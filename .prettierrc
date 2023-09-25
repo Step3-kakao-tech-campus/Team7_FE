@@ -6,7 +6,17 @@
   "singleQuote": true,
   "trailingComma": "all",
   "tabWidth": 2,
-  "importOrder": ["^react", "^next", "^@tanstack/react-query", "^@/*", "^./(.*)", "^[./]", "^types", "^public"],
-  "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "importOrderSeparation": true
+  "importOrder": [
+    "^react",
+    "^next",
+    "^@tanstack/react-query",
+    "^@[^/]",
+    "^@/*",
+    "^@/styles/(.*)$",
+    "^./(.*)",
+    "^[./]",
+    "^types",
+    "^public"
+  ],
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

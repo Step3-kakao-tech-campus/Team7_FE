@@ -1,7 +1,15 @@
-import React from 'react';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
 const Button = () => {
-  return <button>Button</button>;
+  return <ExButton>Button</ExButton>;
 };
 
 export default Button;
+
+const ExButton = styled.button`
+  color: red;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.black};
+  `}
+`;
