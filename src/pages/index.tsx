@@ -1,18 +1,27 @@
 import { css } from '@emotion/react';
-import Input from '@/components/Input';
+// import Input from '@/components/Input';
+import InputField from '@/components/Input';
 
 export default function Home() {
   return (
     <div style={{ padding: '30px' }}>
-      <Input
-        label={'이메일'}
-        status="error"
-        message="This is an error message"
-        placeholder={'이메일을 입력해주세요.'}
-        css={css`
-          width: 1000px;
-        `}
-      />
+      <InputField>
+        <InputField.Label
+          css={css`
+            font-weight: 700;
+            font-size: 1.325rem;
+          `}>
+          이메일
+        </InputField.Label>
+        <InputField.Input
+          status="error"
+          placeholder="이메일을 입력해주세요."
+          css={css`
+            width: 400px;
+          `}
+        />
+        <InputField.Message>This is an error message</InputField.Message>
+      </InputField>
     </div>
   );
 }

@@ -4,6 +4,8 @@ interface InputProps {
   status?: 'error' | 'default';
 }
 
+export const Root = styled.div``;
+
 export const Label = styled.label`
   display: block;
 `;
