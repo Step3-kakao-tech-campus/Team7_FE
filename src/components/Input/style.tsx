@@ -6,15 +6,11 @@ interface InputProps {
 
 export const Root = styled.div``;
 
-export const Label = styled.label`
-  display: block;
-`;
-
-export const LabelText = styled.div`
+export const Label = styled.div`
   color: ${({ theme }) => theme.colors.black};
 `;
 
-export const Input = styled.input<InputProps>`
+export const InputField = styled.input<InputProps>`
   width: 300px;
   height: 25px;
   margin: 0.4rem 0 0.2rem 0;

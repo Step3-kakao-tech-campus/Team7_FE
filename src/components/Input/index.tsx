@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, PropsWithChildren } from 'react';
 import * as Styled from './style';
 
-const InputField = (props: PropsWithChildren) => {
+const Input = (props: PropsWithChildren) => {
   const { children } = props;
   return <Styled.Root>{children}</Styled.Root>;
 };
@@ -10,10 +10,10 @@ export interface LabelProps {
   className?: string;
 }
 
-InputField.Label = function Label(props: PropsWithChildren<LabelProps>) {
+Input.Label = function Label(props: PropsWithChildren<LabelProps>) {
   const { children, className } = props;
 
-  return <Styled.LabelText className={className}>{children}</Styled.LabelText>;
+  return <Styled.Label className={className}>{children}</Styled.Label>;
 };
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -22,20 +22,20 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-InputField.Input = function Input(props: InputProps) {
+Input.InputField = function InputField(props: InputProps) {
   const { status = 'default', className, ...rest } = props;
 
-  return <Styled.Input className={className} status={status} {...rest} />;
+  return <Styled.InputField className={className} status={status} {...rest} />;
 };
 
 export interface MessageProps {
   className?: string;
 }
 
-InputField.Message = function Message(props: PropsWithChildren<MessageProps>) {
+Input.Message = function Message(props: PropsWithChildren<MessageProps>) {
   const { children } = props;
 
   return <Styled.Message>{children}</Styled.Message>;
 };
 
-export default InputField;
+export default Input;
