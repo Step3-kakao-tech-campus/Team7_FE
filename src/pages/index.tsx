@@ -1,22 +1,18 @@
-import axios from 'axios';
-import Button from '@/components/Button';
+import { css } from '@emotion/react';
+import Input from '@/components/Input';
 
 export default function Home() {
-  const getTest = () => {
-    axios
-      .get('/products')
-      .then((res) => {
-        const { data } = res;
-        console.log(data);
-      })
-      .catch((error) => console.log(error));
-  };
-
   return (
-    <div>
-      Home
-      <Button />
-      <button onClick={() => getTest()}>msw</button>
+    <div style={{ padding: '30px' }}>
+      <Input
+        label={'이메일'}
+        status="error"
+        message="This is an error message"
+        placeholder={'이메일을 입력해주세요.'}
+        css={css`
+          width: 1000px;
+        `}
+      />
     </div>
   );
 }
