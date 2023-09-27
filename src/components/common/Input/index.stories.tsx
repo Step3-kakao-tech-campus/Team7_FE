@@ -1,6 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
-import Input from './index';
-import type { Props } from './index';
+import Input from '@/components/common/Input';
+import type { Props } from '@/components/common/Input';
 
 export default {
   component: Input,
