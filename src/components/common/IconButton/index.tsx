@@ -13,12 +13,10 @@ type IconButtonProps = Omit<ButtonProps, 'isLoading' | 'loadingWidth' | 'loading
 const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
   const { children, iconName, imageWidth = 16, imageHeight = 16, ...rest } = props;
 
-  const extension = '.svg';
-
   return (
     <Button {...rest}>
       <Container>
-        <Image src={`/assets/icons/${iconName}${extension}`} alt="icon" width={imageWidth} height={imageHeight} />
+        <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageWidth} height={imageHeight} />
       </Container>
       {children}
     </Button>
