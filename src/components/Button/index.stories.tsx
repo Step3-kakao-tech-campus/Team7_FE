@@ -1,28 +1,52 @@
-import type { Story } from '@storybook/react';
-import { icLock } from '@/assets/icons';
-import type { Props } from '.';
-import Button from '.';
+import type { Meta } from '@storybook/react';
+import Button from '@/components/Button';
 
 export default {
-  title: 'shared/Button',
   component: Button,
+} as Meta<typeof Button>;
+
+export const Default = {
+  args: {
+    children: '기본 버튼',
+    variant: 'default',
+  },
+
+  name: 'Default',
 };
 
-const Template: Story<Props> = (args) => <Button {...args} />;
+export const Primary = {
+  args: {
+    children: '프라이머리 버튼',
+    variant: 'primary',
+  },
 
-export const Default = Template.bind({});
-Default.args = {
-  variant: 'default',
-  children: <Button.Text>Button Test</Button.Text>,
+  name: 'Primary',
 };
 
-export const WithImage = Template.bind({});
-WithImage.args = {
-  variant: 'default',
-  children: (
-    <>
-      <Button.Image style={{ margin: '3px 7px 0 0' }} src={icLock} alt="" />
-      <Button.Text>Button Test</Button.Text>
-    </>
-  ),
+export const Outline = {
+  args: {
+    children: '아웃라인 버튼',
+    variant: 'outline',
+  },
+
+  name: 'Outline',
+};
+
+export const Ghost = {
+  args: {
+    children: '아웃라인 버튼',
+    variant: 'ghost',
+  },
+
+  name: 'Ghost',
+};
+
+export const Disabled = {
+  args: {
+    children: 'Disabled 버튼',
+    variant: 'primary',
+    disabled: true,
+  },
+
+  name: 'Disabled',
 };
