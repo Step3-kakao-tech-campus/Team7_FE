@@ -1,12 +1,8 @@
 import styled from '@emotion/styled';
+import type { Props } from './index';
 
-interface LabelTextProps {
-  labelType?: 'bold' | 'regular';
-}
-
-interface InputProps {
-  status?: 'error' | 'default';
-}
+type LabelTextProps = Pick<Props, 'labelType'>;
+type InputProps = Pick<Props, 'status'>;
 
 export const Label = styled.label`
   display: block;
@@ -24,7 +20,7 @@ export const Input = styled.input<InputProps>`
   padding: 0.75rem 0.4rem;
   border-width: 1px;
   border-style: solid;
-  border-color: ${({ status, theme }) => (status === 'error' ? '#dc2626' : theme.colors.blue_gray_300)};
+  border-color: ${({ status, theme }) => (status === 'error' ? theme.colors.red : theme.colors.blue_gray_300)};
   border-radius: 0.35rem;
   outline: none;
 
@@ -44,6 +40,6 @@ export const Input = styled.input<InputProps>`
 export const Message = styled.p`
   margin: 0;
   padding-left: 0.25rem;
-  color: #dc2626;
+  color: ${({ theme }) => theme.colors.red};
   font-size: 0.75rem;
 `;
