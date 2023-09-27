@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import type { ButtonProps } from '@/components/Button';
+import type { ButtonProps } from '@/components/common/Button';
 import type { EmotionTheme } from '@/styles/emotion';
 
 type StyledButtonProps = Required<Pick<ButtonProps, 'variant' | 'fullWidth'>>;
