@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import type { Props } from './index';
+import type { InputProps } from './index';
 
-type LabelTextProps = Pick<Props, 'labelType'>;
-type InputProps = Pick<Props, 'status'>;
+type LabelTextProps = Pick<InputProps, 'labelType'>;
+type StyledInputProps = Pick<InputProps, 'status'>;
 
 export const Label = styled.label`
   display: block;
@@ -14,7 +14,7 @@ export const LabelText = styled.div<LabelTextProps>`
   font-size: ${({ labelType }) => labelType === 'bold' && '1.25rem'};
 `;
 
-export const Input = styled.input<InputProps>`
+export const Input = styled.input<StyledInputProps>`
   width: 100%;
   margin: 0.25rem 0;
   padding: 0.75rem 0.4rem;
