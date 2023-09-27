@@ -1,70 +1,56 @@
 import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
-import Image from 'next/image';
-import type { ImageProps } from 'next/image';
-import * as S from './style';
+import styled from '@emotion/styled';
+import Flex from '@/components/Flex';
+import Spinner from '@/components/Spinner';
+import type { ButtonStyle } from './style';
+import { buttonStyles } from './style';
 
-export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'outline' | 'ghost' | 'default';
-  round?: number;
-  px?: number;
-  py?: number;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonStyle;
   fullWidth?: boolean;
-  fontSize?: number;
+  isLoading?: boolean;
+  loadingWidth?: number;
+  loadingHeight?: number;
   className?: string;
 }
 
-const Button = (props: PropsWithChildren<Props>) => {
+const Button = (props: PropsWithChildren<ButtonProps>) => {
   const {
     variant = 'default',
-    round = 6,
     fullWidth = false,
-    px = 1,
-    py = 0.5,
+    isLoading = false,
+    loadingWidth = 16,
+    loadingHeight = 16,
     children,
-    fontSize = 1,
     className,
     ...rest
   } = props;
 
   return (
-    <S.Button
-      variant={variant}
-      round={round}
-      px={px}
-      py={py}
-      fullWidth={fullWidth}
-      className={className}
-      fontSize={fontSize}
-      {...rest}>
-      {children}
-    </S.Button>
+    <StyledButton variant={variant} fullWidth={fullWidth} className={className} {...rest}>
+      <Flex align="center" justify="center">
+        {isLoading && <Spinner width={loadingWidth} height={loadingHeight} />}
+        {children}
+      </Flex>
+    </StyledButton>
   );
-};
-
-export interface ButtonImageProps extends ImageProps {
-  className?: string;
-  width?: number;
-  height?: number;
-}
-
-Button.Image = function ButtonImage(props: ButtonImageProps) {
-  const { alt = '', width = 16, height = 16, className, ...rest } = props;
-
-  return (
-    <S.ImageContainer className={className}>
-      <Image width={width} height={height} {...rest} alt={alt} />
-    </S.ImageContainer>
-  );
-};
-export interface ButtonTextProps {
-  className?: string;
-  fontSize?: number;
-}
-
-Button.Text = function ButtonText(props: PropsWithChildren<ButtonTextProps>) {
-  const { children, className } = props;
-
-  return <S.Text className={className}>{children}</S.Text>;
 };
 
 export default Button;
+
+type StyledButtonProps = Required<Pick<ButtonProps, 'variant' | 'fullWidth'>>;
+
+const StyledButton = styled.button<StyledButtonProps>`
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
+  padding: 8px 16px;
+  border-radius: 6px;
+
+  font-size: 16px;
+  cursor: pointer;
+  ${({ variant, theme }) => buttonStyles[variant](theme)}
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${({ theme }) => theme.colors.gray_700};
+  }
+`;
