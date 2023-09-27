@@ -15,8 +15,8 @@ const Flex = styled.div<Props>`
   flex-direction: ${({ dir }) => (dir === 'col' ? 'column' : 'row')};
   justify-content: ${({ justify }) => justify};
   align-items: ${({ align }) => align};
-  gap: ${({ gap = 0 }) => `${gap}px`};
-  margin: ${({ margin = 0 }) => (typeof margin === 'string' ? margin : `${margin}px`)};
+  gap: ${({ gap = 0 }) => `${gap}rem`};
+  margin: ${({ margin = 0 }) => (typeof margin === 'string' ? margin : `${margin}rem`)};
 `;
 
 export default Flex;

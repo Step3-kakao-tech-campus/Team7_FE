@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import type { ButtonProps } from '@/components/common/Button';
 import type { EmotionTheme } from '@/styles/emotion';
 
-export type ButtonStyle = 'primary' | 'outline' | 'ghost' | 'default';
+type StyledButtonProps = Required<Pick<ButtonProps, 'variant' | 'fullWidth'>>;
 
 export const buttonStyles = {
   primary: (theme: EmotionTheme) => css`
@@ -32,3 +34,18 @@ export const buttonStyles = {
     color: white;
   `,
 };
+
+export const Button = styled.button<StyledButtonProps>`
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+
+  font-size: 1rem;
+  cursor: pointer;
+  ${({ variant, theme }) => buttonStyles[variant](theme)}
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${({ theme }) => theme.colors.gray_700};
+  }
+`;
