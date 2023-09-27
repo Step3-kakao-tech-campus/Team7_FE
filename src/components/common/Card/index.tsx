@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import styled from '@emotion/styled';
+import * as Styled from './style';
 
 export interface CardProps {
   className?: string;
@@ -8,15 +8,7 @@ export interface CardProps {
 const Card = (props: PropsWithChildren<CardProps>) => {
   const { children, className } = props;
 
-  return <Root className={className}>{children}</Root>;
+  return <Styled.Card className={className}>{children}</Styled.Card>;
 };
 
 export default Card;
-
-const Root = styled.div`
-  width: 100%;
-  border-radius: 6px;
-  border: 1px solid #e5e7eb;
-  background: #fff;
-  box-shadow: 0px 4px 4px 0px rgba(174, 174, 174, 0.25);
-`;
