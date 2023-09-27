@@ -1,22 +1,25 @@
-import axios from 'axios';
+import { css } from '@emotion/react';
 import Button from '@/components/Button';
+import Spinner from '@/components/Spinner';
 
 export default function Home() {
-  const getTest = () => {
-    axios
-      .get('/products')
-      .then((res) => {
-        const { data } = res;
-        console.log(data);
-      })
-      .catch((error) => console.log(error));
-  };
-
   return (
     <div>
-      Home
-      <Button />
-      <button onClick={() => getTest()}>msw</button>
+      <Button px={0.6}>
+        <Spinner
+          css={css`
+            margin-right: 0.5rem;
+          `}
+          width={14}
+          height={14}
+        />
+        <Button.Text
+          css={css`
+            margin-right: 0.5rem;
+          `}>
+          Please Wait
+        </Button.Text>
+      </Button>
     </div>
   );
 }
