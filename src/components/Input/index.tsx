@@ -1,41 +1,24 @@
-import type { InputHTMLAttributes, PropsWithChildren } from 'react';
+import type { InputHTMLAttributes } from 'react';
 import * as Styled from './style';
 
-const Input = (props: PropsWithChildren) => {
-  const { children } = props;
-  return <Styled.Root>{children}</Styled.Root>;
-};
-
-export interface LabelProps {
-  className?: string;
-}
-
-Input.Label = function Label(props: PropsWithChildren<LabelProps>) {
-  const { children, className } = props;
-
-  return <Styled.Label className={className}>{children}</Styled.Label>;
-};
-
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
   placeholder?: string;
   status?: 'error' | 'default';
-  className?: string;
+  message?: string;
+  labelType?: 'bold' | 'regular';
+  cssProps?: string;
 }
 
-Input.InputField = function InputField(props: InputProps) {
-  const { status = 'default', className, ...rest } = props;
-
-  return <Styled.InputField className={className} status={status} {...rest} />;
-};
-
-export interface MessageProps {
-  className?: string;
-}
-
-Input.Message = function Message(props: PropsWithChildren<MessageProps>) {
-  const { children } = props;
-
-  return <Styled.Message>{children}</Styled.Message>;
+const Input = (props: Props) => {
+  const { label, status = 'default', message, labelType, cssProps, ...rest } = props;
+  return (
+    <Styled.Label>
+      {label && <Styled.LabelText labelType={labelType}>{label}</Styled.LabelText>}
+      <Styled.Input className={cssProps} status={status} {...rest} />
+      {message && <Styled.Message>{message}</Styled.Message>}
+    </Styled.Label>
+  );
 };
 
 export default Input;
