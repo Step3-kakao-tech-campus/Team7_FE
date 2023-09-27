@@ -1,15 +1,14 @@
 import type { Meta } from '@storybook/react';
-import IconButton from '@/components/IconButton';
+import Button from '@/components/common/Button';
 
 export default {
-  component: IconButton,
-} as Meta<typeof IconButton>;
+  component: Button,
+} as Meta<typeof Button>;
 
 export const Default = {
   args: {
-    children: '잠금된 풀이',
+    children: '기본 버튼',
     variant: 'default',
-    iconName: 'ic_lock',
   },
 
   name: 'Default',
@@ -17,9 +16,8 @@ export const Default = {
 
 export const Primary = {
   args: {
-    children: '잠금된 풀이',
+    children: '프라이머리 버튼',
     variant: 'primary',
-    iconName: 'ic_lock',
   },
 
   name: 'Primary',
@@ -27,9 +25,8 @@ export const Primary = {
 
 export const Outline = {
   args: {
-    children: '잠금된 풀이',
+    children: '아웃라인 버튼',
     variant: 'outline',
-    iconName: 'ic_lock',
   },
 
   name: 'Outline',
@@ -37,9 +34,8 @@ export const Outline = {
 
 export const Ghost = {
   args: {
-    children: '잠금된 풀이',
+    children: '아웃라인 버튼',
     variant: 'ghost',
-    iconName: 'ic_lock',
   },
 
   name: 'Ghost',
@@ -47,9 +43,8 @@ export const Ghost = {
 
 export const Disabled = {
   args: {
-    children: '잠금된 풀이',
+    children: 'Disabled 버튼',
     variant: 'primary',
-    iconName: 'ic_lock',
     disabled: true,
   },
 

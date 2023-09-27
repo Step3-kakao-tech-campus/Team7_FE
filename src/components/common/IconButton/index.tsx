@@ -1,8 +1,8 @@
 import type { PropsWithChildren } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
-import type { ButtonProps } from '@/components/Button';
-import Button from '@/components/Button';
+import type { ButtonProps } from '@/components/common/Button';
+import Button from '@/components/common/Button';
 
 type IconButtonProps = Omit<ButtonProps, 'isLoading' | 'loadingWidth' | 'loadingHeight'> & {
   iconName: string;

@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
-import Flex from '@/components/Flex';
-import Spinner from '@/components/Spinner';
+import Flex from '@/components/common/Flex';
+import Spinner from '@/components/common/Spinner';
 import type { ButtonStyle } from './style';
 import { buttonStyles } from './style';
 
