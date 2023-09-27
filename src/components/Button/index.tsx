@@ -1,12 +1,10 @@
 import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
-import styled from '@emotion/styled';
 import Flex from '@/components/Flex';
 import Spinner from '@/components/Spinner';
-import type { ButtonStyle } from './style';
-import { buttonStyles } from './style';
+import * as Styled from './style';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonStyle;
+  variant?: 'primary' | 'outline' | 'ghost' | 'default';
   fullWidth?: boolean;
   isLoading?: boolean;
   loadingWidth?: number;
@@ -19,38 +17,21 @@ const Button = (props: PropsWithChildren<ButtonProps>) => {
     variant = 'default',
     fullWidth = false,
     isLoading = false,
-    loadingWidth = 16,
-    loadingHeight = 16,
+    loadingWidth = 1,
+    loadingHeight = 1,
     children,
     className,
     ...rest
   } = props;
 
   return (
-    <StyledButton variant={variant} fullWidth={fullWidth} className={className} {...rest}>
+    <Styled.Button variant={variant} fullWidth={fullWidth} className={className} {...rest}>
       <Flex align="center" justify="center">
         {isLoading && <Spinner width={loadingWidth} height={loadingHeight} />}
         {children}
       </Flex>
-    </StyledButton>
+    </Styled.Button>
   );
 };
 
 export default Button;
-
-type StyledButtonProps = Required<Pick<ButtonProps, 'variant' | 'fullWidth'>>;
-
-const StyledButton = styled.button<StyledButtonProps>`
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
-  padding: 8px 16px;
-  border-radius: 6px;
-
-  font-size: 16px;
-  cursor: pointer;
-  ${({ variant, theme }) => buttonStyles[variant](theme)}
-
-  &:disabled {
-    cursor: not-allowed;
-    background-color: ${({ theme }) => theme.colors.gray_700};
-  }
-`;

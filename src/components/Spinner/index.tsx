@@ -26,17 +26,16 @@ const Root = styled.div<Props>`
   align-items: center;
   justify-content: center;
   position: relative;
-  width: ${({ width }) => (width ? `${width}px` : '35px')};
-  height: ${({ height }) => (height ? `${height}px` : '35px')};
-  margin-right: 8px;
-  margin-bottom: 2px;
-
+  width: ${({ width }) => (width ? `${width}rem` : '2.1rem')};
+  height: ${({ height }) => (height ? `${height}rem` : '2.1rem')};
+  margin-right: 0.5rem;
+  margin-bottom: 0.125em;
   & > div {
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: ${({ width }) => (width ? `${width}px` : '35px')};
-    height: ${({ height }) => (height ? `${height}px` : '35px')};
+    width: ${({ width }) => (width ? `${width}rem` : '2.1rem')};
+    height: ${({ height }) => (height ? `${height}rem` : '2.1rem')};
     border: ${({ theme }) => `2px solid ${theme.colors.white}`};
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;

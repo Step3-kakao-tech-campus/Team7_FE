@@ -28,5 +28,5 @@ const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
 export default IconButton;
 
 const Container = styled.div`
-  margin-right: 6px;
+  margin-right: 0.4rem;
 `;
