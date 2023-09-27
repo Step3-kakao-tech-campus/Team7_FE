@@ -26,8 +26,10 @@ const Root = styled.div<Props>`
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: ${({ width }) => (width ? `${width}px` : '35px')};
+  height: ${({ height }) => (height ? `${height}px` : '35px')};
+  margin-right: 8px;
+  margin-bottom: 2px;
 
   & > div {
     box-sizing: border-box;
@@ -35,7 +37,6 @@ const Root = styled.div<Props>`
     position: absolute;
     width: ${({ width }) => (width ? `${width}px` : '35px')};
     height: ${({ height }) => (height ? `${height}px` : '35px')};
-    margin: 8px;
     border: ${({ theme }) => `2px solid ${theme.colors.white}`};
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
