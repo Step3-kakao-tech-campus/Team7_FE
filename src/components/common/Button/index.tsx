@@ -27,12 +27,12 @@ const Button = (props: PropsWithChildren<ButtonProps>) => {
   } = props;
 
   return (
-    <StyledButton variant={variant} fullWidth={fullWidth} className={className} {...rest}>
+    <Root variant={variant} fullWidth={fullWidth} className={className} {...rest}>
       <Flex align="center" justify="center">
         {isLoading && <Spinner width={loadingWidth} height={loadingHeight} />}
         {children}
       </Flex>
-    </StyledButton>
+    </Root>
   );
 };
 
@@ -40,7 +40,7 @@ export default Button;
 
 type StyledButtonProps = Required<Pick<ButtonProps, 'variant' | 'fullWidth'>>;
 
-const StyledButton = styled.button<StyledButtonProps>`
+const Root = styled.button<StyledButtonProps>`
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
   padding: 8px 16px;
   border-radius: 6px;

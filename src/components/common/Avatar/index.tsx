@@ -10,14 +10,12 @@ interface AvatarProps {
 const Avatar = (props: AvatarProps) => {
   const { iconName, imageWidth = 68, imageHeight = 68, ...rest } = props;
 
-  return (
-    <StyledAvatar src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageWidth} height={imageHeight} {...rest} />
-  );
+  return <Root src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageWidth} height={imageHeight} {...rest} />;
 };
 
 export default Avatar;
 
-const StyledAvatar = styled(Image)`
+const Root = styled(Image)`
   align-self: center;
   border-radius: 50%;
   object-fit: cover;
