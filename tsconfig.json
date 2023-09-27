@@ -15,7 +15,8 @@
     "jsxImportSource": "@emotion/react",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/public/*": ["./public/*"]
     },
     "forceConsistentCasingInFileNames": true
   },
