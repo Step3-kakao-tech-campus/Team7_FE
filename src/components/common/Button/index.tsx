@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
-import Flex from '@/components/Flex';
-import Spinner from '@/components/Spinner';
+import Flex from '@/components/common/Flex';
+import Spinner from '@/components/common/Spinner';
 import * as Styled from './style';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
