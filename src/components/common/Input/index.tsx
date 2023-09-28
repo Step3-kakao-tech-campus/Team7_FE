@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from 'react';
 import * as Styled from './style';
 
-export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   placeholder?: string;
   status?: 'error' | 'default';
@@ -10,7 +10,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   cssProps?: string;
 }
 
-const Input = (props: Props) => {
+const Input = (props: InputProps) => {
   const { label, status = 'default', message, labelType, cssProps, ...rest } = props;
   return (
     <Styled.Label>
