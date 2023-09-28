@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type { Meta, Story } from '@storybook/react';
 import Input from './index';
 import type { Props } from './index';
@@ -36,4 +37,22 @@ Disabled.args = {
   status: 'default',
   labelType: 'bold',
   disabled: true,
+};
+
+export const Search = {
+  render: () => {
+    return (
+      <Input
+        css={(theme) => css`
+          background-color: ${theme.colors.gray_100};
+          border: 0.1rem solid ${theme.colors.gray_100};
+          width: 300px;
+          font-size: 16px;
+        `}
+        placeholder="검색어를 입력하세요"
+        endIcon="ic_search_2x"
+      />
+    );
+  },
+  name: 'Search',
 };
