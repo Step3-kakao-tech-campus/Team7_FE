@@ -14,6 +14,7 @@ const colors = {
   blue_gray_200: '#D9E2EA',
   blue_gray_300: '#CBD5E1',
   blue_gray_400: '#94A3B8',
+  blue: '#3B82F6;',
 } as const;
 
 export const emotionTheme = { colors } as const;

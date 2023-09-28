@@ -5,20 +5,30 @@ import type { ButtonProps } from '@/components/common/Button';
 import Button from '@/components/common/Button';
 
 type IconButtonProps = Omit<ButtonProps, 'isLoading' | 'loadingWidth' | 'loadingHeight'> & {
+  iconPosition?: 'left' | 'right';
   iconName: string;
   imageWidth?: number;
   imageHeight?: number;
 };
 
 const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
-  const { children, iconName, imageWidth = 16, imageHeight = 16, ...rest } = props;
+  const { children, iconPosition = 'left', iconName, imageWidth = 16, imageHeight = 16, ...rest } = props;
 
   return (
     <Button {...rest}>
-      <Container>
-        <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageWidth} height={imageHeight} />
-      </Container>
-      {children}
+      {iconPosition === 'left' && (
+        <Container>
+          <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageWidth} height={imageHeight} />
+        </Container>
+      )}
+
+      <Container>{children}</Container>
+
+      {iconPosition === 'right' && (
+        <Container>
+          <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageWidth} height={imageHeight} />
+        </Container>
+      )}
     </Button>
   );
 };
@@ -26,5 +36,7 @@ const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
 export default IconButton;
 
 const Container = styled.div`
-  margin-right: 0.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
