@@ -6,8 +6,8 @@ type LabelTextProps = Pick<Props, 'labelType'>;
 type InputProps = Pick<Props, 'status' | 'disabled'>;
 
 export const Label = styled.label`
+  width: 100%;
   display: block;
-  width: fit-content;
 `;
 
 export const LabelText = styled.div<LabelTextProps>`

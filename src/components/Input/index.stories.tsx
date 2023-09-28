@@ -55,4 +55,11 @@ export const Search = {
     );
   },
   name: 'Search',
+  decorators: [
+    (Story: Story) => (
+      <div style={{ maxWidth: '300px' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
