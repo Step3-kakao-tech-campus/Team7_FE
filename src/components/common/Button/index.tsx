@@ -26,10 +26,8 @@ const Button = (props: PropsWithChildren<ButtonProps>) => {
 
   return (
     <Styled.Button variant={variant} fullWidth={fullWidth} className={className} {...rest}>
-      <Flex align="center" justify="center">
-        {isLoading && <Spinner width={loadingWidth} height={loadingHeight} />}
-        {children}
-      </Flex>
+      {isLoading && <Spinner width={loadingWidth} height={loadingHeight} />}
+      {children}
     </Styled.Button>
   );
 };

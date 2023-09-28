@@ -1,10 +1,12 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { InputProps } from './index';
 
 type LabelTextProps = Pick<InputProps, 'labelType'>;
-type StyledInputProps = Pick<InputProps, 'status'>;
+type InputStateProps = Pick<InputProps, 'status' | 'disabled'>;
 
 export const Label = styled.label`
+  width: 100%;
   display: block;
 `;
 
@@ -14,27 +16,40 @@ export const LabelText = styled.div<LabelTextProps>`
   font-size: ${({ labelType }) => labelType === 'bold' && '1.25rem'};
 `;
 
-export const Input = styled.input<StyledInputProps>`
-  width: 100%;
-  margin: 0.25rem 0;
-  padding: 0.75rem 0.4rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: ${({ status, theme }) => (status === 'error' ? theme.colors.red : theme.colors.blue_gray_300)};
-  border-radius: 0.35rem;
-  outline: none;
+export const InputContainer = styled.div<InputStateProps>`
+  ${({ theme, status, disabled }) => css`
+    display: flex;
+    width: 100%;
+    margin: 0.25rem 0;
+    padding: 0.75rem 0.4rem;
+    border-radius: 0.35rem;
+    border: 0.1rem solid ${theme.colors.black};
 
+    border-color: ${status === 'error' ? theme.colors.red : theme.colors.blue_gray_300};
+
+    &:focus-within {
+      // 내부의 어떤 자식 요소가 포커스를 받았을 때 해당 요소 자체에 스타일을 적용
+      border: 0.1rem solid ${theme.colors.black};
+    }
+
+    ${disabled &&
+    css`
+      color: ${theme.colors.blue_gray_300};
+      background-color: ${theme.colors.gray_100};
+    `}
+  `}
+`;
+
+export const Input = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.colors.blue_gray_300};
   }
 
-  &:focus {
-    border-color: #3b82f6;
-  }
-
-  &:disabled {
-    color: ${({ theme }) => theme.colors.blue_gray_300};
-  }
+  width: 100%;
+  background-color: transparent;
+  font-size: inherit;
+  border: none;
+  outline: none;
 `;
 
 export const Message = styled.p`

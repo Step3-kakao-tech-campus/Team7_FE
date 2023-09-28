@@ -36,8 +36,13 @@ export const buttonStyles = {
 };
 
 export const Button = styled.button<StyledButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 6px;
 
   font-size: 1rem;
