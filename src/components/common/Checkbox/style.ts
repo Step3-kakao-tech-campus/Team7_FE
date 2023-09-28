@@ -19,22 +19,23 @@ export const Label = styled.label`
 `;
 
 export const Checkbox = styled.span<CheckboxProps>`
-  position: relative;
-  transition: 0.1s background-color;
-  border-radius: 4px;
-  border: ${({ theme }) => `1px solid ${theme.colors.black}`};
-  background-color: transparent;
-  width: ${({ textSize }) => `${textSize}rem`};
-  height: ${({ textSize }) => `${textSize}rem`};
-  box-shadow:
-    0px 1px 3px 0px rgba(16, 24, 40, 0.1),
-    0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  ${({ theme, checked, textSize }) => css`
+    position: relative;
+    transition: 0.1s background-color;
+    border-radius: 4px;
+    border: 1px solid ${theme.colors.black};
+    background-color: transparent;
+    width: ${textSize}rem;
+    height: ${textSize}rem;
+    box-shadow:
+      0px 1px 3px 0px rgba(16, 24, 40, 0.1),
+      0px 1px 2px -1px rgba(0, 0, 0, 0.1);
 
-  ${({ checked, theme }) =>
-    checked &&
+    ${checked &&
     css`
       background-color: ${theme.colors.black};
     `}
+  `}
 `;
 
 export const CheckboxImage = styled(Image)`
