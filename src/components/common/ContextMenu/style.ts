@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Root = styled.div`
-  width: 110px;
+  width: 7rem;
   padding: 0.1em 0;
   border: ${({ theme }) => `1px solid ${theme.colors.gray_400}`};
   border-radius: 5px;
