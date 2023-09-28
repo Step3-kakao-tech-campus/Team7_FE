@@ -3,7 +3,6 @@ import * as Styled from './style';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  placeholder?: string;
   status?: 'error' | 'default';
   message?: string;
   labelType?: 'bold' | 'regular';
