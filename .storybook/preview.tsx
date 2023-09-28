@@ -1,6 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from '@emotion/react';
 import type { Preview } from '@storybook/react';
+import '@/styles/globals.css';
 import { emotionTheme } from '../src/styles/emotion';
 
 const preview: Preview = {
