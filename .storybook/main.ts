@@ -16,6 +16,12 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+  babel: async (options) => ({
+    ...options,
+    presets: options.presets
+      ? [...options.presets, '@emotion/babel-preset-css-prop']
+      : ['@emotion/babel-preset-css-prop'],
+  }),
   webpackFinal: async (config) => {
     if (config.resolve) {
       config.resolve.alias = {
