@@ -9,7 +9,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   labelType?: 'bold' | 'regular';
   cssProps?: string;
 }
-
 const Input = (props: InputProps) => {
   const { label, status = 'default', message, labelType, cssProps, ...rest } = props;
   return (

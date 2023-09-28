@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react';
 import Input from '@/components/common/Input';
 
+
 export default {
   component: Input,
   title: 'Input',
