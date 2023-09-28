@@ -22,7 +22,7 @@ const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
         </Container>
       )}
 
-      <Container>{children}</Container>
+      {children}
 
       {iconPosition === 'right' && (
         <Container>
@@ -39,4 +39,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  margin-bottom: 3px;
 `;

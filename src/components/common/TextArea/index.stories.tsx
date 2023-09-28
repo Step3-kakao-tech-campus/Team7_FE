@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import TextArea from '@/components/common/TextArea';
+import TextArea from '@/components/common/TextArea/index';
 
 export default {
   component: TextArea,

@@ -45,7 +45,6 @@ export const Button = styled.button<StyledButtonProps>`
   padding: 0.75rem 1rem;
   border-radius: 6px;
 
-  line-height: 1rem;
   font-size: 1rem;
   cursor: pointer;
   ${({ variant, theme }) => buttonStyles[variant](theme)}
