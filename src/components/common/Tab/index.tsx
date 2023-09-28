@@ -9,12 +9,17 @@ const Tab = (props: PropsWithChildren) => {
 
 interface MenuProps {
   className?: string;
+  onClick?: () => void;
 }
 
 Tab.Menu = function Menu(props: PropsWithChildren<MenuProps>) {
-  const { className, children } = props;
+  const { className, onClick, children } = props;
 
-  return <Styled.Menu className={className}>{children}</Styled.Menu>;
+  return (
+    <Styled.Menu className={className} onClick={onClick}>
+      {children}
+    </Styled.Menu>
+  );
 };
 
 export default Tab;
