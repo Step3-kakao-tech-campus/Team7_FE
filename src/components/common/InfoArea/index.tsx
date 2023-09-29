@@ -18,6 +18,7 @@ const InfoArea = (props: PropsWithChildren<InfoAreaProps>) => {
 
 InfoArea.Info = function Info(props: PropsWithChildren) {
   const { children } = props;
+
   return <Styled.Info>{children}</Styled.Info>;
 };
 
