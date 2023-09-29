@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from '@emotion/react';
+import ToastProvider from '@/components/common/Toast/provider';
 import { emotionTheme } from '@/styles/emotion';
 import '@/styles/globals.css';
 
@@ -20,7 +21,9 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={emotionTheme}>
-      <Component {...pageProps} />
+      <ToastProvider>
+        <Component {...pageProps} />
+      </ToastProvider>
     </ThemeProvider>
   );
 }
