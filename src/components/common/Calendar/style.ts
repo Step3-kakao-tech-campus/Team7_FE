@@ -67,7 +67,7 @@ export const Header = styled.div`
   margin: 0.6rem;
 `;
 
-export const ButtonCSS = css`
+export const ButtonStyles = css`
   background-color: white;
   width: 2.25rem;
   height: 2.25rem;

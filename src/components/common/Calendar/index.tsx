@@ -47,7 +47,7 @@ const Calendar = (props: CalendarProps) => {
                 variant="outline"
                 imageHeight={12}
                 imageWidth={12}
-                css={Styled.ButtonCSS}
+                css={Styled.ButtonStyles}
                 onClick={decreaseMonth}
                 disabled={prevMonthButtonDisabled}
               />
@@ -59,7 +59,7 @@ const Calendar = (props: CalendarProps) => {
                 variant="outline"
                 imageHeight={12}
                 imageWidth={12}
-                css={Styled.ButtonCSS}
+                css={Styled.ButtonStyles}
                 onClick={increaseMonth}
                 disabled={nextMonthButtonDisabled}
               />
