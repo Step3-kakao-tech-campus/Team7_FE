@@ -8,6 +8,17 @@ export default {
   component: Modal,
 } as Meta<typeof Modal>;
 
+export const Default = () => {
+  const { isOpen, handleOpen, handleClose } = useModalState();
+
+  return (
+    <>
+      <button onClick={handleOpen}>클릭하여 모달 열기</button>
+      <Modal title="모달 예시" isOpen={isOpen} onClose={handleClose} />
+    </>
+  );
+};
+
 export const WithState = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
 
