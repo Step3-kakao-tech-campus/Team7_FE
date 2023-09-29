@@ -44,5 +44,5 @@ export const CloseButton = styled.button`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem 2.5rem;
+  padding: 2rem 2.5rem 1.6rem;
 `;
