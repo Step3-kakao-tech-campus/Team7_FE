@@ -13,13 +13,13 @@ const Portal = (props: PropsWithChildren<PortalProps>) => {
   const elementId = portalId ?? `$portal-${id}`;
 
   useEffect(() => {
-    let modalRoot = document.getElementById(elementId);
-    if (!modalRoot) {
-      modalRoot = document.createElement('div');
-      modalRoot.setAttribute('id', elementId);
-      document.body.appendChild(modalRoot);
+    let Root = document.getElementById(elementId);
+    if (!Root) {
+      Root = document.createElement('div');
+      Root.setAttribute('id', elementId);
+      document.body.appendChild(Root);
     }
-    setElement(modalRoot);
+    setElement(Root);
   }, [elementId]);
 
   if (!element) {
