@@ -3,7 +3,6 @@ import InfoArea from '@/components/common/InfoArea';
 
 export default {
   component: InfoArea,
-  title: 'InfoArea',
 } as Meta<typeof InfoArea>;
 
 export const DotLeft: StoryObj<typeof InfoArea> = {
