@@ -4,13 +4,13 @@ import styled from '@emotion/styled';
 export const Root = styled.div``;
 
 export const HeaderRoot = styled.button<{ isActive: boolean }>`
-  ${({ theme, isActive }) => css`
+  ${({ isActive }) => css`
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     width: 16rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 700;
 
     & > img {
@@ -30,6 +30,6 @@ export const ItemRoot = styled.div<{ isActive: boolean; rootHeight: number }>`
   transition: max-height 0.2s ease-out;
   padding-left: 1rem;
   & > * {
-    margin: 1rem 0;
+    margin: 1.3rem 0;
   }
 `;

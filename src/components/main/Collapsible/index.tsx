@@ -1,19 +1,44 @@
 import { type PropsWithChildren, type ButtonHTMLAttributes, useState, useRef, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import * as Styled from './style';
 
 const Collapsible = (props: PropsWithChildren) => {
   const { children } = props;
 
-  return <>{children}</>;
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleContent = () => {
+    if (isActive) {
+      setIsActive(false);
+    } else {
+      setIsActive(true);
+    }
+  };
+
+  return (
+    <>
+      {React.Children.map(children, (child, index) => {
+        if (index === 0) {
+          return (
+            // React.isValidElement => React.cloneElement 사용을 위한 가드, children이 존재하는지 유효한지 확인
+            React.isValidElement<CollapsibleHeaderProps>(child) &&
+            React.cloneElement(child, { isActive, onClick: toggleContent })
+          );
+        } else if (index === 1) {
+          return React.isValidElement<CollapsibleItemProps>(child) && React.cloneElement(child, { isActive });
+        }
+      })}
+    </>
+  );
 };
 
 export interface CollapsibleHeaderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  isActive: boolean;
+  isActive?: boolean;
 }
 
 Collapsible.Header = function Header(props: PropsWithChildren<CollapsibleHeaderProps>) {
-  const { children, isActive, ...rest } = props;
+  const { children, isActive = false, ...rest } = props;
 
   return (
     <Styled.HeaderRoot isActive={isActive} {...rest}>
@@ -24,12 +49,12 @@ Collapsible.Header = function Header(props: PropsWithChildren<CollapsibleHeaderP
 };
 
 export interface CollapsibleItemProps {
-  isActive: boolean;
+  isActive?: boolean;
   className?: string;
 }
 
 Collapsible.Item = function Item(props: PropsWithChildren<CollapsibleItemProps>) {
-  const { children, isActive, className } = props;
+  const { children, isActive = false, className } = props;
   const [rootHeight, setRootHeight] = useState(0);
 
   const itemRootRef = useRef<HTMLDivElement>(null);
