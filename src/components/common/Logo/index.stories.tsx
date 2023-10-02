@@ -3,7 +3,6 @@ import Logo from '@/components/common/Logo';
 
 export default {
   component: Logo,
-  title: 'Logo',
 } as Meta<typeof Logo>;
 
 export const Default = {
