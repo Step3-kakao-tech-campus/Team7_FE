@@ -15,6 +15,15 @@ const nextConfig = {
       ],
     });
 
+    config.module.rules.push({
+      test: /\.(eot|ttf|woff|woff2)$/,
+      use: [
+        {
+          loader: 'url-loader',
+        },
+      ],
+    });
+
     return config;
   },
 };
