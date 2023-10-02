@@ -1,5 +1,7 @@
 import type { InputHTMLAttributes } from 'react';
 import Image from 'next/image';
+import type { SerializedStyles } from '@emotion/react';
+import type { EmotionTheme } from '@/styles/emotion';
 import * as Styled from './style';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,18 +9,29 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   status?: 'error' | 'default';
   message?: string;
   labelType?: 'bold' | 'regular';
-  className?: string;
   disabled?: boolean;
   endIcon?: string;
+  inputStyles?: (theme: EmotionTheme) => SerializedStyles;
 }
 
 const Input = (props: InputProps) => {
-  const { label, status = 'default', message, labelType, className, endIcon, disabled = false, ...rest } = props;
+  const {
+    label,
+    status = 'default',
+    message,
+    inputStyles,
+    labelType,
+    className,
+    endIcon,
+    disabled = false,
+    ...rest
+  } = props;
+
   return (
     <Styled.Label>
       {label && <Styled.LabelText labelType={labelType}>{label}</Styled.LabelText>}
       <Styled.InputContainer className={className} status={status} disabled={disabled}>
-        <Styled.Input {...rest} disabled={disabled} />
+        <Styled.Input {...rest} css={inputStyles} disabled={disabled} />
         {endIcon && <Image src={`/assets/icons/${endIcon}.svg`} alt="" width={24} height={24} />}
       </Styled.InputContainer>
       {message && <Styled.Message>{message}</Styled.Message>}
