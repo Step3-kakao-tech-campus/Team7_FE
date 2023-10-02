@@ -5,7 +5,6 @@ import Skeleton from '@/components/common/Skeleton';
 
 export default {
   component: Skeleton,
-  title: 'Skeleton',
 } as Meta<typeof Skeleton>;
 
 export const Card = {
