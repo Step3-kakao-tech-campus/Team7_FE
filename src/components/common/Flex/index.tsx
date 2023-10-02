@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import styled from '@emotion/styled';
 
-interface Props {
+export interface Props {
   dir?: 'row' | 'col';
   gap?: number;
   align?: CSSProperties['alignItems'];

@@ -4,7 +4,6 @@ import Tab from '@/components/common/Tab';
 
 export default {
   component: Tab,
-  title: 'Tab',
 } as Meta<typeof Tab>;
 
 export const Default = {
