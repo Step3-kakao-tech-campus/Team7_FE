@@ -5,7 +5,7 @@ import type { InputProps } from './index';
 
 export default {
   component: Input,
-} as Meta;
+} as Meta<typeof Input>;
 
 const Template: Story<InputProps> = (args) => <Input {...args} />;
 
