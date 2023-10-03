@@ -6,20 +6,20 @@ export const userHistoryResponse: UserHistoryResponse = {
   result: {
     gardens: [
       {
-        date: '2023-09-14',
-        iswrite: true,
+        day: '2023-09-14',
+        value: 1,
       },
       {
-        date: '2023-09-15',
-        iswrite: false,
+        day: '2023-09-15',
+        value: 0,
       },
       {
-        date: '2023-09-16',
-        iswrite: true,
+        day: '2023-09-16',
+        value: 1,
       },
       {
-        date: '2023-09-17',
-        iswrite: true,
+        day: '2023-09-17',
+        value: 1,
       },
     ],
   },

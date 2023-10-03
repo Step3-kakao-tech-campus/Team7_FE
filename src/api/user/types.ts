@@ -7,6 +7,6 @@ export interface UserHistoryResponse {
 }
 
 export interface UserHistory {
-  date: string;
-  iswrite: boolean;
+  day: string;
+  value: number;
 }
