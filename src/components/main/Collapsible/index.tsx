@@ -43,7 +43,7 @@ Collapsible.Header = function Header(props: PropsWithChildren<CollapsibleHeaderP
   return (
     <Styled.HeaderRoot isActive={isActive} {...rest}>
       <div>{children}</div>
-      <Image src={`/assets/icons/ic_chevronDownBlack.svg`} alt="" width={12} height={12} />
+      <Image src={`/assets/icons/ic_chevronDownBlack.svg`} alt="" width={16} height={16} />
     </Styled.HeaderRoot>
   );
 };

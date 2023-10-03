@@ -14,6 +14,7 @@ export const LeftArea = styled.div`
   display: flex;
   flex-direction: column;
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
+
   padding: 2.5rem;
   height: 100vh;
 `;
@@ -56,4 +57,34 @@ export const ShowAllButton = styled.button`
   margin-top: 1.5rem;
 `;
 
-export const RightArea = styled.div``;
+export const RightArea = styled.div`
+  width: 100%;
+  height: 500px;
+  padding: 3.5rem 0 0 4.5rem;
+`;
+
+export const HistoryTitle = styled.h1`
+  & > span:nth-of-type(1) {
+    font-size: 2rem;
+    margin-right: 1px;
+  }
+
+  & > span:nth-of-type(2) {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+`;
+
+export const CalendarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 1000px;
+  height: 200px;
+`;
+
+export const CardStyles = css`
+  width: 16.875rem;
+  height: 9.375rem;
+
+  padding: 1.25rem;
+`;
