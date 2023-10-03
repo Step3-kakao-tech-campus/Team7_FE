@@ -1,6 +1,6 @@
 import { useState, type PropsWithChildren, useRef } from 'react';
 import Image from 'next/image';
-import { useOnClickOutside } from '@/hooks/useOnClickOutside';
+import { useOnClickOutside } from '@/hooks/common/useOnClickOutside';
 import * as Styled from './style';
 
 export interface SelectOption {
