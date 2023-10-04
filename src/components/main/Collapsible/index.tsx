@@ -56,7 +56,6 @@ export interface CollapsibleItemProps {
 Collapsible.Item = function Item(props: PropsWithChildren<CollapsibleItemProps>) {
   const { children, isActive = false, className } = props;
   const [rootHeight, setRootHeight] = useState(0);
-
   const itemRootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,7 +63,7 @@ Collapsible.Item = function Item(props: PropsWithChildren<CollapsibleItemProps>)
       const height = itemRootRef.current.scrollHeight; // 스크롤로 숨겨진 부분까지 높이로 계산하기 위함.
       setRootHeight(height);
     }
-  }, []);
+  }, [children]);
 
   return (
     <Styled.ItemRoot rootHeight={rootHeight} ref={itemRootRef} isActive={isActive} className={className}>
