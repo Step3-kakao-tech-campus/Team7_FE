@@ -29,7 +29,7 @@ export const InputContainer = styled.div<InputStateProps>`
 
     &:focus-within {
       // 내부의 어떤 자식 요소가 포커스를 받았을 때 해당 요소 자체에 스타일을 적용
-      border: 0.1rem solid ${theme.colors.black};
+      border-color: ${status === 'error' ? theme.colors.red : theme.colors.black};
     }
 
     ${disabled &&
