@@ -28,3 +28,49 @@ export const tilsInfinityEndResponse: TilsResponse = {
   result: null,
   hasNext: false,
 };
+
+export const tilsDateResponse: TilsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    tils: [
+      {
+        id: 1,
+        createDate: '2023-09-17',
+        step: {
+          id: 1,
+          title: '나는 문어~ 꿈을 꾸는 문어~ 나는 감자~',
+        },
+        roadmap: {
+          id: 2,
+          name: '감자학개론',
+        },
+      },
+      {
+        id: 2,
+        createDate: '2023-09-17',
+        step: {
+          id: 2,
+          title: '나는 문어~ 꿈을 꾸는 문어~ 나는 감자~',
+        },
+        roadmap: {
+          id: 2,
+          name: '감자학개론',
+        },
+      },
+      {
+        id: 3,
+        createDate: '2023-09-17',
+        step: {
+          id: 3,
+          title: '나는 문어~ 꿈을 꾸는 문어~ 나는 감자~',
+        },
+        roadmap: {
+          id: 2,
+          name: '감자학개론',
+        },
+      },
+    ],
+  },
+  hasNext: false,
+};
