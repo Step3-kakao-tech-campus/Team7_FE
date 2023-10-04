@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { tilsInfinityEndResponse, tilsResponse, tilsDateResponse } from '@/mocks/fixtures/til';
+import { tilsInfinityEndResponse, tilsResponse, tilsDateResponse, tilsTitleResponse } from '@/mocks/fixtures/til';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -29,6 +29,21 @@ export const tilHandler = [
       if (date) {
         try {
           return res(ctx.status(200), ctx.json(tilsDateResponse));
+        } catch (error) {
+          return res(
+            ctx.status(400),
+            ctx.json({
+              success: false,
+              message: '서버에서 에러가 났어요',
+              result: null,
+            }),
+          );
+        }
+      }
+
+      if (title) {
+        try {
+          return res(ctx.status(200), ctx.json(tilsTitleResponse));
         } catch (error) {
           return res(
             ctx.status(400),

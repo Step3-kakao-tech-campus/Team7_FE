@@ -29,6 +29,28 @@ export const tilsInfinityEndResponse: TilsResponse = {
   hasNext: false,
 };
 
+export const tilsTitleResponse: TilsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    tils: [
+      {
+        id: 1,
+        createDate: '2023-09-17',
+        step: {
+          id: 1,
+          title: '7조의 비밀일기장... 궁금하죠?',
+        },
+        roadmap: {
+          id: 2,
+          name: '비밀 일기장',
+        },
+      },
+    ],
+  },
+  hasNext: false,
+};
+
 export const tilsDateResponse: TilsResponse = {
   success: true,
   message: 'ok',
