@@ -12,6 +12,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   endIcon?: string;
   inputStyles?: (theme: EmotionTheme) => SerializedStyles;
+  onClick?: () => void;
 }
 
 const Input = (props: InputProps) => {
@@ -24,6 +25,7 @@ const Input = (props: InputProps) => {
     className,
     endIcon,
     disabled = false,
+    onClick,
     ...rest
   } = props;
 
@@ -32,7 +34,11 @@ const Input = (props: InputProps) => {
       {label && <Styled.LabelText labelType={labelType}>{label}</Styled.LabelText>}
       <Styled.InputContainer className={className} status={status} disabled={disabled}>
         <Styled.Input {...rest} css={inputStyles} disabled={disabled} />
-        {endIcon && <Image src={`/assets/icons/${endIcon}.svg`} alt="" width={24} height={24} />}
+        {endIcon && (
+          <Styled.ButtonContainer onClick={() => onClick?.()}>
+            <Image src={`/assets/icons/${endIcon}.svg`} alt="" width={24} height={24} />
+          </Styled.ButtonContainer>
+        )}
       </Styled.InputContainer>
       {message && <Styled.Message>{message}</Styled.Message>}
     </Styled.Label>
