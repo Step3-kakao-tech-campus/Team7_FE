@@ -9,14 +9,13 @@ import { useGetUserHistory } from '@/hooks/queries/user';
 import * as Styled from './style';
 
 const History = () => {
-  const { getParamsToUrl } = useParamsToUrl();
+  const { addParamsToUrl } = useParamsToUrl();
 
   const { history, isLoading } = useGetUserHistory();
 
   const handleSelectDay = (color: string, date: string) => {
     if (color === '#eeeeee') return; // til을 작성하지 않은 날은 검색 불가능하도록 함
-
-    getParamsToUrl({ date });
+    addParamsToUrl({ date });
   };
 
   return (

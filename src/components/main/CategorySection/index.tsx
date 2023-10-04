@@ -1,29 +1,47 @@
+import { useRouter } from 'next/router';
 import Collapsible from '@/components/main/Collapsible';
+import { useParamsToUrl } from '@/hooks/common/useParamsToUrl';
+import { useGetRoadmaps } from '@/hooks/queries/roadmap';
 import * as Styled from './style';
 
 const CategorySection = () => {
+  const { data } = useGetRoadmaps();
+  const router = useRouter();
+
+  const { addParamsToUrl } = useParamsToUrl();
+
+  const handleSelectCategory = (id: number) => {
+    const roadmapId = id.toString();
+    addParamsToUrl({ roadmapId });
+  };
+
   return (
     <>
       <Styled.CategoryTitle>TIL 목록</Styled.CategoryTitle>
-      <Styled.ShowAllButton>목록 전체보기</Styled.ShowAllButton>
+      <Styled.ShowAllButton onClick={() => router.push('/')}>목록 전체보기</Styled.ShowAllButton>
       <Styled.CollapsibleContainer>
         <Collapsible>
           <Collapsible.Header>개인 TIL</Collapsible.Header>
           <Collapsible.Item>
-            <div>- 자바 로드맵</div>
-            <div>- 리액트 로드맵</div>
-            <div>- JavaScript 입문 로드맵</div>
+            {data.category.map((item, index) => {
+              return (
+                <Styled.Item onClick={() => handleSelectCategory(item.id)} key={index}>
+                  - {item.name}
+                </Styled.Item>
+              );
+            })}
           </Collapsible.Item>
         </Collapsible>
         <Collapsible>
           <Collapsible.Header>로드맵 TIL</Collapsible.Header>
           <Collapsible.Item>
-            <div>- 자바 로드맵</div>
-            <div>- 리액트 로드맵</div>
-            <div>- JavaScript 입문 로드맵</div>
-            <div>- 자바 로드맵</div>
-            <div>- 리액트 로드맵</div>
-            <div>- JavaScript 입문 로드맵</div>
+            {data.roadmaps.map((item, index) => {
+              return (
+                <Styled.Item onClick={() => handleSelectCategory(item.id)} key={index}>
+                  - {item.name}
+                </Styled.Item>
+              );
+            })}
           </Collapsible.Item>
         </Collapsible>
       </Styled.CollapsibleContainer>

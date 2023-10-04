@@ -6,11 +6,11 @@ import * as Styled from './style';
 const SearchBar = () => {
   const [tilName, setTilName] = useState<string>('');
 
-  const { getParamsToUrl } = useParamsToUrl();
+  const { addParamsToUrl } = useParamsToUrl();
 
   const handleSearch = (title: string) => {
     if (!tilName) return;
-    getParamsToUrl({ title });
+    addParamsToUrl({ title });
   };
 
   return (
