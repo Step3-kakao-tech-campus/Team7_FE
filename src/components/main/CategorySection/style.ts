@@ -21,4 +21,10 @@ export const ShowAllButton = styled.button`
   text-align: left;
 
   margin-top: 1.5rem;
+  cursor: pointer;
+`;
+
+export const Item = styled.button`
+  display: block;
+  cursor: pointer;
 `;

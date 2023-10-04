@@ -34,4 +34,5 @@ export const ItemRoot = styled.div<{ isActive: boolean; rootHeight: number }>`
   & > * {
     margin: 1.3rem 0;
   }
+  cursor: pointer;
 `;
