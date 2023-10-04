@@ -51,6 +51,28 @@ export const tilsTitleResponse: TilsResponse = {
   hasNext: false,
 };
 
+export const tilsCategoryResponse: TilsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    tils: [
+      {
+        id: 1,
+        createDate: '2023-09-17',
+        step: {
+          id: 1,
+          title: '나의 코딩테스트 비법. 궁금하쥬?',
+        },
+        roadmap: {
+          id: 2,
+          name: '일급 비밀',
+        },
+      },
+    ],
+  },
+  hasNext: false,
+};
+
 export const tilsDateResponse: TilsResponse = {
   success: true,
   message: 'ok',
