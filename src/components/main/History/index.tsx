@@ -1,19 +1,15 @@
 import type { PropsWithChildren } from 'react';
-import type { NextRouter } from 'next/router';
 import { css } from '@emotion/react';
 import type { CalendarTooltipProps } from '@nivo/calendar';
 import { ResponsiveCalendar } from '@nivo/calendar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
+import { useParamsToUrl } from '@/hooks/common/useParamsToUrl';
 import { useGetUserHistory } from '@/hooks/queries/user';
 import * as Styled from './style';
 
-interface HistoryProps {
-  getParamsToUrl: (queryParams: NextRouter['query']) => void;
-}
-
-const History = (props: HistoryProps) => {
-  const { getParamsToUrl } = props;
+const History = () => {
+  const { getParamsToUrl } = useParamsToUrl();
 
   const { history, isLoading } = useGetUserHistory();
 
