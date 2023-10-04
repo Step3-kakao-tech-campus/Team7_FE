@@ -8,13 +8,18 @@ const TILSection = () => {
   const { tils, isLoading } = useGetTils({ page: 0 });
 
   return (
-    <Styled.Root>
-      <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
-        {tils.map((til, index) => {
-          return <TIL til={til} key={index} />;
-        })}
-      </CustomSuspense>
-    </Styled.Root>
+    <>
+      <Styled.Root>
+        <Styled.Container>
+          <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
+            {tils.map((til, index) => {
+              return <TIL til={til} key={index} />;
+            })}
+          </CustomSuspense>
+        </Styled.Container>
+      </Styled.Root>
+      <Styled.Target ref={ref} />
+    </>
   );
 };
 
