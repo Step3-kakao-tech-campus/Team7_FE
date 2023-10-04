@@ -9,7 +9,7 @@ const QUERY_KEY = {
 type InfinityTilRequest = Omit<TilsRequest, 'page'>;
 
 export const useGetTils = ({ roadmapId = undefined, date = '', title = '' }: InfinityTilRequest) => {
-  const { data, isLoading, fetchNextPage } = useInfiniteQuery(
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery(
     [QUERY_KEY.getTils],
     async ({ pageParam: page = 0 }) => {
       const data = getTils({ roadmapId, page, date, title });
@@ -40,5 +40,6 @@ export const useGetTils = ({ roadmapId = undefined, date = '', title = '' }: Inf
       }) ?? [],
     isLoading,
     fetchNextPage,
+    hasNextPage,
   };
 };

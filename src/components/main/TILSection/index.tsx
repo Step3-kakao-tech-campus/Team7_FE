@@ -7,15 +7,15 @@ import { useGetTils } from '@/hooks/queries/til';
 import * as Styled from './style';
 
 const TILSection = () => {
-  const { tils, isLoading, fetchNextPage } = useGetTils({});
+  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTils({});
 
   const { ref, isVisible } = useIntersectionObserver();
 
   useEffect(() => {
-    if (isVisible) {
+    if (isVisible && hasNextPage) {
       fetchNextPage();
     }
-  }, [isVisible, fetchNextPage]);
+  }, [isVisible, fetchNextPage, hasNextPage]);
 
   return (
     <>

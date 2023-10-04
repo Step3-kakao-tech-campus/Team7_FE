@@ -24,7 +24,6 @@ export const SkeletonStyles = css`
 `;
 
 export const Target = styled.div`
-  background-color: red;
   width: 100%;
   height: 40px;
 `;
