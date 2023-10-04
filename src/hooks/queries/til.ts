@@ -1,18 +1,28 @@
+import qs from 'qs';
+import { useRouter } from 'next/router';
+import type { QueryKey } from '@tanstack/react-query';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getTils } from '@/api/til';
-import type { TilsRequest, TilsResponse } from '@/api/til/type';
+import type { TilsResponse } from '@/api/til/type';
 
 const QUERY_KEY = {
   getTils: 'getTils',
 };
 
-type InfinityTilRequest = Omit<TilsRequest, 'page'>;
+interface InfinityTilRequest {
+  queryKey?: QueryKey;
+}
 
-export const useGetTils = ({ roadmapId = undefined, date = '', title = '' }: InfinityTilRequest) => {
+export const useGetTils = ({ queryKey }: InfinityTilRequest) => {
+  const { query } = useRouter();
+  const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
+
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    [QUERY_KEY.getTils],
+    [QUERY_KEY.getTils, ..._queryKey],
     async ({ pageParam: page = 0 }) => {
-      const data = getTils({ roadmapId, page, date, title });
+      const searchParams = { page, ...query };
+
+      const data = getTils(qs.stringify(searchParams, { addQueryPrefix: true }));
 
       return data;
     },

@@ -1,9 +1,4 @@
-export interface TilsRequest {
-  roadmapId?: number;
-  page?: number;
-  date?: string;
-  title?: string;
-}
+export type TilsRequest = string;
 
 export interface TilsResponse {
   success: boolean;
