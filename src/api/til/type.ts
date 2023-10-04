@@ -10,7 +10,8 @@ export interface TilsResponse {
   message: string;
   result: {
     tils: Til[];
-  };
+  } | null;
+  hasNext: boolean;
 }
 
 export interface Til {

@@ -1,11 +1,21 @@
+import { useEffect } from 'react';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
 import TIL from '@/components/main/TIL';
+import { useIntersectionObserver } from '@/hooks/common/useInterSectionObserver';
 import { useGetTils } from '@/hooks/queries/til';
 import * as Styled from './style';
 
 const TILSection = () => {
-  const { tils, isLoading } = useGetTils({ page: 0 });
+  const { tils, isLoading, fetchNextPage } = useGetTils({});
+
+  const { ref, isVisible } = useIntersectionObserver();
+
+  useEffect(() => {
+    if (isVisible) {
+      fetchNextPage();
+    }
+  }, [isVisible, fetchNextPage]);
 
   return (
     <>

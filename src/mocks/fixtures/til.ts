@@ -19,4 +19,12 @@ export const tilsResponse: TilsResponse = {
   result: {
     tils,
   },
+  hasNext: true,
+};
+
+export const tilsInfinityEndResponse: TilsResponse = {
+  success: true,
+  message: 'ok',
+  result: null,
+  hasNext: false,
 };
