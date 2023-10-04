@@ -1,35 +1,27 @@
-import { useEffect } from 'react';
+import type { Til } from '@/api/til/type';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
 import TIL from '@/components/main/TIL';
-import { useIntersectionObserver } from '@/hooks/common/useInterSectionObserver';
-import { useGetTils } from '@/hooks/queries/til';
 import * as Styled from './style';
 
-const TILSection = () => {
-  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTils({});
+interface TILSectionProps {
+  tils: Til[];
+  isLoading: boolean;
+}
 
-  const { ref, isVisible } = useIntersectionObserver();
-
-  useEffect(() => {
-    if (isVisible && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [isVisible, fetchNextPage, hasNextPage]);
+const TILSection = (props: TILSectionProps) => {
+  const { tils, isLoading } = props;
 
   return (
-    <>
-      <Styled.Root>
-        <Styled.Container>
-          <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
-            {tils.map((til, index) => {
-              return <TIL til={til} key={index} />;
-            })}
-          </CustomSuspense>
-        </Styled.Container>
-      </Styled.Root>
-      <Styled.Target ref={ref} />
-    </>
+    <Styled.Root>
+      <Styled.Container>
+        <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
+          {tils.map((til, index) => {
+            return <TIL til={til} key={index} />;
+          })}
+        </CustomSuspense>
+      </Styled.Container>
+    </Styled.Root>
   );
 };
 

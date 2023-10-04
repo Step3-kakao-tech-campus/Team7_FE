@@ -22,8 +22,3 @@ export const SkeletonStyles = css`
 
   padding: 1.25rem;
 `;
-
-export const Target = styled.div`
-  width: 100%;
-  height: 40px;
-`;

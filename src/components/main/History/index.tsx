@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from 'react';
+import type { NextRouter } from 'next/router';
 import { css } from '@emotion/react';
 import type { CalendarTooltipProps } from '@nivo/calendar';
 import { ResponsiveCalendar } from '@nivo/calendar';
@@ -7,8 +8,20 @@ import Skeleton from '@/components/common/Skeleton';
 import { useGetUserHistory } from '@/hooks/queries/user';
 import * as Styled from './style';
 
-const History = () => {
+interface HistoryProps {
+  getParamsToUrl: (queryParams: NextRouter['query']) => void;
+}
+
+const History = (props: HistoryProps) => {
+  const { getParamsToUrl } = props;
+
   const { history, isLoading } = useGetUserHistory();
+
+  const handleSelectDay = (color: string, date: string) => {
+    if (color === '#eeeeee') return; // til을 작성하지 않은 날은 검색 불가능하도록 함
+
+    getParamsToUrl({ date });
+  };
 
   return (
     <>
@@ -32,6 +45,9 @@ const History = () => {
             dayBorderWidth={2}
             dayBorderColor="#ffffff"
             tooltip={CustomTooltip}
+            onClick={(data) => {
+              handleSelectDay(data.color, data.day);
+            }}
             legends={[
               {
                 anchor: 'bottom-right',
