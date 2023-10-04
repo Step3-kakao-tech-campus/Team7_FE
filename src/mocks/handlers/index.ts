@@ -1,3 +1,4 @@
+import { tilHandler } from '@/mocks/handlers/til';
 import { userHandler } from '@/mocks/handlers/user';
 
-export const handlers = [...userHandler];
+export const handlers = [...userHandler, ...tilHandler];
