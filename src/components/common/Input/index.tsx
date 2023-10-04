@@ -21,7 +21,7 @@ const Input = (props: InputProps) => {
         <Styled.Input {...rest} disabled={disabled} />
         {endIcon && <Image src={`/assets/icons/${endIcon}.svg`} alt="" width={24} height={24} />}
       </Styled.InputContainer>
-      {message && <Styled.Message>{message}</Styled.Message>}
+      <Styled.Message>{message}</Styled.Message>
     </Styled.Label>
   );
 };
