@@ -72,5 +72,5 @@ const RightArea = styled.div`
 
 const ObserverInterSectionTarget = styled.div`
   width: 100%;
-  height: 40px;
+  height: 2.5rem;
 `;
