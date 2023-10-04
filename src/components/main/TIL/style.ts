@@ -7,6 +7,7 @@ export const Root = styled(Card)`
   height: 9.375rem;
 
   padding: 1.25rem;
+  cursor: pointer;
 `;
 
 export const Badge = styled.div`
