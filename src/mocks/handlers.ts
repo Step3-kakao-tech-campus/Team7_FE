@@ -1,6 +1,16 @@
 import { rest } from 'msw';
 
 export const handlers = [
+  rest.post('/email/check', (req, res, ctx) => {
+    return res(
+      ctx.json({
+        success: true,
+        code: 200,
+        message: 'ok',
+        result: null,
+      }),
+    );
+  }),
   rest.get(`/products`, (req, res, ctx) => {
     const page = Number(req.url.searchParams.get('page'));
     return res(
