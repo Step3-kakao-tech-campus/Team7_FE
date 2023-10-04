@@ -13,6 +13,8 @@ export const HeaderRoot = styled.button<{ isActive: boolean }>`
     font-size: 1.1rem;
     font-weight: 700;
 
+    cursor: pointer;
+
     & > img {
       transition: transform 0.3s;
 
