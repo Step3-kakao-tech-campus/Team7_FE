@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 export const Root = styled.header`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   padding: 0 1.5rem;
 
@@ -13,7 +14,6 @@ export const Root = styled.header`
 `;
 
 export const Title = styled.h1`
-  flex: 1;
   margin-left: 1rem;
   font-size: 1.25rem;
   font-weight: 700;
@@ -28,4 +28,9 @@ export const ButtonStyles = css`
   font-size: 1.125rem;
   font-weight: 600;
   gap: 0.5rem;
+`;
+
+export const ExitContainer = styled.button`
+  display: flex;
+  cursor: pointer;
 `;
