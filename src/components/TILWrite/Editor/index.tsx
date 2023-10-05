@@ -2,22 +2,27 @@ import type { BlockNoteEditor } from '@blocknote/core';
 import '@blocknote/core/style.css';
 import { BlockNoteView, useBlockNote, lightDefaultTheme } from '@blocknote/react';
 import type { Theme } from '@blocknote/react';
+import * as Styled from './style';
 
 // Our <Editor> component we can reuse later
-export default function Editor() {
+const Editor = () => {
   // Creates a new editor instance.
   const editor: BlockNoteEditor | null = useBlockNote();
 
   // Renders the editor instance using a React component.
   return (
-    <BlockNoteView
-      editor={editor}
-      // Adding the custom themes. The editor will use the browser settings to
-      // determine if the light or dark theme is used.
-      theme={customTheme}
-    />
+    <Styled.Root>
+      <BlockNoteView
+        editor={editor}
+        // Adding the custom themes. The editor will use the browser settings to
+        // determine if the light or dark theme is used.
+        theme={customTheme}
+      />
+    </Styled.Root>
   );
-}
+};
+
+export default Editor;
 
 // Custom red light theme
 const lightCustomTheme = {
@@ -25,6 +30,13 @@ const lightCustomTheme = {
   colors: lightDefaultTheme.colors,
   borderRadius: lightDefaultTheme.borderRadius,
   fontFamily: 'Pretendard, sans-serif',
+  componentStyles: () => ({
+    // Adds basic styling to the editor.
+    Editor: {
+      fontSize: '20px',
+    },
+    // Makes all hovered dropdown & menu items blue.
+  }),
 } satisfies Theme;
 
 // Custom red dark theme
