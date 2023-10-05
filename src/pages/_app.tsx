@@ -5,6 +5,7 @@ import { ThemeProvider } from '@emotion/react';
 import ToastProvider from '@/components/common/Toast/provider';
 import { emotionTheme } from '@/styles/emotion';
 import '@/styles/globals.css';
+import { getLayout } from '@/utils/layout';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   if (typeof window === 'undefined') {
@@ -23,6 +24,8 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
+  const Layout = getLayout(Component);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={emotionTheme}>
