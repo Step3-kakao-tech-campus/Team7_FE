@@ -21,7 +21,13 @@ interface EmailFormInput {
 }
 
 const ByEmail = () => {
-  const { mutate, isLoading, data } = useMutation({ mutationFn: (email: string) => postEmailCheck({ email: email }) });
+  const { mutateAsync: emailMutateAsync, isLoading: emailIsLoading } = useMutation({
+    mutationFn: (email: string) => postEmailCheck({ email: email }),
+  });
+
+  const { mutateAsync: codeMutateAsync, isLoading: codeIsLoading } = useMutation({
+    mutationFn: (data: { email: string; code: string }) => postEmailCodeCheck(data),
+  });
 
   const [emailState, setEmailState] = useState<EmailFormStates>('emailReady');
   const [email, setEmail] = useState('');
@@ -44,8 +50,8 @@ const ByEmail = () => {
   const onSubmit: SubmitHandler<EmailFormInput> = async (bodyData) => {
     if (emailState === 'emailReady' && !bodyData.code) {
       const email = bodyData.email;
-      mutate(email);
-      console.log(data);
+
+      const data = await emailMutateAsync(email);
 
       if (data?.code === 200) {
         setEmailState('codeReady');
@@ -57,9 +63,9 @@ const ByEmail = () => {
       const email = bodyData.email;
       const verifyCode = bodyData.code;
 
-      const { success, code, message, result } = await postEmailCodeCheck({ email: email, code: verifyCode });
+      const data = await codeMutateAsync({ email: email, code: verifyCode });
 
-      if (code === 200) {
+      if (data?.code === 200) {
         router.push({
           pathname: '/auth/register',
           query: {
@@ -67,7 +73,7 @@ const ByEmail = () => {
           },
         });
       } else {
-        setError('code', { type: '400', message: message });
+        setError('code', { type: '400', message: data.message });
       }
     }
   };
@@ -105,7 +111,7 @@ const ByEmail = () => {
               variant="ghost"
               onClick={async (e) => {
                 e.preventDefault();
-                const { success, code, message, result } = await postEmailCheck({ email: email });
+                emailMutateAsync(email);
               }}>
               재전송하기
             </StyeldReSendButton>
@@ -133,7 +139,7 @@ const ByEmail = () => {
 
         <StyledButton
           fullWidth
-          isLoading={isLoading}
+          isLoading={emailIsLoading || codeIsLoading}
           onClick={() => {
             // handleOpen();
           }}>
