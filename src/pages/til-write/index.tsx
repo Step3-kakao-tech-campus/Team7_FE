@@ -25,3 +25,9 @@ const TilWrite = () => {
 };
 
 export default TilWrite;
+
+const ResizeHandle = styled(PanelResizeHandle)`
+  width: 50px;
+  height: 100%;
+  background-image: url('/assets/icons/ic_spring.svg');
+`;
