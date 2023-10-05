@@ -15,6 +15,9 @@ const Editor = () => {
       blockContainer: {
         class: styles.blockContainer,
       },
+      blockContent: {
+        class: styles.blockContent,
+      },
     },
   });
 

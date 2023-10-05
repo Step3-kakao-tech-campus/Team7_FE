@@ -2,3 +2,7 @@
   font-size: 18px;
   font-weight: 500;
 }
+
+.blockContent::before {
+  margin-right: 0.6rem !important;
+}
