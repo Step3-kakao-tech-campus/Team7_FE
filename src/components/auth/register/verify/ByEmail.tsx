@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { useMutation } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 import { postEmailCheck, postEmailCodeCheck } from '@/api/auth';
 import Button from '@/components/common/Button';
@@ -20,6 +21,8 @@ interface EmailFormInput {
 }
 
 const ByEmail = () => {
+  const { mutate, isLoading, data } = useMutation({ mutationFn: (email: string) => postEmailCheck({ email: email }) });
+
   const [emailState, setEmailState] = useState<EmailFormStates>('emailReady');
   const [email, setEmail] = useState('');
   const { isOpen, handleOpen, handleClose } = useModalState();
@@ -38,20 +41,21 @@ const ByEmail = () => {
     },
     mode: 'onSubmit',
   });
-  const onSubmit: SubmitHandler<EmailFormInput> = async (data) => {
-    if (emailState === 'emailReady' && !data.code) {
-      const email = data.email;
-      const { success, code, message, result } = await postEmailCheck({ email: email });
+  const onSubmit: SubmitHandler<EmailFormInput> = async (bodyData) => {
+    if (emailState === 'emailReady' && !bodyData.code) {
+      const email = bodyData.email;
+      mutate(email);
+      console.log(data);
 
-      if (code === 200) {
+      if (data?.code === 200) {
         setEmailState('codeReady');
         setEmail(email);
       } else {
         handleOpen();
       }
     } else if (emailState === 'codeReady') {
-      const email = data.email;
-      const verifyCode = data.code;
+      const email = bodyData.email;
+      const verifyCode = bodyData.code;
 
       const { success, code, message, result } = await postEmailCodeCheck({ email: email, code: verifyCode });
 
@@ -129,6 +133,7 @@ const ByEmail = () => {
 
         <StyledButton
           fullWidth
+          isLoading={isLoading}
           onClick={() => {
             // handleOpen();
           }}>

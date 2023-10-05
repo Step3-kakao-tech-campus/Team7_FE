@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@emotion/react';
 import ToastProvider from '@/components/common/Toast/provider';
 import { emotionTheme } from '@/styles/emotion';
@@ -19,17 +20,20 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   }
 }
 
+const queryClient = new QueryClient();
+
 export default function App({ Component, pageProps }: AppProps) {
   const Layout = getLayout(Component);
 
   return (
-    <ThemeProvider theme={emotionTheme}>
-      <ToastProvider>
-        <Layout>
-          {' '}
-          <Component {...pageProps} />
-        </Layout>
-      </ToastProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={emotionTheme}>
+        <ToastProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ToastProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
