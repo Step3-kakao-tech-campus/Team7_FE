@@ -2,12 +2,21 @@ import type { BlockNoteEditor } from '@blocknote/core';
 import '@blocknote/core/style.css';
 import { BlockNoteView, useBlockNote, lightDefaultTheme } from '@blocknote/react';
 import type { Theme } from '@blocknote/react';
+import styles from './index.module.css';
 import * as Styled from './style';
 
 // Our <Editor> component we can reuse later
 const Editor = () => {
   // Creates a new editor instance.
-  const editor: BlockNoteEditor | null = useBlockNote();
+  const editor: BlockNoteEditor | null = useBlockNote({
+    // Sets attributes on DOM elements in the editor.
+    domAttributes: {
+      // Adds a class to all `blockContainer` elements.
+      blockContainer: {
+        class: styles.blockContainer,
+      },
+    },
+  });
 
   // Renders the editor instance using a React component.
   return (
