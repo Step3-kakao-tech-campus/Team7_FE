@@ -1,4 +1,5 @@
 import type { BlockNoteEditor } from '@blocknote/core';
+import { uploadToTmpFilesDotOrg_DEV_ONLY } from '@blocknote/core';
 import '@blocknote/core/style.css';
 import { BlockNoteView, useBlockNote, lightDefaultTheme } from '@blocknote/react';
 import type { Theme } from '@blocknote/react';
@@ -19,6 +20,7 @@ const Editor = () => {
         class: styles.blockContent,
       },
     },
+    uploadFile: uploadToTmpFilesDotOrg_DEV_ONLY,
   });
 
   // Renders the editor instance using a React component.
