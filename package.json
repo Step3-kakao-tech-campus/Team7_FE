@@ -12,6 +12,7 @@
     "chromatic": "npx chromatic --project-token=chpt_aeaca4cc95ad5ad"
   },
   "dependencies": {
+    "@blocknote/react": "^0.9.4",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@nivo/calendar": "^0.80.0",
