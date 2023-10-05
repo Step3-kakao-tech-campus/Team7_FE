@@ -11,6 +11,16 @@ export const handlers = [
       }),
     );
   }),
+  rest.post('/email/code/check', (req, res, ctx) => {
+    return res(
+      ctx.json({
+        success: true,
+        code: 200,
+        message: '인증코드가 불일치합니다.',
+        result: null,
+      }),
+    );
+  }),
   rest.get(`/products`, (req, res, ctx) => {
     const page = Number(req.url.searchParams.get('page'));
     return res(

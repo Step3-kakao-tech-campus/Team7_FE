@@ -1,6 +1,9 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { postEmailCheck, postEmailCodeCheck } from '@/api/auth';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import InfoArea from '@/components/common/InfoArea';
@@ -9,28 +12,61 @@ import Modal from '@/components/common/Modal';
 import { useModalState } from '@/components/common/Modal/useModalState';
 import { EMAIL_REGEX } from '@/constants/regex';
 
+type EmailFormStates = 'emailReady' | 'codeReady' | 'valid';
+
 interface EmailFormInput {
   email: string;
+  code: string;
 }
 
 const ByEmail = () => {
-  const [emailState, setEmailState] = useState('none');
+  const [emailState, setEmailState] = useState<EmailFormStates>('emailReady');
+  const [email, setEmail] = useState('');
+  const { isOpen, handleOpen, handleClose } = useModalState();
+
+  const router = useRouter();
 
   const {
     control,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm({
     defaultValues: {
       email: '',
+      code: '',
     },
     mode: 'onSubmit',
   });
   const onSubmit: SubmitHandler<EmailFormInput> = async (data) => {
-    const email = data.email;
-  };
+    if (emailState === 'emailReady' && !data.code) {
+      const email = data.email;
+      const { success, code, message, result } = await postEmailCheck({ email: email });
 
-  const { isOpen, handleOpen, handleClose } = useModalState();
+      if (code === 200) {
+        setEmailState('codeReady');
+        setEmail(email);
+      } else {
+        handleOpen();
+      }
+    } else if (emailState === 'codeReady') {
+      const email = data.email;
+      const verifyCode = data.code;
+
+      const { success, code, message, result } = await postEmailCodeCheck({ email: email, code: verifyCode });
+
+      if (code === 200) {
+        router.push({
+          pathname: '/auth/register',
+          query: {
+            email: email,
+          },
+        });
+      } else {
+        setError('code', { type: '400', message: message });
+      }
+    }
+  };
 
   return (
     <>
@@ -51,32 +87,55 @@ const ByEmail = () => {
               placeholder="이메일을 입력해주세요."
               message={errors.email?.message}
               status={errors.email ? 'error' : 'default'}
+              disabled={emailState === 'codeReady'}
               {...field}
             />
           )}
         />
+        {emailState === 'codeReady' && (
+          <StyledCodeDiv
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            transition={{ duration: 0.3 }}>
+            <StyeldReSendButton
+              variant="ghost"
+              onClick={async (e) => {
+                e.preventDefault();
+                const { success, code, message, result } = await postEmailCheck({ email: email });
+              }}>
+              재전송하기
+            </StyeldReSendButton>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }}>
+              <InfoArea textAlign="center" isDot={false}>
+                <InfoArea.Info>해당 이메일로 인증코드를 전송하였습니다.</InfoArea.Info>
+                <InfoArea.Info>아래에 인증코드를 입력해주세요.</InfoArea.Info>
+              </InfoArea>
+            </motion.div>
 
-        {emailState !== 'valid' && (
-          <Button
-            fullWidth
-            onClick={() => {
-              // handleOpen();
-            }}>
-            이메일 확인
-          </Button>
+            <Controller
+              name="code"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  placeholder="인증 코드를 입력해주세요."
+                  message={errors.code?.message}
+                  status={errors.code ? 'error' : 'default'}
+                  {...field}
+                />
+              )}
+            />
+          </StyledCodeDiv>
         )}
+
+        <StyledButton
+          fullWidth
+          onClick={() => {
+            // handleOpen();
+          }}>
+          {emailState !== 'codeReady' ? '이메일 확인' : '인증하기'}
+        </StyledButton>
       </StyledEmailForm>
-      {emailState === 'valid' && (
-        <StyledCodeForm>
-          <StyeldButton variant="ghost">재전송하기</StyeldButton>
-          <InfoArea textAlign="center" isDot={false}>
-            <InfoArea.Info>해당 이메일로 인증코드를 전송하였습니다.</InfoArea.Info>
-            <InfoArea.Info>아래에 인증코드를 입력해주세요.</InfoArea.Info>
-          </InfoArea>
-          <Input placeholder="인증 코드를 입력해주세요." />
-          <Button fullWidth>인증하기</Button>
-        </StyledCodeForm>
-      )}
+
       <Modal width={20} isOpen={isOpen} onClose={handleClose}>
         <ModalContainer>
           <Title>이미 사용중인 이메일입니다.</Title>
@@ -86,7 +145,13 @@ const ByEmail = () => {
           </Info>
           <ButtonContainer dir="col">
             <LoginButton>로그인</LoginButton>
-            <TryButton variant="ghost">다시 입력</TryButton>
+            <TryButton
+              onClick={() => {
+                handleClose();
+              }}
+              variant="ghost">
+              다시 입력
+            </TryButton>
           </ButtonContainer>
         </ModalContainer>
       </Modal>
@@ -99,24 +164,34 @@ export default ByEmail;
 const StyledEmailForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.1rem;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 3rem;
 `;
 
-const StyledCodeForm = styled.form`
+const StyledCodeDiv = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  width: 100%;
+  gap: 1rem;
 `;
 
-const StyeldButton = styled(Button)`
+const StyeldReSendButton = styled(Button)`
   align-self: flex-end;
   padding: 0;
   font-size: 0.8rem;
   font-weight: 600;
   color: #94a3b8;
+  transition: all 0.1s;
+
+  &:hover {
+    color: #5d5d5d;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  margin-top: 0.7rem;
+  padding: 0.8rem 0;
+  z-index: 10;
 `;
 
 const ModalContainer = styled.div`
