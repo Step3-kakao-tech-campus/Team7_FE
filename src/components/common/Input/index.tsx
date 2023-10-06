@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import type { InputHTMLAttributes } from 'react';
 import Image from 'next/image';
 import * as Styled from './style';
@@ -21,7 +22,14 @@ const Input = (props: InputProps) => {
         <Styled.Input {...rest} disabled={disabled} />
         {endIcon && <Image src={`/assets/icons/${endIcon}.svg`} alt="" width={24} height={24} />}
       </Styled.InputContainer>
-      {message && <Styled.Message>{message}</Styled.Message>}
+      {message && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          transition={{ ease: 'easeOut', duration: 0.2 }}>
+          <Styled.Message>{message}</Styled.Message>
+        </motion.div>
+      )}
     </Styled.Label>
   );
 };

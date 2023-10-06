@@ -1,9 +1,14 @@
 import styled from '@emotion/styled';
+import Verify from '@/components/auth/register/verify/Verify';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { setLayout } from '@/utils/layout';
 
 export const VerifyPage = () => {
-  return <StyledVerifyPage>{/* <Verify /> */}</StyledVerifyPage>;
+  return (
+    <StyledVerifyPage>
+      <Verify />
+    </StyledVerifyPage>
+  );
 };
 
 setLayout(VerifyPage, FullHeightLayout);
@@ -11,8 +16,10 @@ setLayout(VerifyPage, FullHeightLayout);
 export default VerifyPage;
 
 const StyledVerifyPage = styled.div`
-  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   margin: 0 auto;
-  padding: 64px 24px;
-  max-width: 420px;
+  max-width: 400px;
 `;

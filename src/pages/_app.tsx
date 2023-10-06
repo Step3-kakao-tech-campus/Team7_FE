@@ -30,7 +30,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={emotionTheme}>
         <ToastProvider>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ToastProvider>
       </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
