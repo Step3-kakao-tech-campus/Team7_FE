@@ -20,6 +20,7 @@ const CodeCheck = (props: CodeCheckProps) => {
       animate={{ height: 'auto', opacity: 1 }}
       transition={{ duration: 0.3 }}>
       <Styled.ReSendButton
+        type="button"
         variant="ghost"
         onClick={async (e) => {
           e.preventDefault();
