@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
+import Logo from '@/components/common/Logo';
 import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 
@@ -14,8 +14,7 @@ const GNB = () => {
     <Styled.Root>
       <Styled.Inner>
         <Styled.Logo>
-          <Image src="/assets/icons/ic_tily.svg" alt="logo" width={32} height={32} />
-          <Styled.LogoText>TIL-y</Styled.LogoText>
+          <Logo imageSize={32} />
         </Styled.Logo>
 
         <Styled.NavArea>
