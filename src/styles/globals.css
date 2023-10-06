@@ -129,6 +129,7 @@ select {
 a {
   outline: none;
   text-decoration: none;
+  color: inherit;
 }
 
 a:hover,
@@ -433,5 +434,5 @@ body {
 
 #__next {
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }

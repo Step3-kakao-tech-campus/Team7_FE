@@ -59,3 +59,7 @@ export const Message = styled.p`
   color: ${({ theme }) => theme.colors.red};
   font-size: 0.75rem;
 `;
+
+export const ButtonContainer = styled.button`
+  cursor: pointer;
+`;
