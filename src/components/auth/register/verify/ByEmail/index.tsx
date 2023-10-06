@@ -6,6 +6,7 @@ import { postEmailCheck, postEmailCodeCheck } from '@/api/auth';
 import * as Styled from '@/components/auth/register/verify/ByEmail/style';
 import Input from '@/components/common/Input';
 import { useModalState } from '@/components/common/Modal/useModalState';
+import { tilyLinks } from '@/constants/links';
 import { EMAIL_REGEX } from '@/constants/regex';
 import CodeCheck from '../CodeCheck';
 import VerifyModal from '../VerifyModal';
@@ -63,7 +64,7 @@ const ByEmail = () => {
 
       if (data?.code === 200) {
         router.push({
-          pathname: '/auth/register',
+          pathname: tilyLinks.register(),
           query: {
             email: email,
           },
