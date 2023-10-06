@@ -40,7 +40,6 @@ export default Editor;
 
 // Custom red light theme
 const lightCustomTheme = {
-  type: 'light',
   colors: lightDefaultTheme.colors,
   borderRadius: lightDefaultTheme.borderRadius,
   fontFamily: 'Pretendard, sans-serif',
@@ -56,7 +55,6 @@ const lightCustomTheme = {
 // Custom red dark theme
 const darkCustomTheme = {
   ...lightCustomTheme,
-  type: 'dark',
 } satisfies Theme;
 
 // Combining the custom themes into a single theme object.
