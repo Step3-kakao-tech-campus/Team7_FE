@@ -11,7 +11,7 @@ const TilWrite = () => {
     <>
       <Header />
       <PanelGroup style={{ height: 'calc(100% - 8rem)' }} direction="horizontal">
-        <Panel style={{ overflow: 'scroll', height: 'calc(100% - 30px)' }} defaultSize={70}>
+        <Panel style={{ overflowY: 'scroll', height: 'calc(100% - 30px)' }} defaultSize={70}>
           <Editor />
         </Panel>
         <ResizeHandle />
