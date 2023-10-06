@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import ByEmail from '@/components/auth/verify/ByEmail';
-import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Logo from '@/components/common/Logo';
 import { tilyLinks } from '@/constants/links';
@@ -25,7 +24,7 @@ const StyledFlex = styled(Flex)`
 
 const StyledLoginButton = styled(Link)`
   align-self: flex-end;
-  margin-top: 10px;
+  margin-top: 0.5rem;
   padding: 0;
   font-size: 0.8rem;
   font-weight: 600;
