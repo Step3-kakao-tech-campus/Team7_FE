@@ -20,3 +20,17 @@ export interface EmailCodeCheckResponse {
   message: string;
   result: { email: string } | null;
 }
+
+export interface JoinRequest {
+  email: string;
+  name: string;
+  password: string;
+  passwordConfirm: string;
+}
+
+export interface JoinResponse {
+  success: boolean;
+  code: number;
+  message: string;
+  result: null;
+}

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { type Control, Controller, type FieldErrors } from 'react-hook-form';
-import * as Styled from '@/components/auth/register/verify/CodeCheck/style';
+import * as Styled from '@/components/auth/verify/CodeCheck/style';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import { type EmailFormInput } from '../ByEmail';

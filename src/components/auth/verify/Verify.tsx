@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import styled from '@emotion/styled';
-import ByEmail from '@/components/auth/register/verify/ByEmail';
+import ByEmail from '@/components/auth/verify/ByEmail';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Logo from '@/components/common/Logo';

@@ -1,5 +1,12 @@
 import { axiosInstance } from '@/api';
-import type { EmailCheckRequest, EmailCheckResponse, EmailCodeCheckRequest, EmailCodeCheckResponse } from './type';
+import type {
+  EmailCheckRequest,
+  EmailCheckResponse,
+  EmailCodeCheckRequest,
+  EmailCodeCheckResponse,
+  JoinRequest,
+  JoinResponse,
+} from './type';
 
 export const postEmailCheck = async ({ email }: EmailCheckRequest) => {
   const { data } = await axiosInstance.request<EmailCheckResponse>({
@@ -14,8 +21,18 @@ export const postEmailCheck = async ({ email }: EmailCheckRequest) => {
 export const postEmailCodeCheck = async ({ email, code }: EmailCodeCheckRequest) => {
   const { data } = await axiosInstance.request<EmailCodeCheckResponse>({
     method: 'POST',
-    url: '/email/code/check',
+    url: '/join',
     data: { email, code },
+  });
+
+  return data;
+};
+
+export const postJoin = async ({ email, name, password, passwordConfirm }: JoinRequest) => {
+  const { data } = await axiosInstance.request<JoinResponse>({
+    method: 'POST',
+    url: '/email/code/check',
+    data: { email, name, password, passwordConfirm },
   });
 
   return data;

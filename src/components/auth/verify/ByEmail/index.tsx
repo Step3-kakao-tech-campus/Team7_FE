@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
 import { postEmailCheck, postEmailCodeCheck } from '@/api/auth';
-import * as Styled from '@/components/auth/register/verify/ByEmail/style';
+import * as Styled from '@/components/auth/verify/ByEmail/style';
 import Input from '@/components/common/Input';
 import { useModalState } from '@/components/common/Modal/useModalState';
 import { tilyLinks } from '@/constants/links';
@@ -26,7 +26,7 @@ const ByEmail = () => {
     mutationFn: (email: string) => postEmailCheck({ email: email }),
   });
   const { mutateAsync: codeMutateAsync, isLoading: codeIsLoading } = useMutation({
-    mutationFn: (data: { email: string; code: string }) => postEmailCodeCheck(data),
+    mutationFn: (data: EmailFormInput) => postEmailCodeCheck(data),
   });
 
   const [email, setEmail] = useState<EmailFormStates>({ state: 'emailReady', email: '' });
@@ -47,9 +47,14 @@ const ByEmail = () => {
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<EmailFormInput> = async (bodyData) => {
-    if (email.state === 'emailReady' && !bodyData.code) {
-      const email = bodyData.email;
+  useEffect(() => {
+    console.log(email.state);
+  }, [email]);
+
+  const onSubmit: SubmitHandler<EmailFormInput> = async (formData) => {
+    console.log('here');
+    if (email.state === 'emailReady' && !formData.code) {
+      const email = formData.email;
       const data = await emailMutateAsync(email);
 
       if (data?.code === 200) {
@@ -58,8 +63,8 @@ const ByEmail = () => {
         handleOpen();
       }
     } else if (email.state === 'codeReady') {
-      const email = bodyData.email;
-      const verifyCode = bodyData.code;
+      const email = formData.email;
+      const verifyCode = formData.code;
       const data = await codeMutateAsync({ email: email, code: verifyCode });
 
       if (data?.code === 200) {
