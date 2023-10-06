@@ -61,7 +61,6 @@ const ByEmail = () => {
       const verifyCode = bodyData.code;
       const data = await codeMutateAsync({ email: email, code: verifyCode });
 
-      console.log(data);
       if (data?.code === 200) {
         router.push({
           pathname: '/auth/register',
@@ -103,12 +102,7 @@ const ByEmail = () => {
           <CodeCheck emailMutateAsync={emailMutateAsync} email={email.email} control={control} errors={errors} />
         )}
 
-        <Styled.VerifyButton
-          fullWidth
-          isLoading={emailIsLoading || codeIsLoading}
-          onClick={() => {
-            // handleOpen();
-          }}>
+        <Styled.VerifyButton fullWidth isLoading={emailIsLoading || codeIsLoading}>
           {email.state !== 'codeReady' ? '이메일 확인' : '인증하기'}
         </Styled.VerifyButton>
       </Styled.EmailForm>

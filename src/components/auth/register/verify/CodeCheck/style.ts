@@ -13,7 +13,7 @@ export const ReSendButton = styled(Button)`
   padding: 0;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: ${({ theme }) => theme.colors.gray_800};
   transition: all 0.1s;
 
   &:hover {

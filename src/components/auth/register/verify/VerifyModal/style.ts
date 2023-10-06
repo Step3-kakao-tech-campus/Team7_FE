@@ -14,13 +14,14 @@ export const Title = styled.h3`
 
 export const Info = styled(Flex)`
   text-align: center;
-  color: #94a3b8;
+  color: ${({ theme }) => theme.colors.gray_800};
 `;
 export const InfoText = styled.p`
   text-align: center;
 `;
 
 export const ButtonContainer = styled(Flex)``;
+
 export const LoginButton = styled(Button)`
   border-radius: 10px;
 `;

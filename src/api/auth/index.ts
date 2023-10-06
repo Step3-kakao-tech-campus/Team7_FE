@@ -5,7 +5,7 @@ export const postEmailCheck = async ({ email }: { email: string }) => {
   const { data } = await axiosInstance.request<EmailCheckResponse>({
     method: 'POST',
     url: '/email/check',
-    data: { email: email },
+    data: { email },
   });
 
   return data;
@@ -15,7 +15,7 @@ export const postEmailCodeCheck = async ({ email, code }: { email: string; code:
   const { data } = await axiosInstance.request<EmailCodeCheckResponse>({
     method: 'POST',
     url: '/email/code/check',
-    data: { email: email, code: code },
+    data: { email, code },
   });
 
   return data;
