@@ -20,3 +20,10 @@ export const joinResponse: JoinResponse = {
   message: '인증코드가 불일치합니다.',
   result: null,
 };
+
+export const loginResponse: LoginResponse = {
+  success: true,
+  code: 200,
+  message: '인증코드가 불일치합니다.',
+  result: null,
+};
