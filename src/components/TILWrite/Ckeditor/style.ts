@@ -229,4 +229,8 @@ export const Root = styled.div`
   .ck.ck-editor__main > .ck-editor__editable.ck-focused {
     border: none;
   }
+
+  .ck-content p {
+    font-size: 1.2rem !important;
+  }
 `;

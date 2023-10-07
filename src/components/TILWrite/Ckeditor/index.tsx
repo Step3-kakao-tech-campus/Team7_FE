@@ -12,7 +12,6 @@ const editorConfiguration = {
     'italic',
     'underline',
     'strikethrough',
-    'fontSize',
     'fontColor',
     'fontBackgroundColor',
     '|',
@@ -36,7 +35,7 @@ const CkEditor = () => {
       <CKEditor
         editor={Editor}
         config={editorConfiguration}
-        data='<img src="https://avatars.githubusercontent.com/u/62373865?v=4" alt="CKEditor 5 Sample image." />'
+        data=""
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
           console.log('Editor is ready to use!', editor);
