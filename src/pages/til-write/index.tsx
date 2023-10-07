@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Footer from '@/components/TILWrite/Footer';
 import Header from '@/components/TILWrite/Header';
 
-const Editor = dynamic(() => import('@/components/TILWrite/Editor'), { ssr: false });
+const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
 const TilWrite = () => {
   return (
