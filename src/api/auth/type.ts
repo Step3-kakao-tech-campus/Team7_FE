@@ -7,6 +7,18 @@ export interface EmailCodeCheckRequest {
   code: string;
 }
 
+export interface JoinRequest {
+  email: string;
+  name: string;
+  password: string;
+  passwordConfirm: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
 export interface EmailCheckResponse {
   success: boolean;
   code: number;
@@ -21,14 +33,14 @@ export interface EmailCodeCheckResponse {
   result: { email: string } | null;
 }
 
-export interface JoinRequest {
-  email: string;
-  name: string;
-  password: string;
-  passwordConfirm: string;
+export interface JoinResponse {
+  success: boolean;
+  code: number;
+  message: string;
+  result: null;
 }
 
-export interface JoinResponse {
+export interface LoginResponse {
   success: boolean;
   code: number;
   message: string;
