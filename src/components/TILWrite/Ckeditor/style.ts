@@ -233,4 +233,30 @@ export const Root = styled.div`
   .ck-content p {
     font-size: 1.2rem !important;
   }
+
+  /* .ck.ck-editor__editable_inline > :first-child {
+    display: none;
+  }
+
+  .ck.ck-editor__editable_inline > :last-child {
+    display: none;
+  } */
+
+  .ck.ck-editor__main {
+    padding: 40px;
+
+    & > * {
+      line-height: 1.5;
+    }
+  }
+
+  ul {
+    padding-left: 20px;
+    font-size: 1.2rem;
+  }
+
+  ol {
+    padding-left: 20px;
+    font-size: 1.2rem;
+  }
 `;

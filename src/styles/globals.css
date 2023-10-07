@@ -462,6 +462,7 @@ body {
   color: #e5e5e5 !important;
   border-radius: 6px !important;
   line-height: 1.5 !important;
+  font-size: 1rem !important;
 }
 
 /* ckeditor root variable */
