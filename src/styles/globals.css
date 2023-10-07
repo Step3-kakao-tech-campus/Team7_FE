@@ -457,6 +457,14 @@ body {
   background-color: #0f172a !important;
 }
 
+.ck-content pre {
+  background: #0f172a !important;
+  color: #e5e5e5 !important;
+  border-radius: 6px !important;
+  line-height: 1.5 !important;
+}
+
+/* ckeditor root variable */
 :root {
   --ck-color-selector-column-resizer-hover: #ef4365 !important;
   --ck-color-selector-caption-highlighted-background: #0f172a !important;
