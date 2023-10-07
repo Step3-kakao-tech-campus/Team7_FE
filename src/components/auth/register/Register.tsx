@@ -50,7 +50,7 @@ const Register = () => {
     if (data?.code === 200) {
       handleOpen();
     } else {
-      console.log('error');
+      // 에러 처리
     }
   };
 
