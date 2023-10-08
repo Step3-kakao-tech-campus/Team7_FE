@@ -3,7 +3,7 @@ import { type PropsWithChildren, type HTMLAttributes, useRef } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import Image from 'next/image';
 import Portal from '@/components/common/Portal';
-import { useOnClickOutside } from '@/hooks/useOnClickOutside';
+import { useOnClickOutside } from '@/hooks/common/useOnClickOutside';
 import * as Styled from './style';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {

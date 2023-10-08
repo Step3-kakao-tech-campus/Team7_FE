@@ -3,7 +3,6 @@ import TextArea from '@/components/common/TextArea/index';
 
 export default {
   component: TextArea,
-  title: 'TextArea',
 } as Meta<typeof TextArea>;
 
 export const Default = {
