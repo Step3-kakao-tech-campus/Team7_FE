@@ -243,7 +243,7 @@ export const Root = styled.div`
   } */
 
   .ck.ck-editor__main {
-    padding: 20px 40px;
+    padding: 0 20px;
 
     & > * {
       line-height: 1.5;
@@ -258,5 +258,9 @@ export const Root = styled.div`
   ol {
     padding-left: 20px;
     font-size: 1.2rem;
+  }
+
+  .ck.ck-sticky-panel__content {
+    padding-left: 20px;
   }
 `;
