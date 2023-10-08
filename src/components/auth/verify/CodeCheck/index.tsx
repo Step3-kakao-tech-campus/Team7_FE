@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { type Control, Controller, type FieldErrors } from 'react-hook-form';
-import * as Styled from '@/components/auth/register/verify/CodeCheck/style';
+import * as Styled from '@/components/auth/verify/CodeCheck/style';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import { type EmailFormInput } from '../ByEmail';
@@ -20,6 +20,7 @@ const CodeCheck = (props: CodeCheckProps) => {
       animate={{ height: 'auto', opacity: 1 }}
       transition={{ duration: 0.3 }}>
       <Styled.ReSendButton
+        type="button"
         variant="ghost"
         onClick={async (e) => {
           e.preventDefault();

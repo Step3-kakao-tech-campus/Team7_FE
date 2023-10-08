@@ -1,4 +1,4 @@
-import * as Styled from '@/components/auth/register/verify/VerifyModal/style';
+import * as Styled from '@/components/auth/verify/VerifyModal/style';
 import Modal from '@/components/common/Modal';
 
 interface VerifyModalProps {
