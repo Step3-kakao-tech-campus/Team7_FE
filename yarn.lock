@@ -1371,13 +1371,6 @@
   dependencies:
     ckeditor5 "40.0.0"
 
-"@ckeditor/ckeditor5-highlight@40.0.0":
-  version "40.0.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-highlight/-/ckeditor5-highlight-40.0.0.tgz#8ac534e4b6fb36ca37b50998554b2e13e7aecab7"
-  integrity sha512-XsS0xebBxFgIpmFJjw0KnS867H1c1uss+ac6Bj/4braUsgM3u6unYfZFBqfp7WQUmC0cncKNS3EX5tJbeK2zBQ==
-  dependencies:
-    ckeditor5 "40.0.0"
-
 "@ckeditor/ckeditor5-horizontal-line@40.0.0":
   version "40.0.0"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-horizontal-line/-/ckeditor5-horizontal-line-40.0.0.tgz#3c52200158c9e2f771dea6dedbead2799d5ca0cf"
@@ -1458,21 +1451,6 @@
     "@ckeditor/ckeditor5-ui" "40.0.0"
     ckeditor5 "40.0.0"
 
-"@ckeditor/ckeditor5-mention@40.0.0":
-  version "40.0.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-mention/-/ckeditor5-mention-40.0.0.tgz#e539671452da6a7b32faf51694b39715d6ed367e"
-  integrity sha512-Sb6ezH7WP9rMNv2VpCOZ8JxhUkBB0Do/Xp0Y7bLLhcwRM/L5DxX2494PgmISl1CuBqTVgW4zRNGFjeVIytTP0Q==
-  dependencies:
-    ckeditor5 "40.0.0"
-    lodash-es "4.17.21"
-
-"@ckeditor/ckeditor5-page-break@40.0.0":
-  version "40.0.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-page-break/-/ckeditor5-page-break-40.0.0.tgz#0d8c677e6c3089aedf0527b989fdf8da419ffbb0"
-  integrity sha512-lLVg8sLKBOgae4koDpmYXgU6bNO2R0aZLwaeLg+jbZv2F23fYtsaq5jPEnXgIP9Sp+DtmwZNAl2GK9F+Am97HQ==
-  dependencies:
-    ckeditor5 "40.0.0"
-
 "@ckeditor/ckeditor5-paragraph@40.0.0":
   version "40.0.0"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-paragraph/-/ckeditor5-paragraph-40.0.0.tgz#50be65f332271259c6e06b46d6f5b247a0a305ba"
@@ -1533,13 +1511,6 @@
   integrity sha512-fmxQKabcilPP0+UpQ+2EdupK7BAJdhjOWlcTcn562YrkL5CYR9UYP8x8XhLqplrU9/zvSJlAb3RRWjHCNmsq7g==
   dependencies:
     "@ckeditor/ckeditor5-theme-lark" "40.0.0"
-    ckeditor5 "40.0.0"
-
-"@ckeditor/ckeditor5-special-characters@40.0.0":
-  version "40.0.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-special-characters/-/ckeditor5-special-characters-40.0.0.tgz#7a5d1eadcd04530c75e781d6ac5a18df01b5f1c2"
-  integrity sha512-0MErb6UjhjOaJK7tQjzmxGZh+3Ulb+FZpo56UD9wvcwa93bO4Oomqo3yq/SFY3sOEXkcygeAji0gnVpMqUqvGQ==
-  dependencies:
     ckeditor5 "40.0.0"
 
 "@ckeditor/ckeditor5-style@40.0.0":
@@ -5654,7 +5625,6 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     "@ckeditor/ckeditor5-find-and-replace" "40.0.0"
     "@ckeditor/ckeditor5-font" "40.0.0"
     "@ckeditor/ckeditor5-heading" "40.0.0"
-    "@ckeditor/ckeditor5-highlight" "40.0.0"
     "@ckeditor/ckeditor5-horizontal-line" "40.0.0"
     "@ckeditor/ckeditor5-html-embed" "40.0.0"
     "@ckeditor/ckeditor5-html-support" "40.0.0"
@@ -5665,8 +5635,6 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     "@ckeditor/ckeditor5-list" "40.0.0"
     "@ckeditor/ckeditor5-markdown-gfm" "40.0.0"
     "@ckeditor/ckeditor5-media-embed" "40.0.0"
-    "@ckeditor/ckeditor5-mention" "40.0.0"
-    "@ckeditor/ckeditor5-page-break" "40.0.0"
     "@ckeditor/ckeditor5-paragraph" "40.0.0"
     "@ckeditor/ckeditor5-paste-from-office" "40.0.0"
     "@ckeditor/ckeditor5-remove-format" "40.0.0"
@@ -5674,7 +5642,6 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     "@ckeditor/ckeditor5-select-all" "40.0.0"
     "@ckeditor/ckeditor5-show-blocks" "40.0.0"
     "@ckeditor/ckeditor5-source-editing" "40.0.0"
-    "@ckeditor/ckeditor5-special-characters" "40.0.0"
     "@ckeditor/ckeditor5-style" "40.0.0"
     "@ckeditor/ckeditor5-table" "40.0.0"
     "@ckeditor/ckeditor5-typing" "40.0.0"
