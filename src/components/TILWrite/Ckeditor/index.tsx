@@ -1,7 +1,23 @@
 import axios from 'axios';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
+import type ClassicEditor from 'ckeditor5-custom-build/build/ckeditor';
+import { useState } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import * as Styled from './style';
+
+type EditorDemoState = {
+  documents: string;
+  documentID: number;
+  editor: ClassicEditor | null;
+};
+
+const CkEditor = () => {
+  const [state, setState] = useState<EditorDemoState>({
+    documents: '',
+    documentID: 0,
+    editor: null,
+  });
+
   const customUploadAdapter = (loader) => {
     return {
       upload() {
@@ -29,6 +45,7 @@ import * as Styled from './style';
       return customUploadAdapter(loader);
     };
   }
+
   const editorConfiguration = {
     toolbar: [
       'imageUpload',
@@ -56,16 +73,30 @@ import * as Styled from './style';
     ],
     extraPlugins: [uploadPlugin],
   };
+  const SAMPLE_READ_ONLY_LOCK_ID = 'Integration Sample';
+
+  const toggleReadOnly = () => {
+    const editor = state.editor!;
+
+    if (editor.isReadOnly) {
+      editor.disableReadOnlyMode(SAMPLE_READ_ONLY_LOCK_ID);
+    } else {
+      editor.enableReadOnlyMode(SAMPLE_READ_ONLY_LOCK_ID);
+    }
+  };
 
   return (
     <Styled.Root>
+      {/* <button onClick={() => toggleReadOnly()}>Toggle read-only mode</button> */}
       <CKEditor
         editor={Editor}
         config={editorConfiguration}
-        data=""
+        data={`<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p></p>"`}
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
           console.log('Editor is ready to use!', editor);
+
+          setState((prevState) => ({ ...prevState, editor }));
         }}
         onChange={(event, editor) => {
           const data = editor.getData();
