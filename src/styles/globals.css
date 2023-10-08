@@ -129,6 +129,7 @@ select {
 a {
   outline: none;
   text-decoration: none;
+  color: inherit;
 }
 
 a:hover,
@@ -433,5 +434,55 @@ body {
 
 #__next {
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
+}
+
+/* ckeditor 커스텀 css */
+
+.ck-powered-by {
+  display: none;
+}
+
+/* 링크 input 관련 css */
+.ck.ck-input:focus {
+  box-shadow: none !important;
+  border: 1px solid #0f172a !important;
+}
+
+.ck.ck-button.ck-button-cancel {
+  color: #ef4365 !important;
+}
+
+.ck.ck-button-action {
+  background-color: #0f172a !important;
+}
+
+.ck-content pre {
+  background: #0f172a !important;
+  color: #e5e5e5 !important;
+  border-radius: 6px !important;
+  line-height: 1.5 !important;
+  font-size: 1rem !important;
+}
+
+/* ckeditor root variable */
+:root {
+  --ck-color-selector-column-resizer-hover: #ef4365 !important;
+  --ck-color-selector-caption-highlighted-background: #0f172a !important;
+  --ck-color-widget-type-around-button-hover: #0f172a !important;
+  --ck-color-widget-type-around-button-active: #ef4365 !important;
+  --ck-color-color-grid-check-icon: #0f172a !important;
+  --ck-color-base-active: #0f172a !important;
+  --ck-color-button-on-color: #0f172a !important;
+  --ck-powered-by-border-color: #ef4365 !important;
+  --ck-clipboard-drop-target-color: #ef4365 !important;
+  --ck-color-button-on-active-background: #f1f3f5 !important;
+  --ck-color-button-on-hover-background: #f1f3f5 !important;
+  --ck-color-button-on-background: #f1f3f5 !important;
+  --ck-color-button-on-disabled-background: #f1f3f5 !important;
+  --ck-color-focus-outer-shadow: #ef4365 !important;
+  --ck-color-selector-focused-cell-background: rgba(239, 67, 101, 0.1) !important;
+  --ck-color-focus-border: #0f172a !important;
+  --ck-color-widget-hover-border: #0f172a !important
+;
 }

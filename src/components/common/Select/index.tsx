@@ -1,6 +1,6 @@
 import { useState, type PropsWithChildren, useRef } from 'react';
 import Image from 'next/image';
-import { useOnClickOutside } from '@/hooks/useOnClickOutside';
+import { useOnClickOutside } from '@/hooks/common/useOnClickOutside';
 import * as Styled from './style';
 
 export interface SelectOption {
@@ -36,13 +36,7 @@ const Select = (props: SelectProps) => {
 
   return (
     <Styled.SelectContainer className={className} ref={containerRef}>
-      <Styled.Select
-        onClick={toggleOpen}
-        isOpen={isOpen}
-        imageHeight={14}
-        imageWidth={14}
-        iconName="ic_chevronDown"
-        iconPosition="right">
+      <Styled.Select onClick={toggleOpen} isOpen={isOpen} imageSize={14} iconName="ic_chevronDown" iconPosition="right">
         {selectedOption?.label}
       </Styled.Select>
       <Styled.SelectMenu isOpen={isOpen}>
