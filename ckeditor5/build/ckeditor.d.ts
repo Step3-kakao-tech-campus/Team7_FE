@@ -19,10 +19,8 @@ import { HtmlEmbed } from '@ckeditor/ckeditor5-html-embed';
 import { DataFilter, DataSchema, GeneralHtmlSupport, HtmlComment } from '@ckeditor/ckeditor5-html-support';
 import { AutoImage, Image, ImageCaption, ImageInsert, ImageResize, ImageStyle, ImageToolbar, ImageUpload } from '@ckeditor/ckeditor5-image';
 import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
-import { TextPartLanguage } from '@ckeditor/ckeditor5-language';
-import { AutoLink, Link, LinkImage } from '@ckeditor/ckeditor5-link';
+import { AutoLink, Link } from '@ckeditor/ckeditor5-link';
 import { List, ListProperties } from '@ckeditor/ckeditor5-list';
-import { Markdown } from '@ckeditor/ckeditor5-markdown-gfm';
 import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
@@ -34,10 +32,9 @@ import { SourceEditing } from '@ckeditor/ckeditor5-source-editing';
 import { Style } from '@ckeditor/ckeditor5-style';
 import { Table, TableCaption, TableCellProperties, TableColumnResize, TableProperties, TableToolbar } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
-import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
 declare class Editor extends ClassicEditor {
-    static builtinPlugins: (typeof Alignment | typeof AutoImage | typeof AutoLink | typeof Autoformat | typeof Autosave | typeof Base64UploadAdapter | typeof BlockQuote | typeof Bold | typeof CloudServices | typeof Code | typeof CodeBlock | typeof DataFilter | typeof DataSchema | typeof Essentials | typeof FindAndReplace | typeof FontBackgroundColor | typeof FontColor | typeof GeneralHtmlSupport | typeof Heading | typeof HorizontalLine | typeof HtmlComment | typeof HtmlEmbed | typeof Image | typeof ImageCaption | typeof ImageInsert | typeof ImageResize | typeof ImageStyle | typeof ImageToolbar | typeof ImageUpload | typeof Indent | typeof IndentBlock | typeof Italic | typeof Link | typeof LinkImage | typeof List | typeof ListProperties | typeof Markdown | typeof MediaEmbed | typeof Paragraph | typeof PasteFromOffice | typeof RemoveFormat | typeof SelectAll | typeof ShowBlocks | typeof SourceEditing | typeof StandardEditingMode | typeof Strikethrough | typeof Style | typeof Table | typeof TableCaption | typeof TableCellProperties | typeof TableColumnResize | typeof TableProperties | typeof TableToolbar | typeof TextPartLanguage | typeof TextTransformation | typeof Underline | typeof WordCount)[];
+    static builtinPlugins: (typeof Alignment | typeof AutoImage | typeof AutoLink | typeof Autoformat | typeof Autosave | typeof BlockQuote | typeof Bold | typeof CloudServices | typeof Code | typeof CodeBlock | typeof DataFilter | typeof DataSchema | typeof Essentials | typeof FindAndReplace | typeof FontBackgroundColor | typeof FontColor | typeof GeneralHtmlSupport | typeof Heading | typeof HorizontalLine | typeof HtmlComment | typeof HtmlEmbed | typeof Image | typeof ImageCaption | typeof ImageInsert | typeof ImageResize | typeof ImageStyle | typeof ImageToolbar | typeof ImageUpload | typeof Indent | typeof IndentBlock | typeof Italic | typeof Link | typeof List | typeof ListProperties | typeof MediaEmbed | typeof Paragraph | typeof PasteFromOffice | typeof RemoveFormat | typeof SelectAll | typeof ShowBlocks | typeof SourceEditing | typeof StandardEditingMode | typeof Strikethrough | typeof Style | typeof Table | typeof TableCaption | typeof TableCellProperties | typeof TableColumnResize | typeof TableProperties | typeof TableToolbar | typeof TextTransformation | typeof Underline | typeof WordCount)[];
     static defaultConfig: {
         toolbar: {
             items: string[];

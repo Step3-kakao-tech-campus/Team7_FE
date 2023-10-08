@@ -35,10 +35,8 @@ import {
 	ImageUpload
 } from '@ckeditor/ckeditor5-image';
 import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
-import { TextPartLanguage } from '@ckeditor/ckeditor5-language';
-import { AutoLink, Link, LinkImage } from '@ckeditor/ckeditor5-link';
+import { AutoLink, Link } from '@ckeditor/ckeditor5-link';
 import { List, ListProperties } from '@ckeditor/ckeditor5-list';
-import { Markdown } from '@ckeditor/ckeditor5-markdown-gfm';
 import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
@@ -57,7 +55,6 @@ import {
 	TableToolbar
 } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
-import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
 
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
@@ -70,7 +67,6 @@ class Editor extends ClassicEditor {
 		AutoLink,
 		Autoformat,
 		Autosave,
-		Base64UploadAdapter,
 		BlockQuote,
 		Bold,
 		CloudServices,
@@ -98,10 +94,8 @@ class Editor extends ClassicEditor {
 		IndentBlock,
 		Italic,
 		Link,
-		LinkImage,
 		List,
 		ListProperties,
-		Markdown,
 		MediaEmbed,
 		Paragraph,
 		PasteFromOffice,
@@ -118,7 +112,6 @@ class Editor extends ClassicEditor {
 		TableColumnResize,
 		TableProperties,
 		TableToolbar,
-		TextPartLanguage,
 		TextTransformation,
 		Underline,
 		WordCount
@@ -150,18 +143,17 @@ class Editor extends ClassicEditor {
 				'findAndReplace',
 				'fontBackgroundColor',
 				'fontColor',
-				'horizontalLine',
 				'htmlEmbed',
+				'horizontalLine',
 				'imageInsert',
 				'removeFormat',
-				'selectAll',
 				'showBlocks',
+				'selectAll',
 				'sourceEditing',
 				'restrictedEditingException',
 				'strikethrough',
 				'style',
-				'underline',
-				'textPartLanguage'
+				'underline'
 			]
 		},
 		language: 'ko',
@@ -171,8 +163,7 @@ class Editor extends ClassicEditor {
 				'toggleImageCaption',
 				'imageStyle:inline',
 				'imageStyle:block',
-				'imageStyle:side',
-				'linkImage'
+				'imageStyle:side'
 			]
 		},
 		table: {
