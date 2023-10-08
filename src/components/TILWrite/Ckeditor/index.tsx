@@ -1,35 +1,62 @@
+import axios from 'axios';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import * as Styled from './style';
+  const customUploadAdapter = (loader) => {
+    return {
+      upload() {
+        return new Promise((resolve, reject) => {
+          const formData = new FormData();
+          loader.file.then((file) => {
+            formData.append('image', file);
+            formData.append('key', '6a18ed9fbcb9bcdac5cfe389fd389fdc');
+            axios
+              .post('https://api.imgbb.com/1/upload', formData)
+              .then((res) => {
+                resolve({
+                  default: res.data.data.url,
+                });
+              })
+              .catch((err) => reject(err));
+          });
+        });
+      },
+    };
+  };
 
-const editorConfiguration = {
-  toolbar: [
-    'imageUpload',
-    '|',
-    'heading',
-    '|',
-    'bold',
-    'italic',
-    'underline',
-    'strikethrough',
-    'fontColor',
-    'fontBackgroundColor',
-    '|',
-    'outdent',
-    'indent',
-    'alignment',
-    '|',
-    'blockQuote',
-    'link',
-    'horizontalLine',
-    'findAndReplace',
-    'insertTable',
-    'bulletedList',
-    'codeBlock',
-  ],
-};
+  function uploadPlugin(editor) {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      return customUploadAdapter(loader);
+    };
+  }
+  const editorConfiguration = {
+    toolbar: [
+      'imageUpload',
+      'findAndReplace',
+      '|',
+      'heading',
+      '|',
+      'bold',
+      'italic',
+      'underline',
+      'strikethrough',
+      'fontColor',
+      'fontBackgroundColor',
+      '|',
+      'outdent',
+      'indent',
+      'alignment',
+      '|',
+      'blockQuote',
+      'link',
+      'horizontalLine',
+      'insertTable',
+      'bulletedList',
+      'codeBlock',
+    ],
+    extraPlugins: [uploadPlugin],
+  };
 
-const CkEditor = () => {
   return (
     <Styled.Root>
       <CKEditor
