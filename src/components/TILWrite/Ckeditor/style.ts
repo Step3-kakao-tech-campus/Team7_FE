@@ -243,7 +243,7 @@ export const Root = styled.div`
   } */
 
   .ck.ck-editor__main {
-    padding: 40px;
+    padding: 20px 40px;
 
     & > * {
       line-height: 1.5;
