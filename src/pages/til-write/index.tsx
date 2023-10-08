@@ -16,7 +16,7 @@ const TilWrite = () => {
         </Panel>
         <ResizeHandle />
         <Panel defaultSize={30} maxSize={30} minSize={0}>
-          <div>dada</div>
+          <div>로드맵 STEP</div>
         </Panel>
       </PanelGroup>
       <Footer />
