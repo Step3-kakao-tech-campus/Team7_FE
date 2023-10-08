@@ -7,18 +7,17 @@ import Button from '@/components/common/Button';
 type IconButtonProps = Omit<ButtonProps, 'isLoading' | 'loadingWidth' | 'loadingHeight'> & {
   iconPosition?: 'left' | 'right';
   iconName: string;
-  imageWidth?: number;
-  imageHeight?: number;
+  imageSize?: number;
 };
 
 const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
-  const { children, iconPosition = 'left', iconName, imageWidth = 16, imageHeight = 16, ...rest } = props;
+  const { children, iconPosition = 'left', iconName, imageSize = 16, ...rest } = props;
 
   return (
     <Button {...rest}>
       {iconPosition === 'left' && (
         <Container>
-          <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageWidth} height={imageHeight} />
+          <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageSize} height={imageSize} />
         </Container>
       )}
 
@@ -26,7 +25,7 @@ const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
 
       {iconPosition === 'right' && (
         <Container>
-          <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageWidth} height={imageHeight} />
+          <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageSize} height={imageSize} />
         </Container>
       )}
     </Button>

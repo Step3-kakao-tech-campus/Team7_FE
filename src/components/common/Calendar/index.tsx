@@ -45,8 +45,7 @@ const Calendar = (props: CalendarProps) => {
               <IconButton
                 iconName="ic_chevronLeft"
                 variant="outline"
-                imageHeight={12}
-                imageWidth={12}
+                imageSize={12}
                 css={Styled.ButtonStyles}
                 onClick={decreaseMonth}
                 disabled={prevMonthButtonDisabled}
@@ -57,8 +56,7 @@ const Calendar = (props: CalendarProps) => {
               <IconButton
                 iconName="ic_chevronRight"
                 variant="outline"
-                imageHeight={12}
-                imageWidth={12}
+                imageSize={12}
                 css={Styled.ButtonStyles}
                 onClick={increaseMonth}
                 disabled={nextMonthButtonDisabled}
