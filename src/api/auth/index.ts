@@ -6,6 +6,8 @@ import type {
   EmailCodeCheckResponse,
   JoinRequest,
   JoinResponse,
+  LoginRequest,
+  LoginResponse,
 } from './type';
 
 export const postEmailCheck = async ({ email }: EmailCheckRequest) => {
@@ -33,6 +35,16 @@ export const postJoin = async ({ email, name, password, passwordConfirm }: JoinR
     method: 'POST',
     url: '/email/code/check',
     data: { email, name, password, passwordConfirm },
+  });
+
+  return data;
+};
+
+export const postLogin = async ({ email, password }: LoginRequest) => {
+  const { data } = await axiosInstance.request<LoginResponse>({
+    method: 'POST',
+    url: '/login',
+    data: { email, password },
   });
 
   return data;
