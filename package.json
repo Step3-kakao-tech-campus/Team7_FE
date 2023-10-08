@@ -12,7 +12,6 @@
     "chromatic": "npx chromatic --project-token=chpt_aeaca4cc95ad5ad"
   },
   "dependencies": {
-    "@blocknote/react": "^0.9.4",
     "@ckeditor/ckeditor5-react": "^6.1.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
