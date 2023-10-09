@@ -6,7 +6,7 @@ import Header from '@/components/TILWrite/Header';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
-const TilWrite = () => {
+const TILWrite = () => {
   return (
     <>
       <Header />
@@ -24,7 +24,7 @@ const TilWrite = () => {
   );
 };
 
-export default TilWrite;
+export default TILWrite;
 
 const ResizeHandle = styled(PanelResizeHandle)`
   width: 50px;
