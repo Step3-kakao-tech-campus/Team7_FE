@@ -1,8 +1,8 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Root = styled.div`
   margin-top: 1rem;
+  margin-bottom: 2.5rem;
 `;
 
 export const ProgressRate = styled.div`
