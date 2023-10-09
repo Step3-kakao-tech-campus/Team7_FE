@@ -1,4 +1,4 @@
-import Progress from '@/components/TILWrite/Progress';
+import Progress from '@/components/TILWrite/RoadMap/Progress';
 import * as Styled from './style';
 
 const RoadMapInfo = () => {

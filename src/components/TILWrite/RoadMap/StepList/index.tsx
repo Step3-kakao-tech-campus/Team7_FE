@@ -1,4 +1,4 @@
-import Step from '@/components/TILWrite/Step';
+import Step from '@/components/TILWrite/RoadMap/Step';
 import * as Styled from './style';
 
 const StepList = () => {

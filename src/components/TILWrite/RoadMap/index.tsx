@@ -1,5 +1,5 @@
-import RoadMapInfo from '@/components/TILWrite/RoadMapInfo';
-import StepList from '@/components/TILWrite/StepList';
+import RoadMapInfo from '@/components/TILWrite/RoadMap/RoadMapInfo';
+import StepList from '@/components/TILWrite/RoadMap/StepList';
 import * as Styled from './style';
 
 const RoadMap = () => {
