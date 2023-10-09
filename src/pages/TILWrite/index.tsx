@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
 import Footer from '@/components/TILWrite/Footer';
 import Header from '@/components/TILWrite/Header';
+import RoadMap from '@/components/TILWrite/RoadMap';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
@@ -15,8 +16,8 @@ const TILWrite = () => {
           <Editor />
         </Panel>
         <ResizeHandle />
-        <Panel defaultSize={30} maxSize={30} minSize={0}>
-          <div>로드맵 STEP</div>
+        <Panel style={{ overflowY: 'scroll' }} defaultSize={30} maxSize={30} minSize={0}>
+          <RoadMap />
         </Panel>
       </PanelGroup>
       <Footer />
