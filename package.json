@@ -25,6 +25,7 @@
     "focus-trap-react": "^10.2.2",
     "framer-motion": "^10.16.4",
     "next": "13.5.2",
+    "open-graph-scraper": "^6.3.0",
     "qs": "^6.11.2",
     "react": "18.2.0",
     "react-datepicker": "^4.18.0",
