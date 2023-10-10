@@ -1,9 +1,14 @@
 import type { PropsWithChildren } from 'react';
 import * as Styled from './style';
 
-const ContextMenu = (props: PropsWithChildren) => {
-  const { children } = props;
-  return <Styled.Root>{children}</Styled.Root>;
+interface ContextMenuProps {
+  className?: string;
+}
+
+const ContextMenu = (props: PropsWithChildren<ContextMenuProps>) => {
+  const { children, className } = props;
+
+  return <Styled.Root className={className}>{children}</Styled.Root>;
 };
 
 interface MenuProps {
