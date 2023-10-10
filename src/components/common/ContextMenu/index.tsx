@@ -1,15 +1,26 @@
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ForwardRefExoticComponent, RefAttributes, FunctionComponent } from 'react';
+import { forwardRef } from 'react';
+import React from 'react';
 import * as Styled from './style';
 
 interface ContextMenuProps {
   className?: string;
 }
 
-const ContextMenu = (props: PropsWithChildren<ContextMenuProps>) => {
+interface ExtendedContextMenuComponent
+  extends ForwardRefExoticComponent<PropsWithChildren<ContextMenuProps> & RefAttributes<HTMLDivElement>> {
+  Menu: FunctionComponent<{ children?: React.ReactNode }>;
+}
+
+const ContextMenu = forwardRef<HTMLDivElement, PropsWithChildren<ContextMenuProps>>((props, ref) => {
   const { children, className } = props;
 
-  return <Styled.Root className={className}>{children}</Styled.Root>;
-};
+  return (
+    <Styled.Root ref={ref} className={className}>
+      {children}
+    </Styled.Root>
+  );
+}) as ExtendedContextMenuComponent;
 
 interface MenuProps {
   onClick?: () => void;
