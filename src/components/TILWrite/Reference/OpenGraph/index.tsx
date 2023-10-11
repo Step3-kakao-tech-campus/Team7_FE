@@ -38,7 +38,6 @@ const OpenGraph = (props: OpenGraphProps) => {
         <Styled.Container>
           <Styled.Title>{data?.ogTitle}</Styled.Title>
           <Styled.Desc>{data?.ogDescription}</Styled.Desc>
-          <Styled.Url>{data.ogUrl}</Styled.Url>
         </Styled.Container>
         {data?.ogImage ? <Styled.Image src={data?.ogImage[0].url} alt="참고자료 이미지" /> : null}
       </Styled.Wrapper>
