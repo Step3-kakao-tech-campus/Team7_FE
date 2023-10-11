@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -8,77 +7,55 @@ import Footer from '@/components/TILWrite/Footer';
 import Header from '@/components/TILWrite/Header';
 import Reference from '@/components/TILWrite/Reference';
 import RoadMap from '@/components/TILWrite/RoadMap';
+import { useDrawerState } from '@/hooks/common/useDrawerState';
 import type { EmotionTheme } from '@/styles/emotion';
 import { emotionTheme } from '@/styles/emotion';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
 const TILWrite = () => {
-  const [referenceOpen, setReferenceOpen] = useState(false);
-  const [referenceMount, setReferenceMount] = useState(false);
-  const [commentOpen, setCommentOpen] = useState(false);
-  const [commentMount, setCommentMount] = useState(false);
-  const [asideOpen, setAsideOpen] = useState(true);
-  const [asideMount, setAsideMount] = useState(true);
-  const handleCloseAside = () => {
-    setAsideOpen(false);
-    setReferenceOpen(false);
+  const {
+    isOpen: asideOpen,
+    isMount: asideMount,
+    handleOpen: handleOpenAside,
+    handleClose: handleCloseAside,
+    handleToggle: handleToggleAside,
+  } = useDrawerState({
+    defaultValue: true,
+    duration: DURATION,
+  });
+
+  const {
+    isOpen: referenceOpen,
+    isMount: referenceMount,
+    handleClose: handleCloseReference,
+    handleOpen: handleOpenReference,
+  } = useDrawerState({
+    defaultValue: false,
+    duration: DURATION,
+  });
+
+  const {
+    isOpen: commentOpen,
+    isMount: commentMount,
+    handleClose: handleCloseComment,
+    handleOpen: handleOpenComment,
+  } = useDrawerState({
+    defaultValue: false,
+    duration: DURATION,
+    runWhenTrue: handleOpenAside,
+    runWhenFalse: handleCloseReference,
+  });
+
+  const handleToggleResize = () => {
+    handleCloseReference();
+    handleCloseComment();
+    handleToggleAside();
   };
-
-  const handleCloseReferenceAside = () => {
-    setReferenceOpen(false);
-  };
-
-  const handleOpenReferenceAside = () => {
-    setReferenceOpen(true);
-  };
-
-  const handleOpenCommentAside = () => {
-    setCommentOpen(true);
-  };
-
-  const handleCloseCommentAside = () => {
-    setCommentOpen(false);
-  };
-
-  useEffect(() => {
-    // aside가 마운트될때 drawer가 열리면 레이아웃 깨지는 현상이 발생하여 딜레이를 주었다.
-    if (asideOpen) {
-      setTimeout(() => {
-        setAsideMount(true);
-      }, 300);
-    } else {
-      setAsideMount(false);
-    }
-  }, [asideOpen]);
-
-  useEffect(() => {
-    // aside가 마운트될때 drawer가 열리면 레이아웃 깨지는 현상이 발생하여 딜레이를 주었다.
-    if (referenceOpen) {
-      setTimeout(() => {
-        setReferenceMount(true);
-      }, 300);
-    } else {
-      setReferenceMount(false);
-    }
-  }, [referenceOpen]);
-
-  useEffect(() => {
-    // aside가 마운트될때 drawer가 열리면 레이아웃 깨지는 현상이 발생하여 딜레이를 주었다.
-    if (commentOpen) {
-      setAsideOpen(true);
-      setTimeout(() => {
-        setCommentMount(true);
-      }, 300);
-    } else {
-      setReferenceOpen(false);
-      setCommentMount(false);
-    }
-  }, [commentOpen]);
 
   return (
     <Root>
-      <Header handleOpenCommentAside={handleOpenCommentAside} />
+      <Header handleOpenCommentAside={handleOpenComment} />
       <Container>
         <EditorContainer
           initial="asideOpen"
@@ -89,16 +66,13 @@ const TILWrite = () => {
         </EditorContainer>
 
         <AsideContainer>
-          <ResizeHandle
-            onClick={() => {
-              setReferenceOpen(false);
-              setCommentOpen(false);
-              setAsideOpen((prev) => !prev);
-            }}
-          />
+          <ResizeHandle onClick={handleToggleResize} />
 
           {asideMount && asideOpen && (
-            <RoadMap handleCloseAside={handleCloseAside} handleOpenReferenceAside={handleOpenReferenceAside} />
+            <RoadMap
+              handleCloseAside={() => handleCloseAside(handleCloseReference)}
+              handleOpenReferenceAside={handleOpenReference}
+            />
           )}
 
           <motion.aside
@@ -107,7 +81,7 @@ const TILWrite = () => {
             animate={referenceOpen ? 'open' : 'closed'}
             variants={extraDrawerVariants}
             transition={{ type: 'tween' }}>
-            {referenceMount && referenceOpen && <Reference handleCloseReferenceAside={handleCloseReferenceAside} />}
+            {referenceMount && referenceOpen && <Reference handleCloseReferenceAside={() => handleCloseReference()} />}
           </motion.aside>
 
           <motion.aside
@@ -116,7 +90,7 @@ const TILWrite = () => {
             animate={commentOpen ? 'open' : 'closed'}
             variants={extraDrawerVariants}
             transition={{ type: 'tween' }}>
-            {commentMount && commentOpen && <Comment handleCloseCommentAside={handleCloseCommentAside} />}
+            {commentMount && commentOpen && <Comment handleCloseCommentAside={() => handleCloseComment()} />}
           </motion.aside>
         </AsideContainer>
       </Container>
