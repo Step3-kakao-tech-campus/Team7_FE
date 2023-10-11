@@ -19,6 +19,12 @@ const colors = {
   blue: '#3B82F6;',
 } as const;
 
-export const emotionTheme = { colors } as const;
+const layout = {
+  headerHeight: '4rem',
+  footerHeight: '4rem',
+  resizeHandleWidth: '50px',
+} as const;
+
+export const emotionTheme = { colors, layout } as const;
 
 export type EmotionTheme = typeof emotionTheme;
