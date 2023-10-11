@@ -13,21 +13,6 @@ import { emotionTheme } from '@/styles/emotion';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
-const editorVariants = {
-  asideOpen: { width: `${emotionTheme.layout.defaultEditorWidth}` },
-  asideClosed: { width: `calc(${emotionTheme.layout.maxEditorWidth} - ${emotionTheme.layout.resizeHandleWidth} )` },
-};
-
-// const asideVariants = {
-//   open: { opacity: 1, x: 0 },
-//   closed: { opacity: 1, x: 'calc(100% - 60px)' },
-// };
-
-const extraDrawerVariants = {
-  open: { opacity: 1, x: 0 },
-  closed: { opacity: 1, x: '100%' },
-};
-
 const TILWrite = () => {
   const [referenceOpen, setReferenceOpen] = useState(false);
   const [referenceMount, setReferenceMount] = useState(false);
@@ -95,24 +80,23 @@ const TILWrite = () => {
     <Root>
       <Header handleOpenCommentAside={handleOpenCommentAside} />
       <Container>
-        <motion.div
-          css={EditorContainerStyles}
+        <EditorContainer
           initial="asideOpen"
           animate={asideOpen ? 'asideOpen' : 'asideClosed'}
           variants={editorVariants}
-          transition={{ type: 'tween', duration: 0.3 }}>
+          transition={{ type: 'tween', duration: DURATION }}>
           <Editor />
-        </motion.div>
+        </EditorContainer>
 
-        <motion.aside css={AsideStyles}>
+        <AsideContainer>
           <ResizeHandle
             onClick={() => {
-              console.log('click');
               setReferenceOpen(false);
               setCommentOpen(false);
               setAsideOpen((prev) => !prev);
             }}
           />
+
           {asideMount && asideOpen && (
             <RoadMap handleCloseAside={handleCloseAside} handleOpenReferenceAside={handleOpenReferenceAside} />
           )}
@@ -134,7 +118,7 @@ const TILWrite = () => {
             transition={{ type: 'tween' }}>
             {commentMount && commentOpen && <Comment handleCloseCommentAside={handleCloseCommentAside} />}
           </motion.aside>
-        </motion.aside>
+        </AsideContainer>
       </Container>
       <Footer />
     </Root>
@@ -143,13 +127,25 @@ const TILWrite = () => {
 
 export default TILWrite;
 
+const editorVariants = {
+  asideOpen: { width: `${emotionTheme.layout.defaultEditorWidth}` },
+  asideClosed: { width: `calc(${emotionTheme.layout.maxEditorWidth} - ${emotionTheme.layout.resizeHandleWidth} )` },
+};
+
+const extraDrawerVariants = {
+  open: { x: 0 },
+  closed: { x: '100%' },
+};
+
+const DURATION = 0.3;
+
 const Root = styled.div`
   overflow-x: hidden;
   height: 100%;
 `;
 
-const EditorContainerStyles = (theme: EmotionTheme) => css`
-  width: ${theme.layout.defaultEditorWidth};
+const EditorContainer = styled(motion.div)`
+  width: ${({ theme }) => theme.layout.defaultEditorWidth};
   flex-shrink: 0;
   overflow-y: scroll;
   background-color: #fff;
@@ -168,7 +164,7 @@ const Container = styled.div`
   height: ${({ theme }) => `calc(100% - ${theme.layout.headerHeight} - ${theme.layout.footerHeight})`};
 `;
 
-const AsideStyles = css`
+const AsideContainer = styled.div`
   display: flex;
   flex: 1;
 `;
