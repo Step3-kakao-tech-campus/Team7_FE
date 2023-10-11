@@ -9,5 +9,5 @@ export const Root = styled.div`
 export const StepList = styled.div`
   flex: 1;
   overflow-y: scroll;
-  padding: 0.625rem 1rem 0 0;
+  padding: 0 1rem 0 0;
 `;
