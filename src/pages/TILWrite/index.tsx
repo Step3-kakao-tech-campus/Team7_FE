@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Comment from '@/components/TILWrite/Comments';
 import Footer from '@/components/TILWrite/Footer';
@@ -8,7 +7,6 @@ import Header from '@/components/TILWrite/Header';
 import Reference from '@/components/TILWrite/Reference';
 import RoadMap from '@/components/TILWrite/RoadMap';
 import { useDrawerState } from '@/hooks/common/useDrawerState';
-import type { EmotionTheme } from '@/styles/emotion';
 import { emotionTheme } from '@/styles/emotion';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
@@ -75,23 +73,21 @@ const TILWrite = () => {
             />
           )}
 
-          <motion.aside
-            css={extraDrawerStyles}
+          <ExtraDrawerMotion
             initial="closed"
             animate={referenceOpen ? 'open' : 'closed'}
             variants={extraDrawerVariants}
             transition={{ type: 'tween' }}>
             {referenceMount && referenceOpen && <Reference handleCloseReferenceAside={() => handleCloseReference()} />}
-          </motion.aside>
+          </ExtraDrawerMotion>
 
-          <motion.aside
-            css={extraDrawerStyles}
+          <ExtraDrawerMotion
             initial="closed"
             animate={commentOpen ? 'open' : 'closed'}
             variants={extraDrawerVariants}
             transition={{ type: 'tween' }}>
             {commentMount && commentOpen && <Comment handleCloseCommentAside={() => handleCloseComment()} />}
-          </motion.aside>
+          </ExtraDrawerMotion>
         </AsideContainer>
       </Container>
       <Footer />
@@ -133,23 +129,24 @@ const ResizeHandle = styled.div`
   background-image: url('/assets/icons/ic_spring.svg');
   cursor: pointer;
 `;
+
 const Container = styled.div`
   display: flex;
   height: ${({ theme }) => `calc(100% - ${theme.layout.headerHeight} - ${theme.layout.footerHeight})`};
 `;
 
-const AsideContainer = styled.div`
+const AsideContainer = styled.aside`
   display: flex;
   flex: 1;
 `;
 
-const extraDrawerStyles = (theme: EmotionTheme) => css`
+const ExtraDrawerMotion = styled(motion.div)`
   position: fixed;
-  top: ${theme.layout.headerHeight};
-  left: calc(${theme.layout.defaultEditorWidth} + ${theme.layout.resizeHandleWidth});
+  top: ${({ theme }) => theme.layout.headerHeight};
+  left: ${({ theme }) => `calc(${theme.layout.defaultEditorWidth} + ${theme.layout.resizeHandleWidth})`};
   z-index: 100;
-  width: calc(${theme.layout.asideWidth});
-  height: calc(100% - ${theme.layout.headerHeight} - ${theme.layout.footerHeight});
+  width: ${({ theme }) => `calc(${theme.layout.asideWidth})`};
+  height: ${({ theme }) => `calc(100% - ${theme.layout.headerHeight} - ${theme.layout.footerHeight})`};
   background-color: white;
   overflow-y: scroll;
 `;
