@@ -37,7 +37,3 @@ export const CheckIconContainer = styled.div`
 `;
 
 export const Title = styled.span``;
-
-export const ReferenceButton = styled.button`
-  cursor: pointer;
-`;

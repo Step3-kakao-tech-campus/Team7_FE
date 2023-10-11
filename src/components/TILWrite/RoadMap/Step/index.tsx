@@ -1,7 +1,14 @@
 import Image from 'next/image';
+import Icon from '@/components/common/Icon';
 import * as Styled from './style';
 
-const Step = () => {
+interface StepProps {
+  handleOpenReferenceAside: () => void;
+}
+
+const Step = (props: StepProps) => {
+  const { handleOpenReferenceAside } = props;
+
   return (
     <Styled.Root>
       <Styled.Container>
@@ -10,9 +17,15 @@ const Step = () => {
         </Styled.CheckIconContainer>
         <Styled.Title>Java - 소개와 수업 소개</Styled.Title>
       </Styled.Container>
-      <Styled.ReferenceButton>
-        <Image className="icon" src="/assets/icons/ic_chevronRight.svg" width={14} height={14} alt="화살표" />
-      </Styled.ReferenceButton>
+
+      <Icon
+        className="icon"
+        onClick={handleOpenReferenceAside}
+        iconName="ic_chevronRight"
+        imageSize={14}
+        ext="svg"
+        alt="화살표"
+      />
     </Styled.Root>
   );
 };
