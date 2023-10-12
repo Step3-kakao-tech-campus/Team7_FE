@@ -2,7 +2,7 @@ const colors = {
   white: '#ffffff',
   black: '#0F172A',
   rose: '#EF4365',
-  roes_light: '#FFEEF1',
+  rose_light: '#FFEEF1',
   red: '#DC2626',
   gray_100: '#F8F9FA',
   gray_200: '#F1F3F5',
