@@ -93,3 +93,22 @@ export const useGetTils = (queryKey: { roadmapId: string }) => {
     isLoading,
   };
 };
+
+export const usePostTilsIndividual = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(postTilsIndividualAPI);
+
+  const postTilsIndividual = async (body: { categoryId: number; title: string }) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        console.log('이거 실행됩니깐');
+        queryClient.invalidateQueries([QUERY_KEY.getTils, { roadmapId: body.categoryId.toString() }]);
+      },
+    });
+
+    return data;
+  };
+  // useMutation 훅을 밖으로 내보내지 않아도, 비즈니스 로직 함수 작성해서 내보내면 된다.
+  return { postTilsIndividual };
+};
