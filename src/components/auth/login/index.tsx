@@ -1,3 +1,4 @@
+import { useSetRecoilState } from 'recoil';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
@@ -8,6 +9,7 @@ import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
 import { tilyLinks } from '@/constants/links';
+import { accessTokenAtom } from '../states/accessTokenAtoms';
 
 interface LoginFormInput {
   email: string;
@@ -16,6 +18,8 @@ interface LoginFormInput {
 
 const Login = () => {
   const { mutateAsync, isLoading } = useMutation({ mutationFn: (data: LoginFormInput) => postLogin(data) });
+
+  const setAccessToken = useSetRecoilState(accessTokenAtom);
 
   const router = useRouter();
 
@@ -34,7 +38,8 @@ const Login = () => {
   const onSubmit: SubmitHandler<LoginFormInput> = async (formData) => {
     const data = await mutateAsync(formData);
 
-    if (data?.code === 200) {
+    if (data?.code === 200 && data?.result?.token) {
+      setAccessToken(data?.result?.token);
       router.replace(tilyLinks.home());
     } else {
       // 에러 처리
