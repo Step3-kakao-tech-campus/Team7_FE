@@ -1,3 +1,4 @@
+// getRoadmaps
 export interface UserRoadmapsResponse {
   success: boolean;
   message: string;
@@ -37,4 +38,24 @@ interface Creator {
   id: number;
   name: string;
   image: string;
+}
+
+// getRoadmapSteps
+export interface GetRoadmapStepsResponse {
+  success: boolean;
+  message: string;
+  result: RoadmapStepsResult;
+}
+
+export interface RoadmapStepsResult {
+  steps: Step[];
+  progress: number;
+  role: string;
+}
+
+export interface Step {
+  id: number;
+  title: string;
+  isCompleted: boolean;
+  tilId: number | null;
 }
