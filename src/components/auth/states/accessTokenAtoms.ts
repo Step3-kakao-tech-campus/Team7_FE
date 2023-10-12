@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { axiosInstance } from '@/api';
 import { tokenStorage } from '@/utils/accessToken';
 
 export const accessTokenAtom = atom<string | null>({
@@ -9,6 +10,7 @@ export const accessTokenAtom = atom<string | null>({
       const token = tokenStorage.get();
       if (token !== null) {
         setSelf(token);
+        axiosInstance.defaults.headers.common['Authorization'] = token;
       }
 
       onSet((token, _, isReset) => {
@@ -16,6 +18,7 @@ export const accessTokenAtom = atom<string | null>({
           tokenStorage.remove();
         } else {
           tokenStorage.set(token);
+          axiosInstance.defaults.headers.common['Authorization'] = token;
         }
       });
     },
