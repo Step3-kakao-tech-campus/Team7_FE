@@ -3,6 +3,7 @@ import { getRoadmaps } from '@/api/roadmap';
 
 const QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
+  getRoadmapSteps: 'getRoadmapSteps',
 };
 
 export const useGetRoadmaps = () => {
@@ -17,3 +18,14 @@ export const useGetRoadmaps = () => {
     data: categoryData,
   };
 };
+
+export const useGetRoadmapSteps = (roadmapId: number) => {
+  const enabled = roadmapId !== 0;
+
+  const { data } = useQuery([QUERY_KEY.getRoadmapSteps], () => getRoadmapSteps(roadmapId), { enabled });
+
+  return {
+    steps: data,
+  };
+};
+
