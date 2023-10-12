@@ -1,4 +1,4 @@
-import type { UserRoadmapsResponse } from '@/api/roadmap/type';
+import type { GetRoadmapStepsResponse, UserRoadmapsResponse } from '@/api/roadmap/type';
 
 export const userRoadmapsResponse: UserRoadmapsResponse = {
   success: true,
@@ -33,7 +33,7 @@ export const userRoadmapsResponse: UserRoadmapsResponse = {
       ],
       group: [
         {
-          id: 1,
+          id: 3,
           name: '준서좌의 나도 할 수 있다 알고리즘',
           stepNum: 20,
           image: 'qwer.jpg',
@@ -44,7 +44,7 @@ export const userRoadmapsResponse: UserRoadmapsResponse = {
           },
         },
         {
-          id: 2,
+          id: 4,
           name: '상명좌의 나도 할 수 있다 스프링',
           stepNum: 20,
           image: 'qwer.jpg',
@@ -55,7 +55,7 @@ export const userRoadmapsResponse: UserRoadmapsResponse = {
           },
         },
         {
-          id: 3,
+          id: 5,
           name: '수현좌의 JPA 비밀 노트',
           stepNum: 20,
           image: 'qwer.jpg',
@@ -68,4 +68,45 @@ export const userRoadmapsResponse: UserRoadmapsResponse = {
       ],
     },
   },
+};
+
+export const getRoadmapStepsResponse: GetRoadmapStepsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    steps: [
+      {
+        id: 1,
+        title: '자바 소개',
+        isCompleted: true,
+        tilId: 1,
+      },
+      {
+        id: 2,
+        title: '객체 지향',
+        isCompleted: false,
+        tilId: null,
+      },
+      {
+        id: 3,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+    ],
+    progress: 55,
+    role: 'member',
+  },
+};
+
+export const updateFixture = (name: string) => {
+  const length = userRoadmapsResponse.result.category.length;
+
+  userRoadmapsResponse.result.category = [
+    ...userRoadmapsResponse.result.category,
+    {
+      id: length + 1,
+      name,
+    },
+  ];
 };

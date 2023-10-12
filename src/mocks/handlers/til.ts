@@ -5,6 +5,7 @@ import {
   tilsCategoryResponse,
   tilsDateResponse,
   tilsTitleResponse,
+  updateFixture,
 } from '@/mocks/fixtures/til';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -87,6 +88,28 @@ export const tilHandler = [
           }),
         );
       }
+    }
+  }),
+
+  rest.post(`${BASE_URL}/roadmaps/individual/:id/steps`, (req, res, ctx) => {
+    const {
+      body: { title },
+    } = req;
+
+    console.log(title);
+
+    try {
+      updateFixture(title);
+      return res(ctx.status(200), ctx.json(tilsCategoryResponse));
+    } catch (error) {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          success: false,
+          message: '서버에서 에러가 났어요',
+          result: null,
+        }),
+      );
     }
   }),
 ];
