@@ -21,3 +21,11 @@ export interface Til {
     name: string;
   };
 }
+
+export interface PostTilsIndividualResponse {
+  success: boolean;
+  message: string;
+  result: {
+    id: number;
+  };
+}
