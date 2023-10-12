@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { useGetTilsParam } from '@/api/hooks/til';
 import Avatar from '@/components/common/Avatar';
 import Flex from '@/components/common/Flex';
 import GNB from '@/components/common/GNB';
@@ -9,7 +10,6 @@ import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
 import { useIntersectionObserver } from '@/hooks/common/useInterSectionObserver';
-import { useGetTilsParam } from '@/hooks/queries/til';
 
 const Home = () => {
   const router = useRouter();

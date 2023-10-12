@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
+import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import TILModal from '@/components/common/GNB/TILModal';
 import Logo from '@/components/common/Logo';
 import { tilyLinks } from '@/constants/links';
 import { useModalState } from '@/hooks/common/useModalState';
-import { useGetRoadmaps } from '@/hooks/queries/roadmap';
 import * as Styled from './style';
 
 const GNB = () => {

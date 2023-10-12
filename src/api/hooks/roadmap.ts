@@ -4,7 +4,7 @@ import { getRoadmapSteps, getRoadmaps, postRoadmapsIndividual as postRoadmapsInd
 
 const QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
-  getRoadmapSteps: 'getRoadmapSteps',
+  getRoadmapSteps: 'getRoadmㅊapSteps',
 };
 
 export const useGetRoadmaps = () => {

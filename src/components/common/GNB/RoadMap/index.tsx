@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useGetRoadmaps, usePostRoadmapsIndividual } from '@/api/hooks/roadmap';
+import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
+import { useGetTils } from '@/api/hooks/til';
+import { usePostTilsIndividual } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
-import { useGetRoadmaps, usePostRoadmapsIndividual } from '@/hooks/queries/roadmap';
-import { useGetRoadmapSteps } from '@/hooks/queries/roadmap';
-import { useGetTils } from '@/hooks/queries/til';
-import { usePostTilsIndividual } from '@/hooks/queries/til';
 import * as Styled from './style';
 
 interface FormInput {
