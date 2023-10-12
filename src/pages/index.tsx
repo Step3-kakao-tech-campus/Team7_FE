@@ -9,11 +9,12 @@ import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
 import { useIntersectionObserver } from '@/hooks/common/useInterSectionObserver';
-import { useGetTils } from '@/hooks/queries/til';
+import { useGetTilsParam } from '@/hooks/queries/til';
 
 const Home = () => {
   const router = useRouter();
-  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTils({ queryKey: [router.query] });
+
+  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTilsParam({ queryKey: [router.query] });
   const { ref, isVisible } = useIntersectionObserver();
 
   useEffect(() => {
