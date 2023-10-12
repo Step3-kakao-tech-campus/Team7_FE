@@ -42,21 +42,30 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
   return (
     <Portal>
       <Styled.Background>
-        <FocusTrap>
-          <RemoveScroll>
-            <Styled.Container role="dialog" ref={modalRef} width={width} {...rest}>
-              <Styled.CloseButton css={closeButtonStyles} onClick={onClose}>
-                <Image
-                  src="/assets/icons/ic_closeButton.svg"
-                  alt="close"
-                  width={closeButtonSize}
-                  height={closeButtonSize}
-                />
-              </Styled.CloseButton>
-              <Styled.Content css={modalContentStyles}>{children}</Styled.Content>
-            </Styled.Container>
-          </RemoveScroll>
-        </FocusTrap>
+        <Styled.Root
+          initial="closed"
+          animate={isOpen ? 'open' : 'closed'}
+          variants={{
+            open: { opacity: 1 },
+            closed: { opacity: 0 },
+          }}
+          transition={{ type: 'tween', duration: 0.2 }}>
+          <FocusTrap>
+            <RemoveScroll>
+              <Styled.Container role="dialog" ref={modalRef} width={width} {...rest}>
+                <Styled.CloseButton css={closeButtonStyles} onClick={onClose}>
+                  <Image
+                    src="/assets/icons/ic_closeButton.svg"
+                    alt="close"
+                    width={closeButtonSize}
+                    height={closeButtonSize}
+                  />
+                </Styled.CloseButton>
+                <Styled.Content css={modalContentStyles}>{children}</Styled.Content>
+              </Styled.Container>
+            </RemoveScroll>
+          </FocusTrap>
+        </Styled.Root>
       </Styled.Background>
     </Portal>
   );

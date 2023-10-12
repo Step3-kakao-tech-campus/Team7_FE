@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 
 export const Background = styled.div`
@@ -12,6 +13,7 @@ export const Background = styled.div`
   width: 100%;
   height: 100%;
 `;
+export const Root = styled(motion.div)``;
 
 export const Container = styled.div<{ width?: number }>`
   position: relative;
