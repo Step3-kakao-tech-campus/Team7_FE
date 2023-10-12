@@ -32,7 +32,8 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.47.0",
     "react-remove-scroll": "^2.5.6",
-    "react-resizable-panels": "^0.0.55"
+    "react-resizable-panels": "^0.0.55",
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^11.11.0",

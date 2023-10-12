@@ -44,5 +44,5 @@ export interface LoginResponse {
   success: boolean;
   code: number;
   message: string;
-  result: null;
+  result: { token: string } | null;
 }
