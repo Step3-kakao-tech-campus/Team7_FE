@@ -59,3 +59,10 @@ export interface Step {
   isCompleted: boolean;
   tilId: number | null;
 }
+
+// postRoadmapsIndividual
+export interface PostRoadmapsIndividualResponse {
+  success: boolean;
+  message: string;
+  result: { id: number };
+}
