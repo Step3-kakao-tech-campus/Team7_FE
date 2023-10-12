@@ -110,3 +110,17 @@ export const updateFixture = (name: string) => {
     },
   ];
 };
+
+export const updateGetRoadmapStepsResponseFixture = (name: string) => {
+  const length = getRoadmapStepsResponse.result.steps.length;
+
+  getRoadmapStepsResponse.result.steps = [
+    ...getRoadmapStepsResponse.result.steps,
+    {
+      id: length + 1,
+      title: name,
+      isCompleted: false,
+      tilId: null,
+    },
+  ];
+};

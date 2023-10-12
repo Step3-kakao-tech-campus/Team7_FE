@@ -66,3 +66,12 @@ export interface PostRoadmapsIndividualResponse {
   message: string;
   result: { id: number };
 }
+
+// postRoadmapStepIndividual
+export interface PostRoadmapStepIndividualResponse {
+  success: boolean;
+  message: string;
+  result: {
+    id: number;
+  };
+}

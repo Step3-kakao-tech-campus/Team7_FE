@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useGetRoadmaps, usePostRoadmapsIndividual } from '@/api/hooks/roadmap';
-import { useGetTils } from '@/api/hooks/til';
-import { usePostTilsIndividual } from '@/api/hooks/til';
+import {
+  useGetRoadmapSteps,
+  useGetRoadmaps,
+  usePostRoadmapStepIndividual,
+  usePostRoadmapsIndividual,
+} from '@/api/hooks/roadmap';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
@@ -18,11 +21,11 @@ interface FormInput {
 const Personal = () => {
   const router = useRouter();
   const [roadmapId, setRoadmapId] = useState<number>(0);
-  const [tilId, setTilId] = useState<number>(0);
+  const [stepId, setStepId] = useState<number>(0);
   const { data } = useGetRoadmaps();
-  const { tils } = useGetTils({ roadmapId: roadmapId.toString() });
+  const { steps } = useGetRoadmapSteps(roadmapId);
   const { postRoadmapsIndividual } = usePostRoadmapsIndividual();
-  const { postTilsIndividual } = usePostTilsIndividual();
+  const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [isTilSelected, setIsTilSelected] = useState<boolean>(false);
 
@@ -55,7 +58,7 @@ const Personal = () => {
 
   const onSubmit2: SubmitHandler<FormInput> = (formData) => {
     try {
-      postTilsIndividual({ categoryId: roadmapId, title: formData.tilTitle });
+      postRoadmapStepIndividual({ roadmapId, title: formData.tilTitle });
       reset();
       setIsTilSelected(false);
     } catch {
@@ -150,11 +153,10 @@ const Personal = () => {
                 </Styled.PlusButton>
               ))}
 
-            {tils.map((til) => {
-              console.log(til);
+            {steps?.result.steps.map((step) => {
               return (
-                <Styled.Item selected={tilId === til.id} onClick={() => setTilId(til.id)} key={til.id}>
-                  {til.step.title}
+                <Styled.Item selected={stepId === step.id} onClick={() => setStepId(step.id)} key={step.id}>
+                  {step.title}
                 </Styled.Item>
               );
             })}

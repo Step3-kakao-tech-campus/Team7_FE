@@ -1,9 +1,8 @@
 import qs from 'qs';
 import { useRouter } from 'next/router';
 import type { QueryKey } from '@tanstack/react-query';
-import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getTils } from '@/api/til';
-import { postTilsIndividual as postTilsIndividualAPI } from '@/api/til';
 import type { TilsResponse } from '@/api/til/type';
 
 const QUERY_KEY = {
@@ -53,62 +52,4 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
     fetchNextPage,
     hasNextPage,
   };
-};
-
-export const useGetTils = (queryKey: { roadmapId: string }) => {
-  const enabled = queryKey.roadmapId !== '0';
-
-  const { data, isLoading } = useInfiniteQuery(
-    [QUERY_KEY.getTils, queryKey],
-    async ({ pageParam: page = 0 }) => {
-      const searchParams = { page, ...queryKey };
-
-      const data = getTils(qs.stringify(searchParams, { addQueryPrefix: true }));
-
-      return data;
-    },
-    {
-      getNextPageParam: (lastPage: TilsResponse, pages) => {
-        if (!lastPage.hasNext) {
-          return undefined;
-        }
-
-        return pages.length + 1;
-      },
-      keepPreviousData: true, // 이전 데이터 유지 layout shift 방지
-      enabled,
-    },
-  );
-
-  return {
-    // return type에 undefined 제거 하기위해 null 병합 연산자 추가
-    tils:
-      data?.pages.flatMap((page) => {
-        if (page.result === null) {
-          // 마지막 페이지인 경우
-          return [];
-        }
-        return page.result?.tils;
-      }) ?? [],
-    isLoading,
-  };
-};
-
-export const usePostTilsIndividual = () => {
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation(postTilsIndividualAPI);
-
-  const postTilsIndividual = async (body: { categoryId: number; title: string }) => {
-    const data = await mutation.mutateAsync(body, {
-      onSuccess: () => {
-        console.log('이거 실행됩니깐');
-        queryClient.invalidateQueries([QUERY_KEY.getTils, { roadmapId: body.categoryId.toString() }]);
-      },
-    });
-
-    return data;
-  };
-  // useMutation 훅을 밖으로 내보내지 않아도, 비즈니스 로직 함수 작성해서 내보내면 된다.
-  return { postTilsIndividual };
 };

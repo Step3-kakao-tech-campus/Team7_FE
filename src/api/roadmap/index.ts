@@ -1,5 +1,10 @@
 import { axiosInstance } from '@/api';
-import type { UserRoadmapsResponse, PostRoadmapsIndividualResponse, GetRoadmapStepsResponse } from '@/api/roadmap/type';
+import type {
+  UserRoadmapsResponse,
+  PostRoadmapsIndividualResponse,
+  GetRoadmapStepsResponse,
+  PostRoadmapStepIndividualResponse,
+} from '@/api/roadmap/type';
 
 export const getRoadmaps = async () => {
   const { data } = await axiosInstance.request<UserRoadmapsResponse>({
@@ -24,6 +29,16 @@ export const postRoadmapsIndividual = async (name: string) => {
     method: 'POST',
     url: `/roadmaps/individual`,
     data: { name },
+  });
+
+  return data;
+};
+
+export const postRoadmapStepIndividual = async ({ roadmapId, title }: { roadmapId: number; title: string }) => {
+  const { data } = await axiosInstance.request<PostRoadmapStepIndividualResponse>({
+    method: 'POST',
+    url: `/roadmaps/individual/${roadmapId}/steps`,
+    data: { title },
   });
 
   return data;
