@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { EmotionTheme } from '@/styles/emotion';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const ModalInfo = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const CardStyles = css`
   margin-bottom: 1.25rem;
 `;
 
-export const Left = styled.div`
+export const RoadmapSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -30,7 +30,8 @@ export const Left = styled.div`
   padding: 0.5rem;
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
-export const Right = styled.div`
+
+export const StepSection = styled.div`
   width: 50%;
   height: 100%;
   padding: 0.5rem;
@@ -63,8 +64,23 @@ export const List = styled.ul`
   }
 `;
 
-export const Item = styled.li<{ selected?: boolean }>`
+export const Container = styled.li<{ selected?: boolean }>`
   display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  margin-bottom: 0.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+
+  background-color: ${({ selected, theme }) => (selected ? theme.colors.rose_light : '#ffffff')};
+
+  &:hover {
+    background-color: ${({ selected, theme }) => (selected ? theme.colors.rose_light : theme.colors.gray_200)};
+  }
+`;
+
+export const Item = styled.span<{ selected?: boolean }>`
+  display: block;
   align-items: center;
   width: 100%;
   margin-bottom: 0.25rem;
@@ -72,6 +88,9 @@ export const Item = styled.li<{ selected?: boolean }>`
   border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   cursor: pointer;
 
   background-color: ${({ selected, theme }) => (selected ? theme.colors.rose_light : '#ffffff')};
@@ -104,4 +123,13 @@ export const InputStyles = () => css`
   }
 `;
 
-export const Form = styled.form``;
+export const IconStyles = css`
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin-right: 0.75rem;
+`;
+
+export const ItemStyles = css`
+  padding-left: 0;
+  margin-bottom: 0;
+`;

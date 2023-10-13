@@ -1,26 +1,17 @@
 import { useState } from 'react';
-import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useGetRoadmaps, usePostRoadmapsIndividual } from '@/api/hooks/roadmap';
+import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
-import { useGetTils } from '@/api/hooks/til';
-import { usePostTilsIndividual } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
-import Input from '@/components/common/Input';
+import Icon from '@/components/common/Icon';
 import * as Styled from './style';
-
-interface FormInput {
-  title: string;
-  tilTitle: string;
-}
 
 const RoadMap = () => {
   const router = useRouter();
   const [roadmapId, setRoadmapId] = useState<number>(0);
   const [stepId, setStepId] = useState<number>(0);
-  const { data } = useGetRoadmaps();
+  const { data: roadmaps } = useGetRoadmaps();
   const { steps } = useGetRoadmapSteps(roadmapId);
 
   return (
@@ -31,29 +22,45 @@ const RoadMap = () => {
       </Styled.ModalInfo>
 
       <Card css={Styled.CardStyles}>
-        <Styled.Left>
+        <Styled.RoadmapSection>
           <Styled.List>
-            {data.roadmaps.map((item) => {
+            {roadmaps.roadmaps.map((roadmap) => {
               return (
-                <Styled.Item selected={roadmapId === item.id} onClick={() => setRoadmapId(item.id)} key={item.id}>
-                  {item.name}
+                <Styled.Item
+                  selected={roadmapId === roadmap.id}
+                  onClick={() => setRoadmapId(roadmap.id)}
+                  key={roadmap.id}>
+                  {roadmap.name}
                 </Styled.Item>
               );
             })}
           </Styled.List>
-        </Styled.Left>
+        </Styled.RoadmapSection>
 
-        <Styled.Right>
+        <Styled.StepSection>
           <Styled.List>
             {steps?.result.steps.map((step) => {
               return (
-                <Styled.Item selected={stepId === step.id} onClick={() => setStepId(step.id)} key={step.id}>
-                  {step.title}
-                </Styled.Item>
+                <Styled.Container key={step.id} selected={stepId === step.id}>
+                  {step.isCompleted ? (
+                    <Icon css={Styled.IconStyles} iconName="ic_checkButton" imageSize={20} ext="svg" alt="체크 버튼" />
+                  ) : (
+                    <Icon
+                      css={Styled.IconStyles}
+                      iconName="ic_uncheckButton"
+                      imageSize={20}
+                      ext="svg"
+                      alt="체크 버튼"
+                    />
+                  )}
+                  <Styled.Item css={Styled.ItemStyles} selected={stepId === step.id} onClick={() => setStepId(step.id)}>
+                    {step.title}
+                  </Styled.Item>
+                </Styled.Container>
               );
             })}
           </Styled.List>
-        </Styled.Right>
+        </Styled.StepSection>
       </Card>
 
       <Styled.ButtonContainer>

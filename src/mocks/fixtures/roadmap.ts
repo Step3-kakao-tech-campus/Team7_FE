@@ -7,7 +7,7 @@ export const userRoadmapsResponse: UserRoadmapsResponse = {
     category: [
       {
         id: 1,
-        name: '홍박사의 알고리즘',
+        name: '홍박사의 알고리즘즘즘즘즘즘즘즘즘즘즘',
       },
       {
         id: 2,
@@ -22,7 +22,7 @@ export const userRoadmapsResponse: UserRoadmapsResponse = {
       tily: [
         {
           id: 1,
-          name: '알고리즘 격파!',
+          name: '알고리즘 격파파파파파파파파파파파파파파',
           stepNum: 88,
         },
         {
@@ -34,7 +34,7 @@ export const userRoadmapsResponse: UserRoadmapsResponse = {
       group: [
         {
           id: 3,
-          name: '준서좌의 나도 할 수 있다 알고리즘',
+          name: '준서좌의 나도 할 수 있다 알고리즘즘즘즘즘즘즘',
           stepNum: 20,
           image: 'qwer.jpg',
           creator: {
@@ -89,7 +89,7 @@ export const getRoadmapStepsResponse: GetRoadmapStepsResponse = {
       },
       {
         id: 3,
-        title: '클래스 기초',
+        title: '클래스 기초초초초초초초초초초초초초초',
         isCompleted: false,
         tilId: 1,
       },

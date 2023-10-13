@@ -48,14 +48,16 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li<{ selected?: boolean }>`
-  display: flex;
-  align-items: center;
+  display: block;
   width: 100%;
   margin-bottom: 0.25rem;
   padding: 0.75rem 1rem;
   border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   cursor: pointer;
 
   background-color: ${({ selected, theme }) => (selected ? theme.colors.rose_light : '#ffffff')};

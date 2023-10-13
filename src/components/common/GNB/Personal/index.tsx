@@ -137,10 +137,13 @@ const Personal = () => {
             <PlusButton title="카테고리 추가하기" onClick={() => setIsRoadmapButtonSelected(true)} />
           )}
           <Styled.List>
-            {roadmaps?.category.map((item) => {
+            {roadmaps?.category.map((roadmap) => {
               return (
-                <Styled.Item selected={roadmapId === item.id} onClick={() => setRoadmapId(item.id)} key={item.id}>
-                  {item.name}
+                <Styled.Item
+                  selected={roadmapId === roadmap.id}
+                  onClick={() => setRoadmapId(roadmap.id)}
+                  key={roadmap.id}>
+                  {roadmap.name}
                 </Styled.Item>
               );
             })}
