@@ -8,6 +8,7 @@ import {
   usePostRoadmapStepIndividual,
   usePostRoadmapsIndividual,
 } from '@/api/hooks/roadmap';
+import { usePostTil } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
@@ -19,15 +20,20 @@ interface FormInput {
 }
 
 const Personal = () => {
-  const router = useRouter();
   const [roadmapId, setRoadmapId] = useState<number>(0);
   const [stepId, setStepId] = useState<number>(0);
+  const [tilId, setTilId] = useState<number | null>(null);
+  const [selectStepTitle, setSelectStepTitle] = useState<string>('');
+  const [isRoadmapSelected, setIsRoadmapSelected] = useState<boolean>(false);
+  const [isStepIdSelected, setIsStepIdSelected] = useState<boolean>(false);
+  const [isTILCreatedForStep, setIsTILCreatedForStep] = useState<boolean>(false);
+
+  const router = useRouter();
   const { data } = useGetRoadmaps();
   const { steps } = useGetRoadmapSteps(roadmapId);
   const { postRoadmapsIndividual } = usePostRoadmapsIndividual();
   const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();
-  const [isSelected, setIsSelected] = useState<boolean>(false);
-  const [isTilSelected, setIsTilSelected] = useState<boolean>(false);
+  const { postTil } = usePostTil();
 
   const {
     control,
@@ -47,7 +53,7 @@ const Personal = () => {
     try {
       postRoadmapsIndividual(formData.title);
       reset();
-      setIsSelected(false);
+      setIsRoadmapSelected(false);
     } catch {
       setError('title', {
         type: '400',
@@ -60,12 +66,22 @@ const Personal = () => {
     try {
       postRoadmapStepIndividual({ roadmapId, title: formData.tilTitle });
       reset();
-      setIsTilSelected(false);
+      setIsStepIdSelected(false);
     } catch {
       setError('tilTitle', {
         type: '400',
         message: '에러가 발생했습니다. 다시 시도해주세요.',
       });
+    }
+  };
+
+  // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수
+  const routeTILWrite = async () => {
+    if (isTILCreatedForStep) {
+      router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${tilId}`);
+    } else {
+      const data = await postTil({ roadmapId, stepId, title: selectStepTitle });
+      router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${data?.result.id}`);
     }
   };
 
@@ -78,7 +94,7 @@ const Personal = () => {
 
       <Card css={Styled.CardStyles}>
         <Styled.Left>
-          {isSelected ? (
+          {isRoadmapSelected ? (
             <Styled.Form onSubmit={handleSubmit(onSubmit)}>
               <Controller
                 name="title"
@@ -103,7 +119,7 @@ const Personal = () => {
               />
             </Styled.Form>
           ) : (
-            <Styled.PlusButton onClick={() => setIsSelected(true)}>
+            <Styled.PlusButton onClick={() => setIsRoadmapSelected(true)}>
               <Image src="/assets/icons/ic_plusButton.svg" alt="plus" width={20} height={20} />
               <span>카테고리 추가하기</span>
             </Styled.PlusButton>
@@ -122,7 +138,7 @@ const Personal = () => {
         <Styled.Right>
           <Styled.List>
             {roadmapId !== 0 &&
-              (isTilSelected ? (
+              (isStepIdSelected ? (
                 <Styled.Form onSubmit={handleSubmit(onSubmit2)}>
                   <Controller
                     name="tilTitle"
@@ -147,7 +163,7 @@ const Personal = () => {
                   />
                 </Styled.Form>
               ) : (
-                <Styled.PlusButton onClick={() => setIsTilSelected(true)}>
+                <Styled.PlusButton onClick={() => setIsStepIdSelected(true)}>
                   <Image src="/assets/icons/ic_plusButton.svg" alt="plus" width={20} height={20} />
                   <span>TIL 추가하기</span>
                 </Styled.PlusButton>
@@ -155,7 +171,15 @@ const Personal = () => {
 
             {steps?.result.steps.map((step) => {
               return (
-                <Styled.Item selected={stepId === step.id} onClick={() => setStepId(step.id)} key={step.id}>
+                <Styled.Item
+                  selected={stepId === step.id}
+                  onClick={() => {
+                    setStepId(step.id);
+                    setIsTILCreatedForStep(step.isCompleted);
+                    setTilId(step.tilId);
+                    setSelectStepTitle(step.title);
+                  }}
+                  key={step.id}>
                   {step.title}
                 </Styled.Item>
               );
@@ -165,7 +189,7 @@ const Personal = () => {
       </Card>
 
       <Styled.ButtonContainer>
-        <Button onClick={() => router.push('/TILWrite')} css={Styled.ButtonStyles}>
+        <Button onClick={routeTILWrite} css={Styled.ButtonStyles}>
           완료
         </Button>
       </Styled.ButtonContainer>

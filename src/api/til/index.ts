@@ -11,11 +11,11 @@ export const getTils = async (input: TilsRequest) => {
 };
 //
 
-export const postTil = async (param: PostTilRequest) => {
-  const { roadmapId, stepId, title } = param;
+export const postTil = async (body: PostTilRequest) => {
+  const { roadmapId, stepId, title } = body;
 
   const { data } = await axiosInstance.request<PostTilResponse>({
-    method: 'GET',
+    method: 'POST',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils`,
     data: { title },
   });

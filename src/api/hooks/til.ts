@@ -1,9 +1,10 @@
 import qs from 'qs';
 import { useRouter } from 'next/router';
 import type { QueryKey } from '@tanstack/react-query';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 import { getTils } from '@/api/til';
-import type { TilsResponse } from '@/api/til/type';
+import { postTil as postTilAPI } from '@/api/til';
+import type { PostTilRequest, TilsResponse } from '@/api/til/type';
 
 const QUERY_KEY = {
   getTils: 'getTils',
@@ -52,4 +53,16 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
     fetchNextPage,
     hasNextPage,
   };
+};
+
+export const usePostTil = () => {
+  const mutation = useMutation(postTilAPI);
+
+  const postTil = async (body: PostTilRequest) => {
+    const data = await mutation.mutateAsync(body);
+
+    return data;
+  };
+
+  return { postTil };
 };

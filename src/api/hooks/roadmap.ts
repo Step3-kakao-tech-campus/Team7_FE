@@ -61,7 +61,6 @@ export const usePostRoadmapStepIndividual = () => {
   const postRoadmapStepIndividual = async (body: { roadmapId: number; title: string }) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
-        console.log('이거 실행됩니깐');
         queryClient.invalidateQueries([QUERY_KEY.getRoadmapSteps, body.roadmapId]);
       },
     });
