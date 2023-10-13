@@ -15,11 +15,6 @@ import PlusButton from '@/components/common/GNB/PlusButton';
 import Input from '@/components/common/Input';
 import * as Styled from './style';
 
-interface FormInput {
-  roadmapTitle: string;
-  stepTitle: string;
-}
-
 const Personal = () => {
   const [roadmapId, setRoadmapId] = useState<number>(NOT_SELECTED);
   const [stepId, setStepId] = useState<number>(NOT_SELECTED);
@@ -36,39 +31,51 @@ const Personal = () => {
   const { postTil } = usePostTil();
 
   const {
-    control,
-    handleSubmit,
-    setError,
-    reset,
-    formState: { errors },
+    control: roadmapControl,
+    handleSubmit: roadmapHandleSubmit,
+    setError: roadmapSetError,
+    reset: roadmapReset,
+    formState: { errors: roadmapErrors },
   } = useForm({
     defaultValues: {
       roadmapTitle: '',
+    },
+    mode: 'onSubmit',
+  });
+
+  const {
+    control: stepControl,
+    handleSubmit: stepHandleSubmit,
+    setError: stepSetError,
+    reset: stepReset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
       stepTitle: '',
     },
     mode: 'onSubmit',
   });
 
-  const createRoadmap: SubmitHandler<FormInput> = (formData) => {
+  const createRoadmap: SubmitHandler<{ roadmapTitle: string }> = (formData) => {
     try {
       postRoadmapsIndividual(formData.roadmapTitle);
-      reset();
+      roadmapReset();
       setIsRoadmapButtonSelected(false);
     } catch {
-      setError('roadmapTitle', {
+      roadmapSetError('roadmapTitle', {
         type: '400',
         message: '에러가 발생했습니다. 다시 시도해주세요.',
       });
     }
   };
 
-  const createStep: SubmitHandler<FormInput> = (formData) => {
+  const createStep: SubmitHandler<{ stepTitle: string }> = (formData) => {
     try {
       postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
-      reset();
+      stepReset();
       setIsStepButtonSelected(false);
     } catch {
-      setError('stepTitle', {
+      stepSetError('stepTitle', {
         type: '400',
         message: '에러가 발생했습니다. 다시 시도해주세요.',
       });
@@ -103,10 +110,10 @@ const Personal = () => {
       <Card css={Styled.CardStyles}>
         <Styled.RoadmapSection>
           {isRoadmapButtonSelected ? (
-            <Styled.Form onSubmit={handleSubmit(createRoadmap)}>
+            <Styled.Form onSubmit={roadmapHandleSubmit(createRoadmap)}>
               <Controller
                 name="roadmapTitle"
-                control={control}
+                control={roadmapControl}
                 rules={{
                   required: '카테고리명을 입력해주세요.',
                   pattern: {
@@ -119,8 +126,8 @@ const Personal = () => {
                     css={Styled.InputContainerStyles}
                     inputStyles={Styled.InputStyles}
                     placeholder="카테고리명을 입력해주세요."
-                    message={errors.roadmapTitle?.message}
-                    status={errors.roadmapTitle ? 'error' : 'default'}
+                    message={roadmapErrors.roadmapTitle?.message}
+                    status={roadmapErrors.roadmapTitle ? 'error' : 'default'}
                     {...field}
                   />
                 )}
@@ -143,10 +150,10 @@ const Personal = () => {
         <Styled.StepSection>
           {roadmapId !== NOT_SELECTED &&
             (isStepButtonSelected ? (
-              <Styled.Form onSubmit={handleSubmit(createStep)}>
+              <Styled.Form onSubmit={stepHandleSubmit(createStep)}>
                 <Controller
                   name="stepTitle"
-                  control={control}
+                  control={stepControl}
                   rules={{
                     required: 'TIL의 제목을 입력해주세요.',
                     pattern: {
