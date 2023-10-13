@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import {
   useGetRoadmapSteps,
@@ -11,6 +10,7 @@ import {
 import { usePostTil } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
+import PlusButton from '@/components/common/GNB/PlusButton';
 import Input from '@/components/common/Input';
 import * as Styled from './style';
 
@@ -119,10 +119,7 @@ const Personal = () => {
               />
             </Styled.Form>
           ) : (
-            <Styled.PlusButton onClick={() => setIsRoadmapSelected(true)}>
-              <Image src="/assets/icons/ic_plusButton.svg" alt="plus" width={20} height={20} />
-              <span>카테고리 추가하기</span>
-            </Styled.PlusButton>
+            <PlusButton title="카테고리 추가하기" onClick={() => setIsStepIdSelected(true)} />
           )}
           <Styled.List>
             {data.category.map((item) => {
@@ -163,10 +160,7 @@ const Personal = () => {
                   />
                 </Styled.Form>
               ) : (
-                <Styled.PlusButton onClick={() => setIsStepIdSelected(true)}>
-                  <Image src="/assets/icons/ic_plusButton.svg" alt="plus" width={20} height={20} />
-                  <span>TIL 추가하기</span>
-                </Styled.PlusButton>
+                <PlusButton title="TIL 추가하기" onClick={() => setIsStepIdSelected(true)} />
               ))}
 
             {steps?.result.steps.map((step) => {
