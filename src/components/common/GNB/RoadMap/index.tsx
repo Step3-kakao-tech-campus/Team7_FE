@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
+import { usePostTil } from '@/api/hooks/til';
+import type { Step } from '@/api/roadmap/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Icon from '@/components/common/Icon';
@@ -11,8 +13,30 @@ const RoadMap = () => {
   const router = useRouter();
   const [roadmapId, setRoadmapId] = useState<number>(0);
   const [stepId, setStepId] = useState<number>(0);
+  const [selectedStepTitle, setSelectedStepTitle] = useState<string>('');
+  const [tilId, setTilId] = useState<number | null>(null);
+
   const { data: roadmaps } = useGetRoadmaps();
   const { steps } = useGetRoadmapSteps(roadmapId);
+  const { postTil } = usePostTil();
+
+  // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수
+  const routeTILWrite = async () => {
+    const NOT_TIL_CREATED_FOR_STEP = null;
+
+    if (tilId === NOT_TIL_CREATED_FOR_STEP) {
+      router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${tilId}`);
+    } else {
+      const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
+      router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${data?.result.id}`);
+    }
+  };
+
+  const handleSelcteStep = (step: Step) => {
+    setStepId(step.id);
+    setTilId(step.tilId);
+    setSelectedStepTitle(step.title);
+  };
 
   return (
     <>
@@ -24,7 +48,7 @@ const RoadMap = () => {
       <Card css={Styled.CardStyles}>
         <Styled.RoadmapSection>
           <Styled.List>
-            {roadmaps.roadmaps.map((roadmap) => {
+            {roadmaps?.roadmaps.map((roadmap) => {
               return (
                 <Styled.Item
                   selected={roadmapId === roadmap.id}
@@ -53,7 +77,10 @@ const RoadMap = () => {
                       alt="체크 버튼"
                     />
                   )}
-                  <Styled.Item css={Styled.ItemStyles} selected={stepId === step.id} onClick={() => setStepId(step.id)}>
+                  <Styled.Item
+                    css={Styled.ItemStyles}
+                    selected={stepId === step.id}
+                    onClick={() => handleSelcteStep(step)}>
                     {step.title}
                   </Styled.Item>
                 </Styled.Container>
@@ -64,7 +91,7 @@ const RoadMap = () => {
       </Card>
 
       <Styled.ButtonContainer>
-        <Button onClick={() => router.push('/TILWrite')} css={Styled.ButtonStyles}>
+        <Button onClick={routeTILWrite} css={Styled.ButtonStyles}>
           완료
         </Button>
       </Styled.ButtonContainer>
