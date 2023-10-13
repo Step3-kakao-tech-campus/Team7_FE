@@ -24,7 +24,7 @@ export const getRoadmapSteps = async (roadmapId: number) => {
   return data;
 };
 
-export const postRoadmapsIndividual = async (name: string) => {
+export const postRoadmapIndividual = async (name: string) => {
   const { data } = await axiosInstance.request<PostRoadmapsIndividualResponse>({
     method: 'POST',
     url: `/roadmaps/individual`,

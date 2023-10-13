@@ -22,7 +22,7 @@ export const CardStyles = css`
   margin-bottom: 1.25rem;
 `;
 
-export const Left = styled.div`
+export const RoadmapSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -30,7 +30,7 @@ export const Left = styled.div`
   padding: 0.5rem;
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
-export const Right = styled.div`
+export const StepSection = styled.div`
   width: 50%;
   height: 100%;
   padding: 0.5rem;

@@ -5,9 +5,10 @@ import {
   useGetRoadmapSteps,
   useGetRoadmaps,
   usePostRoadmapStepIndividual,
-  usePostRoadmapsIndividual,
+  usePostRoadmapIndividual,
 } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
+import type { Step } from '@/api/roadmap/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import PlusButton from '@/components/common/GNB/PlusButton';
@@ -15,23 +16,22 @@ import Input from '@/components/common/Input';
 import * as Styled from './style';
 
 interface FormInput {
-  title: string;
-  tilTitle: string;
+  roadmapTitle: string;
+  stepTitle: string;
 }
 
 const Personal = () => {
-  const [roadmapId, setRoadmapId] = useState<number>(0);
-  const [stepId, setStepId] = useState<number>(0);
+  const [roadmapId, setRoadmapId] = useState<number>(NOT_SELECTED);
+  const [stepId, setStepId] = useState<number>(NOT_SELECTED);
+  const [selectedStepTitle, setSelectedStepTitle] = useState<string>('');
   const [tilId, setTilId] = useState<number | null>(null);
-  const [selectStepTitle, setSelectStepTitle] = useState<string>('');
-  const [isRoadmapSelected, setIsRoadmapSelected] = useState<boolean>(false);
-  const [isStepIdSelected, setIsStepIdSelected] = useState<boolean>(false);
-  const [isTILCreatedForStep, setIsTILCreatedForStep] = useState<boolean>(false);
+  const [isRoadmapButtonSelected, setIsRoadmapButtonSelected] = useState<boolean>(false);
+  const [isStepButtonSelected, setIsStepButtonSelected] = useState<boolean>(false);
 
   const router = useRouter();
-  const { data } = useGetRoadmaps();
+  const { data: roadmaps } = useGetRoadmaps();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postRoadmapsIndividual } = usePostRoadmapsIndividual();
+  const { postRoadmapsIndividual } = usePostRoadmapIndividual();
   const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();
   const { postTil } = usePostTil();
 
@@ -43,32 +43,32 @@ const Personal = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: '',
-      tilTitle: '',
+      roadmapTitle: '',
+      stepTitle: '',
     },
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<FormInput> = (formData) => {
+  const createRoadmap: SubmitHandler<FormInput> = (formData) => {
     try {
-      postRoadmapsIndividual(formData.title);
+      postRoadmapsIndividual(formData.roadmapTitle);
       reset();
-      setIsRoadmapSelected(false);
+      setIsRoadmapButtonSelected(false);
     } catch {
-      setError('title', {
+      setError('roadmapTitle', {
         type: '400',
         message: '에러가 발생했습니다. 다시 시도해주세요.',
       });
     }
   };
 
-  const onSubmit2: SubmitHandler<FormInput> = (formData) => {
+  const createStep: SubmitHandler<FormInput> = (formData) => {
     try {
-      postRoadmapStepIndividual({ roadmapId, title: formData.tilTitle });
+      postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
       reset();
-      setIsStepIdSelected(false);
+      setIsStepButtonSelected(false);
     } catch {
-      setError('tilTitle', {
+      setError('stepTitle', {
         type: '400',
         message: '에러가 발생했습니다. 다시 시도해주세요.',
       });
@@ -77,12 +77,20 @@ const Personal = () => {
 
   // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수
   const routeTILWrite = async () => {
-    if (isTILCreatedForStep) {
+    const NOT_TIL_CREATED_FOR_STEP = null;
+
+    if (tilId === NOT_TIL_CREATED_FOR_STEP) {
       router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${tilId}`);
     } else {
-      const data = await postTil({ roadmapId, stepId, title: selectStepTitle });
+      const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
       router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${data?.result.id}`);
     }
+  };
+
+  const handleSelcteStep = (step: Step) => {
+    setStepId(step.id);
+    setTilId(step.tilId);
+    setSelectedStepTitle(step.title);
   };
 
   return (
@@ -93,11 +101,11 @@ const Personal = () => {
       </Styled.ModalInfo>
 
       <Card css={Styled.CardStyles}>
-        <Styled.Left>
-          {isRoadmapSelected ? (
-            <Styled.Form onSubmit={handleSubmit(onSubmit)}>
+        <Styled.RoadmapSection>
+          {isRoadmapButtonSelected ? (
+            <Styled.Form onSubmit={handleSubmit(createRoadmap)}>
               <Controller
-                name="title"
+                name="roadmapTitle"
                 control={control}
                 rules={{
                   required: '카테고리명을 입력해주세요.',
@@ -111,18 +119,18 @@ const Personal = () => {
                     css={Styled.InputContainerStyles}
                     inputStyles={Styled.InputStyles}
                     placeholder="카테고리명을 입력해주세요."
-                    message={errors.title?.message}
-                    status={errors.title ? 'error' : 'default'}
+                    message={errors.roadmapTitle?.message}
+                    status={errors.roadmapTitle ? 'error' : 'default'}
                     {...field}
                   />
                 )}
               />
             </Styled.Form>
           ) : (
-            <PlusButton title="카테고리 추가하기" onClick={() => setIsStepIdSelected(true)} />
+            <PlusButton title="카테고리 추가하기" onClick={() => setIsRoadmapButtonSelected(true)} />
           )}
           <Styled.List>
-            {data.category.map((item) => {
+            {roadmaps?.category.map((item) => {
               return (
                 <Styled.Item selected={roadmapId === item.id} onClick={() => setRoadmapId(item.id)} key={item.id}>
                   {item.name}
@@ -130,56 +138,48 @@ const Personal = () => {
               );
             })}
           </Styled.List>
-        </Styled.Left>
+        </Styled.RoadmapSection>
 
-        <Styled.Right>
-          <Styled.List>
-            {roadmapId !== 0 &&
-              (isStepIdSelected ? (
-                <Styled.Form onSubmit={handleSubmit(onSubmit2)}>
-                  <Controller
-                    name="tilTitle"
-                    control={control}
-                    rules={{
-                      required: 'TIL의 제목을 입력해주세요.',
-                      pattern: {
-                        value: /^(.{1,20})$/,
-                        message: '글자수는 20자까지 입력가능합니다.',
-                      },
-                    }}
-                    render={({ field }) => (
-                      <Input
-                        css={Styled.InputContainerStyles}
-                        inputStyles={Styled.InputStyles}
-                        placeholder="TIL의 제목을 입력해주세요."
-                        message={errors.tilTitle?.message}
-                        status={errors.tilTitle ? 'error' : 'default'}
-                        {...field}
-                      />
-                    )}
-                  />
-                </Styled.Form>
-              ) : (
-                <PlusButton title="TIL 추가하기" onClick={() => setIsStepIdSelected(true)} />
-              ))}
-
-            {steps?.result.steps.map((step) => {
-              return (
-                <Styled.Item
-                  selected={stepId === step.id}
-                  onClick={() => {
-                    setStepId(step.id);
-                    setIsTILCreatedForStep(step.isCompleted);
-                    setTilId(step.tilId);
-                    setSelectStepTitle(step.title);
+        <Styled.StepSection>
+          {roadmapId !== NOT_SELECTED &&
+            (isStepButtonSelected ? (
+              <Styled.Form onSubmit={handleSubmit(createStep)}>
+                <Controller
+                  name="stepTitle"
+                  control={control}
+                  rules={{
+                    required: 'TIL의 제목을 입력해주세요.',
+                    pattern: {
+                      value: /^(.{1,20})$/,
+                      message: '글자수는 20자까지 입력가능합니다.',
+                    },
                   }}
-                  key={step.id}>
+                  render={({ field }) => (
+                    <Input
+                      css={Styled.InputContainerStyles}
+                      inputStyles={Styled.InputStyles}
+                      placeholder="TIL의 제목을 입력해주세요."
+                      message={errors.stepTitle?.message}
+                      status={errors.stepTitle ? 'error' : 'default'}
+                      {...field}
+                    />
+                  )}
+                />
+              </Styled.Form>
+            ) : (
+              <PlusButton title="TIL 추가하기" onClick={() => setIsStepButtonSelected(true)} />
+            ))}
+
+          <Styled.List>
+            {steps?.result.steps.map((step: Step) => {
+              return (
+                <Styled.Item selected={stepId === step.id} onClick={() => handleSelcteStep(step)} key={step.id}>
                   {step.title}
                 </Styled.Item>
               );
             })}
           </Styled.List>
-        </Styled.Right>
+        </Styled.StepSection>
       </Card>
 
       <Styled.ButtonContainer>
@@ -192,3 +192,5 @@ const Personal = () => {
 };
 
 export default Personal;
+
+const NOT_SELECTED = 0;

@@ -4,7 +4,7 @@ import {
   getRoadmapSteps,
   getRoadmaps,
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
-  postRoadmapsIndividual as postRoadmapsIndividualAPI,
+  postRoadmapIndividual as postRoadmapIndividualAPI,
 } from '@/api/roadmap';
 
 const QUERY_KEY = {
@@ -35,10 +35,10 @@ export const useGetRoadmapSteps = (roadmapId: number) => {
   };
 };
 
-export const usePostRoadmapsIndividual = () => {
+export const usePostRoadmapIndividual = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(postRoadmapsIndividualAPI);
+  const mutation = useMutation(postRoadmapIndividualAPI);
 
   const postRoadmapsIndividual = async (title: string) => {
     const data = await mutation.mutateAsync(title, {
@@ -67,6 +67,5 @@ export const usePostRoadmapStepIndividual = () => {
 
     return data;
   };
-  // useMutation 훅을 밖으로 내보내지 않아도, 비즈니스 로직 함수 작성해서 내보내면 된다.
   return { postRoadmapStepIndividual };
 };
