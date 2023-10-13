@@ -28,7 +28,7 @@ const Home = () => {
       <Root>
         <Inner>
           <LeftArea>
-            <Avatar imageWidth={240} imageHeight={240} iconName="ic_profile" />
+            <Avatar imageSize={240} iconName="ic_profile" />
             <SearchBar />
             <CategorySection />
           </LeftArea>

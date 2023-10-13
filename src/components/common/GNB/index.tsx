@@ -37,7 +37,7 @@ const GNB = () => {
             TIL
           </Button>
 
-          <Avatar imageWidth={40} imageHeight={40} iconName="ic_profile" />
+          <Avatar imageSize={40} iconName="ic_profile" />
         </Styled.ActionArea>
       </Styled.Inner>
     </Styled.Root>

@@ -19,6 +19,19 @@ const colors = {
   blue: '#3B82F6;',
 } as const;
 
-export const emotionTheme = { colors } as const;
+const defaultEditorWidth = '70%';
+const maxEditorWidth = '100%';
+const resizeHandleWidth = '50px';
+
+const layout = {
+  defaultEditorWidth,
+  maxEditorWidth,
+  resizeHandleWidth,
+  asideWidth: `${maxEditorWidth} - ${defaultEditorWidth} - ${resizeHandleWidth}`,
+  headerHeight: '4rem',
+  footerHeight: '4rem',
+} as const;
+
+export const emotionTheme = { colors, layout } as const;
 
 export type EmotionTheme = typeof emotionTheme;

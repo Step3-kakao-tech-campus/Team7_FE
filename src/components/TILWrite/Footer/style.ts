@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Root = styled.header`
+export const Root = styled.footer`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,7 +10,7 @@ export const Root = styled.header`
 
   background-color: ${({ theme }) => theme.colors.gray_100};
   width: 100%;
-  height: 4rem;
+  height: ${({ theme }) => theme.layout.footerHeight};
 `;
 
 export const Title = styled.h1`
