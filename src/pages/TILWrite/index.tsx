@@ -6,7 +6,7 @@ import Footer from '@/components/TILWrite/Footer';
 import Header from '@/components/TILWrite/Header';
 import Reference from '@/components/TILWrite/Reference';
 import RoadMap from '@/components/TILWrite/RoadMap';
-import { useDrawerState } from '@/hooks/common/useDrawerState';
+import { useDrawerState } from '@/hooks/useDrawerState';
 import { emotionTheme } from '@/styles/emotion';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
