@@ -1,4 +1,4 @@
-import type { UserHistoryResponse } from '@/api/user/types';
+import type { GetUserResponse, UserHistoryResponse } from '@/api/user/type';
 
 export const userHistoryResponse: UserHistoryResponse = {
   success: true,
@@ -22,5 +22,16 @@ export const userHistoryResponse: UserHistoryResponse = {
         value: 1,
       },
     ],
+  },
+};
+
+export const getUserResponse: GetUserResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    id: 1,
+    name: '김동영',
+    email: 'ehddud1006@pusan.ac.kr',
+    image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
   },
 };
