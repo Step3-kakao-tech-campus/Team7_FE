@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import withAuth from '@/components/auth/utils/AuthRequired';
 import Avatar from '@/components/common/Avatar';
 import Flex from '@/components/common/Flex';
 import GNB from '@/components/common/GNB';
@@ -49,7 +48,7 @@ const Home = () => {
 
 setLayout(Home, EmptyLayout);
 
-export default withAuth(Home);
+export default Home;
 
 const Root = styled.div``;
 

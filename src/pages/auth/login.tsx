@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import Login from '@/components/auth/login';

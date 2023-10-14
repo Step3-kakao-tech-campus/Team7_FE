@@ -1,4 +1,5 @@
 import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { tilyLinks } from '@/constants/links';
 import type { Layout } from '@/utils/layout';
@@ -9,10 +10,12 @@ function withAuth(WrappedComponent: Layout) {
     const router = useRouter();
     const accessToken = useRecoilValue(accessTokenAtom);
 
-    if (accessToken === null) {
-      router.replace(tilyLinks.login());
-      return null;
-    }
+    useEffect(() => {
+      if (accessToken === null) {
+        router.replace(tilyLinks.login());
+      }
+    });
+
     return <WrappedComponent {...props} />;
   };
 }
