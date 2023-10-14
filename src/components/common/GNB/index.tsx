@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
+import Alarm from '@/components/common/GNB/Alarm';
 import TILModal from '@/components/common/GNB/TILModal';
 import Logo from '@/components/common/Logo';
 import { tilyLinks } from '@/constants/links';
@@ -11,7 +12,8 @@ import * as Styled from './style';
 const GNB = () => {
   useGetRoadmaps();
 
-  const { isOpen, handleOpen, handleClose } = useModalState();
+  const { isOpen: isTilModalOpen, handleOpen: handleOpenTilModal, handleClose: handleCloseTilModal } = useModalState();
+  const { isOpen: isAlarmOpen, handleOpen: handleOpenAlarm, handleClose: handleCloseAlarm } = useModalState();
 
   const router = useRouter();
 
@@ -41,18 +43,24 @@ const GNB = () => {
               <span>를 심어보세요</span>
             </Styled.TILInfo>
 
-            <Button onClick={handleOpen} css={Styled.TILButtonStyles} variant="ghost">
+            <Button onClick={handleOpenTilModal} css={Styled.TILButtonStyles} variant="ghost">
               TIL
             </Button>
 
-            <Avatar imageSize={40} iconName="ic_profile" />
+            <Styled.NoticeContainer>
+              <button onClick={handleOpenAlarm}>
+                <Avatar imageSize={40} iconName="ic_profile" />
+              </button>
+
+              <Alarm />
+            </Styled.NoticeContainer>
           </Styled.ActionArea>
         </Styled.Inner>
       </Styled.Root>
 
       <Styled.BellowRoot />
 
-      <TILModal isOpen={isOpen} onClose={handleClose} />
+      <TILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} />
     </>
   );
 };

@@ -86,3 +86,9 @@ export const TILButtonStyles = css`
   font-weight: 700;
   margin-right: 1rem;
 `;
+
+export const NoticeContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
