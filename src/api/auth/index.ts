@@ -4,6 +4,8 @@ import type {
   EmailCheckResponse,
   EmailCodeCheckRequest,
   EmailCodeCheckResponse,
+  EmailCodeRequest,
+  EmailCodeResponse,
   JoinRequest,
   JoinResponse,
   LoginRequest,
@@ -14,6 +16,16 @@ export const postEmailCheck = async ({ email }: EmailCheckRequest) => {
   const { data } = await axiosInstance.request<EmailCheckResponse>({
     method: 'POST',
     url: '/email/check',
+    data: { email },
+  });
+
+  return data;
+};
+
+export const postEmailCode = async ({ email }: EmailCodeRequest) => {
+  const { data } = await axiosInstance.request<EmailCodeResponse>({
+    method: 'POST',
+    url: '/email/code',
     data: { email },
   });
 
