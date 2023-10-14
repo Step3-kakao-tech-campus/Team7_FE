@@ -1,6 +1,19 @@
-import type { EmailCheckResponse, EmailCodeCheckResponse, JoinResponse, LoginResponse } from '@/api/auth/type';
+import type {
+  EmailCheckResponse,
+  EmailCodeCheckResponse,
+  EmailCodeResponse,
+  JoinResponse,
+  LoginResponse,
+} from '@/api/auth/type';
 
 export const emailCheckResponse: EmailCheckResponse = {
+  success: true,
+  code: 200,
+  message: 'ok',
+  result: null,
+};
+
+export const emailCodeResponse: EmailCodeResponse = {
   success: true,
   code: 200,
   message: 'ok',

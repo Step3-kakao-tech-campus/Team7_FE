@@ -1,11 +1,20 @@
 import { rest } from 'msw';
-import { emailCheckResponse, emailCodeCheckResponse, joinResponse, loginResponse } from '@/mocks/fixtures/auth';
+import {
+  emailCheckResponse,
+  emailCodeCheckResponse,
+  emailCodeResponse,
+  joinResponse,
+  loginResponse,
+} from '@/mocks/fixtures/auth';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const authHandler = [
   rest.post(`${BASE_URL}/email/check`, (req, res, ctx) => {
     return res(ctx.json(emailCheckResponse));
+  }),
+  rest.post(`${BASE_URL}/email/code`, (req, res, ctx) => {
+    return res(ctx.json(emailCodeResponse));
   }),
   rest.post(`${BASE_URL}/email/code/check`, (req, res, ctx) => {
     return res(ctx.json(emailCodeCheckResponse));

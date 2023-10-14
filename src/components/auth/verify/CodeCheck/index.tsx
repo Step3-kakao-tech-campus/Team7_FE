@@ -6,14 +6,16 @@ import Input from '@/components/common/Input';
 import { type EmailFormInput } from '../ByEmail';
 
 interface CodeCheckProps {
-  emailMutateAsync: (email: string) => Promise<unknown>;
+  registerEmailMutateAsync: (email: string) => Promise<unknown>;
+  passwordEmailMutateAsync: (email: string) => Promise<unknown>;
+  type: 'register' | 'findPassword';
   email: string;
   control: Control<EmailFormInput>;
   errors: FieldErrors<EmailFormInput>;
 }
 
 const CodeCheck = (props: CodeCheckProps) => {
-  const { emailMutateAsync, email, control, errors } = props;
+  const { registerEmailMutateAsync, passwordEmailMutateAsync, type, email, control, errors } = props;
   return (
     <Styled.CodeDiv
       initial={{ height: 0, opacity: 0 }}
@@ -24,7 +26,7 @@ const CodeCheck = (props: CodeCheckProps) => {
         variant="ghost"
         onClick={async (e) => {
           e.preventDefault();
-          emailMutateAsync(email);
+          type === 'register' ? registerEmailMutateAsync(email) : passwordEmailMutateAsync(email);
         }}>
         재전송하기
       </Styled.ReSendButton>
