@@ -4,16 +4,18 @@ import { useGetAlarms, useGetUser } from '@/api/hooks/user';
 import { usePatchAlarm } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
+import CustomSuspense from '@/components/common/CustomSuspense';
 import Alarm from '@/components/common/GNB/Alarm';
 import TILModal from '@/components/common/GNB/TILModal';
 import Logo from '@/components/common/Logo';
+import Skeleton from '@/components/common/Skeleton';
 import { tilyLinks } from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 const GNB = () => {
   useGetRoadmaps();
-  const { user } = useGetUser();
+  const { user, isLoading } = useGetUser();
   const { isNewAlarm, patchAlarmRequset } = useGetAlarms();
   const { patchAlarm } = usePatchAlarm();
   const { isOpen: isTilModalOpen, handleOpen: handleOpenTilModal, handleClose: handleCloseTilModal } = useModalState();
@@ -57,13 +59,17 @@ const GNB = () => {
             </Button>
 
             <Styled.NoticeContainer>
-              <button onClick={handleAlarm}>
-                {user?.image ? (
-                  <Avatar imageUrl={user?.image} imageSize={40} alt="프로필 이미지" />
-                ) : (
-                  <Avatar imageSize={40} iconName="ic_profile" alt="프로필 이미지" />
-                )}
-              </button>
+              <CustomSuspense
+                isLoading={isLoading}
+                fallback={<Skeleton css={Styled.ProfileSkeletonStyles} type="circle" />}>
+                <button onClick={handleAlarm}>
+                  {user?.image ? (
+                    <Avatar imageUrl={user?.image} imageSize={40} alt="프로필 이미지" />
+                  ) : (
+                    <Avatar imageSize={40} iconName="ic_profile" alt="프로필 이미지" />
+                  )}
+                </button>
+              </CustomSuspense>
 
               {isNewAlarm && <Styled.AlarmActiveDot />}
 

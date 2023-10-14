@@ -102,3 +102,8 @@ export const AlarmActiveDot = styled.div`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.rose};
 `;
+
+export const ProfileSkeletonStyles = css`
+  width: 40px;
+  height: 40px;
+`;

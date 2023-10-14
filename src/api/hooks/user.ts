@@ -21,10 +21,11 @@ export const useGetUserHistory = () => {
 };
 
 export const useGetUser = () => {
-  const { data } = useQuery([QUERY_KEY.user], () => getUser());
+  const { data, isLoading } = useQuery([QUERY_KEY.user], () => getUser());
 
   return {
     user: data?.result,
+    isLoading,
   };
 };
 
