@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import { useGetAlarms, useGetUser } from '@/api/hooks/user';
@@ -19,14 +20,14 @@ const GNB = () => {
   const { isNewAlarm, patchAlarmRequset } = useGetAlarms();
   const { patchAlarm } = usePatchAlarm();
   const { isOpen: isTilModalOpen, handleOpen: handleOpenTilModal, handleClose: handleCloseTilModal } = useModalState();
-  const { isOpen: isAlarmOpen, handleOpen: handleOpenAlarm, handleClose: handleCloseAlarm } = useModalState();
-
+  const { isOpen: isAlarmOpen, handleClose: handleCloseAlarm, handleToggle: handleToggleAlarm } = useModalState(false);
+  const alarmButtonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
   const activePathMatcher = (path: string) => router.pathname === path;
 
   const handleAlarm = () => {
-    handleOpenAlarm();
+    handleToggleAlarm();
     patchAlarm(patchAlarmRequset);
   };
 
@@ -62,7 +63,7 @@ const GNB = () => {
               <CustomSuspense
                 isLoading={isLoading}
                 fallback={<Skeleton css={Styled.ProfileSkeletonStyles} type="circle" />}>
-                <button onClick={handleAlarm}>
+                <button ref={alarmButtonRef} onClick={() => handleAlarm()}>
                   {user?.image ? (
                     <Avatar imageUrl={user?.image} imageSize={40} alt="프로필 이미지" />
                   ) : (
@@ -73,7 +74,7 @@ const GNB = () => {
 
               {isNewAlarm && <Styled.AlarmActiveDot />}
 
-              {isAlarmOpen && <Alarm handleCloseAlarm={handleCloseAlarm} />}
+              <Alarm alarmButtonRef={alarmButtonRef} isAlarmOpen={isAlarmOpen} handleCloseAlarm={handleCloseAlarm} />
             </Styled.NoticeContainer>
           </Styled.ActionArea>
         </Styled.Inner>
