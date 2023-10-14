@@ -37,6 +37,10 @@ export const Item = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_200};
   list-style: none;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_200};
+  }
 `;
 
 export const Content = styled.div`
@@ -81,6 +85,10 @@ export const Footer = styled.div`
     padding: 1rem 0;
     width: 50%;
     font-weight: 600;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.gray_200};
+    }
 
     & > span {
       display: flex;
