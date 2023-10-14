@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getUser, getUserHistory } from '@/api/user';
+import { getAlarms, getUser, getUserHistory } from '@/api/user';
 
 const QUERY_KEY = {
   userHistory: 'userHistory',
   user: 'user',
+  alarm: 'alarm',
 };
 
 export const useGetUserHistory = () => {
@@ -21,5 +22,13 @@ export const useGetUser = () => {
 
   return {
     user: data?.result,
+  };
+};
+
+export const useGetAlarms = () => {
+  const { data } = useQuery([QUERY_KEY.alarm], () => getAlarms());
+
+  return {
+    alarms: data?.result.alarms ?? [],
   };
 };
