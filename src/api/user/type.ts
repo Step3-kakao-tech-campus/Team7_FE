@@ -38,8 +38,9 @@ export interface Alarm {
   tilId: number;
   isChecked: boolean;
   roadmap: Roadmap;
-  stepId: number;
+  step: Step;
   sender: Sender;
+  createdAt: Date;
 }
 
 export interface Sender {
@@ -47,7 +48,16 @@ export interface Sender {
   image: string;
 }
 
+export interface Step {
+  id: number;
+  name: string;
+}
 export interface Roadmap {
   id: number;
   name: string;
+}
+
+// patchAlarm
+export interface PatchAlarmRequest {
+  alarms: Pick<Alarm, 'id'>[];
 }

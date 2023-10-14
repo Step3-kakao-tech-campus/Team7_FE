@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/api';
-import type { GetAlarmsResponse, GetUserHistoryResponse, GetUserResponse } from '@/api/user/type';
+import type { GetAlarmsResponse, GetUserHistoryResponse, GetUserResponse, PatchAlarmRequest } from '@/api/user/type';
 
 export const getUserHistory = async () => {
   const { data } = await axiosInstance.request<GetUserHistoryResponse>({
@@ -23,6 +23,16 @@ export const getAlarms = async () => {
   const { data } = await axiosInstance.request<GetAlarmsResponse>({
     method: 'GET',
     url: `/alarms`,
+  });
+
+  return data;
+};
+
+export const patchAlarm = async (body: PatchAlarmRequest) => {
+  const { data } = await axiosInstance.request<GetAlarmsResponse>({
+    method: 'PATCH',
+    url: `/alarms/read`,
+    data: body,
   });
 
   return data;
