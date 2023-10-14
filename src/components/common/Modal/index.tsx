@@ -4,7 +4,7 @@ import { RemoveScroll } from 'react-remove-scroll';
 import Image from 'next/image';
 import type { SerializedStyles } from '@emotion/react';
 import Portal from '@/components/common/Portal';
-import { useOnClickOutside } from '@/hooks/common/useOnClickOutside';
+import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import type { EmotionTheme } from '@/styles/emotion';
 import * as Styled from './style';
 
