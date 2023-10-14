@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 
-export const Root = styled.div`
+export const Root = styled(motion.div)`
   display: flex;
   flex-direction: column;
   position: absolute;
