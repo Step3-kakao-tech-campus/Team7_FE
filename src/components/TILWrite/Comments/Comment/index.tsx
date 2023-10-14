@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import Avatar from '@/components/common/Avatar';
 import ContextMenu from '@/components/common/ContextMenu';
 import Icon from '@/components/common/Icon';
-import { useOnClickOutside } from '@/hooks/common/useOnClickOutside';
+import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
 
 interface CommentProps {}
