@@ -1,3 +1,4 @@
+import { get } from 'http';
 import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -13,6 +14,7 @@ import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import PlusButton from '@/components/common/GNB/PlusButton';
 import Input from '@/components/common/Input';
+import { getTilWriteUrl } from '@/utils/getTilWriteUrl';
 import * as Styled from './style';
 
 const Personal = () => {
@@ -87,10 +89,10 @@ const Personal = () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${tilId}`);
-    } else {
       const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
-      router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${data?.result.id}`);
+      router.push(getTilWriteUrl(roadmapId, stepId, data?.result.id));
+    } else {
+      router.push(getTilWriteUrl(roadmapId, stepId, tilId));
     }
   };
 
