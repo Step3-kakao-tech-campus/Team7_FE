@@ -9,7 +9,7 @@ import CategorySection from '@/components/main/CategorySection';
 import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
-import { useIntersectionObserver } from '@/hooks/common/useInterSectionObserver';
+import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 
 const Home = () => {
   const router = useRouter();

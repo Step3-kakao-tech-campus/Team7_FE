@@ -5,7 +5,7 @@ import Button from '@/components/common/Button';
 import TILModal from '@/components/common/GNB/TILModal';
 import Logo from '@/components/common/Logo';
 import { tilyLinks } from '@/constants/links';
-import { useModalState } from '@/hooks/common/useModalState';
+import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 const GNB = () => {
