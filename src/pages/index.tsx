@@ -1,15 +1,18 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import withAuth from '@/components/auth/utils/AuthRequired';
 import Avatar from '@/components/common/Avatar';
 import Flex from '@/components/common/Flex';
 import GNB from '@/components/common/GNB';
+import EmptyLayout from '@/components/layout/EmptyLayout';
 import CategorySection from '@/components/main/CategorySection';
 import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
 import { useIntersectionObserver } from '@/hooks/common/useInterSectionObserver';
 import { useGetTils } from '@/hooks/queries/til';
+import { setLayout } from '@/utils/layout';
 
 const Home = () => {
   const router = useRouter();
@@ -44,7 +47,9 @@ const Home = () => {
   );
 };
 
-export default Home;
+setLayout(Home, EmptyLayout);
+
+export default withAuth(Home);
 
 const Root = styled.div``;
 

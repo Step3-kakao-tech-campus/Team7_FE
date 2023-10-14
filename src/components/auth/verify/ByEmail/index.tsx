@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
@@ -47,12 +47,7 @@ const ByEmail = () => {
     mode: 'onSubmit',
   });
 
-  useEffect(() => {
-    console.log(email.state);
-  }, [email]);
-
   const onSubmit: SubmitHandler<EmailFormInput> = async (formData) => {
-    console.log('here');
     if (email.state === 'emailReady' && !formData.code) {
       const email = formData.email;
       const data = await emailMutateAsync(email);

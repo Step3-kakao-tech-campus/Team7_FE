@@ -1,4 +1,6 @@
+import { useResetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
+import { accessTokenAtom } from '@/components/auth/states/accessTokenAtoms';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import Logo from '@/components/common/Logo';
@@ -8,6 +10,8 @@ import * as Styled from './style';
 const GNB = () => {
   const router = useRouter();
 
+  const resetAccessToken = useResetRecoilState(accessTokenAtom);
+
   const activePathMatcher = (path: string) => router.pathname === path;
 
   return (
@@ -16,6 +20,12 @@ const GNB = () => {
         <Styled.Logo>
           <Logo imageSize={32} />
         </Styled.Logo>
+        <button
+          onClick={() => {
+            resetAccessToken();
+          }}>
+          로그아웃
+        </button>
 
         <Styled.NavArea>
           <Styled.NavItem href={tilyLinks.home()} isActive={activePathMatcher(tilyLinks.home())}>
