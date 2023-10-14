@@ -7,7 +7,9 @@ import Avatar from '@/components/common/Avatar';
 import { tilyLinks } from '@/constants/links';
 import useAuth from '@/hooks/useAuth';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
+import { getTilWriteUrl } from '@/utils/getTilWriteUrl';
 import * as Styled from './style';
+import { Alarm } from '@/api/user/type';
 
 interface AlarmProps {
   handleCloseAlarm: () => void;
@@ -33,9 +35,9 @@ const Alarm = (props: AlarmProps) => {
         {alarms.length === 0 ? (
           <EmptyAlarm />
         ) : (
-          alarms.map((alarm) => {
+          alarms.map((alarm:Alarm) => {
             return (
-              <Styled.Item key={alarm.id}>
+              <Styled.Item key={alarm.id} onClick={() => router.push(getTilWriteUrl(alarm.roadmap.id, alarm.step.id, alarm.tilId))}>
                 <Avatar imageSize={40} imageUrl={alarm.sender.image} alt="프로필 이미지" />
                 <Styled.Content>
                   <Styled.Title>
