@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { useGetTilsParam } from '@/api/hooks/til';
+import { useGetUser } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import Flex from '@/components/common/Flex';
 import GNB from '@/components/common/GNB';
@@ -13,7 +14,7 @@ import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 
 const Home = () => {
   const router = useRouter();
-
+  const { user } = useGetUser();
   const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTilsParam({ queryKey: [router.query] });
   const { ref, isVisible } = useIntersectionObserver();
 
@@ -29,7 +30,11 @@ const Home = () => {
       <Root>
         <Inner>
           <LeftArea>
-            <Avatar imageSize={240} iconName="ic_profile" />
+            {user?.image ? (
+              <Avatar imageUrl={user?.image} imageSize={240} alt="프로필 이미지" />
+            ) : (
+              <Avatar imageSize={240} iconName="ic_profile" alt="프로필 이미지" />
+            )}
             <SearchBar />
             <CategorySection />
           </LeftArea>

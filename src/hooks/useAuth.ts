@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { accessTokenAtom } from '@/components/auth/states/accessTokenAtoms';
 import { tilyLinks } from '@/constants/links';
 
-const useAuth = () => {
+export const useAuth = () => {
   const router = useRouter();
   const resetAccessToken = useResetRecoilState(accessTokenAtom);
   const accessToken = useRecoilValue(accessTokenAtom);

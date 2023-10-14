@@ -5,4 +5,5 @@ export const tilyLinks = {
   register: () => '/auth/register',
   login: () => '/auth/login',
   roadmaps: () => '/roadmaps',
+  mypage: () => '/mypage',
 };

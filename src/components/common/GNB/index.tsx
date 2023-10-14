@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import { useGetAlarms, useGetUser } from '@/api/hooks/user';
+import { usePatchAlarm } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import Alarm from '@/components/common/GNB/Alarm';
@@ -13,14 +14,19 @@ import * as Styled from './style';
 const GNB = () => {
   useGetRoadmaps();
   const { user } = useGetUser();
-  const { alarms } = useGetAlarms();
-
+  const { isNewAlarm, patchAlarmRequset } = useGetAlarms();
+  const { patchAlarm } = usePatchAlarm();
   const { isOpen: isTilModalOpen, handleOpen: handleOpenTilModal, handleClose: handleCloseTilModal } = useModalState();
   const { isOpen: isAlarmOpen, handleOpen: handleOpenAlarm, handleClose: handleCloseAlarm } = useModalState();
 
   const router = useRouter();
 
   const activePathMatcher = (path: string) => router.pathname === path;
+
+  const handleAlarm = () => {
+    handleOpenAlarm();
+    patchAlarm(patchAlarmRequset);
+  };
 
   return (
     <>
@@ -51,7 +57,7 @@ const GNB = () => {
             </Button>
 
             <Styled.NoticeContainer>
-              <button onClick={handleOpenAlarm}>
+              <button onClick={handleAlarm}>
                 {user?.image ? (
                   <Avatar imageUrl={user?.image} imageSize={40} alt="프로필 이미지" />
                 ) : (
@@ -59,9 +65,9 @@ const GNB = () => {
                 )}
               </button>
 
-              {alarms?.length > 0 && <Styled.AlarmActiveDot />}
+              {isNewAlarm && <Styled.AlarmActiveDot />}
 
-              <Alarm />
+              {isAlarmOpen && <Alarm handleCloseAlarm={handleCloseAlarm} />}
             </Styled.NoticeContainer>
           </Styled.ActionArea>
         </Styled.Inner>

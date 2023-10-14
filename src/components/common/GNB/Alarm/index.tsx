@@ -1,11 +1,32 @@
+import dayjs from 'dayjs';
+import { useRef } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useGetAlarms } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
+import { tilyLinks } from '@/constants/links';
+import useAuth from '@/hooks/useAuth';
+import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
 
+interface AlarmProps {
+  handleCloseAlarm: () => void;
+}
+
+const Alarm = (props: AlarmProps) => {
+  const { handleCloseAlarm } = props;
+
+  const router = useRouter();
+  const ref = useRef<HTMLDivElement>(null);
   const { alarms } = useGetAlarms();
+  const { logout } = useAuth();
+
+  useOnClickOutside(ref, () => {
+    handleCloseAlarm();
+  });
+
   return (
-    <Styled.Root>
+    <Styled.Root ref={ref}>
       <Styled.Header>알림</Styled.Header>
 
       <Styled.List>
@@ -26,79 +47,22 @@ import * as Styled from './style';
                       <span>님이 댓글을 남겼습니다.</span>
                     </Styled.Commenter>
 
-              <Styled.Time>2023.06.16</Styled.Time>
-            </Styled.Description>
-          </Styled.Content>
-        </Styled.Item>
-
-        <Styled.Item>
-          <Avatar imageSize={40} iconName="ic_profile" />
-          <Styled.Content>
-            <Styled.Title>Next JS 입문 - 6. SPA</Styled.Title>
-            <Styled.Description>
-              <Styled.Commenter>
-                <span>동영</span>
-                <span>님이 댓글을 남겼습니다.</span>
-              </Styled.Commenter>
-
-              <Styled.Time>2023.06.16</Styled.Time>
-            </Styled.Description>
-          </Styled.Content>
-        </Styled.Item>
-
-        <Styled.Item>
-          <Avatar imageSize={40} iconName="ic_profile" />
-          <Styled.Content>
-            <Styled.Title>Next JS 입문 - 6. SPA</Styled.Title>
-            <Styled.Description>
-              <Styled.Commenter>
-                <span>동영</span>
-                <span>님이 댓글을 남겼습니다.</span>
-              </Styled.Commenter>
-
-              <Styled.Time>2023.06.16</Styled.Time>
-            </Styled.Description>
-          </Styled.Content>
-        </Styled.Item>
-
-        <Styled.Item>
-          <Avatar imageSize={40} iconName="ic_profile" />
-          <Styled.Content>
-            <Styled.Title>Next JS 입문 - 6. SPA</Styled.Title>
-            <Styled.Description>
-              <Styled.Commenter>
-                <span>동영</span>
-                <span>님이 댓글을 남겼습니다.</span>
-              </Styled.Commenter>
-
-              <Styled.Time>2023.06.16</Styled.Time>
-            </Styled.Description>
-          </Styled.Content>
-        </Styled.Item>
-
-        <Styled.Item>
-          <Avatar imageSize={40} iconName="ic_profile" />
-          <Styled.Content>
-            <Styled.Title>Next JS 입문 - 6. SPA</Styled.Title>
-            <Styled.Description>
-              <Styled.Commenter>
-                <span>동영</span>
-                <span>님이 댓글을 남겼습니다.</span>
-              </Styled.Commenter>
-
-              <Styled.Time>2023.06.16</Styled.Time>
-            </Styled.Description>
-          </Styled.Content>
-        </Styled.Item>
+                    <Styled.Time>{dayjs(alarm.createdAt).format('YYYY.MM.DD')}</Styled.Time>
+                  </Styled.Description>
+                </Styled.Content>
+              </Styled.Item>
+            );
+          })
+        )}
       </Styled.List>
 
       <Styled.Footer>
-        <button>
+        <button onClick={() => router.push(tilyLinks.mypage())}>
           <Image src="/assets/icons/ic_smile.svg" width={20} height={20} alt="마이페이지 버튼 아이콘" />
           <span>마이페이지</span>
         </button>
 
-        <button>
+        <button onClick={() => logout()}>
           <Image src="/assets/icons/ic_unlock.svg" width={20} height={20} alt="마이페이지 버튼 아이콘" />
           <span>로그아웃</span>
         </button>
@@ -112,8 +76,8 @@ export default Alarm;
 const EmptyAlarm = () => {
   return (
     <Styled.EmptyAlarmRoot>
-      <Image src="/assets/icons/ic_unAlarm.svg" width={40} height={40} alt="알림이 없습니다" />
-      <Styled.EmptyAlarmRoot>알림이 없습니다.</Styled.EmptyAlarmRoot>
+      <Image src="/assets/icons/ic_unAlarm.svg" width={36} height={36} alt="알림이 없습니다" />
+      <Styled.EmptyAlarmText>알림이 없습니다.</Styled.EmptyAlarmText>
     </Styled.EmptyAlarmRoot>
   );
 };
