@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
+import { useGetUser } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import Alarm from '@/components/common/GNB/Alarm';
@@ -11,6 +12,7 @@ import * as Styled from './style';
 
 const GNB = () => {
   useGetRoadmaps();
+  const { user } = useGetUser();
 
   const { isOpen: isTilModalOpen, handleOpen: handleOpenTilModal, handleClose: handleCloseTilModal } = useModalState();
   const { isOpen: isAlarmOpen, handleOpen: handleOpenAlarm, handleClose: handleCloseAlarm } = useModalState();
@@ -49,7 +51,11 @@ const GNB = () => {
 
             <Styled.NoticeContainer>
               <button onClick={handleOpenAlarm}>
-                <Avatar imageSize={40} iconName="ic_profile" />
+                {user?.image ? (
+                  <Avatar imageUrl={user?.image} imageSize={40} alt="프로필 이미지" />
+                ) : (
+                  <Avatar imageSize={40} iconName="ic_profile" alt="프로필 이미지" />
+                )}
               </button>
 
               <Alarm />
