@@ -33,6 +33,11 @@ const layout = {
   footerHeight: '4rem',
 } as const;
 
-export const emotionTheme = { colors, layout } as const;
+const layer = {
+  header: 1000,
+  headerAlarm: 1000,
+};
+
+export const emotionTheme = { colors, layout, layer } as const;
 
 export type EmotionTheme = typeof emotionTheme;

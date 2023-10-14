@@ -6,7 +6,7 @@ export const Root = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: ${({ theme }) => theme.layer.header};
   background-color: #fff;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
