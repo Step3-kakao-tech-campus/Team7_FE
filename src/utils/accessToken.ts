@@ -1,5 +1,6 @@
 export const tokenStorage = {
   get() {
+    if (typeof window === 'undefined') return '';
     return localStorage.getItem('accessToken');
   },
   set(accessToken: string) {
