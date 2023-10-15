@@ -1,4 +1,3 @@
-import { get } from 'http';
 import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -9,12 +8,12 @@ import {
   usePostRoadmapIndividual,
 } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
-import type { Step } from '@/api/roadmap/type';
+import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import PlusButton from '@/components/common/GNB/PlusButton';
 import Input from '@/components/common/Input';
-import { getTilWriteUrl } from '@/utils/getTilWriteUrl';
+import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 
 const Personal = () => {
@@ -90,9 +89,9 @@ const Personal = () => {
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
       const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
-      router.push(getTilWriteUrl(roadmapId, stepId, data?.result.id));
+      router.push({ pathname: tilyLinks.tilWrite(), query: { roadmapId, stepId, tilId: data?.result.id } });
     } else {
-      router.push(getTilWriteUrl(roadmapId, stepId, tilId));
+      router.push({ pathname: tilyLinks.tilWrite(), query: { roadmapId, stepId, tilId } });
     }
   };
 

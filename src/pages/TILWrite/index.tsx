@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { useGetTil } from '@/api/hooks/til';
 import Comment from '@/components/TILWrite/Comments';
 import Footer from '@/components/TILWrite/Footer';
 import Header from '@/components/TILWrite/Header';
@@ -12,6 +14,11 @@ import { emotionTheme } from '@/styles/emotion';
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
 const TILWrite = () => {
+  const router = useRouter();
+  const { query } = router;
+  console.log(query);
+  // const { data } = useGetTil();
+
   const {
     isOpen: asideOpen,
     isMount: asideMount,

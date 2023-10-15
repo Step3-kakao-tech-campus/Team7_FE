@@ -16,6 +16,7 @@ export interface Step {
   title: string;
   isCompleted: boolean;
   tilId: number | null;
+  name?: string;
 }
 
 export interface Category {
