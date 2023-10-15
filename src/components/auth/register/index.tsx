@@ -11,6 +11,7 @@ import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
 import { tilyLinks } from '@/constants/links';
 import { NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
+import { useModalState } from '@/hooks/useModalState';
 import AuthModal from '../AuthModal';
 
 interface RegisterFormInput {
@@ -134,7 +135,7 @@ const Register = () => {
             )}
           />
           <StyledButtonContainer>
-            <Link href={tilyLinks.verify()}>취소</Link>
+            <StyledCancelButton href={tilyLinks.verify()}>취소</StyledCancelButton>
             <Button type="submit" isLoading={isLoading}>
               완료
             </Button>
@@ -176,4 +177,8 @@ const StyledButtonContainer = styled.div`
       text-decoration: underline;
     }
   }
+`;
+
+const StyledCancelButton = styled(Link)`
+  margin-top: 5px;
 `;
