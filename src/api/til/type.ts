@@ -66,7 +66,20 @@ export interface PatchCommentResponse extends CommonResponse {
   result: null;
 }
 
-// patchComment
+// patchTil
+export interface PatchTilRequest {
+  roadmapId: string;
+  stepId: string;
+  tilId: string;
+  title: string;
+  content: string;
+}
+
+export interface PatchTilResponse extends CommonResponse {
+  result: null;
+}
+
+// deleteComment
 export interface DeleteCommentRequest {
   roadmapId: string;
   stepId: string;

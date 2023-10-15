@@ -12,12 +12,25 @@ import type {
   PatchCommentResponse,
   DeleteCommentRequest,
   DeleteCommentResponse,
+  PatchTilRequest,
+  PatchTilResponse,
 } from '@/api/til/type';
 
 export const getTils = async (input: TilsRequest) => {
   const { data } = await axiosInstance.request<TilsResponse>({
     method: 'GET',
     url: `/tils/my/${input}`,
+  });
+
+  return data;
+};
+
+export const getTil = async (body: GetTilRequest) => {
+  const { roadmapId, stepId, tilId } = body;
+
+  const { data } = await axiosInstance.request<GetTilResponse>({
+    method: 'GET',
+    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
   });
 
   return data;
@@ -30,17 +43,6 @@ export const postTil = async (body: PostTilRequest) => {
     method: 'POST',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils`,
     data: { title },
-  });
-
-  return data;
-};
-
-export const getTil = async (body: GetTilRequest) => {
-  const { roadmapId, stepId, tilId } = body;
-
-  const { data } = await axiosInstance.request<GetTilResponse>({
-    method: 'GET',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
   });
 
   return data;
@@ -65,6 +67,18 @@ export const patchComment = async (body: PatchCommentRequest) => {
     method: 'PATCH',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
     data: { content },
+  });
+
+  return data;
+};
+
+export const patchTil = async (body: PatchTilRequest) => {
+  const { roadmapId, stepId, tilId, title, content } = body;
+
+  const { data } = await axiosInstance.request<PatchTilResponse>({
+    method: 'PATCH',
+    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
+    data: { title, content },
   });
 
   return data;

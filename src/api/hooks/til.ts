@@ -10,6 +10,7 @@ import {
   postComment as postCommentAPI,
   patchComment as patchCommentAPI,
   deleteComment as deleteCommentAPI,
+  patchTil as patchTilAPI,
 } from '@/api/til';
 import type {
   DeleteCommentRequest,
@@ -18,6 +19,7 @@ import type {
   PostCommentRequest,
   PostTilRequest,
   TilsResponse,
+  PatchTilRequest,
 } from '@/api/til/type';
 
 const QUERY_KEY = {
@@ -70,6 +72,18 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
   };
 };
 
+export const useGetTil = (body: GetTilRequest) => {
+  const { isReady } = useRouter();
+
+  const { data } = useQuery([QUERY_KEY.getTil, body], () => getTil(body), {
+    enabled: isReady,
+  });
+
+  return {
+    tilDetail: data?.result ?? null,
+  };
+};
+
 export const usePostTil = () => {
   const queryClient = useQueryClient();
 
@@ -88,18 +102,6 @@ export const usePostTil = () => {
   };
 
   return { postTil };
-};
-
-export const useGetTil = (body: GetTilRequest) => {
-  const { isReady } = useRouter();
-
-  const { data } = useQuery([QUERY_KEY.getTil, body], () => getTil(body), {
-    enabled: isReady,
-  });
-
-  return {
-    tilDetail: data?.result ?? null,
-  };
 };
 
 export const usePostComment = () => {
@@ -150,6 +152,17 @@ export const usePatchComment = () => {
   };
 
   return { patchComment };
+};
+
+export const usePatchTil = () => {
+  const mutation = useMutation(patchTilAPI);
+
+  const patchTil = async (body: PatchTilRequest) => {
+    const data = await mutation.mutateAsync(body);
+
+    return data;
+  };
+  return { patchTil };
 };
 
 export const useDeleteComment = () => {
