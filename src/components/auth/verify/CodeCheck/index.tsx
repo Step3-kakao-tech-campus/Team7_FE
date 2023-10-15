@@ -8,7 +8,7 @@ import { type EmailFormInput } from '../ByEmail';
 interface CodeCheckProps {
   registerEmailMutateAsync: (email: string) => Promise<unknown>;
   passwordEmailMutateAsync: (email: string) => Promise<unknown>;
-  type: 'register' | 'findPassword';
+  type: 'register' | 'changePassword';
   email: string;
   control: Control<EmailFormInput>;
   errors: FieldErrors<EmailFormInput>;

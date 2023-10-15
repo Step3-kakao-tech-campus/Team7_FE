@@ -8,7 +8,7 @@ export const PasswordVerifyPage = () => {
   return (
     <StyledVerifyPage>
       <Logo />
-      <ByEmail type="findPassword" />
+      <ByEmail type="changePassword" />
     </StyledVerifyPage>
   );
 };

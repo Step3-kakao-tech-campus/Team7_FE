@@ -3,7 +3,7 @@ export const tilyLinks = {
   verify: () => '/auth/register/verify',
   register: () => '/auth/register/',
   login: () => '/auth/login',
-  findPwVerify: () => '/auth/find-password/verify',
-  findPassword: () => '/auth/find-password/',
+  findPwVerify: () => '/auth/change-password/verify',
+  changePassword: () => '/auth/change-password/',
   roadmaps: () => '/roadmaps',
 };

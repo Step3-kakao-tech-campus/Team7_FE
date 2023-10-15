@@ -22,7 +22,7 @@ export interface EmailFormInput {
 }
 
 interface ByEmailProps {
-  type: 'findPassword' | 'register';
+  type: 'changePassword' | 'register';
 }
 
 const ByEmail = ({ type }: ByEmailProps) => {
@@ -69,7 +69,7 @@ const ByEmail = ({ type }: ByEmailProps) => {
           }
           break;
         }
-        case 'findPassword': {
+        case 'changePassword': {
           const data = await passwordEmailMutateAsync(email);
 
           if (data?.code === 200) {
@@ -96,9 +96,9 @@ const ByEmail = ({ type }: ByEmailProps) => {
             });
             break;
           }
-          case 'findPassword': {
+          case 'changePassword': {
             router.push({
-              pathname: tilyLinks.findPassword(),
+              pathname: tilyLinks.changePassword(),
               query: {
                 email: email,
               },
