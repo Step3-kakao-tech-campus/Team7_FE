@@ -2,14 +2,21 @@ import { useState } from 'react';
 import Image from 'next/image';
 import * as Styled from './style';
 
-const Youtube = () => {
+interface YoutubeProps {
+  index: number;
+  link: string;
+}
+
+const Youtube = (props: YoutubeProps) => {
+  const { link, index } = props;
+
   const [isOpen, setIsOpen] = useState(true);
 
   return (
     <Styled.Root>
       <Styled.ReferenceContainer onClick={() => setIsOpen((prev) => !prev)}>
         <Image src={`/assets/icons/ic_reference.svg`} width={18} height={18} alt="참고자료" />
-        <div>영상자료</div>
+        <div>{`영상자료 ${index}`}</div>
       </Styled.ReferenceContainer>
 
       <Styled.YoutubeContariner
@@ -21,14 +28,7 @@ const Youtube = () => {
           closed: { opacity: 0 },
         }}
         transition={{ type: 'tween' }}>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/kWUsI7LCSmY?si=59XO3fvZ_pwxMDs3"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        />
+        <Styled.Youtube dangerouslySetInnerHTML={{ __html: link }} />
       </Styled.YoutubeContariner>
     </Styled.Root>
   );

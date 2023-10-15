@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -14,6 +15,12 @@ import { emotionTheme } from '@/styles/emotion';
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
 const TILWrite = () => {
+  const [referenceParam, setReferenceParam] = useState<{ roadmapId: string; stepId: string } | null>(null);
+
+  const handleSelectStepReference = (roadmapId: string, stepId: string) => {
+    setReferenceParam({ roadmapId, stepId });
+  };
+
   const { query } = useRouter();
 
   const { tilDetail } = useGetTil({
@@ -87,6 +94,7 @@ const TILWrite = () => {
               <RoadMap
                 asideMount={asideMount}
                 handleCloseAside={() => handleCloseAside(handleCloseReference)}
+                handleSelectStepReference={handleSelectStepReference}
                 handleOpenReferenceAside={handleOpenReference}
               />
             )}
@@ -96,7 +104,7 @@ const TILWrite = () => {
               animate={referenceOpen ? 'open' : 'closed'}
               variants={extraDrawerVariants}
               transition={{ type: 'tween', duration: DURATION }}>
-              <Reference handleCloseReferenceAside={() => handleCloseReference()} />
+              <Reference referenceParam={referenceParam} handleCloseReferenceAside={() => handleCloseReference()} />
             </ExtraDrawerMotion>
 
             <ExtraDrawerMotion

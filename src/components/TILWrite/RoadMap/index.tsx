@@ -7,11 +7,12 @@ import * as Styled from './style';
 interface RoadMapProps {
   handleCloseAside: () => void;
   handleOpenReferenceAside: () => void;
+  handleSelectStepReference: (roadmapId: string, stepId: string) => void;
   asideMount: boolean;
 }
 
 const RoadMap = (props: RoadMapProps) => {
-  const { handleCloseAside, handleOpenReferenceAside, asideMount } = props;
+  const { handleCloseAside, handleOpenReferenceAside, handleSelectStepReference, asideMount } = props;
 
   const { query } = useRouter();
   const { steps } = useGetRoadmapSteps(query.roadmapId as string);
@@ -36,6 +37,7 @@ const RoadMap = (props: RoadMapProps) => {
               title={step.title}
               isCompleted={step.isCompleted}
               tilId={step.tilId}
+              handleSelectStepReference={handleSelectStepReference}
               handleOpenReferenceAside={handleOpenReferenceAside}
             />
           );
