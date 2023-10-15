@@ -4,13 +4,14 @@ import * as Styled from './style';
 
 export interface CardProps {
   className?: string;
+  onClick?: () => void;
 }
 
 const Card = forwardRef<HTMLDivElement, PropsWithChildren<CardProps>>((props, ref) => {
-  const { children, className } = props;
+  const { children, className, onClick } = props;
 
   return (
-    <Styled.Card ref={ref} className={className}>
+    <Styled.Card ref={ref} className={className} onClick={onClick}>
       {children}
     </Styled.Card>
   );

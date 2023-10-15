@@ -89,4 +89,28 @@ export const tilHandler = [
       }
     }
   }),
+
+  rest.post(`${BASE_URL}/roadmaps/:roadmapId/steps/:stepId/tils`, (req, res, ctx) => {
+    try {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          success: true,
+          message: 'ok',
+          result: {
+            id: 1,
+          },
+        }),
+      );
+    } catch (error) {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          success: false,
+          message: '서버에서 에러가 났어요',
+          result: null,
+        }),
+      );
+    }
+  }),
 ];

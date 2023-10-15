@@ -1,3 +1,4 @@
+import { RecoilRoot } from 'recoil';
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -21,20 +22,33 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   }
 }
 
-const queryClient = new QueryClient();
+// 크롬이 online 일때 리액트 쿼리가 동작하도록 함.
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      networkMode: 'always',
+      refetchOnWindowFocus: false,
+    },
+    mutations: {
+      networkMode: 'always',
+    },
+  },
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const Layout = getLayout(Component);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={emotionTheme}>
-        <ToastProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ToastProvider>
-      </ThemeProvider>
+      <RecoilRoot>
+        <ThemeProvider theme={emotionTheme}>
+          <ToastProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ToastProvider>
+        </ThemeProvider>
+      </RecoilRoot>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

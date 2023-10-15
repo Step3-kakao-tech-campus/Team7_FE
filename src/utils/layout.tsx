@@ -1,8 +1,9 @@
 import type { FC, ReactNode } from 'react';
 import type { NextPage } from 'next';
-import EmptyLayout from '@/components/layout/EmptyLayou';
+import withAuth from '@/components/auth/utils/AuthRequired';
+import EmptyLayout from '@/components/layout/EmptyLayout';
 
-type Layout = FC<{ children: ReactNode }>;
+export type Layout = FC<{ children: ReactNode }>;
 
 type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
   getLayout?: Layout;
@@ -12,6 +13,6 @@ export function getLayout(Component: NextPageWithLayout) {
   return Component.getLayout || EmptyLayout;
 }
 
-export function setLayout(Component: NextPageWithLayout, Layout: Layout) {
-  Component.getLayout = Layout;
+export function setLayout(Component: NextPageWithLayout, Layout: Layout, isAuthRequired: boolean = false) {
+  Component.getLayout = isAuthRequired ? withAuth(Layout) : Layout;
 }

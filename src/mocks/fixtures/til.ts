@@ -118,3 +118,25 @@ export const tilsDateResponse: TilsResponse = {
   },
   hasNext: false,
 };
+
+export const updateFixture = (name: string) => {
+  const length = tilsCategoryResponse.result?.tils.length || 0;
+
+  if (tilsCategoryResponse.result !== null) {
+    tilsCategoryResponse.result.tils = [
+      ...tilsCategoryResponse.result.tils,
+      {
+        id: length + 1,
+        createDate: '2023-09-17',
+        step: {
+          id: length + 1,
+          title: name,
+        },
+        roadmap: {
+          id: 2,
+          name: '일급 비밀',
+        },
+      },
+    ];
+  }
+};

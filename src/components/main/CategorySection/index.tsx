@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
+import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import Collapsible from '@/components/main/Collapsible';
-import { useParamsToUrl } from '@/hooks/common/useParamsToUrl';
-import { useGetRoadmaps } from '@/hooks/queries/roadmap';
+import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 
 const CategorySection = () => {
