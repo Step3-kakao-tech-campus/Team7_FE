@@ -5,6 +5,7 @@ import {
   tilsCategoryResponse,
   tilsDateResponse,
   tilsTitleResponse,
+  getTilResponse,
 } from '@/mocks/fixtures/til';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -87,6 +88,21 @@ export const tilHandler = [
           }),
         );
       }
+    }
+  }),
+
+  rest.get(`${BASE_URL}/roadmaps/:roadmapId/steps/:stepId/tils/:tilId`, (req, res, ctx) => {
+    try {
+      return res(ctx.status(200), ctx.json(getTilResponse));
+    } catch (error) {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          success: false,
+          message: '서버에서 에러가 났어요',
+          result: null,
+        }),
+      );
     }
   }),
 
