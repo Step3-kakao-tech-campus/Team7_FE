@@ -14,10 +14,13 @@ import { emotionTheme } from '@/styles/emotion';
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
 const TILWrite = () => {
-  const router = useRouter();
-  const { query } = router;
-  console.log(query);
-  // const { data } = useGetTil();
+  const { query } = useRouter();
+
+  const { tilDetail } = useGetTil({
+    roadmapId: query.roadmapId as string,
+    stepId: query.stepId as string,
+    tilId: query.tilId as string,
+  });
 
   const {
     isOpen: asideOpen,
@@ -62,41 +65,49 @@ const TILWrite = () => {
     <Root>
       <Header handleOpenCommentAside={handleOpenComment} />
       <Container>
-        <EditorContainer
-          initial="asideOpen"
-          animate={asideOpen ? 'asideOpen' : 'asideClosed'}
-          variants={editorVariants}
-          transition={{ type: 'tween', duration: DURATION }}>
-          <Editor />
-        </EditorContainer>
-
-        <AsideContainer>
-          <ResizeHandle onClick={handleToggleResize} />
-
-          {asideOpen && (
-            <RoadMap
-              asideMount={asideMount}
-              handleCloseAside={() => handleCloseAside(handleCloseReference)}
-              handleOpenReferenceAside={handleOpenReference}
-            />
-          )}
-
-          <ExtraDrawerMotion
-            initial="closed"
-            animate={referenceOpen ? 'open' : 'closed'}
-            variants={extraDrawerVariants}
+        {tilDetail?.isPersonal === false ? (
+          <EditorContainer
+            initial="asideOpen"
+            animate={asideOpen ? 'asideOpen' : 'asideClosed'}
+            variants={editorVariants}
             transition={{ type: 'tween', duration: DURATION }}>
-            <Reference handleCloseReferenceAside={() => handleCloseReference()} />
-          </ExtraDrawerMotion>
+            <Editor />
+          </EditorContainer>
+        ) : (
+          <PersonalEditorContainer>
+            <Editor />
+          </PersonalEditorContainer>
+        )}
 
-          <ExtraDrawerMotion
-            initial="closed"
-            animate={commentOpen ? 'open' : 'closed'}
-            variants={extraDrawerVariants}
-            transition={{ type: 'tween', duration: DURATION }}>
-            <Comment handleCloseCommentAside={() => handleCloseComment()} />
-          </ExtraDrawerMotion>
-        </AsideContainer>
+        {tilDetail?.isPersonal === false && (
+          <AsideContainer>
+            <ResizeHandle onClick={handleToggleResize} />
+
+            {asideOpen && (
+              <RoadMap
+                asideMount={asideMount}
+                handleCloseAside={() => handleCloseAside(handleCloseReference)}
+                handleOpenReferenceAside={handleOpenReference}
+              />
+            )}
+
+            <ExtraDrawerMotion
+              initial="closed"
+              animate={referenceOpen ? 'open' : 'closed'}
+              variants={extraDrawerVariants}
+              transition={{ type: 'tween', duration: DURATION }}>
+              <Reference handleCloseReferenceAside={() => handleCloseReference()} />
+            </ExtraDrawerMotion>
+
+            <ExtraDrawerMotion
+              initial="closed"
+              animate={commentOpen ? 'open' : 'closed'}
+              variants={extraDrawerVariants}
+              transition={{ type: 'tween', duration: DURATION }}>
+              <Comment handleCloseCommentAside={() => handleCloseComment()} />
+            </ExtraDrawerMotion>
+          </AsideContainer>
+        )}
       </Container>
       <Footer />
     </Root>
@@ -106,7 +117,9 @@ const TILWrite = () => {
 export default TILWrite;
 
 const editorVariants = {
-  asideOpen: { width: `${emotionTheme.layout.defaultEditorWidth}` },
+  asideOpen: {
+    width: `${emotionTheme.layout.defaultEditorWidth}`,
+  },
   asideClosed: {
     width: `calc(${emotionTheme.layout.maxEditorWidth} - ${emotionTheme.layout.resizeHandleWidth} )`,
   },
@@ -126,6 +139,13 @@ const Root = styled.div`
 
 const EditorContainer = styled(motion.div)`
   width: ${({ theme }) => theme.layout.defaultEditorWidth};
+  flex-shrink: 0;
+  overflow-y: scroll;
+  background-color: #fff;
+`;
+
+const PersonalEditorContainer = styled.div`
+  width: ${({ theme }) => theme.layout.maxEditorWidth};
   flex-shrink: 0;
   overflow-y: scroll;
   background-color: #fff;
