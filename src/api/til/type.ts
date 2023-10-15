@@ -56,3 +56,12 @@ export interface PostCommentResponse extends CommonResponse {
     id: number;
   };
 }
+
+// patchComment
+export interface PatchCommentRequest extends PostCommentRequest {
+  commentId: string;
+}
+
+export interface PatchCommentResponse extends CommonResponse {
+  result: null;
+}

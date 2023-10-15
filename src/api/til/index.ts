@@ -8,6 +8,8 @@ import type {
   GetTilResponse,
   PostCommentRequest,
   PostCommentResponse,
+  PatchCommentRequest,
+  PatchCommentResponse,
 } from '@/api/til/type';
 
 export const getTils = async (input: TilsRequest) => {
@@ -48,6 +50,18 @@ export const postComment = async (body: PostCommentRequest) => {
   const { data } = await axiosInstance.request<PostCommentResponse>({
     method: 'POST',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments`,
+    data: { content },
+  });
+
+  return data;
+};
+
+export const patchComment = async (body: PatchCommentRequest) => {
+  const { roadmapId, stepId, tilId, commentId, content } = body;
+
+  const { data } = await axiosInstance.request<PatchCommentResponse>({
+    method: 'PATCH',
+    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
     data: { content },
   });
 
