@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import type { Meta } from '@storybook/react';
 import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
-import { useModalState } from '@/hooks/common/useModalState';
+import { useModalState } from '@/hooks/useModalState';
 
 export default {
   component: Modal,
