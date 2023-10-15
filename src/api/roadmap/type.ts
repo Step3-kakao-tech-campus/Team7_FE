@@ -1,4 +1,4 @@
-import type { Step, Category, Roadmap } from '@/api/type';
+import type { Step, Category, Roadmap, CommonResponse } from '@/api/type';
 
 // getRoadmaps
 export interface UserRoadmapsResponse {
@@ -23,6 +23,31 @@ export interface RoadmapStepsResult {
   steps: Step[];
   progress: number;
   role: string;
+}
+
+// getRoadmapStepReference
+export interface GetRoadmapStepReferenceRequest {
+  roadmapId: string;
+  stepId: string;
+}
+
+export interface GetRoadmapStepReferenceResponse extends CommonResponse {
+  result: {
+    id: number;
+    description: string;
+    youtube: Youtube[];
+    web: Web[];
+  };
+}
+
+export interface Youtube {
+  id: number;
+  link: string;
+}
+
+export interface Web {
+  id: number;
+  link: string;
 }
 
 // postRoadmapsIndividual
