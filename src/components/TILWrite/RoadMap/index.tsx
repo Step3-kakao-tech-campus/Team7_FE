@@ -5,13 +5,21 @@ import * as Styled from './style';
 interface RoadMapProps {
   handleCloseAside: () => void;
   handleOpenReferenceAside: () => void;
+  asideMount: boolean;
 }
 
 const RoadMap = (props: RoadMapProps) => {
-  const { handleCloseAside, handleOpenReferenceAside } = props;
+  const { handleCloseAside, handleOpenReferenceAside, asideMount } = props;
 
   return (
-    <Styled.Root>
+    <Styled.Root
+      initial="closed"
+      animate={asideMount ? 'open' : 'closed'}
+      variants={{
+        open: { opacity: 1 },
+        closed: { opacity: 0 },
+      }}
+      transition={{ type: 'tween' }}>
       <RoadMapInfo handleCloseAside={handleCloseAside} />
 
       <Styled.StepList>

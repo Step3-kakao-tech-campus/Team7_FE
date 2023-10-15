@@ -5,9 +5,9 @@ import { useMutation } from '@tanstack/react-query';
 import { postEmailCheck, postEmailCode, postEmailCodeCheck } from '@/api/auth';
 import * as Styled from '@/components/auth/verify/ByEmail/style';
 import Input from '@/components/common/Input';
-import { useModalState } from '@/components/common/Modal/useModalState';
 import { tilyLinks } from '@/constants/links';
 import { EMAIL_REGEX } from '@/constants/regex';
+import { useModalState } from '@/hooks/common/useModalState';
 import CodeCheck from '../CodeCheck';
 import VerifyModal from '../VerifyModal';
 

@@ -25,7 +25,6 @@ const TILWrite = () => {
 
   const {
     isOpen: referenceOpen,
-    isMount: referenceMount,
     handleClose: handleCloseReference,
     handleOpen: handleOpenReference,
   } = useDrawerState({
@@ -35,14 +34,15 @@ const TILWrite = () => {
 
   const {
     isOpen: commentOpen,
-    isMount: commentMount,
     handleClose: handleCloseComment,
     handleOpen: handleOpenComment,
   } = useDrawerState({
     defaultValue: false,
     duration: DURATION,
-    runWhenTrue: handleOpenAside,
-    runWhenFalse: handleCloseReference,
+    runWhenTrue: () => {
+      handleOpenAside();
+      handleCloseReference();
+    },
   });
 
   const handleToggleResize = () => {
@@ -66,8 +66,9 @@ const TILWrite = () => {
         <AsideContainer>
           <ResizeHandle onClick={handleToggleResize} />
 
-          {asideMount && asideOpen && (
+          {asideOpen && (
             <RoadMap
+              asideMount={asideMount}
               handleCloseAside={() => handleCloseAside(handleCloseReference)}
               handleOpenReferenceAside={handleOpenReference}
             />
@@ -77,16 +78,16 @@ const TILWrite = () => {
             initial="closed"
             animate={referenceOpen ? 'open' : 'closed'}
             variants={extraDrawerVariants}
-            transition={{ type: 'tween' }}>
-            {referenceMount && referenceOpen && <Reference handleCloseReferenceAside={() => handleCloseReference()} />}
+            transition={{ type: 'tween', duration: DURATION }}>
+            <Reference handleCloseReferenceAside={() => handleCloseReference()} />
           </ExtraDrawerMotion>
 
           <ExtraDrawerMotion
             initial="closed"
             animate={commentOpen ? 'open' : 'closed'}
             variants={extraDrawerVariants}
-            transition={{ type: 'tween' }}>
-            {commentMount && commentOpen && <Comment handleCloseCommentAside={() => handleCloseComment()} />}
+            transition={{ type: 'tween', duration: DURATION }}>
+            <Comment handleCloseCommentAside={() => handleCloseComment()} />
           </ExtraDrawerMotion>
         </AsideContainer>
       </Container>
@@ -99,12 +100,14 @@ export default TILWrite;
 
 const editorVariants = {
   asideOpen: { width: `${emotionTheme.layout.defaultEditorWidth}` },
-  asideClosed: { width: `calc(${emotionTheme.layout.maxEditorWidth} - ${emotionTheme.layout.resizeHandleWidth} )` },
+  asideClosed: {
+    width: `calc(${emotionTheme.layout.maxEditorWidth} - ${emotionTheme.layout.resizeHandleWidth} )`,
+  },
 };
 
 const extraDrawerVariants = {
-  open: { x: 0 },
-  closed: { x: '100%' },
+  open: { x: 0, opacity: 1 },
+  closed: { x: '100%', opacity: 0 },
 };
 
 const DURATION = 0.3;
@@ -144,7 +147,7 @@ const ExtraDrawerMotion = styled(motion.div)`
   position: fixed;
   top: ${({ theme }) => theme.layout.headerHeight};
   left: ${({ theme }) => `calc(${theme.layout.defaultEditorWidth} + ${theme.layout.resizeHandleWidth})`};
-  z-index: 100;
+  z-index: 200;
   width: ${({ theme }) => `calc(${theme.layout.asideWidth})`};
   height: ${({ theme }) => `calc(100% - ${theme.layout.headerHeight} - ${theme.layout.footerHeight})`};
   background-color: white;

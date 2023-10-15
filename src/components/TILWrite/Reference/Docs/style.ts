@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 
 export const Root = styled.div``;
@@ -12,7 +13,7 @@ export const ReferenceContainer = styled.button`
   cursor: pointer;
 `;
 
-export const OpenGraphContariner = styled.div<{ isOpen: boolean }>`
+export const OpenGraphContariner = styled(motion.div)<{ isOpen: boolean }>`
   margin-top: 0.5rem;
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
 `;

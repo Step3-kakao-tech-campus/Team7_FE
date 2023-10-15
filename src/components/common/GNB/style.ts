@@ -3,7 +3,16 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Root = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_500};
+`;
+
+export const BellowRoot = styled.div`
+  height: ${({ theme }) => theme.layout.headerHeight};
 `;
 
 export const Inner = styled.header`

@@ -9,7 +9,6 @@ import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
-import { useModalState } from '@/components/common/Modal/useModalState';
 import { tilyLinks } from '@/constants/links';
 import { NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
 import AuthModal from '../AuthModal';

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { useGetTilsParam } from '@/api/hooks/til';
 import Avatar from '@/components/common/Avatar';
 import Flex from '@/components/common/Flex';
 import GNB from '@/components/common/GNB';
@@ -8,12 +9,12 @@ import CategorySection from '@/components/main/CategorySection';
 import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
-import { useIntersectionObserver } from '@/hooks/common/useInterSectionObserver';
-import { useGetTils } from '@/hooks/queries/til';
+import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 
 const Home = () => {
   const router = useRouter();
-  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTils({ queryKey: [router.query] });
+
+  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTilsParam({ queryKey: [router.query] });
   const { ref, isVisible } = useIntersectionObserver();
 
   useEffect(() => {
