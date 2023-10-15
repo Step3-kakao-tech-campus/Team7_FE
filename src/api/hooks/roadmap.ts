@@ -5,7 +5,9 @@ import {
   getRoadmaps,
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
+  getRoadmapStepReference,
 } from '@/api/roadmap';
+import type { GetRoadmapStepReferenceRequest } from '@/api/roadmap/type';
 
 const QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
@@ -41,6 +43,19 @@ export const useGetRoadmapSteps = (roadmapId: string) => {
 
   return {
     steps: data,
+    isLoading,
+  };
+};
+
+export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest) => {
+  const enabled = !!body.roadmapId && !!body.roadmapId;
+
+  const { data, isLoading } = useQuery([QUERY_KEY.getRoadmapSteps, body], () => getRoadmapStepReference(body), {
+    enabled,
+  });
+
+  return {
+    reference: data?.result,
     isLoading,
   };
 };
