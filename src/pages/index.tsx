@@ -46,7 +46,7 @@ const Home = () => {
   );
 };
 
-setLayout(Home, EmptyLayout);
+setLayout(Home, EmptyLayout, true);
 
 export default Home;
 
