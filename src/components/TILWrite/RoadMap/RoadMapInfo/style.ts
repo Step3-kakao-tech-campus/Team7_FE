@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Root = styled.div`
@@ -28,4 +29,20 @@ export const Title = styled.h2`
   margin-top: 1rem;
   font-size: 1.125rem;
   font-weight: 400;
+`;
+
+export const ProgressSkeletonRoot = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+`;
+
+export const ProgressRateStyle = css`
+  width: 70%;
+  height: 0.875rem;
+`;
+
+export const ProgressBarStyle = css`
+  width: 100%;
+  height: 8px;
+  margin-top: 0.75rem;
 `;

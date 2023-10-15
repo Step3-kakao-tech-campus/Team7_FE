@@ -1,5 +1,9 @@
+import { useRouter } from 'next/router';
+import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import Progress from '@/components/TILWrite/RoadMap/Progress';
+import CustomSuspense from '@/components/common/CustomSuspense';
 import Icon from '@/components/common/Icon';
+import Skeleton from '@/components/common/Skeleton';
 import * as Styled from './style';
 
 interface RoadMapInfoProps {
@@ -8,6 +12,9 @@ interface RoadMapInfoProps {
 
 const RoadMapInfo = (props: RoadMapInfoProps) => {
   const { handleCloseAside } = props;
+
+  const { query } = useRouter();
+  const { steps, isLoading } = useGetRoadmapSteps(query.roadmapId as string);
 
   return (
     <Styled.Root>
@@ -19,10 +26,21 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
 
         <Styled.Title>Java 입문 수업 (생활코딩)</Styled.Title>
 
-        <Progress />
+        <CustomSuspense isLoading={isLoading} fallback={<ProgressSkeleton />}>
+          <Progress ProgressRate={steps?.result.progress} steps={steps?.result.steps} />
+        </CustomSuspense>
       </Styled.Container>
     </Styled.Root>
   );
 };
 
 export default RoadMapInfo;
+
+const ProgressSkeleton = () => {
+  return (
+    <Styled.ProgressSkeletonRoot>
+      <Skeleton css={Styled.ProgressRateStyle} />
+      <Skeleton css={Styled.ProgressBarStyle} />
+    </Styled.ProgressSkeletonRoot>
+  );
+};
