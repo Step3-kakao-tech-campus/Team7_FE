@@ -1,5 +1,8 @@
+import type { CommonResponse, Step, Til } from '@/api/type';
+
 export type TilsRequest = string;
 
+// getTils
 export interface TilsResponse {
   success: boolean;
   message: string;
@@ -9,19 +12,7 @@ export interface TilsResponse {
   hasNext: boolean;
 }
 
-export interface Til {
-  id: number;
-  createDate: string;
-  step: {
-    id: number;
-    title: string;
-  };
-  roadmap: {
-    id: number;
-    name: string;
-  };
-}
-
+// postTil
 export interface PostTilRequest {
   roadmapId: number;
   stepId: number;
@@ -33,5 +24,21 @@ export interface PostTilResponse {
   message: string;
   result: {
     id: number;
+  };
+}
+
+// getTil
+export interface GetTilRequest {
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
+}
+
+export interface GetTilResponse extends CommonResponse {
+  result: {
+    content: string;
+    isPersonal: boolean;
+    step: Omit<Step, 'tilId'>;
+    comments: Comment[];
   };
 }
