@@ -9,13 +9,13 @@ import {
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest } from '@/api/roadmap/type';
 
-const QUERY_KEY = {
+export const ROADMAP_QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
   getRoadmapSteps: 'getRoadmapSteps',
 };
 
 export const useGetRoadmaps = () => {
-  const { data } = useQuery([QUERY_KEY.getRoadmaps], () => getRoadmaps());
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmaps], () => getRoadmaps());
 
   const categoryData = {
     category: data?.result.categories ?? [],
@@ -34,7 +34,7 @@ export const useGetRoadmapSteps = (roadmapId: string) => {
   const roadmapIdToString = roadmapId.toString();
 
   const { data, isLoading } = useQuery(
-    [QUERY_KEY.getRoadmapSteps, roadmapId],
+    [ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId],
     () => getRoadmapSteps(roadmapIdToString),
     {
       enabled,
@@ -50,7 +50,7 @@ export const useGetRoadmapSteps = (roadmapId: string) => {
 export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest) => {
   const enabled = !!body.roadmapId && !!body.roadmapId;
 
-  const { data, isLoading } = useQuery([QUERY_KEY.getRoadmapSteps, body], () => getRoadmapStepReference(body), {
+  const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapSteps, body], () => getRoadmapStepReference(body), {
     enabled,
   });
 
@@ -68,7 +68,7 @@ export const usePostRoadmapIndividual = () => {
   const postRoadmapsIndividual = async (title: string) => {
     const data = await mutation.mutateAsync(title, {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.getRoadmaps]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmaps]);
       },
     });
 
@@ -86,7 +86,7 @@ export const usePostRoadmapStepIndividual = () => {
   const postRoadmapStepIndividual = async (body: { roadmapId: string; title: string }) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.getRoadmapSteps, body.roadmapId]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
       },
     });
 

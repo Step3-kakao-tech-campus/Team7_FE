@@ -2,6 +2,7 @@ import qs from 'qs';
 import { useRouter } from 'next/router';
 import type { QueryKey } from '@tanstack/react-query';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { ROADMAP_QUERY_KEY } from '@/api/hooks/roadmap';
 import {
   getTil,
   getTils,
@@ -70,10 +71,18 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
 };
 
 export const usePostTil = () => {
+  const queryClient = useQueryClient();
+
   const mutation = useMutation(postTilAPI);
 
   const postTil = async (body: PostTilRequest) => {
-    const data = await mutation.mutateAsync(body);
+    const { roadmapId } = body;
+
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId.toString()]);
+      },
+    });
 
     return data;
   };

@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.div`
+export const Root = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  width: 100%;
   margin: 3px 0;
   padding: 0.875rem 1.25rem;
 
