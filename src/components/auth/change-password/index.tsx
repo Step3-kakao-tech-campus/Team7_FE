@@ -1,33 +1,31 @@
 import { useEffect } from 'react';
-import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
 import styled from '@emotion/styled';
-import { postJoin } from '@/api/auth';
+import { postEmailCode } from '@/api/auth';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
 import { useModalState } from '@/components/common/Modal/useModalState';
 import { tilyLinks } from '@/constants/links';
-import { NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
-import RegisterModal from './RegisterModal';
+import { PASSWORD_REGEX } from '@/constants/regex';
+import AuthModal from '../AuthModal';
 
-interface RegisterFormInput {
+interface ChangePasswordFormInput {
   email: string;
-  name: string;
   password: string;
   passwordConfirm: string;
 }
 
-const Register = () => {
-  const { mutateAsync, isLoading } = useMutation({ mutationFn: (data: RegisterFormInput) => postJoin(data) });
-
+const ChangePassword = () => {
+  const { mutateAsync, isLoading } = useMutation({
+    mutationFn: (data: ChangePasswordFormInput) => postEmailCode(data),
+  });
   const { isOpen, handleOpen, handleClose } = useModalState();
-
   const router = useRouter();
-
   const {
     control,
     handleSubmit,
@@ -37,16 +35,14 @@ const Register = () => {
   } = useForm({
     defaultValues: {
       email: '',
-      name: '',
       password: '',
       passwordConfirm: '',
     },
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<RegisterFormInput> = async (formData) => {
+  const onSubmit: SubmitHandler<ChangePasswordFormInput> = async (formData) => {
     const data = await mutateAsync(formData);
-
     if (data?.code === 200) {
       handleOpen();
     } else {
@@ -70,32 +66,6 @@ const Register = () => {
         <Logo />
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <Controller
-            name="email"
-            control={control}
-            render={({ field }) => <Input label="이메일" placeholder="이메일을 입력해주세요." disabled {...field} />}
-          />
-
-          <Controller
-            name="name"
-            control={control}
-            rules={{
-              required: '필수 정보입니다.',
-              pattern: {
-                value: NAME_REGEX,
-                message: '2~10글자의 이름만 사용 가능합니다.',
-              },
-            }}
-            render={({ field }) => (
-              <Input
-                label="이름"
-                placeholder="이름을 입력해주세요."
-                message={errors.name?.message}
-                status={errors.name ? 'error' : 'default'}
-                {...field}
-              />
-            )}
-          />
-          <Controller
             name="password"
             control={control}
             rules={{
@@ -109,7 +79,7 @@ const Register = () => {
               <Input
                 type="password"
                 label="비밀번호"
-                placeholder="비밀번호를 입력해주세요."
+                placeholder="새 비밀번호를 입력해주세요."
                 message={errors.password?.message}
                 status={errors.password ? 'error' : 'default'}
                 {...field}
@@ -126,8 +96,7 @@ const Register = () => {
             render={({ field }) => (
               <Input
                 type="password"
-                label="비밀번호 확인"
-                placeholder="비밀번호를 입력해주세요."
+                placeholder="새 비밀번호 확인"
                 message={errors.passwordConfirm?.message}
                 status={errors.passwordConfirm ? 'error' : 'default'}
                 {...field}
@@ -142,12 +111,12 @@ const Register = () => {
           </StyledButtonContainer>
         </StyledForm>
       </StyledFlex>
-      <RegisterModal isOpen={isOpen} handleClose={handleClose} />
+      <AuthModal isOpen={isOpen} handleClose={handleClose} content="비밀번호 변경이 완료되었습니다." />
     </>
   );
 };
 
-export default Register;
+export default ChangePassword;
 
 const StyledFlex = styled(Flex)`
   width: 100%;

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import Register from '@/components/auth/register/Register';
+import Register from '@/components/auth/register';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { setLayout } from '@/utils/layout';
 

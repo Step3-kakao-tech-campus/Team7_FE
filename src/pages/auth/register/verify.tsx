@@ -1,25 +1,33 @@
-import type { FC } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import ByEmail from '@/components/auth/verify/ByEmail';
-import Flex from '@/components/common/Flex';
 import Logo from '@/components/common/Logo';
+import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { tilyLinks } from '@/constants/links';
+import { setLayout } from '@/utils/layout';
 
-const Verify: FC = () => {
+export const RegisterVerifyPage = () => {
   return (
-    <StyledFlex dir="col" align="center">
+    <StyledVerifyPage>
       <Logo />
-      <ByEmail />
+      <ByEmail type="register" />
       <StyledLoginButton href={tilyLinks.login()}>이미 계정이 있나요? 로그인하기</StyledLoginButton>
-    </StyledFlex>
+    </StyledVerifyPage>
   );
 };
 
-export default Verify;
+setLayout(RegisterVerifyPage, FullHeightLayout);
 
-const StyledFlex = styled(Flex)`
-  width: 100%;
+export default RegisterVerifyPage;
+
+const StyledVerifyPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 400px;
 `;
 
 const StyledLoginButton = styled(Link)`
