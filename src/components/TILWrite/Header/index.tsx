@@ -5,6 +5,7 @@ import SubmitModal from '@/components/TILWrite/SubmitModal';
 import Button from '@/components/common/Button';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
+import { tilyLinks } from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
@@ -15,21 +16,21 @@ interface HeaderProps {
 const Header = (props: HeaderProps) => {
   const { handleOpenCommentAside } = props;
 
-  const { query } = useRouter();
+  const router = useRouter();
 
   const { isOpen, handleOpen, handleClose } = useModalState();
   const { tilDetail } = useGetTil({
-    roadmapId: query.roadmapId as string,
-    stepId: query.stepId as string,
-    tilId: query.tilId as string,
+    roadmapId: router.query.roadmapId as string,
+    stepId: router.query.stepId as string,
+    tilId: router.query.tilId as string,
   });
   const { submitTil } = useSubmitTil();
 
   const handleSubmit = () => {
     submitTil({
-      roadmapId: query.roadmapId as string,
-      stepId: query.stepId as string,
-      tilId: query.tilId as string,
+      roadmapId: router.query.roadmapId as string,
+      stepId: router.query.stepId as string,
+      tilId: router.query.tilId as string,
       title: 'title',
       content: 'content',
     });
@@ -38,7 +39,9 @@ const Header = (props: HeaderProps) => {
 
   return (
     <Styled.Root>
-      <Logo type="logo" imageSize={32} />
+      <button onClick={() => router.push(tilyLinks.home())}>
+        <Logo type="logo" imageSize={32} />
+      </button>
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
 
       <Styled.Container>
