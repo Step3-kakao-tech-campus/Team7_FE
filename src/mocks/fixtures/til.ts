@@ -1,4 +1,4 @@
-import type { GetTilResponse, TilsResponse } from '@/api/til/type';
+import type { GetTilResponse, GetTilsResponse } from '@/api/til/type';
 
 const tils = Array.from({ length: 9 }).map((_, index) => ({
   id: 1 + index,
@@ -13,7 +13,7 @@ const tils = Array.from({ length: 9 }).map((_, index) => ({
   },
 }));
 
-export const tilsResponse: TilsResponse = {
+export const tilsResponse: GetTilsResponse = {
   success: true,
   message: 'ok',
   result: {
@@ -22,14 +22,14 @@ export const tilsResponse: TilsResponse = {
   hasNext: true,
 };
 
-export const tilsInfinityEndResponse: TilsResponse = {
+export const tilsInfinityEndResponse: GetTilsResponse = {
   success: true,
   message: 'ok',
   result: null,
   hasNext: false,
 };
 
-export const tilsTitleResponse: TilsResponse = {
+export const tilsTitleResponse: GetTilsResponse = {
   success: true,
   message: 'ok',
   result: {
@@ -51,7 +51,7 @@ export const tilsTitleResponse: TilsResponse = {
   hasNext: false,
 };
 
-export const tilsCategoryResponse: TilsResponse = {
+export const tilsCategoryResponse: GetTilsResponse = {
   success: true,
   message: 'ok',
   result: {
@@ -73,7 +73,7 @@ export const tilsCategoryResponse: TilsResponse = {
   hasNext: false,
 };
 
-export const tilsDateResponse: TilsResponse = {
+export const tilsDateResponse: GetTilsResponse = {
   success: true,
   message: 'ok',
   result: {

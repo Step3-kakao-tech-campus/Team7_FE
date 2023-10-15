@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import {
-  userRoadmapsResponse,
+  getRoadmapsResponse,
   updateFixture,
   getRoadmapStepsResponse,
   updateGetRoadmapStepsResponseFixture,
@@ -12,7 +12,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 export const roadmapHandler = [
   rest.get(`${BASE_URL}/roadmaps/my`, (req, res, ctx) => {
     try {
-      return res(ctx.status(200), ctx.json(userRoadmapsResponse));
+      return res(ctx.status(200), ctx.json(getRoadmapsResponse));
     } catch (error) {
       return res(
         ctx.status(400),
@@ -62,7 +62,7 @@ export const roadmapHandler = [
 
     try {
       updateFixture(name);
-      return res(ctx.status(200), ctx.json(userRoadmapsResponse));
+      return res(ctx.status(200), ctx.json(getRoadmapsResponse));
     } catch (error) {
       return res(
         ctx.status(400),

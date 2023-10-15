@@ -1,14 +1,10 @@
-import type {
-  GetRoadmapStepsResponse,
-  UserRoadmapsResponse,
-  GetRoadmapStepReferenceResponse,
-} from '@/api/roadmap/type';
+import type { GetRoadmapStepsResponse, GetRoadmapsResponse, GetRoadmapStepReferenceResponse } from '@/api/roadmap/type';
 
-export const userRoadmapsResponse: UserRoadmapsResponse = {
+export const getRoadmapsResponse: GetRoadmapsResponse = {
   success: true,
   message: 'ok',
   result: {
-    category: [
+    categories: [
       {
         id: 1,
         name: '홍박사의 알고리즘즘즘즘즘즘즘즘즘즘즘',
@@ -22,7 +18,7 @@ export const userRoadmapsResponse: UserRoadmapsResponse = {
         name: '홍박사의 비밀일기 ><',
       },
     ],
-    roadmap: {
+    roadmaps: {
       tily: [
         {
           id: 1,
@@ -206,10 +202,10 @@ export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = 
 };
 
 export const updateFixture = (name: string) => {
-  const length = userRoadmapsResponse.result.category.length;
+  const length = getRoadmapsResponse.result.categories.length;
 
-  userRoadmapsResponse.result.category = [
-    ...userRoadmapsResponse.result.category,
+  getRoadmapsResponse.result.categories = [
+    ...getRoadmapsResponse.result.categories,
     {
       id: length + 1,
       name,

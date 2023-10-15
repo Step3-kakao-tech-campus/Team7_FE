@@ -1,9 +1,9 @@
 import type { CommonResponse, Step, Comment, Til } from '@/api/type';
 
-export type TilsRequest = string;
+export type GetTilsRequest = string;
 
 // getTils
-export interface TilsResponse {
+export interface GetTilsResponse {
   success: boolean;
   message: string;
   result: {

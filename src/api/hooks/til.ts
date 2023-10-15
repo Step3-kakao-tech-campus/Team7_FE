@@ -19,7 +19,7 @@ import type {
   PatchCommentRequest,
   PostCommentRequest,
   PostTilRequest,
-  TilsResponse,
+  GetTilsResponse,
   PatchTilRequest,
   SubmitTilRequest,
 } from '@/api/til/type';
@@ -47,7 +47,7 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
       return data;
     },
     {
-      getNextPageParam: (lastPage: TilsResponse, pages) => {
+      getNextPageParam: (lastPage: GetTilsResponse, pages) => {
         if (!lastPage.hasNext) {
           return undefined;
         }
@@ -106,6 +106,28 @@ export const usePostTil = () => {
   return { postTil };
 };
 
+export const usePatchTil = () => {
+  const mutation = useMutation(patchTilAPI);
+
+  const patchTil = async (body: PatchTilRequest) => {
+    const data = await mutation.mutateAsync(body);
+
+    return data;
+  };
+  return { patchTil };
+};
+
+export const useSubmitTil = () => {
+  const mutation = useMutation(submitTilAPI);
+
+  const submitTil = async (body: SubmitTilRequest) => {
+    const data = await mutation.mutateAsync(body);
+
+    return data;
+  };
+  return { submitTil };
+};
+
 export const usePostComment = () => {
   const queryClient = useQueryClient();
 
@@ -154,28 +176,6 @@ export const usePatchComment = () => {
   };
 
   return { patchComment };
-};
-
-export const usePatchTil = () => {
-  const mutation = useMutation(patchTilAPI);
-
-  const patchTil = async (body: PatchTilRequest) => {
-    const data = await mutation.mutateAsync(body);
-
-    return data;
-  };
-  return { patchTil };
-};
-
-export const useSubmitTil = () => {
-  const mutation = useMutation(submitTilAPI);
-
-  const submitTil = async (body: SubmitTilRequest) => {
-    const data = await mutation.mutateAsync(body);
-
-    return data;
-  };
-  return { submitTil };
 };
 
 export const useDeleteComment = () => {
