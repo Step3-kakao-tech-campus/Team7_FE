@@ -31,6 +31,8 @@ export const RoadmapSection = styled.div`
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
 export const StepSection = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
   padding: 0.5rem;

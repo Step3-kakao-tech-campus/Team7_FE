@@ -32,6 +32,8 @@ export const RoadmapSection = styled.div`
 `;
 
 export const StepSection = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
   padding: 0.5rem;
