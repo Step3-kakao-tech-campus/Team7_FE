@@ -6,7 +6,13 @@ import { defaultData } from '@/components/TILWrite/Ckeditor/defaultData';
 import { editorConfiguration } from './plugin';
 import * as Styled from './style';
 
-const CkEditor = () => {
+interface CkEditorProps {
+  handleTILContent: (content: string) => void;
+}
+
+const CkEditor = (props: CkEditorProps) => {
+  const { handleTILContent } = props;
+
   const { query } = useRouter();
 
   const { tilDetail } = useGetTil({
@@ -23,11 +29,12 @@ const CkEditor = () => {
         data={tilDetail ? tilDetail.content : defaultData}
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
-          console.log('Editor is ready to use!', editor);
+          handleTILContent(editor.getData());
         }}
         onChange={(event, editor) => {
           const data = editor.getData();
           console.log({ event, editor, data });
+          handleTILContent(editor.getData());
         }}
         onBlur={(event, editor) => {
           console.log('Blur.', editor);

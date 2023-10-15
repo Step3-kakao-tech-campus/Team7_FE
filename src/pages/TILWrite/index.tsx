@@ -16,10 +16,7 @@ const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: fa
 
 const TILWrite = () => {
   const [referenceParam, setReferenceParam] = useState<{ roadmapId: string; stepId: string } | null>(null);
-
-  const handleSelectStepReference = (roadmapId: string, stepId: string) => {
-    setReferenceParam({ roadmapId, stepId });
-  };
+  const [TILContent, setTILContent] = useState<string>('');
 
   const { query } = useRouter();
 
@@ -28,6 +25,14 @@ const TILWrite = () => {
     stepId: query.stepId as string,
     tilId: query.tilId as string,
   });
+
+  const handleSelectStepReference = (roadmapId: string, stepId: string) => {
+    setReferenceParam({ roadmapId, stepId });
+  };
+
+  const handleTILContent = (content: string) => {
+    setTILContent(content);
+  };
 
   const {
     isOpen: asideOpen,
@@ -78,11 +83,11 @@ const TILWrite = () => {
             animate={asideOpen ? 'asideOpen' : 'asideClosed'}
             variants={editorVariants}
             transition={{ type: 'tween', duration: DURATION }}>
-            <Editor />
+            <Editor handleTILContent={handleTILContent} />
           </EditorContainer>
         ) : (
           <PersonalEditorContainer>
-            <Editor />
+            <Editor handleTILContent={handleTILContent} />
           </PersonalEditorContainer>
         )}
 
@@ -117,7 +122,7 @@ const TILWrite = () => {
           </AsideContainer>
         )}
       </Container>
-      <Footer />
+      <Footer TILContent={TILContent} />
     </Root>
   );
 };
