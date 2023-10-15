@@ -87,12 +87,12 @@ export const patchTil = async (body: PatchTilRequest) => {
 };
 
 export const submitTil = async (body: SubmitTilRequest) => {
-  const { roadmapId, stepId, tilId, title, content } = body;
+  const { roadmapId, stepId, tilId, title, content: submitContent } = body;
 
   const { data } = await axiosInstance.request<SubmitTilResponse>({
     method: 'POST',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
-    data: { title, content },
+    data: { title, submitContent },
   });
 
   return data;
