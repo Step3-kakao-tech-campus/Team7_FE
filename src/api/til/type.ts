@@ -1,4 +1,4 @@
-import type { CommonResponse, Step, Til } from '@/api/type';
+import type { CommonResponse, Step, Comment, Til } from '@/api/type';
 
 export type TilsRequest = string;
 
@@ -29,9 +29,9 @@ export interface PostTilResponse {
 
 // getTil
 export interface GetTilRequest {
-  roadmapId: number;
-  stepId: number;
-  tilId: number;
+  roadmapId: string;
+  stepId: string;
+  tilId: string;
 }
 
 export interface GetTilResponse extends CommonResponse {

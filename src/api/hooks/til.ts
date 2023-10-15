@@ -69,9 +69,13 @@ export const usePostTil = () => {
 };
 
 export const useGetTil = (body: GetTilRequest) => {
-  const { data } = useQuery([QUERY_KEY.getTil], () => getTil(body));
+  const { isReady } = useRouter();
+
+  const { data } = useQuery([QUERY_KEY.getTil, body], () => getTil(body), {
+    enabled: isReady,
+  });
 
   return {
-    data,
+    tilDetail: data?.result ?? null,
   };
 };
