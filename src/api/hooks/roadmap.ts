@@ -25,13 +25,23 @@ export const useGetRoadmaps = () => {
   };
 };
 
-export const useGetRoadmapSteps = (roadmapId: number) => {
-  const enabled = roadmapId !== 0;
+export const useGetRoadmapSteps = (roadmapId: string) => {
+  const enabled = roadmapId !== '' && roadmapId !== '0';
 
-  const { data } = useQuery([QUERY_KEY.getRoadmapSteps, roadmapId], () => getRoadmapSteps(roadmapId), { enabled });
+  // queryString에서 받아오는 roadmapId는 string이므로 api의 param을 string으로 통일해주었음
+  const roadmapIdToString = roadmapId.toString();
+
+  const { data, isLoading } = useQuery(
+    [QUERY_KEY.getRoadmapSteps, roadmapId],
+    () => getRoadmapSteps(roadmapIdToString),
+    {
+      enabled,
+    },
+  );
 
   return {
     steps: data,
+    isLoading,
   };
 };
 
@@ -58,7 +68,7 @@ export const usePostRoadmapStepIndividual = () => {
 
   const mutation = useMutation(postRoadmapStepIndividualAPI);
 
-  const postRoadmapStepIndividual = async (body: { roadmapId: number; title: string }) => {
+  const postRoadmapStepIndividual = async (body: { roadmapId: string; title: string }) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
         queryClient.invalidateQueries([QUERY_KEY.getRoadmapSteps, body.roadmapId]);

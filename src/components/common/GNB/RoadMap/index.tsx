@@ -18,7 +18,7 @@ const RoadMap = () => {
   const [tilId, setTilId] = useState<number | null>(null);
 
   const { data: roadmaps } = useGetRoadmaps();
-  const { steps } = useGetRoadmapSteps(roadmapId);
+  const { steps } = useGetRoadmapSteps(roadmapId.toString());
   const { postTil } = usePostTil();
 
   // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수

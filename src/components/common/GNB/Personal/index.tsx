@@ -26,7 +26,7 @@ const Personal = () => {
 
   const router = useRouter();
   const { data: roadmaps } = useGetRoadmaps();
-  const { steps } = useGetRoadmapSteps(roadmapId);
+  const { steps } = useGetRoadmapSteps(roadmapId.toString());
   const { postRoadmapsIndividual } = usePostRoadmapIndividual();
   const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();
   const { postTil } = usePostTil();
