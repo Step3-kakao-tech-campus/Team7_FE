@@ -1,11 +1,12 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import type { Comment as CommentType } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import ContextMenu from '@/components/common/ContextMenu';
 import Icon from '@/components/common/Icon';
+import { useModalState } from '@/hooks/useModalState';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
 
@@ -13,20 +14,33 @@ import * as Styled from './style';
 dayjs.extend(relativeTime);
 dayjs.locale('ko');
 
-interface CommentProps extends CommentType {}
+interface CommentProps extends CommentType {
+  handlePatchModalOpen: () => void;
+  handleSelectComment: (commentId: number) => void;
+}
 
 const Comment = (props: CommentProps) => {
-  const { name, image, content, isOwner, date } = props;
+  const { handlePatchModalOpen, handleSelectComment, id, name, image, content, isOwner, date } = props;
 
-  const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
+  const {
+    isOpen: isContextMenuOpen,
+    handleClose: handleCloseMenu,
+    handleToggle: handleToggleMenu,
+  } = useModalState(false);
   const contextRef = useRef<HTMLDivElement>(null);
 
   const handleOpenContextMenu = () => {
-    setIsContextMenuOpen((prev) => !prev);
+    handleToggleMenu();
+    handleSelectComment(id);
+  };
+
+  const handleSelectPatchComment = () => {
+    handleCloseMenu();
+    handlePatchModalOpen();
   };
 
   useOnClickOutside(contextRef, () => {
-    setIsContextMenuOpen(false);
+    handleCloseMenu();
   });
 
   return (
@@ -57,7 +71,7 @@ const Comment = (props: CommentProps) => {
                   case true:
                     return (
                       <Styled.ContextMenus ref={contextRef}>
-                        <ContextMenu.Menu>수정하기</ContextMenu.Menu>
+                        <ContextMenu.Menu onClick={handleSelectPatchComment}>수정하기</ContextMenu.Menu>
                         <ContextMenu.Menu>삭제하기</ContextMenu.Menu>
                       </Styled.ContextMenus>
                     );

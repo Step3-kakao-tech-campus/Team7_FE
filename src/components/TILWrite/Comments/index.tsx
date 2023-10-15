@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
 import Comment from '@/components/TILWrite/Comments/Comment';
+import CommentPatchModal from '@/components/TILWrite/Comments/CommentPatchModal';
 import Header from '@/components/TILWrite/Comments/Header';
 import TextAreaSection from '@/components/TILWrite/Comments/TextAreaSection';
+import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 interface CommentsProps {
@@ -12,13 +15,19 @@ interface CommentsProps {
 const Comments = (props: CommentsProps) => {
   const { handleCloseCommentAside } = props;
 
-  const { query } = useRouter();
+  const [selectedCommentId, setSelectedCommentId] = useState<number>(0);
 
+  const { query } = useRouter();
+  const { isOpen, handleOpen, handleClose } = useModalState(true);
   const { tilDetail } = useGetTil({
     roadmapId: query.roadmapId as string,
     stepId: query.stepId as string,
     tilId: query.tilId as string,
   });
+
+  const handleSelectComment = (commentId: number) => {
+    setSelectedCommentId(commentId);
+  };
 
   return (
     <Styled.Root>
@@ -28,11 +37,20 @@ const Comments = (props: CommentsProps) => {
 
       <Styled.CommentContainer>
         {tilDetail?.comments.map((comment) => {
-          return <Comment key={comment.id} {...comment} />;
+          return (
+            <Comment
+              handlePatchModalOpen={handleOpen}
+              handleSelectComment={handleSelectComment}
+              key={comment.id}
+              {...comment}
+            />
+          );
         })}
       </Styled.CommentContainer>
 
       <TextAreaSection />
+
+      <CommentPatchModal selectedCommentId={selectedCommentId} onClose={handleClose} isOpen={isOpen} />
     </Styled.Root>
   );
 };
