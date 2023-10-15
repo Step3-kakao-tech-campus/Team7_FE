@@ -7,7 +7,7 @@ import * as Styled from '@/components/auth/verify/ByEmail/style';
 import Input from '@/components/common/Input';
 import { tilyLinks } from '@/constants/links';
 import { EMAIL_REGEX } from '@/constants/regex';
-import { useModalState } from '@/hooks/common/useModalState';
+import { useModalState } from '@/hooks/useModalState';
 import CodeCheck from '../CodeCheck';
 import VerifyModal from '../VerifyModal';
 

@@ -8,15 +8,14 @@ import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Flex from '@/components/common/Flex';
 import GNB from '@/components/common/GNB';
-import EmptyLayout from '@/components/layout/EmptyLayout';
 import Skeleton from '@/components/common/Skeleton';
+import EmptyLayout from '@/components/layout/EmptyLayout';
 import CategorySection from '@/components/main/CategorySection';
 import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
-import { useGetTils } from '@/hooks/queries/til';
-import { setLayout } from '@/utils/layout';
 import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
+import { setLayout } from '@/utils/layout';
 
 const Home = () => {
   const router = useRouter();

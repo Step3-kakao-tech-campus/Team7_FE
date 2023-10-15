@@ -9,9 +9,9 @@ import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
-import { useModalState } from '@/components/common/Modal/useModalState';
 import { tilyLinks } from '@/constants/links';
 import { PASSWORD_REGEX } from '@/constants/regex';
+import { useModalState } from '@/hooks/useModalState';
 import AuthModal from '../AuthModal';
 
 interface ChangePasswordFormInput {
@@ -104,9 +104,9 @@ const ChangePassword = () => {
             )}
           />
           <StyledButtonContainer>
-            <Link href={tilyLinks.verify()}>취소</Link>
+            <StyledCancelButton href={tilyLinks.verify()}>취소</StyledCancelButton>
             <Button type="submit" isLoading={isLoading}>
-              완료
+              변경
             </Button>
           </StyledButtonContainer>
         </StyledForm>
@@ -146,4 +146,7 @@ const StyledButtonContainer = styled.div`
       text-decoration: underline;
     }
   }
+`;
+const StyledCancelButton = styled(Link)`
+  margin-top: 5px;
 `;
