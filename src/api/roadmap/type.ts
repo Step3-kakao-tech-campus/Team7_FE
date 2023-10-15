@@ -1,4 +1,4 @@
-import type { Step, Category, Roadmap, CommonResponse } from '@/api/type';
+import type { Step, Category, Roadmaps, CommonResponse } from '@/api/type';
 
 // getRoadmaps
 export interface UserRoadmapsResponse {
@@ -8,8 +8,8 @@ export interface UserRoadmapsResponse {
 }
 
 export interface UserRoadmapsResult {
-  category: Category[];
-  roadmap: Roadmap;
+  categories: Category[];
+  roadmaps: Roadmaps;
 }
 
 // getRoadmapSteps

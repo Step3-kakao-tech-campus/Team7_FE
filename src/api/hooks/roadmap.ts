@@ -18,8 +18,8 @@ export const useGetRoadmaps = () => {
   const { data } = useQuery([QUERY_KEY.getRoadmaps], () => getRoadmaps());
 
   const categoryData = {
-    category: data?.result.category ?? [],
-    roadmaps: [...(data?.result.roadmap.tily ?? []), ...(data?.result.roadmap.group ?? [])],
+    category: data?.result.categories ?? [],
+    roadmaps: [...(data?.result.roadmaps.tily ?? []), ...(data?.result.roadmaps.group ?? [])],
   };
 
   return {
