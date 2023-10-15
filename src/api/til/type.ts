@@ -90,3 +90,10 @@ export interface DeleteCommentRequest {
 export interface DeleteCommentResponse extends CommonResponse {
   result: null;
 }
+
+// submitTil
+export interface SubmitTilRequest extends PatchTilRequest {}
+
+export interface SubmitTilResponse extends CommonResponse {
+  result: null;
+}

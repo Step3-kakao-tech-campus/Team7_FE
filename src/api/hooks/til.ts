@@ -11,6 +11,7 @@ import {
   patchComment as patchCommentAPI,
   deleteComment as deleteCommentAPI,
   patchTil as patchTilAPI,
+  submitTil as submitTilAPI,
 } from '@/api/til';
 import type {
   DeleteCommentRequest,
@@ -20,6 +21,7 @@ import type {
   PostTilRequest,
   TilsResponse,
   PatchTilRequest,
+  SubmitTilRequest,
 } from '@/api/til/type';
 
 const QUERY_KEY = {
@@ -163,6 +165,17 @@ export const usePatchTil = () => {
     return data;
   };
   return { patchTil };
+};
+
+export const useSubmitTil = () => {
+  const mutation = useMutation(submitTilAPI);
+
+  const submitTil = async (body: SubmitTilRequest) => {
+    const data = await mutation.mutateAsync(body);
+
+    return data;
+  };
+  return { submitTil };
 };
 
 export const useDeleteComment = () => {

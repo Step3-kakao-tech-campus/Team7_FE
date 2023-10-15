@@ -14,6 +14,8 @@ import type {
   DeleteCommentResponse,
   PatchTilRequest,
   PatchTilResponse,
+  SubmitTilRequest,
+  SubmitTilResponse,
 } from '@/api/til/type';
 
 export const getTils = async (input: TilsRequest) => {
@@ -77,6 +79,18 @@ export const patchTil = async (body: PatchTilRequest) => {
 
   const { data } = await axiosInstance.request<PatchTilResponse>({
     method: 'PATCH',
+    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
+    data: { title, content },
+  });
+
+  return data;
+};
+
+export const submitTil = async (body: SubmitTilRequest) => {
+  const { roadmapId, stepId, tilId, title, content } = body;
+
+  const { data } = await axiosInstance.request<SubmitTilResponse>({
+    method: 'POST',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
     data: { title, content },
   });
