@@ -2,6 +2,10 @@ export interface EmailCheckRequest {
   email: string;
 }
 
+export interface EmailCodeRequest {
+  email: string;
+}
+
 export interface EmailCodeCheckRequest {
   email: string;
   code: string;
@@ -19,7 +23,19 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface PasswordChangeRequest {
+  email: string;
+  password: string;
+}
+
 export interface EmailCheckResponse {
+  success: boolean;
+  code: number;
+  message: string;
+  result: null;
+}
+
+export interface EmailCodeResponse {
   success: boolean;
   code: number;
   message: string;
@@ -45,4 +61,11 @@ export interface LoginResponse {
   code: number;
   message: string;
   result: { token: string } | null;
+}
+
+export interface PasswordChangeResponse {
+  success: boolean;
+  code: number;
+  message: string;
+  result: null;
 }

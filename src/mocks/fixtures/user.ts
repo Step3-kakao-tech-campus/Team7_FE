@@ -1,6 +1,6 @@
-import type { UserHistoryResponse } from '@/api/user/types';
+import type { GetAlarmsResponse, GetUserResponse, GetUserHistoryResponse } from '@/api/user/type';
 
-export const userHistoryResponse: UserHistoryResponse = {
+export const userHistoryResponse: GetUserHistoryResponse = {
   success: true,
   message: 'ok',
   result: {
@@ -23,4 +23,69 @@ export const userHistoryResponse: UserHistoryResponse = {
       },
     ],
   },
+};
+
+export const getUserResponse: GetUserResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    id: 1,
+    name: '김동영',
+    email: 'ehddud1006@pusan.ac.kr',
+    image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+  },
+};
+
+export const getAlarmsResponse: GetAlarmsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    alarms: [
+      {
+        id: 1,
+        tilId: 1,
+        isChecked: false,
+        roadmap: {
+          id: 1,
+          name: 'Next JS',
+        },
+        step: {
+          id: 1,
+          name: '6. SPA',
+        },
+        sender: {
+          name: '김동영',
+          image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        },
+        createdAt: new Date(),
+      },
+      {
+        id: 2,
+        tilId: 3,
+        isChecked: false,
+        roadmap: {
+          id: 1,
+          name: 'Next JS',
+        },
+        step: {
+          id: 1,
+          name: '6. SPA',
+        },
+        sender: {
+          name: '이한홍',
+          image: 'https://avatars.githubusercontent.com/u/6237',
+        },
+        createdAt: new Date(),
+      },
+    ],
+  },
+};
+
+export const updateGetAlarmsResponseFixture = () => {
+  getAlarmsResponse.result.alarms = getAlarmsResponse.result.alarms.map((alarm) => {
+    return {
+      ...alarm,
+      isChecked: true,
+    };
+  });
 };

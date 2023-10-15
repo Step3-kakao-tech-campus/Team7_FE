@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Input from '@/components/common/Input';
-import { useParamsToUrl } from '@/hooks/common/useParamsToUrl';
+import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 
 const SearchBar = () => {

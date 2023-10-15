@@ -432,6 +432,10 @@ body {
   height: 100%;
 }
 
+button {
+  cursor: pointer;
+}
+
 #__next {
   height: 100%;
   /* overflow: hidden; */

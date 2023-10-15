@@ -1,21 +1,27 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useGetTilsParam } from '@/api/hooks/til';
+import { useGetUser } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
+import CustomSuspense from '@/components/common/CustomSuspense';
 import Flex from '@/components/common/Flex';
 import GNB from '@/components/common/GNB';
 import EmptyLayout from '@/components/layout/EmptyLayout';
+import Skeleton from '@/components/common/Skeleton';
 import CategorySection from '@/components/main/CategorySection';
 import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
-import { useIntersectionObserver } from '@/hooks/common/useInterSectionObserver';
 import { useGetTils } from '@/hooks/queries/til';
 import { setLayout } from '@/utils/layout';
+import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 
 const Home = () => {
   const router = useRouter();
-  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTils({ queryKey: [router.query] });
+  const { user, isLoading: userIsLoading } = useGetUser();
+  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTilsParam({ queryKey: [router.query] });
   const { ref, isVisible } = useIntersectionObserver();
 
   useEffect(() => {
@@ -30,7 +36,13 @@ const Home = () => {
       <Root>
         <Inner>
           <LeftArea>
-            <Avatar imageWidth={240} imageHeight={240} iconName="ic_profile" />
+            <CustomSuspense isLoading={userIsLoading} fallback={<Skeleton type="circle" css={ProfileSkeletonStyles} />}>
+              {user?.image ? (
+                <Avatar imageUrl={user?.image} imageSize={240} alt="프로필 이미지" />
+              ) : (
+                <Avatar imageSize={240} iconName="ic_profile" alt="프로필 이미지" />
+              )}
+            </CustomSuspense>
             <SearchBar />
             <CategorySection />
           </LeftArea>
@@ -77,4 +89,9 @@ const RightArea = styled.div`
 const ObserverInterSectionTarget = styled.div`
   width: 100%;
   height: 2.5rem;
+`;
+
+export const ProfileSkeletonStyles = css`
+  width: 240px;
+  height: 240px;
 `;

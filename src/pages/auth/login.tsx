@@ -12,7 +12,7 @@ export const LoginPage = () => {
       <Login />
       <StyledButtonContainer justify="space-between">
         <Link href={tilyLinks.verify()}>회원가입</Link>
-        <Link href="/">비밀번호 찾기</Link>
+        <Link href={tilyLinks.findPwVerify()}>비밀번호 찾기</Link>
       </StyledButtonContainer>
     </StyledRegisterPage>
   );

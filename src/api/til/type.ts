@@ -21,3 +21,17 @@ export interface Til {
     name: string;
   };
 }
+
+export interface PostTilRequest {
+  roadmapId: number;
+  stepId: number;
+  title: string;
+}
+
+export interface PostTilResponse {
+  success: boolean;
+  message: string;
+  result: {
+    id: number;
+  };
+}

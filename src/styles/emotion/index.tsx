@@ -2,6 +2,7 @@ const colors = {
   white: '#ffffff',
   black: '#0F172A',
   rose: '#EF4365',
+  rose_light: '#FFEEF1',
   red: '#DC2626',
   gray_100: '#F8F9FA',
   gray_200: '#F1F3F5',
@@ -19,6 +20,24 @@ const colors = {
   blue: '#3B82F6;',
 } as const;
 
-export const emotionTheme = { colors } as const;
+const defaultEditorWidth = '70%';
+const maxEditorWidth = '100%';
+const resizeHandleWidth = '50px';
+
+const layout = {
+  defaultEditorWidth,
+  maxEditorWidth,
+  resizeHandleWidth,
+  asideWidth: `${maxEditorWidth} - ${defaultEditorWidth} - ${resizeHandleWidth}`,
+  headerHeight: '4rem',
+  footerHeight: '4rem',
+} as const;
+
+const layer = {
+  header: 1000,
+  headerAlarm: 1000,
+};
+
+export const emotionTheme = { colors, layout, layer } as const;
 
 export type EmotionTheme = typeof emotionTheme;

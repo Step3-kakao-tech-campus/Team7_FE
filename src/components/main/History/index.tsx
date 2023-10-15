@@ -2,10 +2,10 @@ import type { PropsWithChildren } from 'react';
 import { css } from '@emotion/react';
 import type { CalendarTooltipProps } from '@nivo/calendar';
 import { ResponsiveCalendar } from '@nivo/calendar';
+import { useGetUserHistory } from '@/api/hooks/user';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
-import { useParamsToUrl } from '@/hooks/common/useParamsToUrl';
-import { useGetUserHistory } from '@/hooks/queries/user';
+import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 
 const History = () => {

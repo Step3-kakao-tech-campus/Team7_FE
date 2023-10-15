@@ -22,7 +22,18 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   }
 }
 
-const queryClient = new QueryClient();
+// 크롬이 online 일때 리액트 쿼리가 동작하도록 함.
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      networkMode: 'always',
+      refetchOnWindowFocus: false,
+    },
+    mutations: {
+      networkMode: 'always',
+    },
+  },
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const Layout = getLayout(Component);
