@@ -10,6 +10,8 @@ import type {
   JoinResponse,
   LoginRequest,
   LoginResponse,
+  PasswordChangeRequest,
+  PasswordChangeResponse,
 } from './type';
 
 export const postEmailCheck = async ({ email }: EmailCheckRequest) => {
@@ -56,6 +58,16 @@ export const postLogin = async ({ email, password }: LoginRequest) => {
   const { data } = await axiosInstance.request<LoginResponse>({
     method: 'POST',
     url: '/login',
+    data: { email, password },
+  });
+
+  return data;
+};
+
+export const patchPasswordChange = async ({ email, password }: PasswordChangeRequest) => {
+  const { data } = await axiosInstance.request<PasswordChangeResponse>({
+    method: 'PATCH',
+    url: '/password/change',
     data: { email, password },
   });
 

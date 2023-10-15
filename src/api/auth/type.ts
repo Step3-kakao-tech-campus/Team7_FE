@@ -23,6 +23,11 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface PasswordChangeRequest {
+  email: string;
+  password: string;
+}
+
 export interface EmailCheckResponse {
   success: boolean;
   code: number;
@@ -56,4 +61,11 @@ export interface LoginResponse {
   code: number;
   message: string;
   result: { token: string } | null;
+}
+
+export interface PasswordChangeResponse {
+  success: boolean;
+  code: number;
+  message: string;
+  result: null;
 }
