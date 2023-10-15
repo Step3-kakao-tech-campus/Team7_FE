@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import { useGetTil } from '@/api/hooks/til';
 import Comment from '@/components/TILWrite/Comments/Comment';
 import Header from '@/components/TILWrite/Comments/Header';
 import TextAreaSection from '@/components/TILWrite/Comments/TextAreaSection';
@@ -10,6 +12,14 @@ interface CommentsProps {
 const Comments = (props: CommentsProps) => {
   const { handleCloseCommentAside } = props;
 
+  const { query } = useRouter();
+
+  const { tilDetail } = useGetTil({
+    roadmapId: query.roadmapId as string,
+    stepId: query.stepId as string,
+    tilId: query.tilId as string,
+  });
+
   return (
     <Styled.Root>
       <Styled.HeaderContainer>
@@ -17,8 +27,8 @@ const Comments = (props: CommentsProps) => {
       </Styled.HeaderContainer>
 
       <Styled.CommentContainer>
-        {Array.from({ length: 30 }).map((_, index) => {
-          return <Comment key={index} />;
+        {tilDetail?.comments.map((comment) => {
+          return <Comment key={comment.id} {...comment} />;
         })}
       </Styled.CommentContainer>
 

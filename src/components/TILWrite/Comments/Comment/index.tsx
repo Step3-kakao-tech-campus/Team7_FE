@@ -1,13 +1,23 @@
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { useRef, useState } from 'react';
+import type { Comment as CommentType } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import ContextMenu from '@/components/common/ContextMenu';
 import Icon from '@/components/common/Icon';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
 
-interface CommentProps {}
+// 플러그인과 로케일 설정
+dayjs.extend(relativeTime);
+dayjs.locale('ko');
+
+interface CommentProps extends CommentType {}
 
 const Comment = (props: CommentProps) => {
+  const { name, image, content, isOwner, date } = props;
+
   const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
   const contextRef = useRef<HTMLDivElement>(null);
 
@@ -23,9 +33,9 @@ const Comment = (props: CommentProps) => {
     <Styled.Root>
       <Styled.Header>
         <Styled.Left>
-          <Avatar imageSize={32} iconName="ic_profile" />
-          <Styled.Name>홍길동</Styled.Name>
-          <Styled.Date>9시간 전</Styled.Date>
+          <Avatar imageSize={32} imageUrl={image} alt="프로필 이미지" />
+          <Styled.Name>{name}</Styled.Name>
+          <Styled.Date>{dayjs(date).from(dayjs())}</Styled.Date>
         </Styled.Left>
 
         <Styled.Right>
@@ -38,15 +48,33 @@ const Comment = (props: CommentProps) => {
             alt="설정"
           />
           {isContextMenuOpen && (
-            <Styled.ContextMenus ref={contextRef}>
-              <ContextMenu.Menu>수정하기</ContextMenu.Menu>
-              <ContextMenu.Menu>삭제하기</ContextMenu.Menu>
-            </Styled.ContextMenus>
+            <>
+              {(() => {
+                // 자신이 글을 작성했을때 들어올 수 있는 페이지 이다.
+                // 자신의 댓글이라면 수정, 삭제가 가능하다.
+                // 다른 사람의 댓글이라면 삭제하기만 가능하다.
+                switch (isOwner) {
+                  case true:
+                    return (
+                      <Styled.ContextMenus ref={contextRef}>
+                        <ContextMenu.Menu>수정하기</ContextMenu.Menu>
+                        <ContextMenu.Menu>삭제하기</ContextMenu.Menu>
+                      </Styled.ContextMenus>
+                    );
+                  case false:
+                    return (
+                      <Styled.ContextMenus ref={contextRef}>
+                        <ContextMenu.Menu>삭제하기</ContextMenu.Menu>
+                      </Styled.ContextMenus>
+                    );
+                }
+              })()}
+            </>
           )}
         </Styled.Right>
       </Styled.Header>
 
-      <Styled.Text>할 슈 있 다 ~ 꿈은 이루어진다...⭐️</Styled.Text>
+      <Styled.Text>{content}</Styled.Text>
     </Styled.Root>
   );
 };
