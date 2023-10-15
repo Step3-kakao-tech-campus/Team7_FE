@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { EmotionTheme } from '@/styles/emotion';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const ModalContainerStyles = () => css`
   width: 27.5rem;

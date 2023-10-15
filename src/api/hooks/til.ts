@@ -8,8 +8,10 @@ import {
   postTil as postTilAPI,
   postComment as postCommentAPI,
   patchComment as patchCommentAPI,
+  deleteComment as deleteCommentAPI,
 } from '@/api/til';
 import type {
+  DeleteCommentRequest,
   GetTilRequest,
   PatchCommentRequest,
   PostCommentRequest,
@@ -139,4 +141,29 @@ export const usePatchComment = () => {
   };
 
   return { patchComment };
+};
+
+export const useDeleteComment = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(deleteCommentAPI);
+
+  const deleteComment = async (body: DeleteCommentRequest) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          QUERY_KEY.getTil,
+          {
+            roadmapId: body.roadmapId,
+            stepId: body.stepId,
+            tilId: body.tilId,
+          },
+        ]);
+      },
+    });
+
+    return data;
+  };
+
+  return { deleteComment };
 };

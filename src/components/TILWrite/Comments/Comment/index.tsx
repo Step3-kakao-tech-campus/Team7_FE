@@ -2,6 +2,8 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useRef } from 'react';
+import { useRouter } from 'next/router';
+import { useDeleteComment } from '@/api/hooks/til';
 import type { Comment as CommentType } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import ContextMenu from '@/components/common/ContextMenu';
@@ -28,6 +30,8 @@ const Comment = (props: CommentProps) => {
     handleToggle: handleToggleMenu,
   } = useModalState(false);
   const contextRef = useRef<HTMLDivElement>(null);
+  const { deleteComment } = useDeleteComment();
+  const { query } = useRouter();
 
   const handleOpenContextMenu = () => {
     handleToggleMenu();
@@ -37,6 +41,16 @@ const Comment = (props: CommentProps) => {
   const handleSelectPatchComment = () => {
     handleCloseMenu();
     handlePatchModalOpen();
+  };
+
+  const handleSelectDeleteComment = () => {
+    handleCloseMenu();
+    deleteComment({
+      roadmapId: query.roadmapId as string,
+      stepId: query.stepId as string,
+      tilId: query.tilId as string,
+      commentId: id.toString(),
+    });
   };
 
   useOnClickOutside(contextRef, () => {
@@ -72,13 +86,13 @@ const Comment = (props: CommentProps) => {
                     return (
                       <Styled.ContextMenus ref={contextRef}>
                         <ContextMenu.Menu onClick={handleSelectPatchComment}>수정하기</ContextMenu.Menu>
-                        <ContextMenu.Menu>삭제하기</ContextMenu.Menu>
+                        <ContextMenu.Menu onClick={handleSelectDeleteComment}>삭제하기</ContextMenu.Menu>
                       </Styled.ContextMenus>
                     );
                   case false:
                     return (
                       <Styled.ContextMenus ref={contextRef}>
-                        <ContextMenu.Menu>삭제하기</ContextMenu.Menu>
+                        <ContextMenu.Menu onClick={handleSelectDeleteComment}>삭제하기</ContextMenu.Menu>
                       </Styled.ContextMenus>
                     );
                 }

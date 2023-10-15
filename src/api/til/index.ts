@@ -10,6 +10,8 @@ import type {
   PostCommentResponse,
   PatchCommentRequest,
   PatchCommentResponse,
+  DeleteCommentRequest,
+  DeleteCommentResponse,
 } from '@/api/til/type';
 
 export const getTils = async (input: TilsRequest) => {
@@ -63,6 +65,17 @@ export const patchComment = async (body: PatchCommentRequest) => {
     method: 'PATCH',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
     data: { content },
+  });
+
+  return data;
+};
+
+export const deleteComment = async (body: DeleteCommentRequest) => {
+  const { roadmapId, stepId, tilId, commentId } = body;
+
+  const { data } = await axiosInstance.request<DeleteCommentResponse>({
+    method: 'DELETE',
+    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
   });
 
   return data;
