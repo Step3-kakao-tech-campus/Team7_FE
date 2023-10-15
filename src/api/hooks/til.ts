@@ -1,10 +1,9 @@
 import qs from 'qs';
 import { useRouter } from 'next/router';
 import type { QueryKey } from '@tanstack/react-query';
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import { getTil, getTils } from '@/api/til';
-import { postTil as postTilAPI } from '@/api/til';
-import type { GetTilRequest, PostTilRequest, TilsResponse } from '@/api/til/type';
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getTil, getTils, postTil as postTilAPI, postComment as postCommentAPI } from '@/api/til';
+import type { GetTilRequest, PostCommentRequest, PostTilRequest, TilsResponse } from '@/api/til/type';
 
 const QUERY_KEY = {
   getTils: 'getTils',
@@ -78,4 +77,29 @@ export const useGetTil = (body: GetTilRequest) => {
   return {
     tilDetail: data?.result ?? null,
   };
+};
+
+export const usePostComment = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(postCommentAPI);
+
+  const postComment = async (body: PostCommentRequest) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          QUERY_KEY.getTil,
+          {
+            roadmapId: body.roadmapId,
+            stepId: body.stepId,
+            tilId: body.tilId,
+          },
+        ]);
+      },
+    });
+
+    return data;
+  };
+
+  return { postComment };
 };

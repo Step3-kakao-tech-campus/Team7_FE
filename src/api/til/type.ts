@@ -42,3 +42,17 @@ export interface GetTilResponse extends CommonResponse {
     comments: Comment[];
   };
 }
+
+// postComment
+export interface PostCommentRequest {
+  roadmapId: string;
+  stepId: string;
+  tilId: string;
+  content: string;
+}
+
+export interface PostCommentResponse extends CommonResponse {
+  result: {
+    id: number;
+  };
+}

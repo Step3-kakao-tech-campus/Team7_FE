@@ -193,3 +193,19 @@ export const updateFixture = (name: string) => {
     ];
   }
 };
+
+export const updateGetTilResponseFixture = (content: string) => {
+  const length = getTilResponse.result.comments.length;
+
+  getTilResponse.result.comments = [
+    ...getTilResponse.result.comments,
+    {
+      id: length + 1,
+      name: '조준서',
+      image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+      content,
+      isOwner: false,
+      date: '2023-10-09',
+    },
+  ];
+};

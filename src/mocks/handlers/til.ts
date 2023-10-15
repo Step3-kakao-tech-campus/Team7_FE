@@ -6,6 +6,7 @@ import {
   tilsDateResponse,
   tilsTitleResponse,
   getTilResponse,
+  updateGetTilResponseFixture,
 } from '@/mocks/fixtures/til';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -108,6 +109,34 @@ export const tilHandler = [
 
   rest.post(`${BASE_URL}/roadmaps/:roadmapId/steps/:stepId/tils`, (req, res, ctx) => {
     try {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          success: true,
+          message: 'ok',
+          result: {
+            id: 1,
+          },
+        }),
+      );
+    } catch (error) {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          success: false,
+          message: '서버에서 에러가 났어요',
+          result: null,
+        }),
+      );
+    }
+  }),
+
+  rest.post(`${BASE_URL}/roadmaps/:roadmapId/steps/:stepId/tils/:tilId/comments`, (req, res, ctx) => {
+    const {
+      body: { content },
+    } = req;
+    try {
+      updateGetTilResponseFixture(content);
       return res(
         ctx.status(200),
         ctx.json({

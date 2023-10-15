@@ -6,6 +6,8 @@ import type {
   PostTilResponse,
   GetTilRequest,
   GetTilResponse,
+  PostCommentRequest,
+  PostCommentResponse,
 } from '@/api/til/type';
 
 export const getTils = async (input: TilsRequest) => {
@@ -35,6 +37,18 @@ export const getTil = async (body: GetTilRequest) => {
   const { data } = await axiosInstance.request<GetTilResponse>({
     method: 'GET',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
+  });
+
+  return data;
+};
+
+export const postComment = async (body: PostCommentRequest) => {
+  const { roadmapId, stepId, tilId, content } = body;
+
+  const { data } = await axiosInstance.request<PostCommentResponse>({
+    method: 'POST',
+    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments`,
+    data: { content },
   });
 
   return data;
