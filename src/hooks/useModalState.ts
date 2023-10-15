@@ -10,5 +10,9 @@ export const useModalState = (initialState = false) => {
     setIsOpen(false);
   };
 
-  return { isOpen, handleOpen, handleClose };
+  const handleToggle = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  return { isOpen, handleOpen, handleClose, handleToggle };
 };

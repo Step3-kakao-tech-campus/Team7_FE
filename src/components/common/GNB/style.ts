@@ -6,7 +6,7 @@ export const Root = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: ${({ theme }) => theme.layer.header};
   background-color: #fff;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
@@ -85,4 +85,25 @@ export const TILButtonStyles = css`
   font-size: 1.25rem;
   font-weight: 700;
   margin-right: 1rem;
+`;
+
+export const NoticeContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+export const AlarmActiveDot = styled.div`
+  position: absolute;
+  top: 6px;
+  right: -4px;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.rose};
+`;
+
+export const ProfileSkeletonStyles = css`
+  width: 40px;
+  height: 40px;
 `;

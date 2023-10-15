@@ -1,4 +1,5 @@
 export const tilyLinks = {
+  intro: () => '/intro',
   home: () => '/',
   verify: () => '/auth/register/verify',
   register: () => '/auth/register/',
@@ -6,4 +7,5 @@ export const tilyLinks = {
   findPwVerify: () => '/auth/change-password/verify',
   changePassword: () => '/auth/change-password/',
   roadmaps: () => '/roadmaps',
+  mypage: () => '/mypage',
 };

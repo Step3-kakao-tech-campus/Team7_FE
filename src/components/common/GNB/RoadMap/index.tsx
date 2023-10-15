@@ -7,6 +7,7 @@ import type { Step } from '@/api/roadmap/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Icon from '@/components/common/Icon';
+import { getTilWriteUrl } from '@/utils/getTilWriteUrl';
 import * as Styled from './style';
 
 const RoadMap = () => {
@@ -25,10 +26,10 @@ const RoadMap = () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${tilId}`);
-    } else {
       const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
-      router.push(`/TILWrite?roadmapId=${roadmapId}&?stepId=${stepId}&?tilId=${data?.result.id}`);
+      router.push(getTilWriteUrl(roadmapId, stepId, data?.result.id));
+    } else {
+      router.push(getTilWriteUrl(roadmapId, stepId, tilId));
     }
   };
 
