@@ -11,8 +11,7 @@ import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
 import { tilyLinks } from '@/constants/links';
 import { NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
-import { useModalState } from '@/hooks/common/useModalState';
-import RegisterModal from './RegisterModal';
+import AuthModal from '../AuthModal';
 
 interface RegisterFormInput {
   email: string;
@@ -142,7 +141,7 @@ const Register = () => {
           </StyledButtonContainer>
         </StyledForm>
       </StyledFlex>
-      <RegisterModal isOpen={isOpen} handleClose={handleClose} />
+      <AuthModal isOpen={isOpen} handleClose={handleClose} content="회원가입이 완료되었습니다." />
     </>
   );
 };
