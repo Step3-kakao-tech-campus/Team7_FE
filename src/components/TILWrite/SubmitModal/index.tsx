@@ -5,11 +5,11 @@ import * as Styled from './style';
 interface SubmitModalProps {
   isOpen: boolean;
   handleClose: () => void;
-  handleSubmit: () => void;
+  handleSubmitTIL: () => void;
 }
 
 const SubmitModal = (props: SubmitModalProps) => {
-  const { isOpen, handleClose, handleSubmit } = props;
+  const { isOpen, handleClose, handleSubmitTIL } = props;
 
   return (
     <Modal title="모달 예시" isOpen={isOpen} onClose={handleClose}>
@@ -22,7 +22,7 @@ const SubmitModal = (props: SubmitModalProps) => {
         <Button variant="ghost" onClick={handleClose}>
           취소
         </Button>
-        <Button onClick={handleSubmit}>확인</Button>
+        <Button onClick={handleSubmitTIL}>확인</Button>
       </Styled.ButtonContainer>
     </Modal>
   );

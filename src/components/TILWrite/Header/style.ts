@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Root = styled.header`
@@ -22,9 +21,4 @@ export const Title = styled.h1`
 export const Container = styled.div`
   display: flex;
   gap: 1.3rem;
-`;
-
-export const SubmitButtonStyles = () => css`
-  font-weight: 600;
-  font-size: 1rem;
 `;

@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
+import { useSubmitTil } from '@/api/hooks/til';
+import SubmitModal from '@/components/TILWrite/SubmitModal';
 import Button from '@/components/common/Button';
-import IconButton from '@/components/common/IconButton';
 import { tilyLinks } from '@/constants/links';
+import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 interface FooterProps {
@@ -14,7 +16,9 @@ const Footer = (props: FooterProps) => {
   const { TILContent } = props;
 
   const router = useRouter();
+  const { isOpen, handleOpen, handleClose } = useModalState();
   const { patchTil } = usePatchTil();
+  const { submitTil } = useSubmitTil();
   const { tilDetail } = useGetTil({
     roadmapId: router.query.roadmapId as string,
     stepId: router.query.stepId as string,
@@ -33,6 +37,17 @@ const Footer = (props: FooterProps) => {
     });
   };
 
+  const handleSubmitTIL = () => {
+    submitTil({
+      roadmapId: router.query.roadmapId as string,
+      stepId: router.query.stepId as string,
+      tilId: router.query.tilId as string,
+      title: 'title',
+      content: 'content',
+    });
+    handleClose();
+  };
+
   return (
     <Styled.Root>
       <Styled.ExitContainer onClick={() => router.push(tilyLinks.home())}>
@@ -42,25 +57,32 @@ const Footer = (props: FooterProps) => {
 
       <Styled.Container>
         {tilDetail?.isPersonal === false && (
-          <IconButton
-            css={Styled.ButtonStyles}
-            iconName="ic_lock"
-            imageSize={18}
-            onClick={() =>
-              router.push(
-                tilyLinks.peopleTil({
-                  roadmapId: Number(router.query.roadmapId) as number,
-                  stepId: Number(router.query.stepId) as number,
-                }),
-              )
-            }>
-            다른 사람 TIL 보기
-          </IconButton>
+          <>
+            {tilDetail?.isCompleted === false ? (
+              <Button variant="primary" css={Styled.ButtonStyles} onClick={handleOpen}>
+                제출
+              </Button>
+            ) : (
+              <Button
+                css={Styled.ButtonStyles}
+                onClick={() =>
+                  router.push(
+                    tilyLinks.peopleTil({
+                      roadmapId: Number(router.query.roadmapId) as number,
+                      stepId: Number(router.query.stepId) as number,
+                    }),
+                  )
+                }>
+                다른 사람 TIL 보기
+              </Button>
+            )}
+          </>
         )}
         <Button css={Styled.ButtonStyles} onClick={handleSaveTIL}>
           저장
         </Button>
       </Styled.Container>
+      <SubmitModal isOpen={isOpen} handleClose={handleClose} handleSubmitTIL={handleSubmitTIL} />
     </Styled.Root>
   );
 };
