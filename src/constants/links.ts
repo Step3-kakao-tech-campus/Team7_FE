@@ -9,7 +9,7 @@ export const tilyLinks = {
   roadmap: () => '/roadmap',
   mypage: () => '/mypage',
   tilWrite: ({ roadmapId, stepId, tilId }: tilWriteParams) =>
-    `TILWrite/roadmap/${roadmapId}/step/${stepId}/til/${tilId}`,
+    `/TILWrite/roadmap/${roadmapId}/step/${stepId}/til/${tilId}`,
   peopleTil: ({ roadmapId, stepId }: Omit<tilWriteParams, 'tilId'>) => `/roadmap/${roadmapId}/step/${stepId}`,
 };
 
