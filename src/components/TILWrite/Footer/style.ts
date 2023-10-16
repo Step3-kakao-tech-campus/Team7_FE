@@ -10,7 +10,7 @@ export const Root = styled.footer`
 
   background-color: ${({ theme }) => theme.colors.gray_100};
   width: 100%;
-  height: ${({ theme }) => theme.layout.footerHeight};
+  height: ${({ theme }) => theme.layout.tilWrite.footerHeight};
 `;
 
 export const Title = styled.h1`

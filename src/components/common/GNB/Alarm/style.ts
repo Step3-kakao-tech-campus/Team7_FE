@@ -6,7 +6,7 @@ export const Root = styled(motion.div)`
   flex-direction: column;
   position: absolute;
   z-index: ${({ theme }) => theme.layer.headerAlarm};
-  top: ${({ theme }) => theme.layout.headerHeight};
+  top: 4rem;
   right: 0;
   width: 27.5rem;
   max-height: 30.75rem;

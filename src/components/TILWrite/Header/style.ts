@@ -9,7 +9,7 @@ export const Root = styled.header`
 
   background-color: ${({ theme }) => theme.colors.gray_100};
   width: 100%;
-  height: ${({ theme }) => theme.layout.headerHeight};
+  height: ${({ theme }) => theme.layout.tilWrite.headerHeight};
 `;
 
 export const Title = styled.h1`

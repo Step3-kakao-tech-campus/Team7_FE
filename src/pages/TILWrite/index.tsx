@@ -131,10 +131,10 @@ export default TILWrite;
 
 const editorVariants = {
   asideOpen: {
-    width: `${emotionTheme.layout.defaultEditorWidth}`,
+    width: `${emotionTheme.layout.tilWrite.defaultEditorWidth}`,
   },
   asideClosed: {
-    width: `calc(${emotionTheme.layout.maxEditorWidth} - ${emotionTheme.layout.resizeHandleWidth} )`,
+    width: `calc(${emotionTheme.layout.tilWrite.maxEditorWidth} - ${emotionTheme.layout.tilWrite.resizeHandleWidth} )`,
   },
 };
 
@@ -151,14 +151,14 @@ const Root = styled.div`
 `;
 
 const EditorContainer = styled(motion.div)`
-  width: ${({ theme }) => theme.layout.defaultEditorWidth};
+  width: ${({ theme }) => theme.layout.tilWrite.defaultEditorWidth};
   flex-shrink: 0;
   overflow-y: scroll;
   background-color: #fff;
 `;
 
 const PersonalEditorContainer = styled.div`
-  width: ${({ theme }) => theme.layout.maxEditorWidth};
+  width: ${({ theme }) => theme.layout.tilWrite.maxEditorWidth};
   flex-shrink: 0;
   overflow-y: scroll;
   background-color: #fff;
@@ -167,7 +167,7 @@ const PersonalEditorContainer = styled.div`
 const ResizeHandle = styled.div`
   position: sticky;
   top: 0;
-  width: ${({ theme }) => theme.layout.resizeHandleWidth};
+  width: ${({ theme }) => theme.layout.tilWrite.resizeHandleWidth};
   height: 100%;
   background-image: url('/assets/icons/ic_spring.svg');
   cursor: pointer;
@@ -175,7 +175,8 @@ const ResizeHandle = styled.div`
 
 const Container = styled.div`
   display: flex;
-  height: ${({ theme }) => `calc(100% - ${theme.layout.headerHeight} - ${theme.layout.footerHeight})`};
+  height: ${({ theme }) =>
+    `calc(100% - ${theme.layout.tilWrite.headerHeight} - ${theme.layout.tilWrite.footerHeight})`};
 `;
 
 const AsideContainer = styled.aside`
@@ -185,11 +186,13 @@ const AsideContainer = styled.aside`
 
 const ExtraDrawerMotion = styled(motion.div)`
   position: fixed;
-  top: ${({ theme }) => theme.layout.headerHeight};
-  left: ${({ theme }) => `calc(${theme.layout.defaultEditorWidth} + ${theme.layout.resizeHandleWidth})`};
+  top: ${({ theme }) => theme.layout.tilWrite.headerHeight};
+  left: ${({ theme }) =>
+    `calc(${theme.layout.tilWrite.defaultEditorWidth} + ${theme.layout.tilWrite.resizeHandleWidth})`};
   z-index: 200;
-  width: ${({ theme }) => `calc(${theme.layout.asideWidth})`};
-  height: ${({ theme }) => `calc(100% - ${theme.layout.headerHeight} - ${theme.layout.footerHeight})`};
+  width: ${({ theme }) => `calc(${theme.layout.tilWrite.asideWidth})`};
+  height: ${({ theme }) =>
+    `calc(100% - ${theme.layout.tilWrite.headerHeight} - ${theme.layout.tilWrite.footerHeight})`};
   background-color: white;
   overflow-y: scroll;
 `;

@@ -25,12 +25,17 @@ const maxEditorWidth = '100%';
 const resizeHandleWidth = '50px';
 
 const layout = {
-  defaultEditorWidth,
-  maxEditorWidth,
-  resizeHandleWidth,
-  asideWidth: `${maxEditorWidth} - ${defaultEditorWidth} - ${resizeHandleWidth}`,
-  headerHeight: '4rem',
-  footerHeight: '4rem',
+  main: {
+    GNBHeight: '4.5rem',
+  },
+  tilWrite: {
+    defaultEditorWidth,
+    maxEditorWidth,
+    resizeHandleWidth,
+    asideWidth: `${maxEditorWidth} - ${defaultEditorWidth} - ${resizeHandleWidth}`,
+    headerHeight: '4rem',
+    footerHeight: '4rem',
+  },
 } as const;
 
 const layer = {
