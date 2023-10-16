@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import IconButton from '@/components/common/IconButton';
+import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 
 interface FooterProps {
@@ -34,7 +35,7 @@ const Footer = (props: FooterProps) => {
 
   return (
     <Styled.Root>
-      <Styled.ExitContainer onClick={() => router.back()}>
+      <Styled.ExitContainer onClick={() => router.push(tilyLinks.home())}>
         <Image src={'/assets/icons/ic_arrowLeft.svg'} alt="Logo" width={20} height={20} />
         <Styled.Title>나가기</Styled.Title>
       </Styled.ExitContainer>
