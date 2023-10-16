@@ -14,7 +14,7 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
   const { handleCloseAside } = props;
 
   const { query } = useRouter();
-  const { steps, isLoading } = useGetRoadmapSteps(query.roadmapId as string);
+  const { steps, isLoading } = useGetRoadmapSteps(Number(query.roadmapId));
 
   return (
     <Styled.Root>

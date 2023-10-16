@@ -27,8 +27,8 @@ export interface RoadmapStepsResult {
 
 // getRoadmapStepReference
 export interface GetRoadmapStepReferenceRequest {
-  roadmapId: string;
-  stepId: string;
+  roadmapId: number;
+  stepId: number;
 }
 
 export interface GetRoadmapStepReferenceResponse extends CommonResponse {

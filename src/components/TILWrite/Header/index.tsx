@@ -15,9 +15,9 @@ const Header = (props: HeaderProps) => {
   const router = useRouter();
 
   const { tilDetail } = useGetTil({
-    roadmapId: router.query.roadmapId as string,
-    stepId: router.query.stepId as string,
-    tilId: router.query.tilId as string,
+    roadmapId: Number(router.query.roadmapId),
+    stepId: Number(router.query.stepId),
+    tilId: Number(router.query.tilId),
   });
 
   return (
@@ -29,7 +29,7 @@ const Header = (props: HeaderProps) => {
 
       <Styled.Container>
         <Icon iconName="ic_github" imageSize={32} ext="svg" alt="깃허브 익스텐션" />
-        {tilDetail?.isPersonal === false && (
+        {!tilDetail?.isPersonal && (
           <Icon onClick={handleOpenCommentAside} iconName="ic_comment" imageSize={32} ext="svg" alt="코멘트" />
         )}
       </Styled.Container>

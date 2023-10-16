@@ -20,18 +20,18 @@ const Footer = (props: FooterProps) => {
   const { patchTil } = usePatchTil();
   const { submitTil } = useSubmitTil();
   const { tilDetail } = useGetTil({
-    roadmapId: router.query.roadmapId as string,
-    stepId: router.query.stepId as string,
-    tilId: router.query.tilId as string,
+    roadmapId: Number(router.query.roadmapId),
+    stepId: Number(router.query.stepId),
+    tilId: Number(router.query.tilId),
   });
 
   const handleSaveTIL = () => {
     if (!tilDetail) return;
 
     patchTil({
-      roadmapId: router.query.roadmapId as string,
-      stepId: router.query.stepId as string,
-      tilId: router.query.tilId as string,
+      roadmapId: Number(router.query.roadmapId),
+      stepId: Number(router.query.stepId),
+      tilId: Number(router.query.tilId),
       content: TILContent,
       title: tilDetail?.step.title,
     });
@@ -39,9 +39,9 @@ const Footer = (props: FooterProps) => {
 
   const handleSubmitTIL = () => {
     submitTil({
-      roadmapId: router.query.roadmapId as string,
-      stepId: router.query.stepId as string,
-      tilId: router.query.tilId as string,
+      roadmapId: Number(router.query.roadmapId),
+      stepId: Number(router.query.stepId),
+      tilId: Number(router.query.tilId),
       title: 'title',
       content: 'content',
     });
@@ -56,13 +56,9 @@ const Footer = (props: FooterProps) => {
       </Styled.ExitContainer>
 
       <Styled.Container>
-        {tilDetail?.isPersonal === false && (
+        {!tilDetail?.isPersonal && (
           <>
-            {tilDetail?.isCompleted === false ? (
-              <Button variant="primary" css={Styled.ButtonStyles} onClick={handleOpen}>
-                제출
-              </Button>
-            ) : (
+            {tilDetail?.isCompleted ? (
               <Button
                 css={Styled.ButtonStyles}
                 onClick={() =>
@@ -74,6 +70,10 @@ const Footer = (props: FooterProps) => {
                   )
                 }>
                 다른 사람 TIL 보기
+              </Button>
+            ) : (
+              <Button variant="primary" css={Styled.ButtonStyles} onClick={handleOpen}>
+                제출
               </Button>
             )}
           </>

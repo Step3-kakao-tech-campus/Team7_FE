@@ -20,9 +20,9 @@ const Comments = (props: CommentsProps) => {
   const { query } = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState(false);
   const { tilDetail } = useGetTil({
-    roadmapId: query.roadmapId as string,
-    stepId: query.stepId as string,
-    tilId: query.tilId as string,
+    roadmapId: Number(query.roadmapId),
+    stepId: Number(query.stepId),
+    tilId: Number(query.tilId),
   });
 
   const handleSelectComment = (commentId: number) => {

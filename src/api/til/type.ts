@@ -29,9 +29,9 @@ export interface PostTilResponse {
 
 // getTil
 export interface GetTilRequest {
-  roadmapId: string;
-  stepId: string;
-  tilId: string;
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
 }
 
 export interface GetTilResponse extends CommonResponse {
@@ -46,9 +46,9 @@ export interface GetTilResponse extends CommonResponse {
 
 // postComment
 export interface PostCommentRequest {
-  roadmapId: string;
-  stepId: string;
-  tilId: string;
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
   content: string;
 }
 
@@ -69,9 +69,9 @@ export interface PatchCommentResponse extends CommonResponse {
 
 // patchTil
 export interface PatchTilRequest {
-  roadmapId: string;
-  stepId: string;
-  tilId: string;
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
   title: string;
   content: string;
 }
@@ -82,9 +82,9 @@ export interface PatchTilResponse extends CommonResponse {
 
 // deleteComment
 export interface DeleteCommentRequest {
-  roadmapId: string;
-  stepId: string;
-  tilId: string;
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
   commentId: string;
 }
 

@@ -15,18 +15,18 @@ import { emotionTheme } from '@/styles/emotion';
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
 const TILWrite = () => {
-  const [referenceParam, setReferenceParam] = useState<{ roadmapId: string; stepId: string } | null>(null);
+  const [referenceParam, setReferenceParam] = useState<{ roadmapId: number; stepId: number } | null>(null);
   const [TILContent, setTILContent] = useState<string>('');
 
   const { query } = useRouter();
 
   const { tilDetail } = useGetTil({
-    roadmapId: query.roadmapId as string,
-    stepId: query.stepId as string,
-    tilId: query.tilId as string,
+    roadmapId: Number(query.roadmapId),
+    stepId: Number(query.stepId),
+    tilId: Number(query.tilId),
   });
 
-  const handleSelectStepReference = (roadmapId: string, stepId: string) => {
+  const handleSelectStepReference = (roadmapId: number, stepId: number) => {
     setReferenceParam({ roadmapId, stepId });
   };
 

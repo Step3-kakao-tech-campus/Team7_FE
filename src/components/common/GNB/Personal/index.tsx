@@ -26,7 +26,7 @@ const Personal = () => {
 
   const router = useRouter();
   const { data: roadmaps } = useGetRoadmaps();
-  const { steps } = useGetRoadmapSteps(roadmapId.toString());
+  const { steps } = useGetRoadmapSteps(roadmapId);
   const { postRoadmapsIndividual } = usePostRoadmapIndividual();
   const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();
   const { postTil } = usePostTil();
@@ -72,7 +72,7 @@ const Personal = () => {
 
   const createStep: SubmitHandler<{ stepTitle: string }> = (formData) => {
     try {
-      postRoadmapStepIndividual({ roadmapId: roadmapId.toString(), title: formData.stepTitle });
+      postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
       stepReset();
       setIsStepButtonSelected(false);
     } catch {

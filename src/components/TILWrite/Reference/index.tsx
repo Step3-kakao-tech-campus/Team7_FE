@@ -5,15 +5,15 @@ import Youtube from '@/components/TILWrite/Reference/Youtube';
 import * as Styled from './style';
 
 interface ReferenceProps {
-  referenceParam: { roadmapId: string; stepId: string } | null;
+  referenceParam: { roadmapId: number; stepId: number } | null;
   handleCloseReferenceAside: () => void;
 }
 const Reference = (props: ReferenceProps) => {
   const { referenceParam, handleCloseReferenceAside } = props;
 
   const { reference } = useGetRoadmapStepReference({
-    roadmapId: referenceParam?.roadmapId as string,
-    stepId: referenceParam?.stepId as string,
+    roadmapId: Number(referenceParam?.roadmapId),
+    stepId: Number(referenceParam?.stepId),
   });
 
   return (

@@ -7,7 +7,7 @@ import * as Styled from './style';
 interface RoadMapProps {
   handleCloseAside: () => void;
   handleOpenReferenceAside: () => void;
-  handleSelectStepReference: (roadmapId: string, stepId: string) => void;
+  handleSelectStepReference: (roadmapId: number, stepId: number) => void;
   asideMount: boolean;
 }
 
@@ -15,7 +15,7 @@ const RoadMap = (props: RoadMapProps) => {
   const { handleCloseAside, handleOpenReferenceAside, handleSelectStepReference, asideMount } = props;
 
   const { query } = useRouter();
-  const { steps } = useGetRoadmapSteps(query.roadmapId as string);
+  const { steps } = useGetRoadmapSteps(Number(query.roadmapId));
 
   return (
     <Styled.Root

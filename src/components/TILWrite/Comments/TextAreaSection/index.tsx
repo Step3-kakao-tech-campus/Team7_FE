@@ -14,9 +14,9 @@ const TextAreaSection = () => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postComment({
-      roadmapId: query.roadmapId as string,
-      stepId: query.stepId as string,
-      tilId: query.tilId as string,
+      roadmapId: Number(query.roadmapId),
+      stepId: Number(query.stepId),
+      tilId: Number(query.tilId),
       content,
     });
     setContent('');

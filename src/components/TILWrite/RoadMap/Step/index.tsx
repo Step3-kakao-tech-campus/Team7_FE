@@ -11,7 +11,7 @@ interface StepProps {
   isCompleted: boolean;
   tilId: number | null;
   handleOpenReferenceAside: () => void;
-  handleSelectStepReference: (roadmapId: string, stepId: string) => void;
+  handleSelectStepReference: (roadmapId: number, stepId: number) => void;
 }
 
 const Step = (props: StepProps) => {
@@ -21,7 +21,7 @@ const Step = (props: StepProps) => {
   const { postTil } = usePostTil();
 
   const handleSelectReference = () => {
-    handleSelectStepReference(router.query.roadmapId as string, stepId.toString());
+    handleSelectStepReference(Number(router.query.roadmapId), stepId);
     handleOpenReferenceAside();
   };
 

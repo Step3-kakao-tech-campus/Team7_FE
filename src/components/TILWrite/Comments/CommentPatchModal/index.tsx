@@ -22,9 +22,9 @@ const CommentPatchModal = (props: CommentPatchModalProps) => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     patchComment({
-      roadmapId: query.roadmapId as string,
-      stepId: query.stepId as string,
-      tilId: query.tilId as string,
+      roadmapId: Number(query.roadmapId),
+      stepId: Number(query.stepId),
+      tilId: Number(query.tilId),
       commentId: selectedCommentId.toString(),
       content,
     });
