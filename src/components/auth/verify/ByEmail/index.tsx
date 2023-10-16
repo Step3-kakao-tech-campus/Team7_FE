@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { useMutation } from '@tanstack/react-query';
-import { postEmailCheck, postEmailCode, postEmailCodeCheck } from '@/api/auth';
+import { usePostEmailCodeCheck, usePostEmailCheck, usePostEmailCode } from '@/api/hooks/auth';
 import * as Styled from '@/components/auth/verify/ByEmail/style';
 import Input from '@/components/common/Input';
 import { tilyLinks } from '@/constants/links';
 import { EMAIL_REGEX } from '@/constants/regex';
-import { useModalState } from '@/hooks/common/useModalState';
+import { useModalState } from '@/hooks/useModalState';
 import CodeCheck from '../CodeCheck';
 import VerifyModal from '../VerifyModal';
 
@@ -26,16 +25,11 @@ interface ByEmailProps {
 }
 
 const ByEmail = ({ type }: ByEmailProps) => {
-  const { mutateAsync: registerEmailMutateAsync, isLoading: registerEmailIsLoading } = useMutation({
-    mutationFn: (email: string) => postEmailCheck({ email: email }),
-  });
+  const { postEmailCheck, isLoading: registerEmailIsLoading } = usePostEmailCheck();
 
-  const { mutateAsync: passwordEmailMutateAsync, isLoading: passwordEmailIsLoading } = useMutation({
-    mutationFn: (email: string) => postEmailCode({ email: email }),
-  });
-  const { mutateAsync: codeMutateAsync, isLoading: codeIsLoading } = useMutation({
-    mutationFn: (data: EmailFormInput) => postEmailCodeCheck(data),
-  });
+  const { postEmailCode, isLoading: passwordEmailIsLoading } = usePostEmailCode();
+
+  const { postEmailCodeCheck, isLoading: codeIsLoading } = usePostEmailCodeCheck();
 
   const [email, setEmail] = useState<EmailFormStates>({ state: 'emailReady', email: '' });
   const { isOpen, handleOpen, handleClose } = useModalState();
@@ -60,7 +54,7 @@ const ByEmail = ({ type }: ByEmailProps) => {
       const email = formData.email;
       switch (type) {
         case 'register': {
-          const data = await registerEmailMutateAsync(email);
+          const data = await postEmailCheck(email);
 
           if (data?.code === 200) {
             setEmail({ state: 'codeReady', email: email });
@@ -70,7 +64,7 @@ const ByEmail = ({ type }: ByEmailProps) => {
           break;
         }
         case 'changePassword': {
-          const data = await passwordEmailMutateAsync(email);
+          const data = await postEmailCode(email);
 
           if (data?.code === 200) {
             setEmail({ state: 'codeReady', email: email });
@@ -83,7 +77,7 @@ const ByEmail = ({ type }: ByEmailProps) => {
     } else if (email.state === 'codeReady') {
       const email = formData.email;
       const verifyCode = formData.code;
-      const data = await codeMutateAsync({ email: email, code: verifyCode });
+      const data = await postEmailCodeCheck({ email: email, code: verifyCode });
 
       if (data?.code === 200) {
         switch (type) {
@@ -138,8 +132,8 @@ const ByEmail = ({ type }: ByEmailProps) => {
         />
         {email.state === 'codeReady' && (
           <CodeCheck
-            registerEmailMutateAsync={registerEmailMutateAsync}
-            passwordEmailMutateAsync={passwordEmailMutateAsync}
+            registerEmailMutateAsync={postEmailCheck}
+            passwordEmailMutateAsync={postEmailCode}
             type={type}
             email={email.email}
             control={control}

@@ -13,13 +13,13 @@ const Portal = (props: PropsWithChildren<PortalProps>) => {
   const elementId = portalId ?? `$portal-${id}`;
 
   useEffect(() => {
-    let Root = document.getElementById(elementId);
-    if (!Root) {
-      Root = document.createElement('div');
-      Root.setAttribute('id', elementId);
-      document.body.appendChild(Root);
+    let root = document.getElementById(elementId);
+    if (!root) {
+      root = document.createElement('div');
+      root.setAttribute('id', elementId);
+      document.body.appendChild(root);
     }
-    setElement(Root);
+    setElement(root);
   }, [elementId]);
 
   if (!element) {
