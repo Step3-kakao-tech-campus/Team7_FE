@@ -26,7 +26,7 @@ export const authHandler = [
   rest.post(`${BASE_URL}/login`, (req, res, ctx) => {
     return res(ctx.json(loginResponse));
   }),
-  rest.post(`${BASE_URL}/password/change`, (req, res, ctx) => {
+  rest.patch(`${BASE_URL}/password/change`, (req, res, ctx) => {
     return res(ctx.json(passwordChangeResponse));
   }),
 ];
