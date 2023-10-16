@@ -146,10 +146,10 @@ export const getTilResponse: GetTilResponse = {
     return { props: { pvId } };
   };</code></pre><p>&nbsp;</p><p>컴포넌트가 렌더링 될 때에 router.query를 바로 받아올 수 있는 방법을 2가지나 알게되었으니,,</p><p>이제 쿼리를 사용하여 여러가지 데이터를 넘기고 사용하는 방법을 좀더 활용해서 기능을 구현해보도록 해야겠다~~</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>`,
     isPersonal: false,
+    isCompleted: true,
     step: {
       id: 1,
       title: 'Java - 설치와 실행 2 : 리눅스에 Java 설치하기',
-      isCompleted: true,
     },
     comments: [
       {

@@ -38,7 +38,8 @@ export interface GetTilResponse extends CommonResponse {
   result: {
     content: string;
     isPersonal: boolean;
-    step: Omit<Step, 'tilId'>;
+    isCompleted: boolean;
+    step: Omit<Step, 'tilId' | 'isCompleted'>;
     comments: Comment[];
   };
 }
