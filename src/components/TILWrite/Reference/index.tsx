@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useGetRoadmapStepReference } from '@/api/hooks/roadmap';
 import Docs from '@/components/TILWrite/Reference/Docs';
 import Header from '@/components/TILWrite/Reference/Header';
@@ -5,15 +6,15 @@ import Youtube from '@/components/TILWrite/Reference/Youtube';
 import * as Styled from './style';
 
 interface ReferenceProps {
-  referenceParam: { roadmapId: number; stepId: number } | null;
   handleCloseReferenceAside: () => void;
 }
 const Reference = (props: ReferenceProps) => {
-  const { referenceParam, handleCloseReferenceAside } = props;
+  const { handleCloseReferenceAside } = props;
 
+  const { query } = useRouter();
   const { reference } = useGetRoadmapStepReference({
-    roadmapId: Number(referenceParam?.roadmapId),
-    stepId: Number(referenceParam?.stepId),
+    roadmapId: Number(query?.roadmapId),
+    stepId: Number(query?.stepId),
   });
 
   return (

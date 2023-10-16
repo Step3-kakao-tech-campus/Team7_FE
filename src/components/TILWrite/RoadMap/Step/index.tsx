@@ -11,11 +11,10 @@ interface StepProps {
   isCompleted: boolean;
   tilId: number | null;
   handleOpenReferenceAside: () => void;
-  handleSelectStepReference: (roadmapId: number, stepId: number) => void;
 }
 
 const Step = (props: StepProps) => {
-  const { stepId, title, isCompleted, tilId, handleOpenReferenceAside, handleSelectStepReference } = props;
+  const { stepId, title, isCompleted, tilId, handleOpenReferenceAside } = props;
 
   const router = useRouter();
   const { postTil } = usePostTil();
@@ -23,7 +22,6 @@ const Step = (props: StepProps) => {
   const isActiveStep = stepId === Number(router.query.stepId);
 
   const handleSelectReference = () => {
-    handleSelectStepReference(Number(router.query.roadmapId), stepId);
     handleOpenReferenceAside();
   };
 

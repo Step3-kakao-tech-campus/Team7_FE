@@ -15,7 +15,6 @@ import { emotionTheme } from '@/styles/emotion';
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
 const TILWrite = () => {
-  const [referenceParam, setReferenceParam] = useState<{ roadmapId: number; stepId: number } | null>(null);
   const [TILContent, setTILContent] = useState<string>('');
 
   const { query } = useRouter();
@@ -25,10 +24,6 @@ const TILWrite = () => {
     stepId: Number(query.stepId),
     tilId: Number(query.tilId),
   });
-
-  const handleSelectStepReference = (roadmapId: number, stepId: number) => {
-    setReferenceParam({ roadmapId, stepId });
-  };
 
   const handleTILContent = (content: string) => {
     setTILContent(content);
@@ -99,7 +94,6 @@ const TILWrite = () => {
               <RoadMap
                 asideMount={asideMount}
                 handleCloseAside={() => handleCloseAside(handleCloseReference)}
-                handleSelectStepReference={handleSelectStepReference}
                 handleOpenReferenceAside={handleOpenReference}
               />
             )}
@@ -109,7 +103,7 @@ const TILWrite = () => {
               animate={referenceOpen ? 'open' : 'closed'}
               variants={extraDrawerVariants}
               transition={{ type: 'tween', duration: DURATION }}>
-              <Reference referenceParam={referenceParam} handleCloseReferenceAside={() => handleCloseReference()} />
+              <Reference handleCloseReferenceAside={() => handleCloseReference()} />
             </ExtraDrawerMotion>
 
             <ExtraDrawerMotion
