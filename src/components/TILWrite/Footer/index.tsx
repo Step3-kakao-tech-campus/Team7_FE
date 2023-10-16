@@ -42,7 +42,18 @@ const Footer = (props: FooterProps) => {
 
       <Styled.Container>
         {tilDetail?.isPersonal === false && (
-          <IconButton css={Styled.ButtonStyles} iconName="ic_lock" imageSize={18}>
+          <IconButton
+            css={Styled.ButtonStyles}
+            iconName="ic_lock"
+            imageSize={18}
+            onClick={() =>
+              router.push(
+                tilyLinks.peopleTil({
+                  roadmapId: Number(router.query.roadmapId) as number,
+                  stepId: Number(router.query.stepId) as number,
+                }),
+              )
+            }>
             다른 사람 TIL 보기
           </IconButton>
         )}
