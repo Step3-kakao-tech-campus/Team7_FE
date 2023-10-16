@@ -51,7 +51,7 @@ const Alarm = (props: AlarmProps) => {
         ) : (
           alarms.map((alarm:Alarm) => {
             return (
-              <Styled.Item key={alarm.id} onClick={() => router.push({pathname:tilyLinks.tilWrite(),query:{ roadmapId:alarm.roadmap.id,stepId:alarm.step.id, tilId:alarm.tilId }}, tilyLinks.tilWrite())}>
+              <Styled.Item key={alarm.id} onClick={() => router.push(tilyLinks.tilWrite({roadmapId: alarm.roadmap.id, stepId: alarm.step.id, tilId: alarm.tilId}))}>
                 <Avatar imageSize={40} imageUrl={alarm.sender.image} alt="프로필 이미지" />
                 <Styled.Content>
                   <Styled.Title>
