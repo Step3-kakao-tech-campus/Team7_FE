@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useMutation } from '@tanstack/react-query';
 import styled from '@emotion/styled';
-import { postJoin } from '@/api/auth';
+import { usePostJoin } from '@/api/hooks/auth';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
@@ -14,7 +13,7 @@ import { NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
 import { useModalState } from '@/hooks/useModalState';
 import AuthModal from '../AuthModal';
 
-interface RegisterFormInput {
+export interface RegisterFormInput {
   email: string;
   name: string;
   password: string;
@@ -22,7 +21,7 @@ interface RegisterFormInput {
 }
 
 const Register = () => {
-  const { mutateAsync, isLoading } = useMutation({ mutationFn: (data: RegisterFormInput) => postJoin(data) });
+  const { postJoin, isLoading } = usePostJoin();
 
   const { isOpen, handleOpen, handleClose } = useModalState();
 
@@ -45,7 +44,7 @@ const Register = () => {
   });
 
   const onSubmit: SubmitHandler<RegisterFormInput> = async (formData) => {
-    const data = await mutateAsync(formData);
+    const data = await postJoin(formData);
 
     if (data?.code === 200) {
       handleOpen();

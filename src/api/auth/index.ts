@@ -37,7 +37,7 @@ export const postEmailCode = async ({ email }: EmailCodeRequest) => {
 export const postEmailCodeCheck = async ({ email, code }: EmailCodeCheckRequest) => {
   const { data } = await axiosInstance.request<EmailCodeCheckResponse>({
     method: 'POST',
-    url: '/join',
+    url: '/email/code/check',
     data: { email, code },
   });
 
@@ -47,7 +47,7 @@ export const postEmailCodeCheck = async ({ email, code }: EmailCodeCheckRequest)
 export const postJoin = async ({ email, name, password, passwordConfirm }: JoinRequest) => {
   const { data } = await axiosInstance.request<JoinResponse>({
     method: 'POST',
-    url: '/email/code/check',
+    url: '/join',
     data: { email, name, password, passwordConfirm },
   });
 
