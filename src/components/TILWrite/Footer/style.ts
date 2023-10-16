@@ -34,3 +34,9 @@ export const ExitContainer = styled.button`
   display: flex;
   cursor: pointer;
 `;
+
+export const SkeletonStyles = css`
+  width: 60px;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+`;

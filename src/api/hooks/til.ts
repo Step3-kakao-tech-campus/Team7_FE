@@ -77,12 +77,13 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
 export const useGetTil = (body: GetTilRequest) => {
   const { isReady } = useRouter();
 
-  const { data } = useQuery([QUERY_KEY.getTil, body], () => getTil(body), {
+  const { data, isLoading } = useQuery([QUERY_KEY.getTil, body], () => getTil(body), {
     enabled: isReady,
   });
 
   return {
     tilDetail: data?.result ?? null,
+    isLoading,
   };
 };
 
