@@ -20,6 +20,8 @@ const Step = (props: StepProps) => {
   const router = useRouter();
   const { postTil } = usePostTil();
 
+  const isActiveStep = stepId === Number(router.query.stepId);
+
   const handleSelectReference = () => {
     handleSelectStepReference(Number(router.query.roadmapId), stepId);
     handleOpenReferenceAside();
@@ -39,7 +41,7 @@ const Step = (props: StepProps) => {
   };
 
   return (
-    <Styled.Root onClick={routeTILWrite}>
+    <Styled.Root isActiveStep={isActiveStep} onClick={routeTILWrite}>
       <Styled.Container>
         <Styled.CheckIconContainer>
           {isCompleted ? (
