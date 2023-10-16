@@ -3,20 +3,12 @@ import styled from '@emotion/styled';
 import Card from '@/components/common/Card';
 import IconButton from '@/components/common/IconButton';
 
-interface SelectProps {
-  isOpen: boolean;
-}
-
-interface SelectMenuProps {
-  isOpen: boolean;
-}
-
 export const SelectContainer = styled(Card)`
   width: 140px;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 `;
 
-export const Select = styled(IconButton)<SelectProps>`
+export const Select = styled(IconButton)<{ isOpen: boolean }>`
   ${({ theme, isOpen }) => css`
     display: flex;
     justify-content: space-between;
@@ -33,7 +25,7 @@ export const Select = styled(IconButton)<SelectProps>`
   `}
 `;
 
-export const SelectMenu = styled.ul<SelectMenuProps>`
+export const SelectMenu = styled.ul<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   flex-direction: column;
   padding: 0.25rem 0.5rem;
