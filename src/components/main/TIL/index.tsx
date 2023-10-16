@@ -15,10 +15,13 @@ const TIL = (props: TILProps) => {
   return (
     <Styled.Root
       onClick={() =>
-        router.push({
-          pathname: tilyLinks.tilWrite(),
-          query: { roadmapId: til.roadmap.id, stepId: til.step.id, tilId: til.id },
-        })
+        router.push(
+          {
+            pathname: tilyLinks.tilWrite(),
+            query: { roadmapId: til.roadmap.id, stepId: til.step.id, tilId: til.id },
+          },
+          tilyLinks.tilWrite(),
+        )
       }>
       <Styled.Badge>{til.roadmap.name}</Styled.Badge>
       <Styled.Title>{til.step.title}</Styled.Title>

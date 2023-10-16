@@ -32,9 +32,12 @@ const Step = (props: StepProps) => {
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
       const data = await postTil({ roadmapId, stepId, title });
-      router.push({ pathname: tilyLinks.tilWrite(), query: { roadmapId, stepId, tilId: data?.result.id } });
+      router.push(
+        { pathname: tilyLinks.tilWrite(), query: { roadmapId, stepId, tilId: data?.result.id } },
+        tilyLinks.tilWrite(),
+      );
     } else {
-      router.push({ pathname: tilyLinks.tilWrite(), query: { roadmapId, stepId, tilId } });
+      router.push({ pathname: tilyLinks.tilWrite(), query: { roadmapId, stepId, tilId } }, tilyLinks.tilWrite());
     }
   };
 
