@@ -6,9 +6,9 @@ import { usePostTil } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
+import * as Styled from '@/components/common/GNB/Personal/style';
 import Icon from '@/components/common/Icon';
 import { tilyLinks } from '@/constants/links';
-import * as Styled from './style';
 
 const RoadMap = () => {
   const router = useRouter();

@@ -93,3 +93,31 @@ export const InputStyles = () => css`
 `;
 
 export const Form = styled.form``;
+
+// Path: src/components/common/GNB/RoadMap 에 추가적으로 사용되는 style
+
+export const Container = styled.li<{ selected?: boolean }>`
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  margin-bottom: 0.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+
+  background-color: ${({ selected, theme }) => (selected ? theme.colors.rose_light : '#ffffff')};
+
+  &:hover {
+    background-color: ${({ selected, theme }) => (selected ? theme.colors.rose_light : theme.colors.gray_200)};
+  }
+`;
+
+export const IconStyles = css`
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin-right: 0.75rem;
+`;
+
+export const ItemStyles = css`
+  padding-left: 0;
+  margin-bottom: 0;
+`;
