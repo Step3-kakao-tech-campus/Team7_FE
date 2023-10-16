@@ -4,30 +4,31 @@ import styled from '@emotion/styled';
 import type { ButtonProps } from '@/components/common/Button';
 import Button from '@/components/common/Button';
 
-type IconButtonProps = Omit<ButtonProps, 'isLoading' | 'loadingWidth' | 'loadingHeight'> & {
+interface IconButtonProps extends Omit<ButtonProps, 'isLoading' | 'loadingWidth' | 'loadingHeight'> {
   iconPosition?: 'left' | 'right';
   iconName: string;
   imageSize?: number;
-};
+}
 
 const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
   const { children, iconPosition = 'left', iconName, imageSize = 16, ...rest } = props;
 
+  const renderImage = (position: 'left' | 'right') => {
+    if (iconPosition === position) {
+      return (
+        <Container>
+          <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageSize} height={imageSize} />
+        </Container>
+      );
+    }
+    return null;
+  };
+
   return (
     <Button {...rest}>
-      {iconPosition === 'left' && (
-        <Container>
-          <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageSize} height={imageSize} />
-        </Container>
-      )}
-
+      {renderImage('left')}
       {children}
-
-      {iconPosition === 'right' && (
-        <Container>
-          <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageSize} height={imageSize} />
-        </Container>
-      )}
+      {renderImage('right')}
     </Button>
   );
 };
