@@ -13,14 +13,6 @@ export const Root = styled.button<{ isActiveStep: boolean }>`
   &:hover {
     background-color: ${({ theme, isActiveStep }) => (isActiveStep ? theme.colors.rose_light : theme.colors.gray_300)};
   }
-
-  .icon {
-    opacity: 0;
-  }
-
-  &:hover .icon {
-    opacity: 1;
-  }
 `;
 
 export const Container = styled.div`
