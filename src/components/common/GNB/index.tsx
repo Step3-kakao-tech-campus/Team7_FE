@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import { useGetAlarms, useGetUser } from '@/api/hooks/user';
@@ -24,7 +24,7 @@ const GNB = () => {
   const alarmButtonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
-  const activePathMatcher = (path: string) => router.pathname === path;
+  const activePathMatcher = (path: string) => `/${router.pathname.split('/')[1]}` === path;
 
   const handleAlarm = () => {
     handleToggleAlarm();
