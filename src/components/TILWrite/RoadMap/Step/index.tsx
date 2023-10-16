@@ -53,14 +53,16 @@ const Step = (props: StepProps) => {
         <Styled.Title>{title}</Styled.Title>
       </Styled.Container>
 
-      <Icon
-        className="icon"
-        onClick={handleSelectReference}
-        iconName="ic_chevronRight"
-        imageSize={14}
-        ext="svg"
-        alt="화살표"
-      />
+      {isActiveStep && (
+        <Icon
+          className="icon"
+          onClick={handleSelectReference}
+          iconName="ic_chevronRight"
+          imageSize={14}
+          ext="svg"
+          alt="화살표"
+        />
+      )}
     </Styled.Root>
   );
 };
