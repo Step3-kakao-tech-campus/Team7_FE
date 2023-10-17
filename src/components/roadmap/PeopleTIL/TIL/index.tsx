@@ -1,26 +1,35 @@
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import Image from 'next/image';
+import type { MemberTil } from '@/api/til/type';
 import Avatar from '@/components/common/Avatar';
 import * as Styled from './style';
 
-const TIL = () => {
+// 플러그인과 로케일 설정
+dayjs.extend(relativeTime);
+dayjs.locale('ko');
+
+interface TILProps extends MemberTil {}
+
+const TIL = (props: TILProps) => {
+  const { userId, name, image, content, submitDate, commentNum } = props;
+
   return (
     <Styled.Root>
       <Styled.Header>
-        <Avatar iconName="ic_profile" imageSize={40} alt="프로필 이미지" />
+        <Avatar imageUrl={image} imageSize={40} alt="프로필 이미지" />
         <Styled.Container>
-          <Styled.Name>김동영님</Styled.Name>
-          <Styled.Date>12일전</Styled.Date>
+          <Styled.Name>{name}님</Styled.Name>
+          <Styled.Date>{dayjs(submitDate).from(dayjs())}</Styled.Date>
         </Styled.Container>
       </Styled.Header>
 
-      <Styled.Body>
-        최소한 국내에서 자바는 가장 시장 규모가 큰 언어입니다. 기업용 시장에서는 전통적인 강자였고, 안드로이드가 주류가
-        되었습니다. 어메이징하쥬?
-      </Styled.Body>
+      <Styled.Body>{content}</Styled.Body>
 
       <Styled.Footer>
         <Image src="/assets/icons/ic_comment.svg" width={16} height={16} alt="좋아요" />
-        <span>0</span>
+        <span>{commentNum}</span>
       </Styled.Footer>
     </Styled.Root>
   );
