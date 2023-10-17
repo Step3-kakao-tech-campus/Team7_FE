@@ -33,12 +33,6 @@ export const Description = styled.p`
     font-weight: 700;
     font-size: 1.375rem;
   }
-
-  & > span:last-of-type {
-    font-size: 1.125rem;
-    margin-top: 0.75rem;
-    color: ${({ theme }) => theme.colors.gray_800};
-  }
 `;
 
 export const ButtonStyles = css`

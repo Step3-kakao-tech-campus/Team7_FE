@@ -1,8 +1,12 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
+import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 
 const EmptyPeopleTILSection = () => {
+  const router = useRouter();
+
   return (
     <Styled.Root>
       <Styled.Title>다른 사람의 TIL 보기</Styled.Title>
@@ -13,10 +17,11 @@ const EmptyPeopleTILSection = () => {
 
         <Styled.Description>
           <span>공개된 다른 TIL이 없습니다.</span>
-          <span>해당 STEP 에 대한 TIL을 작성해보세요.</span>
         </Styled.Description>
 
-        <Button css={Styled.ButtonStyles}>작성하러 가기</Button>
+        <Button css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.home())}>
+          메인 페이지로 이동
+        </Button>
       </Styled.CardContainer>
     </Styled.Root>
   );
