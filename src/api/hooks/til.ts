@@ -12,6 +12,7 @@ import {
   deleteComment as deleteCommentAPI,
   patchTil as patchTilAPI,
   submitTil as submitTilAPI,
+  getStepTils,
 } from '@/api/til';
 import type {
   DeleteCommentRequest,
@@ -27,6 +28,7 @@ import type {
 const QUERY_KEY = {
   getTils: 'getTils',
   getTil: 'getTil',
+  getStepTils: 'getStepTils',
 };
 
 interface InfinityTilRequest {
@@ -202,4 +204,34 @@ export const useDeleteComment = () => {
   };
 
   return { deleteComment };
+};
+
+interface useStepTilsRequest {
+  roadmapId: number;
+  stepId: number;
+  isSubmit?: boolean;
+  isMember?: boolean;
+  name?: string;
+}
+
+export const useStepTils = (body: useStepTilsRequest) => {
+  const { roadmapId, stepId, ...rest } = body;
+
+  // router query에 접근할때 라우터 필드가 클라이언트 측에서 업데이트되고 사용할 준비가 되었는지 확인한다.
+  const { isReady } = useRouter();
+
+  const { data } = useQuery(
+    [QUERY_KEY.getStepTils, body],
+    () =>
+      getStepTils({
+        roadmapId,
+        stepId,
+        input: qs.stringify(rest, { addQueryPrefix: true }),
+      }),
+    { enabled: isReady, suspense: true },
+  );
+
+  return {
+    memberTils: data?.result.members ?? [],
+  };
 };

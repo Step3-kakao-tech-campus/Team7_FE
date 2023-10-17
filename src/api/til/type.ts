@@ -108,11 +108,11 @@ export interface GetStepTilsRequest {
 
 export interface GetStepTilsResponse extends CommonResponse {
   result: {
-    members: memberTil[];
+    members: MemberTil[];
   };
 }
 
-export interface memberTil {
+export interface MemberTil {
   tilId: number | null;
   userId: number;
   name: string;
