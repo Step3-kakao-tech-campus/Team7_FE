@@ -1,4 +1,6 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import Card from '@/components/common/Card';
 
 export const Root = styled.section`
   width: 100%;
@@ -17,4 +19,34 @@ export const Container = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 48px;
   column-gap: 32px;
+`;
+
+// PeopleTILSection.Empty
+export const CardContainer = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 420px;
+`;
+
+export const ImageContainer = styled.div`
+  margin-top: 2rem;
+  margin-right: 1rem;
+`;
+
+export const Description = styled.p`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & > span:first-of-type {
+    font-weight: 700;
+    font-size: 1.375rem;
+  }
+`;
+
+export const ButtonStyles = css`
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 500;
 `;
