@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useStepTils } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import Fallback from '@/components/common/Fallback';
 import Skeleton from '@/components/common/Skeleton';
@@ -8,17 +9,37 @@ import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 
 const PeopleTILSection = () => {
+  const { query } = useRouter();
+
+  const { memberTils } = useStepTils({
+    roadmapId: Number(query.roadmapId),
+    stepId: Number(query.stepId),
+  });
+
   return (
-    <Styled.Root>
-      <Styled.Title>다른 사람의 TIL 보기</Styled.Title>
-      <Styled.Container>
-        <TIL />
-        <TIL />
-        <TIL />
-        <TIL />
-        <TIL />
-      </Styled.Container>
-    </Styled.Root>
+    <>
+      {memberTils.length === 0 ? (
+        <PeopleTILSection.Empty />
+      ) : (
+        <Styled.Root>
+          <Styled.Title>다른 사람의 TIL 보기</Styled.Title>
+          <Styled.Container>
+            {memberTils?.map((til) => (
+              <TIL
+                key={til.tilId}
+                tilId={til.tilId}
+                userId={til.userId}
+                submitDate={til.submitDate}
+                image={til.image}
+                name={til.name}
+                content={til.content}
+                commentNum={til.commentNum}
+              />
+            ))}
+          </Styled.Container>
+        </Styled.Root>
+      )}
+    </>
   );
 };
 
