@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import HeaderLayout from '@/components/layout/HeaderLayout';
+import EmptyPeopleTILSection from '@/components/roadmap/PeopleTIL/EmptyPeopleTILSection';
 import FeatureInfoSection from '@/components/roadmap/PeopleTIL/FeatureInfoSection';
 import PeopleTILSection from '@/components/roadmap/PeopleTIL/PeopleTILSection';
 import { setLayout } from '@/utils/layout';
@@ -10,7 +11,8 @@ const PeopleTil = () => {
       <Root>
         <Inner>
           <FeatureInfoSection />
-          <PeopleTILSection />
+          {/* <PeopleTILSection /> */}
+          <EmptyPeopleTILSection />
         </Inner>
       </Root>
     </>
