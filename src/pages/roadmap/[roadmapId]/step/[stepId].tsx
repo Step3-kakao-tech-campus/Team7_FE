@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import FeatureInfoSection from '@/components/roadmap/PeopleTIL/FeatureInfoSection';
+import PeopleTILSection from '@/components/roadmap/PeopleTIL/PeopleTILSection';
 import { setLayout } from '@/utils/layout';
 
 const PeopleTil = () => {
@@ -9,6 +10,7 @@ const PeopleTil = () => {
       <Root>
         <Inner>
           <FeatureInfoSection />
+          <PeopleTILSection />
         </Inner>
       </Root>
     </>
@@ -23,7 +25,7 @@ const Root = styled.main``;
 
 const Inner = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
