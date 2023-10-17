@@ -7,9 +7,8 @@ import Avatar from '@/components/common/Avatar';
 import { tilyLinks } from '@/constants/links';
 import useAuth from '@/hooks/useAuth';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
-import { getTilWriteUrl } from '@/utils/getTilWriteUrl';
 import * as Styled from './style';
-import { Alarm } from '@/api/user/type';
+import { Alarm } from '@/api/type';
 
 interface AlarmProps {
   alarmButtonRef: React.RefObject<HTMLButtonElement>;
@@ -52,7 +51,7 @@ const Alarm = (props: AlarmProps) => {
         ) : (
           alarms.map((alarm:Alarm) => {
             return (
-              <Styled.Item key={alarm.id} onClick={() => router.push(getTilWriteUrl(alarm.roadmap.id, alarm.step.id, alarm.tilId))}>
+              <Styled.Item key={alarm.id} onClick={() => router.push(tilyLinks.tilWrite({roadmapId: alarm.roadmap.id, stepId: alarm.step.id, tilId: alarm.tilId}))}>
                 <Avatar imageSize={40} imageUrl={alarm.sender.image} alt="프로필 이미지" />
                 <Styled.Content>
                   <Styled.Title>

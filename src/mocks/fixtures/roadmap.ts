@@ -1,10 +1,10 @@
-import type { GetRoadmapStepsResponse, UserRoadmapsResponse } from '@/api/roadmap/type';
+import type { GetRoadmapStepsResponse, GetRoadmapsResponse, GetRoadmapStepReferenceResponse } from '@/api/roadmap/type';
 
-export const userRoadmapsResponse: UserRoadmapsResponse = {
+export const getRoadmapsResponse: GetRoadmapsResponse = {
   success: true,
   message: 'ok',
   result: {
-    category: [
+    categories: [
       {
         id: 1,
         name: '홍박사의 알고리즘즘즘즘즘즘즘즘즘즘즘',
@@ -18,7 +18,7 @@ export const userRoadmapsResponse: UserRoadmapsResponse = {
         name: '홍박사의 비밀일기 ><',
       },
     ],
-    roadmap: {
+    roadmaps: {
       tily: [
         {
           id: 1,
@@ -89,7 +89,73 @@ export const getRoadmapStepsResponse: GetRoadmapStepsResponse = {
       },
       {
         id: 3,
-        title: '클래스 기초초초초초초초초초초초초초초',
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 4,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 5,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 6,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 7,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 8,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 9,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 10,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 11,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 12,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 13,
+        title: '클래스 기초',
+        isCompleted: false,
+        tilId: 1,
+      },
+      {
+        id: 14,
+        title: '클래스 기초',
         isCompleted: false,
         tilId: 1,
       },
@@ -99,11 +165,47 @@ export const getRoadmapStepsResponse: GetRoadmapStepsResponse = {
   },
 };
 
-export const updateFixture = (name: string) => {
-  const length = userRoadmapsResponse.result.category.length;
+export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    id: 1,
+    description: '7조 화이팅',
+    youtube: [
+      {
+        id: 1,
+        link: `<iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/kWUsI7LCSmY?si=59XO3fvZ_pwxMDs3"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      />`,
+      },
+      {
+        id: 2,
+        link: `<iframe width="560" height="315" src="https://www.youtube.com/embed/pWvF8AOO_Ao?si=fOJR_fRZ3mI3p7fV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
+      },
+    ],
+    web: [
+      {
+        id: 1,
+        link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter',
+      },
+      {
+        id: 2,
+        link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter',
+      },
+    ],
+  },
+};
 
-  userRoadmapsResponse.result.category = [
-    ...userRoadmapsResponse.result.category,
+export const updateFixture = (name: string) => {
+  const length = getRoadmapsResponse.result.categories.length;
+
+  getRoadmapsResponse.result.categories = [
+    ...getRoadmapsResponse.result.categories,
     {
       id: length + 1,
       name,

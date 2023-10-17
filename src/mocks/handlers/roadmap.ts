@@ -1,9 +1,10 @@
 import { rest } from 'msw';
 import {
-  userRoadmapsResponse,
+  getRoadmapsResponse,
   updateFixture,
   getRoadmapStepsResponse,
   updateGetRoadmapStepsResponseFixture,
+  getRoadmapStepReferenceResponse,
 } from '@/mocks/fixtures/roadmap';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -11,7 +12,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 export const roadmapHandler = [
   rest.get(`${BASE_URL}/roadmaps/my`, (req, res, ctx) => {
     try {
-      return res(ctx.status(200), ctx.json(userRoadmapsResponse));
+      return res(ctx.status(200), ctx.json(getRoadmapsResponse));
     } catch (error) {
       return res(
         ctx.status(400),
@@ -39,6 +40,21 @@ export const roadmapHandler = [
     }
   }),
 
+  rest.get(`${BASE_URL}/roadmaps/:roadmapId/steps/:stepId/references`, (req, res, ctx) => {
+    try {
+      return res(ctx.status(200), ctx.json(getRoadmapStepReferenceResponse));
+    } catch (error) {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          success: false,
+          message: '서버에서 에러가 났어요',
+          result: null,
+        }),
+      );
+    }
+  }),
+
   rest.post(`${BASE_URL}/roadmaps/individual`, (req, res, ctx) => {
     const {
       body: { name },
@@ -46,7 +62,7 @@ export const roadmapHandler = [
 
     try {
       updateFixture(name);
-      return res(ctx.status(200), ctx.json(userRoadmapsResponse));
+      return res(ctx.status(200), ctx.json(getRoadmapsResponse));
     } catch (error) {
       return res(
         ctx.status(400),

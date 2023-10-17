@@ -10,7 +10,7 @@ export const Root = styled.footer`
 
   background-color: ${({ theme }) => theme.colors.gray_100};
   width: 100%;
-  height: ${({ theme }) => theme.layout.footerHeight};
+  height: ${({ theme }) => theme.layout.tilWrite.footerHeight};
 `;
 
 export const Title = styled.h1`
@@ -33,4 +33,10 @@ export const ButtonStyles = css`
 export const ExitContainer = styled.button`
   display: flex;
   cursor: pointer;
+`;
+
+export const SkeletonStyles = css`
+  width: 60px;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
 `;

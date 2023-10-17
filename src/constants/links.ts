@@ -6,6 +6,15 @@ export const tilyLinks = {
   login: () => '/auth/login',
   findPwVerify: () => '/auth/change-password/verify',
   changePassword: () => '/auth/change-password/',
-  roadmaps: () => '/roadmaps',
+  roadmap: () => '/roadmap',
   mypage: () => '/mypage',
+  tilWrite: ({ roadmapId, stepId, tilId }: tilWriteParams) =>
+    `/TILWrite/roadmap/${roadmapId}/step/${stepId}/til/${tilId}`,
+  peopleTil: ({ roadmapId, stepId }: Omit<tilWriteParams, 'tilId'>) => `/roadmap/${roadmapId}/step/${stepId}`,
 };
+
+interface tilWriteParams {
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
+}

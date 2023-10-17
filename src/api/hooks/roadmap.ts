@@ -5,19 +5,21 @@ import {
   getRoadmaps,
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
+  getRoadmapStepReference,
 } from '@/api/roadmap';
+import type { GetRoadmapStepReferenceRequest } from '@/api/roadmap/type';
 
-const QUERY_KEY = {
+export const ROADMAP_QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
   getRoadmapSteps: 'getRoadmapSteps',
 };
 
 export const useGetRoadmaps = () => {
-  const { data } = useQuery([QUERY_KEY.getRoadmaps], () => getRoadmaps());
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmaps], () => getRoadmaps());
 
   const categoryData = {
-    category: data?.result.category ?? [],
-    roadmaps: [...(data?.result.roadmap.tily ?? []), ...(data?.result.roadmap.group ?? [])],
+    category: data?.result.categories ?? [],
+    roadmaps: [...(data?.result.roadmaps.tily ?? []), ...(data?.result.roadmaps.group ?? [])],
   };
 
   return {
@@ -28,10 +30,30 @@ export const useGetRoadmaps = () => {
 export const useGetRoadmapSteps = (roadmapId: number) => {
   const enabled = roadmapId !== 0;
 
-  const { data } = useQuery([QUERY_KEY.getRoadmapSteps, roadmapId], () => getRoadmapSteps(roadmapId), { enabled });
+  const { data, isLoading } = useQuery(
+    [ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId],
+    () => getRoadmapSteps(roadmapId),
+    {
+      enabled,
+    },
+  );
 
   return {
     steps: data,
+    isLoading,
+  };
+};
+
+export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest) => {
+  const enabled = !!body.roadmapId && !!body.roadmapId;
+
+  const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapSteps, body], () => getRoadmapStepReference(body), {
+    enabled,
+  });
+
+  return {
+    reference: data?.result,
+    isLoading,
   };
 };
 
@@ -43,7 +65,7 @@ export const usePostRoadmapIndividual = () => {
   const postRoadmapsIndividual = async (title: string) => {
     const data = await mutation.mutateAsync(title, {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.getRoadmaps]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmaps]);
       },
     });
 
@@ -61,7 +83,7 @@ export const usePostRoadmapStepIndividual = () => {
   const postRoadmapStepIndividual = async (body: { roadmapId: number; title: string }) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.getRoadmapSteps, body.roadmapId]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
       },
     });
 

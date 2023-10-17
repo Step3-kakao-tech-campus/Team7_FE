@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const TextAreaContainer = styled.div`
+export const TextAreaContainer = styled.form`
   display: flex;
   flex-shrink: 0;
   width: 100%;

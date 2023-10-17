@@ -1,6 +1,6 @@
 import GNB from '@/components/common/GNB';
 
-const Roadmaps = () => {
+const Roadmap = () => {
   return (
     <>
       <GNB />
@@ -8,4 +8,4 @@ const Roadmaps = () => {
   );
 };
 
-export default Roadmaps;
+export default Roadmap;

@@ -12,7 +12,7 @@ export const Root = styled.div`
 `;
 
 export const BellowRoot = styled.div`
-  height: ${({ theme }) => theme.layout.headerHeight};
+  height: ${({ theme }) => theme.layout.main.GNBHeight};
 `;
 
 export const Inner = styled.header`

@@ -24,7 +24,7 @@ const GNB = () => {
   const alarmButtonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
-  const activePathMatcher = (path: string) => router.pathname === path;
+  const activePathMatcher = (path: string) => `/${router.pathname.split('/')[1]}` === path;
 
   const handleAlarm = () => {
     handleToggleAlarm();
@@ -43,7 +43,7 @@ const GNB = () => {
             <Styled.NavItem href={tilyLinks.home()} isActive={activePathMatcher(tilyLinks.home())}>
               홈
             </Styled.NavItem>
-            <Styled.NavItem href={tilyLinks.roadmaps()} isActive={activePathMatcher(tilyLinks.roadmaps())}>
+            <Styled.NavItem href={tilyLinks.roadmap()} isActive={activePathMatcher(tilyLinks.roadmap())}>
               로드맵
             </Styled.NavItem>
           </Styled.NavArea>

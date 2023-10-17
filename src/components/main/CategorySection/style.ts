@@ -25,6 +25,11 @@ export const ShowAllButton = styled.button`
 `;
 
 export const Item = styled.button`
+  width: 14rem;
   display: block;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   cursor: pointer;
 `;

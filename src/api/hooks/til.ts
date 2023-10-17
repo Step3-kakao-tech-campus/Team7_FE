@@ -1,13 +1,32 @@
 import qs from 'qs';
 import { useRouter } from 'next/router';
 import type { QueryKey } from '@tanstack/react-query';
-import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
-import { getTils } from '@/api/til';
-import { postTil as postTilAPI } from '@/api/til';
-import type { PostTilRequest, TilsResponse } from '@/api/til/type';
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { ROADMAP_QUERY_KEY } from '@/api/hooks/roadmap';
+import {
+  getTil,
+  getTils,
+  postTil as postTilAPI,
+  postComment as postCommentAPI,
+  patchComment as patchCommentAPI,
+  deleteComment as deleteCommentAPI,
+  patchTil as patchTilAPI,
+  submitTil as submitTilAPI,
+} from '@/api/til';
+import type {
+  DeleteCommentRequest,
+  GetTilRequest,
+  PatchCommentRequest,
+  PostCommentRequest,
+  PostTilRequest,
+  GetTilsResponse,
+  PatchTilRequest,
+  SubmitTilRequest,
+} from '@/api/til/type';
 
 const QUERY_KEY = {
   getTils: 'getTils',
+  getTil: 'getTil',
 };
 
 interface InfinityTilRequest {
@@ -28,7 +47,7 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
       return data;
     },
     {
-      getNextPageParam: (lastPage: TilsResponse, pages) => {
+      getNextPageParam: (lastPage: GetTilsResponse, pages) => {
         if (!lastPage.hasNext) {
           return undefined;
         }
@@ -55,14 +74,132 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
   };
 };
 
+export const useGetTil = (body: GetTilRequest) => {
+  const { isReady } = useRouter();
+
+  const { data, isLoading } = useQuery([QUERY_KEY.getTil, body], () => getTil(body), {
+    enabled: isReady,
+  });
+
+  return {
+    tilDetail: data?.result ?? null,
+    isLoading,
+  };
+};
+
 export const usePostTil = () => {
+  const queryClient = useQueryClient();
+
   const mutation = useMutation(postTilAPI);
 
   const postTil = async (body: PostTilRequest) => {
-    const data = await mutation.mutateAsync(body);
+    const { roadmapId } = body;
+
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId.toString()]);
+      },
+    });
 
     return data;
   };
 
   return { postTil };
+};
+
+export const usePatchTil = () => {
+  const mutation = useMutation(patchTilAPI);
+
+  const patchTil = async (body: PatchTilRequest) => {
+    const data = await mutation.mutateAsync(body);
+
+    return data;
+  };
+  return { patchTil };
+};
+
+export const useSubmitTil = () => {
+  const mutation = useMutation(submitTilAPI);
+
+  const submitTil = async (body: SubmitTilRequest) => {
+    const data = await mutation.mutateAsync(body);
+
+    return data;
+  };
+  return { submitTil };
+};
+
+export const usePostComment = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(postCommentAPI);
+
+  const postComment = async (body: PostCommentRequest) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          QUERY_KEY.getTil,
+          {
+            roadmapId: body.roadmapId,
+            stepId: body.stepId,
+            tilId: body.tilId,
+          },
+        ]);
+      },
+    });
+
+    return data;
+  };
+
+  return { postComment };
+};
+
+export const usePatchComment = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(patchCommentAPI);
+
+  const patchComment = async (body: PatchCommentRequest) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          QUERY_KEY.getTil,
+          {
+            roadmapId: body.roadmapId,
+            stepId: body.stepId,
+            tilId: body.tilId,
+          },
+        ]);
+      },
+    });
+
+    return data;
+  };
+
+  return { patchComment };
+};
+
+export const useDeleteComment = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(deleteCommentAPI);
+
+  const deleteComment = async (body: DeleteCommentRequest) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          QUERY_KEY.getTil,
+          {
+            roadmapId: body.roadmapId,
+            stepId: body.stepId,
+            tilId: body.tilId,
+          },
+        ]);
+      },
+    });
+
+    return data;
+  };
+
+  return { deleteComment };
 };

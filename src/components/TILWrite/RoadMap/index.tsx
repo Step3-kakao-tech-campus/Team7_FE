@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import RoadMapInfo from '@/components/TILWrite/RoadMap/RoadMapInfo';
 import Step from '@/components/TILWrite/RoadMap/Step';
 import * as Styled from './style';
@@ -11,6 +13,9 @@ interface RoadMapProps {
 const RoadMap = (props: RoadMapProps) => {
   const { handleCloseAside, handleOpenReferenceAside, asideMount } = props;
 
+  const { query } = useRouter();
+  const { steps } = useGetRoadmapSteps(Number(query.roadmapId));
+
   return (
     <Styled.Root
       initial="closed"
@@ -23,8 +28,17 @@ const RoadMap = (props: RoadMapProps) => {
       <RoadMapInfo handleCloseAside={handleCloseAside} />
 
       <Styled.StepList>
-        {Array.from({ length: 30 }).map((_, index) => {
-          return <Step key={index} handleOpenReferenceAside={handleOpenReferenceAside} />;
+        {steps?.result.steps.map((step) => {
+          return (
+            <Step
+              key={step.id}
+              stepId={step.id}
+              title={step.title}
+              isCompleted={step.isCompleted}
+              tilId={step.tilId}
+              handleOpenReferenceAside={handleOpenReferenceAside}
+            />
+          );
         })}
       </Styled.StepList>
     </Styled.Root>
