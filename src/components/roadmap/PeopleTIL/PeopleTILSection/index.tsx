@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
+import Fallback from '@/components/common/Fallback';
 import Skeleton from '@/components/common/Skeleton';
 import TIL from '@/components/roadmap/PeopleTIL/TIL';
 import { tilyLinks } from '@/constants/links';
@@ -55,6 +56,17 @@ PeopleTILSection.Skeleton = function _Skeleton() {
           <Skeleton key={index} css={Styled.SkeletonCardStyles} />
         ))}
       </Styled.Container>
+    </Styled.Root>
+  );
+};
+
+PeopleTILSection.Fallback = function _Fallback() {
+  return (
+    <Styled.Root>
+      <Styled.Title>다른 사람의 TIL 보기</Styled.Title>
+      <Styled.FallbackContainer>
+        <Fallback />
+      </Styled.FallbackContainer>
     </Styled.Root>
   );
 };

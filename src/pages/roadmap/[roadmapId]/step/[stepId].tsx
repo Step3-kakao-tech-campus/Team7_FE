@@ -11,7 +11,8 @@ const PeopleTil = () => {
         <Inner>
           <FeatureInfoSection />
           {/* <PeopleTILSection /> */}
-          <PeopleTILSection.Empty />
+          {/* <PeopleTILSection.Skeleton /> */}
+          <PeopleTILSection.Fallback />
         </Inner>
       </Root>
     </>

@@ -56,3 +56,13 @@ export const SkeletonCardStyles = css`
   width: 20rem;
   height: 11rem;
 `;
+
+// PeopleTILSection.Fallback
+
+export const FallbackContainer = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 420px;
+`;
