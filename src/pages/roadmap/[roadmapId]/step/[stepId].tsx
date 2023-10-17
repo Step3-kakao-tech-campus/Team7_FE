@@ -1,16 +1,15 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import GNB from '@/components/common/GNB';
 import HeaderLayout from '@/components/layout/HeaderLayout';
+import FeatureInfoSection from '@/components/roadmap/PeopleTIL/FeatureInfoSection';
 import { setLayout } from '@/utils/layout';
-import * as Styled from './style';
 
 const PeopleTil = () => {
   return (
     <>
-      <GNB />
       <Root>
-        <Inner>ddd</Inner>
+        <Inner>
+          <FeatureInfoSection />
+        </Inner>
       </Root>
     </>
   );
@@ -26,6 +25,6 @@ const Inner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 1440px;
+  max-width: 1200px;
   margin: 0 auto;
 `;
