@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import styled from '@emotion/styled';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import FeatureInfoSection from '@/components/roadmap/PeopleTIL/FeatureInfoSection';
@@ -10,9 +11,9 @@ const PeopleTil = () => {
       <Root>
         <Inner>
           <FeatureInfoSection />
-          {/* <PeopleTILSection /> */}
-          {/* <PeopleTILSection.Skeleton /> */}
-          <PeopleTILSection.Fallback />
+          <Suspense fallback={<PeopleTILSection.Skeleton />}>
+            <PeopleTILSection />
+          </Suspense>
         </Inner>
       </Root>
     </>
