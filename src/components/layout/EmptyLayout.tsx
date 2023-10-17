@@ -1,10 +1,7 @@
-import { type FC, type ReactNode } from 'react';
+import type { PropsWithChildren, FC } from 'react';
 
-interface EmptyLayoutProps {
-  children: ReactNode;
-}
-
-const EmptyLayout: FC<EmptyLayoutProps> = ({ children }) => {
+const EmptyLayout: FC = (props: PropsWithChildren) => {
+  const { children } = props;
   return <>{children}</>;
 };
 

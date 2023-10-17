@@ -7,9 +7,8 @@ import { useGetUser } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Flex from '@/components/common/Flex';
-import GNB from '@/components/common/GNB';
 import Skeleton from '@/components/common/Skeleton';
-import EmptyLayout from '@/components/layout/EmptyLayout';
+import HeaderLayout from '@/components/layout/HeaderLayout';
 import CategorySection from '@/components/main/CategorySection';
 import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
@@ -31,7 +30,6 @@ const Home = () => {
 
   return (
     <>
-      <GNB />
       <Root>
         <Inner>
           <LeftArea>
@@ -57,7 +55,7 @@ const Home = () => {
   );
 };
 
-setLayout(Home, EmptyLayout, true);
+setLayout(Home, HeaderLayout, true);
 
 export default Home;
 

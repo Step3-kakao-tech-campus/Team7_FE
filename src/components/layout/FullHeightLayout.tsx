@@ -1,11 +1,8 @@
-import type { FC, ReactNode } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 
-interface FullHeightLayoutProps {
-  children: ReactNode;
-}
-
-const FullHeightLayout: FC<FullHeightLayoutProps> = ({ children }) => {
+const FullHeightLayout: FC = (props: PropsWithChildren) => {
+  const { children } = props;
   return <StyledFullHeightLayout>{children}</StyledFullHeightLayout>;
 };
 
