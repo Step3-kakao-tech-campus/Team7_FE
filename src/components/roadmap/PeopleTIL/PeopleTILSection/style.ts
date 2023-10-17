@@ -50,3 +50,9 @@ export const ButtonStyles = css`
   font-size: 1.125rem;
   font-weight: 500;
 `;
+
+// PeopleTILSection.Skeleton
+export const SkeletonCardStyles = css`
+  width: 20rem;
+  height: 11rem;
+`;
