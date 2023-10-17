@@ -1,11 +1,10 @@
-import GNB from '@/components/common/GNB';
+import HeaderLayout from '@/components/layout/HeaderLayout';
+import { setLayout } from '@/utils/layout';
 
 const Roadmap = () => {
-  return (
-    <>
-      <GNB />
-    </>
-  );
+  return <>로드맵 페이지</>;
 };
+
+setLayout(Roadmap, HeaderLayout);
 
 export default Roadmap;
