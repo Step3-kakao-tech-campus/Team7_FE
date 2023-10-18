@@ -18,7 +18,7 @@ const PeopleTILSection = () => {
 
   return (
     <>
-      {memberTils.length === 0 ? (
+      {memberTils?.length === 0 ? (
         <PeopleTILSection.Empty />
       ) : (
         <Styled.Root>
