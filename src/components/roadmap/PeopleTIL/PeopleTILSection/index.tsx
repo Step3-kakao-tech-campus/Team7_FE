@@ -81,12 +81,16 @@ PeopleTILSection.Skeleton = function _Skeleton() {
   );
 };
 
-PeopleTILSection.Fallback = function _Fallback() {
+PeopleTILSection.Fallback = function _Fallback({ error, resetErrorBoundary }) {
   return (
     <Styled.Root>
       <Styled.Title>다른 사람의 TIL 보기</Styled.Title>
       <Styled.FallbackContainer>
-        <Fallback />
+        <Fallback
+          onClick={() => {
+            resetErrorBoundary();
+          }}
+        />
       </Styled.FallbackContainer>
     </Styled.Root>
   );
