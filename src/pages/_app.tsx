@@ -28,6 +28,8 @@ const queryClient = new QueryClient({
     queries: {
       networkMode: 'always',
       refetchOnWindowFocus: false,
+      useErrorBoundary: true,
+      retry: 0,
     },
     mutations: {
       networkMode: 'always',
