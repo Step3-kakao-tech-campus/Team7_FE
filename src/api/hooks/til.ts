@@ -228,7 +228,7 @@ export const useStepTils = (body: useStepTilsRequest) => {
         stepId,
         input: qs.stringify(rest, { addQueryPrefix: true }),
       }),
-    { enabled: isReady, suspense: true },
+    { enabled: isReady },
   );
 
   return {
