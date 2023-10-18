@@ -58,16 +58,9 @@ const Personal = () => {
   });
 
   const createRoadmap: SubmitHandler<{ roadmapTitle: string }> = (formData) => {
-    try {
-      postRoadmapsIndividual(formData.roadmapTitle);
-      roadmapReset();
-      setIsRoadmapButtonSelected(false);
-    } catch {
-      roadmapSetError('roadmapTitle', {
-        type: '400',
-        message: '에러가 발생했습니다. 다시 시도해주세요.',
-      });
-    }
+    postRoadmapsIndividual(formData.roadmapTitle);
+    roadmapReset();
+    setIsRoadmapButtonSelected(false);
   };
 
   const createStep: SubmitHandler<{ stepTitle: string }> = (formData) => {
