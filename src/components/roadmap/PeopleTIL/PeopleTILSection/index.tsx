@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useStepTils } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
+import CustomSuspense from '@/components/common/CustomSuspense';
 import Fallback from '@/components/common/Fallback';
 import Skeleton from '@/components/common/Skeleton';
 import TIL from '@/components/roadmap/PeopleTIL/TIL';
@@ -10,14 +11,13 @@ import * as Styled from './style';
 
 const PeopleTILSection = () => {
   const { query } = useRouter();
-
-  const { memberTils } = useStepTils({
+  const { memberTils, isLoading } = useStepTils({
     roadmapId: Number(query.roadmapId),
     stepId: Number(query.stepId),
   });
 
   return (
-    <>
+    <CustomSuspense isLoading={isLoading} fallback={<PeopleTILSection.Skeleton />}>
       {memberTils?.length === 0 ? (
         <PeopleTILSection.Empty />
       ) : (
@@ -39,7 +39,7 @@ const PeopleTILSection = () => {
           </Styled.Container>
         </Styled.Root>
       )}
-    </>
+    </CustomSuspense>
   );
 };
 

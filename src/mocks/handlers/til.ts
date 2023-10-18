@@ -162,7 +162,7 @@ export const tilHandler = [
 
   rest.get(`${BASE_URL}/roadmaps/groups/:roadId/steps/:stepId/tils`, (req, res, ctx) => {
     try {
-      return res(ctx.delay(1000), ctx.status(200), ctx.json(getStepTilsResponse));
+      return res(ctx.delay(1000), ctx.status(500), ctx.json(getStepTilsResponse));
     } catch (error) {
       return res(
         ctx.status(400),
