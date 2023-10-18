@@ -4,6 +4,7 @@ import { useStepTils } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Fallback from '@/components/common/Fallback';
+import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary';
 import Skeleton from '@/components/common/Skeleton';
 import TIL from '@/components/roadmap/PeopleTIL/TIL';
 import { tilyLinks } from '@/constants/links';
@@ -81,7 +82,9 @@ PeopleTILSection.Skeleton = function _Skeleton() {
   );
 };
 
-PeopleTILSection.Fallback = function _Fallback({ error, resetErrorBoundary }) {
+PeopleTILSection.Fallback = function _Fallback(props: ErrorBoundaryProps) {
+  const { error, resetErrorBoundary } = props;
+
   return (
     <Styled.Root>
       <Styled.Title>다른 사람의 TIL 보기</Styled.Title>
