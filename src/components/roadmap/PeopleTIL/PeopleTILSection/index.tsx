@@ -83,7 +83,7 @@ PeopleTILSection.Skeleton = function _Skeleton() {
 };
 
 PeopleTILSection.Fallback = function _Fallback(props: ErrorBoundaryProps) {
-  const { error, resetErrorBoundary } = props;
+  const { resetErrorBoundary } = props;
 
   return (
     <Styled.Root>

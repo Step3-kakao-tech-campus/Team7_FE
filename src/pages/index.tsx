@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { useRouter } from 'next/router';
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useGetTilsParam } from '@/api/hooks/til';
@@ -46,7 +48,13 @@ const Home = () => {
 
           <RightArea>
             <History />
-            <TILSection tils={tils} isLoading={isLoading} />
+            <QueryErrorResetBoundary>
+              {({ reset }) => (
+                <ErrorBoundary key={router.pathname} onReset={reset} fallbackRender={TILSection.Fallback}>
+                  <TILSection tils={tils} isLoading={isLoading} />
+                </ErrorBoundary>
+              )}
+            </QueryErrorResetBoundary>
             <ObserverInterSectionTarget ref={ref} />
           </RightArea>
         </Inner>

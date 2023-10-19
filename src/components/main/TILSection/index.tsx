@@ -1,5 +1,8 @@
 import Image from 'next/image';
+import type { Til } from '@/api/type';
 import CustomSuspense from '@/components/common/CustomSuspense';
+import Fallback from '@/components/common/Fallback';
+import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary';
 import Skeleton from '@/components/common/Skeleton';
 import TIL from '@/components/main/TIL';
 import * as Styled from './style';
@@ -16,9 +19,15 @@ const TILSection = (props: TILSectionProps) => {
     <Styled.Root>
       <Styled.Container>
         <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
-          {tils.map((til, index) => {
-            return <TIL til={til} key={index} />;
-          })}
+          {tils.length === 0 ? (
+            <TILSection.Empty />
+          ) : (
+            <>
+              {tils.map((til, index) => {
+                return <TIL til={til} key={index} />;
+              })}
+            </>
+          )}
         </CustomSuspense>
       </Styled.Container>
     </Styled.Root>
@@ -26,6 +35,7 @@ const TILSection = (props: TILSectionProps) => {
 };
 
 export default TILSection;
+
 TILSection.Empty = function () {
   return (
     <Styled.EmptyRoot>
@@ -47,5 +57,19 @@ TILSection.Skeleton = function () {
         <Skeleton key={index} css={Styled.SkeletonStyles} />
       ))}
     </>
+  );
+};
+
+TILSection.Fallback = function (props: ErrorBoundaryProps) {
+  const { resetErrorBoundary } = props;
+
+  return (
+    <Styled.EmptyRoot>
+      <Fallback
+        onClick={() => {
+          resetErrorBoundary();
+        }}
+      />
+    </Styled.EmptyRoot>
   );
 };
