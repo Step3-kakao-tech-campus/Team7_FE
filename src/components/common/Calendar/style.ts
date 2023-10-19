@@ -9,6 +9,10 @@ export const CustomContainer = styled.div`
     padding: 0.4rem 0.25rem;
     line-height: 1;
   }
+  input:disabled {
+    color: ${({ theme }) => theme.colors.gray_400};
+    background-color: ${({ theme }) => theme.colors.gray_100};
+  }
 
   .react-datepicker {
     border-radius: 6px;
