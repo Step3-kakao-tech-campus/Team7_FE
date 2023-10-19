@@ -47,19 +47,19 @@ export default function App({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <ThemeProvider theme={emotionTheme}>
           <ToastProvider>
-            <Layout>
-              <QueryErrorResetBoundary>
-                {({ reset }) => (
-                  <ErrorBoundary
-                    onReset={reset}
-                    fallbackRender={({ error, resetErrorBoundary }) => {
-                      return <GlobalErrorBoundary error={error} resetErrorBoundary={resetErrorBoundary} />;
-                    }}>
+            <QueryErrorResetBoundary>
+              {({ reset }) => (
+                <ErrorBoundary
+                  onReset={reset}
+                  fallbackRender={({ error, resetErrorBoundary }) => {
+                    return <GlobalErrorBoundary error={error} resetErrorBoundary={resetErrorBoundary} />;
+                  }}>
+                  <Layout>
                     <Component {...pageProps} />
-                  </ErrorBoundary>
-                )}
-              </QueryErrorResetBoundary>
-            </Layout>
+                  </Layout>
+                </ErrorBoundary>
+              )}
+            </QueryErrorResetBoundary>
           </ToastProvider>
         </ThemeProvider>
       </RecoilRoot>
