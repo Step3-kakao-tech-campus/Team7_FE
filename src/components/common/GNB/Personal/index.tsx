@@ -46,7 +46,6 @@ const Personal = () => {
   const {
     control: stepControl,
     handleSubmit: stepHandleSubmit,
-    setError: stepSetError,
     reset: stepReset,
     formState: { errors },
   } = useForm({
@@ -63,16 +62,9 @@ const Personal = () => {
   };
 
   const createStep: SubmitHandler<{ stepTitle: string }> = (formData) => {
-    try {
-      postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
-      stepReset();
-      setIsStepButtonSelected(false);
-    } catch {
-      stepSetError('stepTitle', {
-        type: '400',
-        message: '에러가 발생했습니다. 다시 시도해주세요.',
-      });
-    }
+    postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
+    stepReset();
+    setIsStepButtonSelected(false);
   };
 
   // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수

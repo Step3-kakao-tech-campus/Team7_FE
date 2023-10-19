@@ -8,13 +8,6 @@ export const useApiError = () => {
     // axios error
     if (axios.isAxiosError(error)) {
       switch (true) {
-        case error.response?.status === 400:
-          toast.show({
-            message: error.response?.data.message,
-            isError: true,
-          });
-          break;
-
         default:
           toast.show({
             message: '에러가 발생했습니다.',
