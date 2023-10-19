@@ -1,54 +1,11 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useGetTil, usePatchTil } from '@/api/hooks/til';
-import { useSubmitTil } from '@/api/hooks/til';
 import * as Styled from '@/components/TILWrite/Footer/style';
-import SubmitModal from '@/components/TILWrite/SubmitModal';
 import Button from '@/components/common/Button';
-import CustomSuspense from '@/components/common/CustomSuspense';
-import Skeleton from '@/components/common/Skeleton';
 import { tilyLinks } from '@/constants/links';
-import { useModalState } from '@/hooks/useModalState';
 
-interface FooterProps {
-  TILContent: string;
-}
-
-const Footer = (props: FooterProps) => {
-  const { TILContent } = props;
-
+const Footer = () => {
   const router = useRouter();
-  const { isOpen, handleOpen, handleClose } = useModalState();
-  const { patchTil } = usePatchTil();
-  const { submitTil } = useSubmitTil();
-  const { tilDetail, isLoading } = useGetTil({
-    roadmapId: Number(router.query.roadmapId),
-    stepId: Number(router.query.stepId),
-    tilId: Number(router.query.tilId),
-  });
-
-  const handleSaveTIL = () => {
-    if (!tilDetail) return;
-
-    patchTil({
-      roadmapId: Number(router.query.roadmapId),
-      stepId: Number(router.query.stepId),
-      tilId: Number(router.query.tilId),
-      content: TILContent,
-      title: tilDetail?.step.title,
-    });
-  };
-
-  const handleSubmitTIL = () => {
-    submitTil({
-      roadmapId: Number(router.query.roadmapId),
-      stepId: Number(router.query.stepId),
-      tilId: Number(router.query.tilId),
-      title: 'title',
-      content: 'content',
-    });
-    handleClose();
-  };
 
   return (
     <Styled.Root>
@@ -58,41 +15,21 @@ const Footer = (props: FooterProps) => {
       </Styled.ExitContainer>
 
       <Styled.Container>
-        <CustomSuspense fallback={<SkeletonButton />} isLoading={isLoading}>
-          {!tilDetail?.isPersonal && (
-            <>
-              {tilDetail?.isCompleted ? (
-                <Button
-                  css={Styled.ButtonStyles}
-                  onClick={() =>
-                    router.push(
-                      tilyLinks.peopleTil({
-                        roadmapId: Number(router.query.roadmapId) as number,
-                        stepId: Number(router.query.stepId) as number,
-                      }),
-                    )
-                  }>
-                  다른 사람 TIL 보기
-                </Button>
-              ) : (
-                <Button variant="primary" css={Styled.ButtonStyles} onClick={handleOpen}>
-                  제출
-                </Button>
-              )}
-            </>
-          )}
-        </CustomSuspense>
-        <Button css={Styled.ButtonStyles} onClick={handleSaveTIL}>
-          저장
+        <Button
+          css={Styled.ButtonStyles}
+          onClick={() =>
+            router.push(
+              tilyLinks.peopleTil({
+                roadmapId: Number(router.query.roadmapId) as number,
+                stepId: Number(router.query.stepId) as number,
+              }),
+            )
+          }>
+          다른 사람 TIL 보기
         </Button>
       </Styled.Container>
-      <SubmitModal isOpen={isOpen} handleClose={handleClose} handleSubmitTIL={handleSubmitTIL} />
     </Styled.Root>
   );
 };
 
 export default Footer;
-
-const SkeletonButton = () => {
-  return <Skeleton css={Styled.SkeletonStyles} />;
-};
