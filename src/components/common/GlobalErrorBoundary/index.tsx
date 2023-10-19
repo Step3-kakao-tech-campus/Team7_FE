@@ -19,7 +19,15 @@ const GlobalErrorBoundary = (props: ErrorBoundaryProps) => {
     <Styled.Root>
       <Image src="/assets/icons/500.svg" width={300} height={300} alt="페이지 에러" />
       <h1>오류가 발생했습니다</h1>
-      <Button variant="default" onClick={() => router.back()} css={Styled.ButtonStyles}>
+      <Button
+        variant="default"
+        onClick={() => {
+          router.back();
+          setTimeout(() => {
+            resetErrorBoundary();
+          }, 300);
+        }}
+        css={Styled.ButtonStyles}>
         이전 페이지 이동
       </Button>
     </Styled.Root>
