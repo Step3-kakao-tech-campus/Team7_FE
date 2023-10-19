@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 
 export const Root = styled.div`
@@ -21,4 +22,12 @@ export const CommentContainer = styled.div`
   & > div:last-child {
     margin-bottom: 2rem;
   }
+`;
+
+// TILView
+
+export const TILViewRoot = styled(motion.div)`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 `;

@@ -5,15 +5,16 @@ import Comment from '@/components/TILWrite/Comments/Comment';
 import CommentPatchModal from '@/components/TILWrite/Comments/CommentPatchModal';
 import Header from '@/components/TILWrite/Comments/Header';
 import TextAreaSection from '@/components/TILWrite/Comments/TextAreaSection';
+import * as Styled from '@/components/TILWrite/Comments/style';
 import { useModalState } from '@/hooks/useModalState';
-import * as Styled from './style';
 
 interface CommentsProps {
+  asideMount: boolean;
   handleCloseCommentAside: () => void;
 }
 
 const Comments = (props: CommentsProps) => {
-  const { handleCloseCommentAside } = props;
+  const { asideMount, handleCloseCommentAside } = props;
 
   const [selectedCommentId, setSelectedCommentId] = useState<number>(0);
 
@@ -30,7 +31,14 @@ const Comments = (props: CommentsProps) => {
   };
 
   return (
-    <Styled.Root>
+    <Styled.TILViewRoot
+      initial="closed"
+      animate={asideMount ? 'open' : 'closed'}
+      variants={{
+        open: { opacity: 1 },
+        closed: { opacity: 0 },
+      }}
+      transition={{ type: 'tween' }}>
       <Styled.HeaderContainer>
         <Header handleCloseCommentAside={handleCloseCommentAside} />
       </Styled.HeaderContainer>
@@ -51,7 +59,7 @@ const Comments = (props: CommentsProps) => {
       <TextAreaSection />
 
       <CommentPatchModal selectedCommentId={selectedCommentId} onClose={handleClose} isOpen={isOpen} />
-    </Styled.Root>
+    </Styled.TILViewRoot>
   );
 };
 
