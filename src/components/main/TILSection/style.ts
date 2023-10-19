@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import Card from '@/components/common/Card';
 
 export const Root = styled.main`
   display: flex;
@@ -21,4 +22,32 @@ export const SkeletonStyles = css`
   height: 9.375rem;
 
   padding: 1.25rem;
+`;
+
+export const EmptyRoot = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 850px;
+  height: 500px;
+  margin-left: 2.5rem;
+`;
+
+export const Description = styled.p`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & > span:first-of-type {
+    font-weight: 700;
+    font-size: 1.375rem;
+  }
+
+  & > span:last-of-type {
+    margin-top: 0.5rem;
+    font-weight: 700;
+    font-size: 1.375rem;
+    margin-bottom: 5rem;
+  }
 `;

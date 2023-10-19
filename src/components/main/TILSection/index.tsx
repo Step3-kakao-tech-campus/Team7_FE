@@ -1,4 +1,4 @@
-import type { Til } from '@/api/til/type';
+import Image from 'next/image';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
 import TIL from '@/components/main/TIL';
@@ -26,6 +26,17 @@ const TILSection = (props: TILSectionProps) => {
 };
 
 export default TILSection;
+TILSection.Empty = function () {
+  return (
+    <Styled.EmptyRoot>
+      <Image src="/assets/icons/ic_peopleTILEmpty.svg" width={200} height={200} alt="다른 사람의 TIL이 없습니다." />
+      <Styled.Description>
+        <span>작성된 TIL이 없습니다</span>
+        <span>TIL 를 작성하고 학습 히스토리를 남겨보세요!</span>
+      </Styled.Description>
+    </Styled.EmptyRoot>
+  );
+};
 
 const SKELETON_COUNT = 9;
 
