@@ -5,6 +5,8 @@ import Card from '@/components/common/Card';
 export const Root = styled(Card)`
   max-width: 20.875rem;
   padding: 1rem 1.375rem;
+
+  cursor: pointer;
 `;
 
 export const Header = styled.h3`

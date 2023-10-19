@@ -2,8 +2,10 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import type { MemberTil } from '@/api/til/type';
 import Avatar from '@/components/common/Avatar';
+import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 
 // 플러그인과 로케일 설정
@@ -13,10 +15,24 @@ dayjs.locale('ko');
 interface TILProps extends MemberTil {}
 
 const TIL = (props: TILProps) => {
-  const { userId, name, image, content, submitDate, commentNum } = props;
+  const { tilId, name, image, content, submitDate, commentNum } = props;
+
+  const router = useRouter();
+
+  const handleRouteTILView = () => {
+    if (!tilId) return;
+
+    router.push(
+      tilyLinks.tilView({
+        roadmapId: Number(router.query.roadmapId),
+        stepId: Number(router.query.stepId),
+        tilId,
+      }),
+    );
+  };
 
   return (
-    <Styled.Root>
+    <Styled.Root onClick={handleRouteTILView}>
       <Styled.Header>
         <Avatar imageUrl={image} imageSize={40} alt="프로필 이미지" />
         <Styled.Container>
