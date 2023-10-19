@@ -1,18 +1,29 @@
+import { Suspense, useId } from 'react';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { useStepTils } from '@/api/hooks/til';
+import CustomSuspense from '@/components/common/CustomSuspense';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import FeatureInfoSection from '@/components/roadmap/PeopleTIL/FeatureInfoSection';
 import PeopleTILSection from '@/components/roadmap/PeopleTIL/PeopleTILSection';
 import { setLayout } from '@/utils/layout';
 
 const PeopleTil = () => {
+  const { query } = useRouter();
+
+  const { isLoading } = useStepTils({
+    roadmapId: Number(query.roadmapId),
+    stepId: Number(query.stepId),
+  });
+
   return (
     <>
       <Root>
         <Inner>
           <FeatureInfoSection />
-          {/* <PeopleTILSection /> */}
-          {/* <PeopleTILSection.Skeleton /> */}
-          <PeopleTILSection.Fallback />
+          <CustomSuspense isLoading={isLoading} fallback={<PeopleTILSection.Skeleton />}>
+            <PeopleTILSection />
+          </CustomSuspense>
         </Inner>
       </Root>
     </>

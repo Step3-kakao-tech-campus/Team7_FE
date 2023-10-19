@@ -30,7 +30,7 @@ const Header = (props: HeaderProps) => {
       <Styled.Container>
         <Icon iconName="ic_github" imageSize={32} ext="svg" alt="깃허브 익스텐션" />
         {!tilDetail?.isPersonal && (
-          <Icon onClick={handleOpenCommentAside} iconName="ic_comment" imageSize={32} ext="svg" alt="코멘트" />
+          <Icon onClick={handleOpenCommentAside} iconName="ic_commentBlack" imageSize={32} ext="svg" alt="코멘트" />
         )}
       </Styled.Container>
     </Styled.Root>

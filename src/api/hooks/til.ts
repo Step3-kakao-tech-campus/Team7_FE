@@ -12,6 +12,7 @@ import {
   deleteComment as deleteCommentAPI,
   patchTil as patchTilAPI,
   submitTil as submitTilAPI,
+  getStepTils,
 } from '@/api/til';
 import type {
   DeleteCommentRequest,
@@ -27,6 +28,7 @@ import type {
 const QUERY_KEY = {
   getTils: 'getTils',
   getTil: 'getTil',
+  getStepTils: 'getStepTils',
 };
 
 interface InfinityTilRequest {
@@ -202,4 +204,29 @@ export const useDeleteComment = () => {
   };
 
   return { deleteComment };
+};
+
+interface useStepTilsRequest {
+  roadmapId: number;
+  stepId: number;
+  isSubmit?: boolean;
+  isMember?: boolean;
+  name?: string;
+}
+
+export const useStepTils = (body: useStepTilsRequest) => {
+  const { roadmapId, stepId, isSubmit, isMember, name } = body;
+
+  const { data, isLoading } = useQuery([QUERY_KEY.getStepTils, body], () =>
+    getStepTils({
+      roadmapId,
+      stepId,
+      input: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
+    }),
+  );
+
+  return {
+    memberTils: data?.result.members,
+    isLoading,
+  };
 };
