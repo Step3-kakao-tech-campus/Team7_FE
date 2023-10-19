@@ -1,14 +1,19 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import GNB from '@/components/common/GNB';
-import * as Styled from './style';
+import HeaderLayout from '@/components/layout/HeaderLayout';
+import FeatureInfoSection from '@/components/roadmap/PeopleTIL/FeatureInfoSection';
+import PeopleTILSection from '@/components/roadmap/PeopleTIL/PeopleTILSection';
+import { setLayout } from '@/utils/layout';
 
 const PeopleTil = () => {
   return (
     <>
-      <GNB />
       <Root>
-        <Inner>ddd</Inner>
+        <Inner>
+          <FeatureInfoSection />
+          {/* <PeopleTILSection /> */}
+          {/* <PeopleTILSection.Skeleton /> */}
+          <PeopleTILSection.Fallback />
+        </Inner>
       </Root>
     </>
   );
@@ -16,12 +21,14 @@ const PeopleTil = () => {
 
 export default PeopleTil;
 
+setLayout(PeopleTil, HeaderLayout, true);
+
 const Root = styled.main``;
 
 const Inner = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  max-width: 1440px;
+  max-width: 1200px;
   margin: 0 auto;
 `;

@@ -9,8 +9,10 @@ import Footer from '@/components/TILWrite/Footer';
 import Header from '@/components/TILWrite/Header';
 import Reference from '@/components/TILWrite/Reference';
 import RoadMap from '@/components/TILWrite/RoadMap';
+import EmptyLayout from '@/components/layout/EmptyLayout';
 import { useDrawerState } from '@/hooks/useDrawerState';
 import { emotionTheme } from '@/styles/emotion';
+import { setLayout } from '@/utils/layout';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
@@ -122,6 +124,8 @@ const TILWrite = () => {
 };
 
 export default TILWrite;
+
+setLayout(TILWrite, EmptyLayout, true);
 
 const editorVariants = {
   asideOpen: {
