@@ -11,10 +11,11 @@ dayjs().format();
 export interface CalendarProps {
   popperPlacement?: 'top' | 'bottom';
   onChangeDate?: (date: Date) => void;
+  disabled?: boolean;
 }
 
 const Calendar = (props: CalendarProps) => {
-  const { onChangeDate, popperPlacement = 'bottom' } = props;
+  const { onChangeDate, popperPlacement = 'bottom', disabled = false } = props;
 
   const [date, setDate] = useState(new Date());
   const handleCalendarClose = () => {
@@ -31,6 +32,7 @@ const Calendar = (props: CalendarProps) => {
         onCalendarOpen={handleCalendarOpen}
         dateFormat="yyyy-MM-dd"
         popperPlacement={popperPlacement}
+        disabled={disabled}
         renderCustomHeader={({
           date,
           decreaseMonth,
