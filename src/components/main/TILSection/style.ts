@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import Card from '@/components/common/Card';
 
 export const Root = styled.main`
   display: flex;
@@ -50,4 +49,9 @@ export const Description = styled.p`
     font-size: 1.375rem;
     margin-bottom: 5rem;
   }
+`;
+
+export const ObserverInterSectionTarget = styled.div`
+  width: 100%;
+  height: 2.5rem;
 `;

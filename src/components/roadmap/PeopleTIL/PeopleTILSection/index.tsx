@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useStepTils } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
+import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Fallback from '@/components/common/Fallback';
 import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary';
@@ -19,9 +20,7 @@ const PeopleTILSection = () => {
 
   return (
     <CustomSuspense isLoading={isLoading} fallback={<PeopleTILSection.Skeleton />}>
-      {memberTils?.length === 0 ? (
-        <PeopleTILSection.Empty />
-      ) : (
+      <ConditionalRender data={memberTils} EmptyUI={<PeopleTILSection.Empty />}>
         <Styled.Root>
           <Styled.Title>다른 사람의 TIL 보기</Styled.Title>
           <Styled.Container>
@@ -39,7 +38,7 @@ const PeopleTILSection = () => {
             ))}
           </Styled.Container>
         </Styled.Root>
-      )}
+      </ConditionalRender>
     </CustomSuspense>
   );
 };
