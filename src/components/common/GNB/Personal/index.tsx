@@ -34,7 +34,6 @@ const Personal = () => {
   const {
     control: roadmapControl,
     handleSubmit: roadmapHandleSubmit,
-    setError: roadmapSetError,
     reset: roadmapReset,
     formState: { errors: roadmapErrors },
   } = useForm({
