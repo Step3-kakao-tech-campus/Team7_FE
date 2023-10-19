@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Header from '@/components/Roadmap/RoadmapCreate/Header';
+import Step from '@/components/Roadmap/RoadmapCreate/Step';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import { useRoeadmapCreate } from '@/hooks/useRoedmapCreate';
 import { setLayout } from '@/utils/layout';
@@ -18,6 +19,7 @@ const RoadmapCreate = () => {
     <RoadmapCreatePage>
       <Header />
       <Info info={info} handleOnChange={handleOnChange} />
+      <Step />
     </RoadmapCreatePage>
   );
 };
