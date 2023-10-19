@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/Step/StepSection/style';
+import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/style';
 
-const StepSection = () => {};
+const StepList = () => {};
 
-StepSection.Empty = function Empty() {
+StepList.Empty = function Empty() {
   return (
     <Styled.Root>
       <Image src="/assets/icons/ic_step.svg" alt="stepEmptyIcon" width={50} height={50} />
@@ -12,4 +12,4 @@ StepSection.Empty = function Empty() {
   );
 };
 
-export default StepSection;
+export default StepList;
