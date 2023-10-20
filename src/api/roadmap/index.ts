@@ -7,6 +7,7 @@ import type {
   GetRoadmapStepReferenceRequest,
   GetRoadmapStepReferenceResponse,
   GetRoadmapGroupMemberResponse,
+  PatchRoadmapGroupMemberRoleResponse,
 } from '@/api/roadmap/type';
 
 export const getRoadmaps = async () => {
@@ -62,6 +63,15 @@ export const getRoadmapGroupMember = async (roadmapId: number) => {
   const { data } = await axiosInstance.request<GetRoadmapGroupMemberResponse>({
     method: 'GET',
     url: `/roadmaps/groups/${roadmapId}/members`,
+  });
+
+  return data;
+};
+
+export const patchRoadmapGroupMemberRole = async (roadmapId: number, userId: number) => {
+  const { data } = await axiosInstance.request<PatchRoadmapGroupMemberRoleResponse>({
+    method: 'PATCH',
+    url: `/roadmaps/groups/${roadmapId}/members/${userId}`,
   });
 
   return data;

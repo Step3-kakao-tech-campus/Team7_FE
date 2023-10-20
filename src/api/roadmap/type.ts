@@ -88,3 +88,6 @@ export const roleStatus = {
   manager: '매니저',
   member: '멤버',
 } as const;
+
+// getRoadmapGroupMember
+export interface PatchRoadmapGroupMemberRoleResponse extends CommonResponse {}
