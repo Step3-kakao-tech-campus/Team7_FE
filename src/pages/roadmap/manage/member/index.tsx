@@ -1,10 +1,8 @@
-import { c } from 'msw/lib/glossary-de6278a9';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import SideBar from '@/components/manage/SideBar';
+import Table from '@/components/manage/member/Table';
 import { setLayout } from '@/utils/layout';
-import * as Styled from './style';
 
 const Member = () => {
   return (
@@ -16,6 +14,7 @@ const Member = () => {
 
         <RightArea>
           <Header>구성원 관리</Header>
+          <Table />
         </RightArea>
       </Container>
     </Root>
@@ -37,6 +36,8 @@ const Container = styled.main`
 `;
 
 const LeftArea = styled.aside`
+  position: sticky;
+  top: ${({ theme }) => theme.layout.main.GNBHeight};
   width: 200px;
   padding: 0.5rem;
   height: ${({ theme }) => `calc(100vh - ${theme.layout.main.GNBHeight})`};
@@ -44,10 +45,10 @@ const LeftArea = styled.aside`
 `;
 
 const RightArea = styled.main`
-  margin-left: 60px;
+  padding: 2.5rem 6.25rem 5rem 6.25rem;
   flex: 1;
 `;
 
 const Header = styled.h1`
-  margin-top: 2rem;
+  margin-bottom: 1rem;
 `;

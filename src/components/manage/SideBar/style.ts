@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 export const Root = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 6rem;
+  margin-top: 2.5rem;
   gap: 4px;
 `;
 
