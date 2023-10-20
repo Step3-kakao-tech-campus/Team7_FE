@@ -1,12 +1,29 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useGetRoadmapGroupMember } from '@/api/hooks/roadmap';
+import { useDeleteRoadmapGroupMember, useGetRoadmapGroupMember } from '@/api/hooks/roadmap';
+import BanUserModal from '@/components/roadmap/manage/BanUserModal';
 import TableColumn from '@/components/roadmap/manage/member/TableColumn';
+import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 const ManageTable = () => {
-  const router = useRouter();
+  const [userId, setUserId] = useState<number>(0);
 
+  const router = useRouter();
   const { members, myRole } = useGetRoadmapGroupMember(Number(router.query.roadmapId));
+  const { deleteRoadmapGroupMember } = useDeleteRoadmapGroupMember();
+  const { isOpen, handleOpen, handleClose } = useModalState();
+
+  const handleUserId = (userId: number) => {
+    setUserId(userId);
+  };
+
+  const handleBanUser = () => {
+    deleteRoadmapGroupMember({
+      roadmapId: Number(router.query.roadmapId),
+      userId: userId,
+    });
+  };
 
   return (
     <Styled.Root>
@@ -19,9 +36,11 @@ const ManageTable = () => {
       </Styled.TableHead>
       <Styled.TableBody>
         {members.map((member, index) => (
-          <TableColumn key={index} myRole={myRole} {...member} />
+          <TableColumn key={index} myRole={myRole} {...member} handleUserId={handleUserId} handleOpen={handleOpen} />
         ))}
       </Styled.TableBody>
+
+      <BanUserModal isOpen={isOpen} handleClose={handleClose} handleBanUser={handleBanUser} />
     </Styled.Root>
   );
 };

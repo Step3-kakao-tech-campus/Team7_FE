@@ -22,10 +22,12 @@ const selectOptionItems: SelectOption[] = [
 
 interface TableColumnProps extends Member {
   myRole?: Role;
+  handleUserId: (userId: number) => void;
+  handleOpen: () => void;
 }
 
 const TableColumn = (props: TableColumnProps) => {
-  const { id: memberId, myRole, name, image, role: userRole } = props;
+  const { id: memberId, myRole, name, image, role: userRole, handleUserId, handleOpen } = props;
 
   const [selectedOption, setSelectedOption] = useState<SelectOption>({
     label: roleStatus[userRole],
@@ -44,39 +46,47 @@ const TableColumn = (props: TableColumnProps) => {
   };
 
   return (
-    <tr>
-      <td>
-        <Avatar imageUrl={image} alt="프로필 이미지" imageSize={46} />
-        {name}
-      </td>
+    <>
+      <tr>
+        <td>
+          <Avatar imageUrl={image} alt="프로필 이미지" imageSize={46} />
+          {name}
+        </td>
 
-      {myRole === 'master' ? (
-        <td>
-          {userRole === 'master' ? (
-            <Styled.RenderUserRole>마스터</Styled.RenderUserRole>
-          ) : (
-            <Select
-              selectedOption={selectedOption}
-              onChangeOption={(option) => setSelectedOption(option)}
-              callbackFunction={handleChangeRole}
-              options={selectOptionItems}
-            />
-          )}
-        </td>
-      ) : (
-        <td>
-          <Styled.RenderUserRole>{roleStatus[userRole]}</Styled.RenderUserRole>
-        </td>
-      )}
+        {myRole === 'master' ? (
+          <td>
+            {userRole === 'master' ? (
+              <Styled.RenderUserRole>마스터</Styled.RenderUserRole>
+            ) : (
+              <Select
+                selectedOption={selectedOption}
+                onChangeOption={(option) => setSelectedOption(option)}
+                callbackFunction={handleChangeRole}
+                options={selectOptionItems}
+              />
+            )}
+          </td>
+        ) : (
+          <td>
+            <Styled.RenderUserRole>{roleStatus[userRole]}</Styled.RenderUserRole>
+          </td>
+        )}
 
-      {myRole === 'master' && (
-        <td>
-          <Button variant="primary" css={Styled.ButtonStyles}>
-            강퇴
-          </Button>
-        </td>
-      )}
-    </tr>
+        {myRole === 'master' && (
+          <td>
+            <Button
+              variant="primary"
+              css={Styled.ButtonStyles}
+              onClick={() => {
+                handleOpen();
+                handleUserId(memberId);
+              }}>
+              강퇴
+            </Button>
+          </td>
+        )}
+      </tr>
+    </>
   );
 };
 
