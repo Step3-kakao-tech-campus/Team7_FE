@@ -17,7 +17,7 @@ export interface CalendarProps {
 }
 
 const Calendar = (props: CalendarProps) => {
-  const { onChangeDate, popperPlacement = 'bottom', disabled = false, minDate, isTimeInclude } = props;
+  const { onChangeDate, popperPlacement = 'bottom', disabled = false, minDate, isTimeInclude = false } = props;
 
   const [date, setDate] = useState(new Date());
   const handleCalendarClose = () => {
