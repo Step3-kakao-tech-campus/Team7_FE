@@ -104,8 +104,16 @@ export const usePostRoadmapStepIndividual = () => {
 export const useGetRoadmapGroupMember = (roadmapId: number) => {
   const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupMember], () => getRoadmapGroupMember(roadmapId));
 
+  const roleWeight = {
+    master: 3,
+    manager: 2,
+    member: 1,
+  };
+
+  const members = data?.result.users.sort((a, b) => roleWeight[b.role] - roleWeight[a.role]) ?? [];
+
   return {
-    members: data?.result.users ?? [],
+    members: members,
     myRole: data?.result.myRole,
   };
 };
