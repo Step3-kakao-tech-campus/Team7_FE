@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { usePatchRoadmapGroupMemberRole } from '@/api/hooks/roadmap';
 import type { Member, Role } from '@/api/roadmap/type';
 import { roleStatus } from '@/api/roadmap/type';
 import Avatar from '@/components/common/Avatar';
@@ -14,7 +16,7 @@ const selectOptionItems: SelectOption[] = [
   },
   {
     label: '멤버',
-    value: 'meber',
+    value: 'member',
   },
 ];
 
@@ -23,12 +25,23 @@ interface TableColumnProps extends Member {
 }
 
 const TableColumn = (props: TableColumnProps) => {
-  const { id, myRole, name, image, role: userRole } = props;
+  const { id: memberId, myRole, name, image, role: userRole } = props;
 
-  const [selectedOption, setSelectedOption] = useState<SelectOption | undefined>({
+  const [selectedOption, setSelectedOption] = useState<SelectOption>({
     label: roleStatus[userRole],
     value: userRole,
   });
+
+  const { query } = useRouter();
+  const { patchRoadmapGroupMemberRole } = usePatchRoadmapGroupMemberRole();
+
+  const handleChangeRole = (option: SelectOption) => {
+    patchRoadmapGroupMemberRole({
+      roadmapId: Number(query.roadmapId),
+      userId: memberId,
+      role: option.value as Exclude<Role, null>,
+    });
+  };
 
   return (
     <tr>
@@ -45,6 +58,7 @@ const TableColumn = (props: TableColumnProps) => {
             <Select
               selectedOption={selectedOption}
               onChangeOption={(option) => setSelectedOption(option)}
+              callbackFunction={handleChangeRole}
               options={selectOptionItems}
             />
           )}
