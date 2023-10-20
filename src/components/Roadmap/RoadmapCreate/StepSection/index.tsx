@@ -1,5 +1,5 @@
+import StepList from '@/components/Roadmap/RoadmapCreate/StepSection/StepList';
 import StepModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
-import StepList from '@/components/Roadmap/RoadmapCreate/StepSection/StepSection';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/style';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
@@ -9,6 +9,7 @@ import type { Step } from '@/pages/roadmap/create';
 
 interface StepSectionProps {
   step: Step;
+  stepList: Step[];
   valid: RoadmapValid;
   handleOnChange: (name: string, value: string | Date | null) => void;
   resetStep: () => void;
@@ -16,7 +17,7 @@ interface StepSectionProps {
 }
 
 const StepSection = (props: StepSectionProps) => {
-  const { step, valid, handleOnChange, resetStep, addStep } = props;
+  const { step, stepList, valid, handleOnChange, resetStep, addStep } = props;
   const { isOpen, handleOpen, handleClose } = useModalState();
   return (
     <>
@@ -32,7 +33,9 @@ const StepSection = (props: StepSectionProps) => {
           </Button>
         </Styled.ButtonContainer>
       </Flex>
-      <StepList.Empty />
+      {stepList.length === 0 ? <StepList.Empty /> : <StepList stepList={stepList} />}
+      {/* <StepList.Empty /> */}
+
       <StepModal
         isOpen={isOpen}
         onClose={handleClose}

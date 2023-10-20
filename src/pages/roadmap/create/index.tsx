@@ -28,7 +28,14 @@ const RoadmapCreate = () => {
     <RoadmapCreatePage>
       <Header />
       <InfoSection info={info} handleOnChange={handleInfo} />
-      <StepSection step={step} valid={valid} handleOnChange={handleStep} resetStep={resetStep} addStep={addStep} />
+      <StepSection
+        step={step}
+        stepList={stepList}
+        valid={valid}
+        handleOnChange={handleStep}
+        resetStep={resetStep}
+        addStep={addStep}
+      />
     </RoadmapCreatePage>
   );
 };
