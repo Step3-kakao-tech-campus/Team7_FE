@@ -13,10 +13,11 @@ export interface CalendarProps {
   onChangeDate?: (date: Date) => void;
   disabled?: boolean;
   minDate?: Date;
+  isTimeInclude?: boolean;
 }
 
 const Calendar = (props: CalendarProps) => {
-  const { onChangeDate, popperPlacement = 'bottom', disabled = false, minDate } = props;
+  const { onChangeDate, popperPlacement = 'bottom', disabled = false, minDate, isTimeInclude } = props;
 
   const [date, setDate] = useState(new Date());
   const handleCalendarClose = () => {
@@ -25,13 +26,15 @@ const Calendar = (props: CalendarProps) => {
   const handleCalendarOpen = () => console.log('Calendar opened');
 
   return (
-    <Styled.CustomContainer>
+    <Styled.CustomContainer isTimeInclude={isTimeInclude}>
       <DatePicker
         selected={date}
         onChange={(date) => setDate(date!)}
         onCalendarClose={handleCalendarClose}
         onCalendarOpen={handleCalendarOpen}
-        dateFormat="yyyy-MM-dd"
+        dateFormat={isTimeInclude ? 'yyyy-MM-dd | HH:mm' : 'yyyy-MM-dd'}
+        timeIntervals={30}
+        showTimeSelect={isTimeInclude}
         popperPlacement={popperPlacement}
         minDate={minDate}
         disabled={disabled}

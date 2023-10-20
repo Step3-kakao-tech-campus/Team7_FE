@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const CustomContainer = styled.div`
+export const CustomContainer = styled.div<{ isTimeInclude: boolean }>`
   input {
-    width: calc(9ch + 0.5rem);
+    width: ${(props) => (props.isTimeInclude ? 'calc(16ch + 0.5rem)' : 'calc(9.5ch + 0.5rem)')};
     text-align: center;
     border: 1px solid ${({ theme }) => theme.colors.gray_400};
     padding: 0.4rem 0.25rem;

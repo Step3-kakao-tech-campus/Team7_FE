@@ -66,6 +66,7 @@ const StepModal = (props: StepModalProps) => {
           />
           <Calendar
             onChangeDate={(date: Date) => handleOnChange('date', date)}
+            isTimeInclude={true}
             disabled={step.date === null}
             minDate={new Date()}
           />
