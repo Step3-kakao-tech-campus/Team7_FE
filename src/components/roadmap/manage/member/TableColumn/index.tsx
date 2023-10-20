@@ -38,6 +38,9 @@ const TableColumn = (props: TableColumnProps) => {
   const { patchRoadmapGroupMemberRole } = usePatchRoadmapGroupMemberRole();
 
   const handleChangeRole = (option: SelectOption) => {
+    // 이전 상태와 클릭된 상태가 같으면 요청을 보내지 않는다.
+    if (selectedOption.value === option.value) return;
+
     patchRoadmapGroupMemberRole({
       roadmapId: Number(query.roadmapId),
       userId: memberId,
