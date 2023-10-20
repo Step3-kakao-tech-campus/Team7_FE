@@ -6,6 +6,7 @@ import {
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
   getRoadmapStepReference,
+  getRoadmapGroupMember,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
@@ -14,6 +15,7 @@ import { useApiError } from '@/hooks/useApiError';
 export const ROADMAP_QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
   getRoadmapSteps: 'getRoadmapSteps',
+  getRoadmapGroupMember: 'getRoadmapGroupMember',
 };
 
 export const useGetRoadmaps = () => {
@@ -97,4 +99,13 @@ export const usePostRoadmapStepIndividual = () => {
     return data;
   };
   return { postRoadmapStepIndividual };
+};
+
+export const useGetRoadmapGroupMember = (roadmapId: number) => {
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupMember], () => getRoadmapGroupMember(roadmapId));
+
+  return {
+    members: data?.result.users ?? [],
+    myRole: data?.result.myRole,
+  };
 };
