@@ -7,8 +7,9 @@ import {
   postRoadmapIndividual as postRoadmapIndividualAPI,
   getRoadmapStepReference,
   getRoadmapGroupMember,
+  patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
 } from '@/api/roadmap';
-import type { GetRoadmapStepReferenceRequest } from '@/api/roadmap/type';
+import type { GetRoadmapStepReferenceRequest, Role } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
@@ -116,4 +117,26 @@ export const useGetRoadmapGroupMember = (roadmapId: number) => {
     members: members,
     myRole: data?.result.myRole,
   };
+};
+
+export const usePatchRoadmapGroupMemberRole = () => {
+  const toast = useToast();
+  const mutation = useMutation(patchRoadmapGroupMemberRoleAPI);
+
+  const patchRoadmapGroupMemberRole = async (body: {
+    roadmapId: number;
+    userId: number;
+    role: Exclude<Role, null>;
+  }) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        toast.show({
+          message: '멤버 권한이 변경되었습니다.',
+        });
+      },
+    });
+
+    return data;
+  };
+  return { patchRoadmapGroupMemberRole };
 };
