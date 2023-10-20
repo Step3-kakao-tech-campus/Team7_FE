@@ -1,4 +1,9 @@
-import type { GetRoadmapStepsResponse, GetRoadmapsResponse, GetRoadmapStepReferenceResponse } from '@/api/roadmap/type';
+import type {
+  GetRoadmapStepsResponse,
+  GetRoadmapsResponse,
+  GetRoadmapStepReferenceResponse,
+  GetRoadmapGroupMemberResponse,
+} from '@/api/roadmap/type';
 
 export const getRoadmapsResponse: GetRoadmapsResponse = {
   success: true,
@@ -198,6 +203,34 @@ export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = 
         link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter',
       },
     ],
+  },
+};
+
+export const getRoadmapGroupMemberResponse: GetRoadmapGroupMemberResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    users: [
+      {
+        id: 1,
+        name: '김수현',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'member',
+      },
+      {
+        id: 2,
+        name: '이한홍',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'manager',
+      },
+      {
+        id: 3,
+        name: '김동영',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'manager',
+      },
+    ],
+    myRole: 'manager',
   },
 };
 
