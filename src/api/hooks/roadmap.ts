@@ -8,6 +8,7 @@ import {
   getRoadmapStepReference,
   getRoadmapGroupMember,
   patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
+  deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, Role } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
@@ -139,4 +140,24 @@ export const usePatchRoadmapGroupMemberRole = () => {
     return data;
   };
   return { patchRoadmapGroupMemberRole };
+};
+
+export const useDeleteRoadmapGroupMember = () => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const mutation = useMutation(deleteRoadmapGroupMemberAPI);
+
+  const deleteRoadmapGroupMember = async (body: { roadmapId: number; userId: number }) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupMember]);
+        toast.show({
+          message: '멤버가 강퇴되었습니다.',
+        });
+      },
+    });
+
+    return data;
+  };
+  return { deleteRoadmapGroupMember };
 };
