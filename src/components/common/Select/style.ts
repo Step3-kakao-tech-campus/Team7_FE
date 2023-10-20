@@ -30,7 +30,10 @@ export const SelectMenu = styled.ul<{ isOpen: boolean }>`
   flex-direction: column;
   padding: 0.25rem 0.25rem;
   position: absolute;
+  z-index: 1;
   width: 100%;
+  background-color: #fff;
+  font-size: 1rem;
   border-left: 1px solid ${({ theme }) => theme.colors.gray_400};
   border-right: 1px solid ${({ theme }) => theme.colors.gray_400};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_400};
