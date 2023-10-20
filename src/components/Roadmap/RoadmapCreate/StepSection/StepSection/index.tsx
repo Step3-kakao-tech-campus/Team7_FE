@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/style';
+import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepSection/style';
 
 const StepList = () => {};
 

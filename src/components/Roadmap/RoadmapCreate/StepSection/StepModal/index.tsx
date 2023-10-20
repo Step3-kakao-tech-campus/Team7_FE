@@ -6,17 +6,19 @@ import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
+import type { RoadmapValid } from '@/hooks/useRoedmapCreate';
 import type { Step } from '@/pages/roadmap/create';
 
 interface StepModalProps extends ModalProps {
   step: Step;
+  valid: RoadmapValid;
   handleOnChange: (name: string, value: string | Date | null) => void;
   resetStep: () => void;
-  addStep: () => void;
+  addStep: () => boolean;
 }
 
 const StepModal = (props: StepModalProps) => {
-  const { isOpen, onClose, step, handleOnChange, resetStep, addStep } = props;
+  const { isOpen, onClose, step, valid, handleOnChange, resetStep, addStep } = props;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
@@ -33,6 +35,8 @@ const StepModal = (props: StepModalProps) => {
             placeholder="제목을 입력해주세요."
             name="title"
             value={step.title}
+            status={valid === 'step' ? 'error' : 'default'}
+            message="필수 정보 입니다."
             onChange={(e) => {
               handleOnChange(e.target.name, e.target.value);
             }}
@@ -80,7 +84,7 @@ const StepModal = (props: StepModalProps) => {
           </Button>
           <Button
             onClick={() => {
-              addStep();
+              if (addStep()) onClose();
             }}>
             확인
           </Button>

@@ -19,13 +19,16 @@ export interface Step {
 }
 
 const RoadmapCreate = () => {
-  const { info, step, handleInfo, handleStep, resetStep, addStep } = useRoeadmapCreate(defaultInfo, defaultStep);
+  const { info, step, stepList, valid, handleInfo, handleStep, resetStep, addStep } = useRoeadmapCreate(
+    defaultInfo,
+    defaultStep,
+  );
 
   return (
     <RoadmapCreatePage>
       <Header />
       <InfoSection info={info} handleOnChange={handleInfo} />
-      <StepSection step={step} handleOnChange={handleStep} resetStep={resetStep} addStep={addStep} />
+      <StepSection step={step} valid={valid} handleOnChange={handleStep} resetStep={resetStep} addStep={addStep} />
     </RoadmapCreatePage>
   );
 };
