@@ -64,7 +64,11 @@ const StepModal = (props: StepModalProps) => {
             checked={step.date !== null}
             onChange={() => handleOnChange('date', new Date())}
           />
-          <Calendar onChangeDate={(date: Date) => handleOnChange('date', date)} disabled={step.date === null} />
+          <Calendar
+            onChangeDate={(date: Date) => handleOnChange('date', date)}
+            disabled={step.date === null}
+            minDate={new Date()}
+          />
           <RadioButton
             label="기간 제한 없음"
             textPosition="right"

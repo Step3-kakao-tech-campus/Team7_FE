@@ -12,10 +12,11 @@ export interface CalendarProps {
   popperPlacement?: 'top' | 'bottom';
   onChangeDate?: (date: Date) => void;
   disabled?: boolean;
+  minDate?: Date;
 }
 
 const Calendar = (props: CalendarProps) => {
-  const { onChangeDate, popperPlacement = 'bottom', disabled = false } = props;
+  const { onChangeDate, popperPlacement = 'bottom', disabled = false, minDate } = props;
 
   const [date, setDate] = useState(new Date());
   const handleCalendarClose = () => {
@@ -32,6 +33,7 @@ const Calendar = (props: CalendarProps) => {
         onCalendarOpen={handleCalendarOpen}
         dateFormat="yyyy-MM-dd"
         popperPlacement={popperPlacement}
+        minDate={minDate}
         disabled={disabled}
         renderCustomHeader={({
           date,
