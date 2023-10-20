@@ -5,6 +5,6 @@ const Roadmap = () => {
   return <>로드맵 페이지</>;
 };
 
-setLayout(Roadmap, HeaderLayout);
+setLayout(Roadmap, HeaderLayout, false);
 
 export default Roadmap;
