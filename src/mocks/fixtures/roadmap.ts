@@ -3,6 +3,7 @@ import type {
   GetRoadmapsResponse,
   GetRoadmapStepReferenceResponse,
   GetRoadmapGroupMemberResponse,
+  Role,
 } from '@/api/roadmap/type';
 
 export const getRoadmapsResponse: GetRoadmapsResponse = {
@@ -206,7 +207,8 @@ export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = 
   },
 };
 
-export const getRoadmapGroupMemberResponse: GetRoadmapGroupMemberResponse = {
+// eslint-disable-next-line prefer-const
+export let getRoadmapGroupMemberResponse: GetRoadmapGroupMemberResponse = {
   success: true,
   message: 'ok',
   result: {
@@ -229,8 +231,20 @@ export const getRoadmapGroupMemberResponse: GetRoadmapGroupMemberResponse = {
         image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
         role: 'manager',
       },
+      {
+        id: 4,
+        name: '조준서',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'manager',
+      },
+      {
+        id: 5,
+        name: '이상명',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'master',
+      },
     ],
-    myRole: 'manager',
+    myRole: 'master',
   },
 };
 
@@ -258,4 +272,10 @@ export const updateGetRoadmapStepsResponseFixture = (name: string) => {
       tilId: null,
     },
   ];
+};
+
+export const updateGetRoadmapGroupMemberResponseFixture = (userId: number, role: Exclude<Role, null>) => {
+  getRoadmapGroupMemberResponse.result.users = getRoadmapGroupMemberResponse.result.users.map((user) =>
+    user.id === userId ? { ...user, role } : user,
+  );
 };

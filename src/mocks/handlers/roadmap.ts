@@ -3,9 +3,10 @@ import {
   getRoadmapsResponse,
   updateFixture,
   getRoadmapStepsResponse,
-  updateGetRoadmapStepsResponseFixture,
+  updateGetRoadmapGroupMemberResponseFixture,
   getRoadmapStepReferenceResponse,
   getRoadmapGroupMemberResponse,
+  updateGetRoadmapStepsResponseFixture,
 } from '@/mocks/fixtures/roadmap';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -98,6 +99,27 @@ export const roadmapHandler = [
 
   rest.get(`${BASE_URL}/roadmaps/groups/:roadmapId/members`, (req, res, ctx) => {
     try {
+      return res(ctx.status(200), ctx.json(getRoadmapGroupMemberResponse));
+    } catch (error) {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          success: false,
+          message: '서버에서 에러가 났어요',
+          result: null,
+        }),
+      );
+    }
+  }),
+
+  rest.patch(`${BASE_URL}/roadmaps/groups/:roadmapId/members/:userId`, (req, res, ctx) => {
+    const {
+      body: { role },
+      params: { userId },
+    } = req;
+
+    try {
+      updateGetRoadmapGroupMemberResponseFixture(Number(userId), role);
       return res(ctx.status(200), ctx.json(getRoadmapGroupMemberResponse));
     } catch (error) {
       return res(
