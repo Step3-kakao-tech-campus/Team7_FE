@@ -75,19 +75,39 @@ const TableColumn = (props: TableColumnProps) => {
           </td>
         )}
 
-        {myRole === 'master' && (
-          <td>
-            <Button
-              variant="primary"
-              css={Styled.ButtonStyles}
-              onClick={() => {
-                handleOpen();
-                handleUserId(memberId);
-              }}>
-              강퇴
-            </Button>
-          </td>
-        )}
+        {(() => {
+          switch (true) {
+            case myRole === 'master':
+              return (
+                <td>
+                  <Button
+                    variant="primary"
+                    css={Styled.ButtonStyles}
+                    onClick={() => {
+                      handleOpen();
+                      handleUserId(memberId);
+                    }}>
+                    강퇴
+                  </Button>
+                </td>
+              );
+
+            case myRole === 'manager' && userRole === 'member':
+              return (
+                <td>
+                  <Button
+                    variant="primary"
+                    css={Styled.ButtonStyles}
+                    onClick={() => {
+                      handleOpen();
+                      handleUserId(memberId);
+                    }}>
+                    강퇴
+                  </Button>
+                </td>
+              );
+          }
+        })()}
       </tr>
     </>
   );

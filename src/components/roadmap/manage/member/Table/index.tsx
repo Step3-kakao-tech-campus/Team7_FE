@@ -31,7 +31,7 @@ const ManageTable = () => {
         <tr>
           <th>이름</th>
           <th>역할</th>
-          {myRole === 'master' && <th>강퇴</th>}
+          <th>강퇴</th>
         </tr>
       </Styled.TableHead>
       <Styled.TableBody>
