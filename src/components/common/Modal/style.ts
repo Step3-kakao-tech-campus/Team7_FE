@@ -8,7 +8,7 @@ export const Background = styled.div`
   left: 0;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
+  z-index: ${({ theme }) => theme.layer.modalBackground};
   background-color: rgb(0 0 0 / 70%);
   width: 100%;
   height: 100%;

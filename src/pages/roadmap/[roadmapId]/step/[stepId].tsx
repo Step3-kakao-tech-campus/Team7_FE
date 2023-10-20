@@ -1,29 +1,22 @@
-import { Suspense, useId } from 'react';
-import { useRouter } from 'next/router';
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import styled from '@emotion/styled';
-import { useStepTils } from '@/api/hooks/til';
-import CustomSuspense from '@/components/common/CustomSuspense';
+import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import FeatureInfoSection from '@/components/roadmap/PeopleTIL/FeatureInfoSection';
 import PeopleTILSection from '@/components/roadmap/PeopleTIL/PeopleTILSection';
 import { setLayout } from '@/utils/layout';
 
 const PeopleTil = () => {
-  const { query } = useRouter();
-
-  const { isLoading } = useStepTils({
-    roadmapId: Number(query.roadmapId),
-    stepId: Number(query.stepId),
-  });
-
   return (
     <>
       <Root>
         <Inner>
           <FeatureInfoSection />
-          <CustomSuspense isLoading={isLoading} fallback={<PeopleTILSection.Skeleton />}>
-            <PeopleTILSection />
-          </CustomSuspense>
+          <QueryErrorResetBoundary>
+            <FallbackErrorBoundary fallbackRender={PeopleTILSection.Fallback}>
+              <PeopleTILSection />
+            </FallbackErrorBoundary>
+          </QueryErrorResetBoundary>
         </Inner>
       </Root>
     </>

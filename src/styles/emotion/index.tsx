@@ -41,6 +41,8 @@ const layout = {
 const layer = {
   header: 1000,
   headerAlarm: 1000,
+  modalBackground: 9999,
+  toast: 10000,
 };
 
 export const emotionTheme = { colors, layout, layer } as const;

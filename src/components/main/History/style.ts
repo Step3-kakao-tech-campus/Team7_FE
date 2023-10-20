@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
+export const Root = styled.div``;
+
 export const Container = styled.div`
   display: flex;
   align-items: center;

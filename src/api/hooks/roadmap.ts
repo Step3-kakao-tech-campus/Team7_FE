@@ -8,6 +8,8 @@ import {
   getRoadmapStepReference,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest } from '@/api/roadmap/type';
+import { useToast } from '@/components/common/Toast/useToast';
+import { useApiError } from '@/hooks/useApiError';
 
 export const ROADMAP_QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
@@ -59,14 +61,19 @@ export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest)
 
 export const usePostRoadmapIndividual = () => {
   const queryClient = useQueryClient();
-
+  const toast = useToast();
   const mutation = useMutation(postRoadmapIndividualAPI);
+  const { handleError } = useApiError();
 
   const postRoadmapsIndividual = async (title: string) => {
     const data = await mutation.mutateAsync(title, {
       onSuccess: () => {
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmaps]);
+        toast.show({
+          message: '로드맵이 생성되었습니다.',
+        });
       },
+      onError: handleError,
     });
 
     return data;

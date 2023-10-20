@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useGetTilsParam } from '@/api/hooks/til';
 import { useGetUser } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
+import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
 import Flex from '@/components/common/Flex';
 import Skeleton from '@/components/common/Skeleton';
 import HeaderLayout from '@/components/layout/HeaderLayout';
@@ -13,20 +11,10 @@ import CategorySection from '@/components/main/CategorySection';
 import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
-import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 import { setLayout } from '@/utils/layout';
 
 const Home = () => {
-  const router = useRouter();
   const { user, isLoading: userIsLoading } = useGetUser();
-  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTilsParam({ queryKey: [router.query] });
-  const { ref, isVisible } = useIntersectionObserver();
-
-  useEffect(() => {
-    if (isVisible && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [isVisible, fetchNextPage, hasNextPage]);
 
   return (
     <>
@@ -46,8 +34,9 @@ const Home = () => {
 
           <RightArea>
             <History />
-            <TILSection tils={tils} isLoading={isLoading} />
-            <ObserverInterSectionTarget ref={ref} />
+            <FallbackErrorBoundary fallbackRender={TILSection.Fallback}>
+              <TILSection />
+            </FallbackErrorBoundary>
           </RightArea>
         </Inner>
       </Root>
@@ -81,11 +70,6 @@ const RightArea = styled.div`
   width: 100%;
   min-height: 101vh;
   padding: 3.5rem 0 0 4.5rem;
-`;
-
-const ObserverInterSectionTarget = styled.div`
-  width: 100%;
-  height: 2.5rem;
 `;
 
 export const ProfileSkeletonStyles = css`
