@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapGroupMember } from '@/api/hooks/roadmap';
-import TableColumn from '@/components/manage/member/TableColumn';
+import TableColumn from '@/components/roadmap/manage/member/TableColumn';
 import * as Styled from './style';
 
 const ManageTable = () => {
