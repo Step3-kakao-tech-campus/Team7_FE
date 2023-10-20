@@ -65,3 +65,20 @@ export interface PostRoadmapStepIndividualResponse {
     id: number;
   };
 }
+
+// getRoadmapGroupMember
+export interface GetRoadmapGroupMemberResponse extends CommonResponse {
+  result: {
+    users: Member[];
+    myRole: Role;
+  };
+}
+
+interface Member {
+  id: number;
+  name: string;
+  image: string;
+  role: Exclude<Role, null>;
+}
+
+type Role = 'master' | 'manager' | 'member' | null;
