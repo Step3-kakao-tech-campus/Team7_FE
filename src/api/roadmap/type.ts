@@ -74,11 +74,17 @@ export interface GetRoadmapGroupMemberResponse extends CommonResponse {
   };
 }
 
-interface Member {
+export interface Member {
   id: number;
   name: string;
   image: string;
   role: Exclude<Role, null>;
 }
 
-type Role = 'master' | 'manager' | 'member' | null;
+export type Role = keyof typeof roleStatus | null;
+
+export const roleStatus = {
+  master: '마스터',
+  manager: '매니저',
+  member: '멤버',
+} as const;
