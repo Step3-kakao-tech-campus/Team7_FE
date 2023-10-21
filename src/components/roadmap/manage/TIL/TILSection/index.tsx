@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useGetStepTilsManage } from '@/api/hooks/til';
-import TILCard from '@/components/roadmap/manage/TIL/TILCard';
+import TILCard from '@/components/roadmap/manage/TIL/TILSection/TILCard';
 import * as Styled from './style';
 
 const TILSection = () => {
