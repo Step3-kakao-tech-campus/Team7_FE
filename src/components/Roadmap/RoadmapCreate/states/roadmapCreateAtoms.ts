@@ -17,7 +17,7 @@ interface Reference {
   youtube: ReferenceLink[];
 }
 
-interface ReferenceLink {
+export interface ReferenceLink {
   link: string;
 }
 
