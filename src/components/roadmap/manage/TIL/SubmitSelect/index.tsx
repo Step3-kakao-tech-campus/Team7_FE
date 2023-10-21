@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Select from '@/components/common/Select';
 import type { SelectOption } from '@/components/common/Select';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
@@ -17,12 +18,17 @@ const selectOptionItems: SelectOption[] = [
 const SubmitSelect = () => {
   const [selectedOption, setSelectedOption] = useState<SelectOption | undefined>(defaultValue);
 
+  const router = useRouter();
   const { overlapParamsToUrl } = useParamsToUrl();
 
   const handleSelectStep = (option: SelectOption) => {
     const isSubmit = option.value;
     overlapParamsToUrl({ isSubmit });
   };
+
+  useEffect(() => {
+    setSelectedOption(router.query.isSubmit === 'false' ? selectOptionItems[1] : selectOptionItems[0]);
+  }, [router.isReady]);
 
   return (
     <Select
