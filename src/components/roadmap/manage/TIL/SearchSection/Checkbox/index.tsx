@@ -11,6 +11,8 @@ const Checkbox = () => {
   const { overlapParamsToUrl } = useParamsToUrl();
 
   useEffect(() => {
+    if (!router.isReady) return;
+
     setChecked(router.query.isMember === 'false' ? MASTER_MANAGER : MEMBER);
   }, [router.isReady]);
 

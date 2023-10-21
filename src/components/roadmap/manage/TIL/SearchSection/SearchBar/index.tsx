@@ -23,6 +23,8 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
+    if (!router.isReady) return;
+
     setTilName(router.query.name ? router.query.name.toString() : '');
   }, [router.isReady]);
 

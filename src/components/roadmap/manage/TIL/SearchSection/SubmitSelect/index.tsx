@@ -27,6 +27,8 @@ const SubmitSelect = () => {
   };
 
   useEffect(() => {
+    if (!router.isReady) return;
+
     setSelectedOption(router.query.isSubmit === 'false' ? selectOptionItems[1] : selectOptionItems[0]);
   }, [router.isReady]);
 
