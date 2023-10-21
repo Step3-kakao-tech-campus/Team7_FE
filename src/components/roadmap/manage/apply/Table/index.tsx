@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useDeleteRoadmapGroupMember, useGetRoadmapGroupApply } from '@/api/hooks/roadmap';
+import { useGetRoadmapGroupApply } from '@/api/hooks/roadmap';
 import { usePostRoadmapGroupApplyAccept } from '@/api/hooks/roadmap';
+import { useDelelteRoadmapGroupApplyReject } from '@/api/hooks/roadmap';
 import ConfirmModal from '@/components/roadmap/manage/apply/ConfirmModal';
 import TableColumn from '@/components/roadmap/manage/apply/TableColumn';
 import * as Styled from '@/components/roadmap/manage/member/Table/style';
@@ -14,6 +15,7 @@ const ApplyTable = () => {
   const { members } = useGetRoadmapGroupApply(Number(router.query.roadmapId));
   const { isOpen, handleOpen, handleClose } = useModalState();
   const { postRoadmapGroupApplyAccept } = usePostRoadmapGroupApplyAccept();
+  const { delelteRoadmapGroupApplyReject } = useDelelteRoadmapGroupApplyReject();
 
   const handleUserId = (userId: number) => {
     setUserId(userId);
@@ -24,6 +26,15 @@ const ApplyTable = () => {
       roadmapId: Number(router.query.roadmapId),
       userId: userId,
     });
+    handleClose();
+  };
+
+  const handleRejectUser = () => {
+    delelteRoadmapGroupApplyReject({
+      roadmapId: Number(router.query.roadmapId),
+      userId: userId,
+    });
+    handleClose();
   };
 
   return (
@@ -41,7 +52,12 @@ const ApplyTable = () => {
         ))}
       </Styled.TableBody>
 
-      <ConfirmModal isOpen={isOpen} handleClose={handleClose} handleAcceptUser={handleAcceptUser} />
+      <ConfirmModal
+        isOpen={isOpen}
+        handleClose={handleClose}
+        handleAcceptUser={handleAcceptUser}
+        handleRejectUser={handleRejectUser}
+      />
     </Styled.Root>
   );
 };

@@ -7,10 +7,11 @@ interface ConfirmModalProps {
   isOpen: boolean;
   handleClose: () => void;
   handleAcceptUser: () => void;
+  handleRejectUser: () => void;
 }
 
 const ConfirmModal = (props: ConfirmModalProps) => {
-  const { isOpen, handleClose, handleAcceptUser } = props;
+  const { isOpen, handleClose, handleAcceptUser, handleRejectUser } = props;
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
@@ -29,7 +30,7 @@ const ConfirmModal = (props: ConfirmModalProps) => {
         </Styled.Info>
       </Styled.InfoContainer>
       <Styled.ButtonContainer>
-        <Button variant="default" onClick={handleClose}>
+        <Button variant="default" onClick={handleRejectUser}>
           거절
         </Button>
         <Button variant="primary" onClick={handleAcceptUser}>
