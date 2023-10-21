@@ -6,11 +6,11 @@ import * as Styled from './style';
 interface ConfirmModalProps {
   isOpen: boolean;
   handleClose: () => void;
-  handleBanUser: () => void;
+  handleAcceptUser: () => void;
 }
 
 const ConfirmModal = (props: ConfirmModalProps) => {
-  const { isOpen, handleClose, handleBanUser } = props;
+  const { isOpen, handleClose, handleAcceptUser } = props;
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
@@ -32,7 +32,7 @@ const ConfirmModal = (props: ConfirmModalProps) => {
         <Button variant="default" onClick={handleClose}>
           거절
         </Button>
-        <Button variant="primary" onClick={handleBanUser}>
+        <Button variant="primary" onClick={handleAcceptUser}>
           승인
         </Button>
       </Styled.ButtonContainer>
