@@ -23,6 +23,7 @@ const ManageTable = () => {
       roadmapId: Number(router.query.roadmapId),
       userId: userId,
     });
+    handleClose();
   };
 
   return (
