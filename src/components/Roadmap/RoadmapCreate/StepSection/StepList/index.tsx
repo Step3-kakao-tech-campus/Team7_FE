@@ -5,15 +5,16 @@ import type { Step } from '@/pages/roadmap/create';
 
 interface StepListProps {
   stepList: Step[];
+  addYoutube: (idx: number, link: string) => void;
 }
 
 const StepList = (props: StepListProps) => {
-  const { stepList } = props;
+  const { stepList, addYoutube } = props;
 
   return (
     <Styled.Root>
       {stepList.map((step, idx) => (
-        <StepBox key={idx} step={step} />
+        <StepBox key={idx} idx={idx} step={step} addYoutube={addYoutube} />
       ))}
     </Styled.Root>
   );

@@ -1,15 +1,18 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import Image from 'next/image';
+import YoutubeBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeBox';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/style';
 import type { Step } from '@/pages/roadmap/create';
 
 interface StepBoxProps {
   step: Step;
+  idx: number;
+  addYoutube: (idx: number, link: string) => void;
 }
 
 const StepBox = (props: StepBoxProps) => {
-  const { step } = props;
+  const { step, idx, addYoutube } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -38,6 +41,7 @@ const StepBox = (props: StepBoxProps) => {
       {isOpen && (
         <Styled.ContentContainer>
           <p>{step.description}</p>
+          <YoutubeBox idx={idx} addYoutube={addYoutube} />
         </Styled.ContentContainer>
       )}
     </Styled.StepContainer>

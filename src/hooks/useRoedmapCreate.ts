@@ -38,5 +38,9 @@ export const useRoeadmapCreate = (defaultInfo: RoadmapInfo, defaultStep: Step) =
     }
   };
 
-  return { info, step, stepList, valid, handleInfo, handleStep, resetStep, addStep };
+  const addYoutube = (idx: number, link: string) => {
+    console.log(idx, link);
+  };
+
+  return { info, step, stepList, valid, handleInfo, handleStep, resetStep, addStep, addYoutube };
 };

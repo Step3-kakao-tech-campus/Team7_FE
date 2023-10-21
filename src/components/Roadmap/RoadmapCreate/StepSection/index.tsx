@@ -14,10 +14,11 @@ interface StepSectionProps {
   handleOnChange: (name: string, value: string | Date | null) => void;
   resetStep: () => void;
   addStep: () => boolean;
+  addYoutube: (idx: number, link: string) => void;
 }
 
 const StepSection = (props: StepSectionProps) => {
-  const { step, stepList, valid, handleOnChange, resetStep, addStep } = props;
+  const { step, stepList, valid, handleOnChange, resetStep, addStep, addYoutube } = props;
   const { isOpen, handleOpen, handleClose } = useModalState();
   return (
     <>
@@ -33,7 +34,7 @@ const StepSection = (props: StepSectionProps) => {
           </Button>
         </Styled.ButtonContainer>
       </Flex>
-      {stepList.length === 0 ? <StepList.Empty /> : <StepList stepList={stepList} />}
+      {stepList.length === 0 ? <StepList.Empty /> : <StepList stepList={stepList} addYoutube={addYoutube} />}
       {/* <StepList.Empty /> */}
 
       <StepModal

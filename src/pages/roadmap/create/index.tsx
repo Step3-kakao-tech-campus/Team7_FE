@@ -16,10 +16,19 @@ export interface Step {
   title: string;
   description: string;
   date: Date | null;
+  reference?: Reference;
+}
+
+export interface Reference {
+  youtube?: ReferenceLink[];
+}
+
+export interface ReferenceLink {
+  link: string;
 }
 
 const RoadmapCreate = () => {
-  const { info, step, stepList, valid, handleInfo, handleStep, resetStep, addStep } = useRoeadmapCreate(
+  const { info, step, stepList, valid, handleInfo, handleStep, resetStep, addStep, addYoutube } = useRoeadmapCreate(
     defaultInfo,
     defaultStep,
   );
@@ -35,6 +44,7 @@ const RoadmapCreate = () => {
         handleOnChange={handleStep}
         resetStep={resetStep}
         addStep={addStep}
+        addYoutube={addYoutube}
       />
     </RoadmapCreatePage>
   );
