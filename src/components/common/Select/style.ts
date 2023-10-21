@@ -32,6 +32,13 @@ export const SelectMenu = styled.ul<{ isOpen: boolean }>`
   position: absolute;
   z-index: 1;
   width: 100%;
+  height: 18rem;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
   background-color: #fff;
   font-size: 1rem;
   border-left: 1px solid ${({ theme }) => theme.colors.gray_400};
