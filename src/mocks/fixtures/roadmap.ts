@@ -264,7 +264,15 @@ export const getRoadmapGroupApplyResponse: GetRoadmapGroupApplyResponse = {
       },
       {
         id: 2,
-        name: '조준서',
+        name: '김동영',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        date: '2023-08-20',
+        content:
+          '저는 부산대학교 컴퓨터공학과 4학년 재학중입니다. 현재 프론트엔드 개발자를 지망하고 있으며, 리액트 공부를 하고 싶습니다.',
+      },
+      {
+        id: 3,
+        name: '홍박사',
         image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
         date: '2023-08-20',
         content:
