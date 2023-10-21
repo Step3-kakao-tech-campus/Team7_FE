@@ -1,9 +1,26 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
-import * as Styled from './style';
+import HeaderLayout from '@/components/layout/HeaderLayout';
+import SideBar from '@/components/roadmap/manage/SideBar';
+import ApplyTable from '@/components/roadmap/manage/apply/Table';
+import { Root, Container, LeftArea, RightArea, Header } from '@/pages/roadmap/[roadmapId]/manage/member';
+import { setLayout } from '@/utils/layout';
 
-const index = () => {
-  return <>index</>;
+const Apply = () => {
+  return (
+    <Root>
+      <Container>
+        <LeftArea>
+          <SideBar />
+        </LeftArea>
+
+        <RightArea>
+          <Header>신청 관리</Header>
+          <ApplyTable />
+        </RightArea>
+      </Container>
+    </Root>
+  );
 };
 
-export default index;
+setLayout(Apply, HeaderLayout, true);
+
+export default Apply;
