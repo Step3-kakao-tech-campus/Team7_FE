@@ -1,12 +1,13 @@
 import SearchSection from '@/components/roadmap/manage/TIL/SearchSection';
 import TILSection from '@/components/roadmap/manage/TIL/TILSection';
+import * as Styled from './style';
 
 const ManagePeopleTIL = () => {
   return (
-    <main>
+    <Styled.Root>
       <SearchSection />
       <TILSection />
-    </main>
+    </Styled.Root>
   );
 };
 

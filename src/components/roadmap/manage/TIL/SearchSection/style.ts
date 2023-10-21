@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 export const SearchSection = styled.section`
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 `;
 
 export const MainSearchContainer = styled.div`
