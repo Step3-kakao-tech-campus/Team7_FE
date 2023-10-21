@@ -10,6 +10,7 @@ import type {
   PatchRoadmapGroupMemberRoleResponse,
   DeleteRoadmapGroupMemberResponse,
   GetRoadmapGroupApplyResponse,
+  PostRoadmapGroupApplyAcceptResponse,
   Role,
 } from '@/api/roadmap/type';
 
@@ -102,6 +103,15 @@ export const getRoadmapGroupApply = async (roadmapId: number) => {
   const { data } = await axiosInstance.request<GetRoadmapGroupApplyResponse>({
     method: 'GET',
     url: `/roadmaps/groups/${roadmapId}/members/apply`,
+  });
+
+  return data;
+};
+
+export const postRoadmapGroupApplyAccept = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
+  const { data } = await axiosInstance.request<PostRoadmapGroupApplyAcceptResponse>({
+    method: 'POST',
+    url: `/roadmaps/groups/${roadmapId}/members/${userId}/accept`,
   });
 
   return data;

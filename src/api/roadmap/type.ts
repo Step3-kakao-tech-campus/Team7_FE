@@ -112,3 +112,7 @@ export interface ApplyMember {
   date: string;
   content: string;
 }
+
+// postRoadmapGroupApplyAccept
+
+export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
