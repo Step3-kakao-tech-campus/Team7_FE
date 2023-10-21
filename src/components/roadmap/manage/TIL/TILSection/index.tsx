@@ -8,19 +8,7 @@ const TILSection = () => {
 
   const { memberTils } = useGetStepTilsManage({ queryKey: [router.query] });
 
-  return (
-    <Styled.Root>
-      <TILCard />
-      <TILCard />
-      <TILCard />
-      <TILCard />
-      <TILCard />
-      <TILCard />
-      <TILCard />
-      <TILCard />
-      <TILCard />
-    </Styled.Root>
-  );
+  return <Styled.Root>{memberTils?.map((til) => <TILCard key={til.tilId} {...til} />)}</Styled.Root>;
 };
 
 export default TILSection;
