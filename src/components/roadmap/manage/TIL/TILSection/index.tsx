@@ -10,9 +10,11 @@ const TILSection = () => {
 
   const { memberTils } = useGetStepTilsManage({ queryKey: [router.query] });
 
+  console.log(memberTils);
+
   return (
     <ConditionalRender data={memberTils} EmptyUI={<TILSection.Empty />}>
-      <Styled.Root>{memberTils?.map((til) => <TILCard key={til.tilId} {...til} />)}</Styled.Root>
+      <Styled.Root>{memberTils?.map((til, index) => <TILCard key={index} {...til} />)}</Styled.Root>
     </ConditionalRender>
   );
 };
