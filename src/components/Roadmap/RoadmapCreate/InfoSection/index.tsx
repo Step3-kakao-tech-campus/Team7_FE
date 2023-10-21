@@ -1,10 +1,10 @@
 import { useRecoilState } from 'recoil';
 import { useEffect } from 'react';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/InfoSection/style';
+import { roadmapInfoAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Input from '@/components/common/Input';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
-import { roadmapInfoAtoms } from '../states/roadmapCreateAtoms';
 
 const InfoSection = () => {
   const [info, setInfo] = useRecoilState(roadmapInfoAtoms);

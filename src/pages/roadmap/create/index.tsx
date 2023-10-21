@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import Header from '@/components/Roadmap/RoadmapCreate/Header';
+import InfoSection from '@/components/Roadmap/RoadmapCreate/InfoSection';
 import StepSection from '@/components/Roadmap/RoadmapCreate/StepSection';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import { setLayout } from '@/utils/layout';
-import InfoSection from '../../../components/Roadmap/RoadmapCreate/InfoSection';
 
 const RoadmapCreate = () => {
   return (
