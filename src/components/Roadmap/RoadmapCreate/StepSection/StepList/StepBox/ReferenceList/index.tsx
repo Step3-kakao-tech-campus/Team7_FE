@@ -1,19 +1,20 @@
 import Image from 'next/image';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeList/style';
+import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/ReferenceList/style';
 import type { ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
-interface YoutubeListProps {
-  youtubes: ReferenceLink[];
+interface ReferenceListProps {
+  type: string;
+  references: ReferenceLink[];
 }
 
-const YoutubeList = (props: YoutubeListProps) => {
-  const { youtubes } = props;
+const ReferenceList = (props: ReferenceListProps) => {
+  const { type, references } = props;
   return (
     <Styled.EmptyRoot>
-      {youtubes.map((youtube, idx) => (
+      {references.map((youtube, idx) => (
         <Styled.Link key={idx}>
           <section>
-            <Image src="/assets/icons/ic_link.svg" alt="stepEmptyIcon" width={25} height={25} />
+            <Image src={`/assets/icons/ic_${type}.svg`} alt="stepEmptyIcon" width={23} height={23} />
             <p>{`${idx + 1}. ${youtube.link}`}</p>
           </section>
 
@@ -24,7 +25,7 @@ const YoutubeList = (props: YoutubeListProps) => {
   );
 };
 
-YoutubeList.Empty = function Empty() {
+ReferenceList.Empty = function Empty() {
   return (
     <Styled.EmptyRoot>
       <Image src="/assets/icons/ic_noLink.svg" alt="stepEmptyIcon" width={35} height={35} />
@@ -33,4 +34,4 @@ YoutubeList.Empty = function Empty() {
   );
 };
 
-export default YoutubeList;
+export default ReferenceList;

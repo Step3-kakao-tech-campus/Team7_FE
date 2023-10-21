@@ -1,4 +1,5 @@
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal/style';
+import type { ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import Calendar from '@/components/common/Calendar';
 import InfoArea from '@/components/common/InfoArea';
@@ -13,7 +14,8 @@ export interface StepForm {
   description: string;
   dueDate: Date | null;
   references: {
-    youtube: { link: string }[];
+    youtube: ReferenceLink[];
+    web: ReferenceLink[];
   };
 }
 
@@ -113,5 +115,6 @@ const defaultValue = {
   dueDate: new Date(),
   references: {
     youtube: [],
+    web: [],
   },
 };

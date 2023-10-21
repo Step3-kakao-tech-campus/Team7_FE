@@ -15,6 +15,7 @@ export interface Step {
 
 interface Reference {
   youtube: ReferenceLink[];
+  web: ReferenceLink[];
 }
 
 export interface ReferenceLink {

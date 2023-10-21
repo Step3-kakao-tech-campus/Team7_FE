@@ -1,16 +1,16 @@
 import { useRecoilValue } from 'recoil';
 import ReferenceList from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/ReferenceList';
+import WebModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/WebModal';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeBox/style';
-import YoutubeModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeModal';
 import { roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import { useModalState } from '@/hooks/useModalState';
 
-interface YoutubeBoxProps {
+interface WebBoxProps {
   idx: number;
 }
 
-const YoutubeBox = (props: YoutubeBoxProps) => {
+const WebBox = (props: WebBoxProps) => {
   const { idx } = props;
   const { isOpen, handleOpen, handleClose } = useModalState();
 
@@ -20,23 +20,23 @@ const YoutubeBox = (props: YoutubeBoxProps) => {
     <>
       <Styled.Root>
         <Styled.Header>
-          <h3>유튜브 링크</h3>
+          <h3>참고자료 링크</h3>
           <Button
             onClick={() => {
               handleOpen();
             }}>
-            유튜브 영상 추가하기
+            참고자료 추가하기
           </Button>
         </Styled.Header>
-        {stepList[idx].references.youtube.length === 0 ? (
+        {stepList[idx].references.web.length === 0 ? (
           <ReferenceList.Empty />
         ) : (
-          <ReferenceList type="youtube" references={stepList[idx].references.youtube} />
+          <ReferenceList type="web" references={stepList[idx].references.web} />
         )}
       </Styled.Root>
-      <YoutubeModal isOpen={isOpen} onClose={handleClose} idx={idx} />
+      <WebModal isOpen={isOpen} onClose={handleClose} idx={idx} />
     </>
   );
 };
 
-export default YoutubeBox;
+export default WebBox;

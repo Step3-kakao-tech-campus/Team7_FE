@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { StepForm } from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
 import { roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
@@ -24,11 +24,6 @@ export const useStepInfo = (defaultValue: StepForm) => {
       callback();
     }
   };
-
-  useEffect(() => {
-    console.log(stepList);
-  }, [stepList]);
-
   const handleResetStep = () => {
     setStep(defaultValue);
     setIsValid(true);

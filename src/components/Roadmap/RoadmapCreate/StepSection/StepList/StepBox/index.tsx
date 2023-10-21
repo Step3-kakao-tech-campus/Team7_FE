@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import Image from 'next/image';
+import WebBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/WebBox';
 import YoutubeBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeBox';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/style';
 import type { Step } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
@@ -41,6 +42,7 @@ const StepBox = (props: StepBoxProps) => {
         <Styled.ContentContainer>
           <p>{step.description}</p>
           <YoutubeBox idx={idx} />
+          <WebBox idx={idx} />
         </Styled.ContentContainer>
       )}
     </Styled.StepContainer>
