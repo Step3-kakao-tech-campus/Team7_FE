@@ -13,7 +13,7 @@ const StepSelect = () => {
   const router = useRouter();
 
   const { steps } = useGetRoadmapSteps(Number(router.query.roadmapId));
-  const { addParamsToUrl } = useParamsToUrl();
+  const { overlapParamsToUrl } = useParamsToUrl();
 
   useEffect(() => {
     // 초기 useEffect에서 steps가 undefined일 경우 return
@@ -26,7 +26,7 @@ const StepSelect = () => {
       };
     });
 
-    addParamsToUrl({ stepId: router.query.stepId ? router.query.stepId : transformData[0].value });
+    overlapParamsToUrl({ stepId: router.query.stepId ? router.query.stepId : transformData[0].value });
     setSelectedOption(
       router.query.stepId ? transformData.find((data) => data.value === router.query.stepId) : transformData[0],
     );
@@ -35,7 +35,7 @@ const StepSelect = () => {
 
   const handleSelectStep = (option: SelectOption) => {
     const stepId = option.value;
-    addParamsToUrl({ stepId });
+    overlapParamsToUrl({ stepId });
   };
 
   return (
