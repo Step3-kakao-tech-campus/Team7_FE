@@ -1,20 +1,19 @@
 import Image from 'next/image';
 import StepBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/style';
-import type { Step } from '@/pages/roadmap/create';
+import type { Step } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
 interface StepListProps {
   stepList: Step[];
-  addYoutube: (idx: number, link: string) => void;
 }
 
 const StepList = (props: StepListProps) => {
-  const { stepList, addYoutube } = props;
+  const { stepList } = props;
 
   return (
     <Styled.Root>
       {stepList.map((step, idx) => (
-        <StepBox key={idx} idx={idx} step={step} addYoutube={addYoutube} />
+        <StepBox key={idx} idx={idx} step={step} />
       ))}
     </Styled.Root>
   );

@@ -6,19 +6,20 @@ import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
-import type { RoadmapValid } from '@/hooks/useRoedmapCreate';
-import type { Step } from '@/pages/roadmap/create';
+import { useStepInfo } from '@/hooks/useStepInfo';
 
-interface StepModalProps extends ModalProps {
-  step: Step;
-  valid: RoadmapValid;
-  handleOnChange: (name: string, value: string | Date | null) => void;
-  resetStep: () => void;
-  addStep: () => boolean;
+export interface StepForm {
+  title: string;
+  description: string;
+  dueDate: Date | null;
+  references: {
+    youtube: { link: string }[];
+  };
 }
 
-const StepModal = (props: StepModalProps) => {
-  const { isOpen, onClose, step, valid, handleOnChange, resetStep, addStep } = props;
+const StepModal = (props: ModalProps) => {
+  const { step, isValid, handleResetStep, handleStepChange, handleCreateStep } = useStepInfo(defaultValue);
+  const { isOpen, onClose } = props;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
@@ -35,10 +36,10 @@ const StepModal = (props: StepModalProps) => {
             placeholder="제목을 입력해주세요."
             name="title"
             value={step.title}
-            status={valid === 'step' ? 'error' : 'default'}
+            status={!isValid ? 'error' : 'default'}
             message="필수 정보 입니다."
             onChange={(e) => {
-              handleOnChange(e.target.name, e.target.value);
+              handleStepChange(e.target.name, e.target.value);
             }}
           />
         </Styled.Label>
@@ -50,7 +51,7 @@ const StepModal = (props: StepModalProps) => {
             name="description"
             value={step.description}
             onChange={(e) => {
-              handleOnChange(e.target.name, e.target.value);
+              handleStepChange(e.target.name, e.target.value);
             }}
           />
         </Styled.Label>
@@ -61,21 +62,26 @@ const StepModal = (props: StepModalProps) => {
             label="종료일 이후 제출 제한"
             textPosition="right"
             textSize={0.8}
-            checked={step.date !== null}
-            onChange={() => handleOnChange('date', new Date())}
+            checked={!!step.dueDate}
+            onChange={() => {
+              handleStepChange('dueDate', new Date());
+            }}
           />
-          <Calendar
-            onChangeDate={(date: Date) => handleOnChange('date', date)}
-            isTimeInclude={true}
-            disabled={step.date === null}
-            minDate={new Date()}
-          />
+          {!!step.dueDate && (
+            <Calendar
+              onChangeDate={(date: Date) => handleStepChange('dueDate', date)}
+              isTimeInclude={true}
+              minDate={new Date()}
+            />
+          )}
           <RadioButton
             label="기간 제한 없음"
             textPosition="right"
             textSize={0.8}
-            checked={step.date === null}
-            onChange={() => handleOnChange('date', null)}
+            checked={!step.dueDate}
+            onChange={() => {
+              handleStepChange('dueDate', null);
+            }}
           />
         </Styled.Label>
         <Styled.ButtonContainer>
@@ -83,13 +89,13 @@ const StepModal = (props: StepModalProps) => {
             variant="ghost"
             onClick={() => {
               onClose();
-              resetStep();
+              handleResetStep();
             }}>
             취소
           </Button>
           <Button
             onClick={() => {
-              if (addStep()) onClose();
+              handleCreateStep(onClose);
             }}>
             확인
           </Button>
@@ -100,3 +106,12 @@ const StepModal = (props: StepModalProps) => {
 };
 
 export default StepModal;
+
+const defaultValue = {
+  title: '',
+  description: '',
+  dueDate: new Date(),
+  references: {
+    youtube: [],
+  },
+};

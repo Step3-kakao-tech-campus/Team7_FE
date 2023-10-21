@@ -1,25 +1,17 @@
+import { useRecoilValue } from 'recoil';
 import StepList from '@/components/Roadmap/RoadmapCreate/StepSection/StepList';
 import StepModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/style';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import { useModalState } from '@/hooks/useModalState';
-import type { RoadmapValid } from '@/hooks/useRoedmapCreate';
-import type { Step } from '@/pages/roadmap/create';
+import { roadmapStepAtoms } from '../states/roadmapCreateAtoms';
 
-interface StepSectionProps {
-  step: Step;
-  stepList: Step[];
-  valid: RoadmapValid;
-  handleOnChange: (name: string, value: string | Date | null) => void;
-  resetStep: () => void;
-  addStep: () => boolean;
-  addYoutube: (idx: number, link: string) => void;
-}
-
-const StepSection = (props: StepSectionProps) => {
-  const { step, stepList, valid, handleOnChange, resetStep, addStep, addYoutube } = props;
+const StepSection = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
+
+  const stepList = useRecoilValue(roadmapStepAtoms);
+
   return (
     <>
       <Flex justify="space-between">
@@ -34,18 +26,10 @@ const StepSection = (props: StepSectionProps) => {
           </Button>
         </Styled.ButtonContainer>
       </Flex>
-      {stepList.length === 0 ? <StepList.Empty /> : <StepList stepList={stepList} addYoutube={addYoutube} />}
+      {stepList.length === 0 ? <StepList.Empty /> : <StepList stepList={stepList} />}
       {/* <StepList.Empty /> */}
 
-      <StepModal
-        isOpen={isOpen}
-        onClose={handleClose}
-        step={step}
-        valid={valid}
-        handleOnChange={handleOnChange}
-        resetStep={resetStep}
-        addStep={addStep}
-      />
+      <StepModal isOpen={isOpen} onClose={handleClose} />
     </>
   );
 };

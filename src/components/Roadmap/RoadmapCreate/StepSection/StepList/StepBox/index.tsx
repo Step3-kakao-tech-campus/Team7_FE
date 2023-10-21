@@ -3,16 +3,15 @@ import { useState } from 'react';
 import Image from 'next/image';
 import YoutubeBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeBox';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/style';
-import type { Step } from '@/pages/roadmap/create';
+import type { Step } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
 interface StepBoxProps {
   step: Step;
   idx: number;
-  addYoutube: (idx: number, link: string) => void;
 }
 
 const StepBox = (props: StepBoxProps) => {
-  const { step, idx, addYoutube } = props;
+  const { step, idx } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -33,7 +32,7 @@ const StepBox = (props: StepBoxProps) => {
         </Styled.TitleContainer>
         <Styled.ButtonContainer>
           <b>제출기한</b>
-          <p>{dayjs(step.date).format('YYYY-MM-DD | HH:mm')}</p>
+          <p>{dayjs(step.dueDate).format('YYYY-MM-DD | HH:mm')}</p>
           <Image src="/assets/icons/ic_edit.svg" alt="아래 화살표" width={25} height={25} />
           <Image src="/assets/icons/ic_trash.svg" alt="아래 화살표" width={25} height={25} />
         </Styled.ButtonContainer>
@@ -41,7 +40,7 @@ const StepBox = (props: StepBoxProps) => {
       {isOpen && (
         <Styled.ContentContainer>
           <p>{step.description}</p>
-          <YoutubeBox idx={idx} addYoutube={addYoutube} />
+          <YoutubeBox idx={idx} />
         </Styled.ContentContainer>
       )}
     </Styled.StepContainer>
