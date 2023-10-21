@@ -11,6 +11,7 @@ import {
   patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
+  delelteRoadmapGroupApplyReject as delelteRoadmapGroupApplyRejectAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, Role } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
@@ -190,4 +191,21 @@ export const usePostRoadmapGroupApplyAccept = () => {
     return data;
   };
   return { postRoadmapGroupApplyAccept };
+};
+
+export const useDelelteRoadmapGroupApplyReject = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(delelteRoadmapGroupApplyRejectAPI);
+
+  const delelteRoadmapGroupApplyReject = async (body: { roadmapId: number; userId: number }) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupApply, body.roadmapId]);
+      },
+    });
+
+    return data;
+  };
+  return { delelteRoadmapGroupApplyReject };
 };
