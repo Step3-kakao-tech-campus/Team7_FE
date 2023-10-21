@@ -13,18 +13,20 @@ const TILCard = (props: MemberTil) => {
         <Styled.Name>{name}님</Styled.Name>
       </Styled.Header>
 
-      <Styled.Body>{content}</Styled.Body>
+      {content !== null && <Styled.Body>{content}</Styled.Body>}
 
-      <Styled.Footer>
-        <Styled.TILInfoContainer>
-          <span>{submitDate}</span>
-        </Styled.TILInfoContainer>
+      {submitDate !== null && (
+        <Styled.Footer>
+          <Styled.TILInfoContainer>
+            <span>{submitDate}</span>
+          </Styled.TILInfoContainer>
 
-        <Styled.CommentContainer>
-          <Image src="/assets/icons/ic_comment.svg" width={16} height={16} alt="댓글 이미지" />
-          <span>{commentNum}</span>
-        </Styled.CommentContainer>
-      </Styled.Footer>
+          <Styled.CommentContainer>
+            <Image src="/assets/icons/ic_comment.svg" width={16} height={16} alt="댓글 이미지" />
+            <span>{commentNum}</span>
+          </Styled.CommentContainer>
+        </Styled.Footer>
+      )}
     </Styled.Root>
   );
 };

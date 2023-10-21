@@ -246,7 +246,7 @@ export const useGetStepTilsManage = ({ queryKey }: { queryKey: QueryKey }) => {
   );
 
   return {
-    memberTils: data?.result.members ?? [],
+    memberTils: data?.result.members,
     isLoading,
   };
 };
