@@ -51,4 +51,4 @@ const StepSelect = () => {
 
 export default StepSelect;
 
-const defaultValue = { label: '', value: '' };
+const defaultValue = { label: 'STEP', value: '' };
