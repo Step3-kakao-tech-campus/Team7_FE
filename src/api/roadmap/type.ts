@@ -116,3 +116,7 @@ export interface ApplyMember {
 // postRoadmapGroupApplyAccept
 
 export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
+
+// delelteRoadmapGroupApplyReject
+
+export interface DelelteRoadmapGroupApplyRejectResponse extends CommonResponse {}
