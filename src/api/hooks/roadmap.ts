@@ -7,6 +7,7 @@ import {
   postRoadmapIndividual as postRoadmapIndividualAPI,
   getRoadmapStepReference,
   getRoadmapGroupMember,
+  getRoadmapGroupApply,
   patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
 } from '@/api/roadmap';
@@ -18,6 +19,7 @@ export const ROADMAP_QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
   getRoadmapSteps: 'getRoadmapSteps',
   getRoadmapGroupMember: 'getRoadmapGroupMember',
+  getRoadmapGroupApply: 'getRoadmapGroupApply',
 };
 
 export const useGetRoadmaps = () => {
@@ -160,4 +162,12 @@ export const useDeleteRoadmapGroupMember = () => {
     return data;
   };
   return { deleteRoadmapGroupMember };
+};
+
+export const useGetRoadmapGroupApply = (roadmapId: number) => {
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupApply], () => getRoadmapGroupApply(roadmapId));
+
+  return {
+    members: data?.result.users ?? [],
+  };
 };
