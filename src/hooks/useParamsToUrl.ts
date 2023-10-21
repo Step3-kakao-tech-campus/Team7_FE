@@ -21,5 +21,21 @@ export const useParamsToUrl = () => {
       },
     );
   };
-  return { addParamsToUrl };
+
+  const overlapParamsToUrl = (queryParams: NextRouter['query']) => {
+    const mergedParams = { ...router.query, ...queryParams };
+
+    router.push(
+      // qs.stringify: 객체를 쿼리스트링으로 변환
+      `${replaceDynamicPath(router.pathname, router.query)}${qs.stringify(mergedParams, {
+        addQueryPrefix: true, // prefix로 ?를 붙여준다.
+      })}`,
+      undefined, // 두번째 옵션은 사용하지 않는다.
+      {
+        scroll: false, // 라우터 이동시 스크롤 위치 고정
+      },
+    );
+  };
+
+  return { addParamsToUrl, overlapParamsToUrl };
 };
