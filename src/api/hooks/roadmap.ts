@@ -10,6 +10,7 @@ import {
   getRoadmapGroupApply,
   patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
+  postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, Role } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
@@ -106,7 +107,9 @@ export const usePostRoadmapStepIndividual = () => {
 };
 
 export const useGetRoadmapGroupMember = (roadmapId: number) => {
-  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupMember], () => getRoadmapGroupMember(roadmapId));
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupMember, roadmapId], () =>
+    getRoadmapGroupMember(roadmapId),
+  );
 
   const roleWeight = {
     master: 3,
@@ -152,7 +155,7 @@ export const useDeleteRoadmapGroupMember = () => {
   const deleteRoadmapGroupMember = async (body: { roadmapId: number; userId: number }) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupMember]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupMember, body.roadmapId]);
         toast.show({
           message: '멤버가 강퇴되었습니다.',
         });
@@ -165,9 +168,26 @@ export const useDeleteRoadmapGroupMember = () => {
 };
 
 export const useGetRoadmapGroupApply = (roadmapId: number) => {
-  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupApply], () => getRoadmapGroupApply(roadmapId));
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupApply, roadmapId], () => getRoadmapGroupApply(roadmapId));
 
   return {
     members: data?.result.users ?? [],
   };
+};
+
+export const usePostRoadmapGroupApplyAccept = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(postRoadmapGroupApplyAcceptAPI);
+
+  const postRoadmapGroupApplyAccept = async (body: { roadmapId: number; userId: number }) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupApply, body.roadmapId]);
+      },
+    });
+
+    return data;
+  };
+  return { postRoadmapGroupApplyAccept };
 };
