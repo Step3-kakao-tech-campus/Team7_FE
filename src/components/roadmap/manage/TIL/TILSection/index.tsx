@@ -12,7 +12,7 @@ const TILSection = () => {
 
   return (
     <ConditionalRender data={memberTils} EmptyUI={<TILSection.Empty />}>
-      <Styled.Root>{memberTils?.map((til, index) => <TILCard key={index} {...til} />)}</Styled.Root>
+      <Styled.Root>{memberTils?.map((til) => <TILCard key={til.userId} {...til} />)}</Styled.Root>
     </ConditionalRender>
   );
 };
