@@ -1,15 +1,15 @@
-import * as Styled from '@/components/Roadmap/RoadmapCreate/Info/style';
+import * as Styled from '@/components/Roadmap/RoadmapCreate/InfoSection/style';
 import Input from '@/components/common/Input';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
 import type { RoadmapInfo } from '@/pages/roadmap/create';
 
-interface InfoProps {
+interface InfoSectionProps {
   info: RoadmapInfo;
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const Info = (props: InfoProps) => {
+const InfoSection = (props: InfoSectionProps) => {
   const { info, handleOnChange } = props;
   return (
     <>
@@ -48,4 +48,4 @@ const Info = (props: InfoProps) => {
   );
 };
 
-export default Info;
+export default InfoSection;

@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import Header from '@/components/Roadmap/RoadmapCreate/Header';
-import Step from '@/components/Roadmap/RoadmapCreate/Step';
+import StepSection from '@/components/Roadmap/RoadmapCreate/StepSection';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import { useRoeadmapCreate } from '@/hooks/useRoedmapCreate';
 import { setLayout } from '@/utils/layout';
-import Info from '../../../components/Roadmap/RoadmapCreate/Info';
+import InfoSection from '../../../components/Roadmap/RoadmapCreate/InfoSection';
 
 export interface RoadmapInfo {
   name: string;
@@ -12,14 +12,23 @@ export interface RoadmapInfo {
   isPublic: boolean;
 }
 
+export interface Step {
+  title: string;
+  description: string;
+  date: Date | null;
+}
+
 const RoadmapCreate = () => {
-  const { info, handleOnChange } = useRoeadmapCreate(infoDefault);
+  const { info, step, stepList, valid, handleInfo, handleStep, resetStep, addStep } = useRoeadmapCreate(
+    defaultInfo,
+    defaultStep,
+  );
 
   return (
     <RoadmapCreatePage>
       <Header />
-      <Info info={info} handleOnChange={handleOnChange} />
-      <Step />
+      <InfoSection info={info} handleOnChange={handleInfo} />
+      <StepSection step={step} valid={valid} handleOnChange={handleStep} resetStep={resetStep} addStep={addStep} />
     </RoadmapCreatePage>
   );
 };
@@ -36,4 +45,6 @@ const RoadmapCreatePage = styled.main`
   margin: 0 auto;
 `;
 
-const infoDefault = { name: '', description: '', isPublic: true };
+const defaultInfo = { name: '', description: '', isPublic: true };
+
+const defaultStep = { title: '', description: '', date: new Date() };
