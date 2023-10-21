@@ -32,7 +32,7 @@ export const SelectMenu = styled.ul<{ isOpen: boolean }>`
   position: absolute;
   z-index: 1;
   width: 100%;
-  height: 18rem;
+  max-height: 18rem;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
