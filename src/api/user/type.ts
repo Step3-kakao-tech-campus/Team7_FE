@@ -14,6 +14,9 @@ export interface GetUserResponse extends CommonResponse {
   result: User;
 }
 
+// deleteUser
+export interface DeleteUserResponse extends CommonResponse {}
+
 // patchUserPassword
 export interface PatchUserPasswordRequest {
   curPassword: string;

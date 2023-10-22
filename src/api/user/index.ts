@@ -6,6 +6,7 @@ import type {
   PatchAlarmRequest,
   PatchUserPasswordRequest,
   PatchUserPasswordResponse,
+  DeleteUserResponse,
 } from '@/api/user/type';
 
 export const getUserHistory = async () => {
@@ -31,6 +32,16 @@ export const patchUserPassword = async (body: PatchUserPasswordRequest) => {
     method: 'PATCH',
     url: `/users`,
     data: { ...body },
+  });
+
+  return data;
+};
+
+export const deleteUser = async (password: string) => {
+  const { data } = await axiosInstance.request<DeleteUserResponse>({
+    method: 'DELETE',
+    url: `/users`,
+    data: { password },
   });
 
   return data;
