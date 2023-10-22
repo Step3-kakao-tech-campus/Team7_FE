@@ -31,7 +31,7 @@ const WebBox = (props: WebBoxProps) => {
         {stepList[idx].references.web.length === 0 ? (
           <ReferenceList.Empty />
         ) : (
-          <ReferenceList type="web" references={stepList[idx].references.web} />
+          <ReferenceList type="web" stepIdx={idx} references={stepList[idx].references.web} />
         )}
       </Styled.Root>
       <WebModal isOpen={isOpen} onClose={handleClose} idx={idx} />

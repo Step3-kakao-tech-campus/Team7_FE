@@ -110,7 +110,8 @@ const StepModal = (props: StepModalProps) => {
             variant="ghost"
             onClick={() => {
               onClose();
-              handleResetStep();
+              // 수정하다가 취소하고 나오면, 기존 값으로 상태를 다시 맞춰준다.
+              type === 'edit' && idx !== undefined ? setStep(editValue[idx]) : handleResetStep();
             }}>
             취소
           </Button>

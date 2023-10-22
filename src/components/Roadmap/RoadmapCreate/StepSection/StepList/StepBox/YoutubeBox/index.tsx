@@ -31,7 +31,7 @@ const YoutubeBox = (props: YoutubeBoxProps) => {
         {stepList[idx].references.youtube.length === 0 ? (
           <ReferenceList.Empty />
         ) : (
-          <ReferenceList type="youtube" references={stepList[idx].references.youtube} />
+          <ReferenceList type="youtube" stepIdx={idx} references={stepList[idx].references.youtube} />
         )}
       </Styled.Root>
       <YoutubeModal isOpen={isOpen} onClose={handleClose} idx={idx} />

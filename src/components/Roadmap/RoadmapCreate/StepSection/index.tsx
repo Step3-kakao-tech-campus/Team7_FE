@@ -1,4 +1,5 @@
 import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 import StepList from '@/components/Roadmap/RoadmapCreate/StepSection/StepList';
 import StepModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/style';
@@ -26,8 +27,7 @@ const StepSection = () => {
           </Button>
         </Styled.ButtonContainer>
       </Flex>
-      {stepList.length === 0 ? <StepList.Empty /> : <StepList stepList={stepList} />}
-      {/* <StepList.Empty /> */}
+      <StepList stepList={stepList} />
 
       <StepModal type="create" isOpen={isOpen} onClose={handleClose} />
     </>

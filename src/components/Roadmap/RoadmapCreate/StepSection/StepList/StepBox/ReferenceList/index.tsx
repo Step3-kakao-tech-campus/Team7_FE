@@ -1,24 +1,56 @@
+import { useRecoilState } from 'recoil';
 import Image from 'next/image';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/ReferenceList/style';
-import type { ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapStepAtoms, type ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
 interface ReferenceListProps {
   type: string;
+  stepIdx: number;
   references: ReferenceLink[];
 }
 
 const ReferenceList = (props: ReferenceListProps) => {
-  const { type, references } = props;
+  const { type, stepIdx, references } = props;
+
+  const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
+
+  const handleDeleteReference = (idx: number) => {
+    const newStepList = [...stepList];
+    const newReferences = { ...stepList[stepIdx].references };
+
+    if (type === 'youtube') {
+      const newYoutube = [...stepList[stepIdx].references.youtube];
+      newYoutube.splice(idx, 1);
+      newReferences.youtube = newYoutube;
+    } else {
+      const newWeb = [...stepList[stepIdx].references.web];
+      newWeb.splice(idx, 1);
+      newReferences.web = newWeb;
+    }
+
+    newStepList[stepIdx] = { ...newStepList[stepIdx], references: newReferences };
+
+    setStepList(newStepList);
+  };
+
   return (
     <Styled.EmptyRoot>
-      {references.map((youtube, idx) => (
+      {references.map((reference, idx) => (
         <Styled.Link key={idx}>
           <section>
             <Image src={`/assets/icons/ic_${type}.svg`} alt="stepEmptyIcon" width={23} height={23} />
-            <p>{`${idx + 1}. ${youtube.link}`}</p>
+            <p>{`${idx + 1}. ${reference.link}`}</p>
           </section>
 
-          <Image src="/assets/icons/ic_trash.svg" alt="stepEmptyIcon" width={25} height={25} />
+          <Image
+            src="/assets/icons/ic_trash.svg"
+            alt="stepEmptyIcon"
+            width={25}
+            height={25}
+            onClick={() => {
+              handleDeleteReference(idx);
+            }}
+          />
         </Styled.Link>
       ))}
     </Styled.EmptyRoot>

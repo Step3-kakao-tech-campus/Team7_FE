@@ -10,13 +10,16 @@ interface StepListProps {
 const StepList = (props: StepListProps) => {
   const { stepList } = props;
 
-  return (
-    <Styled.Root>
-      {stepList.map((step, idx) => (
-        <StepBox key={idx} idx={idx} step={step} />
-      ))}
-    </Styled.Root>
-  );
+  if (stepList.length === 0) return <StepList.Empty />;
+  else {
+    return (
+      <Styled.Root>
+        {stepList.map((step, idx) => (
+          <StepBox key={idx} idx={idx} step={step} />
+        ))}
+      </Styled.Root>
+    );
+  }
 };
 
 StepList.Empty = function Empty() {
