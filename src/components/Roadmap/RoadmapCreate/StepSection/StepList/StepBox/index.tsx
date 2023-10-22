@@ -1,15 +1,13 @@
 import dayjs from 'dayjs';
-import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import Image from 'next/image';
 import WebBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/WebBox';
 import YoutubeBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeBox';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/style';
 import StepModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
-import { roadmapStepAtoms, type Step } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
-import Button from '@/components/common/Button';
-import Modal from '@/components/common/Modal';
+import type { Step } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import { useModalState } from '@/hooks/useModalState';
+import StepDeleteModal from '../../StepDeleteModal';
 
 interface StepBoxProps {
   step: Step;
@@ -21,16 +19,10 @@ const StepBox = (props: StepBoxProps) => {
 
   // STEP 수정하기 Modal
   const { isOpen: isEditOpen, handleOpen: handleEditOpen, handleClose: handleEditClose } = useModalState();
+  // STEP 삭제하기 Modal
   const { isOpen: isDeleteOpen, handleOpen: handleDeleteOpen, handleClose: handleDeleteClose } = useModalState();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
-
-  const handleStepDelete = () => {
-    const newStepList = [...stepList];
-    newStepList.splice(idx, 1);
-    setStepList(newStepList);
-  };
 
   return (
     <>
@@ -83,26 +75,7 @@ const StepBox = (props: StepBoxProps) => {
         )}
       </Styled.StepContainer>
       <StepModal type="edit" idx={idx} isOpen={isEditOpen} onClose={handleEditClose} />
-      <Modal isOpen={isDeleteOpen} onClose={handleDeleteClose} width={35}>
-        <Styled.DeleteModalRoot>
-          <h2>STEP 삭제하기</h2>
-          <p>
-            <b>{step.title}</b> STEP을 삭제하시겠습니까?
-          </p>
-          <Styled.DeleteModalButtonContainer>
-            <Button variant="ghost" onClick={handleDeleteClose}>
-              취소
-            </Button>
-            <Button
-              onClick={() => {
-                handleStepDelete();
-                handleDeleteClose();
-              }}>
-              확인
-            </Button>
-          </Styled.DeleteModalButtonContainer>
-        </Styled.DeleteModalRoot>
-      </Modal>
+      <StepDeleteModal idx={idx} isOpen={isDeleteOpen} onClose={handleDeleteClose} />
     </>
   );
 };

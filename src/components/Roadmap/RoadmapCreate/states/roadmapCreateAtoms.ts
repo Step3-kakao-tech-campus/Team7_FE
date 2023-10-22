@@ -13,7 +13,7 @@ export interface Step {
   references: Reference;
 }
 
-interface Reference {
+export interface Reference {
   youtube: ReferenceLink[];
   web: ReferenceLink[];
 }

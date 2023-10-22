@@ -1,14 +1,11 @@
+import { useRecoilValue } from 'recoil';
 import Image from 'next/image';
 import StepBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/style';
-import type { Step } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
-interface StepListProps {
-  stepList: Step[];
-}
-
-const StepList = (props: StepListProps) => {
-  const { stepList } = props;
+const StepList = () => {
+  const stepList = useRecoilValue(roadmapStepAtoms);
 
   if (stepList.length === 0) return <StepList.Empty />;
   else {

@@ -26,6 +26,7 @@ interface StepModalProps extends ModalProps {
   idx?: number;
 }
 
+// STEP 생성과 STEP 수정 두가지 모두로 재사용합니다.
 const StepModal = (props: StepModalProps) => {
   const { type, idx, isOpen, onClose } = props;
 
@@ -34,6 +35,7 @@ const StepModal = (props: StepModalProps) => {
 
   const editValue = useRecoilValue(roadmapStepAtoms);
 
+  // 수정하기로 들어오면 해당 STEP의 정보들이 미리 주입된다.
   useEffect(() => {
     if (type === 'edit' && idx !== undefined) {
       setStep(editValue[idx]);

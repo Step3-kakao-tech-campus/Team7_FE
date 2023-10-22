@@ -1,37 +1,22 @@
-import { useRecoilState } from 'recoil';
 import Image from 'next/image';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/ReferenceList/style';
-import { roadmapStepAtoms, type ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { useReference } from '@/hooks/useReference';
 
 interface ReferenceListProps {
   type: string;
   stepIdx: number;
-  references: ReferenceLink[];
 }
 
+// youtube, web 에서 재사용하는 참고자료 리스트입니다.
 const ReferenceList = (props: ReferenceListProps) => {
-  const { type, stepIdx, references } = props;
+  const { type, stepIdx } = props;
 
-  const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
+  // 참고자료 리스트에서 사용될 커스텀 훅입니다.
+  const { references, handleDeleteReference } = useReference(type, stepIdx);
 
-  const handleDeleteReference = (idx: number) => {
-    const newStepList = [...stepList];
-    const newReferences = { ...stepList[stepIdx].references };
-
-    if (type === 'youtube') {
-      const newYoutube = [...stepList[stepIdx].references.youtube];
-      newYoutube.splice(idx, 1);
-      newReferences.youtube = newYoutube;
-    } else {
-      const newWeb = [...stepList[stepIdx].references.web];
-      newWeb.splice(idx, 1);
-      newReferences.web = newWeb;
-    }
-
-    newStepList[stepIdx] = { ...newStepList[stepIdx], references: newReferences };
-
-    setStepList(newStepList);
-  };
+  if (references.length === 0) {
+    return <ReferenceList.Empty />;
+  }
 
   return (
     <Styled.EmptyRoot>
