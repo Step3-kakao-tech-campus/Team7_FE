@@ -231,6 +231,33 @@ export const getStepTilsResponse: GetStepTilsResponse = {
   },
 };
 
+export const getStepTilsIsSubmitFalseResponse: GetStepTilsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    members: [
+      {
+        tilId: null,
+        userId: 1,
+        name: '김동영',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        content: null,
+        submitDate: null,
+        commentNum: null,
+      },
+      {
+        tilId: null,
+        userId: 1,
+        name: '김수현',
+        image: 'https://avatars.githubusercontent.com/u/53530683?v=4',
+        content: null,
+        submitDate: null,
+        commentNum: null,
+      },
+    ],
+  },
+};
+
 export const updateFixture = (name: string) => {
   const length = tilsCategoryResponse.result?.tils.length || 0;
 

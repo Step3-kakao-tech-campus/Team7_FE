@@ -20,10 +20,10 @@ import type {
   GetStepTilsResponse,
 } from '@/api/til/type';
 
-export const getTils = async (input: GetTilsRequest) => {
+export const getTils = async (queryParamToString: GetTilsRequest) => {
   const { data } = await axiosInstance.request<GetTilsResponse>({
     method: 'GET',
-    url: `/tils/my/${input}`,
+    url: `/tils/my/${queryParamToString}`,
   });
 
   return data;

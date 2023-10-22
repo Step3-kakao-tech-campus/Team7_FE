@@ -119,5 +119,5 @@ export interface MemberTil {
   image: string;
   content: string | null;
   submitDate: string | null;
-  commentNum: number;
+  commentNum: number | null;
 }
