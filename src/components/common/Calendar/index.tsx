@@ -14,12 +14,20 @@ export interface CalendarProps {
   disabled?: boolean;
   minDate?: Date;
   isTimeInclude?: boolean;
+  date?: Date;
 }
 
 const Calendar = (props: CalendarProps) => {
-  const { onChangeDate, popperPlacement = 'bottom', disabled = false, minDate, isTimeInclude = false } = props;
+  const {
+    onChangeDate,
+    popperPlacement = 'bottom',
+    disabled = false,
+    minDate,
+    isTimeInclude = false,
+    date: externalDate = new Date(),
+  } = props;
 
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(externalDate);
   const handleCalendarClose = () => {
     onChangeDate?.(date);
   };
