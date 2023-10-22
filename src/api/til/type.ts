@@ -98,3 +98,26 @@ export interface SubmitTilRequest extends PatchTilRequest {}
 export interface SubmitTilResponse extends CommonResponse {
   result: null;
 }
+
+//  getStepTils
+export interface GetStepTilsRequest {
+  roadmapId: number;
+  stepId: number;
+  input: string;
+}
+
+export interface GetStepTilsResponse extends CommonResponse {
+  result: {
+    members: MemberTil[];
+  };
+}
+
+export interface MemberTil {
+  tilId: number | null;
+  userId: number;
+  name: string;
+  image: string;
+  content: string | null;
+  submitDate: string | null;
+  commentNum: number | null;
+}

@@ -12,6 +12,7 @@ import {
   deleteComment as deleteCommentAPI,
   patchTil as patchTilAPI,
   submitTil as submitTilAPI,
+  getStepTils,
 } from '@/api/til';
 import type {
   DeleteCommentRequest,
@@ -27,6 +28,7 @@ import type {
 const QUERY_KEY = {
   getTils: 'getTils',
   getTil: 'getTil',
+  getStepTils: 'getStepTils',
 };
 
 interface InfinityTilRequest {
@@ -202,4 +204,49 @@ export const useDeleteComment = () => {
   };
 
   return { deleteComment };
+};
+
+interface useGetStepTilsRequest {
+  roadmapId: number;
+  stepId: number;
+  isSubmit?: boolean;
+  isMember?: boolean;
+  name?: string;
+}
+
+export const useGetStepTils = (body: useGetStepTilsRequest) => {
+  const { roadmapId, stepId, isSubmit, isMember, name } = body;
+
+  const { data, isLoading } = useQuery([QUERY_KEY.getStepTils, body], () =>
+    getStepTils({
+      roadmapId,
+      stepId,
+      input: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
+    }),
+  );
+
+  return {
+    memberTils: data?.result.members,
+    isLoading,
+  };
+};
+
+export const useGetStepTilsManage = ({ queryKey }: { queryKey: QueryKey }) => {
+  const { query } = useRouter();
+  const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
+
+  const { roadmapId, stepId, isSubmit, isMember, name } = query;
+
+  const { data, isLoading } = useQuery([QUERY_KEY.getStepTils, ..._queryKey], () =>
+    getStepTils({
+      roadmapId: Number(roadmapId),
+      stepId: Number(stepId),
+      input: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
+    }),
+  );
+
+  return {
+    memberTils: data?.result.members,
+    isLoading,
+  };
 };

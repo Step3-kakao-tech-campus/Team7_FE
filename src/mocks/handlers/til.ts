@@ -7,6 +7,8 @@ import {
   tilsTitleResponse,
   getTilResponse,
   updateGetTilResponseFixture,
+  getStepTilsResponse,
+  getStepTilsIsSubmitFalseResponse,
 } from '@/mocks/fixtures/til';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -147,6 +149,25 @@ export const tilHandler = [
           },
         }),
       );
+    } catch (error) {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          success: false,
+          message: '서버에서 에러가 났어요',
+          result: null,
+        }),
+      );
+    }
+  }),
+
+  rest.get(`${BASE_URL}/roadmaps/groups/:roadId/steps/:stepId/tils`, (req, res, ctx) => {
+    const isSubmit = req.url.searchParams.get('isSubmit');
+
+    if (isSubmit === 'false') return res(ctx.status(200), ctx.json(getStepTilsIsSubmitFalseResponse));
+
+    try {
+      return res(ctx.status(200), ctx.json(getStepTilsResponse));
     } catch (error) {
       return res(
         ctx.status(400),

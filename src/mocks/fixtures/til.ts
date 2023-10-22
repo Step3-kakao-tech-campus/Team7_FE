@@ -1,4 +1,4 @@
-import type { GetTilResponse, GetTilsResponse } from '@/api/til/type';
+import type { GetStepTilsResponse, GetTilResponse, GetTilsResponse } from '@/api/til/type';
 
 const tils = Array.from({ length: 9 }).map((_, index) => ({
   id: 1 + index,
@@ -167,6 +167,92 @@ export const getTilResponse: GetTilResponse = {
         content: '배추?',
         isOwner: true,
         date: '2023-10-09',
+      },
+    ],
+  },
+};
+
+export const getStepTilsResponse: GetStepTilsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    members: [
+      {
+        tilId: 1,
+        userId: 1,
+        name: '김동영',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        content:
+          '최소한 국내에서 자바는 가장 시장 규모가 큰 언어입니다. 기업용 시장에서는 전통적인 강자였고, 안드로이드가 주류가 되었습니다. 어메이징하쥬?',
+        submitDate: '2023-08-23',
+        commentNum: 5,
+      },
+      {
+        tilId: 3,
+        userId: 3,
+        name: '이상명',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        content:
+          '최소한 국내에서 자바는 가장 시장 규모가 큰 언어입니다. 기업용 시장에서는 전통적인 강자였고, 안드로이드가 주류가 되었습니다. 어메이징하쥬?',
+        submitDate: '2023-08-23',
+        commentNum: 2,
+      },
+      {
+        tilId: 4,
+        userId: 4,
+        name: '이상명',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        content:
+          '최소한 국내에서 자바는 가장 시장 규모가 큰 언어입니다. 기업용 시장에서는 전통적인 강자였고, 안드로이드가 주류가 되었습니다. 어메이징하쥬?',
+        submitDate: '2023-08-23',
+        commentNum: 2,
+      },
+      {
+        tilId: 5,
+        userId: 5,
+        name: '이상명',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        content:
+          '최소한 국내에서 자바는 가장 시장 규모가 큰 언어입니다. 기업용 시장에서는 전통적인 강자였고, 안드로이드가 주류가 되었습니다. 어메이징하쥬?',
+        submitDate: '2023-08-23',
+        commentNum: 2,
+      },
+      {
+        tilId: 2,
+        userId: 2,
+        name: '이상명',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        content:
+          '최소한 국내에서 자바는 가장 시장 규모가 큰 언어입니다. 기업용 시장에서는 전통적인 강자였고, 안드로이드가 주류가 되었습니다. 어메이징하쥬?',
+        submitDate: '2023-08-23',
+        commentNum: 2,
+      },
+    ],
+  },
+};
+
+export const getStepTilsIsSubmitFalseResponse: GetStepTilsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    members: [
+      {
+        tilId: null,
+        userId: 1,
+        name: '김동영',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        content: null,
+        submitDate: null,
+        commentNum: null,
+      },
+      {
+        tilId: null,
+        userId: 1,
+        name: '김수현',
+        image: 'https://avatars.githubusercontent.com/u/53530683?v=4',
+        content: null,
+        submitDate: null,
+        commentNum: null,
       },
     ],
   },

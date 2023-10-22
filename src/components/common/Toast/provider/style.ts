@@ -8,9 +8,9 @@ export const ToastContainer = styled.div<{ animation: string }>`
   left: 0px;
   transform: translateY(300%);
   width: 100%;
-  z-index: 100;
+  z-index: ${({ theme }) => theme.layer.toast};
   // fowards 애니메이션의 마지막 상태를 유지
-  animation: 0.3s forwards ${(props) => props.animation};
+  animation: 0.5s forwards ${(props) => props.animation};
 
   @keyframes slide-in {
     from {

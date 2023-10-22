@@ -35,15 +35,17 @@ const GNB = () => {
     <>
       <Styled.Root>
         <Styled.Inner>
-          <Styled.Logo>
-            <Logo imageSize={32} />
-          </Styled.Logo>
+          <button onClick={() => router.push(tilyLinks.home())}>
+            <Styled.Logo>
+              <Logo imageSize={32} />
+            </Styled.Logo>
+          </button>
 
           <Styled.NavArea>
-            <Styled.NavItem href={tilyLinks.home()} isActive={activePathMatcher(tilyLinks.home())}>
+            <Styled.NavItem href={tilyLinks.home()} active={+activePathMatcher(tilyLinks.home())}>
               홈
             </Styled.NavItem>
-            <Styled.NavItem href={tilyLinks.roadmap()} isActive={activePathMatcher(tilyLinks.roadmap())}>
+            <Styled.NavItem href={tilyLinks.roadmap()} active={+activePathMatcher(tilyLinks.roadmap())}>
               로드맵
             </Styled.NavItem>
           </Styled.NavArea>

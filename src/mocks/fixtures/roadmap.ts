@@ -3,6 +3,9 @@ import type {
   GetRoadmapsResponse,
   GetRoadmapStepReferenceResponse,
   PostRoadmapsResponse,
+  GetRoadmapGroupMemberResponse,
+  Role,
+  GetRoadmapGroupApplyResponse,
 } from '@/api/roadmap/type';
 
 export const getRoadmapsResponse: GetRoadmapsResponse = {
@@ -206,6 +209,81 @@ export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = 
   },
 };
 
+// eslint-disable-next-line prefer-const
+export let getRoadmapGroupMemberResponse: GetRoadmapGroupMemberResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    users: [
+      {
+        id: 1,
+        name: '김수현',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'member',
+      },
+      {
+        id: 2,
+        name: '이한홍',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'manager',
+      },
+      {
+        id: 3,
+        name: '김동영',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'manager',
+      },
+      {
+        id: 4,
+        name: '조준서',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'manager',
+      },
+      {
+        id: 5,
+        name: '이상명',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'master',
+      },
+    ],
+    myRole: 'master',
+  },
+};
+
+export const getRoadmapGroupApplyResponse: GetRoadmapGroupApplyResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    users: [
+      {
+        id: 1,
+        name: '조준서',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        date: '2023-08-20',
+        content:
+          '저는 부산대학교 컴퓨터공학과 4학년 재학중입니다. 현재 프론트엔드 개발자를 지망하고 있으며, 리액트 공부를 하고 싶습니다.',
+      },
+      {
+        id: 2,
+        name: '김동영',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        date: '2023-08-20',
+        content:
+          '저는 부산대학교 컴퓨터공학과 4학년 재학중입니다. 현재 프론트엔드 개발자를 지망하고 있으며, 리액트 공부를 하고 싶습니다.',
+      },
+      {
+        id: 3,
+        name: '홍박사',
+        image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
+        date: '2023-08-20',
+        content:
+          '저는 부산대학교 컴퓨터공학과 4학년 재학중입니다. 현재 프론트엔드 개발자를 지망하고 있으며, 리액트 공부를 하고 싶습니다.',
+      },
+    ],
+    myRole: 'master',
+  },
+};
+
 export const updateFixture = (name: string) => {
   const length = getRoadmapsResponse.result.categories.length;
 
@@ -232,10 +310,17 @@ export const updateGetRoadmapStepsResponseFixture = (name: string) => {
   ];
 };
 
+
 export const postRoadmapsResponse: PostRoadmapsResponse = {
   success: true,
   message: 'ok',
   result: {
     id: 1,
   },
+ };
+
+export const updateGetRoadmapGroupMemberResponseFixture = (userId: number, role: Exclude<Role, null>) => {
+  getRoadmapGroupMemberResponse.result.users = getRoadmapGroupMemberResponse.result.users.map((user) =>
+    user.id === userId ? { ...user, role } : user,
+  );
 };

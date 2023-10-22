@@ -12,7 +12,7 @@ const SubmitModal = (props: SubmitModalProps) => {
   const { isOpen, handleClose, handleSubmitTIL } = props;
 
   return (
-    <Modal title="모달 예시" isOpen={isOpen} onClose={handleClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <Styled.Title>TIL 제출하기</Styled.Title>
       <Styled.Info>
         <Styled.InfoText>그룹 로드맵 제출은 한번만 가능합니다</Styled.InfoText>

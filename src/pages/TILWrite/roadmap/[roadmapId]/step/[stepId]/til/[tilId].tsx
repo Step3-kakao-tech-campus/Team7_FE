@@ -9,8 +9,10 @@ import Footer from '@/components/TILWrite/Footer';
 import Header from '@/components/TILWrite/Header';
 import Reference from '@/components/TILWrite/Reference';
 import RoadMap from '@/components/TILWrite/RoadMap';
+import EmptyLayout from '@/components/layout/EmptyLayout';
 import { useDrawerState } from '@/hooks/useDrawerState';
 import { emotionTheme } from '@/styles/emotion';
+import { setLayout } from '@/utils/layout';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
@@ -123,7 +125,9 @@ const TILWrite = () => {
 
 export default TILWrite;
 
-const editorVariants = {
+setLayout(TILWrite, EmptyLayout, true);
+
+export const editorVariants = {
   asideOpen: {
     width: `${emotionTheme.layout.tilWrite.defaultEditorWidth}`,
   },
@@ -132,33 +136,33 @@ const editorVariants = {
   },
 };
 
-const extraDrawerVariants = {
+export const extraDrawerVariants = {
   open: { x: 0, opacity: 1 },
   closed: { x: '100%', opacity: 0 },
 };
 
-const DURATION = 0.3;
+export const DURATION = 0.3;
 
-const Root = styled.div`
+export const Root = styled.div`
   overflow-x: hidden;
   height: 100%;
 `;
 
-const EditorContainer = styled(motion.div)`
+export const EditorContainer = styled(motion.div)`
   width: ${({ theme }) => theme.layout.tilWrite.defaultEditorWidth};
   flex-shrink: 0;
   overflow-y: scroll;
   background-color: #fff;
 `;
 
-const PersonalEditorContainer = styled.div`
+export const PersonalEditorContainer = styled.div`
   width: ${({ theme }) => theme.layout.tilWrite.maxEditorWidth};
   flex-shrink: 0;
   overflow-y: scroll;
   background-color: #fff;
 `;
 
-const ResizeHandle = styled.div`
+export const ResizeHandle = styled.div`
   position: sticky;
   top: 0;
   width: ${({ theme }) => theme.layout.tilWrite.resizeHandleWidth};
@@ -167,18 +171,18 @@ const ResizeHandle = styled.div`
   cursor: pointer;
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   height: ${({ theme }) =>
     `calc(100% - ${theme.layout.tilWrite.headerHeight} - ${theme.layout.tilWrite.footerHeight})`};
 `;
 
-const AsideContainer = styled.aside`
+export const AsideContainer = styled.aside`
   display: flex;
   flex: 1;
 `;
 
-const ExtraDrawerMotion = styled(motion.div)`
+export const ExtraDrawerMotion = styled(motion.div)`
   position: fixed;
   top: ${({ theme }) => theme.layout.tilWrite.headerHeight};
   left: ${({ theme }) =>

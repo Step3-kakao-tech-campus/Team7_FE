@@ -1,8 +1,10 @@
 import { RecoilRoot } from 'recoil';
+import { ErrorBoundary } from 'react-error-boundary';
 import type { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from '@emotion/react';
+import GlobalErrorBoundary from '@/components/common/GlobalErrorBoundary';
 import ToastProvider from '@/components/common/Toast/provider';
 import { emotionTheme } from '@/styles/emotion';
 import '@/styles/globals.css';
@@ -28,6 +30,8 @@ const queryClient = new QueryClient({
     queries: {
       networkMode: 'always',
       refetchOnWindowFocus: false,
+      useErrorBoundary: true,
+      retry: 0,
     },
     mutations: {
       networkMode: 'always',
@@ -43,9 +47,19 @@ export default function App({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <ThemeProvider theme={emotionTheme}>
           <ToastProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <QueryErrorResetBoundary>
+              {({ reset }) => (
+                <ErrorBoundary
+                  onReset={reset}
+                  fallbackRender={({ error, resetErrorBoundary }) => {
+                    return <GlobalErrorBoundary error={error} resetErrorBoundary={resetErrorBoundary} />;
+                  }}>
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                </ErrorBoundary>
+              )}
+            </QueryErrorResetBoundary>
           </ToastProvider>
         </ThemeProvider>
       </RecoilRoot>

@@ -16,12 +16,14 @@ import type {
   PatchTilResponse,
   SubmitTilRequest,
   SubmitTilResponse,
+  GetStepTilsRequest,
+  GetStepTilsResponse,
 } from '@/api/til/type';
 
-export const getTils = async (input: GetTilsRequest) => {
+export const getTils = async (queryParamToString: GetTilsRequest) => {
   const { data } = await axiosInstance.request<GetTilsResponse>({
     method: 'GET',
-    url: `/tils/my/${input}`,
+    url: `/tils/my/${queryParamToString}`,
   });
 
   return data;
@@ -104,6 +106,17 @@ export const deleteComment = async (body: DeleteCommentRequest) => {
   const { data } = await axiosInstance.request<DeleteCommentResponse>({
     method: 'DELETE',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
+  });
+
+  return data;
+};
+
+export const getStepTils = async (body: GetStepTilsRequest) => {
+  const { roadmapId, stepId, input } = body;
+
+  const { data } = await axiosInstance.request<GetStepTilsResponse>({
+    method: 'GET',
+    url: `/roadmaps/groups/${roadmapId}/steps/${stepId}/tils/${input}`,
   });
 
   return data;

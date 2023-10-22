@@ -18,6 +18,7 @@ const colors = {
   blue_gray_300: '#CBD5E1',
   blue_gray_400: '#94A3B8',
   blue: '#3B82F6;',
+  tableGray: '#e5e7eb',
 } as const;
 
 const defaultEditorWidth = '70%';
@@ -41,6 +42,8 @@ const layout = {
 const layer = {
   header: 1000,
   headerAlarm: 1000,
+  modalBackground: 9999,
+  toast: 10000,
 };
 
 export const emotionTheme = { colors, layout, layer } as const;
