@@ -2,7 +2,13 @@ import { useRef } from 'react';
 import Avatar from '@/components/common/Avatar';
 import * as Styled from './style';
 
-const ImageUploader = () => {
+interface ImageUploaderProps {
+  imageUrl?: string;
+}
+
+const ImageUploader = (props: ImageUploaderProps) => {
+  const { imageUrl } = props;
+
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleClick = () => {
@@ -17,7 +23,7 @@ const ImageUploader = () => {
   return (
     <Styled.Root onClick={handleClick}>
       <Styled.ImageInput type="file" accept="image/*" ref={inputRef} />
-      <Avatar iconName="ic_profile" alt="프로필 이미지" imageSize={160} />
+      <Avatar imageUrl={imageUrl} alt="프로필 이미지" imageSize={160} />
     </Styled.Root>
   );
 };

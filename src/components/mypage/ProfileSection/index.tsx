@@ -7,7 +7,7 @@ const ProfileSection = () => {
 
   return (
     <Styled.Root>
-      <ImageUploader />
+      <ImageUploader imageUrl={user?.image} />
       <Styled.UserInfo>
         <Styled.Name>{user?.name}</Styled.Name>
         <Styled.Honorific>님</Styled.Honorific>
