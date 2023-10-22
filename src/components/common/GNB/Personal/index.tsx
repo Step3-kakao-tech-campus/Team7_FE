@@ -1,4 +1,3 @@
-import { get } from 'http';
 import { useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -9,12 +8,12 @@ import {
   usePostRoadmapIndividual,
 } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
-import type { Step } from '@/api/roadmap/type';
+import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import PlusButton from '@/components/common/GNB/PlusButton';
 import Input from '@/components/common/Input';
-import { getTilWriteUrl } from '@/utils/getTilWriteUrl';
+import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 
 const Personal = () => {
@@ -35,7 +34,6 @@ const Personal = () => {
   const {
     control: roadmapControl,
     handleSubmit: roadmapHandleSubmit,
-    setError: roadmapSetError,
     reset: roadmapReset,
     formState: { errors: roadmapErrors },
   } = useForm({
@@ -48,7 +46,6 @@ const Personal = () => {
   const {
     control: stepControl,
     handleSubmit: stepHandleSubmit,
-    setError: stepSetError,
     reset: stepReset,
     formState: { errors },
   } = useForm({
@@ -59,29 +56,15 @@ const Personal = () => {
   });
 
   const createRoadmap: SubmitHandler<{ roadmapTitle: string }> = (formData) => {
-    try {
-      postRoadmapsIndividual(formData.roadmapTitle);
-      roadmapReset();
-      setIsRoadmapButtonSelected(false);
-    } catch {
-      roadmapSetError('roadmapTitle', {
-        type: '400',
-        message: '에러가 발생했습니다. 다시 시도해주세요.',
-      });
-    }
+    postRoadmapsIndividual(formData.roadmapTitle);
+    roadmapReset();
+    setIsRoadmapButtonSelected(false);
   };
 
   const createStep: SubmitHandler<{ stepTitle: string }> = (formData) => {
-    try {
-      postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
-      stepReset();
-      setIsStepButtonSelected(false);
-    } catch {
-      stepSetError('stepTitle', {
-        type: '400',
-        message: '에러가 발생했습니다. 다시 시도해주세요.',
-      });
-    }
+    postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
+    stepReset();
+    setIsStepButtonSelected(false);
   };
 
   // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수
@@ -90,9 +73,9 @@ const Personal = () => {
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
       const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
-      router.push(getTilWriteUrl(roadmapId, stepId, data?.result.id));
+      router.push(tilyLinks.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
-      router.push(getTilWriteUrl(roadmapId, stepId, tilId));
+      router.push(tilyLinks.tilWrite({ roadmapId, stepId, tilId }));
     }
   };
 

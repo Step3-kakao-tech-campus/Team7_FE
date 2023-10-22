@@ -2,28 +2,25 @@ import { useEffect } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useMutation } from '@tanstack/react-query';
 import styled from '@emotion/styled';
-import { postEmailCode } from '@/api/auth';
+import { usePatchPasswordChange } from '@/api/hooks/auth';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
-import { useModalState } from '@/components/common/Modal/useModalState';
 import { tilyLinks } from '@/constants/links';
 import { PASSWORD_REGEX } from '@/constants/regex';
+import { useModalState } from '@/hooks/useModalState';
 import AuthModal from '../AuthModal';
 
-interface ChangePasswordFormInput {
+export interface ChangePasswordFormInput {
   email: string;
   password: string;
   passwordConfirm: string;
 }
 
 const ChangePassword = () => {
-  const { mutateAsync, isLoading } = useMutation({
-    mutationFn: (data: ChangePasswordFormInput) => postEmailCode(data),
-  });
+  const { patchPasswordChange, isLoading } = usePatchPasswordChange();
   const { isOpen, handleOpen, handleClose } = useModalState();
   const router = useRouter();
   const {
@@ -42,7 +39,7 @@ const ChangePassword = () => {
   });
 
   const onSubmit: SubmitHandler<ChangePasswordFormInput> = async (formData) => {
-    const data = await mutateAsync(formData);
+    const data = await patchPasswordChange(formData);
     if (data?.code === 200) {
       handleOpen();
     } else {
@@ -104,9 +101,9 @@ const ChangePassword = () => {
             )}
           />
           <StyledButtonContainer>
-            <Link href={tilyLinks.verify()}>취소</Link>
+            <StyledCancelButton href={tilyLinks.verify()}>취소</StyledCancelButton>
             <Button type="submit" isLoading={isLoading}>
-              완료
+              변경
             </Button>
           </StyledButtonContainer>
         </StyledForm>
@@ -146,4 +143,7 @@ const StyledButtonContainer = styled.div`
       text-decoration: underline;
     }
   }
+`;
+const StyledCancelButton = styled(Link)`
+  margin-top: 5px;
 `;

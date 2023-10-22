@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
-import type { Step } from '@/api/roadmap/type';
+import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
+import * as Styled from '@/components/common/GNB/Personal/style';
 import Icon from '@/components/common/Icon';
-import { getTilWriteUrl } from '@/utils/getTilWriteUrl';
-import * as Styled from './style';
+import { tilyLinks } from '@/constants/links';
 
 const RoadMap = () => {
   const router = useRouter();
@@ -27,9 +27,9 @@ const RoadMap = () => {
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
       const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
-      router.push(getTilWriteUrl(roadmapId, stepId, data?.result.id));
+      router.push(tilyLinks.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
-      router.push(getTilWriteUrl(roadmapId, stepId, tilId));
+      router.push(tilyLinks.tilWrite({ roadmapId, stepId, tilId }));
     }
   };
 

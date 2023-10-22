@@ -41,10 +41,10 @@ const Input = (props: InputProps) => {
           </Styled.ButtonContainer>
         )}
       </Styled.InputContainer>
-      {message && (
+      {status === 'error' && message && (
         <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
+          initial={{ height: 0 }}
+          animate={{ height: 'auto' }}
           transition={{ ease: 'easeOut', duration: 0.2 }}>
           <Styled.Message>{message}</Styled.Message>
         </motion.div>

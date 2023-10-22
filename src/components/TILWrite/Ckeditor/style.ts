@@ -1,6 +1,7 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Root = styled.div`
+export const Root = styled.div<{ isReadOnly: boolean }>`
   // 툴바 아이콘 여백 조정
   .ck.ck-toolbar > .ck-toolbar__items > :not(.ck-toolbar__line-break) {
     margin: 5px 2px;
@@ -263,4 +264,12 @@ export const Root = styled.div`
   .ck.ck-sticky-panel__content {
     padding-left: 20px;
   }
+
+  ${({ isReadOnly }) =>
+    isReadOnly &&
+    css`
+      .ck.ck-editor__top.ck-reset_all {
+        display: none;
+      }
+    `}
 `;

@@ -9,7 +9,7 @@ interface ContextMenuProps {
 
 interface ExtendedContextMenuComponent
   extends ForwardRefExoticComponent<PropsWithChildren<ContextMenuProps> & RefAttributes<HTMLDivElement>> {
-  Menu: FunctionComponent<{ children?: React.ReactNode }>;
+  Menu: FunctionComponent<PropsWithChildren<MenuProps>>;
 }
 
 const ContextMenu = forwardRef<HTMLDivElement, PropsWithChildren<ContextMenuProps>>((props, ref) => {

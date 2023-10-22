@@ -1,6 +1,9 @@
-export type TilsRequest = string;
+import type { CommonResponse, Step, Comment, Til } from '@/api/type';
 
-export interface TilsResponse {
+export type GetTilsRequest = string;
+
+// getTils
+export interface GetTilsResponse {
   success: boolean;
   message: string;
   result: {
@@ -9,19 +12,7 @@ export interface TilsResponse {
   hasNext: boolean;
 }
 
-export interface Til {
-  id: number;
-  createDate: string;
-  step: {
-    id: number;
-    title: string;
-  };
-  roadmap: {
-    id: number;
-    name: string;
-  };
-}
-
+// postTil
 export interface PostTilRequest {
   roadmapId: number;
   stepId: number;
@@ -34,4 +25,99 @@ export interface PostTilResponse {
   result: {
     id: number;
   };
+}
+
+// getTil
+export interface GetTilRequest {
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
+}
+
+export interface GetTilResponse extends CommonResponse {
+  result: {
+    content: string;
+    isPersonal: boolean;
+    isCompleted: boolean;
+    step: Omit<Step, 'tilId' | 'isCompleted'>;
+    comments: Comment[];
+  };
+}
+
+// postComment
+export interface PostCommentRequest {
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
+  content: string;
+}
+
+export interface PostCommentResponse extends CommonResponse {
+  result: {
+    id: number;
+  };
+}
+
+// patchComment
+export interface PatchCommentRequest extends PostCommentRequest {
+  commentId: string;
+}
+
+export interface PatchCommentResponse extends CommonResponse {
+  result: null;
+}
+
+// patchTil
+export interface PatchTilRequest {
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
+  title: string;
+  content: string;
+}
+
+export interface PatchTilResponse extends CommonResponse {
+  result: null;
+}
+
+// deleteComment
+export interface DeleteCommentRequest {
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
+  commentId: string;
+}
+
+export interface DeleteCommentResponse extends CommonResponse {
+  result: null;
+}
+
+// submitTil
+export interface SubmitTilRequest extends PatchTilRequest {}
+
+export interface SubmitTilResponse extends CommonResponse {
+  result: null;
+}
+
+//  getStepTils
+export interface GetStepTilsRequest {
+  roadmapId: number;
+  stepId: number;
+  input: string;
+}
+
+export interface GetStepTilsResponse extends CommonResponse {
+  result: {
+    members: MemberTil[];
+  };
+}
+
+export interface MemberTil {
+  tilId: number | null;
+  userId: number;
+  name: string;
+  image: string;
+  content: string | null;
+  submitDate: string | null;
+  commentNum: number | null;
 }

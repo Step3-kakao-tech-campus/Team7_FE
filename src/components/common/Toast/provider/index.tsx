@@ -7,6 +7,7 @@ import * as Styled from './style';
 
 export interface ToastOption {
   message: string;
+  isError?: boolean;
 }
 
 export interface ToastController {
@@ -20,15 +21,15 @@ export interface ToastProviderProps {
 }
 
 const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
-  const { duration = 1500, children } = props;
+  const { duration = 2500, children } = props;
 
   const [toast, setToast] = useState<ToastOption | null>(null);
   const [animation, setAnimation] = useState<'slide-in' | 'slide-out' | 'slide-reset'>('slide-in');
   const toastTimeout = useTimeout();
 
   const controller: ToastController = {
-    show: async ({ message }: ToastOption) => {
-      setToast({ message });
+    show: async ({ message, isError = false }: ToastOption) => {
+      setToast({ message, isError });
       setAnimation('slide-reset');
 
       // 연속 클릭시 slide-reset이 실행된 후 slide-in이 실행되도록 함.
@@ -46,7 +47,7 @@ const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
       {children}
       <Portal>
         <Styled.ToastContainer animation={animation}>
-          {toast && <Toast message={toast.message} />}
+          {toast && <Toast message={toast.message} isError={toast.isError} />}
         </Styled.ToastContainer>
       </Portal>
     </ToastContext.Provider>

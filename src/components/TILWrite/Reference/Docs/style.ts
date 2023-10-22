@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 
-export const Root = styled.div``;
+export const Root = styled.div`
+  margin-bottom: 2rem;
+`;
 
 export const ReferenceContainer = styled.button`
   display: flex;

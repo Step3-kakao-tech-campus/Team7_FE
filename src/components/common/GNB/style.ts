@@ -12,7 +12,7 @@ export const Root = styled.div`
 `;
 
 export const BellowRoot = styled.div`
-  height: ${({ theme }) => theme.layout.headerHeight};
+  height: ${({ theme }) => theme.layout.main.GNBHeight};
 `;
 
 export const Inner = styled.header`
@@ -47,17 +47,17 @@ export const NavArea = styled.nav`
   }
 `;
 
-export const NavItem = styled(Link)<{ isActive: boolean }>`
+export const NavItem = styled(Link)<{ active: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 3.75rem;
   min-width: 2.5rem;
   height: 2.5rem;
-  font-weight: ${({ isActive }) => (isActive ? 700 : 400)};
+  font-weight: ${({ active }) => (active ? 700 : 400)};
 
-  ${({ isActive, theme }) =>
-    isActive &&
+  ${({ active, theme }) =>
+    active &&
     css`
       border-bottom: 5px solid ${theme.colors.black};
       height: calc(2.5rem + 5px);

@@ -19,7 +19,7 @@ const History = () => {
   };
 
   return (
-    <>
+    <Styled.Root>
       <Styled.HistoryTitle>
         <span>홍박사</span>
         <span>님의 학습 히스토리</span>
@@ -58,7 +58,7 @@ const History = () => {
           />
         </CustomSuspense>
       </Styled.Container>
-    </>
+    </Styled.Root>
   );
 };
 

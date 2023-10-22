@@ -1,9 +1,8 @@
 import { useSetRecoilState } from 'recoil';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { useMutation } from '@tanstack/react-query';
 import styled from '@emotion/styled';
-import { postLogin } from '@/api/auth';
+import { usePostLogin } from '@/api/hooks/auth';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
@@ -11,13 +10,13 @@ import Logo from '@/components/common/Logo';
 import { tilyLinks } from '@/constants/links';
 import { accessTokenAtom } from '../states/accessTokenAtoms';
 
-interface LoginFormInput {
+export interface LoginFormInput {
   email: string;
   password: string;
 }
 
 const Login = () => {
-  const { mutateAsync, isLoading } = useMutation({ mutationFn: (data: LoginFormInput) => postLogin(data) });
+  const { postLogin, isLoading } = usePostLogin();
 
   const setAccessToken = useSetRecoilState(accessTokenAtom);
 
@@ -36,7 +35,7 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<LoginFormInput> = async (formData) => {
-    const data = await mutateAsync(formData);
+    const data = await postLogin(formData);
 
     if (data?.code === 200 && data?.result?.token) {
       setAccessToken(data?.result?.token);

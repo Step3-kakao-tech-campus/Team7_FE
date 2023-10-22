@@ -1,43 +1,15 @@
+import type { Step, Category, Roadmaps, CommonResponse } from '@/api/type';
+
 // getRoadmaps
-export interface UserRoadmapsResponse {
+export interface GetRoadmapsResponse {
   success: boolean;
   message: string;
   result: UserRoadmapsResult;
 }
 
 export interface UserRoadmapsResult {
-  category: Category[];
-  roadmap: Roadmap;
-}
-
-interface Category {
-  id: number;
-  name: string;
-}
-
-interface Roadmap {
-  tily: Tily[];
-  group: Group[];
-}
-
-interface Tily {
-  id: number;
-  name: string;
-  stepNum: number;
-}
-
-interface Group {
-  id: number;
-  name: string;
-  stepNum: number;
-  image: string;
-  creator: Creator;
-}
-
-interface Creator {
-  id: number;
-  name: string;
-  image: string;
+  categories: Category[];
+  roadmaps: Roadmaps;
 }
 
 // getRoadmapSteps
@@ -53,11 +25,29 @@ export interface RoadmapStepsResult {
   role: string;
 }
 
-export interface Step {
+// getRoadmapStepReference
+export interface GetRoadmapStepReferenceRequest {
+  roadmapId: number;
+  stepId: number;
+}
+
+export interface GetRoadmapStepReferenceResponse extends CommonResponse {
+  result: {
+    id: number;
+    description: string;
+    youtube: Youtube[];
+    web: Web[];
+  };
+}
+
+export interface Youtube {
   id: number;
-  title: string;
-  isCompleted: boolean;
-  tilId: number | null;
+  link: string;
+}
+
+export interface Web {
+  id: number;
+  link: string;
 }
 
 // postRoadmapsIndividual
@@ -75,3 +65,67 @@ export interface PostRoadmapStepIndividualResponse {
     id: number;
   };
 }
+
+// postRoadmaps
+export interface PostRoadmapsResponse {
+  success: boolean;
+  message: string;
+  result: {
+    id: number;
+  };
+}
+
+// getRoadmapGroupMember
+export interface GetRoadmapGroupMemberResponse extends CommonResponse {
+  result: {
+    users: Member[];
+    myRole: Role;
+  };
+}
+
+export interface Member {
+  id: number;
+  name: string;
+  image: string;
+  role: Exclude<Role, null>;
+}
+
+export type Role = keyof typeof roleStatus | null;
+
+export const roleStatus = {
+  master: '마스터',
+  manager: '매니저',
+  member: '멤버',
+} as const;
+
+// patchRoadmapGroupMemberRole
+export interface PatchRoadmapGroupMemberRoleResponse extends CommonResponse {}
+
+// deleteRoadmapGroupMember
+
+export interface DeleteRoadmapGroupMemberResponse extends CommonResponse {}
+
+// getRoadmapGroupApply
+
+export interface GetRoadmapGroupApplyResponse extends CommonResponse {
+  result: {
+    users: ApplyMember[];
+    myRole: Role;
+  };
+}
+
+export interface ApplyMember {
+  id: number;
+  name: string;
+  image: string;
+  date: string;
+  content: string;
+}
+
+// postRoadmapGroupApplyAccept
+
+export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
+
+// delelteRoadmapGroupApplyReject
+
+export interface DelelteRoadmapGroupApplyRejectResponse extends CommonResponse {}

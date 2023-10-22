@@ -1,10 +1,10 @@
 import { useState, type PropsWithChildren, useRef } from 'react';
 import Image from 'next/image';
-import { useOnClickOutside } from '@/hooks/common/useOnClickOutside';
+import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
 
 export interface SelectOption {
-  value: string | null;
+  value: string;
   label: string;
 }
 
@@ -12,11 +12,12 @@ export interface SelectProps {
   className?: string;
   selectedOption?: SelectOption;
   onChangeOption?: (option: SelectOption) => void;
+  callbackFunction?: (option: SelectOption) => void;
   options: SelectOption[];
 }
 
 const Select = (props: SelectProps) => {
-  const { className, onChangeOption, options, selectedOption } = props;
+  const { className, options, selectedOption, callbackFunction, onChangeOption } = props;
 
   const [isOpen, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -32,6 +33,7 @@ const Select = (props: SelectProps) => {
   const handleClickOption = (option: SelectOption) => {
     toggleOpen();
     onChangeOption?.(option);
+    callbackFunction?.(option);
   };
 
   return (

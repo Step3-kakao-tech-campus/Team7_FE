@@ -1,25 +1,17 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.div`
+export const Root = styled.button<{ isActiveStep: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  width: 100%;
   margin: 3px 0;
   padding: 0.875rem 1.25rem;
-
   border-radius: 10px;
+  background-color: ${({ theme, isActiveStep }) => isActiveStep && theme.colors.rose_light};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.gray_300};
-  }
-
-  .icon {
-    opacity: 0;
-  }
-
-  &:hover .icon {
-    opacity: 1;
+    background-color: ${({ theme, isActiveStep }) => (isActiveStep ? theme.colors.rose_light : theme.colors.gray_300)};
   }
 `;
 
