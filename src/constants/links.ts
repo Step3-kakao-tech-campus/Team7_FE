@@ -14,6 +14,10 @@ export const tilyLinks = {
   tilView: ({ roadmapId, stepId, tilId }: tilWriteParams) =>
     `/TILView/roadmap/${roadmapId}/step/${stepId}/til/${tilId}`,
   peopleTil: ({ roadmapId, stepId }: Omit<tilWriteParams, 'tilId'>) => `/roadmap/${roadmapId}/step/${stepId}`,
+  manageGroupInfo: () => '/roadmap/manage/groupInfo',
+  manageMember: () => '/roadmap/manage/member',
+  manageTIL: () => '/roadmap/manage/TIL',
+  manageApply: () => '/roadmap/manage/apply',
 };
 
 interface tilWriteParams {

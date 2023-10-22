@@ -17,6 +17,6 @@ const Roadmap = () => {
   );
 };
 
-setLayout(Roadmap, HeaderLayout);
+setLayout(Roadmap, HeaderLayout, false);
 
 export default Roadmap;

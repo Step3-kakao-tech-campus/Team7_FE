@@ -18,6 +18,7 @@ const colors = {
   blue_gray_300: '#CBD5E1',
   blue_gray_400: '#94A3B8',
   blue: '#3B82F6;',
+  tableGray: '#e5e7eb',
 } as const;
 
 const defaultEditorWidth = '70%';
