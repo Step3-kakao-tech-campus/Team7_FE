@@ -21,10 +21,6 @@ const InfoSection = () => {
     setInfo((prev) => ({ ...prev, [name]: handleValue(value) }));
   };
 
-  useEffect(() => {
-    console.log(info);
-  }, [info]);
-
   return (
     <>
       <Input

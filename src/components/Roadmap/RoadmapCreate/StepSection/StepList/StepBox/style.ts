@@ -35,3 +35,18 @@ export const ButtonContainer = styled.section`
 export const ContentContainer = styled.section`
   padding: 1.2rem 2rem;
 `;
+
+export const DeleteModalRoot = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+export const DeleteModalButtonContainer = styled.section`
+  display: flex;
+  align-self: flex-end;
+
+  & > button:nth-of-type(2) {
+    background-color: ${({ theme }) => theme.colors.red};
+  }
+`;
