@@ -1,4 +1,5 @@
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
+import { usePatchUserPassword } from '@/api/hooks/user';
 import { useGetUser } from '@/api/hooks/user';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
@@ -13,6 +14,7 @@ interface ChangePasswordFormInput {
 
 const EditSection = () => {
   const { user } = useGetUser();
+  const { patchUserPassword, isLoading } = usePatchUserPassword();
 
   const {
     control,
@@ -34,7 +36,11 @@ const EditSection = () => {
   };
 
   const onSubmit: SubmitHandler<ChangePasswordFormInput> = async (formData) => {
-    console.log('폼 실행');
+    patchUserPassword({
+      curPassword: formData.password,
+      newPassword: formData.newPassword,
+      newPasswordConfirm: formData.newPasswordConfirm,
+    });
   };
 
   return (
@@ -109,7 +115,7 @@ const EditSection = () => {
             )}
           />
 
-          <Button type="submit" css={Styled.SubmitButtonStyles}>
+          <Button type="submit" css={Styled.SubmitButtonStyles} isLoading={isLoading}>
             수정
           </Button>
         </Styled.SubmitContainer>

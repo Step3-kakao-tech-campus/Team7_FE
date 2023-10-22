@@ -31,7 +31,6 @@ export const PasswordContainer = styled.div`
 export const SubmitContainer = styled.div`
   display: flex;
   gap: 10px;
-  align-items: center;
 `;
 
 export const InputContainerStyles = css`
@@ -40,6 +39,7 @@ export const InputContainerStyles = css`
 
 export const SubmitButtonStyles = css`
   flex-shrink: 0;
+  margin: 0.25rem 0;
   padding: 1rem;
   height: fit-content;
   font-weight: 500;

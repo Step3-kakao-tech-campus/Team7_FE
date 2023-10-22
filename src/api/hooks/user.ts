@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { getAlarms, getUser, getUserHistory } from '@/api/user';
-import { patchAlarm as patchAlarmAPI } from '@/api/user';
-import type { PatchAlarmRequest } from '@/api/user/type';
+import { patchAlarm as patchAlarmAPI, patchUserPassword as patchUserPasswordAPI } from '@/api/user';
+import type { PatchAlarmRequest, PatchUserPasswordRequest } from '@/api/user/type';
 
 const QUERY_KEY = {
   userHistory: 'userHistory',
@@ -27,6 +27,26 @@ export const useGetUser = () => {
     user: data?.result,
     isLoading,
   };
+};
+
+export const usePatchUserPassword = () => {
+  const queryClient = useQueryClient();
+
+  const { mutateAsync, isLoading } = useMutation(patchUserPasswordAPI);
+
+  const patchUserPassword = async (body: PatchUserPasswordRequest) => {
+    const data = await mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QUERY_KEY.alarm]);
+      },
+    });
+
+    return {
+      data,
+    };
+  };
+
+  return { patchUserPassword, isLoading };
 };
 
 export const useGetAlarms = () => {
