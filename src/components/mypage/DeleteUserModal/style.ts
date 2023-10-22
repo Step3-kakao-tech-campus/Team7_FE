@@ -33,3 +33,7 @@ export const ButtonContainer = styled.div`
 export const InputContainer = styled.div`
   margin-top: 1rem;
 `;
+
+export const InputContainerStyles = css`
+  padding: 0.65rem 0.45rem;
+`;

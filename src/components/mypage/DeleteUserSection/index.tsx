@@ -1,3 +1,4 @@
+import { useDeleteUser } from '@/api/hooks/user';
 import Button from '@/components/common/Button';
 import DeleteUserModal from '@/components/mypage/DeleteUserModal';
 import { useModalState } from '@/hooks/useModalState';
@@ -5,6 +6,12 @@ import * as Styled from './style';
 
 const DeleteUserSection = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
+  const { deleteUser } = useDeleteUser();
+
+  const handleDelteUser = (password: string) => {
+    deleteUser(password);
+    handleClose();
+  };
 
   return (
     <Styled.Root>
@@ -19,7 +26,7 @@ const DeleteUserSection = () => {
         회원 탈퇴
       </Button>
 
-      <DeleteUserModal isOpen={isOpen} handleClose={handleClose} />
+      <DeleteUserModal isOpen={isOpen} handleClose={handleClose} handleDelteUser={handleDelteUser} />
     </Styled.Root>
   );
 };
