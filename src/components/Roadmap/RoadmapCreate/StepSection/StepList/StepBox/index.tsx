@@ -22,7 +22,7 @@ const StepBox = (props: StepBoxProps) => {
   // STEP 삭제하기 Modal
   const { isOpen: isDeleteOpen, handleOpen: handleDeleteOpen, handleClose: handleDeleteClose } = useModalState();
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(idx === 0);
 
   return (
     <>

@@ -7,11 +7,11 @@ interface ReferenceListProps {
   stepIdx: number;
 }
 
-// youtube, web 에서 재사용하는 참고자료 리스트입니다.
+// youtube, web 에서 재사용하는 참고자료 리스트
 const ReferenceList = (props: ReferenceListProps) => {
   const { type, stepIdx } = props;
 
-  // 참고자료 리스트에서 사용될 커스텀 훅입니다.
+  // 참고자료 리스트에서 사용될 커스텀 훅
   const { references, handleDeleteReference } = useReference(type, stepIdx);
 
   if (references.length === 0) {
