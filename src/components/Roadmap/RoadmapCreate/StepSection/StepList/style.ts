@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.section`
+export const Root = styled.section``;
+
+export const EmptyRoot = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
