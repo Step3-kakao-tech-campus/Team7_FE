@@ -1,5 +1,7 @@
+import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal/style';
-import type { ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapStepAtoms, type ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import Calendar from '@/components/common/Calendar';
 import InfoArea from '@/components/common/InfoArea';
@@ -21,12 +23,22 @@ export interface StepForm {
 
 interface StepModalProps extends ModalProps {
   type: 'create' | 'edit';
-  defaultStep?: StepForm;
+  idx?: number;
 }
 
 const StepModal = (props: StepModalProps) => {
-  const { type, defaultStep = defaultValue, isOpen, onClose } = props;
-  const { step, isValid, handleResetStep, handleStepChange, handleCreateStep } = useStepInfo(defaultStep);
+  const { type, idx, isOpen, onClose } = props;
+
+  const { step, setStep, isValid, handleResetStep, handleStepChange, handleCreateStep, handleEditStep } =
+    useStepInfo(defaultValue);
+
+  const editValue = useRecoilValue(roadmapStepAtoms);
+
+  useEffect(() => {
+    if (type === 'edit' && idx !== undefined) {
+      setStep(editValue[idx]);
+    }
+  }, [editValue, idx, setStep, type]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
@@ -104,7 +116,7 @@ const StepModal = (props: StepModalProps) => {
           </Button>
           <Button
             onClick={() => {
-              handleCreateStep(onClose);
+              type === 'edit' && idx !== undefined ? handleEditStep(onClose, idx) : handleCreateStep(onClose);
             }}>
             확인
           </Button>

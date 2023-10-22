@@ -1,5 +1,4 @@
 import { useRecoilValue } from 'recoil';
-import { useEffect } from 'react';
 import StepList from '@/components/Roadmap/RoadmapCreate/StepSection/StepList';
 import StepModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/style';
@@ -12,10 +11,6 @@ const StepSection = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   const stepList = useRecoilValue(roadmapStepAtoms);
-
-  useEffect(() => {
-    console.log(stepList);
-  }, [stepList]);
 
   return (
     <>

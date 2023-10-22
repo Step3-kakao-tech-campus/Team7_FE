@@ -14,6 +14,10 @@ export const useStepInfo = (defaultValue: StepForm) => {
     setStep({ ...step, [name]: value });
   };
 
+  /**
+   * Step을 생성한다.
+   * @param callback 모달의 onClose를 받기 위한 콜백 함수
+   */
   const handleCreateStep = (callback: () => void) => {
     if (!step.title) {
       setIsValid(false);
@@ -24,10 +28,24 @@ export const useStepInfo = (defaultValue: StepForm) => {
       callback();
     }
   };
+
+  const handleEditStep = (callback: () => void, idx: number) => {
+    if (!step.title) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+      const newStepList = [...stepList];
+      newStepList[idx] = step;
+      setStepList(newStepList);
+      handleResetStep();
+      callback();
+    }
+  };
+
   const handleResetStep = () => {
     setStep(defaultValue);
     setIsValid(true);
   };
 
-  return { step, setStep, isValid, handleResetStep, handleStepChange, handleCreateStep };
+  return { step, setStep, isValid, handleResetStep, handleStepChange, handleCreateStep, handleEditStep };
 };

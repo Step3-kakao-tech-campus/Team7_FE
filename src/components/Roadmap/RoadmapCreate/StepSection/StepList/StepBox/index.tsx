@@ -82,7 +82,7 @@ const StepBox = (props: StepBoxProps) => {
           </Styled.ContentContainer>
         )}
       </Styled.StepContainer>
-      <StepModal type="edit" defaultStep={step} isOpen={isEditOpen} onClose={handleEditClose} />
+      <StepModal type="edit" idx={idx} isOpen={isEditOpen} onClose={handleEditClose} />
       <Modal isOpen={isDeleteOpen} onClose={handleDeleteClose} width={35}>
         <Styled.DeleteModalRoot>
           <h2>STEP 삭제하기</h2>
