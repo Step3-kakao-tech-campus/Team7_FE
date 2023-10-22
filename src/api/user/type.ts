@@ -14,6 +14,17 @@ export interface GetUserResponse extends CommonResponse {
   result: User;
 }
 
+// patchUserPassword
+export interface PatchUserPasswordRequest {
+  curPassword: string;
+  newPassword: string;
+  newPasswordConfirm: string;
+}
+
+export interface PatchUserPasswordResponse extends CommonResponse {
+  result: null;
+}
+
 // getAlarm
 export interface GetAlarmsResponse extends CommonResponse {
   result: {

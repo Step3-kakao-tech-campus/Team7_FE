@@ -1,5 +1,12 @@
 import { axiosInstance } from '@/api';
-import type { GetAlarmsResponse, GetUserHistoryResponse, GetUserResponse, PatchAlarmRequest } from '@/api/user/type';
+import type {
+  GetAlarmsResponse,
+  GetUserHistoryResponse,
+  GetUserResponse,
+  PatchAlarmRequest,
+  PatchUserPasswordRequest,
+  PatchUserPasswordResponse,
+} from '@/api/user/type';
 
 export const getUserHistory = async () => {
   const { data } = await axiosInstance.request<GetUserHistoryResponse>({
@@ -14,6 +21,16 @@ export const getUser = async () => {
   const { data } = await axiosInstance.request<GetUserResponse>({
     method: 'GET',
     url: `/users`,
+  });
+
+  return data;
+};
+
+export const patchUserPassword = async (body: PatchUserPasswordRequest) => {
+  const { data } = await axiosInstance.request<PatchUserPasswordResponse>({
+    method: 'PATCH',
+    url: `/users`,
+    data: { ...body },
   });
 
   return data;
