@@ -6,14 +6,18 @@ import {
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
   getRoadmapStepReference,
+  getRoadmapGroupMember,
+  patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
+  deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
 } from '@/api/roadmap';
-import type { GetRoadmapStepReferenceRequest } from '@/api/roadmap/type';
+import type { GetRoadmapStepReferenceRequest, Role } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
 export const ROADMAP_QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
   getRoadmapSteps: 'getRoadmapSteps',
+  getRoadmapGroupMember: 'getRoadmapGroupMember',
 };
 
 export const useGetRoadmaps = () => {
@@ -97,4 +101,63 @@ export const usePostRoadmapStepIndividual = () => {
     return data;
   };
   return { postRoadmapStepIndividual };
+};
+
+export const useGetRoadmapGroupMember = (roadmapId: number) => {
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupMember], () => getRoadmapGroupMember(roadmapId));
+
+  const roleWeight = {
+    master: 3,
+    manager: 2,
+    member: 1,
+  };
+
+  const members = data?.result.users.sort((a, b) => roleWeight[b.role] - roleWeight[a.role]) ?? [];
+
+  return {
+    members: members,
+    myRole: data?.result.myRole,
+  };
+};
+
+export const usePatchRoadmapGroupMemberRole = () => {
+  const toast = useToast();
+  const mutation = useMutation(patchRoadmapGroupMemberRoleAPI);
+
+  const patchRoadmapGroupMemberRole = async (body: {
+    roadmapId: number;
+    userId: number;
+    role: Exclude<Role, null>;
+  }) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        toast.show({
+          message: '멤버 권한이 변경되었습니다.',
+        });
+      },
+    });
+
+    return data;
+  };
+  return { patchRoadmapGroupMemberRole };
+};
+
+export const useDeleteRoadmapGroupMember = () => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const mutation = useMutation(deleteRoadmapGroupMemberAPI);
+
+  const deleteRoadmapGroupMember = async (body: { roadmapId: number; userId: number }) => {
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupMember]);
+        toast.show({
+          message: '멤버가 강퇴되었습니다.',
+        });
+      },
+    });
+
+    return data;
+  };
+  return { deleteRoadmapGroupMember };
 };

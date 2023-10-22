@@ -65,3 +65,33 @@ export interface PostRoadmapStepIndividualResponse {
     id: number;
   };
 }
+
+// getRoadmapGroupMember
+export interface GetRoadmapGroupMemberResponse extends CommonResponse {
+  result: {
+    users: Member[];
+    myRole: Role;
+  };
+}
+
+export interface Member {
+  id: number;
+  name: string;
+  image: string;
+  role: Exclude<Role, null>;
+}
+
+export type Role = keyof typeof roleStatus | null;
+
+export const roleStatus = {
+  master: '마스터',
+  manager: '매니저',
+  member: '멤버',
+} as const;
+
+// getRoadmapGroupMember
+export interface PatchRoadmapGroupMemberRoleResponse extends CommonResponse {}
+
+// deleteRoadmapGroupMember
+
+export interface DeleteRoadmapGroupMemberResponse extends CommonResponse {}

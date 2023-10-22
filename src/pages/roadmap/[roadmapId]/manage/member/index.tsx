@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import HeaderLayout from '@/components/layout/HeaderLayout';
-import SideBar from '@/components/manage/SideBar';
-import Table from '@/components/manage/member/Table';
+import SideBar from '@/components/roadmap/manage/SideBar';
+import Table from '@/components/roadmap/manage/member/Table';
 import { setLayout } from '@/utils/layout';
 
 const Member = () => {

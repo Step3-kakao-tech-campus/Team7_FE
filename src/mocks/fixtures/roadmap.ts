@@ -1,4 +1,10 @@
-import type { GetRoadmapStepsResponse, GetRoadmapsResponse, GetRoadmapStepReferenceResponse } from '@/api/roadmap/type';
+import type {
+  GetRoadmapStepsResponse,
+  GetRoadmapsResponse,
+  GetRoadmapStepReferenceResponse,
+  GetRoadmapGroupMemberResponse,
+  Role,
+} from '@/api/roadmap/type';
 
 export const getRoadmapsResponse: GetRoadmapsResponse = {
   success: true,
@@ -201,6 +207,47 @@ export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = 
   },
 };
 
+// eslint-disable-next-line prefer-const
+export let getRoadmapGroupMemberResponse: GetRoadmapGroupMemberResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    users: [
+      {
+        id: 1,
+        name: '김수현',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'member',
+      },
+      {
+        id: 2,
+        name: '이한홍',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'manager',
+      },
+      {
+        id: 3,
+        name: '김동영',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'manager',
+      },
+      {
+        id: 4,
+        name: '조준서',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'manager',
+      },
+      {
+        id: 5,
+        name: '이상명',
+        image: 'https://avatars.githubusercontent.com/u/70303795?s=64&v=4',
+        role: 'master',
+      },
+    ],
+    myRole: 'master',
+  },
+};
+
 export const updateFixture = (name: string) => {
   const length = getRoadmapsResponse.result.categories.length;
 
@@ -225,4 +272,10 @@ export const updateGetRoadmapStepsResponseFixture = (name: string) => {
       tilId: null,
     },
   ];
+};
+
+export const updateGetRoadmapGroupMemberResponseFixture = (userId: number, role: Exclude<Role, null>) => {
+  getRoadmapGroupMemberResponse.result.users = getRoadmapGroupMemberResponse.result.users.map((user) =>
+    user.id === userId ? { ...user, role } : user,
+  );
 };

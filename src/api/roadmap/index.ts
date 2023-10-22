@@ -6,6 +6,10 @@ import type {
   PostRoadmapStepIndividualResponse,
   GetRoadmapStepReferenceRequest,
   GetRoadmapStepReferenceResponse,
+  GetRoadmapGroupMemberResponse,
+  PatchRoadmapGroupMemberRoleResponse,
+  DeleteRoadmapGroupMemberResponse,
+  Role,
 } from '@/api/roadmap/type';
 
 export const getRoadmaps = async () => {
@@ -52,6 +56,42 @@ export const postRoadmapStepIndividual = async ({ roadmapId, title }: { roadmapI
     method: 'POST',
     url: `/roadmaps/individual/${roadmapId}/steps`,
     data: { title },
+  });
+
+  return data;
+};
+
+export const getRoadmapGroupMember = async (roadmapId: number) => {
+  const { data } = await axiosInstance.request<GetRoadmapGroupMemberResponse>({
+    method: 'GET',
+    url: `/roadmaps/groups/${roadmapId}/members`,
+  });
+
+  return data;
+};
+
+export const patchRoadmapGroupMemberRole = async ({
+  roadmapId,
+  userId,
+  role,
+}: {
+  roadmapId: number;
+  userId: number;
+  role: Exclude<Role, null>;
+}) => {
+  const { data } = await axiosInstance.request<PatchRoadmapGroupMemberRoleResponse>({
+    method: 'PATCH',
+    url: `/roadmaps/groups/${roadmapId}/members/${userId}`,
+    data: { role },
+  });
+
+  return data;
+};
+
+export const deleteRoadmapGroupMember = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
+  const { data } = await axiosInstance.request<DeleteRoadmapGroupMemberResponse>({
+    method: 'DELETE',
+    url: `/roadmaps/groups/${roadmapId}/members/${userId}`,
   });
 
   return data;
