@@ -1,4 +1,9 @@
-import type { GetRoadmapStepsResponse, GetRoadmapsResponse, GetRoadmapStepReferenceResponse } from '@/api/roadmap/type';
+import type {
+  GetRoadmapStepsResponse,
+  GetRoadmapsResponse,
+  GetRoadmapStepReferenceResponse,
+  PostRoadmapsResponse,
+} from '@/api/roadmap/type';
 
 export const getRoadmapsResponse: GetRoadmapsResponse = {
   success: true,
@@ -225,4 +230,12 @@ export const updateGetRoadmapStepsResponseFixture = (name: string) => {
       tilId: null,
     },
   ];
+};
+
+export const postRoadmapsResponse: PostRoadmapsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    id: 1,
+  },
 };

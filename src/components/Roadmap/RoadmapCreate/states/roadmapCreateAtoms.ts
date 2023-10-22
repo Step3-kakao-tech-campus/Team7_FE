@@ -1,4 +1,9 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
+
+export interface RoadmapForm {
+  roadmap: RoadmapInfo;
+  steps: Step[];
+}
 
 interface RoadmapInfo {
   name: string;
@@ -34,4 +39,14 @@ export const roadmapInfoAtoms = atom<RoadmapInfo>({
 export const roadmapStepAtoms = atom<Step[]>({
   key: 'roadmapStep',
   default: [],
+});
+
+export const roadmapFormDataSelector = selector({
+  key: 'roadmapFormData',
+  get: ({ get }) => {
+    const roadmap = get(roadmapInfoAtoms);
+    const steps = get(roadmapStepAtoms);
+
+    return { roadmap, steps };
+  },
 });

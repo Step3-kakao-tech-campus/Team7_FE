@@ -9,7 +9,7 @@ import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
-import { useStepInfo } from '@/hooks/useStepInfo';
+import { useStepInfo } from '@/hooks/useRoadmapCreate';
 
 export interface StepForm {
   title: string;

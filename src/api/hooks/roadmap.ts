@@ -6,8 +6,10 @@ import {
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
   getRoadmapStepReference,
+  postRoadmaps as postRoadmapsAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest } from '@/api/roadmap/type';
+import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
 export const ROADMAP_QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
@@ -90,4 +92,16 @@ export const usePostRoadmapStepIndividual = () => {
     return data;
   };
   return { postRoadmapStepIndividual };
+};
+
+export const usePostRoadmaps = () => {
+  const { mutateAsync, isLoading } = useMutation(postRoadmapsAPI);
+
+  const postRoadmaps = async (body: RoadmapForm) => {
+    const data = await mutateAsync(body);
+
+    return data;
+  };
+
+  return { postRoadmaps, isLoading };
 };

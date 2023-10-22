@@ -5,6 +5,7 @@ import {
   getRoadmapStepsResponse,
   updateGetRoadmapStepsResponseFixture,
   getRoadmapStepReferenceResponse,
+  postRoadmapsResponse,
 } from '@/mocks/fixtures/roadmap';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -93,5 +94,8 @@ export const roadmapHandler = [
         }),
       );
     }
+  }),
+  rest.post(`${BASE_URL}/roadmaps`, (req, res, ctx) => {
+    return res(ctx.json(postRoadmapsResponse));
   }),
 ];
