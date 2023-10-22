@@ -9,6 +9,9 @@ import type {
   GetRoadmapGroupMemberResponse,
   PatchRoadmapGroupMemberRoleResponse,
   DeleteRoadmapGroupMemberResponse,
+  GetRoadmapGroupApplyResponse,
+  PostRoadmapGroupApplyAcceptResponse,
+  DelelteRoadmapGroupApplyRejectResponse,
   Role,
 } from '@/api/roadmap/type';
 
@@ -92,6 +95,33 @@ export const deleteRoadmapGroupMember = async ({ roadmapId, userId }: { roadmapI
   const { data } = await axiosInstance.request<DeleteRoadmapGroupMemberResponse>({
     method: 'DELETE',
     url: `/roadmaps/groups/${roadmapId}/members/${userId}`,
+  });
+
+  return data;
+};
+
+export const getRoadmapGroupApply = async (roadmapId: number) => {
+  const { data } = await axiosInstance.request<GetRoadmapGroupApplyResponse>({
+    method: 'GET',
+    url: `/roadmaps/groups/${roadmapId}/members/apply`,
+  });
+
+  return data;
+};
+
+export const postRoadmapGroupApplyAccept = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
+  const { data } = await axiosInstance.request<PostRoadmapGroupApplyAcceptResponse>({
+    method: 'POST',
+    url: `/roadmaps/groups/${roadmapId}/members/${userId}/accept`,
+  });
+
+  return data;
+};
+
+export const delelteRoadmapGroupApplyReject = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
+  const { data } = await axiosInstance.request<DelelteRoadmapGroupApplyRejectResponse>({
+    method: 'DELETE',
+    url: `/roadmaps/groups/${roadmapId}/members/${userId}/reject`,
   });
 
   return data;

@@ -49,3 +49,29 @@ export const TableBody = styled.tbody`
     gap: 14px;
   }
 `;
+
+export const ApplyTableHead = styled.thead`
+  & > tr {
+    border-top: ${({ theme }) => `1px solid ${theme.colors.tableGray}`};
+    border-bottom: ${({ theme }) => `1px solid ${theme.colors.tableGray}`};
+  }
+
+  & > tr > th {
+    padding: 1rem 0;
+  }
+
+  & > tr > th:first-of-type {
+    padding-left: 3.75rem;
+    text-align: start;
+  }
+
+  & > tr > th:nth-of-type(2) {
+    text-align: start;
+    width: 10rem;
+  }
+
+  & > tr > th:nth-of-type(3) {
+    text-align: start;
+    width: 7rem;
+  }
+`;

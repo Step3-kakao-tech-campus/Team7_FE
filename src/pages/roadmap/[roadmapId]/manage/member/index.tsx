@@ -25,17 +25,17 @@ setLayout(Member, HeaderLayout, true);
 
 export default Member;
 
-const Root = styled.div`
+export const Root = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 2rem;
 `;
 
-const Container = styled.main`
+export const Container = styled.main`
   display: flex;
 `;
 
-const LeftArea = styled.aside`
+export const LeftArea = styled.aside`
   position: sticky;
   top: ${({ theme }) => theme.layout.main.GNBHeight};
   width: 200px;
@@ -44,11 +44,11 @@ const LeftArea = styled.aside`
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
 
-const RightArea = styled.main`
+export const RightArea = styled.main`
   padding: 2.5rem 6.25rem 5rem 6.25rem;
   flex: 1;
 `;
 
-const Header = styled.h1`
+export const Header = styled.h1`
   margin-bottom: 1rem;
 `;

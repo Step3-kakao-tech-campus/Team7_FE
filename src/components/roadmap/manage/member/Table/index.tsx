@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDeleteRoadmapGroupMember, useGetRoadmapGroupMember } from '@/api/hooks/roadmap';
-import BanUserModal from '@/components/roadmap/manage/BanUserModal';
+import BanUserModal from '@/components/roadmap/manage/member/BanUserModal';
 import TableColumn from '@/components/roadmap/manage/member/TableColumn';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
@@ -23,6 +23,7 @@ const ManageTable = () => {
       roadmapId: Number(router.query.roadmapId),
       userId: userId,
     });
+    handleClose();
   };
 
   return (

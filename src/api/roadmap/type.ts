@@ -89,9 +89,34 @@ export const roleStatus = {
   member: '멤버',
 } as const;
 
-// getRoadmapGroupMember
+// patchRoadmapGroupMemberRole
 export interface PatchRoadmapGroupMemberRoleResponse extends CommonResponse {}
 
 // deleteRoadmapGroupMember
 
 export interface DeleteRoadmapGroupMemberResponse extends CommonResponse {}
+
+// getRoadmapGroupApply
+
+export interface GetRoadmapGroupApplyResponse extends CommonResponse {
+  result: {
+    users: ApplyMember[];
+    myRole: Role;
+  };
+}
+
+export interface ApplyMember {
+  id: number;
+  name: string;
+  image: string;
+  date: string;
+  content: string;
+}
+
+// postRoadmapGroupApplyAccept
+
+export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
+
+// delelteRoadmapGroupApplyReject
+
+export interface DelelteRoadmapGroupApplyRejectResponse extends CommonResponse {}
