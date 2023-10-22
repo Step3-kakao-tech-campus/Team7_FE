@@ -19,14 +19,20 @@ export interface StepForm {
   };
 }
 
-const StepModal = (props: ModalProps) => {
-  const { step, isValid, handleResetStep, handleStepChange, handleCreateStep } = useStepInfo(defaultValue);
-  const { isOpen, onClose } = props;
+interface StepModalProps extends ModalProps {
+  type: 'create' | 'edit';
+  defaultStep?: StepForm;
+}
+
+const StepModal = (props: StepModalProps) => {
+  const { type, defaultStep = defaultValue, isOpen, onClose } = props;
+  const { step, isValid, handleResetStep, handleStepChange, handleCreateStep } = useStepInfo(defaultStep);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
       <Styled.Root>
-        <h2>STEP 추가하기</h2>
+        {type === 'create' ? <h2>STEP 추가하기</h2> : <h2>STEP 수정하기</h2>}
+
         <InfoArea>
           <InfoArea.Info>STEP은 로드맵의 한 단계입니다.</InfoArea.Info>
           <InfoArea.Info>STE들을 추가하여 로드맵을 완성해보세요.</InfoArea.Info>
@@ -74,6 +80,7 @@ const StepModal = (props: ModalProps) => {
               onChangeDate={(date: Date) => handleStepChange('dueDate', date)}
               isTimeInclude={true}
               minDate={new Date()}
+              date={step.dueDate}
             />
           )}
           <RadioButton

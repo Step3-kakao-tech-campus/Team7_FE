@@ -34,7 +34,7 @@ const StepSection = () => {
       {stepList.length === 0 ? <StepList.Empty /> : <StepList stepList={stepList} />}
       {/* <StepList.Empty /> */}
 
-      <StepModal isOpen={isOpen} onClose={handleClose} />
+      <StepModal type="create" isOpen={isOpen} onClose={handleClose} />
     </>
   );
 };

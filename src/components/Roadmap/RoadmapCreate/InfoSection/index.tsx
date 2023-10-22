@@ -9,10 +9,16 @@ import TextArea from '@/components/common/TextArea';
 const InfoSection = () => {
   const [info, setInfo] = useRecoilState(roadmapInfoAtoms);
 
+  const handleValue = (value: string) => {
+    if (value === 'public') return true;
+    if (value === 'private') return false;
+    return value;
+  };
+
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
-    setInfo({ ...info, [name]: value === 'public' ? true : value === 'private' ? false : value });
+    setInfo((prev) => ({ ...prev, [name]: handleValue(value) }));
   };
 
   useEffect(() => {
