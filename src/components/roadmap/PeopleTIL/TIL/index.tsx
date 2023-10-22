@@ -12,16 +12,16 @@ import * as Styled from './style';
 dayjs.extend(relativeTime);
 dayjs.locale('ko');
 
-interface TILProps extends MemberTil {}
+type NonNullableMemberTil = {
+  [P in keyof MemberTil]: NonNullable<MemberTil[P]>;
+};
 
-const TIL = (props: TILProps) => {
+const TIL = (props: NonNullableMemberTil) => {
   const { tilId, name, image, content, submitDate, commentNum } = props;
 
   const router = useRouter();
 
   const handleRouteTILView = () => {
-    if (!tilId) return;
-
     router.push(
       tilyLinks.tilView({
         roadmapId: Number(router.query.roadmapId),
