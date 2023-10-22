@@ -1,5 +1,7 @@
+import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal/style';
-import type { ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapStepAtoms, type ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import Calendar from '@/components/common/Calendar';
 import InfoArea from '@/components/common/InfoArea';
@@ -7,7 +9,7 @@ import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
-import { useStepInfo } from '@/hooks/useStepInfo';
+import { useStepInfo } from '@/hooks/useRoadmapCreate';
 
 export interface StepForm {
   title: string;
@@ -19,14 +21,32 @@ export interface StepForm {
   };
 }
 
-const StepModal = (props: ModalProps) => {
-  const { step, isValid, handleResetStep, handleStepChange, handleCreateStep } = useStepInfo(defaultValue);
-  const { isOpen, onClose } = props;
+interface StepModalProps extends ModalProps {
+  type: 'create' | 'edit';
+  idx?: number;
+}
+
+// STEP 생성과 STEP 수정 두가지 모두로 재사용합니다.
+const StepModal = (props: StepModalProps) => {
+  const { type, idx, isOpen, onClose } = props;
+
+  const { step, setStep, isValid, handleResetStep, handleStepChange, handleCreateStep, handleEditStep } =
+    useStepInfo(defaultValue);
+
+  const editValue = useRecoilValue(roadmapStepAtoms);
+
+  // 수정하기로 들어오면 해당 STEP의 정보들이 미리 주입된다.
+  useEffect(() => {
+    if (type === 'edit' && idx !== undefined) {
+      setStep(editValue[idx]);
+    }
+  }, [editValue, idx, setStep, type]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
       <Styled.Root>
-        <h2>STEP 추가하기</h2>
+        {type === 'create' ? <h2>STEP 추가하기</h2> : <h2>STEP 수정하기</h2>}
+
         <InfoArea>
           <InfoArea.Info>STEP은 로드맵의 한 단계입니다.</InfoArea.Info>
           <InfoArea.Info>STE들을 추가하여 로드맵을 완성해보세요.</InfoArea.Info>
@@ -74,6 +94,7 @@ const StepModal = (props: ModalProps) => {
               onChangeDate={(date: Date) => handleStepChange('dueDate', date)}
               isTimeInclude={true}
               minDate={new Date()}
+              date={step.dueDate}
             />
           )}
           <RadioButton
@@ -91,13 +112,14 @@ const StepModal = (props: ModalProps) => {
             variant="ghost"
             onClick={() => {
               onClose();
-              handleResetStep();
+              // 수정하다가 취소하고 나오면, 기존 값으로 상태를 다시 맞춰준다.
+              type === 'edit' && idx !== undefined ? setStep(editValue[idx]) : handleResetStep();
             }}>
             취소
           </Button>
           <Button
             onClick={() => {
-              handleCreateStep(onClose);
+              type === 'edit' && idx !== undefined ? handleEditStep(onClose, idx) : handleCreateStep(onClose);
             }}>
             확인
           </Button>

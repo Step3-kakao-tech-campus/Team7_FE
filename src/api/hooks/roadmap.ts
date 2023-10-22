@@ -6,6 +6,7 @@ import {
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
   getRoadmapStepReference,
+  postRoadmaps as postRoadmapsAPI,
   getRoadmapGroupMember,
   getRoadmapGroupApply,
   patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
@@ -16,6 +17,8 @@ import {
 import type { GetRoadmapStepReferenceRequest, Role } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
+import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+
 
 export const ROADMAP_QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
@@ -105,6 +108,18 @@ export const usePostRoadmapStepIndividual = () => {
     return data;
   };
   return { postRoadmapStepIndividual };
+};
+
+export const usePostRoadmaps = () => {
+  const { mutateAsync, isLoading } = useMutation(postRoadmapsAPI);
+
+  const postRoadmaps = async (body: RoadmapForm) => {
+    const data = await mutateAsync(body);
+
+    return data;
+  };
+
+  return { postRoadmaps, isLoading };
 };
 
 export const useGetRoadmapGroupMember = (roadmapId: number) => {

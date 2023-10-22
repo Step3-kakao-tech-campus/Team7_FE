@@ -5,6 +5,7 @@ import {
   getRoadmapStepsResponse,
   updateGetRoadmapGroupMemberResponseFixture,
   getRoadmapStepReferenceResponse,
+  postRoadmapsResponse,
   getRoadmapGroupMemberResponse,
   updateGetRoadmapStepsResponseFixture,
   getRoadmapGroupApplyResponse,
@@ -96,6 +97,10 @@ export const roadmapHandler = [
         }),
       );
     }
+  }),
+  
+  rest.post(`${BASE_URL}/roadmaps`, (req, res, ctx) => {
+    return res(ctx.json(postRoadmapsResponse));
   }),
 
   rest.get(`${BASE_URL}/roadmaps/groups/:roadmapId/members`, (req, res, ctx) => {

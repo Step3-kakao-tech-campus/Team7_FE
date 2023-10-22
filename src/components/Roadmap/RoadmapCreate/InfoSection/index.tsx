@@ -1,31 +1,27 @@
-import { useRecoilState } from 'recoil';
-import { useEffect } from 'react';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/InfoSection/style';
-import { roadmapInfoAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
+import { useRoadmapInfo } from '@/hooks/useRoadmapCreate';
 
 const InfoSection = () => {
-  const [info, setInfo] = useRecoilState(roadmapInfoAtoms);
-
-  const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-
-    setInfo({ ...info, [name]: value === 'public' ? true : value === 'private' ? false : value });
-  };
-
-  useEffect(() => {
-    console.log(info);
-  }, [info]);
-
+  const { info, handleInfoChange, roadmapValid, onCreateRoadmapHandler, isLoading } = useRoadmapInfo();
   return (
     <>
+      <Styled.Root>
+        <h1>그룹 로드맵 생성</h1>
+        <Button onClick={onCreateRoadmapHandler} isLoading={isLoading}>
+          생성하기
+        </Button>
+      </Styled.Root>
       <Input
         label="로드맵 이름"
         labelType="bold"
         placeholder="이름을 입력해주세요."
         name="name"
+        status={roadmapValid ? 'default' : 'error'}
+        message={'필수 정보 입니다.'}
         value={info?.name}
         onChange={handleInfoChange}
       />

@@ -1,21 +1,12 @@
-import { useRecoilValue } from 'recoil';
-import { useEffect } from 'react';
 import StepList from '@/components/Roadmap/RoadmapCreate/StepSection/StepList';
 import StepModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/style';
-import { roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import { useModalState } from '@/hooks/useModalState';
 
 const StepSection = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
-
-  const stepList = useRecoilValue(roadmapStepAtoms);
-
-  useEffect(() => {
-    console.log(stepList);
-  }, [stepList]);
 
   return (
     <>
@@ -31,10 +22,9 @@ const StepSection = () => {
           </Button>
         </Styled.ButtonContainer>
       </Flex>
-      {stepList.length === 0 ? <StepList.Empty /> : <StepList stepList={stepList} />}
-      {/* <StepList.Empty /> */}
+      <StepList />
 
-      <StepModal isOpen={isOpen} onClose={handleClose} />
+      <StepModal type="create" isOpen={isOpen} onClose={handleClose} />
     </>
   );
 };

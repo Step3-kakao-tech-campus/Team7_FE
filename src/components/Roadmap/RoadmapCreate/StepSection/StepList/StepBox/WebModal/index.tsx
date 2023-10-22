@@ -6,6 +6,7 @@ import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
+import { WEBADDRESS_REGEX } from '@/constants/regex';
 
 interface WebModalProps extends ModalProps {
   idx: number;
@@ -57,6 +58,10 @@ const WebModal = (props: WebModalProps) => {
             control={control}
             rules={{
               required: '필수 정보입니다.',
+              pattern: {
+                value: WEBADDRESS_REGEX,
+                message: '링크를 정확히 입력하셨는지 확인해주세요.',
+              },
             }}
             render={({ field }) => (
               <Input

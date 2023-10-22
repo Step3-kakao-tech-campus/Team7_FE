@@ -2,6 +2,7 @@ import type {
   GetRoadmapStepsResponse,
   GetRoadmapsResponse,
   GetRoadmapStepReferenceResponse,
+  PostRoadmapsResponse,
   GetRoadmapGroupMemberResponse,
   Role,
   GetRoadmapGroupApplyResponse,
@@ -308,6 +309,15 @@ export const updateGetRoadmapStepsResponseFixture = (name: string) => {
     },
   ];
 };
+
+
+export const postRoadmapsResponse: PostRoadmapsResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    id: 1,
+  },
+ };
 
 export const updateGetRoadmapGroupMemberResponseFixture = (userId: number, role: Exclude<Role, null>) => {
   getRoadmapGroupMemberResponse.result.users = getRoadmapGroupMemberResponse.result.users.map((user) =>

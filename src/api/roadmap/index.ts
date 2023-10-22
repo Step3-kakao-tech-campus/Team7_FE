@@ -6,6 +6,7 @@ import type {
   PostRoadmapStepIndividualResponse,
   GetRoadmapStepReferenceRequest,
   GetRoadmapStepReferenceResponse,
+  PostRoadmapsResponse,
   GetRoadmapGroupMemberResponse,
   PatchRoadmapGroupMemberRoleResponse,
   DeleteRoadmapGroupMemberResponse,
@@ -14,6 +15,7 @@ import type {
   DelelteRoadmapGroupApplyRejectResponse,
   Role,
 } from '@/api/roadmap/type';
+import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
 export const getRoadmaps = async () => {
   const { data } = await axiosInstance.request<GetRoadmapsResponse>({
@@ -64,6 +66,16 @@ export const postRoadmapStepIndividual = async ({ roadmapId, title }: { roadmapI
   return data;
 };
 
+
+export const postRoadmaps = async (roadmapForm: RoadmapForm) => {
+  const { data } = await axiosInstance.request<PostRoadmapsResponse>({
+    method: 'POST',
+    url: '/roadmaps',
+    data: roadmapForm,
+  });
+
+  return data;
+};
 export const getRoadmapGroupMember = async (roadmapId: number) => {
   const { data } = await axiosInstance.request<GetRoadmapGroupMemberResponse>({
     method: 'GET',

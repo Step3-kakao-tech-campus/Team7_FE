@@ -66,6 +66,15 @@ export interface PostRoadmapStepIndividualResponse {
   };
 }
 
+// postRoadmaps
+export interface PostRoadmapsResponse {
+  success: boolean;
+  message: string;
+  result: {
+    id: number;
+  };
+}
+
 // getRoadmapGroupMember
 export interface GetRoadmapGroupMemberResponse extends CommonResponse {
   result: {
