@@ -9,6 +9,7 @@ import {
   getRoadmapGroupMemberResponse,
   updateGetRoadmapStepsResponseFixture,
   getRoadmapGroupApplyResponse,
+  postRoadmapsGroupsParticipateResponse,
 } from '@/mocks/fixtures/roadmap';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -98,7 +99,7 @@ export const roadmapHandler = [
       );
     }
   }),
-  
+
   rest.post(`${BASE_URL}/roadmaps`, (req, res, ctx) => {
     return res(ctx.json(postRoadmapsResponse));
   }),
@@ -152,5 +153,9 @@ export const roadmapHandler = [
         }),
       );
     }
+  }),
+
+  rest.post(`${BASE_URL}/roadmaps/groups/participate`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(postRoadmapsGroupsParticipateResponse));
   }),
 ];

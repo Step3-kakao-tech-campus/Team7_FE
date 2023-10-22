@@ -13,12 +13,12 @@ import {
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
   delelteRoadmapGroupApplyReject as delelteRoadmapGroupApplyRejectAPI,
+  postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, Role } from '@/api/roadmap/type';
+import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
-import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
-
 
 export const ROADMAP_QUERY_KEY = {
   getRoadmaps: 'getRoadmaps',
@@ -223,4 +223,28 @@ export const useDelelteRoadmapGroupApplyReject = () => {
     return data;
   };
   return { delelteRoadmapGroupApplyReject };
+};
+
+export const usePostRoadmapsGroupsParticipate = () => {
+  const { mutateAsync, isLoading, isError } = useMutation(postRoadmapsGroupsParticipateAPI);
+  const toast = useToast();
+
+  const postRoadmapsGroupsParticipate = async (code: string) => {
+    const data = await mutateAsync(code, {
+      onSuccess: () => {
+        toast.show({
+          message: '로드맵에 참여되었습니다.',
+        });
+      },
+      onError: () => {
+        toast.show({
+          message: '로드맵을 찾을 수 없습니다. 코드를 확인해주세요.',
+        });
+      },
+    });
+
+    return data;
+  };
+
+  return { postRoadmapsGroupsParticipate, isLoading, isError };
 };

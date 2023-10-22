@@ -6,14 +6,15 @@ import type {
   PostRoadmapStepIndividualResponse,
   GetRoadmapStepReferenceRequest,
   GetRoadmapStepReferenceResponse,
-  PostRoadmapsResponse,
-  GetRoadmapGroupMemberResponse,
-  PatchRoadmapGroupMemberRoleResponse,
-  DeleteRoadmapGroupMemberResponse,
-  GetRoadmapGroupApplyResponse,
-  PostRoadmapGroupApplyAcceptResponse,
+  PostRoadmapsGroupsParticipateResponse,
   DelelteRoadmapGroupApplyRejectResponse,
+  PostRoadmapGroupApplyAcceptResponse,
+  GetRoadmapGroupApplyResponse,
+  DeleteRoadmapGroupMemberResponse,
+  PatchRoadmapGroupMemberRoleResponse,
   Role,
+  GetRoadmapGroupMemberResponse,
+  PostRoadmapsResponse,
 } from '@/api/roadmap/type';
 import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
@@ -65,8 +66,6 @@ export const postRoadmapStepIndividual = async ({ roadmapId, title }: { roadmapI
 
   return data;
 };
-
-
 export const postRoadmaps = async (roadmapForm: RoadmapForm) => {
   const { data } = await axiosInstance.request<PostRoadmapsResponse>({
     method: 'POST',
@@ -76,6 +75,7 @@ export const postRoadmaps = async (roadmapForm: RoadmapForm) => {
 
   return data;
 };
+
 export const getRoadmapGroupMember = async (roadmapId: number) => {
   const { data } = await axiosInstance.request<GetRoadmapGroupMemberResponse>({
     method: 'GET',
@@ -136,5 +136,14 @@ export const delelteRoadmapGroupApplyReject = async ({ roadmapId, userId }: { ro
     url: `/roadmaps/groups/${roadmapId}/members/${userId}/reject`,
   });
 
+  return data;
+};
+
+export const postRoadmapsGroupsParticipate = async (code: string) => {
+  const { data } = await axiosInstance.request<PostRoadmapsGroupsParticipateResponse>({
+    method: 'POST',
+    url: '/roadmaps/groups/participate',
+    data: { code },
+  });
   return data;
 };

@@ -1,22 +1,24 @@
-import { useRouter } from 'next/router';
-import Button from '@/components/common/Button';
+import styled from '@emotion/styled';
+import MyRoadmap from '@/components/Roadmap/MyRoadmap';
 import HeaderLayout from '@/components/layout/HeaderLayout';
-import { tilyLinks } from '@/constants/links';
 import { setLayout } from '@/utils/layout';
 
-const Roadmap = () => {
-  const router = useRouter();
-
+const RoadmapList = () => {
   return (
-    <Button
-      onClick={() => {
-        router.push(tilyLinks.roadmapCreate());
-      }}>
-      로드맵 생성하기
-    </Button>
+    <RoadmapListPage>
+      <MyRoadmap />
+    </RoadmapListPage>
   );
 };
 
-setLayout(Roadmap, HeaderLayout, false);
+setLayout(RoadmapList, HeaderLayout, false);
 
-export default Roadmap;
+export default RoadmapList;
+
+const RoadmapListPage = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 3rem auto 0;
+`;

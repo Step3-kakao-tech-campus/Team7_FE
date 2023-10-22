@@ -66,6 +66,15 @@ export interface PostRoadmapStepIndividualResponse {
   };
 }
 
+// postRoadmapsGroupsParticipate
+export interface PostRoadmapsGroupsParticipateResponse {
+  success: boolean;
+  message: string;
+  result: {
+    id: number;
+  };
+}
+
 // postRoadmaps
 export interface PostRoadmapsResponse {
   success: boolean;
