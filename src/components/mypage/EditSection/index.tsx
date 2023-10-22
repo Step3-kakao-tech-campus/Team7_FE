@@ -1,4 +1,5 @@
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
+import { useGetUser } from '@/api/hooks/user';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { PASSWORD_REGEX } from '@/constants/regex';
@@ -11,6 +12,8 @@ interface ChangePasswordFormInput {
 }
 
 const EditSection = () => {
+  const { user } = useGetUser();
+
   const {
     control,
     handleSubmit,
@@ -38,7 +41,7 @@ const EditSection = () => {
     <Styled.Root onSubmit={handleSubmit(onSubmit)} onKeyDown={(e) => checkKeyDown(e)}>
       <Styled.EmailContainer>
         <Styled.Title>이메일</Styled.Title>
-        <Styled.Email>dnwl@naver.com</Styled.Email>
+        <Styled.Email>{user?.email}</Styled.Email>
       </Styled.EmailContainer>
 
       <Styled.PasswordContainer>
