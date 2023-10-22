@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Title = styled.h3`
@@ -26,5 +27,9 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 
-  margin-top: 1.3rem;
+  margin-top: 0.75rem;
+`;
+
+export const InputContainer = styled.div`
+  margin-top: 1rem;
 `;
