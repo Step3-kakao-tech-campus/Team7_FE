@@ -96,6 +96,111 @@ const createRepo = (token, name) => {
   xhr.send(data);
 };
 
+/* Status codes for linking of repo */
+const linkStatusCode = (status, name) => {
+  let bool = false;
+  switch (status) {
+    case 301:
+      $('#success').hide();
+      $('#error').html(
+        `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to BaekjoonHub. <br> This repository has been moved permenantly. Try creating a new one.`,
+      );
+      $('#error').show();
+      break;
+
+    case 403:
+      $('#success').hide();
+      $('#error').html(
+        `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to BaekjoonHub. <br> Forbidden action. Please make sure you have the right access to this repository.`,
+      );
+      $('#error').show();
+      break;
+
+    case 404:
+      $('#success').hide();
+      $('#error').html(
+        `Error linking <a target="blank" href="${`https://github.com/${name}`}">${name}</a> to BaekjoonHub. <br> Resource not found. Make sure you enter the right repository name.`,
+      );
+      $('#error').show();
+      break;
+
+    default:
+      bool = true;
+      break;
+  }
+  $('#unlink').show();
+  return bool;
+};
+
+/* 
+    Method for linking hook with an existing repository 
+    Steps:
+    1. Check if existing repository exists and the user has write access to it.
+    2. Link Hook to it (chrome Storage).
+*/
+const linkRepo = (token, name) => {
+  const AUTHENTICATION_URL = `https://api.github.com/repos/${name}`;
+
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('readystatechange', function () {
+    if (xhr.readyState === 4) {
+      const res = JSON.parse(xhr.responseText);
+      const bool = linkStatusCode(xhr.status, name);
+      if (xhr.status === 200) {
+        // BUG FIX
+        if (!bool) {
+          // unable to gain access to repo in commit mode. Must switch to hook mode.
+          /* Set mode type to hook */
+          chrome.storage.local.set({ mode_type: 'hook' }, () => {
+            console.log(`Error linking ${name} to BaekjoonHub`);
+          });
+          /* Set Repo Hook to NONE */
+          chrome.storage.local.set({ TILyHub_hook: null }, () => {
+            console.log('Defaulted repo hook to NONE');
+          });
+
+          /* Hide accordingly */
+          document.getElementById('hook_mode').style.display = 'inherit';
+          document.getElementById('commit_mode').style.display = 'none';
+        } else {
+          /* Change mode type to commit */
+          /* Save repo url to chrome storage */
+          chrome.storage.local.set({ mode_type: 'commit', repo: res.html_url }, () => {
+            $('#error').hide();
+            $('#success').html(
+              `Successfully linked <a target="blank" href="${res.html_url}">${name}</a> to BaekjoonHub. Start <a href="https://www.acmicpc.net/">BOJ</a> now!`,
+            );
+            $('#success').show();
+            $('#unlink').show();
+          });
+          /* Set Repo Hook */
+
+          stats = {};
+          stats.version = chrome.runtime.getManifest().version;
+          stats.submission = {};
+          chrome.storage.local.set({ stats });
+
+          chrome.storage.local.set({ TILyHub_hook: res.full_name }, () => {
+            console.log('Successfully set new repo hook');
+            /* Get problems solved count */
+            chrome.storage.local.get('stats', (psolved) => {
+              const { stats } = psolved;
+            });
+          });
+          /* Hide accordingly */
+          document.getElementById('hook_mode').style.display = 'none';
+          document.getElementById('commit_mode').style.display = 'inherit';
+        }
+      }
+    }
+  });
+
+  xhr.open('GET', AUTHENTICATION_URL, true);
+  xhr.setRequestHeader('Authorization', `token ${token}`);
+  xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
+  xhr.send();
+};
+
 
 /* Check for value of select tag, Get Started disabled by default */
 
