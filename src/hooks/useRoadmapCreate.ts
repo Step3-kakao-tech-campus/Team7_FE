@@ -57,6 +57,7 @@ export const useRoadmapInfo = () => {
  * @returns
  */
 export const useStepInfo = (defaultValue: StepForm) => {
+  const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
   const [step, setStep] = useState<StepForm>(defaultValue);
   const [isValid, setIsValid] = useState(true);
 

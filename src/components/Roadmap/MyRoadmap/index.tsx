@@ -1,15 +1,19 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { usePostRoadmapsGroupsParticipate } from '@/api/hooks/roadmap';
 import * as Style from '@/components/Roadmap/MyRoadmap/style';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Modal from '@/components/common/Modal';
+import { tilyLinks } from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 
 const MyRoadmap = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   const { postRoadmapsGroupsParticipate, isLoading } = usePostRoadmapsGroupsParticipate();
+
+  const router = useRouter();
 
   const {
     control,
@@ -37,7 +41,13 @@ const MyRoadmap = () => {
             }}>
             코드로 참여하기
           </Button>
-          <Button variant="outline">그룹 생성</Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              router.push(tilyLinks.roadmapCreate());
+            }}>
+            로드맵 생성
+          </Button>
         </Style.ButtonContainer>
       </Style.Header>
       <Modal isOpen={isOpen} onClose={handleClose}>
