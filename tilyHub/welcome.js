@@ -18,6 +18,20 @@ $('#type').on('change', function () {
   }
 });
 
+$('#hook_button').on('click', () => {
+  /* on click should generate: 1) option 2) repository name */
+  if (!option()) {
+    $('#error').text('No option selected - Pick an option from dropdown menu below that best suits you!');
+    $('#error').show();
+  } else if (!repositoryName()) {
+    $('#error').text('No repository name added - Enter the name of your repository!');
+    $('#name').focus();
+    $('#error').show();
+  } else {
+    $('#error').hide();
+    $('#success').text('Attempting to create Hook... Please wait.');
+    $('#success').show();
+
 /* Detect mode type */
 chrome.storage.local.get('mode_type', (data) => {
   const mode = data.mode_type;
