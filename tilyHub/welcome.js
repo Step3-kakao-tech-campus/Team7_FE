@@ -7,6 +7,96 @@ const repositoryName = () => {
   return $('#name').val().trim();
 };
 
+/* Status codes for creating of repo */
+
+const statusCode = (res, status, name) => {
+  switch (status) {
+    case 304:
+      $('#success').hide();
+      $('#error').text(`Error creating ${name} - Unable to modify repository. Try again later!`);
+      $('#error').show();
+      break;
+
+    case 400:
+      $('#success').hide();
+      $('#error').text(
+        `Error creating ${name} - Bad POST request, make sure you're not overriding any existing scripts`,
+      );
+      $('#error').show();
+      break;
+
+    case 401:
+      $('#success').hide();
+      $('#error').text(`Error creating ${name} - Unauthorized access to repo. Try again later!`);
+      $('#error').show();
+      break;
+
+    case 403:
+      $('#success').hide();
+      $('#error').text(`Error creating ${name} - Forbidden access to repository. Try again later!`);
+      $('#error').show();
+      break;
+
+    case 422:
+      $('#success').hide();
+      $('#error').text(
+        `Error creating ${name} - Unprocessable Entity. Repository may have already been created. Try Linking instead (select 2nd option).`,
+      );
+      $('#error').show();
+      break;
+
+    default:
+      /* Change mode type to commit */
+      chrome.storage.local.set({ mode_type: 'commit' }, () => {
+        $('#error').hide();
+        $('#success').html(
+          `Successfully created <a target="blank" href="${res.html_url}">${name}</a>. Start <a href="https://www.acmicpc.net/">BOJ</a>!`,
+        );
+        $('#success').show();
+        $('#unlink').show();
+        /* Show new layout */
+        document.getElementById('hook_mode').style.display = 'none';
+        document.getElementById('commit_mode').style.display = 'inherit';
+      });
+      /* Set Repo Hook */
+      chrome.storage.local.set({ TILyHub_hook: res.full_name }, () => {
+        console.log('Successfully set new repo hook');
+      });
+
+      break;
+  }
+};
+
+const createRepo = (token, name) => {
+  const AUTHENTICATION_URL = 'https://api.github.com/user/repos';
+  let data = {
+    name,
+    private: true,
+    auto_init: true,
+    description:
+      'This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).',
+  };
+  data = JSON.stringify(data);
+
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('readystatechange', function () {
+    if (xhr.readyState === 4) {
+      statusCode(JSON.parse(xhr.responseText), xhr.status, name);
+    }
+  });
+
+  stats = {};
+  stats.version = chrome.runtime.getManifest().version;
+  stats.submission = {};
+  chrome.storage.local.set({ stats });
+
+  xhr.open('POST', AUTHENTICATION_URL, true);
+  xhr.setRequestHeader('Authorization', `token ${token}`);
+  xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
+  xhr.send(data);
+};
+
+
 /* Check for value of select tag, Get Started disabled by default */
 
 $('#type').on('change', function () {
