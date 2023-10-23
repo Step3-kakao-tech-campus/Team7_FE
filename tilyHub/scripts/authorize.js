@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
+/* eslint-disable no-undef */
+
 const RedirectAuth = {
   /**
    * Initialize
@@ -60,13 +63,44 @@ const RedirectAuth = {
     xhr.send(data);
   },
 
+  /**
+   * Finish
+   *
+   * @param token The OAuth2 token given to the application from the provider.
+   */
+  finish(token) {
+    /* Get username */
+    // To validate user, load user object from GitHub.
+    const AUTHENTICATION_URL = 'https://api.github.com/user';
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('readystatechange', function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          const username = JSON.parse(xhr.responseText).login;
+          chrome.runtime.sendMessage({
+            closeWebPage: true,
+            isSuccess: true,
+            token,
+            username,
+            KEY: this.KEY,
+          });
+        }
+      }
+    });
+    xhr.open('GET', AUTHENTICATION_URL, true);
+    xhr.setRequestHeader('Authorization', `token ${token}`);
+    xhr.send();
+  },
+};
+
 RedirectAuth.init();
 const link = window.location.href;
 
 /* Check for open pipe */
 if (window.location.host === 'github.com') {
   chrome.storage.local.get('pipe_TILyHub', (data) => {
-    if (data && data.pipe_baekjoonhub) {
+    if (data && data.pipe_TILyHub) {
       RedirectAuth.parseAccessCode(link);
     }
   });
