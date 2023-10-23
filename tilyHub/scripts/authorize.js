@@ -31,6 +31,35 @@ const RedirectAuth = {
     }
   },
 
+  /**
+   * Request Token
+   *
+   * @param code The access code returned by provider.
+   */
+  requestToken(code) {
+    const that = this;
+    const data = new FormData();
+    data.append('client_id', this.CLIENT_ID);
+    data.append('client_secret', this.CLIENT_SECRET);
+    data.append('code', code);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('readystatechange', function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          that.finish(xhr.responseText.match(/access_token=([^&]*)/)[1]);
+        } else {
+          chrome.runtime.sendMessage({
+            closeWebPage: true,
+            isSuccess: false,
+          });
+        }
+      }
+    });
+    xhr.open('POST', this.ACCESS_TOKEN_URL, true);
+    xhr.send(data);
+  },
+
 RedirectAuth.init();
 const link = window.location.href;
 
