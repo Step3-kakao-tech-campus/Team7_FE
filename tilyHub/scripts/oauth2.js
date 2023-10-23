@@ -5,11 +5,11 @@ const oAuth2 = {
    * Initialize
    */
   init() {
-    this.KEY = 'BaekjoonHub_token';
+    this.KEY = 'TILyHub_token';
     this.ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
     this.AUTHORIZATION_URL = 'https://github.com/login/oauth/authorize';
-    this.CLIENT_ID = '975f8d5cf6686dd1faed';
-    this.CLIENT_SECRET = '934b2bfc3bb3ad239bc67bdfa81a378b1616dd1e';
+    this.CLIENT_ID = '8d5b1ccf732a48a5cdd3';
+    this.CLIENT_SECRET = 'c0879c62b8e9c9accc1bd72fb822145e72d181a2';
     this.REDIRECT_URL = 'https://github.com/'; // for example, https://github.com
     this.SCOPES = ['repo'];
   },
