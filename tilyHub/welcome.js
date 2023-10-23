@@ -201,6 +201,18 @@ const linkRepo = (token, name) => {
   xhr.send();
 };
 
+const unlinkRepo = () => {
+  /* Set mode type to hook */
+  chrome.storage.local.set({ mode_type: 'hook' }, () => {});
+  /* Set Repo Hook to NONE */
+  chrome.storage.local.set({ TILyHub_hook: null }, () => {
+    console.log('Defaulted repo hook to NONE');
+  });
+
+  /* Hide accordingly */
+  document.getElementById('hook_mode').style.display = 'inherit';
+  document.getElementById('commit_mode').style.display = 'none';
+};
 
 /* Check for value of select tag, Get Started disabled by default */
 
@@ -262,6 +274,12 @@ $('#hook_button').on('click', () => {
       }
     });
   }
+});
+
+$('#unlink a').on('click', () => {
+  unlinkRepo();
+  $('#unlink').hide();
+  $('#success').text('Successfully unlinked your current git repo. Please create/link a new hook.');
 });
 
 /* Detect mode type */
