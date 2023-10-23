@@ -32,6 +32,43 @@ $('#hook_button').on('click', () => {
     $('#success').text('Attempting to create Hook... Please wait.');
     $('#success').show();
 
+    /* 
+      Perform processing
+      - step 1: Check if current stage === hook.
+      - step 2: store repo name as repoName in chrome storage.
+      - step 3: if (1), POST request to repoName (iff option = create new repo) ; else display error message.
+      - step 4: if proceed from 3, hide hook_mode and display commit_mode (show stats e.g: files pushed/questions-solved/leaderboard)
+    */
+    chrome.storage.local.get('TILyHub_token', (data) => {
+      const token = data.TILyHub_token;
+      if (token === null || token === undefined) {
+        /* Not authorized yet. */
+        $('#error').text(
+          'Authorization error - Grant BaekjoonHub access to your GitHub account to continue (launch extension to proceed)',
+        );
+        $('#error').show();
+        $('#success').hide();
+      } else if (option() === 'new') {
+        createRepo(token, repositoryName());
+      } else {
+        chrome.storage.local.get('TILyHub_username', (data2) => {
+          const username = data2.TILyHub_username;
+          if (!username) {
+            /* Improper authorization. */
+            $('#error').text(
+              'Improper Authorization error - Grant BaekjoonHub access to your GitHub account to continue (launch extension to proceed)',
+            );
+            $('#error').show();
+            $('#success').hide();
+          } else {
+            linkRepo(token, `${username}/${repositoryName()}`, false);
+          }
+        });
+      }
+    });
+  }
+});
+
 /* Detect mode type */
 chrome.storage.local.get('mode_type', (data) => {
   const mode = data.mode_type;
