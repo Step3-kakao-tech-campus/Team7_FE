@@ -1,3 +1,22 @@
+/* eslint-disable no-undef */
+const option = () => {
+  return $('#type').val();
+};
+
+const repositoryName = () => {
+  return $('#name').val().trim();
+};
+
+/* Check for value of select tag, Get Started disabled by default */
+
+$('#type').on('change', function () {
+  const valueSelected = this.value;
+  if (valueSelected) {
+    $('#hook_button').attr('disabled', false);
+  } else {
+    $('#hook_button').attr('disabled', true);
+  }
+});
 
 /* Detect mode type */
 chrome.storage.local.get('mode_type', (data) => {
