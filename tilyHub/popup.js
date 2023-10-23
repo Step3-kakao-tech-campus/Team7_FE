@@ -8,8 +8,8 @@ $('#authenticate').on('click', () => {
   }
 });
 
-chrome.storage.local.get('BaekjoonHub_token', (data) => {
-  const token = data.BaekjoonHub_token;
+chrome.storage.local.get('TILyHub_token', (data) => {
+  const token = data.TILyHub_token;
   if (token === null || token === undefined) {
     action = true;
     $('#auth_mode').show();
