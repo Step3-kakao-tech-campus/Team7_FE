@@ -38,7 +38,20 @@ const Header = (props: HeaderProps) => {
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
 
       <Styled.Container>
-        <Icon iconName="ic_github" imageSize={32} ext="svg" alt="깃허브 익스텐션" />
+          <button
+            id="github_extenstion"
+            onClick={() => {
+              const detail = {
+                isPersonal: tilDetail?.isPersonal,
+                roadmapTitle: '조금만 더 화이팅',
+                stepTitle: tilDetail?.step.title,
+                content: TILContent,
+              };
+              const event = new CustomEvent('크롬익스텐션이벤트', { detail });
+              document.dispatchEvent(event);
+            }}>
+            <Image src="/assets/icons/ic_github.svg" width={32} height={32} alt="깃허브 익스텐션" />
+          </button>
         {!tilDetail?.isPersonal && (
           <Icon onClick={handleOpenCommentAside} iconName="ic_commentBlack" imageSize={32} ext="svg" alt="코멘트" />
         )}
