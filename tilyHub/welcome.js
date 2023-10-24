@@ -156,7 +156,6 @@ const linkRepo = (token, name) => {
 
           /* Hide accordingly */
           document.getElementById('hook_mode').style.display = 'inherit';
-          document.getElementById('commit_mode').style.display = 'none';
         } else {
           /* Change mode type to commit */
           /* Save repo url to chrome storage */
@@ -175,7 +174,6 @@ const linkRepo = (token, name) => {
           });
           /* Hide accordingly */
           document.getElementById('hook_mode').style.display = 'none';
-          document.getElementById('commit_mode').style.display = 'inherit';
         }
       }
     }
@@ -197,7 +195,6 @@ const unlinkRepo = () => {
 
   /* Hide accordingly */
   document.getElementById('hook_mode').style.display = 'inherit';
-  document.getElementById('commit_mode').style.display = 'none';
 };
 
 /* Check for value of select tag, Get Started disabled by default */
@@ -287,7 +284,6 @@ chrome.storage.local.get('mode_type', (data) => {
         $('#success').hide();
         /* Hide accordingly */
         document.getElementById('hook_mode').style.display = 'inherit';
-        document.getElementById('commit_mode').style.display = 'none';
       } else {
         /* Get access to repo */
         // 스토리지에 저장해야하는 레포의 데이터가 없을때 에러 핸들링
@@ -302,7 +298,6 @@ chrome.storage.local.get('mode_type', (data) => {
             $('#success').hide();
             /* Hide accordingly */
             document.getElementById('hook_mode').style.display = 'inherit';
-            document.getElementById('commit_mode').style.display = 'none';
           } else {
             /* Username exists, at least in storage. Confirm this */
             linkRepo(token, hook);
