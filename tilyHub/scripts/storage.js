@@ -5,8 +5,6 @@
  * @param {string} key
  */
 const getObjectFromLocalStorage = async (key) => {
-  console.log('getObjectFromLocalStorage');
-
   return new Promise((resolve, reject) => {
     try {
       chrome.storage.local.get(key, function (value) {
