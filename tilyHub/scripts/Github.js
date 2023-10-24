@@ -171,7 +171,22 @@ async function updateHead(hook, token, ref, commitSHA, force = true) {
       'content-type': 'application/json',
     },
   })
-    .then((res) => res.json())
+    .then((res) => {
+      if (res.status === 200) {
+        const detail = {
+          message: '깃허브 푸쉬가 완료되었습니다.',
+        };
+        const event = new CustomEvent('크롬익스텐션성공', { detail });
+        document.dispatchEvent(event);
+      } else {
+        const detail = {
+          message: '깃허브 푸쉬에 실패했습니다.',
+        };
+        const event = new CustomEvent('크롬익스텐션에러', { detail });
+        document.dispatchEvent(event);
+      }
+      return res.json();
+    })
     .then((data) => {
       return data.sha;
     });
