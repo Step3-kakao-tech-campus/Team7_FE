@@ -15,3 +15,24 @@ const commitContentToGitHub = async ({ isPersonal, roadmapTitle, stepTitle, cont
   await beginUpload(updateData);
 };
 
+/**
+ * 문제의 문제의 업로드할 디렉토리, 커밋 메시지, 리드미 데이터를 반환합니다.
+ * @param {Object} 함수의 매개변수를 담고 있는 객체
+ * @param {boolean} isPersonal - 개인 로드맵 / 틸리 + 그룹 로드맵인지 여부를 판단하는 변수
+ * @param {string} roadmapTitle - 로드맵의 제목
+ * @param {string} stepTitle - 단계의 제목
+ * @param {string} content - 유저 작성한 학습일지 데이터
+ * @returns {Object} { directory, message, readme }
+ */
+const getGitUploadData = ({ isPersonal, roadmapTitle, stepTitle, content }) => {
+  const directory = isPersonal ? `개인 로드맵/${stepTitle}` : `틸리 로드맵 + 그룹 로드맵/${roadmapTitle}/${stepTitle}`;
+  const message = `Sync TIL to GitHub - ${stepTitle}`;
+  const readme = content;
+  // prettier-ignore-end
+  return {
+    directory,
+    message,
+    readme,
+  };
+};
+
