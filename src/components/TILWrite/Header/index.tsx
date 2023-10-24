@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
-  const { handleOpenCommentAside } = props;
+  const [isExtensionInstall, setIsExtensionInstall] = useState(false);
 
   const router = useRouter();
 
@@ -19,6 +19,16 @@ const Header = (props: HeaderProps) => {
     stepId: Number(router.query.stepId),
     tilId: Number(router.query.tilId),
   });
+
+  useEffect(() => {
+    const isInstalled = document.documentElement.getAttribute('myextension');
+
+    if (isInstalled) {
+      setIsExtensionInstall(true);
+    } else {
+      setIsExtensionInstall(false);
+    }
+  }, []);
 
   return (
     <Styled.Root>
