@@ -21,4 +21,26 @@ export const Title = styled.h1`
 export const Container = styled.div`
   display: flex;
   gap: 1.3rem;
+
+  & > .swing {
+    animation: swing 2s infinite linear;
+  }
+
+  @keyframes swing {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(30deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    75% {
+      transform: rotate(-30deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
 `;

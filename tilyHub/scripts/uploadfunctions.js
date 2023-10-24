@@ -35,12 +35,16 @@ const uploadOnGitHub = async (updateData, cb) => {
  */
 const upload = async (token, hook, readmeText, directory, commitMessage, cb) => {
   /* 업로드 후 커밋 */
+  const githubIcon = document.getElementById('github_extenstion');
+  githubIcon.classList.add('swing');
+
   const git = new GitHub(hook, token);
   const { refSHA, ref } = await git.getReference();
   const readme = await git.createBlob(readmeText, `${directory}/README.md`); // readme 파일
   const treeSHA = await git.createTree(refSHA, [readme]);
   const commitSHA = await git.createCommit(commitMessage, treeSHA, refSHA);
   await git.updateHead(ref, commitSHA);
+  githubIcon.classList.remove('swing');
 
   // 콜백 함수 실행
   if (typeof cb === 'function') cb();
