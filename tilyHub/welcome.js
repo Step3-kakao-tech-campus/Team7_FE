@@ -56,7 +56,6 @@ const statusCode = (res, status, name) => {
         $('#unlink').show();
         /* Show new layout */
         document.getElementById('hook_mode').style.display = 'none';
-        document.getElementById('commit_mode').style.display = 'inherit';
       });
       /* Set Repo Hook */
       chrome.storage.local.set({ TILyHub_hook: res.full_name }, () => {

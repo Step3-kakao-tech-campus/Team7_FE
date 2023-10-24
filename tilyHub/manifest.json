@@ -35,12 +35,21 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],
-      "js": ["scripts/authorize.js"],
+      "js": ["scripts/authorize.js", "scripts/util.js", "scripts/Github.js"],
       "run_at": "document_idle"
     },
     {
       "matches": ["http://localhost:3000/*"],
-      "js": ["library/sha1.min.js", "library/jszip.min.js", "scripts/authorize.js", "scripts/tily.js"],
+      "js": [
+        "library/sha1.min.js",
+        "library/jszip.min.js",
+        "scripts/authorize.js",
+        "scripts/tily.js",
+        "scripts/util.js",
+        "scripts/Github.js",
+        "scripts/uploadfunctions.js",
+        "scripts/storage.js"
+      ],
       "run_at": "document_idle"
     }
   ]
