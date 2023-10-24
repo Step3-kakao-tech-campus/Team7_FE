@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
+import ExtensionInfoModal from '@/components/TILWrite/SubmitModal';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
 import { useToast } from '@/components/common/Toast/useToast';
 import { tilyLinks } from '@/constants/links';
+import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 interface HeaderProps {
@@ -20,6 +22,7 @@ const Header = (props: HeaderProps) => {
 
   const router = useRouter();
   const toast = useToast();
+  const { isOpen, handleClose, handleOpen } = useModalState();
 
   const { tilDetail } = useGetTil({
     roadmapId: Number(router.query.roadmapId),
@@ -87,7 +90,7 @@ const Header = (props: HeaderProps) => {
             <Image src="/assets/icons/ic_github.svg" width={32} height={32} alt="깃허브 익스텐션" />
           </button>
         ) : (
-          <button id="github_extenstion" onClick={() => router.push('/')}>
+          <button id="github_extenstion" onClick={handleOpen}>
             <Image src="/assets/icons/ic_github.svg" width={32} height={32} alt="깃허브 익스텐션" />
           </button>
         )}
@@ -96,6 +99,7 @@ const Header = (props: HeaderProps) => {
           <Icon onClick={handleOpenCommentAside} iconName="ic_commentBlack" imageSize={32} ext="svg" alt="코멘트" />
         )}
       </Styled.Container>
+      <ExtensionInfoModal isOpen={isOpen} handleClose={handleClose} />
     </Styled.Root>
   );
 };
