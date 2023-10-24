@@ -36,3 +36,9 @@ const getGitUploadData = ({ isPersonal, roadmapTitle, stepTitle, content }) => {
   };
 };
 
+/* 파싱 직후 실행되는 함수 */
+const beginUpload = async (updateData) => {
+  if (isNotEmpty(updateData)) {
+    await uploadOnGitHub(updateData);
+  }
+};
