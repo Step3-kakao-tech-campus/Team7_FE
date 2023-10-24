@@ -85,11 +85,6 @@ const createRepo = (token, name) => {
     }
   });
 
-  stats = {};
-  stats.version = chrome.runtime.getManifest().version;
-  stats.submission = {};
-  chrome.storage.local.set({ stats });
-
   xhr.open('POST', AUTHENTICATION_URL, true);
   xhr.setRequestHeader('Authorization', `token ${token}`);
   xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
@@ -175,17 +170,8 @@ const linkRepo = (token, name) => {
           });
           /* Set Repo Hook */
 
-          stats = {};
-          stats.version = chrome.runtime.getManifest().version;
-          stats.submission = {};
-          chrome.storage.local.set({ stats });
-
           chrome.storage.local.set({ TILyHub_hook: res.full_name }, () => {
             console.log('Successfully set new repo hook');
-            /* Get problems solved count */
-            chrome.storage.local.get('stats', (psolved) => {
-              const { stats } = psolved;
-            });
           });
           /* Hide accordingly */
           document.getElementById('hook_mode').style.display = 'none';
@@ -326,9 +312,7 @@ chrome.storage.local.get('mode_type', (data) => {
     });
 
     document.getElementById('hook_mode').style.display = 'none';
-    document.getElementById('commit_mode').style.display = 'inherit';
   } else {
     document.getElementById('hook_mode').style.display = 'inherit';
-    document.getElementById('commit_mode').style.display = 'none';
   }
 });
