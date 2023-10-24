@@ -9,7 +9,14 @@
 const uploadOnGitHub = async (updateData, cb) => {
   const token = await getToken();
   const hook = await getHook();
+
   if (isNull(token) || isNull(hook)) {
+    const detail = {
+      message: '업로드할 깃허브 레포를 지정해주세요.',
+    };
+    const event = new CustomEvent('크롬익스텐션에러', { detail });
+    document.dispatchEvent(event);
+
     console.error('token or hook is null', token, hook);
     return;
   }
