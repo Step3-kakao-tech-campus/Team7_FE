@@ -1,5 +1,8 @@
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
 import Typer from '@/components/main/Guest/Typer';
+import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 
 const shineColorList = ['#EF4365'];
@@ -10,6 +13,8 @@ const FADE_DOWN_ANIMATION_VARIANTS = {
 };
 
 const Guest = () => {
+  const router = useRouter();
+
   return (
     <Styled.GuestRoot>
       <Styled.GuestGradientContainer>
@@ -41,6 +46,76 @@ const Guest = () => {
         <Button css={Styled.ButtonStyles}>Get Started</Button>
       </Styled.ButtonContainer>
 
+      <Styled.IntroSection>
+        <Styled.HardWareContainer>
+          <Image src="/assets/images/landing1.png" alt="TIL-y" width={1024} height={600} />
+        </Styled.HardWareContainer>
+      </Styled.IntroSection>
+
+      <Styled.UseRoadmapSection initial="hidden" whileInView="show" variants={FADE_DOWN_ANIMATION_VARIANTS}>
+        <Styled.SectionTitle>개발공부의 방향성 제시</Styled.SectionTitle>
+        <Styled.HardWareContainer>
+          <Image
+            style={{ borderRadius: '10px' }}
+            src="/assets/images/roadmap.gif"
+            alt="TIL-y"
+            width={980}
+            height={540}
+          />
+        </Styled.HardWareContainer>
+      </Styled.UseRoadmapSection>
+
+      <Styled.UseRoadmapSection initial="hidden" whileInView="show" variants={FADE_DOWN_ANIMATION_VARIANTS}>
+        <Styled.SectionTitle>TIL 깃허브 업로드</Styled.SectionTitle>
+        <Styled.HardWareContainer>
+          <Image
+            style={{ borderRadius: '10px' }}
+            src="/assets/images/roadmap.gif"
+            alt="TIL-y"
+            width={980}
+            height={540}
+          />
+        </Styled.HardWareContainer>
+      </Styled.UseRoadmapSection>
+
+      <Styled.UseRoadmapSection initial="hidden" whileInView="show" variants={FADE_DOWN_ANIMATION_VARIANTS}>
+        <Styled.SectionTitle>동일 주제에 대한 TIL 공유 기능</Styled.SectionTitle>
+        <Styled.HardWareContainer>
+          <Image
+            style={{ borderRadius: '10px' }}
+            src="/assets/images/roadmap.gif"
+            alt="TIL-y"
+            width={980}
+            height={540}
+          />
+        </Styled.HardWareContainer>
+      </Styled.UseRoadmapSection>
+
+      <Styled.UseRoadmapSection initial="hidden" whileInView="show" variants={FADE_DOWN_ANIMATION_VARIANTS}>
+        <Styled.SectionTitle>그룹 로드맵 생성</Styled.SectionTitle>
+        <Styled.HardWareContainer>
+          <Image
+            style={{ borderRadius: '10px' }}
+            src="/assets/images/roadmap.gif"
+            alt="TIL-y"
+            width={980}
+            height={540}
+          />
+        </Styled.HardWareContainer>
+      </Styled.UseRoadmapSection>
+
+      <Styled.UseRoadmapSection initial="hidden" whileInView="show" variants={FADE_DOWN_ANIMATION_VARIANTS}>
+        <Styled.SectionTitle>팀 내 학습 관리</Styled.SectionTitle>
+        <Styled.HardWareContainer>
+          <Image
+            style={{ borderRadius: '10px' }}
+            src="/assets/images/roadmap.gif"
+            alt="TIL-y"
+            width={980}
+            height={540}
+          />
+        </Styled.HardWareContainer>
+      </Styled.UseRoadmapSection>
     </Styled.GuestRoot>
   );
 };

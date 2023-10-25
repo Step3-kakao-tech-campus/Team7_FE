@@ -53,3 +53,62 @@ export const GuestGradient = styled.div`
   }
 `;
 
+export const TyperBox = styled.h1`
+  margin-top: 8rem;
+
+  white-space: pre-wrap;
+  color: black;
+  text-align: center;
+  font-size: 4.5rem;
+  line-height: 1.3;
+  font-weight: 700;
+`;
+
+export const SubTitle = styled.div`
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 500;
+`;
+
+export const ButtonContainer = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+`;
+
+export const ButtonStyles = css`
+  font-size: 1.2rem;
+  border-radius: 20px;
+  box-shadow:
+    0 0.3259259164px 0.7333333492px 0 rgba(0, 0, 0, 0.12),
+    0 1.5407407284px 2.8666665554px 0 rgba(0, 0, 0, 0.07),
+    0 4px 9px 0 rgba(0, 0, 0, 0.05);
+`;
+
+export const IntroSection = styled.section`
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
+`;
+
+export const UseRoadmapSection = styled(motion.section)`
+  margin-top: 10rem;
+`;
+
+export const SectionTitle = styled.h2`
+  font-size: 3rem;
+  line-height: 1.3;
+  font-weight: 700;
+  text-align: center;
+`;
+
+export const HardWareContainer = styled.div`
+  margin-top: 2rem;
+  padding: 22px;
+  background-color: #000000;
+  border-radius: 20px;
+  border: 1px solid #d2d3d4;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+`;
