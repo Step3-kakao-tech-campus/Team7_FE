@@ -2,13 +2,20 @@ import Link from 'next/link';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Root = styled.div`
+export const Root = styled.div<{ isLoggedIn: boolean; isScrolled: boolean }>`
   position: fixed;
   top: 0;
   width: 100%;
   z-index: ${({ theme }) => theme.layer.header};
-  background-color: #fff;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray_500};
+
+  ${({ isLoggedIn, theme, isScrolled }) =>
+    (isLoggedIn || isScrolled) &&
+    css`
+      background-color: #fff;
+      border-bottom: 1px solid ${theme.colors.gray_500};
+    `}
+
+  transition: background-color 0.2s ease-in-out;
 `;
 
 export const BellowRoot = styled.div`
@@ -106,4 +113,9 @@ export const AlarmActiveDot = styled.div`
 export const ProfileSkeletonStyles = css`
   width: 40px;
   height: 40px;
+`;
+
+export const ButtonStyles = css`
+  margin-right: 6px;
+  font-weight: 500;
 `;
