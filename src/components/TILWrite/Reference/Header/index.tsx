@@ -15,7 +15,7 @@ const Header = (props: HeaderProps) => {
         <div>로드맵</div>
       </Styled.TitleContainer>
 
-      <Styled.Title>Java - 설치와 실행 2 : 리눅스에 Java 설치하기</Styled.Title>
+      <Styled.Title>Next.js 13 - Next.js 란 무엇인가?</Styled.Title>
     </Styled.Container>
   );
 };

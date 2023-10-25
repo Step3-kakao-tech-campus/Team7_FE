@@ -24,7 +24,7 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
           <Icon iconName="ic_close" imageSize={16} ext="svg" onClick={handleCloseAside} alt="닫기 버튼" />
         </Styled.RoadMapContainer>
 
-        <Styled.Title>Java 입문 수업 (생활코딩)</Styled.Title>
+        <Styled.Title>Next.js 13 (생활코딩)</Styled.Title>
 
         <CustomSuspense isLoading={isLoading} fallback={<ProgressSkeleton />}>
           <Progress ProgressRate={steps?.result.progress} steps={steps?.result.steps} />
