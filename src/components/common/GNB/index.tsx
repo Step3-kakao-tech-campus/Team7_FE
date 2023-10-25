@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import { useGetAlarms, useGetUser } from '@/api/hooks/user';
@@ -11,11 +11,15 @@ import TILModal from '@/components/common/GNB/TILModal';
 import Logo from '@/components/common/Logo';
 import Skeleton from '@/components/common/Skeleton';
 import { tilyLinks } from '@/constants/links';
+import useAuth from '@/hooks/useAuth';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 const GNB = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
   useGetRoadmaps();
+  const { isLoggedIn } = useAuth();
   const { user, isLoading } = useGetUser();
   const { isNewAlarm, patchAlarmRequset } = useGetAlarms();
   const { patchAlarm } = usePatchAlarm();
@@ -23,6 +27,25 @@ const GNB = () => {
   const { isOpen: isAlarmOpen, handleClose: handleCloseAlarm, handleToggle: handleToggleAlarm } = useModalState(false);
   const alarmButtonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    // Call handleScroll on initial render
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const activePathMatcher = (path: string) => `/${router.pathname.split('/')[1]}` === path;
 
@@ -33,7 +56,7 @@ const GNB = () => {
 
   return (
     <>
-      <Styled.Root>
+      <Styled.Root isLoggedIn={isLoggedIn} isScrolled={isScrolled}>
         <Styled.Inner>
           <button onClick={() => router.push(tilyLinks.home())}>
             <Styled.Logo>
