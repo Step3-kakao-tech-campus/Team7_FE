@@ -50,35 +50,48 @@ const GNB = () => {
             </Styled.NavItem>
           </Styled.NavArea>
 
-          <Styled.ActionArea>
-            <Styled.TILInfo>
-              <span>오늘의 TIL를 작성하고 </span>
-              <span>장미</span>
-              <span>를 심어보세요</span>
-            </Styled.TILInfo>
+          {isLoggedIn && (
+            <Styled.ActionArea>
+              <Styled.TILInfo>
+                <span>오늘의 TIL를 작성하고 </span>
+                <span>장미</span>
+                <span>를 심어보세요</span>
+              </Styled.TILInfo>
 
-            <Button onClick={handleOpenTilModal} css={Styled.TILButtonStyles} variant="ghost">
-              TIL
-            </Button>
+              <Button onClick={handleOpenTilModal} css={Styled.TILButtonStyles} variant="ghost">
+                TIL
+              </Button>
 
-            <Styled.NoticeContainer>
-              <CustomSuspense
-                isLoading={isLoading}
-                fallback={<Skeleton css={Styled.ProfileSkeletonStyles} type="circle" />}>
-                <button ref={alarmButtonRef} onClick={() => handleAlarm()}>
-                  {user?.image ? (
-                    <Avatar imageUrl={user?.image} imageSize={40} alt="프로필 이미지" />
-                  ) : (
-                    <Avatar imageSize={40} iconName="ic_profile" alt="프로필 이미지" />
-                  )}
-                </button>
-              </CustomSuspense>
+              <Styled.NoticeContainer>
+                <CustomSuspense
+                  isLoading={isLoading}
+                  fallback={<Skeleton css={Styled.ProfileSkeletonStyles} type="circle" />}>
+                  <button ref={alarmButtonRef} onClick={() => handleAlarm()}>
+                    {user?.image ? (
+                      <Avatar imageUrl={user?.image} imageSize={40} alt="프로필 이미지" />
+                    ) : (
+                      <Avatar imageSize={40} iconName="ic_profile" alt="프로필 이미지" />
+                    )}
+                  </button>
+                </CustomSuspense>
 
-              {isNewAlarm && <Styled.AlarmActiveDot />}
+                {isNewAlarm && <Styled.AlarmActiveDot />}
 
-              <Alarm alarmButtonRef={alarmButtonRef} isAlarmOpen={isAlarmOpen} handleCloseAlarm={handleCloseAlarm} />
-            </Styled.NoticeContainer>
-          </Styled.ActionArea>
+                <Alarm alarmButtonRef={alarmButtonRef} isAlarmOpen={isAlarmOpen} handleCloseAlarm={handleCloseAlarm} />
+              </Styled.NoticeContainer>
+            </Styled.ActionArea>
+          )}
+
+          {!isLoggedIn && (
+            <Styled.ActionArea>
+              <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.login())}>
+                로그인
+              </Button>
+              <Button css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.verify())}>
+                회원가입
+              </Button>
+            </Styled.ActionArea>
+          )}
         </Styled.Inner>
       </Styled.Root>
 
