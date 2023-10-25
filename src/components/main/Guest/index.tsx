@@ -53,11 +53,45 @@ const Guest = () => {
           </SectionStyled.HardWareContainer>
         </Styled.IntroSection>
 
-        <FeatureSection title="개발공부의 방향성 제시" width={980} height={540} />
-        <FeatureSection title="TIL 깃허브 업로드" width={980} height={540} />
-        <FeatureSection title="동일 주제에 대한 TIL 공유 기능" width={980} height={540} />
-        <FeatureSection title="그룹 로드맵 생성" width={980} height={540} />
-        <FeatureSection title="팀 내 학습 관리" width={980} height={540} />
+        <FeatureSection
+          title={SECTION.roadmap.title}
+          width={SECTION.roadmap.width}
+          height={SECTION.roadmap.height}
+          alt={SECTION.roadmap.alt}
+          imgsrc={SECTION.roadmap.imgsrc}
+        />
+
+        <FeatureSection
+          title={SECTION.github.title}
+          width={SECTION.github.width}
+          height={SECTION.github.height}
+          alt={SECTION.github.alt}
+          imgsrc={SECTION.github.imgsrc}
+        />
+
+        <FeatureSection
+          title={SECTION.share.title}
+          width={SECTION.share.width}
+          height={SECTION.share.height}
+          alt={SECTION.share.alt}
+          imgsrc={SECTION.share.imgsrc}
+        />
+
+        <FeatureSection
+          title={SECTION.group.title}
+          width={SECTION.group.width}
+          height={SECTION.group.height}
+          alt={SECTION.group.alt}
+          imgsrc={SECTION.group.imgsrc}
+        />
+
+        <FeatureSection
+          title={SECTION.team.title}
+          width={SECTION.team.width}
+          height={SECTION.team.height}
+          alt={SECTION.team.alt}
+          imgsrc={SECTION.team.imgsrc}
+        />
 
         <SectionStyled.FeatureSection>
           <SectionStyled.SectionTitle>이 모든것을 TIL-y 에서</SectionStyled.SectionTitle>
@@ -74,3 +108,41 @@ const Guest = () => {
 };
 
 export default Guest;
+
+const SECTION = {
+  roadmap: {
+    title: '개발공부의 방향성 제시',
+    width: 980,
+    height: 540,
+    imgsrc: '/assets/images/roadmap.gif',
+    alt: '개발공부의 방향성 제시',
+  },
+  github: {
+    title: 'TIL 깃허브 업로드',
+    width: 980,
+    height: 540,
+    imgsrc: '/assets/images/roadmap.gif',
+    alt: 'TIL 깃허브 업로드',
+  },
+  share: {
+    title: '동일 주제에 대한 TIL 공유 기능',
+    width: 980,
+    height: 540,
+    imgsrc: '/assets/images/roadmap.gif',
+    alt: '동일 주제에 대한 TIL 공유 기능',
+  },
+  group: {
+    title: '그룹 로드맵 생성',
+    width: 980,
+    height: 540,
+    imgsrc: '/assets/images/roadmap.gif',
+    alt: '그룹 로드맵 생성',
+  },
+  team: {
+    title: '팀 내 학습 관리',
+    width: 980,
+    height: 540,
+    imgsrc: '/assets/images/roadmap.gif',
+    alt: '팀 내 학습 관리',
+  },
+};
