@@ -13,14 +13,14 @@ const Guest = () => {
 
   return (
     <>
-      <Styled.GuestRoot>
-        <Styled.GuestGradientContainer>
-          <Styled.GuestGradient />
-        </Styled.GuestGradientContainer>
+      <Styled.Root>
+        <Styled.LeftTopGradientContainer>
+          <Styled.LeftTopGradient />
+        </Styled.LeftTopGradientContainer>
 
-        <Styled.GuestGradientContainer2>
-          <Styled.GuestGradient2 />
-        </Styled.GuestGradientContainer2>
+        <Styled.RightBottomGradientContainer>
+          <Styled.RightBottomGradient />
+        </Styled.RightBottomGradientContainer>
 
         <Styled.TyperBox>
           <div>꾸준하고픈 개발자의</div>
@@ -67,7 +67,7 @@ const Guest = () => {
             </Button>
           </Styled.ButtonContainer>
         </SectionStyled.FeatureSection>
-      </Styled.GuestRoot>
+      </Styled.Root>
       <Footer />
     </>
   );
