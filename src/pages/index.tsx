@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useGetUser } from '@/api/hooks/user';
@@ -5,6 +6,8 @@ import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
 import Flex from '@/components/common/Flex';
+import Icon from '@/components/common/Icon';
+import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import CategorySection from '@/components/main/CategorySection';
@@ -13,6 +16,7 @@ import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
 import useAuth from '@/hooks/useAuth';
+import { EmotionTheme } from '@/styles/emotion';
 import { setLayout } from '@/utils/layout';
 
 const Home = () => {
@@ -24,26 +28,37 @@ const Home = () => {
       {isLoggedIn ? (
         <Root>
           <Inner>
-            <LeftArea>
-              <CustomSuspense
-                isLoading={userIsLoading}
-                fallback={<Skeleton type="circle" css={ProfileSkeletonStyles} />}>
-                {user?.image ? (
-                  <Avatar imageUrl={user?.image} imageSize={240} alt="프로필 이미지" />
-                ) : (
-                  <Avatar imageSize={240} iconName="ic_profile" alt="프로필 이미지" />
-                )}
-              </CustomSuspense>
-              <SearchBar />
-              <CategorySection />
-            </LeftArea>
+            <Responsive device="desktop">
+              <LeftArea>
+                <CustomSuspense
+                  isLoading={userIsLoading}
+                  fallback={<Skeleton type="circle" css={ProfileSkeletonStyles} />}>
+                  {user?.image ? (
+                    <Avatar imageUrl={user?.image} imageSize={240} alt="프로필 이미지" />
+                  ) : (
+                    <Avatar imageSize={240} iconName="ic_profile" alt="프로필 이미지" />
+                  )}
+                </CustomSuspense>
+                <SearchBar />
+                <CategorySection />
+              </LeftArea>
+            </Responsive>
 
-            <RightArea>
+            <Responsive device="mobile" css={MenuBarStyles}>
+              <Icon iconName="ic_hamburger" imageSize={24} alt="사이드바" ext="svg" />
+              <UserName>
+                <span>김동영</span>
+                <span>님</span>
+              </UserName>
+              <LayoutElement />
+            </Responsive>
+
+            {/* <RightArea>
               <History />
               <FallbackErrorBoundary fallbackRender={TILSection.Fallback}>
                 <TILSection />
               </FallbackErrorBoundary>
-            </RightArea>
+            </RightArea> */}
           </Inner>
         </Root>
       ) : (
@@ -84,4 +99,33 @@ const RightArea = styled.div`
 export const ProfileSkeletonStyles = css`
   width: 240px;
   height: 240px;
+`;
+
+// 모바일
+
+const UserName = styled.div`
+  & > span:first-of-type {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  & > span:nth-of-type(2) {
+    font-size: 16px;
+    font-weight: 600;
+  }
+`;
+
+const MenuBarStyles = (theme: EmotionTheme) => css`
+  display: flex !important;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 16px;
+  border-bottom: 1px solid ${theme.colors.gray_500};
+`;
+
+const LayoutElement = styled.div`
+  width: 24px;
+  height: 24px;
 `;
