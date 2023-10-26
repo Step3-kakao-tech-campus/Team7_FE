@@ -84,11 +84,13 @@ const GNB = () => {
 
           {isLoggedIn && (
             <Styled.ActionArea>
-              <Styled.TILInfo>
-                <span>오늘의 TIL를 작성하고 </span>
-                <span>장미</span>
-                <span>를 심어보세요</span>
-              </Styled.TILInfo>
+              <Responsive device="desktop">
+                <Styled.TILInfo>
+                  <span>오늘의 TIL를 작성하고 </span>
+                  <span>장미</span>
+                  <span>를 심어보세요</span>
+                </Styled.TILInfo>
+              </Responsive>
 
               <Button onClick={handleOpenTilModal} css={Styled.TILButtonStyles} variant="ghost">
                 TIL
@@ -114,16 +116,27 @@ const GNB = () => {
             </Styled.ActionArea>
           )}
 
-          {!isLoggedIn && (
-            <Styled.ActionArea>
-              <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.login())}>
-                로그인
-              </Button>
-              <Button css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.verify())}>
-                회원가입
-              </Button>
-            </Styled.ActionArea>
-          )}
+          <Responsive device="mobile">
+            {!isLoggedIn && (
+              <Styled.ActionArea>
+                <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.login())}>
+                  로그인
+                </Button>
+              </Styled.ActionArea>
+            )}
+          </Responsive>
+          <Responsive device="desktop">
+            {!isLoggedIn && (
+              <Styled.ActionArea>
+                <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.login())}>
+                  로그인
+                </Button>
+                <Button css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.verify())}>
+                  회원가입
+                </Button>
+              </Styled.ActionArea>
+            )}
+          </Responsive>
         </Styled.Inner>
       </Styled.Root>
 

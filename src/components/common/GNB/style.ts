@@ -113,10 +113,13 @@ export const TILInfo = styled.div`
   }
 `;
 
-export const TILButtonStyles = css`
+export const TILButtonStyles = (theme: EmotionTheme) => css`
   font-size: 1.25rem;
   font-weight: 700;
-  margin-right: 1rem;
+
+  @media ${theme.mediaQuery.md} {
+    margin-right: 8px;
+  }
 `;
 
 export const NoticeContainer = styled.div`
@@ -145,6 +148,7 @@ export const ButtonStyles = (theme: EmotionTheme) => css`
   font-weight: 500;
 
   @media ${theme.mediaQuery.md} {
-    display: none;
+    background-color: transparent;
+    font-weight: 700;
   }
 `;
