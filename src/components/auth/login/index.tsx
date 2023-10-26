@@ -63,7 +63,15 @@ const Login = () => {
             required: '이메일을 입력해주세요.',
           }}
           render={({ field }) => (
-            <Input label="이메일" placeholder="이메일을 입력해주세요." message={errors.email?.message} {...field} />
+            <Input
+              label="이메일"
+              placeholder="이메일을 입력해주세요."
+              message={errors.email?.message}
+              {...field}
+              onBlur={() => {
+                scrollTo(0, 0);
+              }}
+            />
           )}
         />
         <Controller
@@ -79,6 +87,9 @@ const Login = () => {
               placeholder="비밀번호를 입력해주세요."
               message={errors.password?.message}
               {...field}
+              onBlur={() => {
+                scrollTo(0, 0);
+              }}
             />
           )}
         />

@@ -46,6 +46,9 @@ const CodeCheck = (props: CodeCheckProps) => {
             message={errors.code?.message}
             status={errors.code ? 'error' : 'default'}
             {...field}
+            onBlur={() => {
+              scrollTo(0, 0);
+            }}
           />
         )}
       />

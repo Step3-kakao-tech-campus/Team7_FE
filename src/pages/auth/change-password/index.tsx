@@ -21,5 +21,10 @@ const StyledChangePasswordPage = styled.div`
   justify-content: center;
   height: 100%;
   margin: 0 auto;
+  padding: 0 30px;
   max-width: 400px;
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    height: 100dvh;
+  }
 `;

@@ -127,6 +127,9 @@ const ByEmail = ({ type }: ByEmailProps) => {
               status={errors.email ? 'error' : 'default'}
               disabled={email.state === 'codeReady'}
               {...field}
+              onBlur={() => {
+                scrollTo(0, 0);
+              }}
             />
           )}
         />
