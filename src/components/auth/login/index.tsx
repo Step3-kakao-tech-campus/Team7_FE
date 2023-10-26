@@ -1,13 +1,16 @@
 import { useSetRecoilState } from 'recoil';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { usePostLogin } from '@/api/hooks/auth';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
+import Responsive from '@/components/common/Responsive';
 import { tilyLinks } from '@/constants/links';
+import type { EmotionTheme } from '@/styles/emotion';
 import { accessTokenAtom } from '../states/accessTokenAtoms';
 
 export interface LoginFormInput {
@@ -46,7 +49,12 @@ const Login = () => {
   };
   return (
     <StyledFlex dir="col" align="center">
-      <Logo />
+      <Responsive device="desktop">
+        <Logo />
+      </Responsive>
+      <Responsive device="mobile">
+        <Logo imageSize={42} />
+      </Responsive>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="email"
@@ -74,8 +82,8 @@ const Login = () => {
             />
           )}
         />
-        <Button type="submit" isLoading={isLoading} fullWidth>
-          완료
+        <Button type="submit" isLoading={isLoading} fullWidth css={ButtonStyles}>
+          로그인
         </Button>
       </StyledForm>
     </StyledFlex>
@@ -94,5 +102,11 @@ const StyledForm = styled.form`
 
   & > label {
     margin-bottom: 0.8rem;
+  }
+`;
+
+const ButtonStyles = (theme: EmotionTheme) => css`
+  @media ${theme.mediaQuery.sm} {
+    margin-top: 24px;
   }
 `;
