@@ -46,17 +46,14 @@ const layer = {
   toast: 10000,
 };
 
-const DESKTOP_SMALL_WIDTH = 1024;
-const MOBILE_LARGE_WIDTH = 768;
-const MOBILE_MEDIUM_WIDTH = 425;
-const MOBILE_SMALL_WIDTH = 375;
-
 const mediaQuery = {
-  DESKTOP_SMALL: `screen and (max-width: ${DESKTOP_SMALL_WIDTH}px)`,
-  MOBILE_LARGE: `screen and (max-width: ${MOBILE_LARGE_WIDTH}px)`,
-  MOBILE_MEDIUM: `screen and (max-width: ${MOBILE_MEDIUM_WIDTH}px)`,
-  MOBILE_SMALL: `screen and (max-width: ${MOBILE_SMALL_WIDTH}px)`,
-};
+  lg: `screen and (max-width: 1024px)`,
+  md: `screen and (max-width: 768px)`,
+  sm: `screen and (max-width: 640px)`,
+  xs: `screen and (max-width: 425px)`,
+  xxs: `screen and (max-width: 374px)`,
+} as const;
+// as const 를 해야 추론이 가능하다.
 
 export const emotionTheme = { colors, layout, layer, mediaQuery } as const;
 
