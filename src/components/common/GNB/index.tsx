@@ -62,7 +62,7 @@ const GNB = () => {
           <button onClick={() => router.push(tilyLinks.home())}>
             <Responsive device="mobile">
               <Styled.Logo>
-                <Logo imageSize={16} />
+                <Logo imageSize={24} />
               </Styled.Logo>
             </Responsive>
 

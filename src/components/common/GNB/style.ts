@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.div<{ isLoggedIn: boolean; isScrolled: boolean }>`
   position: fixed;
@@ -30,6 +31,10 @@ export const Inner = styled.header`
   height: 4.5rem;
   margin: 0 auto;
   padding: 0 2rem;
+
+  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+    padding: 0 8px;
+  }
 `;
 
 export const Logo = styled.div`
@@ -37,6 +42,10 @@ export const Logo = styled.div`
   gap: 0.4rem;
 
   margin-right: 3rem;
+
+  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+    margin-right: 0;
+  }
 `;
 
 export const LogoText = styled.span`
@@ -51,6 +60,11 @@ export const NavArea = styled.nav`
 
   & > div:first-of-type {
     margin-right: 2.125rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+    font-size: 18px;
+    margin-left: 32px;
   }
 `;
 
@@ -68,9 +82,20 @@ export const NavItem = styled(Link)<{ active: number }>`
     css`
       border-bottom: 5px solid ${theme.colors.black};
       height: calc(2.5rem + 5px);
+
+      @media ${theme.mediaQuery.MOBILE_LARGE} {
+        border-bottom: none;
+        font-weight: 800;
+      }
     `}
 
   cursor: pointer;
+
+  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+    min-width: fit-content;
+    margin-right: 32px;
+    height: auto;
+  }
 `;
 
 export const ActionArea = styled.div`
@@ -115,7 +140,16 @@ export const ProfileSkeletonStyles = css`
   height: 40px;
 `;
 
-export const ButtonStyles = css`
+export const ButtonStyles = (theme: EmotionTheme) => css`
   margin-right: 6px;
   font-weight: 500;
+
+  @media ${theme.mediaQuery.MOBILE_LARGE} {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  @media ${theme.mediaQuery.MOBILE_SMALL} {
+    display: none;
+  }
 `;
