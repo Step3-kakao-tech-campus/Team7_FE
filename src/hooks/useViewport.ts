@@ -4,7 +4,8 @@ export interface IsMobile {
   isMobile: boolean;
 }
 
-function useViewport() {
+/** @deprecated @components/common/Responsive를 대신 사용하세요. 모바일에서 초기 접속시 데스크톱 뷰가 잠깐 노출되는 문제가 있어요. */
+const useViewport = () => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -26,6 +27,6 @@ function useViewport() {
     height,
     isMobile,
   };
-}
+};
 
 export default useViewport;
