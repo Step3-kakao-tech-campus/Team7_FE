@@ -66,7 +66,6 @@ export const postRoadmapStepIndividual = async ({ roadmapId, title }: { roadmapI
   return data;
 };
 
-
 export const postRoadmaps = async (roadmapForm: RoadmapForm) => {
   const { data } = await axiosInstance.request<PostRoadmapsResponse>({
     method: 'POST',

@@ -7,7 +7,8 @@ import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Alarm from '@/components/common/GNB/Alarm';
-import TILModal from '@/components/common/GNB/TILModal';
+import TILModal from '@/components/common/GNB/desktop/TILModal';
+import MobileTILModal from '@/components/common/GNB/mobile/MobileTILModal';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
@@ -142,7 +143,8 @@ const GNB = () => {
 
       <Styled.BellowRoot />
 
-      <TILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} />
+      <MobileTILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} />
+      {/* <TILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} /> */}
     </>
   );
 };

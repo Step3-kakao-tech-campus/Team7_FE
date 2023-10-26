@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -15,8 +16,9 @@ import Guest from '@/components/main/Guest';
 import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
+import SideBar from '@/components/main/mobile/SideBar';
 import useAuth from '@/hooks/useAuth';
-import { EmotionTheme } from '@/styles/emotion';
+import type { EmotionTheme } from '@/styles/emotion';
 import { setLayout } from '@/utils/layout';
 
 const Home = () => {
@@ -45,7 +47,9 @@ const Home = () => {
             </Responsive>
 
             <Responsive device="mobile" css={MenuBarStyles}>
-              <Icon iconName="ic_hamburger" imageSize={24} alt="사이드바" ext="svg" />
+              <SideBar>
+                <Icon iconName="ic_hamburger" imageSize={24} alt="사이드바" ext="svg" />
+              </SideBar>
               <UserName>
                 <span>김동영</span>
                 <span>님</span>
@@ -53,12 +57,12 @@ const Home = () => {
               <LayoutElement />
             </Responsive>
 
-            {/* <RightArea>
+            <RightArea>
               <History />
               <FallbackErrorBoundary fallbackRender={TILSection.Fallback}>
                 <TILSection />
               </FallbackErrorBoundary>
-            </RightArea> */}
+            </RightArea>
           </Inner>
         </Root>
       ) : (
@@ -77,6 +81,11 @@ const Root = styled.div``;
 const Inner = styled(Flex)`
   max-width: 1440px;
   margin: 0 auto;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const LeftArea = styled.div`
@@ -94,6 +103,10 @@ const RightArea = styled.div`
   width: 100%;
   min-height: 101vh;
   padding: 3.5rem 0 0 4.5rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 20px;
+  }
 `;
 
 export const ProfileSkeletonStyles = css`
@@ -119,9 +132,11 @@ const MenuBarStyles = (theme: EmotionTheme) => css`
   display: flex !important;
   justify-content: space-between;
   position: sticky;
-  top: 0;
+  top: ${theme.layout.main.GNBHeight};
   width: 100%;
   padding: 16px;
+  z-index: 1;
+  background-color: #fff;
   border-bottom: 1px solid ${theme.colors.gray_500};
 `;
 
