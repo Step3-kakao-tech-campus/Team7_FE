@@ -13,6 +13,7 @@ import Skeleton from '@/components/common/Skeleton';
 import { tilyLinks } from '@/constants/links';
 import useAuth from '@/hooks/useAuth';
 import { useModalState } from '@/hooks/useModalState';
+import useViewport from '@/hooks/useViewport';
 import * as Styled from './style';
 
 const GNB = () => {
@@ -27,6 +28,7 @@ const GNB = () => {
   const { isOpen: isAlarmOpen, handleClose: handleCloseAlarm, handleToggle: handleToggleAlarm } = useModalState(false);
   const alarmButtonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+  const { isMobile } = useViewport();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,9 +61,15 @@ const GNB = () => {
       <Styled.Root isLoggedIn={isLoggedIn} isScrolled={isScrolled}>
         <Styled.Inner>
           <button onClick={() => router.push(tilyLinks.home())}>
-            <Styled.Logo>
-              <Logo imageSize={32} />
-            </Styled.Logo>
+            {isMobile ? (
+              <Styled.Logo>
+                <Logo imageSize={16} />
+              </Styled.Logo>
+            ) : (
+              <Styled.Logo>
+                <Logo imageSize={32} />
+              </Styled.Logo>
+            )}
           </button>
 
           <Styled.NavArea>
