@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import * as Styled from './style';
 
 const FADE_DOWN_ANIMATION_VARIANTS = {
@@ -8,14 +7,12 @@ const FADE_DOWN_ANIMATION_VARIANTS = {
 
 interface FeatureSectionProps {
   title: string;
-  width: number;
-  height: number;
   imgsrc: string;
   alt: string;
 }
 
 const FeatureSection = (props: FeatureSectionProps) => {
-  const { title, width, height, imgsrc, alt } = props;
+  const { title, imgsrc, alt } = props;
 
   return (
     <Styled.FeatureSection
@@ -25,7 +22,7 @@ const FeatureSection = (props: FeatureSectionProps) => {
       variants={FADE_DOWN_ANIMATION_VARIANTS}>
       <Styled.SectionTitle>{title}</Styled.SectionTitle>
       <Styled.HardWareContainer>
-        <Image style={{ borderRadius: '10px' }} src={imgsrc} alt={alt} width={width} height={height} />
+        <Styled.Image src={imgsrc} alt={alt} />
       </Styled.HardWareContainer>
     </Styled.FeatureSection>
   );

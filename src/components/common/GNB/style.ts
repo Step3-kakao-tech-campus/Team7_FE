@@ -32,7 +32,7 @@ export const Inner = styled.header`
   margin: 0 auto;
   padding: 0 2rem;
 
-  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+  @media ${({ theme }) => theme.mediaQuery.md} {
     padding: 0 8px;
   }
 `;
@@ -43,7 +43,7 @@ export const Logo = styled.div`
 
   margin-right: 3rem;
 
-  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+  @media ${({ theme }) => theme.mediaQuery.md} {
     margin-right: 0;
   }
 `;
@@ -62,7 +62,7 @@ export const NavArea = styled.nav`
     margin-right: 2.125rem;
   }
 
-  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+  @media ${({ theme }) => theme.mediaQuery.md} {
     font-size: 18px;
     margin-left: 32px;
   }
@@ -83,7 +83,7 @@ export const NavItem = styled(Link)<{ active: number }>`
       border-bottom: 5px solid ${theme.colors.black};
       height: calc(2.5rem + 5px);
 
-      @media ${theme.mediaQuery.MOBILE_LARGE} {
+      @media ${theme.mediaQuery.md} {
         border-bottom: none;
         font-weight: 800;
       }
@@ -91,7 +91,7 @@ export const NavItem = styled(Link)<{ active: number }>`
 
   cursor: pointer;
 
-  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+  @media ${({ theme }) => theme.mediaQuery.md} {
     min-width: fit-content;
     margin-right: 32px;
     height: auto;
@@ -144,12 +144,7 @@ export const ButtonStyles = (theme: EmotionTheme) => css`
   margin-right: 6px;
   font-weight: 500;
 
-  @media ${theme.mediaQuery.MOBILE_LARGE} {
-    font-size: 12px;
-    padding: 8px 12px;
-  }
-
-  @media ${theme.mediaQuery.MOBILE_SMALL} {
+  @media ${theme.mediaQuery.md} {
     display: none;
   }
 `;

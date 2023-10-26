@@ -8,7 +8,7 @@ export const Root = styled.div`
   align-items: center;
   gap: 0.8rem;
 
-  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+  @media ${({ theme }) => theme.mediaQuery.md} {
     gap: 8px;
   }
 `;
@@ -17,7 +17,7 @@ export const Text = styled.p<TextProps>`
   font-weight: 700;
   font-size: ${({ imageSize = 54 }) => `${imageSize * 0.8}px`};
 
-  @media ${({ theme }) => theme.mediaQuery.MOBILE_LARGE} {
+  @media ${({ theme }) => theme.mediaQuery.md} {
     min-width: fit-content;
   }
 `;
