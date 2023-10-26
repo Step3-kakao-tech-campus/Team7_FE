@@ -6,8 +6,9 @@ import { usePatchAlarm } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
-import Alarm from '@/components/common/GNB/Alarm';
+import Alarm from '@/components/common/GNB/desktop/Alarm';
 import TILModal from '@/components/common/GNB/desktop/TILModal';
+import MobileAlarm from '@/components/common/GNB/mobile/MobileAlarm';
 import MobileTILModal from '@/components/common/GNB/mobile/MobileTILModal';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
@@ -112,7 +113,20 @@ const GNB = () => {
 
                 {isNewAlarm && <Styled.AlarmActiveDot />}
 
-                <Alarm alarmButtonRef={alarmButtonRef} isAlarmOpen={isAlarmOpen} handleCloseAlarm={handleCloseAlarm} />
+                <Responsive device="desktop">
+                  <Alarm
+                    alarmButtonRef={alarmButtonRef}
+                    isAlarmOpen={isAlarmOpen}
+                    handleCloseAlarm={handleCloseAlarm}
+                  />
+                </Responsive>
+                <Responsive device="mobile">
+                  <MobileAlarm
+                    alarmButtonRef={alarmButtonRef}
+                    isAlarmOpen={isAlarmOpen}
+                    handleCloseAlarm={handleCloseAlarm}
+                  />
+                </Responsive>
               </Styled.NoticeContainer>
             </Styled.ActionArea>
           )}
