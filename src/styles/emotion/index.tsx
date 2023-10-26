@@ -46,6 +46,18 @@ const layer = {
   toast: 10000,
 };
 
-export const emotionTheme = { colors, layout, layer } as const;
+const DESKTOP_SMALL_WIDTH = 1024;
+const TABLET_WIDTH = 768;
+const MOBILE_LARGE_WIDTH = 425;
+const MOBILE_SMALL_WIDTH = 375;
+
+const mediaQuery = {
+  DESKTOP_SMALL: `screen and (max-width: ${DESKTOP_SMALL_WIDTH}px)`,
+  TABLET: `screen and (max-width: ${TABLET_WIDTH}px)`,
+  MOBILE_LARGE: `screen and (max-width: ${MOBILE_LARGE_WIDTH}px)`,
+  MOBILE_SMALL: `screen and (max-width: ${MOBILE_SMALL_WIDTH}px)`,
+};
+
+export const emotionTheme = { colors, layout, layer, mediaQuery } as const;
 
 export type EmotionTheme = typeof emotionTheme;
