@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const ModalContainerStyles = css`
-  width: 100%;
+  width: 90vw;
 `;
 
 export const CloseButtonStyles = () => css`

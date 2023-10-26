@@ -143,8 +143,12 @@ const GNB = () => {
 
       <Styled.BellowRoot />
 
-      <MobileTILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} />
-      {/* <TILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} /> */}
+      <Responsive device="mobile">
+        <MobileTILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} />
+      </Responsive>
+      <Responsive device="desktop">
+        <TILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} />
+      </Responsive>
     </>
   );
 };

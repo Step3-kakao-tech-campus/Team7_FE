@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Personal from '@/components/common/GNB/desktop/Personal';
-import RoadMap from '@/components/common/GNB/desktop/RoadMap';
+import MobilePersonal from '@/components/common/GNB/mobile/MobilePersonal';
+import MobileRoadMap from '@/components/common/GNB/mobile/MobileRoadMap';
 import Modal from '@/components/common/Modal';
 import Tab from '@/components/common/Tab';
 import * as Styled from './style';
@@ -54,6 +54,6 @@ const tabMenu = [
 ] as const;
 
 const tabContent = {
-  personal: <Personal />,
-  roadmap: <RoadMap />,
+  personal: <MobilePersonal />,
+  roadmap: <MobileRoadMap />,
 } as const;
