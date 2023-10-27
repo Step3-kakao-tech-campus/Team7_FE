@@ -45,9 +45,9 @@ export const Slider = styled(SliderList)`
   & > button:nth-of-type(2) {
     position: absolute;
     bottom: 90px;
-    right: -30px;
+    right: -40px;
     width: 20px;
-    height: 30px;
+    height: 40px;
     background-image: url('/assets/icons/ic_chevronRightBlack.svg');
     background-repeat: no-repeat;
     background-size: contain;
