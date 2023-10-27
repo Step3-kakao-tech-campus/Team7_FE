@@ -43,7 +43,12 @@ const SideBar = (props: PropsWithChildren) => {
               <Styled.TabName isActive={active === 'roadmap'} onClick={() => setActive('roadmap')}>
                 로드맵
               </Styled.TabName>
-              <Styled.TabName isActive={active === 'comment'} onClick={() => setActive('comment')}>
+              <Styled.TabName
+                isActive={active === 'comment'}
+                onClick={() => {
+                  setActive('comment');
+                  setReferenceOpen(false);
+                }}>
                 코멘트
               </Styled.TabName>
             </Styled.Header>
