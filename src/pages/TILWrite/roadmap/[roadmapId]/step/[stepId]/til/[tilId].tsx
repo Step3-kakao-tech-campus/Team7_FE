@@ -127,6 +127,7 @@ const TILWrite = () => {
           </AsideContainer>
         )}
       </Container>
+
       <Footer TILContent={TILContent} />
     </Root>
   );
@@ -162,6 +163,10 @@ export const EditorContainer = styled(motion.div)`
   flex-shrink: 0;
   overflow-y: scroll;
   background-color: #fff;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    width: 100% !important;
+  }
 `;
 
 export const PersonalEditorContainer = styled.div`
@@ -189,6 +194,10 @@ export const Container = styled.div`
 export const AsideContainer = styled.aside`
   display: flex;
   flex: 1;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    display: none;
+  }
 `;
 
 export const ExtraDrawerMotion = styled(motion.div)`
