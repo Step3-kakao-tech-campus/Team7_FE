@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Content = styled.div<{ referenceOpen: boolean }>`
+export const Content = styled.div<{ referenceOpen?: boolean }>`
   display: flex;
   position: fixed;
   top: 0;
