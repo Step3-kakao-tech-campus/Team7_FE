@@ -16,6 +16,13 @@ export const Title = styled.h1`
   margin-left: 1rem;
   font-size: 18px;
   font-weight: 700;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    margin-left: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export const Container = styled.div`
