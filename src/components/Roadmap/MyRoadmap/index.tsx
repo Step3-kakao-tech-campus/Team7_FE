@@ -45,7 +45,7 @@ const MyRoadmap = () => {
         },
       },
       {
-        breakpoint: 800,
+        breakpoint: 760,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,

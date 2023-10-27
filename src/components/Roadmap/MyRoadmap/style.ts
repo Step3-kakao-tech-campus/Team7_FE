@@ -20,6 +20,12 @@ export const ButtonContainer = styled.section`
 
 export const Slider = styled(SliderList)`
   position: relative;
+
+  @media (max-width: 550px) {
+    width: 250px;
+    margin: 0 auto;
+  }
+
   & > div {
     overflow: hidden;
   }
@@ -35,7 +41,7 @@ export const Slider = styled(SliderList)`
     top: 100px;
     left: -35px;
     width: 20px;
-    height: 30px;
+    height: 40px;
     background-image: url('/assets/icons/ic_chevronLeftBlack.svg');
     background-repeat: no-repeat;
     background-size: contain;
@@ -45,7 +51,7 @@ export const Slider = styled(SliderList)`
   & > button:nth-of-type(2) {
     position: absolute;
     bottom: 90px;
-    right: -40px;
+    right: -30px;
     width: 20px;
     height: 40px;
     background-image: url('/assets/icons/ic_chevronRightBlack.svg');
