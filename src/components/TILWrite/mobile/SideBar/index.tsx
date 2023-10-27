@@ -21,12 +21,16 @@ const SideBar = (props: PropsWithChildren) => {
   const { query } = useRouter();
   const { steps } = useGetRoadmapSteps(Number(query.roadmapId));
 
+  const handleMobileSideBar = () => {
+    setOpen(false);
+  };
+
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.DialogPortal>
         <Dialog.Content asChild>
-          <Styled.Content>
+          <Styled.Content referenceOpen={referenceOpen}>
             <Icon
               iconName="ic_close"
               imageSize={20}
@@ -45,40 +49,57 @@ const SideBar = (props: PropsWithChildren) => {
               </Styled.TabName>
             </Styled.Header>
 
-            <RoadMapInfo handleCloseAside={() => setOpen(false)} />
-
-            <Styled.StepList>
-              {steps?.result.steps.map((step) => {
-                return (
-                  <Step
-                    key={step.id}
-                    stepId={step.id}
-                    title={step.title}
-                    isCompleted={step.isCompleted}
-                    tilId={step.tilId}
-                    handleOpenReferenceAside={() => setReferenceOpen(true)}
-                  />
-                );
-              })}
-            </Styled.StepList>
-
-            {/* <Reference
-              handleCloseReferenceAside={() => {
-                setOpen(false);
-                setReferenceOpen(false);
+            {/* iframe 과 임베드는 렌더링 시간이 소요되므로 미리 렌더링 해놓는다. */}
+            <Styled.ReferenceContainer
+              initial="hidden"
+              animate={referenceOpen ? 'visible' : 'hidden'}
+              variants={{
+                visible: { opacity: 1, zIndex: 1 },
+                hidden: { opacity: 0, zIndex: -1 },
               }}
-            /> */}
-
-            {/* {referenceOpen && (
+              transition={{ type: 'tween' }}>
               <Reference
                 handleCloseReferenceAside={() => {
-                  setOpen(false);
                   setReferenceOpen(false);
                 }}
               />
-            )} */}
+            </Styled.ReferenceContainer>
 
-            {/* <Comment handleCloseCommentAside={() => setOpen(false)} /> */}
+            {(() => {
+              switch (active) {
+                case 'roadmap':
+                  return (
+                    <>
+                      <RoadMapInfo
+                        handleCloseAside={() => {
+                          setOpen(false);
+                          setReferenceOpen(false);
+                        }}
+                      />
+                      <Styled.StepList>
+                        {steps?.result.steps.map((step) => {
+                          return (
+                            <Step
+                              key={step.id}
+                              stepId={step.id}
+                              title={step.title}
+                              isCompleted={step.isCompleted}
+                              tilId={step.tilId}
+                              handleOpenReferenceAside={() => {
+                                setReferenceOpen(true);
+                              }}
+                              handleMobileSideBar={handleMobileSideBar}
+                            />
+                          );
+                        })}
+                      </Styled.StepList>
+                    </>
+                  );
+
+                case 'comment':
+                  return <Comment handleCloseCommentAside={() => setOpen(false)} />;
+              }
+            })()}
           </Styled.Content>
         </Dialog.Content>
       </Dialog.DialogPortal>
