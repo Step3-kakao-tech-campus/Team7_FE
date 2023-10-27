@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import {
   getRoadmapSteps,
-  getRoadmaps,
+  getRoadmapsMy,
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
   getRoadmapStepReference,
@@ -27,8 +27,8 @@ export const ROADMAP_QUERY_KEY = {
   getRoadmapGroupApply: 'getRoadmapGroupApply',
 };
 
-export const useGetRoadmaps = () => {
-  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmaps], () => getRoadmaps());
+export const useGetRoadmapsMy = () => {
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmaps], () => getRoadmapsMy());
 
   const categoryData = {
     category: data?.result.categories ?? [],

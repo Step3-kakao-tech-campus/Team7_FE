@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/api';
 import type {
-  GetRoadmapsResponse,
+  GetRoadmapsResponseMy,
   PostRoadmapsIndividualResponse,
   GetRoadmapStepsResponse,
   PostRoadmapStepIndividualResponse,
@@ -18,8 +18,8 @@ import type {
 } from '@/api/roadmap/type';
 import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
-export const getRoadmaps = async () => {
-  const { data } = await axiosInstance.request<GetRoadmapsResponse>({
+export const getRoadmapsMy = async () => {
+  const { data } = await axiosInstance.request<GetRoadmapsResponseMy>({
     method: 'GET',
     url: `/roadmaps/my/`,
   });

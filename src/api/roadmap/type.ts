@@ -1,7 +1,7 @@
 import type { Step, Category, Roadmaps, CommonResponse } from '@/api/type';
 
 // getRoadmaps
-export interface GetRoadmapsResponse {
+export interface GetRoadmapsResponseMy {
   success: boolean;
   message: string;
   result: UserRoadmapsResult;

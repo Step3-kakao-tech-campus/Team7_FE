@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
-import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import { useGetAlarms, useGetUser } from '@/api/hooks/user';
 import { usePatchAlarm } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
@@ -15,7 +14,6 @@ import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 const GNB = () => {
-  useGetRoadmaps();
   const { user, isLoading } = useGetUser();
   const { isNewAlarm, patchAlarmRequset } = useGetAlarms();
   const { patchAlarm } = usePatchAlarm();
