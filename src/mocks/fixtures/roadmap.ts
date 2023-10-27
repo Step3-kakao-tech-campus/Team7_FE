@@ -194,6 +194,14 @@ export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = 
         id: 2,
         link: 'https://nextjs.org/docs/getting-started/project-structure',
       },
+      {
+        id: 3,
+        link: 'https://nextjs.org/docs/getting-started/project-structure',
+      },
+      {
+        id: 4,
+        link: 'https://nextjs.org/docs/getting-started/project-structure',
+      },
     ],
   },
 };
