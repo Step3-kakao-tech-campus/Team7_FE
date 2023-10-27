@@ -5,6 +5,11 @@ export const Root = styled.div`
   position: sticky;
   top: 0;
   flex-shrink: 0;
+  background-color: #fff;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    top: 58px;
+  }
 `;
 
 export const Container = styled.div`
