@@ -67,8 +67,7 @@ export const StepList = styled.div`
   padding: 0 1rem;
   @media ${({ theme }) => theme.mediaQuery.md} {
     flex-shrink: 0;
-    height: 100%;
-    padding: 0 1rem 0 0;
+    padding: 0 6px 0 6px;
   }
 `;
 
