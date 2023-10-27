@@ -31,6 +31,7 @@ export const CloseButtonStyles = css`
   top: 4px;
   right: 4px;
   padding: 16px;
+  z-index: 100002;
 `;
 
 export const Header = styled.div`
