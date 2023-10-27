@@ -14,12 +14,12 @@ export const Root = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-  padding: 1rem 1rem 0 1rem;
+  padding: 16px 16px 0 16px;
   background-color: white;
   border-bottom: ${({ theme }) => theme.colors.gray_500} 1px solid;
 
   @media ${({ theme }) => theme.mediaQuery.md} {
-    padding: 0 1rem;
+    padding: 0 16px;
   }
 `;
 

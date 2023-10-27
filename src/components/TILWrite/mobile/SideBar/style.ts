@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Content = styled.div`
+export const Content = styled.div<{ referenceOpen: boolean }>`
   display: flex;
   position: fixed;
   top: 0;
@@ -12,7 +12,8 @@ export const Content = styled.div`
   background-color: #fff;
   width: 100%;
   height: 100dvh;
-  overflow-y: auto;
+  overflow-y: ${({ referenceOpen }) => (referenceOpen ? 'hidden' : 'scroll')};
+  overflow-x: hidden;
   animation: content-show 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
   @keyframes content-show {
@@ -37,7 +38,7 @@ export const CloseButtonStyles = css`
 export const Header = styled.div`
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   width: 100%;
@@ -72,7 +73,12 @@ export const StepList = styled.div`
 `;
 
 export const ReferenceContainer = styled(motion.div)`
-  flex-shrink: 0;
-  display: flex;
+  position: fixed;
+  top: 58px;
+  left: 0;
+  height: 100dvh;
+  width: 100vw;
   overflow-y: scroll;
+  padding-bottom: 20px;
+  background-color: #fff;
 `;
