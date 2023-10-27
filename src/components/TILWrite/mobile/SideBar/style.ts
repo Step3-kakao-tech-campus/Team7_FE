@@ -27,7 +27,7 @@ export const Content = styled.div`
 `;
 
 export const CloseButtonStyles = css`
-  position: absolute;
+  position: fixed;
   top: 4px;
   right: 4px;
   padding: 16px;
@@ -68,6 +68,7 @@ export const StepList = styled.div`
   @media ${({ theme }) => theme.mediaQuery.md} {
     flex-shrink: 0;
     height: 100%;
+    padding: 0 1rem 0 0;
   }
 `;
 
