@@ -233,6 +233,10 @@ export const Root = styled.div<{ isReadOnly?: boolean }>`
 
   .ck-content p {
     font-size: 1.2rem !important;
+
+    @media ${({ theme }) => theme.mediaQuery.md} {
+      font-size: 18px !important;
+    }
   }
 
   /* .ck.ck-editor__editable_inline > :first-child {
