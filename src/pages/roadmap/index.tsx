@@ -19,6 +19,7 @@ const RoadmapListPage = styled.main`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 900px;
+  max-width: 960px;
+  padding: 0 40px;
   margin: 3rem auto 0;
 `;

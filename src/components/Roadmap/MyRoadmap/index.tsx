@@ -2,11 +2,13 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { usePostRoadmapsGroupsParticipate } from '@/api/hooks/roadmap';
 import * as Style from '@/components/Roadmap/MyRoadmap/style';
+import TilyCard from '@/components/Roadmap/TilyCard';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Modal from '@/components/common/Modal';
 import { tilyLinks } from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
+import GroupCard from '../GroupCard';
 
 const MyRoadmap = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
@@ -26,6 +28,38 @@ const MyRoadmap = () => {
     const data = await postRoadmapsGroupsParticipate(formData.code);
 
     if (data.success) handleClose();
+  };
+
+  const setting = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 550,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -50,6 +84,17 @@ const MyRoadmap = () => {
           </Button>
         </Style.ButtonContainer>
       </Style.Header>
+      <Style.Slider {...setting}>
+        <TilyCard />
+        <TilyCard />
+        <GroupCard />
+        <GroupCard />
+        <TilyCard />
+        <TilyCard />
+        <GroupCard />
+        <GroupCard />
+      </Style.Slider>
+
       <Modal isOpen={isOpen} onClose={handleClose}>
         <Style.RoadmapCodeModal>
           <h3>로드맵에 참여해보세요.</h3>

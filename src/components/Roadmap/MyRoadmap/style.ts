@@ -1,3 +1,4 @@
+import SliderList from 'react-slick';
 import styled from '@emotion/styled';
 
 export const Header = styled.header`
@@ -14,6 +15,43 @@ export const ButtonContainer = styled.section`
     border-color: black;
     border-radius: 1.5rem;
     font-weight: 600;
+  }
+`;
+
+export const Slider = styled(SliderList)`
+  position: relative;
+  & > div {
+    overflow: hidden;
+  }
+
+  & > div > div {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+  }
+
+  & > button:nth-of-type(1) {
+    position: absolute;
+    top: 100px;
+    left: -35px;
+    width: 20px;
+    height: 30px;
+    background-image: url('/assets/icons/ic_chevronLeftBlack.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-size: 0;
+  }
+
+  & > button:nth-of-type(2) {
+    position: absolute;
+    bottom: 90px;
+    right: -30px;
+    width: 20px;
+    height: 30px;
+    background-image: url('/assets/icons/ic_chevronRightBlack.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-size: 0;
   }
 `;
 

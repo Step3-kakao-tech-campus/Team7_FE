@@ -8,6 +8,10 @@ const nextConfig = {
         hostname: 'avatars.githubusercontent.com',
       },
       {
+        protocol: 'https',
+        hostname: 'ppss.kr',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
       },
