@@ -1,8 +1,14 @@
 import Image from 'next/image';
+import type { Tily } from '@/api/type';
 import * as Style from '@/components/Roadmap/TilyCard/style';
 import Logo from '@/components/common/Logo';
 
-const TilyCard = () => {
+interface TilyCardProps {
+  roadmap: Tily;
+}
+
+const TilyCard = (props: TilyCardProps) => {
+  const { roadmap } = props;
   return (
     <Style.Root>
       <section>
@@ -14,10 +20,10 @@ const TilyCard = () => {
           style={{ width: '100%', height: 'auto' }}
           alt={'roadmapImg'}
         />
-        <h5>JAVA 입문 수업 - 생활 코딩</h5>
+        <h5>{roadmap.name}</h5>
       </section>
 
-      <p>81개 STEP</p>
+      <p>{roadmap.stepNum}개 STEP</p>
     </Style.Root>
   );
 };

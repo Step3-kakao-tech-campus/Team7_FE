@@ -40,6 +40,11 @@ export const useGetRoadmapsMy = () => {
   };
 };
 
+export const useGetRoadmapsMyList = () => {
+  const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmaps], () => getRoadmapsMy());
+  return { data: data?.result.roadmaps, isLoading: isLoading };
+};
+
 export const useGetRoadmapSteps = (roadmapId: number) => {
   const enabled = roadmapId !== 0;
 

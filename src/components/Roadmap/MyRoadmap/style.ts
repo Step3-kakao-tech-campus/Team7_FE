@@ -1,5 +1,6 @@
 import SliderList from 'react-slick';
 import styled from '@emotion/styled';
+import SkeletonBox from '@/components/common/Skeleton';
 
 export const Header = styled.header`
   display: flex;
@@ -71,4 +72,13 @@ export const RoadmapCodeForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+`;
+
+export const SkeletonRoot = styled.section`
+  display: flex;
+  gap: 10px;
+`;
+export const Skeleton = styled(SkeletonBox)`
+  width: 211px;
+  height: 250px;
 `;

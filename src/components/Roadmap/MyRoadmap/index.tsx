@@ -1,9 +1,10 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { usePostRoadmapsGroupsParticipate } from '@/api/hooks/roadmap';
+import { useGetRoadmapsMyList, usePostRoadmapsGroupsParticipate } from '@/api/hooks/roadmap';
 import * as Style from '@/components/Roadmap/MyRoadmap/style';
 import TilyCard from '@/components/Roadmap/TilyCard';
 import Button from '@/components/common/Button';
+import CustomSuspense from '@/components/common/CustomSuspense';
 import Input from '@/components/common/Input';
 import Modal from '@/components/common/Modal';
 import { tilyLinks } from '@/constants/links';
@@ -14,6 +15,8 @@ const MyRoadmap = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   const { postRoadmapsGroupsParticipate, isLoading } = usePostRoadmapsGroupsParticipate();
+
+  const { data, isLoading: isRoadmapLoading } = useGetRoadmapsMyList();
 
   const router = useRouter();
 
@@ -35,7 +38,7 @@ const MyRoadmap = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    initialSlide: 0,
+
     responsive: [
       {
         breakpoint: 1024,
@@ -49,7 +52,6 @@ const MyRoadmap = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2,
         },
       },
       {
@@ -84,16 +86,12 @@ const MyRoadmap = () => {
           </Button>
         </Style.ButtonContainer>
       </Style.Header>
-      <Style.Slider {...setting}>
-        <TilyCard />
-        <TilyCard />
-        <GroupCard />
-        <GroupCard />
-        <TilyCard />
-        <TilyCard />
-        <GroupCard />
-        <GroupCard />
-      </Style.Slider>
+      <CustomSuspense isLoading={isRoadmapLoading} fallback={<MyRoadmapSkeleton />}>
+        <Style.Slider {...setting}>
+          {data?.group.map((roadmap, idx) => <GroupCard key={idx} roadmap={roadmap} />)}
+          {data?.tily.map((roadmap) => <TilyCard key={roadmap.id} roadmap={roadmap} />)}
+        </Style.Slider>
+      </CustomSuspense>
 
       <Modal isOpen={isOpen} onClose={handleClose}>
         <Style.RoadmapCodeModal>
@@ -117,6 +115,17 @@ const MyRoadmap = () => {
         </Style.RoadmapCodeModal>
       </Modal>
     </>
+  );
+};
+
+const MyRoadmapSkeleton = () => {
+  return (
+    <Style.SkeletonRoot>
+      <Style.Skeleton />
+      <Style.Skeleton />
+      <Style.Skeleton />
+      <Style.Skeleton />
+    </Style.SkeletonRoot>
   );
 };
 
