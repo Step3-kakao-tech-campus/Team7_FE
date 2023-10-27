@@ -12,12 +12,20 @@ export const Container = styled.div`
   padding: 1rem 1rem 0 1rem;
   background-color: white;
   border-bottom: ${({ theme }) => theme.colors.gray_500} 1px solid;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 0 1rem;
+  }
 `;
 
 export const RoadMapContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding-right: 0.5rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    display: none;
+  }
 `;
 
 export const RoadMap = styled.h3`
@@ -28,7 +36,7 @@ export const RoadMap = styled.h3`
 export const Title = styled.h2`
   margin-top: 1rem;
   font-size: 1.125rem;
-  font-weight: 400;
+  font-weight: 600;
 `;
 
 export const ProgressSkeletonRoot = styled.div`
