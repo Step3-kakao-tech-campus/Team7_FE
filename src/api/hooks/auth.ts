@@ -3,6 +3,7 @@ import type { ChangePasswordFormInput } from '@/components/auth/change-password'
 import type { LoginFormInput } from '@/components/auth/login';
 import type { RegisterFormInput } from '@/components/auth/register';
 import type { EmailFormInput } from '@/components/auth/verify/ByEmail';
+import { useApiError } from '@/hooks/useApiError';
 import {
   postPasswordChange as postPasswordChangeAPI,
   postEmailCheck as postEmailCheckAPI,
@@ -63,8 +64,12 @@ export const usePostJoin = () => {
 export const usePostLogin = () => {
   const { mutateAsync, isLoading } = useMutation(postLoginAPI);
 
+  const { handleError } = useApiError();
+
   const postLogin = async (body: LoginFormInput) => {
-    const data = await mutateAsync(body);
+    const data = await mutateAsync(body, {
+      onError: handleError,
+    });
 
     return data;
   };
