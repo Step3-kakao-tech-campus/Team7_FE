@@ -45,6 +45,7 @@ export const Root = styled.div`
 
 export const Container = styled.main`
   display: flex;
+  height: 100%;
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     flex-direction: column;

@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Root = styled.section`
@@ -6,6 +5,11 @@ export const Root = styled.section`
   gap: 20px;
   grid-template-columns: repeat(2, auto);
   padding: 16px 0;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 0 16px 16px 16px;
+    grid-template-columns: 1fr;
+  }
 `;
 
 // TILSection.Empty;

@@ -1,16 +1,20 @@
 import { type PropsWithChildren, useContext, useEffect, useState } from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import { ResponsiveContext } from '@/components/common/Responsive/provider';
 import { emotionTheme } from '@/styles/emotion';
 
 interface ResponsiveProps {
   className?: string;
   device: Device;
+  asChild?: boolean;
 }
 
 type Device = 'mobile' | 'desktop';
 
 const Responsive = (props: PropsWithChildren<ResponsiveProps>) => {
-  const { className = '', children, device } = props;
+  const { className = '', children, device, asChild } = props;
+
+  const Comp = asChild ? Slot : 'div';
 
   const { mobileOnlyClassName, desktopOnlyClassName } = useContext(ResponsiveContext);
   const [current, setCurrent] = useState<Device | null>(null);
@@ -41,7 +45,7 @@ const Responsive = (props: PropsWithChildren<ResponsiveProps>) => {
   }, []);
 
   return current === null || device === current ? (
-    <div className={`${selectedClassName} ${className}`}>{children}</div>
+    <Comp className={`${selectedClassName} ${className}`}>{children}</Comp>
   ) : (
     <></>
   );

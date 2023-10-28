@@ -2,6 +2,7 @@ import Responsive from '@/components/common/Responsive';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import SideBar from '@/components/roadmap/manage/SideBar';
 import ManagePeopleTIL from '@/components/roadmap/manage/TIL/ManagePeopleTIL';
+import TabBar from '@/components/roadmap/manage/mobile/TabBar';
 import { Root, Container, LeftArea, RightArea, Header } from '@/pages/roadmap/[roadmapId]/manage/member';
 import { setLayout } from '@/utils/layout';
 
@@ -13,6 +14,10 @@ const TIL = () => {
           <LeftArea>
             <SideBar />
           </LeftArea>
+        </Responsive>
+
+        <Responsive device="mobile" asChild>
+          <TabBar />
         </Responsive>
 
         <RightArea>
