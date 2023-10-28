@@ -15,9 +15,15 @@ import {
 
 export const usePostEmailCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCheckAPI);
+  const { handleError } = useApiError();
 
   const postEmailCheck = async (email: string) => {
-    const data = await mutateAsync({ email: email });
+    const data = await mutateAsync(
+      { email: email },
+      {
+        onError: handleError,
+      },
+    );
 
     return data;
   };
@@ -28,8 +34,15 @@ export const usePostEmailCheck = () => {
 export const usePostEmailCode = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCodeAPI);
 
+  const { handleError } = useApiError();
+
   const postEmailCode = async (email: string) => {
-    const data = await mutateAsync({ email: email });
+    const data = await mutateAsync(
+      { email: email },
+      {
+        onError: handleError,
+      },
+    );
 
     return data;
   };
@@ -39,9 +52,12 @@ export const usePostEmailCode = () => {
 
 export const usePostEmailCodeCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCodeCheckAPI);
+  const { handleError } = useApiError();
 
   const postEmailCodeCheck = async (body: EmailFormInput) => {
-    const data = await mutateAsync(body);
+    const data = await mutateAsync(body, {
+      onError: handleError,
+    });
 
     return data;
   };
@@ -51,9 +67,12 @@ export const usePostEmailCodeCheck = () => {
 
 export const usePostJoin = () => {
   const { mutateAsync, isLoading } = useMutation(postJoinAPI);
+  const { handleError } = useApiError();
 
   const postJoin = async (body: RegisterFormInput) => {
-    const data = await mutateAsync(body);
+    const data = await mutateAsync(body, {
+      onError: handleError,
+    });
 
     return data;
   };
@@ -63,7 +82,6 @@ export const usePostJoin = () => {
 
 export const usePostLogin = () => {
   const { mutateAsync, isLoading } = useMutation(postLoginAPI);
-
   const { handleError } = useApiError();
 
   const postLogin = async (body: LoginFormInput) => {
@@ -79,9 +97,12 @@ export const usePostLogin = () => {
 
 export const usePostPasswordChange = () => {
   const { mutateAsync, isLoading } = useMutation(postPasswordChangeAPI);
+  const { handleError } = useApiError();
 
   const postPasswordChange = async (body: ChangePasswordFormInput) => {
-    const data = await mutateAsync(body);
+    const data = await mutateAsync(body, {
+      onError: handleError,
+    });
 
     return data;
   };
