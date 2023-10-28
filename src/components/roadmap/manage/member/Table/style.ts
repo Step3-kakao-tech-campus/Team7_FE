@@ -48,6 +48,10 @@ export const TableBody = styled.tbody`
     align-items: center;
     gap: 14px;
   }
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    font-size: 16px;
+  }
 `;
 
 export const ApplyTableHead = styled.thead`
