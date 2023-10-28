@@ -5,6 +5,10 @@ export const Root = styled.form`
   display: flex;
   justify-content: space-between;
   padding: 0 0 3rem 6.25rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 0;
+  }
 `;
 
 export const Title = styled.h2`
