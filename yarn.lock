@@ -3761,6 +3761,11 @@
   resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.4.1.tgz#bfd02c1f2224567676c1545199f87c3a861d878d"
   integrity sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==
 
+"@types/cookie@^0.5.1":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.5.3.tgz#3f98076ede5e467783507284d3c19215327fff8f"
+  integrity sha512-SLg07AS9z1Ab2LU+QxzU8RCmzsja80ywjf/t5oqw+4NSH20gIGlhLOrBDm1L3PBWzPa4+wkgFQVZAjE6Ioj2ug==
+
 "@types/cross-spawn@^6.0.2":
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/@types/cross-spawn/-/cross-spawn-6.0.3.tgz#c743cb2608f55860ee9776d8c99135d6032c763c"
@@ -3857,6 +3862,14 @@
   integrity sha512-MhzcwU8aUygZroVwL2jeYk6JisJrPl/oov/gsgGCue9mkgl9wjGbzReYQClxiUgFDnib9FuHqTndccKeZKxTRw==
   dependencies:
     "@types/node" "*"
+
+"@types/hoist-non-react-statics@^3.3.1":
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.4.tgz#cc477ce0283bb9d19ea0cbfa2941fe2c8493a1be"
+  integrity sha512-ZchYkbieA+7tnxwX/SCBySx9WwvWR8TaP5tb2jRAzwvLb/rWchGw3v0w3pqUbUvj0GCwW2Xz/AVPSk6kUGctXQ==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
 
 "@types/html-minifier-terser@^6.0.0":
   version "6.1.0"
@@ -5506,7 +5519,7 @@ cookie-signature@1.0.6:
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
   integrity sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==
 
-cookie@0.5.0:
+cookie@0.5.0, cookie@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
   integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
@@ -7408,7 +7421,7 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.3.1:
+hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -9586,6 +9599,15 @@ react-confetti@^6.1.0:
   dependencies:
     tween-functions "^1.2.0"
 
+react-cookie@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-6.1.1.tgz#af61c82ea7f41119d3cf8fd3534f8b6c0408f350"
+  integrity sha512-fuFRpf8LH6SfmVMowDUIRywJF5jAUDUWrm0EI5VdXfTl5bPcJ7B0zWbuYpT0Tvikx7Gs18MlvAT+P+744dUz2g==
+  dependencies:
+    "@types/hoist-non-react-statics" "^3.3.1"
+    hoist-non-react-statics "^3.3.2"
+    universal-cookie "^6.0.0"
+
 react-datepicker@^4.18.0:
   version "4.18.0"
   resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.18.0.tgz#d66301acc47833d31fa6f46f98781b084106da0e"
@@ -11034,6 +11056,14 @@ unist-util-visit@^2.0.0:
     "@types/unist" "^2.0.0"
     unist-util-is "^4.0.0"
     unist-util-visit-parents "^3.0.0"
+
+universal-cookie@^6.0.0:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-6.1.1.tgz#2d619e21804c93b39ff0c77fe47dafd7a492346d"
+  integrity sha512-33S9x3CpdUnnjwTNs2Fgc41WGve2tdLtvaK2kPSbZRc5pGpz2vQFbRWMxlATsxNNe/Cy8SzmnmbuBM85jpZPtA==
+  dependencies:
+    "@types/cookie" "^0.5.1"
+    cookie "^0.5.0"
 
 universalify@^2.0.0:
   version "2.0.0"
