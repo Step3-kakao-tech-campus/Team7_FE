@@ -1,3 +1,4 @@
+import Responsive from '@/components/common/Responsive';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import SideBar from '@/components/roadmap/manage/SideBar';
 import ManagePeopleTIL from '@/components/roadmap/manage/TIL/ManagePeopleTIL';
@@ -8,9 +9,11 @@ const TIL = () => {
   return (
     <Root>
       <Container>
-        <LeftArea>
-          <SideBar />
-        </LeftArea>
+        <Responsive device="desktop">
+          <LeftArea>
+            <SideBar />
+          </LeftArea>
+        </Responsive>
 
         <RightArea>
           <Header>TIL 모아보기</Header>

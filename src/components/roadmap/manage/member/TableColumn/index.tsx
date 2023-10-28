@@ -66,6 +66,8 @@ const TableColumn = (props: TableColumnProps) => {
                 onChangeOption={(option) => setSelectedOption(option)}
                 callbackFunction={handleChangeRole}
                 options={selectOptionItems}
+                css={Styled.SelectStyles}
+                imageSize={12}
               />
             )}
           </td>

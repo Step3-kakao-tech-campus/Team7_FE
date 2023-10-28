@@ -31,7 +31,15 @@ export const NavItem = styled(Link)<{ active?: number }>`
     background-color: ${({ theme }) => theme.colors.gray_200};
   }
 
-  @media ${({ theme }) => theme.mediaQuery.xs} {
+  @media ${({ theme }) => theme.mediaQuery.sm} {
     font-size: 16px;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    font-size: 14px;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xxs} {
+    font-size: 12px;
   }
 `;

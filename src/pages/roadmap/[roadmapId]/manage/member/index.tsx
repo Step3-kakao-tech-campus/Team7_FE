@@ -1,16 +1,24 @@
 import styled from '@emotion/styled';
+import Responsive from '@/components/common/Responsive';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import SideBar from '@/components/roadmap/manage/SideBar';
 import Table from '@/components/roadmap/manage/member/Table';
+import TabBar from '@/components/roadmap/manage/mobile/TabBar';
 import { setLayout } from '@/utils/layout';
 
 const Member = () => {
   return (
     <Root>
       <Container>
-        <LeftArea>
-          <SideBar />
-        </LeftArea>
+        <Responsive device="desktop">
+          <LeftArea>
+            <SideBar />
+          </LeftArea>
+        </Responsive>
+
+        <Responsive device="mobile">
+          <TabBar />
+        </Responsive>
 
         <RightArea>
           <Header>구성원 관리</Header>
@@ -29,10 +37,18 @@ export const Root = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 2rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 0;
+  }
 `;
 
 export const Container = styled.main`
   display: flex;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    flex-direction: column;
+  }
 `;
 
 export const LeftArea = styled.aside`
@@ -47,8 +63,26 @@ export const LeftArea = styled.aside`
 export const RightArea = styled.main`
   padding: 2.5rem 6.25rem 5rem 6.25rem;
   flex: 1;
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    padding: 20px 48px;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    padding: 0;
+  }
 `;
 
 export const Header = styled.h1`
   margin-bottom: 1rem;
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    width: 100%;
+    justify-content: space-between;
+    padding: 8px;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    display: none;
+  }
 `;

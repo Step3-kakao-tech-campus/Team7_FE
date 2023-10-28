@@ -9,6 +9,11 @@ export const ButtonStyles = (theme: EmotionTheme) => css`
   @media ${theme.mediaQuery.md} {
     font-size: 14px;
   }
+
+  @media ${theme.mediaQuery.xs} {
+    font-size: 12px;
+    padding: 8px;
+  }
 `;
 
 export const RenderUserRole = styled.div`
@@ -19,4 +24,15 @@ export const RenderUserRole = styled.div`
   font-weight: 600;
   font-size: 1rem;
   border-radius: 6px;
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    width: 120px;
+    font-size: 14px;
+  }
+`;
+
+export const SelectStyles = (theme: EmotionTheme) => css`
+  @media ${theme.mediaQuery.xs} {
+    width: 120px;
+  }
 `;

@@ -41,6 +41,10 @@ export const TableBody = styled.tbody`
 
   & > tr > td {
     padding: 1rem 0;
+
+    @media ${({ theme }) => theme.mediaQuery.xs} {
+      padding: 16px 4px;
+    }
   }
 
   & > tr > td:first-of-type {
@@ -51,6 +55,10 @@ export const TableBody = styled.tbody`
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     font-size: 16px;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    font-size: 14px;
   }
 `;
 
@@ -72,10 +80,18 @@ export const ApplyTableHead = styled.thead`
   & > tr > th:nth-of-type(2) {
     text-align: start;
     width: 10rem;
+
+    @media ${({ theme }) => theme.mediaQuery.md} {
+      width: 7rem;
+    }
   }
 
   & > tr > th:nth-of-type(3) {
     text-align: start;
     width: 7rem;
+
+    @media ${({ theme }) => theme.mediaQuery.sm} {
+      width: 5rem;
+    }
   }
 `;
