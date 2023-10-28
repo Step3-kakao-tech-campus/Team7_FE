@@ -80,5 +80,5 @@ export const SkeletonRoot = styled.section`
 `;
 export const Skeleton = styled(SkeletonBox)`
   width: 211px;
-  height: 250px;
+  height: 230px;
 `;
