@@ -4,7 +4,7 @@ import type { LoginFormInput } from '@/components/auth/login';
 import type { RegisterFormInput } from '@/components/auth/register';
 import type { EmailFormInput } from '@/components/auth/verify/ByEmail';
 import {
-  patchPasswordChange as patchPasswordChangeAPI,
+  postPasswordChange as postPasswordChangeAPI,
   postEmailCheck as postEmailCheckAPI,
   postEmailCode as postEmailCodeAPI,
   postEmailCodeCheck as postEmailCodeCheckAPI,
@@ -72,14 +72,14 @@ export const usePostLogin = () => {
   return { postLogin, isLoading };
 };
 
-export const usePatchPasswordChange = () => {
-  const { mutateAsync, isLoading } = useMutation(patchPasswordChangeAPI);
+export const usePostPasswordChange = () => {
+  const { mutateAsync, isLoading } = useMutation(postPasswordChangeAPI);
 
-  const patchPasswordChange = async (body: ChangePasswordFormInput) => {
+  const postPasswordChange = async (body: ChangePasswordFormInput) => {
     const data = await mutateAsync(body);
 
     return data;
   };
 
-  return { patchPasswordChange, isLoading };
+  return { postPasswordChange, isLoading };
 };

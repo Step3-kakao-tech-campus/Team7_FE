@@ -64,9 +64,9 @@ export const postLogin = async ({ email, password }: LoginRequest) => {
   return data;
 };
 
-export const patchPasswordChange = async ({ email, password }: PasswordChangeRequest) => {
+export const postPasswordChange = async ({ email, password }: PasswordChangeRequest) => {
   const { data } = await axiosInstance.request<PasswordChangeResponse>({
-    method: 'PATCH',
+    method: 'POST',
     url: '/password/change',
     data: { email, password },
   });
