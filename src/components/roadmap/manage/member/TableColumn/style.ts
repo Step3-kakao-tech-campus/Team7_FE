@@ -1,9 +1,14 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import type { EmotionTheme } from '@/styles/emotion';
 
-export const ButtonStyles = () => css`
+export const ButtonStyles = (theme: EmotionTheme) => css`
   padding: 0.65rem 0.9rem;
   font-weight: 600;
+
+  @media ${theme.mediaQuery.md} {
+    font-size: 14px;
+  }
 `;
 
 export const RenderUserRole = styled.div`
