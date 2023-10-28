@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import MyRoadmap from '@/components/Roadmap/MyRoadmap';
+import RecruitRoadmap from '@/components/Roadmap/RoadmapList';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import { setLayout } from '@/utils/layout';
 
@@ -7,6 +8,7 @@ const RoadmapList = () => {
   return (
     <RoadmapListPage>
       <MyRoadmap />
+      <RecruitRoadmap />
     </RoadmapListPage>
   );
 };
