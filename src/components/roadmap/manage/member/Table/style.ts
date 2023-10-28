@@ -28,6 +28,10 @@ export const TableHead = styled.thead`
   & > tr > th:nth-of-type(3) {
     text-align: start;
     width: 3.75rem;
+
+    @media ${({ theme }) => theme.mediaQuery.xs} {
+      padding-left: 4px;
+    }
   }
 `;
 

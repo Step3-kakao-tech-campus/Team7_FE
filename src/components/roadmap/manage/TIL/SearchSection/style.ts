@@ -8,7 +8,7 @@ export const SearchSection = styled.section`
   background-color: #fff;
   @media ${({ theme }) => theme.mediaQuery.md} {
     position: sticky;
-    top: 127px;
+    top: 125px;
     padding-bottom: 16px;
   }
 `;
