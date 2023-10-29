@@ -8,43 +8,52 @@ import Flex from '@/components/common/Flex';
 import Skeleton from '@/components/common/Skeleton';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import CategorySection from '@/components/main/CategorySection';
+import Guest from '@/components/main/Guest';
 import History from '@/components/main/History';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
+import useAuth from '@/hooks/useAuth';
 import { setLayout } from '@/utils/layout';
 
 const Home = () => {
   const { user, isLoading: userIsLoading } = useGetUser();
+  const { isLoggedIn } = useAuth();
 
   return (
     <>
-      <Root>
-        <Inner>
-          <LeftArea>
-            <CustomSuspense isLoading={userIsLoading} fallback={<Skeleton type="circle" css={ProfileSkeletonStyles} />}>
-              {user?.image ? (
-                <Avatar imageUrl={user?.image} imageSize={240} alt="프로필 이미지" />
-              ) : (
-                <Avatar imageSize={240} iconName="ic_profile" alt="프로필 이미지" />
-              )}
-            </CustomSuspense>
-            <SearchBar />
-            <CategorySection />
-          </LeftArea>
+      {isLoggedIn ? (
+        <Root>
+          <Inner>
+            <LeftArea>
+              <CustomSuspense
+                isLoading={userIsLoading}
+                fallback={<Skeleton type="circle" css={ProfileSkeletonStyles} />}>
+                {user?.image ? (
+                  <Avatar imageUrl={user?.image} imageSize={240} alt="프로필 이미지" />
+                ) : (
+                  <Avatar imageSize={240} iconName="ic_profile" alt="프로필 이미지" />
+                )}
+              </CustomSuspense>
+              <SearchBar />
+              <CategorySection />
+            </LeftArea>
 
-          <RightArea>
-            <History />
-            <FallbackErrorBoundary fallbackRender={TILSection.Fallback}>
-              <TILSection />
-            </FallbackErrorBoundary>
-          </RightArea>
-        </Inner>
-      </Root>
+            <RightArea>
+              <History />
+              <FallbackErrorBoundary fallbackRender={TILSection.Fallback}>
+                <TILSection />
+              </FallbackErrorBoundary>
+            </RightArea>
+          </Inner>
+        </Root>
+      ) : (
+        <Guest />
+      )}
     </>
   );
 };
 
-setLayout(Home, HeaderLayout, true);
+setLayout(Home, HeaderLayout, false);
 
 export default Home;
 
