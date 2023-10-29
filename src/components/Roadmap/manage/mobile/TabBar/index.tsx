@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 
-const SideBar = () => {
+const TabBar = () => {
   const router = useRouter();
 
   const activePathMatcher = (path: string) => router.pathname.split('/')[4] === path.split('/')[4];
@@ -33,4 +33,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default TabBar;

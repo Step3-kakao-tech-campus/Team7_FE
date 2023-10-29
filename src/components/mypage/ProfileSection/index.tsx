@@ -1,4 +1,5 @@
 import { useGetUser } from '@/api/hooks/user';
+import Responsive from '@/components/common/Responsive';
 import ImageUploader from '@/components/mypage/ProfileSection/ImageUploader';
 import * as Styled from './style';
 
@@ -7,7 +8,14 @@ const ProfileSection = () => {
 
   return (
     <Styled.Root>
-      <ImageUploader imageUrl={user?.image} />
+      <Responsive device="desktop">
+        <ImageUploader imageUrl={user?.image} imgSize={160} />
+      </Responsive>
+
+      <Responsive device="mobile">
+        <ImageUploader imageUrl={user?.image} imgSize={100} />
+      </Responsive>
+
       <Styled.UserInfo>
         <Styled.Name>{user?.name}</Styled.Name>
         <Styled.Honorific>님</Styled.Honorific>
