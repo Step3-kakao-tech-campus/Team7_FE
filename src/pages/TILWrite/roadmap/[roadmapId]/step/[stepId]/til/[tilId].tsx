@@ -72,7 +72,7 @@ const TILWrite = () => {
 
   return (
     <Root>
-      <Header handleOpenCommentAside={handleOpenComment} />
+      <Header TILContent={TILContent} handleOpenCommentAside={handleOpenComment} />
       <Container>
         {tilDetail?.isPersonal === false ? (
           <EditorContainer
