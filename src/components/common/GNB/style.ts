@@ -106,7 +106,6 @@ export const TILInfo = styled.div`
   background-color: ${({ theme }) => theme.colors.gray_200};
   padding: 1.125rem;
   border-radius: 1rem;
-  margin-right: 1rem;
 
   & > span:nth-of-type(2) {
     color: ${({ theme }) => theme.colors.rose};
