@@ -22,7 +22,7 @@ import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/road
 export const getRoadmapsMy = async () => {
   const { data } = await axiosInstance.request<GetRoadmapsMyResponse>({
     method: 'GET',
-    url: `/roadmaps/my/`,
+    url: `/roadmaps/my`,
   });
 
   return data;

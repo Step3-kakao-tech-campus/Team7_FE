@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import { useGetAlarms, useGetUser } from '@/api/hooks/user';
 import { usePatchAlarm } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
@@ -20,7 +21,7 @@ import * as Styled from './style';
 const GNB = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  useGetRoadmaps();
+  useGetRoadmapsMy();
   const { isLoggedIn } = useAuth();
   const { user, isLoading } = useGetUser();
   const { isNewAlarm, patchAlarmRequset } = useGetAlarms();

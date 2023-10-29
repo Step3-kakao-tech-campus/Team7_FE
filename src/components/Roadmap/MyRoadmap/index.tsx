@@ -88,8 +88,8 @@ const MyRoadmap = () => {
       </Style.Header>
       <CustomSuspense isLoading={isRoadmapLoading} fallback={<MyRoadmapSkeleton />}>
         <Style.Slider {...setting}>
-          {data?.group.map((roadmap, idx) => <GroupCard key={idx} roadmap={roadmap} />)}
-          {data?.tily.map((roadmap) => <TilyCard key={roadmap.id} roadmap={roadmap} />)}
+          {/* {data?.group.map((roadmap, idx) => <GroupCard key={idx} roadmap={roadmap} />)}
+          {data?.tily.map((roadmap) => <TilyCard key={roadmap.id} roadmap={roadmap} />)} */}
         </Style.Slider>
       </CustomSuspense>
 
