@@ -9,6 +9,7 @@ import CustomSuspense from '@/components/common/CustomSuspense';
 import Alarm from '@/components/common/GNB/Alarm';
 import TILModal from '@/components/common/GNB/TILModal';
 import Logo from '@/components/common/Logo';
+import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
 import { tilyLinks } from '@/constants/links';
 import useAuth from '@/hooks/useAuth';
@@ -59,9 +60,17 @@ const GNB = () => {
       <Styled.Root isLoggedIn={isLoggedIn} isScrolled={isScrolled}>
         <Styled.Inner>
           <button onClick={() => router.push(tilyLinks.home())}>
-            <Styled.Logo>
-              <Logo imageSize={32} />
-            </Styled.Logo>
+            <Responsive device="mobile">
+              <Styled.Logo>
+                <Logo imageSize={16} />
+              </Styled.Logo>
+            </Responsive>
+
+            <Responsive device="desktop">
+              <Styled.Logo>
+                <Logo imageSize={32} />
+              </Styled.Logo>
+            </Responsive>
           </button>
 
           <Styled.NavArea>
