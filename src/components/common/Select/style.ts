@@ -23,6 +23,10 @@ export const Select = styled(IconButton)<{ isOpen: boolean }>`
       border-radius: 6px 6px 0 0;
     `}
   `}
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    font-size: 14px;
+  }
 `;
 
 export const SelectMenu = styled.ul<{ isOpen: boolean }>`
@@ -57,5 +61,10 @@ export const SelectOption = styled.button`
   cursor: pointer;
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_200};
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    font-size: 14px;
+    padding: 0.6rem 0.5rem;
   }
 `;

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const Root = styled.div`
   padding: 1rem;
+  background-color: #fff;
 `;
 
 export const Reference = styled.div`

@@ -12,6 +12,11 @@ export const InputContainerStyles = (theme: EmotionTheme) => css`
   border-radius: 20px;
   padding: 0.75rem 0.8rem;
   margin-top: 2.125rem;
+
+  @media ${theme.mediaQuery.md} {
+    margin-top: 20px;
+    width: 100%;
+  }
 `;
 
 export const InputStyles = (theme: EmotionTheme) => css`

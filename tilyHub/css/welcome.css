@@ -1,0 +1,110 @@
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts//Pretendard-ExtraBold.subset.woff2') format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Bold.subset.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-SemiBold.subset.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Medium.subset.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/Pretendard-Regular.subset.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+input:focus {
+  border: 1px solid #0f172a !important;
+}
+
+select:focus {
+  border: 1px solid #0f172a !important;
+}
+
+body {
+  background-color: #ffffff;
+  padding: 10px;
+  text-align: center;
+  transition: background-color 0.75s ease;
+  font-family: 'Pretendard', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+  color: black;
+}
+
+#title {
+  font-family: 'Pretendard', 'Norwester', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+  font-size: 5em;
+  font-weight: bold;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.caption {
+  font-family: 'Pretendard', 'Norwester', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+  font-size: 1.5em;
+  font-weight: bold !important;
+  margin-top: 3px !important;
+  margin-bottom: 0px;
+}
+
+.subCaption {
+  font-family: 'Pretendard', 'Norwester', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+  font-size: 1.375em;
+  font-weight: medium !important;
+  margin-top: 3px !important;
+  margin-bottom: 0px;
+}
+
+#error {
+  font-family: 'Pretendard', 'Norwester', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+  font-weight: normal !important;
+  color: red !important;
+  margin-bottom: 0px;
+}
+
+#success {
+  font-family: 'Pretendard', 'Norwester', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+  font-size: 1.1em;
+  font-weight: normal !important;
+  color: green !important;
+  margin-bottom: 0px;
+}
+
+#unlink {
+  font-family: 'Pretendard', 'Norwester', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+  font-size: 1.1em;
+  font-weight: normal !important;
+  color: green !important;
+  margin-bottom: 0px;
+}
+
+p {
+  color: black !important;
+}
+.onboarding {
+  font-family: 'Pretendard', sans-serif;
+  border-top: solid black 1px;
+  font-weight: 500;
+  font-size: medium;
+}
+
+a {
+  color: black !important;
+  cursor: pointer;
+}

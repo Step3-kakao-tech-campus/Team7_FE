@@ -3,12 +3,26 @@ import styled from '@emotion/styled';
 
 export const Root = styled.div``;
 
-export const Container = styled.div`
+export const Wrapper = styled.div`
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    border: 1px solid ${({ theme }) => theme.colors.gray_500};
+    border-radius: 6px;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+`;
+
+export const CalendarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1000px;
+  width: 100%;
   height: 200px;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    min-width: 1000px;
+  }
 `;
 
 export const SkeletonStyles = css`

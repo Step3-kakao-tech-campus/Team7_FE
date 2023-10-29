@@ -1,15 +1,28 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import ByEmail from '@/components/auth/verify/ByEmail';
 import Logo from '@/components/common/Logo';
+import Responsive from '@/components/common/Responsive';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { tilyLinks } from '@/constants/links';
 import { setLayout } from '@/utils/layout';
 
 export const RegisterVerifyPage = () => {
+  const router = useRouter();
+
   return (
     <StyledVerifyPage>
-      <Logo />
+      <Responsive device="desktop">
+        <button onClick={() => router.push(tilyLinks.login())}>
+          <Logo />
+        </button>
+      </Responsive>
+      <Responsive device="mobile">
+        <button onClick={() => router.push(tilyLinks.login())}>
+          <Logo imageSize={42} />
+        </button>
+      </Responsive>
       <ByEmail type="register" />
       <StyledLoginButton href={tilyLinks.login()}>이미 계정이 있나요? 로그인하기</StyledLoginButton>
     </StyledVerifyPage>
@@ -27,7 +40,12 @@ const StyledVerifyPage = styled.div`
   justify-content: center;
   height: 100%;
   margin: 0 auto;
+  padding: 0 30px;
   max-width: 400px;
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    height: 100dvh;
+  }
 `;
 
 const StyledLoginButton = styled(Link)`

@@ -3,11 +3,12 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import { usePatchPasswordChange } from '@/api/hooks/auth';
+import { usePostPasswordChange } from '@/api/hooks/auth';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
+import Responsive from '@/components/common/Responsive';
 import { tilyLinks } from '@/constants/links';
 import { PASSWORD_REGEX } from '@/constants/regex';
 import { useModalState } from '@/hooks/useModalState';
@@ -20,7 +21,7 @@ export interface ChangePasswordFormInput {
 }
 
 const ChangePassword = () => {
-  const { patchPasswordChange, isLoading } = usePatchPasswordChange();
+  const { postPasswordChange, isLoading } = usePostPasswordChange();
   const { isOpen, handleOpen, handleClose } = useModalState();
   const router = useRouter();
   const {
@@ -39,7 +40,7 @@ const ChangePassword = () => {
   });
 
   const onSubmit: SubmitHandler<ChangePasswordFormInput> = async (formData) => {
-    const data = await patchPasswordChange(formData);
+    const data = await postPasswordChange(formData);
     if (data?.code === 200) {
       handleOpen();
     } else {
@@ -60,7 +61,16 @@ const ChangePassword = () => {
   return (
     <>
       <StyledFlex dir="col" align="center" gap={2}>
-        <Logo />
+        <Responsive device="desktop">
+          <button onClick={() => router.push(tilyLinks.login())}>
+            <Logo />
+          </button>
+        </Responsive>
+        <Responsive device="mobile">
+          <button onClick={() => router.push(tilyLinks.login())}>
+            <Logo imageSize={42} />
+          </button>
+        </Responsive>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="password"
@@ -80,6 +90,9 @@ const ChangePassword = () => {
                 message={errors.password?.message}
                 status={errors.password ? 'error' : 'default'}
                 {...field}
+                onBlur={() => {
+                  scrollTo(0, 0);
+                }}
               />
             )}
           />
@@ -97,6 +110,9 @@ const ChangePassword = () => {
                 message={errors.passwordConfirm?.message}
                 status={errors.passwordConfirm ? 'error' : 'default'}
                 {...field}
+                onBlur={() => {
+                  scrollTo(0, 0);
+                }}
               />
             )}
           />

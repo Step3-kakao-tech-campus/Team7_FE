@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic';
 import Comment from '@/components/TILView/Comments';
 import Footer from '@/components/TILView/Footer';
 import Header from '@/components/TILView/Header';
+import MobileHeader from '@/components/TILView/mobile/MobileHeader';
+import Responsive from '@/components/common/Responsive';
 import EmptyLayout from '@/components/layout/EmptyLayout';
 import { useDrawerState } from '@/hooks/useDrawerState';
 import {
@@ -35,7 +37,13 @@ const TILView = () => {
 
   return (
     <Root>
-      <Header handleOpenCommentAside={handleOpenAside} />
+      <Responsive device="desktop">
+        <Header handleOpenCommentAside={handleOpenAside} />
+      </Responsive>
+      <Responsive device="mobile">
+        <MobileHeader />
+      </Responsive>
+
       <Container>
         <EditorContainer
           initial="asideOpen"

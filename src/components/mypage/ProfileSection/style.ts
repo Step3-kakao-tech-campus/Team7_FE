@@ -4,6 +4,10 @@ import styled from '@emotion/styled';
 export const Root = styled.form`
   display: flex;
   margin-top: 2rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    justify-content: center;
+  }
 `;
 
 export const UserInfo = styled.div`

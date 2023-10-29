@@ -60,7 +60,7 @@ export interface LoginResponse {
   success: boolean;
   code: number;
   message: string;
-  result: { token: string } | null;
+  result: { accessToken: string } | null;
 }
 
 export interface PasswordChangeResponse {

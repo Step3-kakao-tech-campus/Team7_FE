@@ -8,6 +8,11 @@ export const Root = styled(Card)`
 
   padding: 1.25rem;
   cursor: pointer;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const Badge = styled.div`

@@ -1,6 +1,8 @@
 import { useState, type PropsWithChildren, useRef } from 'react';
 import Image from 'next/image';
+import { SerializedStyles } from '@emotion/react';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
+import { EmotionTheme } from '@/styles/emotion';
 import * as Styled from './style';
 
 export interface SelectOption {
@@ -11,13 +13,14 @@ export interface SelectOption {
 export interface SelectProps {
   className?: string;
   selectedOption?: SelectOption;
+  imageSize?: number;
+  options: SelectOption[];
   onChangeOption?: (option: SelectOption) => void;
   callbackFunction?: (option: SelectOption) => void;
-  options: SelectOption[];
 }
 
 const Select = (props: SelectProps) => {
-  const { className, options, selectedOption, callbackFunction, onChangeOption } = props;
+  const { className, options, selectedOption, imageSize = 14, callbackFunction, onChangeOption } = props;
 
   const [isOpen, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -38,7 +41,12 @@ const Select = (props: SelectProps) => {
 
   return (
     <Styled.SelectContainer className={className} ref={containerRef}>
-      <Styled.Select onClick={toggleOpen} isOpen={isOpen} imageSize={14} iconName="ic_chevronDown" iconPosition="right">
+      <Styled.Select
+        onClick={toggleOpen}
+        isOpen={isOpen}
+        imageSize={imageSize}
+        iconName="ic_chevronDown"
+        iconPosition="right">
         {selectedOption?.label}
       </Styled.Select>
       <Styled.SelectMenu isOpen={isOpen}>
@@ -47,6 +55,7 @@ const Select = (props: SelectProps) => {
             <SelectOption
               isChecked={option.value === selectedOption?.value}
               key={option.value}
+              imageSize={imageSize}
               onClick={() => handleClickOption(option)}>
               {option.label}
             </SelectOption>
@@ -61,15 +70,16 @@ export default Select;
 
 interface SelectOptionProps extends React.HTMLAttributes<HTMLButtonElement> {
   isChecked?: boolean;
+  imageSize?: number;
 }
 
 const SelectOption = (props: PropsWithChildren<SelectOptionProps>) => {
-  const { children, isChecked = false, ...rest } = props;
+  const { children, isChecked = false, imageSize = 14, ...rest } = props;
 
   return (
     <Styled.SelectOption {...rest}>
       {children}
-      {isChecked && <Image src={`/assets/icons/ic_check.svg`} alt="icon" width={14} height={14} />}
+      {isChecked && <Image src={`/assets/icons/ic_check.svg`} alt="icon" width={imageSize} height={imageSize} />}
     </Styled.SelectOption>
   );
 };

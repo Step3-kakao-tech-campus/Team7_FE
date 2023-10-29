@@ -124,6 +124,7 @@ input,
 label,
 select {
   background-color: transparent;
+  color: #0f172a;
 }
 
 a {

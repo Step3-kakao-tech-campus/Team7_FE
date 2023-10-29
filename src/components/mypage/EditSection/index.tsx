@@ -65,6 +65,7 @@ const EditSection = () => {
           render={({ field }) => (
             <Input
               css={Styled.InputContainerStyles}
+              inputStyles={Styled.InputStyles}
               type="password"
               placeholder="현재 비밀번호"
               message={errors.password?.message}

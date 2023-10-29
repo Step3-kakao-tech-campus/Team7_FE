@@ -6,11 +6,19 @@ export const Root = styled.div`
   flex-direction: column;
 
   height: 100%;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding-top: 1rem;
+  }
 `;
 
 export const HeaderContainer = styled.div`
   flex-shrink: 0;
   padding: 1rem 1rem 0 1rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    display: none;
+  }
 `;
 
 export const CommentContainer = styled.div`

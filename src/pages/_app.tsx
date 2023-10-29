@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from '@tans
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from '@emotion/react';
 import GlobalErrorBoundary from '@/components/common/GlobalErrorBoundary';
+import ResponsiveProvider from '@/components/common/Responsive/provider';
 import ToastProvider from '@/components/common/Toast/provider';
 import { emotionTheme } from '@/styles/emotion';
 import '@/styles/globals.css';
@@ -30,7 +31,6 @@ const queryClient = new QueryClient({
     queries: {
       networkMode: 'always',
       refetchOnWindowFocus: false,
-      useErrorBoundary: true,
       retry: 0,
     },
     mutations: {
@@ -46,21 +46,23 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <ThemeProvider theme={emotionTheme}>
-          <ToastProvider>
-            <QueryErrorResetBoundary>
-              {({ reset }) => (
-                <ErrorBoundary
-                  onReset={reset}
-                  fallbackRender={({ error, resetErrorBoundary }) => {
-                    return <GlobalErrorBoundary error={error} resetErrorBoundary={resetErrorBoundary} />;
-                  }}>
-                  <Layout>
-                    <Component {...pageProps} />
-                  </Layout>
-                </ErrorBoundary>
-              )}
-            </QueryErrorResetBoundary>
-          </ToastProvider>
+          <ResponsiveProvider>
+            <ToastProvider>
+              <QueryErrorResetBoundary>
+                {({ reset }) => (
+                  <ErrorBoundary
+                    onReset={reset}
+                    fallbackRender={({ error, resetErrorBoundary }) => {
+                      return <GlobalErrorBoundary error={error} resetErrorBoundary={resetErrorBoundary} />;
+                    }}>
+                    <Layout>
+                      <Component {...pageProps} />
+                    </Layout>
+                  </ErrorBoundary>
+                )}
+              </QueryErrorResetBoundary>
+            </ToastProvider>
+          </ResponsiveProvider>
         </ThemeProvider>
       </RecoilRoot>
       <ReactQueryDevtools initialIsOpen={false} />

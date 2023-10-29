@@ -4,10 +4,11 @@ import * as Styled from './style';
 
 interface ImageUploaderProps {
   imageUrl?: string;
+  imgSize?: number;
 }
 
 const ImageUploader = (props: ImageUploaderProps) => {
-  const { imageUrl } = props;
+  const { imageUrl, imgSize = 160 } = props;
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -23,7 +24,7 @@ const ImageUploader = (props: ImageUploaderProps) => {
   return (
     <Styled.Root onClick={handleClick}>
       <Styled.ImageInput type="file" accept="image/*" ref={inputRef} />
-      <Avatar imageUrl={imageUrl} alt="프로필 이미지" imageSize={160} />
+      <Avatar imageUrl={imageUrl} alt="프로필 이미지" imageSize={imgSize} />
     </Styled.Root>
   );
 };
