@@ -1,3 +1,4 @@
+import type { MouseEventHandler } from 'react';
 import Image from 'next/image';
 import * as Styled from './style';
 
@@ -7,7 +8,7 @@ interface IconProps {
   iconName: string;
   ext: 'png' | 'svg';
   alt: string;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const Icon = (props: IconProps) => {

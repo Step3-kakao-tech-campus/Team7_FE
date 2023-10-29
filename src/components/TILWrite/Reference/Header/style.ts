@@ -12,6 +12,12 @@ export const TitleContainer = styled.button`
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+
+  & > div {
+    @media ${({ theme }) => theme.mediaQuery.md} {
+      display: none;
+    }
+  }
 `;
 
 export const Title = styled.h3`

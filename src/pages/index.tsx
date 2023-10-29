@@ -117,6 +117,8 @@ export const ProfileSkeletonStyles = css`
 // 모바일
 
 const UserName = styled.div`
+  display: flex;
+  align-items: center;
   & > span:first-of-type {
     font-size: 20px;
     font-weight: 700;

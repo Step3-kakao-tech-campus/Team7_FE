@@ -1,3 +1,4 @@
+import type { MouseEventHandler } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { usePostTil } from '@/api/hooks/til';
@@ -11,17 +12,19 @@ interface StepProps {
   isCompleted: boolean;
   tilId: number | null;
   handleOpenReferenceAside: () => void;
+  handleMobileSideBar?: () => void;
 }
 
 const Step = (props: StepProps) => {
-  const { stepId, title, isCompleted, tilId, handleOpenReferenceAside } = props;
+  const { stepId, title, isCompleted, tilId, handleOpenReferenceAside, handleMobileSideBar } = props;
 
   const router = useRouter();
   const { postTil } = usePostTil();
 
   const isActiveStep = stepId === Number(router.query.stepId);
 
-  const handleSelectReference = () => {
+  const handleSelectReference: MouseEventHandler = (e) => {
+    e.stopPropagation();
     handleOpenReferenceAside();
   };
 
@@ -36,6 +39,8 @@ const Step = (props: StepProps) => {
     } else {
       router.push(tilyLinks.tilWrite({ roadmapId, stepId, tilId }));
     }
+
+    handleMobileSideBar?.();
   };
 
   return (

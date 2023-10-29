@@ -6,6 +6,10 @@ export const Root = styled.section`
   gap: 3rem;
   width: 100%;
   padding: 3rem 2rem 2rem 2rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    display: none;
+  }
 `;
 
 export const LeftCardStyles = css`
