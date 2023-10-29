@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
-import ExtensionInfoModal from '@/components/TILWrite/SubmitModal';
+import ExtensionInfoModal from '@/components/TILWrite/ExtensionInfoModal';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
 import { useToast } from '@/components/common/Toast/useToast';
