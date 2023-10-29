@@ -3,7 +3,7 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import { usePatchPasswordChange } from '@/api/hooks/auth';
+import { usePostPasswordChange } from '@/api/hooks/auth';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
@@ -21,7 +21,7 @@ export interface ChangePasswordFormInput {
 }
 
 const ChangePassword = () => {
-  const { patchPasswordChange, isLoading } = usePatchPasswordChange();
+  const { postPasswordChange, isLoading } = usePostPasswordChange();
   const { isOpen, handleOpen, handleClose } = useModalState();
   const router = useRouter();
   const {
@@ -40,7 +40,7 @@ const ChangePassword = () => {
   });
 
   const onSubmit: SubmitHandler<ChangePasswordFormInput> = async (formData) => {
-    const data = await patchPasswordChange(formData);
+    const data = await postPasswordChange(formData);
     if (data?.code === 200) {
       handleOpen();
     } else {
@@ -62,10 +62,14 @@ const ChangePassword = () => {
     <>
       <StyledFlex dir="col" align="center" gap={2}>
         <Responsive device="desktop">
-          <Logo />
+          <button onClick={() => router.push(tilyLinks.login())}>
+            <Logo />
+          </button>
         </Responsive>
         <Responsive device="mobile">
-          <Logo imageSize={42} />
+          <button onClick={() => router.push(tilyLinks.login())}>
+            <Logo imageSize={42} />
+          </button>
         </Responsive>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <Controller

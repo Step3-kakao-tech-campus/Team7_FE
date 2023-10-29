@@ -40,8 +40,8 @@ const Login = () => {
   const onSubmit: SubmitHandler<LoginFormInput> = async (formData) => {
     const data = await postLogin(formData);
 
-    if (data?.code === 200 && data?.result?.token) {
-      setAccessToken(data?.result?.token);
+    if (data?.code === 200 && data?.result?.accessToken) {
+      setAccessToken(data?.result?.accessToken);
       router.replace(tilyLinks.home());
     } else {
       // 에러 처리
@@ -50,10 +50,14 @@ const Login = () => {
   return (
     <StyledFlex dir="col" align="center">
       <Responsive device="desktop">
-        <Logo />
+        <button onClick={() => router.push(tilyLinks.login())}>
+          <Logo />
+        </button>
       </Responsive>
       <Responsive device="mobile">
-        <Logo imageSize={42} />
+        <button onClick={() => router.push(tilyLinks.login())}>
+          <Logo imageSize={42} />
+        </button>
       </Responsive>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <Controller

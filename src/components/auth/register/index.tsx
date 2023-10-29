@@ -68,10 +68,14 @@ const Register = () => {
     <>
       <StyledFlex dir="col" align="center" gap={2}>
         <Responsive device="desktop">
-          <Logo />
+          <button onClick={() => router.push(tilyLinks.login())}>
+            <Logo />
+          </button>
         </Responsive>
         <Responsive device="mobile">
-          <Logo imageSize={42} />
+          <button onClick={() => router.push(tilyLinks.login())}>
+            <Logo imageSize={42} />
+          </button>
         </Responsive>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <Controller
