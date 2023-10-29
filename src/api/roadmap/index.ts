@@ -1,26 +1,37 @@
 import { axiosInstance } from '@/api';
 import type {
-  GetRoadmapsResponse,
+  GetRoadmapsMyResponse,
   PostRoadmapsIndividualResponse,
   GetRoadmapStepsResponse,
   PostRoadmapStepIndividualResponse,
   GetRoadmapStepReferenceRequest,
   GetRoadmapStepReferenceResponse,
-  PostRoadmapsResponse,
-  GetRoadmapGroupMemberResponse,
-  PatchRoadmapGroupMemberRoleResponse,
-  DeleteRoadmapGroupMemberResponse,
-  GetRoadmapGroupApplyResponse,
-  PostRoadmapGroupApplyAcceptResponse,
+  PostRoadmapsGroupsParticipateResponse,
   DelelteRoadmapGroupApplyRejectResponse,
+  PostRoadmapGroupApplyAcceptResponse,
+  GetRoadmapGroupApplyResponse,
+  DeleteRoadmapGroupMemberResponse,
+  PatchRoadmapGroupMemberRoleResponse,
   Role,
+  GetRoadmapGroupMemberResponse,
+  PostRoadmapsResponse,
+  GetRoadmapsResponse,
 } from '@/api/roadmap/type';
 import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
-export const getRoadmaps = async () => {
+export const getRoadmapsMy = async () => {
+  const { data } = await axiosInstance.request<GetRoadmapsMyResponse>({
+    method: 'GET',
+    url: `/roadmaps/my`,
+  });
+
+  return data;
+};
+
+export const getRoadmaps = async (queryParamToString: string) => {
   const { data } = await axiosInstance.request<GetRoadmapsResponse>({
     method: 'GET',
-    url: `/roadmaps/my/`,
+    url: `/roadmaps${queryParamToString}`,
   });
 
   return data;
@@ -75,6 +86,7 @@ export const postRoadmaps = async (roadmapForm: RoadmapForm) => {
 
   return data;
 };
+
 export const getRoadmapGroupMember = async (roadmapId: number) => {
   const { data } = await axiosInstance.request<GetRoadmapGroupMemberResponse>({
     method: 'GET',
@@ -135,5 +147,14 @@ export const delelteRoadmapGroupApplyReject = async ({ roadmapId, userId }: { ro
     url: `/roadmaps/groups/${roadmapId}/members/${userId}/reject`,
   });
 
+  return data;
+};
+
+export const postRoadmapsGroupsParticipate = async (code: string) => {
+  const { data } = await axiosInstance.request<PostRoadmapsGroupsParticipateResponse>({
+    method: 'POST',
+    url: '/roadmaps/groups/participate',
+    data: { code },
+  });
   return data;
 };

@@ -3,7 +3,7 @@ import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import {
   useGetRoadmapSteps,
-  useGetRoadmaps,
+  useGetRoadmapsMy,
   usePostRoadmapStepIndividual,
   usePostRoadmapIndividual,
 } from '@/api/hooks/roadmap';
@@ -25,7 +25,7 @@ const Personal = () => {
   const [isStepButtonSelected, setIsStepButtonSelected] = useState<boolean>(false);
 
   const router = useRouter();
-  const { data: roadmaps } = useGetRoadmaps();
+  const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
   const { postRoadmapsIndividual } = usePostRoadmapIndividual();
   const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();

@@ -1,8 +1,7 @@
 import { type PropsWithChildren, useState } from 'react';
-import { set } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import * as Dialog from '@radix-ui/react-dialog';
-import { useGetRoadmaps } from '@/api/hooks/roadmap';
+import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import type { Category, Tily } from '@/api/type';
 import Icon from '@/components/common/Icon';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
@@ -15,7 +14,7 @@ const SideBar = (props: PropsWithChildren) => {
   const [active, setActive] = useState<'personal' | 'group' | null>(null);
 
   const router = useRouter();
-  const { data } = useGetRoadmaps();
+  const { data } = useGetRoadmapsMy();
 
   const { addParamsToUrl } = useParamsToUrl();
 
