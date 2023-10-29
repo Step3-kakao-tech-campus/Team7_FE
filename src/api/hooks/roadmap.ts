@@ -38,7 +38,7 @@ export const useGetRoadmapsMy = () => {
 
   const categoryData = {
     category: data?.result.categories ?? [],
-    roadmaps: [...(data?.result.roadmaps.tily ?? []), ...(data?.result.roadmaps.group ?? [])],
+    roadmaps: [...(data?.result.roadmaps.tilys ?? []), ...(data?.result.roadmaps.groups ?? [])],
   };
 
   return {

@@ -25,8 +25,8 @@ export interface Category {
 }
 
 export interface Roadmaps {
-  tily: Tily[];
-  group: Group[];
+  tilys: Tily[];
+  groups: Group[];
 }
 
 export interface Roadmap {
