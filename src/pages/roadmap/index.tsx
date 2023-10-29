@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import MyRoadmap from '@/components/Roadmap/MyRoadmap';
-import RecruitRoadmap from '@/components/Roadmap/RoadmapList';
+import RecruitRoadmap from '@/components/Roadmap/RecruitRoadmap';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import { setLayout } from '@/utils/layout';
 
@@ -24,4 +24,9 @@ const RoadmapListPage = styled.main`
   max-width: 960px;
   padding: 0 40px;
   margin: 3rem auto 0;
+
+  @media (max-width: 760px) {
+    margin: 20px auto;
+    gap: 15px;
+  }
 `;

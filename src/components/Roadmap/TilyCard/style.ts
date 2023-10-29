@@ -9,6 +9,7 @@ export const Root = styled(Card)`
   height: 230px;
   margin: 0 auto;
   padding: 10px;
+  cursor: pointer;
 
   & > section > * {
     margin-bottom: 7px;
