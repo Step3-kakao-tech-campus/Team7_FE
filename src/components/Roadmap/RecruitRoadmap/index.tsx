@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import * as Styled from '@/components/Roadmap/RecruitRoadmap/style';
+import CustomSuspense from '@/components/common/CustomSuspense';
 import Input from '@/components/common/Input';
 import Tab from '@/components/common/Tab';
+import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import useQueryParam from '@/hooks/useQueryParam';
 import GroupCard from '../GroupCard';
@@ -18,13 +20,25 @@ const RecruitRoadmap = () => {
   const [category, setCategory] = useState<'tily' | 'group' | null>(null);
   const [name, setName] = useState<string>('');
 
-  const { overlapParamsToUrl } = useParamsToUrl();
+  const { overlapParamsToUrl, deleteParamsFromUrl } = useParamsToUrl();
 
   const handleNameSearch = () => {
-    overlapParamsToUrl({ name });
+    if (name === '') {
+      deleteParamsFromUrl('name');
+    } else {
+      overlapParamsToUrl({ name });
+    }
   };
 
-  const data = useGetRoadmaps(router.query);
+  const { ref, isVisible } = useIntersectionObserver();
+
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetRoadmaps(router.query);
+
+  useEffect(() => {
+    if (isVisible && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isVisible, fetchNextPage, hasNextPage, ref]);
 
   useEffect(() => {
     if (router.isReady) {
@@ -78,10 +92,29 @@ const RecruitRoadmap = () => {
       </Styled.Navbar>
 
       <Styled.RoadmapContainer>
-        {data?.result.category === 'tily'
-          ? data?.result.roadmaps.map((roadmap) => <TilyCard key={roadmap.id} roadmap={roadmap} />)
-          : data?.result.roadmaps.map((roadmap) => <GroupCard key={roadmap.id} roadmap={roadmap} />)}
+        <CustomSuspense isLoading={isLoading} fallback={<RoadmapSkeleton />}>
+          {category === 'tily'
+            ? data?.map((roadmap) => <TilyCard key={roadmap.id} roadmap={roadmap} />)
+            : data?.map((roadmap) => <GroupCard key={roadmap.id} roadmap={roadmap} />)}
+        </CustomSuspense>
       </Styled.RoadmapContainer>
+      <Styled.ObserverInterSectionTarget ref={ref} />
+    </>
+  );
+};
+
+const RoadmapSkeleton = () => {
+  return (
+    <>
+      <Styled.Skeleton />
+      <Styled.Skeleton />
+      <Styled.Skeleton />
+      <Styled.Skeleton />
+      <Styled.Skeleton />
+      <Styled.Skeleton />
+      <Styled.Skeleton />
+      <Styled.Skeleton />
+      <Styled.Skeleton />
     </>
   );
 };

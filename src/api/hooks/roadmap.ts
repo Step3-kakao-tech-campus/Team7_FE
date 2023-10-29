@@ -1,6 +1,6 @@
 import qs from 'qs';
 import type { ParsedUrlQuery } from 'querystring';
-import { useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import {
   getRoadmapSteps,
@@ -18,7 +18,7 @@ import {
   delelteRoadmapGroupApplyReject as delelteRoadmapGroupApplyRejectAPI,
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
 } from '@/api/roadmap';
-import type { GetRoadmapStepReferenceRequest, Role } from '@/api/roadmap/type';
+import type { GetRoadmapStepReferenceRequest, GetRoadmapsResponse, Role } from '@/api/roadmap/type';
 import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
@@ -47,11 +47,37 @@ export const useGetRoadmapsMy = () => {
 };
 
 export const useGetRoadmaps = (query: ParsedUrlQuery) => {
-  const { data } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsFiltered(query), () =>
-    getRoadmaps(qs.stringify(query, { addQueryPrefix: true })),
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    ROADMAP_QUERY_KEY.getRoadmapsFiltered(query),
+    ({ pageParam: page = 0 }) => {
+      const searchParams = { page, ...query };
+      const data = getRoadmaps(qs.stringify(searchParams, { addQueryPrefix: true }));
+
+      return data;
+    },
+    {
+      getNextPageParam: (lastPage: GetRoadmapsResponse, pages) => {
+        if (!lastPage.result.hasNext) {
+          return undefined;
+        }
+        return pages.length;
+      },
+      keepPreviousData: true,
+    },
   );
 
-  return data;
+  return {
+    data:
+      data?.pages.flatMap((page) => {
+        if (page.result === null) {
+          return [];
+        }
+        return page.result?.roadmaps;
+      }) ?? [],
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+  };
 };
 
 export const useGetRoadmapsMyList = () => {

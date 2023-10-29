@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import SkeletonBox from '@/components/common/Skeleton';
 import type { EmotionTheme } from '@/styles/emotion';
 
 export const Navbar = styled.section`
@@ -53,4 +54,14 @@ export const RoadmapContainer = styled.section`
   @media (max-width: 550px) {
     grid-template-columns: repeat(1, 1fr);
   }
+`;
+
+export const ObserverInterSectionTarget = styled.div`
+  width: 100%;
+  height: 2.5rem;
+`;
+
+export const Skeleton = styled(SkeletonBox)`
+  width: 211px;
+  height: 230px;
 `;

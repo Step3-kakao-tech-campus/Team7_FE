@@ -1,6 +1,7 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useGetRoadmapsMyList, usePostRoadmapsGroupsParticipate } from '@/api/hooks/roadmap';
+import GroupCard from '@/components/Roadmap/GroupCard';
 import * as Style from '@/components/Roadmap/MyRoadmap/style';
 import TilyCard from '@/components/Roadmap/TilyCard';
 import Button from '@/components/common/Button';
@@ -9,7 +10,6 @@ import Input from '@/components/common/Input';
 import Modal from '@/components/common/Modal';
 import { tilyLinks } from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
-import GroupCard from '../GroupCard';
 
 const MyRoadmap = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
