@@ -6,6 +6,7 @@ import type {
   GetRoadmapGroupMemberResponse,
   Role,
   GetRoadmapGroupApplyResponse,
+  PostRoadmapsGroupsParticipateResponse,
 } from '@/api/roadmap/type';
 
 export const getRoadmapsResponse: GetRoadmapsResponse = {
@@ -319,4 +320,12 @@ export const updateGetRoadmapGroupMemberResponseFixture = (userId: number, role:
   getRoadmapGroupMemberResponse.result.users = getRoadmapGroupMemberResponse.result.users.map((user) =>
     user.id === userId ? { ...user, role } : user,
   );
+};
+
+export const postRoadmapsGroupsParticipateResponse: PostRoadmapsGroupsParticipateResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    id: 5,
+  },
 };

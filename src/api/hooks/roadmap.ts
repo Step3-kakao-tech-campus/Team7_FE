@@ -1,7 +1,10 @@
+import qs from 'qs';
+import type { ParsedUrlQuery } from 'querystring';
 import { useQueryClient } from '@tanstack/react-query';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import {
   getRoadmapSteps,
+  getRoadmapsMy,
   getRoadmaps,
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
@@ -13,6 +16,7 @@ import {
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
   delelteRoadmapGroupApplyReject as delelteRoadmapGroupApplyRejectAPI,
+  postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, Role } from '@/api/roadmap/type';
 import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
@@ -20,14 +24,17 @@ import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
 export const ROADMAP_QUERY_KEY = {
-  getRoadmaps: 'getRoadmaps',
+  all: ['roadmaps'],
+  getRoadmapsMy: 'getRoadmapsMy',
+  getRoadmaps: () => [...ROADMAP_QUERY_KEY.all, 'list'],
+  getRoadmapsFiltered: (filters: ParsedUrlQuery) => [...ROADMAP_QUERY_KEY.getRoadmaps(), filters],
   getRoadmapSteps: 'getRoadmapSteps',
   getRoadmapGroupMember: 'getRoadmapGroupMember',
   getRoadmapGroupApply: 'getRoadmapGroupApply',
 };
 
-export const useGetRoadmaps = () => {
-  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmaps], () => getRoadmaps());
+export const useGetRoadmapsMy = () => {
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapsMy], () => getRoadmapsMy());
 
   const categoryData = {
     category: data?.result.categories ?? [],
@@ -37,6 +44,19 @@ export const useGetRoadmaps = () => {
   return {
     data: categoryData,
   };
+};
+
+export const useGetRoadmaps = (query: ParsedUrlQuery) => {
+  const { data } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsFiltered(query), () =>
+    getRoadmaps(qs.stringify(query, { addQueryPrefix: true })),
+  );
+
+  return data;
+};
+
+export const useGetRoadmapsMyList = () => {
+  const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapsMy], () => getRoadmapsMy());
+  return { data: data?.result.roadmaps, isLoading: isLoading };
 };
 
 export const useGetRoadmapSteps = (roadmapId: number) => {
@@ -222,4 +242,28 @@ export const useDelelteRoadmapGroupApplyReject = () => {
     return data;
   };
   return { delelteRoadmapGroupApplyReject };
+};
+
+export const usePostRoadmapsGroupsParticipate = () => {
+  const { mutateAsync, isLoading, isError } = useMutation(postRoadmapsGroupsParticipateAPI);
+  const toast = useToast();
+
+  const postRoadmapsGroupsParticipate = async (code: string) => {
+    const data = await mutateAsync(code, {
+      onSuccess: () => {
+        toast.show({
+          message: '로드맵에 참여되었습니다.',
+        });
+      },
+      onError: () => {
+        toast.show({
+          message: '로드맵을 찾을 수 없습니다. 코드를 확인해주세요.',
+        });
+      },
+    });
+
+    return data;
+  };
+
+  return { postRoadmapsGroupsParticipate, isLoading, isError };
 };
