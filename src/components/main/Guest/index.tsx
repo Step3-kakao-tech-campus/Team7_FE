@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
 import Footer from '@/components/common/Footer';
+import Responsive from '@/components/common/Responsive';
 import FeatureSection from '@/components/main/Guest/FeatureSection';
 import * as SectionStyled from '@/components/main/Guest/FeatureSection/style';
 import Typer from '@/components/main/Guest/Typer';
@@ -44,59 +44,33 @@ const Guest = () => {
           />{' '}
           {/* 높이 유지용 빈칸 디폴트로 빈칸을 넣어놓았음 */}
         </Styled.TyperBox>
-        <Styled.SubTitle>
-          <div>TIL-y 에서 학습 방향성을 제공받고 공유하며 성장해보세요.</div>
-        </Styled.SubTitle>
+
+        <Responsive device="desktop">
+          <Styled.SubTitle>
+            <div>TIL-y 에서 학습 방향성을 제공받고 공유하며 성장해보세요.</div>
+          </Styled.SubTitle>
+        </Responsive>
+
+        <Responsive device="mobile">
+          <Styled.SubTitle>
+            <div>TIL-y 에서 학습 방향성을</div>
+            <div>제공받고 공유하며 성장해보세요.</div>
+          </Styled.SubTitle>
+        </Responsive>
 
         <Styled.ButtonContainer onClick={() => router.push(tilyLinks.verify())}>
           <Button css={Styled.ButtonStyles}>Get Started</Button>
         </Styled.ButtonContainer>
 
-        <Styled.IntroSection>
+        <SectionStyled.FeatureSection>
           <SectionStyled.HardWareContainer>
-            <Image src="/assets/images/landing1.png" alt="TIL-y" width={980} height={540} />
+            <SectionStyled.Image src="/assets/images/landing1.png" alt="TIL-y" />
           </SectionStyled.HardWareContainer>
-        </Styled.IntroSection>
+        </SectionStyled.FeatureSection>
 
-        <FeatureSection
-          title={SECTION.roadmap.title}
-          width={SECTION.roadmap.width}
-          height={SECTION.roadmap.height}
-          alt={SECTION.roadmap.alt}
-          imgsrc={SECTION.roadmap.imgsrc}
-        />
-
-        <FeatureSection
-          title={SECTION.github.title}
-          width={SECTION.github.width}
-          height={SECTION.github.height}
-          alt={SECTION.github.alt}
-          imgsrc={SECTION.github.imgsrc}
-        />
-
-        <FeatureSection
-          title={SECTION.share.title}
-          width={SECTION.share.width}
-          height={SECTION.share.height}
-          alt={SECTION.share.alt}
-          imgsrc={SECTION.share.imgsrc}
-        />
-
-        <FeatureSection
-          title={SECTION.group.title}
-          width={SECTION.group.width}
-          height={SECTION.group.height}
-          alt={SECTION.group.alt}
-          imgsrc={SECTION.group.imgsrc}
-        />
-
-        <FeatureSection
-          title={SECTION.team.title}
-          width={SECTION.team.width}
-          height={SECTION.team.height}
-          alt={SECTION.team.alt}
-          imgsrc={SECTION.team.imgsrc}
-        />
+        {SECTIONS.map((section) => {
+          return <FeatureSection key={section.key} title={section.title} alt={section.alt} imgsrc={section.imgsrc} />;
+        })}
 
         <SectionStyled.FeatureSection>
           <SectionStyled.SectionTitle>이 모든것을 TIL-y 에서</SectionStyled.SectionTitle>
@@ -114,40 +88,35 @@ const Guest = () => {
 
 export default Guest;
 
-const SECTION = {
-  roadmap: {
+const SECTIONS = [
+  {
+    key: 'roadmap',
     title: '개발공부의 방향성 제시',
-    width: 980,
-    height: 540,
     imgsrc: '/assets/images/roadmap.gif',
     alt: '개발공부의 방향성 제시',
   },
-  github: {
+  {
+    key: 'github',
     title: 'TIL 깃허브 업로드',
-    width: 980,
-    height: 540,
     imgsrc: '/assets/images/roadmap.gif',
     alt: 'TIL 깃허브 업로드',
   },
-  share: {
+  {
+    key: 'share',
     title: '동일 주제에 대한 TIL 공유 기능',
-    width: 980,
-    height: 540,
     imgsrc: '/assets/images/roadmap.gif',
     alt: '동일 주제에 대한 TIL 공유 기능',
   },
-  group: {
+  {
+    key: 'group',
     title: '그룹 로드맵 생성',
-    width: 980,
-    height: 540,
     imgsrc: '/assets/images/roadmap.gif',
     alt: '그룹 로드맵 생성',
   },
-  team: {
+  {
+    key: 'team',
     title: '팀 내 학습 관리',
-    width: 980,
-    height: 540,
     imgsrc: '/assets/images/roadmap.gif',
     alt: '팀 내 학습 관리',
   },
-};
+];

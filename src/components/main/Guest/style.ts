@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 export const Root = styled.div`
   max-width: 1024px;
   margin: 0 auto;
+  padding: 0 24px;
 `;
 
 export const LeftTopGradientContainer = styled.div`
@@ -102,6 +103,11 @@ export const TyperBox = styled.h1`
   font-size: 4.5rem;
   line-height: 1.3;
   font-weight: 700;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    margin-top: 64px;
+    font-size: 32px;
+  }
 `;
 
 export const SubTitle = styled.div`
@@ -110,6 +116,10 @@ export const SubTitle = styled.div`
   font-size: 1.5rem;
   line-height: 1.5;
   font-weight: 500;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    font-size: 18px;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -143,7 +153,5 @@ export const StartButtonStyles = css`
 `;
 
 export const IntroSection = styled.section`
-  display: flex;
-  justify-content: center;
   margin-top: 10rem;
 `;

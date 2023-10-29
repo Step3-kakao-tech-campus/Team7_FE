@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import Personal from '@/components/common/GNB/Personal';
-import RoadMap from '@/components/common/GNB/RoadMap';
+import MobilePersonal from '@/components/common/GNB/mobile/MobilePersonal';
+import MobileRoadMap from '@/components/common/GNB/mobile/MobileRoadMap';
 import Modal from '@/components/common/Modal';
 import Tab from '@/components/common/Tab';
 import * as Styled from './style';
 
-interface TILModalProps {
+interface MobileTILModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const TILModal = (props: TILModalProps) => {
+const MobileTILModal = (props: MobileTILModalProps) => {
   const { isOpen, onClose } = props;
 
   const [curTab, setCurTab] = useState<'personal' | 'roadmap'>('personal');
@@ -46,7 +46,7 @@ const TILModal = (props: TILModalProps) => {
   );
 };
 
-export default TILModal;
+export default MobileTILModal;
 
 const tabMenu = [
   { name: '개인 TIL', status: 'personal' },
@@ -54,6 +54,6 @@ const tabMenu = [
 ] as const;
 
 const tabContent = {
-  personal: <Personal />,
-  roadmap: <RoadMap />,
+  personal: <MobilePersonal />,
+  roadmap: <MobileRoadMap />,
 } as const;

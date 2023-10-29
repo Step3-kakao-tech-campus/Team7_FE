@@ -8,6 +8,7 @@ import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
+import Responsive from '@/components/common/Responsive';
 import { tilyLinks } from '@/constants/links';
 import { PASSWORD_REGEX } from '@/constants/regex';
 import { useModalState } from '@/hooks/useModalState';
@@ -60,7 +61,12 @@ const ChangePassword = () => {
   return (
     <>
       <StyledFlex dir="col" align="center" gap={2}>
-        <Logo />
+        <Responsive device="desktop">
+          <Logo />
+        </Responsive>
+        <Responsive device="mobile">
+          <Logo imageSize={42} />
+        </Responsive>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="password"
@@ -80,6 +86,9 @@ const ChangePassword = () => {
                 message={errors.password?.message}
                 status={errors.password ? 'error' : 'default'}
                 {...field}
+                onBlur={() => {
+                  scrollTo(0, 0);
+                }}
               />
             )}
           />
@@ -97,6 +106,9 @@ const ChangePassword = () => {
                 message={errors.passwordConfirm?.message}
                 status={errors.passwordConfirm ? 'error' : 'default'}
                 {...field}
+                onBlur={() => {
+                  scrollTo(0, 0);
+                }}
               />
             )}
           />

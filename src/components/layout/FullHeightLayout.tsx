@@ -10,4 +10,8 @@ export default FullHeightLayout;
 
 const StyledFullHeightLayout = styled.div`
   height: 100vh;
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    height: 100dvh;
+  }
 `;

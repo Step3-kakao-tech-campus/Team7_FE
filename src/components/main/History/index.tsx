@@ -4,6 +4,7 @@ import type { CalendarTooltipProps } from '@nivo/calendar';
 import { ResponsiveCalendar } from '@nivo/calendar';
 import { useGetUserHistory } from '@/api/hooks/user';
 import CustomSuspense from '@/components/common/CustomSuspense';
+import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
@@ -20,44 +21,49 @@ const History = () => {
 
   return (
     <Styled.Root>
-      <Styled.HistoryTitle>
-        <span>홍박사</span>
-        <span>님의 학습 히스토리</span>
-      </Styled.HistoryTitle>
-      <Styled.Container>
-        <CustomSuspense isLoading={isLoading} fallback={<Skeleton css={Styled.SkeletonStyles} />}>
-          <ResponsiveCalendar
-            data={history}
-            from="2023-01-01"
-            to="2023-12-31"
-            align="top"
-            emptyColor="#eeeeee"
-            colors={['#EF4365']}
-            margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
-            yearSpacing={45}
-            yearLegendOffset={12}
-            monthBorderColor="#ffffff"
-            dayBorderWidth={2}
-            dayBorderColor="#ffffff"
-            tooltip={CustomTooltip}
-            onClick={(data) => {
-              handleSelectDay(data.color, data.day);
-            }}
-            legends={[
-              {
-                anchor: 'bottom-right',
-                direction: 'row',
-                translateY: 36,
-                itemCount: 4,
-                itemWidth: 42,
-                itemHeight: 36,
-                itemsSpacing: 14,
-                itemDirection: 'right-to-left',
-              },
-            ]}
-          />
-        </CustomSuspense>
-      </Styled.Container>
+      <Responsive device="desktop">
+        <Styled.HistoryTitle>
+          <span>홍박사</span>
+          <span>님의 학습 히스토리</span>
+        </Styled.HistoryTitle>
+      </Responsive>
+
+      <Styled.Wrapper>
+        <Styled.CalendarContainer>
+          <CustomSuspense isLoading={isLoading} fallback={<Skeleton css={Styled.SkeletonStyles} />}>
+            <ResponsiveCalendar
+              data={history}
+              from="2023-01-01"
+              to="2023-12-31"
+              align="center"
+              emptyColor="#eeeeee"
+              colors={['#EF4365']}
+              margin={{ top: 20, right: 40, bottom: 10, left: 40 }}
+              yearSpacing={45}
+              yearLegendOffset={12}
+              monthBorderColor="#ffffff"
+              dayBorderWidth={2}
+              dayBorderColor="#ffffff"
+              tooltip={CustomTooltip}
+              onClick={(data) => {
+                handleSelectDay(data.color, data.day);
+              }}
+              legends={[
+                {
+                  anchor: 'bottom-right',
+                  direction: 'row',
+                  translateY: 36,
+                  itemCount: 4,
+                  itemWidth: 42,
+                  itemHeight: 36,
+                  itemsSpacing: 14,
+                  itemDirection: 'right-to-left',
+                },
+              ]}
+            />
+          </CustomSuspense>
+        </Styled.CalendarContainer>
+      </Styled.Wrapper>
     </Styled.Root>
   );
 };

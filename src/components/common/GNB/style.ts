@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.div<{ isLoggedIn: boolean; isScrolled: boolean }>`
   position: fixed;
@@ -30,6 +31,10 @@ export const Inner = styled.header`
   height: 4.5rem;
   margin: 0 auto;
   padding: 0 2rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 0 8px;
+  }
 `;
 
 export const Logo = styled.div`
@@ -37,6 +42,10 @@ export const Logo = styled.div`
   gap: 0.4rem;
 
   margin-right: 3rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    margin-right: 0;
+  }
 `;
 
 export const LogoText = styled.span`
@@ -51,6 +60,11 @@ export const NavArea = styled.nav`
 
   & > div:first-of-type {
     margin-right: 2.125rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    font-size: 18px;
+    margin-left: 32px;
   }
 `;
 
@@ -68,9 +82,20 @@ export const NavItem = styled(Link)<{ active: number }>`
     css`
       border-bottom: 5px solid ${theme.colors.black};
       height: calc(2.5rem + 5px);
+
+      @media ${theme.mediaQuery.md} {
+        border-bottom: none;
+        font-weight: 800;
+      }
     `}
 
   cursor: pointer;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    min-width: fit-content;
+    margin-right: 32px;
+    height: auto;
+  }
 `;
 
 export const ActionArea = styled.div`
@@ -88,10 +113,13 @@ export const TILInfo = styled.div`
   }
 `;
 
-export const TILButtonStyles = css`
+export const TILButtonStyles = (theme: EmotionTheme) => css`
   font-size: 1.25rem;
   font-weight: 700;
-  margin-right: 1rem;
+
+  @media ${theme.mediaQuery.md} {
+    margin-right: 8px;
+  }
 `;
 
 export const NoticeContainer = styled.div`
@@ -115,7 +143,12 @@ export const ProfileSkeletonStyles = css`
   height: 40px;
 `;
 
-export const ButtonStyles = css`
+export const ButtonStyles = (theme: EmotionTheme) => css`
   margin-right: 6px;
   font-weight: 500;
+
+  @media ${theme.mediaQuery.md} {
+    background-color: transparent;
+    font-weight: 700;
+  }
 `;

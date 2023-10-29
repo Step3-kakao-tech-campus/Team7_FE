@@ -29,7 +29,7 @@ const ResponsiveProvider = (props: PropsWithChildren) => {
             display: block !important;
           }
 
-          @media ${mediaQuery.MOBILE_LARGE} {
+          @media ${mediaQuery.md} {
             .${mobileOnlyClassName} {
               display: block !important;
             }

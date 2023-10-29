@@ -23,7 +23,7 @@ const Responsive = (props: PropsWithChildren<ResponsiveProps>) => {
   })();
 
   useEffect(() => {
-    const mobileMedia = window.matchMedia(mediaQuery.MOBILE_LARGE);
+    const mobileMedia = window.matchMedia(mediaQuery.md);
 
     if (mobileMedia.matches) {
       setCurrent('mobile');

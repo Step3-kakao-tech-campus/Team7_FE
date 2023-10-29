@@ -6,8 +6,10 @@ import { usePatchAlarm } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
-import Alarm from '@/components/common/GNB/Alarm';
-import TILModal from '@/components/common/GNB/TILModal';
+import Alarm from '@/components/common/GNB/desktop/Alarm';
+import TILModal from '@/components/common/GNB/desktop/TILModal';
+import MobileAlarm from '@/components/common/GNB/mobile/MobileAlarm';
+import MobileTILModal from '@/components/common/GNB/mobile/MobileTILModal';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
@@ -62,7 +64,7 @@ const GNB = () => {
           <button onClick={() => router.push(tilyLinks.home())}>
             <Responsive device="mobile">
               <Styled.Logo>
-                <Logo imageSize={16} />
+                <Logo imageSize={24} />
               </Styled.Logo>
             </Responsive>
 
@@ -84,11 +86,13 @@ const GNB = () => {
 
           {isLoggedIn && (
             <Styled.ActionArea>
-              <Styled.TILInfo>
-                <span>오늘의 TIL를 작성하고 </span>
-                <span>장미</span>
-                <span>를 심어보세요</span>
-              </Styled.TILInfo>
+              <Responsive device="desktop">
+                <Styled.TILInfo>
+                  <span>오늘의 TIL를 작성하고 </span>
+                  <span>장미</span>
+                  <span>를 심어보세요</span>
+                </Styled.TILInfo>
+              </Responsive>
 
               <Button onClick={handleOpenTilModal} css={Styled.TILButtonStyles} variant="ghost">
                 TIL
@@ -109,27 +113,56 @@ const GNB = () => {
 
                 {isNewAlarm && <Styled.AlarmActiveDot />}
 
-                <Alarm alarmButtonRef={alarmButtonRef} isAlarmOpen={isAlarmOpen} handleCloseAlarm={handleCloseAlarm} />
+                <Responsive device="desktop">
+                  <Alarm
+                    alarmButtonRef={alarmButtonRef}
+                    isAlarmOpen={isAlarmOpen}
+                    handleCloseAlarm={handleCloseAlarm}
+                  />
+                </Responsive>
+                <Responsive device="mobile">
+                  <MobileAlarm
+                    alarmButtonRef={alarmButtonRef}
+                    isAlarmOpen={isAlarmOpen}
+                    handleCloseAlarm={handleCloseAlarm}
+                  />
+                </Responsive>
               </Styled.NoticeContainer>
             </Styled.ActionArea>
           )}
 
-          {!isLoggedIn && (
-            <Styled.ActionArea>
-              <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.login())}>
-                로그인
-              </Button>
-              <Button css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.verify())}>
-                회원가입
-              </Button>
-            </Styled.ActionArea>
-          )}
+          <Responsive device="mobile">
+            {!isLoggedIn && (
+              <Styled.ActionArea>
+                <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.login())}>
+                  로그인
+                </Button>
+              </Styled.ActionArea>
+            )}
+          </Responsive>
+          <Responsive device="desktop">
+            {!isLoggedIn && (
+              <Styled.ActionArea>
+                <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.login())}>
+                  로그인
+                </Button>
+                <Button css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.verify())}>
+                  회원가입
+                </Button>
+              </Styled.ActionArea>
+            )}
+          </Responsive>
         </Styled.Inner>
       </Styled.Root>
 
       <Styled.BellowRoot />
 
-      <TILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} />
+      <Responsive device="mobile">
+        <MobileTILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} />
+      </Responsive>
+      <Responsive device="desktop">
+        <TILModal isOpen={isTilModalOpen} onClose={handleCloseTilModal} />
+      </Responsive>
     </>
   );
 };

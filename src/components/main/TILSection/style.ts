@@ -14,6 +14,17 @@ export const Container = styled.div`
   gap: 2rem;
   margin-left: 2.6rem;
   margin-top: 1.5rem;
+  margin: 1.5rem 0 0 1.5rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 10px 0 0 0;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const SkeletonStyles = css`

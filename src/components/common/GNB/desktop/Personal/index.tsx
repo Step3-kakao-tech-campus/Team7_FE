@@ -11,7 +11,7 @@ import { usePostTil } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
-import PlusButton from '@/components/common/GNB/PlusButton';
+import PlusButton from '@/components/common/GNB/desktop/PlusButton';
 import Input from '@/components/common/Input';
 import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';

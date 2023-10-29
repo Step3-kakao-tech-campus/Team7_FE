@@ -20,4 +20,8 @@ export const Inner = styled.div`
     text-decoration-line: underline;
     font-weight: 500;
   }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    font-size: 10px;
+  }
 `;
