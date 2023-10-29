@@ -30,6 +30,78 @@ export const roadmapHandler = [
     }
   }),
 
+  rest.get(`${BASE_URL}/roadmaps`, (req, res, ctx) => {
+    const category = req.url.searchParams.get('category');
+
+    if (!category || category === 'tily') {
+      return res(
+        ctx.json({
+          success: true,
+          message: 'ok',
+          result: {
+            category: 'tily',
+            roadmaps: [
+              {
+                id: 1,
+                name: 'JAVA 입문 수업 - 생활 코딩',
+                stepNum: 81,
+                creator: {
+                  id: 1,
+                  name: null,
+                  image: null,
+                },
+              },
+              {
+                id: 2,
+                name: 'JAVASCRIPT 입문 수업 - 생활 코딩',
+                stepNum: 32,
+                creator: {
+                  id: 2,
+                  name: null,
+                  image: null,
+                },
+              },
+            ],
+          },
+          error: null,
+        }),
+      );
+    } else {
+      return res(
+        ctx.json({
+          success: true,
+          message: 'ok',
+          result: {
+            category: 'group',
+            roadmaps: [
+              {
+                id: 1,
+                name: 'JAVA 입문 수업 - 생활 코딩',
+                stepNum: 81,
+                creator: {
+                  id: 1,
+                  name: null,
+                  image: null,
+                },
+              },
+              {
+                id: 2,
+                name: 'JAVASCRIPT 입문 수업 - 생활 코딩',
+                stepNum: 32,
+                creator: {
+                  id: 2,
+                  name: null,
+                  image: null,
+                },
+              },
+            ],
+          },
+          error: null,
+        }),
+      );
+    }
+  }),
+
   rest.get(`${BASE_URL}/roadmaps/:id/steps`, (req, res, ctx) => {
     try {
       return res(ctx.status(200), ctx.json(getRoadmapStepsResponse));

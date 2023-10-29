@@ -1,7 +1,7 @@
-import type { Step, Category, Roadmaps, CommonResponse } from '@/api/type';
+import type { Step, Category, Roadmaps, CommonResponse, Group } from '@/api/type';
 
-// getRoadmaps
-export interface GetRoadmapsResponseMy {
+// getRoadmapsMy
+export interface GetRoadmapsMyResponse {
   success: boolean;
   message: string;
   result: UserRoadmapsResult;
@@ -10,6 +10,19 @@ export interface GetRoadmapsResponseMy {
 export interface UserRoadmapsResult {
   categories: Category[];
   roadmaps: Roadmaps;
+}
+
+// getRoadmaps
+export interface GetRoadmapsResponse {
+  success: boolean;
+  message: string;
+  result: GetRoadmapsResult;
+  hasNext: boolean;
+}
+
+interface GetRoadmapsResult {
+  category: 'tily' | 'group';
+  roadmaps: Group[];
 }
 
 // getRoadmapSteps

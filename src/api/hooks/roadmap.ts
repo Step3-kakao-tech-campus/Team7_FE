@@ -1,8 +1,11 @@
+import qs from 'qs';
+import type { ParsedUrlQuery } from 'querystring';
 import { useQueryClient } from '@tanstack/react-query';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import {
   getRoadmapSteps,
   getRoadmapsMy,
+  getRoadmaps,
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
   getRoadmapStepReference,
@@ -21,14 +24,17 @@ import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
 export const ROADMAP_QUERY_KEY = {
-  getRoadmaps: 'getRoadmaps',
+  all: ['roadmaps'],
+  getRoadmapsMy: 'getRoadmapsMy',
+  getRoadmaps: () => [...ROADMAP_QUERY_KEY.all, 'list'],
+  getRoadmapsFiltered: (filters: ParsedUrlQuery) => [...ROADMAP_QUERY_KEY.getRoadmaps(), filters],
   getRoadmapSteps: 'getRoadmapSteps',
   getRoadmapGroupMember: 'getRoadmapGroupMember',
   getRoadmapGroupApply: 'getRoadmapGroupApply',
 };
 
 export const useGetRoadmapsMy = () => {
-  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmaps], () => getRoadmapsMy());
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapsMy], () => getRoadmapsMy());
 
   const categoryData = {
     category: data?.result.categories ?? [],
@@ -40,8 +46,16 @@ export const useGetRoadmapsMy = () => {
   };
 };
 
+export const useGetRoadmaps = (query: ParsedUrlQuery) => {
+  const { data } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsFiltered(query), () =>
+    getRoadmaps(qs.stringify(query, { addQueryPrefix: true })),
+  );
+
+  return data;
+};
+
 export const useGetRoadmapsMyList = () => {
-  const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmaps], () => getRoadmapsMy());
+  const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapsMy], () => getRoadmapsMy());
   return { data: data?.result.roadmaps, isLoading: isLoading };
 };
 
