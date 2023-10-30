@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "틸리허브(TILyHub)",
+  "description": "Automatically integrate your TIL submissions to GitHub",
+  "homepage_url": "https://github.com/Step3-kakao-tech-campus/Team7_FE",
+  "version": "1",
+  "author": "ehddud1006",
+  "action": {
+    "default_icon": "assets/thumbnail.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "assets/thumbnail.png",
+    "48": "assets/thumbnail.png",
+    "128": "assets/thumbnail.png"
+  },
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "permissions": ["storage"],
+  "host_permissions": ["http://localhost:3000/*", "https://github.com/"],
+  "web_accessible_resources": [
+    {
+      "matches": ["<all_urls>"],
+      "resources": [
+        "library/jquery-3.3.1.min.js",
+        "library/semantic.min.js",
+        "popup.html",
+        "popup.js",
+        "welcome.html",
+        "welcome.js"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["scripts/authorize.js", "scripts/util.js", "scripts/Github.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["http://localhost:3000/*"],
+      "js": [
+        "library/sha1.min.js",
+        "library/jszip.min.js",
+        "scripts/authorize.js",
+        "scripts/tily.js",
+        "scripts/util.js",
+        "scripts/Github.js",
+        "scripts/uploadfunctions.js",
+        "scripts/storage.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

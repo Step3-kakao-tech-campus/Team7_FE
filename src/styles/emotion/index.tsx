@@ -46,6 +46,15 @@ const layer = {
   toast: 10000,
 };
 
-export const emotionTheme = { colors, layout, layer } as const;
+const mediaQuery = {
+  lg: `screen and (max-width: 1024px)`,
+  md: `screen and (max-width: 768px)`,
+  sm: `screen and (max-width: 640px)`,
+  xs: `screen and (max-width: 425px)`,
+  xxs: `screen and (max-width: 374px)`,
+} as const;
+// as const 를 해야 추론이 가능하다.
+
+export const emotionTheme = { colors, layout, layer, mediaQuery } as const;
 
 export type EmotionTheme = typeof emotionTheme;

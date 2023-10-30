@@ -9,6 +9,8 @@ import Footer from '@/components/TILWrite/Footer';
 import Header from '@/components/TILWrite/Header';
 import Reference from '@/components/TILWrite/Reference';
 import RoadMap from '@/components/TILWrite/RoadMap';
+import MobileHeader from '@/components/TILWrite/mobile/MobileHeader';
+import Responsive from '@/components/common/Responsive';
 import EmptyLayout from '@/components/layout/EmptyLayout';
 import { useDrawerState } from '@/hooks/useDrawerState';
 import { emotionTheme } from '@/styles/emotion';
@@ -72,7 +74,14 @@ const TILWrite = () => {
 
   return (
     <Root>
-      <Header handleOpenCommentAside={handleOpenComment} />
+      <Responsive device="desktop">
+        <Header TILContent={TILContent} handleOpenCommentAside={handleOpenComment} />
+      </Responsive>
+
+      <Responsive device="mobile">
+        <MobileHeader TILContent={TILContent} handleOpenCommentAside={handleOpenComment} />
+      </Responsive>
+
       <Container>
         {tilDetail?.isPersonal === false ? (
           <EditorContainer
@@ -118,6 +127,7 @@ const TILWrite = () => {
           </AsideContainer>
         )}
       </Container>
+
       <Footer TILContent={TILContent} />
     </Root>
   );
@@ -153,6 +163,10 @@ export const EditorContainer = styled(motion.div)`
   flex-shrink: 0;
   overflow-y: scroll;
   background-color: #fff;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    width: 100% !important;
+  }
 `;
 
 export const PersonalEditorContainer = styled.div`
@@ -180,6 +194,10 @@ export const Container = styled.div`
 export const AsideContainer = styled.aside`
   display: flex;
   flex: 1;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    display: none;
+  }
 `;
 
 export const ExtraDrawerMotion = styled(motion.div)`

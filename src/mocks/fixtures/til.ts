@@ -149,7 +149,7 @@ export const getTilResponse: GetTilResponse = {
     isCompleted: true,
     step: {
       id: 1,
-      title: 'Java - 설치와 실행 2 : 리눅스에 Java 설치하기',
+      title: 'Next.js 13 - Next.js 란 무엇인가?',
     },
     comments: [
       {

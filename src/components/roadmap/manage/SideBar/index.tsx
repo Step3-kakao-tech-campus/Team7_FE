@@ -1,6 +1,4 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Card from '@/components/common/Card';
 import { tilyLinks } from '@/constants/links';
 import * as Styled from './style';
 

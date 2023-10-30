@@ -5,6 +5,12 @@ import type { EmotionTheme } from '@/styles/emotion';
 export const Root = styled.form`
   position: relative;
   flex: 1;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    width: 100%;
+
+    grid-column: 1 / 3;
+  }
 `;
 
 export const InputContainerStyles = (theme: EmotionTheme) => css`
@@ -20,6 +26,10 @@ export const InputContainerStyles = (theme: EmotionTheme) => css`
 export const InputStyles = (theme: EmotionTheme) => css`
   &::placeholder {
     color: ${theme.colors.gray_800};
+  }
+
+  @media ${theme.mediaQuery.xs} {
+    font-size: 14px;
   }
 `;
 

@@ -6,6 +6,7 @@ import type {
   GetRoadmapGroupMemberResponse,
   Role,
   GetRoadmapGroupApplyResponse,
+  PostRoadmapsGroupsParticipateResponse,
 } from '@/api/roadmap/type';
 
 export const getRoadmapsResponse: GetRoadmapsResponse = {
@@ -85,49 +86,49 @@ export const getRoadmapStepsResponse: GetRoadmapStepsResponse = {
     steps: [
       {
         id: 1,
-        title: '자바 소개',
+        title: 'Next.js 란 무엇인가?',
         isCompleted: true,
         tilId: 1,
       },
       {
         id: 2,
-        title: '객체 지향',
+        title: '설치와 실행',
         isCompleted: false,
         tilId: null,
       },
       {
         id: 3,
-        title: '클래스 기초',
+        title: '샘플앱 세탁',
         isCompleted: false,
         tilId: 1,
       },
       {
         id: 4,
-        title: '클래스 기초',
+        title: '배포',
         isCompleted: false,
         tilId: 1,
       },
       {
         id: 5,
-        title: '클래스 기초',
+        title: '뼈대 만들기',
         isCompleted: false,
         tilId: 1,
       },
       {
         id: 6,
-        title: '클래스 기초',
+        title: '라우팅',
         isCompleted: false,
         tilId: 1,
       },
       {
         id: 7,
-        title: '클래스 기초',
+        title: 'Single Page Application',
         isCompleted: false,
         tilId: 1,
       },
       {
         id: 8,
-        title: '클래스 기초',
+        title: '정적 자원 사용하기',
         isCompleted: false,
         tilId: 1,
       },
@@ -139,31 +140,31 @@ export const getRoadmapStepsResponse: GetRoadmapStepsResponse = {
       },
       {
         id: 10,
-        title: '클래스 기초',
+        title: 'css',
         isCompleted: false,
         tilId: 1,
       },
       {
         id: 11,
-        title: '클래스 기초',
+        title: 'backend',
         isCompleted: false,
         tilId: 1,
       },
       {
         id: 12,
-        title: '클래스 기초',
+        title: '글 목록 가져오기',
         isCompleted: false,
         tilId: 1,
       },
       {
         id: 13,
-        title: '클래스 기초',
+        title: '글 생성',
         isCompleted: false,
         tilId: 1,
       },
       {
         id: 14,
-        title: '클래스 기초',
+        title: 'cache',
         isCompleted: false,
         tilId: 1,
       },
@@ -182,28 +183,25 @@ export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = 
     youtube: [
       {
         id: 1,
-        link: `<iframe
-        width="100%"
-        height="315"
-        src="https://www.youtube.com/embed/kWUsI7LCSmY?si=59XO3fvZ_pwxMDs3"
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      />`,
-      },
-      {
-        id: 2,
-        link: `<iframe width="560" height="315" src="https://www.youtube.com/embed/pWvF8AOO_Ao?si=fOJR_fRZ3mI3p7fV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
+        link: `<iframe width="560" height="315" src="https://www.youtube.com/embed/9KOaR6QMb9A?si=HA3x3k-PLh9dmO03" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
       },
     ],
     web: [
       {
         id: 1,
-        link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter',
+        link: 'https://nextjs.org/docs/getting-started/installation',
       },
       {
         id: 2,
-        link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter',
+        link: 'https://nextjs.org/docs/getting-started/project-structure',
+      },
+      {
+        id: 3,
+        link: 'https://nextjs.org/docs/getting-started/project-structure',
+      },
+      {
+        id: 4,
+        link: 'https://nextjs.org/docs/getting-started/project-structure',
       },
     ],
   },
@@ -310,17 +308,24 @@ export const updateGetRoadmapStepsResponseFixture = (name: string) => {
   ];
 };
 
-
 export const postRoadmapsResponse: PostRoadmapsResponse = {
   success: true,
   message: 'ok',
   result: {
     id: 1,
   },
- };
+};
 
 export const updateGetRoadmapGroupMemberResponseFixture = (userId: number, role: Exclude<Role, null>) => {
   getRoadmapGroupMemberResponse.result.users = getRoadmapGroupMemberResponse.result.users.map((user) =>
     user.id === userId ? { ...user, role } : user,
   );
+};
+
+export const postRoadmapsGroupsParticipateResponse: PostRoadmapsGroupsParticipateResponse = {
+  success: true,
+  message: 'ok',
+  result: {
+    id: 5,
+  },
 };

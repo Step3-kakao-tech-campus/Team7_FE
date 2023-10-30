@@ -30,6 +30,10 @@ export const Container = styled.div<{ width?: number }>`
   & :focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.black};
   }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    width: 94vw;
+  }
 `;
 
 export const CloseButton = styled.button`

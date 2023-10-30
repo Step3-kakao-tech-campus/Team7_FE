@@ -11,6 +11,10 @@ export const Root = styled.footer`
   background-color: ${({ theme }) => theme.colors.gray_100};
   width: 100%;
   height: ${({ theme }) => theme.layout.tilWrite.footerHeight};
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    justify-content: flex-end;
+  }
 `;
 
 export const Title = styled.h1`
@@ -33,6 +37,10 @@ export const ButtonStyles = css`
 export const ExitContainer = styled.button`
   display: flex;
   cursor: pointer;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    display: none;
+  }
 `;
 
 export const SkeletonStyles = css`

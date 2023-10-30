@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import styled from '@emotion/styled';
 import { useGetTilsParam } from '@/api/hooks/til';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Fallback from '@/components/common/Fallback';
 import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary';
+import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
+import SearchBar from '@/components/main/SearchBar';
 import TIL from '@/components/main/TIL';
 import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 import * as Styled from './style';
@@ -25,6 +26,9 @@ const TILSection = () => {
 
   return (
     <Styled.Root>
+      <Responsive device="mobile">
+        <SearchBar />
+      </Responsive>
       <Styled.Container>
         <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
           <ConditionalRender data={tils} EmptyUI={<TILSection.Empty />}>

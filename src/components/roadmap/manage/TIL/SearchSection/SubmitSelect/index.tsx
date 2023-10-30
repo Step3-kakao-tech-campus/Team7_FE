@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Select from '@/components/common/Select';
 import type { SelectOption } from '@/components/common/Select';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
+import * as Styled from './style';
 
 const selectOptionItems: SelectOption[] = [
   {
@@ -34,6 +35,7 @@ const SubmitSelect = () => {
 
   return (
     <Select
+      css={Styled.SelectContainerStyles}
       selectedOption={selectedOption}
       onChangeOption={(option) => setSelectedOption(option)}
       callbackFunction={handleSelectStep}

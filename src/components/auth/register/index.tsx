@@ -8,6 +8,7 @@ import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
+import Responsive from '@/components/common/Responsive';
 import { tilyLinks } from '@/constants/links';
 import { NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
 import { useModalState } from '@/hooks/useModalState';
@@ -66,7 +67,16 @@ const Register = () => {
   return (
     <>
       <StyledFlex dir="col" align="center" gap={2}>
-        <Logo />
+        <Responsive device="desktop">
+          <button onClick={() => router.push(tilyLinks.login())}>
+            <Logo />
+          </button>
+        </Responsive>
+        <Responsive device="mobile">
+          <button onClick={() => router.push(tilyLinks.login())}>
+            <Logo imageSize={42} />
+          </button>
+        </Responsive>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="email"
@@ -91,6 +101,9 @@ const Register = () => {
                 message={errors.name?.message}
                 status={errors.name ? 'error' : 'default'}
                 {...field}
+                onBlur={() => {
+                  scrollTo(0, 0);
+                }}
               />
             )}
           />
@@ -112,6 +125,9 @@ const Register = () => {
                 message={errors.password?.message}
                 status={errors.password ? 'error' : 'default'}
                 {...field}
+                onBlur={() => {
+                  scrollTo(0, 0);
+                }}
               />
             )}
           />
@@ -130,6 +146,9 @@ const Register = () => {
                 message={errors.passwordConfirm?.message}
                 status={errors.passwordConfirm ? 'error' : 'default'}
                 {...field}
+                onBlur={() => {
+                  scrollTo(0, 0);
+                }}
               />
             )}
           />

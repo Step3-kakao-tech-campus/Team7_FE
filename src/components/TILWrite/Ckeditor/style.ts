@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Root = styled.div<{ isReadOnly: boolean }>`
+export const Root = styled.div<{ isReadOnly?: boolean }>`
   // 툴바 아이콘 여백 조정
   .ck.ck-toolbar > .ck-toolbar__items > :not(.ck-toolbar__line-break) {
     margin: 5px 2px;
@@ -233,6 +233,10 @@ export const Root = styled.div<{ isReadOnly: boolean }>`
 
   .ck-content p {
     font-size: 1.2rem !important;
+
+    @media ${({ theme }) => theme.mediaQuery.md} {
+      font-size: 18px !important;
+    }
   }
 
   /* .ck.ck-editor__editable_inline > :first-child {

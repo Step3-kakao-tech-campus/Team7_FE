@@ -9,6 +9,7 @@ import {
   getRoadmapGroupMemberResponse,
   updateGetRoadmapStepsResponseFixture,
   getRoadmapGroupApplyResponse,
+  postRoadmapsGroupsParticipateResponse,
 } from '@/mocks/fixtures/roadmap';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -24,6 +25,78 @@ export const roadmapHandler = [
           success: false,
           message: '서버에서 에러가 났어요',
           result: null,
+        }),
+      );
+    }
+  }),
+
+  rest.get(`${BASE_URL}/roadmaps`, (req, res, ctx) => {
+    const category = req.url.searchParams.get('category');
+
+    if (!category || category === 'tily') {
+      return res(
+        ctx.json({
+          success: true,
+          message: 'ok',
+          result: {
+            category: 'tily',
+            roadmaps: [
+              {
+                id: 1,
+                name: 'JAVA 입문 수업 - 생활 코딩',
+                stepNum: 81,
+                creator: {
+                  id: 1,
+                  name: null,
+                  image: null,
+                },
+              },
+              {
+                id: 2,
+                name: 'JAVASCRIPT 입문 수업 - 생활 코딩',
+                stepNum: 32,
+                creator: {
+                  id: 2,
+                  name: null,
+                  image: null,
+                },
+              },
+            ],
+          },
+          error: null,
+        }),
+      );
+    } else {
+      return res(
+        ctx.json({
+          success: true,
+          message: 'ok',
+          result: {
+            category: 'group',
+            roadmaps: [
+              {
+                id: 1,
+                name: 'JAVA 입문 수업 - 생활 코딩',
+                stepNum: 81,
+                creator: {
+                  id: 1,
+                  name: null,
+                  image: null,
+                },
+              },
+              {
+                id: 2,
+                name: 'JAVASCRIPT 입문 수업 - 생활 코딩',
+                stepNum: 32,
+                creator: {
+                  id: 2,
+                  name: null,
+                  image: null,
+                },
+              },
+            ],
+          },
+          error: null,
         }),
       );
     }
@@ -98,7 +171,7 @@ export const roadmapHandler = [
       );
     }
   }),
-  
+
   rest.post(`${BASE_URL}/roadmaps`, (req, res, ctx) => {
     return res(ctx.json(postRoadmapsResponse));
   }),
@@ -152,5 +225,9 @@ export const roadmapHandler = [
         }),
       );
     }
+  }),
+
+  rest.post(`${BASE_URL}/roadmaps/groups/participate`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(postRoadmapsGroupsParticipateResponse));
   }),
 ];
