@@ -135,7 +135,7 @@ export const roadmapHandler = [
   rest.post(`${BASE_URL}/roadmaps/individual`, (req, res, ctx) => {
     const {
       body: { name },
-    } = req;
+    } = req as any;
 
     try {
       updateFixture(name);
@@ -155,7 +155,7 @@ export const roadmapHandler = [
   rest.post(`${BASE_URL}/roadmaps/individual/:id/steps`, (req, res, ctx) => {
     const {
       body: { title },
-    } = req;
+    } = req as any;
 
     try {
       updateGetRoadmapStepsResponseFixture(title);
@@ -195,7 +195,7 @@ export const roadmapHandler = [
     const {
       body: { role },
       params: { userId },
-    } = req;
+    } = req as any;
 
     try {
       updateGetRoadmapGroupMemberResponseFixture(Number(userId), role);

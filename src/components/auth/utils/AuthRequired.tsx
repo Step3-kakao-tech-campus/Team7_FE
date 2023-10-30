@@ -6,7 +6,7 @@ import type { Layout } from '@/utils/layout';
 import { accessTokenAtom } from '../states/accessTokenAtoms';
 
 function withAuth(WrappedComponent: Layout) {
-  return function (props) {
+  return function (props: any) {
     const router = useRouter();
     const accessToken = useRecoilValue(accessTokenAtom);
 

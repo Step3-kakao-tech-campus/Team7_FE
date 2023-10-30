@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
+import SideBar from '@/components/Roadmap/manage/SideBar';
+import Table from '@/components/Roadmap/manage/member/Table';
+import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
 import Responsive from '@/components/common/Responsive';
 import HeaderLayout from '@/components/layout/HeaderLayout';
-import SideBar from '@/components/roadmap/manage/SideBar';
-import Table from '@/components/roadmap/manage/member/Table';
-import TabBar from '@/components/roadmap/manage/mobile/TabBar';
 import { setLayout } from '@/utils/layout';
 
 const Member = () => {

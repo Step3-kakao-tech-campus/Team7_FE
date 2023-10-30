@@ -1,6 +1,6 @@
 import type {
   GetRoadmapStepsResponse,
-  GetRoadmapsResponse,
+  GetRoadmapsMyResponse,
   GetRoadmapStepReferenceResponse,
   PostRoadmapsResponse,
   GetRoadmapGroupMemberResponse,
@@ -9,7 +9,7 @@ import type {
   PostRoadmapsGroupsParticipateResponse,
 } from '@/api/roadmap/type';
 
-export const getRoadmapsResponse: GetRoadmapsResponse = {
+export const getRoadmapsResponse: GetRoadmapsMyResponse = {
   success: true,
   message: 'ok',
   result: {

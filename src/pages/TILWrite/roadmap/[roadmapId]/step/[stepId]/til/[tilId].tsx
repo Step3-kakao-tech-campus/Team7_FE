@@ -79,7 +79,7 @@ const TILWrite = () => {
       </Responsive>
 
       <Responsive device="mobile">
-        <MobileHeader TILContent={TILContent} handleOpenCommentAside={handleOpenComment} />
+        <MobileHeader />
       </Responsive>
 
       <Container>

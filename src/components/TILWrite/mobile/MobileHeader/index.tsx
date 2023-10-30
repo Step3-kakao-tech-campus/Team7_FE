@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { useGetTil } from '@/api/hooks/til';
-import ExtensionInfoModal from '@/components/TILWrite/SubmitModal';
+import ExtensionInfoModal from '@/components/TILWrite/ExtensionInfoModal';
 import SideBar from '@/components/TILWrite/mobile/SideBar';
 import Icon from '@/components/common/Icon';
 import { tilyLinks } from '@/constants/links';
@@ -34,6 +34,7 @@ const MobileHeader = () => {
           <Icon iconName="ic_hamburger" imageSize={24} ext="svg" alt="사이드바 아이콘" />
         </SideBar>
       </Styled.Container>
+
       <ExtensionInfoModal isOpen={isOpen} handleClose={handleClose} />
     </Styled.Root>
   );
