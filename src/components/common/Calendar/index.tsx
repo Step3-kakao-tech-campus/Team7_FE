@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Flex from '@/components/common/Flex';
@@ -36,6 +36,7 @@ const Calendar = (props: CalendarProps) => {
   return (
     <Styled.CustomContainer isTimeInclude={isTimeInclude}>
       <DatePicker
+        onFocus={(e) => e.target.blur()}
         selected={date}
         onChange={(date) => setDate(date!)}
         onCalendarClose={handleCalendarClose}

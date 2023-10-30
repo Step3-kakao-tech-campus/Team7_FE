@@ -10,7 +10,7 @@ const StepSection = () => {
 
   return (
     <>
-      <Flex justify="space-between">
+      <Flex justify="space-between" align="center">
         <Styled.HeaderTitle>STEP 생성</Styled.HeaderTitle>
         <Styled.ButtonContainer>
           <Button>STEP 불러오기</Button>

@@ -10,4 +10,10 @@ export const EmptyRoot = styled.section`
   padding: 5rem;
   gap: 1.25rem;
   width: 100%;
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    & > h3 {
+      font-size: 16px;
+    }
+  }
 `;
