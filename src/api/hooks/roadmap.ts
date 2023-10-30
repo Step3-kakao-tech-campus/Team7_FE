@@ -98,7 +98,7 @@ export const usePostRoadmapIndividual = () => {
   const postRoadmapsIndividual = async (title: string) => {
     const data = await mutation.mutateAsync(title, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmaps]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy]);
         toast.show({
           message: '로드맵이 생성되었습니다.',
         });
