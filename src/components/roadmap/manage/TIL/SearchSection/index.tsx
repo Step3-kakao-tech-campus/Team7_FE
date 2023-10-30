@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useGetStepTilsManage } from '@/api/hooks/til';
-import Checkbox from '@/components/roadmap/manage/TIL/SearchSection/Checkbox';
-import SearchBar from '@/components/roadmap/manage/TIL/SearchSection/SearchBar';
-import StepSelect from '@/components/roadmap/manage/TIL/SearchSection/StepSelect';
-import SubmitSelect from '@/components/roadmap/manage/TIL/SearchSection/SubmitSelect';
+import Checkbox from '@/components/Roadmap/manage/TIL/SearchSection/Checkbox';
+import SearchBar from '@/components/Roadmap/manage/TIL/SearchSection/SearchBar';
+import StepSelect from '@/components/Roadmap/manage/TIL/SearchSection/StepSelect';
+import SubmitSelect from '@/components/Roadmap/manage/TIL/SearchSection/SubmitSelect';
 import * as Styled from './style';
 
 const SearchSection = () => {

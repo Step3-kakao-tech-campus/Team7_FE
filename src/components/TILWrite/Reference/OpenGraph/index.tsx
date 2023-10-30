@@ -14,7 +14,7 @@ const OpenGraph = (props: OpenGraphProps) => {
 
   useEffect(() => {
     async function run() {
-      const { data } = await axios
+      const { data }: any = await axios
         .post('/api/open-graph', { url })
         .then((res) => res)
         .catch((err) => console.log(err));

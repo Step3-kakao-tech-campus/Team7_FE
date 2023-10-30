@@ -1,9 +1,9 @@
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import styled from '@emotion/styled';
+import FeatureInfoSection from '@/components/Roadmap/PeopleTIL/FeatureInfoSection';
+import PeopleTILSection from '@/components/Roadmap/PeopleTIL/PeopleTILSection';
 import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
 import HeaderLayout from '@/components/layout/HeaderLayout';
-import FeatureInfoSection from '@/components/roadmap/PeopleTIL/FeatureInfoSection';
-import PeopleTILSection from '@/components/roadmap/PeopleTIL/PeopleTILSection';
 import { setLayout } from '@/utils/layout';
 
 const PeopleTil = () => {

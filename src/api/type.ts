@@ -71,7 +71,10 @@ export interface Alarm {
   tilId: number;
   isChecked: boolean;
   roadmap: Roadmap;
-  step: Step;
+  step: {
+    id: number;
+    name: string;
+  };
   sender: Sender;
   createdAt: Date;
 }

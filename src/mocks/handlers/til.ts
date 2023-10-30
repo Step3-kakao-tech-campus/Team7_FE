@@ -136,7 +136,7 @@ export const tilHandler = [
   rest.post(`${BASE_URL}/roadmaps/:roadmapId/steps/:stepId/tils/:tilId/comments`, (req, res, ctx) => {
     const {
       body: { content },
-    } = req;
+    } = req as any;
     try {
       updateGetTilResponseFixture(content);
       return res(

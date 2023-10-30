@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useGetRoadmaps } from '@/api/hooks/roadmap';
+import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
@@ -17,7 +17,7 @@ const MobileRoadMap = () => {
   const [selectedStepTitle, setSelectedStepTitle] = useState<string>('');
   const [tilId, setTilId] = useState<number | null>(null);
 
-  const { data: roadmaps } = useGetRoadmaps();
+  const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
   const { postTil } = usePostTil();
 
