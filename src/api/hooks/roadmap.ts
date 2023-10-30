@@ -82,7 +82,7 @@ export const useGetRoadmaps = (query: ParsedUrlQuery) => {
 
 export const useGetRoadmapsMyList = () => {
   const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapsMy], () => getRoadmapsMy());
-  return { data: data?.result.roadmaps, isLoading: isLoading };
+  return { roadmaps: data?.result.roadmaps, isLoading: isLoading };
 };
 
 export const useGetRoadmapSteps = (roadmapId: number) => {
