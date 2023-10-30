@@ -10,7 +10,7 @@ const Slider = () => {
   const { roadmaps, isLoading: isRoadmapLoading } = useGetRoadmapsMyList();
 
   if (roadmaps?.groups.length === 0 && roadmaps?.tilys.length === 0) {
-    return <MyRoadmapEmpty />;
+    return <EmptyMyRoadmap />;
   }
 
   return (
@@ -44,7 +44,7 @@ const MyRoadmapSkeleton = () => {
   );
 };
 
-const MyRoadmapEmpty = () => {
+const EmptyMyRoadmap = () => {
   return (
     <Styled.EmptyRoot>
       <Image src="/assets/icons/ic_step.svg" alt="빈 로드맵" width={60} height={60} />
