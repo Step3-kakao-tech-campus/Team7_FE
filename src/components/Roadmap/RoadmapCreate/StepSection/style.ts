@@ -1,5 +1,12 @@
 import styled from '@emotion/styled';
 
+export const Root = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+`;
+
 export const HeaderTitle = styled.h2`
   font-size: 1.75rem;
 

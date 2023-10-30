@@ -1,6 +1,13 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.header`
+export const Root = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 0 15px;
+`;
+
+export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;

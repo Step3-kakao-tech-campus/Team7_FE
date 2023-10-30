@@ -10,7 +10,7 @@ const StepSection = () => {
 
   return (
     <>
-      <Flex justify="space-between" align="center">
+      <Styled.Root>
         <Styled.HeaderTitle>STEP 생성</Styled.HeaderTitle>
         <Styled.ButtonContainer>
           <Button>STEP 불러오기</Button>
@@ -21,7 +21,7 @@ const StepSection = () => {
             STEP 추가
           </Button>
         </Styled.ButtonContainer>
-      </Flex>
+      </Styled.Root>
       <StepList />
 
       <StepModal type="create" isOpen={isOpen} onClose={handleClose} />

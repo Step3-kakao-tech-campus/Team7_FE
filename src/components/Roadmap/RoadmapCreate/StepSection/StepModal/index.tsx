@@ -91,6 +91,7 @@ const StepModal = (props: StepModalProps) => {
           />
           {!!step.dueDate && (
             <Calendar
+              popperPlacement="top"
               onChangeDate={(date: Date) => handleStepChange('dueDate', date)}
               isTimeInclude={true}
               minDate={new Date()}

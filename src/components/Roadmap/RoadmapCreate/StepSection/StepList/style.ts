@@ -1,6 +1,12 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.section``;
+export const Root = styled.section`
+  padding: 0 15px;
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    padding: 0;
+  }
+`;
 
 export const EmptyRoot = styled.section`
   display: flex;

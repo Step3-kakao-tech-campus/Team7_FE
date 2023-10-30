@@ -34,9 +34,10 @@ const RoadmapCreatePage = styled.main`
   gap: 2rem;
   max-width: 930px;
   margin: 0 auto;
-  padding: 0 15px;
 
   @media ${({ theme }) => theme.mediaQuery.xs} {
+    gap: 1rem;
+
     & label > div {
       font-size: 18px;
       font-weight: 600;

@@ -10,6 +10,24 @@ export const Root = styled.section`
     flex-direction: column;
     gap: 1rem;
   }
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    & > h2 {
+      font-size: 20px;
+    }
+
+    & li {
+      font-size: 14px;
+    }
+
+    & label > div {
+      font-size: 18px;
+    }
+
+    & input {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const ButtonContainer = styled.section`

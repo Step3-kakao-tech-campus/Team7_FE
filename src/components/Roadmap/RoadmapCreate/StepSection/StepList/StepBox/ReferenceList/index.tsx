@@ -19,7 +19,7 @@ const ReferenceList = (props: ReferenceListProps) => {
   }
 
   return (
-    <Styled.EmptyRoot>
+    <Styled.Root>
       {references.map((reference, idx) => (
         <Styled.Link key={idx}>
           <section>
@@ -38,16 +38,16 @@ const ReferenceList = (props: ReferenceListProps) => {
           />
         </Styled.Link>
       ))}
-    </Styled.EmptyRoot>
+    </Styled.Root>
   );
 };
 
 ReferenceList.Empty = function Empty() {
   return (
-    <Styled.EmptyRoot>
+    <Styled.Root>
       <Image src="/assets/icons/ic_noLink.svg" alt="stepEmptyIcon" width={35} height={35} />
       <h4>생성된 링크가 없습니다.</h4>
-    </Styled.EmptyRoot>
+    </Styled.Root>
   );
 };
 
