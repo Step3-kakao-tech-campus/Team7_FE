@@ -17,6 +17,7 @@ import {
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
   delelteRoadmapGroupApplyReject as delelteRoadmapGroupApplyRejectAPI,
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
+  getRoadmapsById,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, GetRoadmapsResponse, Role } from '@/api/roadmap/type';
 import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
@@ -38,7 +39,7 @@ export const useGetRoadmapsMy = () => {
 
   const categoryData = {
     category: data?.result.categories ?? [],
-    roadmaps: [...(data?.result.roadmaps.tily ?? []), ...(data?.result.roadmaps.group ?? [])],
+    roadmaps: [...(data?.result.roadmaps.tilys ?? []), ...(data?.result.roadmaps.groups ?? [])],
   };
 
   return {
@@ -165,6 +166,12 @@ export const usePostRoadmaps = () => {
   };
 
   return { postRoadmaps, isLoading };
+};
+
+export const useGetRoadmapsById = (roadmapId: number) => {
+  const { data } = useQuery([ROADMAP_QUERY_KEY.all, roadmapId], () => getRoadmapsById(roadmapId));
+
+  console.log(data);
 };
 
 export const useGetRoadmapGroupMember = (roadmapId: number) => {

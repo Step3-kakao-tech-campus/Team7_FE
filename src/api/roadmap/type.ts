@@ -1,4 +1,4 @@
-import type { Step, Category, Roadmaps, CommonResponse, Group } from '@/api/type';
+import type { Step, Category, Roadmaps, CommonResponse, Group, Creator, StepWithReferences } from '@/api/type';
 
 // getRoadmapsMy
 export interface GetRoadmapsMyResponse {
@@ -53,6 +53,11 @@ export interface GetRoadmapStepReferenceResponse extends CommonResponse {
   };
 }
 
+export interface References {
+  youtube: Youtube[];
+  web: Web[];
+}
+
 export interface Youtube {
   id: number;
   link: string;
@@ -94,6 +99,20 @@ export interface PostRoadmapsResponse {
   message: string;
   result: {
     id: number;
+  };
+}
+
+export interface GetRoadmapsByIdResponse {
+  success: boolean;
+  message: string;
+  result: {
+    creator: Omit<Creator, 'id'>;
+    name: string;
+    description: string;
+    role: 'master' | 'manager' | 'member' | null;
+    recentTilId: number | null;
+    code: string | null;
+    steps: StepWithReferences[];
   };
 }
 

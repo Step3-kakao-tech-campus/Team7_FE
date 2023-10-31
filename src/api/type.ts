@@ -1,3 +1,5 @@
+import type { References } from './roadmap/type';
+
 export interface CommonResponse {
   success: boolean;
   message: string;
@@ -17,6 +19,13 @@ export interface Step {
   isCompleted: boolean;
   tilId: number | null;
   name?: string;
+}
+
+export interface StepWithReferences {
+  id: number;
+  title: string;
+  description: string;
+  references: References;
 }
 
 export interface Category {
