@@ -60,7 +60,7 @@ export const useGetRoadmapsMyList = () => {
 };
 
 export const useGetRoadmapSteps = (roadmapId: number) => {
-  const enabled = roadmapId !== 0;
+  const enabled = roadmapId !== 0 && !!roadmapId;
 
   const { data, isLoading } = useQuery(
     [ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId],
@@ -81,6 +81,7 @@ export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest)
 
   const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapSteps, body], () => getRoadmapStepReference(body), {
     enabled,
+    useErrorBoundary: true,
   });
 
   return {
