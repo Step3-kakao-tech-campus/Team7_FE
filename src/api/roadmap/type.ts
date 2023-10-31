@@ -116,6 +116,12 @@ export interface GetRoadmapsByIdResponse {
   };
 }
 
+export interface PostRoadmapsApplyResponse {
+  success: boolean;
+  message: string;
+  result: null;
+}
+
 // getRoadmapGroupMember
 export interface GetRoadmapGroupMemberResponse extends CommonResponse {
   result: {

@@ -18,6 +18,7 @@ import {
   delelteRoadmapGroupApplyReject as delelteRoadmapGroupApplyRejectAPI,
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
   getRoadmapsById,
+  postRoadmapsApply as postRoadmapsApplyAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, GetRoadmapsResponse, Role } from '@/api/roadmap/type';
 import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
@@ -176,6 +177,32 @@ export const useGetRoadmapsById = (roadmapId: number) => {
   });
 
   return data;
+};
+
+export const usePostRoadmapsApply = () => {
+  const { mutateAsync, isLoading } = useMutation(postRoadmapsApplyAPI);
+  const toast = useToast();
+
+  const postRoadmapsApply = async (body: { roadmapId: number; content: string }) => {
+    if (body.roadmapId > 0) {
+      const data = await mutateAsync(body, {
+        onSuccess: () => {
+          toast.show({
+            message: '신청이 완료되었습니다.',
+          });
+        },
+        onError: () => {
+          toast.show({
+            message: '신청에 실패하였습니다.',
+          });
+        },
+      });
+
+      return data;
+    } else return undefined;
+  };
+
+  return { postRoadmapsApply, isLoading };
 };
 
 export const useGetRoadmapGroupMember = (roadmapId: number) => {

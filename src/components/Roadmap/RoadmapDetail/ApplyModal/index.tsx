@@ -1,13 +1,20 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { usePostRoadmapsApply } from '@/api/hooks/roadmap';
 import * as Styled from '@/components/Roadmap/RoadmapDetail/ApplyModal/style';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import type { ModalProps } from '@/components/common/Modal';
 import Modal from '@/components/common/Modal';
 import TextArea from '@/components/common/TextArea';
+import useQueryParam from '@/hooks/useQueryParam';
 
 const ApplyModal = (props: ModalProps) => {
+  const router = useRouter();
+  const roadmapId = useQueryParam(router.query.roadmapId);
   const { isOpen, onClose } = props;
+
+  const { postRoadmapsApply, isLoading } = usePostRoadmapsApply();
 
   const {
     control,
@@ -20,8 +27,13 @@ const ApplyModal = (props: ModalProps) => {
     },
   });
 
-  const onSubmit: SubmitHandler<{ aboutMe: string }> = (formData) => {
-    console.log(formData);
+  const onSubmit: SubmitHandler<{ aboutMe: string }> = async (formData) => {
+    const data = await postRoadmapsApply({ roadmapId, content: formData.aboutMe });
+
+    if (data?.success) {
+      onClose();
+      reset();
+    }
   };
 
   return (
@@ -58,7 +70,7 @@ const ApplyModal = (props: ModalProps) => {
               }}>
               취소
             </Button>
-            <Button>신청</Button>
+            <Button isLoading={isLoading}>신청</Button>
           </Styled.ButtonContainer>
         </form>
       </Styled.Root>
