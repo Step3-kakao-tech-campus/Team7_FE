@@ -1,14 +1,24 @@
 import styled from '@emotion/styled';
+import RoadmapDetailInfo from '@/components/Roadmap/RoadmapDetail/RoadmapDetailInfo';
+import HeaderLayout from '@/components/layout/HeaderLayout';
+import { setLayout } from '@/utils/layout';
 
 const RoadmapDetail = () => {
-  return <RoadmapDetailPage></RoadmapDetailPage>;
+  return (
+    <RoadmapDetailPage>
+      <RoadmapDetailInfo />
+    </RoadmapDetailPage>
+  );
 };
+
+setLayout(RoadmapDetail, HeaderLayout, false);
 
 export default RoadmapDetail;
 
 const RoadmapDetailPage = styled.main`
   display: flex;
   flex-direction: column;
+  gap: 30px;
   max-width: 930px;
-  margin: 0 auto;
+  margin: 40px auto 0;
 `;
