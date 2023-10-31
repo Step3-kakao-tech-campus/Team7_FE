@@ -23,11 +23,11 @@ const Reference = (props: ReferenceProps) => {
 
       <Styled.Reference>참고 자료</Styled.Reference>
 
-      {reference?.youtube.map((item, index) => {
+      {reference?.youtubes?.map((item, index) => {
         return <Youtube key={item.id} index={index + 1} link={item.link} />;
       })}
 
-      {reference?.web.map((item, index) => {
+      {reference?.references?.map((item, index) => {
         return <Docs key={item.id} index={index + 1} link={item.link} />;
       })}
     </Styled.Root>
