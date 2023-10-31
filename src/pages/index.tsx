@@ -92,7 +92,7 @@ const LeftArea = styled.div`
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 
   padding: 2.5rem;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 const RightArea = styled.div`
