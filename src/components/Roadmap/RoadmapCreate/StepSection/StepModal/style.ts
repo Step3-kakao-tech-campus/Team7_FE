@@ -4,6 +4,12 @@ export const Root = styled.main`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    & li {
+      font-size: 13px;
+    }
+  }
 `;
 
 export const Label = styled.label`

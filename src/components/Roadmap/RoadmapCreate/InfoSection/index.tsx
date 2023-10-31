@@ -8,13 +8,13 @@ import { useRoadmapInfo } from '@/hooks/useRoadmapCreate';
 const InfoSection = () => {
   const { info, handleInfoChange, roadmapValid, onCreateRoadmapHandler, isLoading } = useRoadmapInfo();
   return (
-    <>
-      <Styled.Root>
+    <Styled.Root>
+      <Styled.Header>
         <h1>그룹 로드맵 생성</h1>
         <Button onClick={onCreateRoadmapHandler} isLoading={isLoading}>
           생성하기
         </Button>
-      </Styled.Root>
+      </Styled.Header>
       <Input
         label="로드맵 이름"
         labelType="bold"
@@ -54,7 +54,7 @@ const InfoSection = () => {
           />
         </Styled.ButtonContainer>
       </Styled.RadioContainer>
-    </>
+    </Styled.Root>
   );
 };
 

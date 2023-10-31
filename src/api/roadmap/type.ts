@@ -17,12 +17,12 @@ export interface GetRoadmapsResponse {
   success: boolean;
   message: string;
   result: GetRoadmapsResult;
-  hasNext: boolean;
 }
 
 interface GetRoadmapsResult {
   category: 'tily' | 'group';
   roadmaps: Group[];
+  hasNext: boolean;
 }
 
 // getRoadmapSteps

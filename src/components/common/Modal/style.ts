@@ -18,6 +18,7 @@ export const Root = styled(motion.div)``;
 export const Container = styled.div<{ width?: number }>`
   position: relative;
   z-index: 101;
+  max-height: 90vh;
   border-radius: 20px;
   background: #fff;
   width: ${({ width }) => width ?? 28}rem;
@@ -26,6 +27,7 @@ export const Container = styled.div<{ width?: number }>`
     0px 4px 6px -4px rgba(0, 0, 0, 0.1),
     0px 10px 15px -3px rgba(0, 0, 0, 0.1),
     0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+  overflow: auto;
 
   & :focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.black};
@@ -51,4 +53,8 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem 2.5rem 1.6rem;
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    padding: 25px 15px;
+  }
 `;

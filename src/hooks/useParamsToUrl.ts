@@ -37,5 +37,19 @@ export const useParamsToUrl = () => {
     );
   };
 
-  return { addParamsToUrl, overlapParamsToUrl };
+  // 현재 라우터에서 특정 쿼리를 제거하는 함수 (검색어를 )
+  const deleteParamsFromUrl = (queryKey: string) => {
+    delete router.query[queryKey];
+    router.push(
+      `${replaceDynamicPath(router.pathname, router.query)}${qs.stringify(router.query, {
+        addQueryPrefix: true, // prefix로 ?를 붙여준다.
+      })}`,
+      undefined,
+      {
+        scroll: false,
+      },
+    );
+  };
+
+  return { addParamsToUrl, overlapParamsToUrl, deleteParamsFromUrl };
 };

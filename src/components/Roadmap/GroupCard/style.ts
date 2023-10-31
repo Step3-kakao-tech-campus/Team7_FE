@@ -5,7 +5,7 @@ export const Root = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 211px;
+  width: 100%;
   height: 230px;
   margin: 0 auto;
   padding: 20px 10px 10px;
@@ -29,5 +29,9 @@ export const Root = styled(Card)`
       font-size: 14px;
       font-weight: 700;
     }
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    height: 200px;
   }
 `;

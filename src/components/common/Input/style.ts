@@ -51,6 +51,10 @@ export const Input = styled.input`
   font-size: inherit;
   border: none;
   outline: none;
+
+  &:focus-visible {
+    outline: none;
+  }
 `;
 
 export const Message = styled.p`

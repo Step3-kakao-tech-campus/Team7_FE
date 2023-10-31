@@ -25,8 +25,9 @@ const RoadmapListPage = styled.main`
   padding: 0 40px;
   margin: 3rem auto 0;
 
-  @media (max-width: 760px) {
+  @media ${({ theme }) => theme.mediaQuery.sm} {
     margin: 20px auto;
+    padding: 0 10px;
     gap: 15px;
   }
 `;
