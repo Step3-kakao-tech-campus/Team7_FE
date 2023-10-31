@@ -8,7 +8,7 @@ const RoadmapDetail = () => {
   return (
     <RoadmapDetailPage>
       <RoadmapDetailInfo />
-      <h2>STEP 목록</h2>
+      <StepListHeader>STEP 목록</StepListHeader>
       <RoadmapDeatilStep />
     </RoadmapDetailPage>
   );
@@ -24,4 +24,14 @@ const RoadmapDetailPage = styled.main`
   gap: 30px;
   max-width: 930px;
   margin: 40px auto 0;
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    margin-top: 20px;
+    gap: 20px;
+  }
+`;
+
+const StepListHeader = styled.h2`
+  padding: 0 15px;
+  font-size: 22px;
 `;

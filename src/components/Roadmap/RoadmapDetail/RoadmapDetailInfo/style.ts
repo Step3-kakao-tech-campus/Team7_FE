@@ -1,5 +1,32 @@
 import styled from '@emotion/styled';
 
+export const Root = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 0 15px;
+
+  & > div > h1 {
+    overflow-wrap: anywhere;
+  }
+
+  & > div > button {
+    flex-shrink: 0;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    gap: 20px;
+
+    & > div > h1 {
+      font-size: 22px;
+    }
+
+    & > div > button {
+      font-size: 14px;
+    }
+  }
+`;
+
 export const InfoBox = styled.section`
   display: flex;
   flex-direction: column;

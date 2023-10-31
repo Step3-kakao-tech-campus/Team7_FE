@@ -13,8 +13,8 @@ const RoadmapDetailInfo = () => {
   const data = useGetRoadmapsById(Number(roadmapId));
 
   return (
-    <>
-      <Flex justify="space-between">
+    <Styled.Root>
+      <Flex justify="space-between" align="flex-start" gap={0.8}>
         <h1>{data?.result.name}</h1>
         <Button>신청하기</Button>
       </Flex>
@@ -26,7 +26,7 @@ const RoadmapDetailInfo = () => {
         <b>로드맵 설명</b>
         <p>{data?.result.description}</p>
       </Styled.InfoBox>
-    </>
+    </Styled.Root>
   );
 };
 

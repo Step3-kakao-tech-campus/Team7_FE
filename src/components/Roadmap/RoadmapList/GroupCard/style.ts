@@ -11,6 +11,10 @@ export const Root = styled(Card)`
   padding: 20px 10px 10px;
   cursor: pointer;
 
+  & > h5 {
+    word-wrap: break-word;
+  }
+
   & > section > p {
     font-size: 12px;
     color: ${({ theme }) => theme.colors.gray_700};
