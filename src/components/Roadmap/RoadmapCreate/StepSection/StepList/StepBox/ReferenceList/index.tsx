@@ -14,8 +14,6 @@ const ReferenceList = (props: ReferenceListProps) => {
 
   // 참고자료 리스트에서 사용될 커스텀 훅
   const { references, handleDeleteReference } = useReference(type, stepIdx, where);
-  console.log(where);
-  console.log(references);
 
   if (references?.length === 0) {
     return <ReferenceList.Empty />;
