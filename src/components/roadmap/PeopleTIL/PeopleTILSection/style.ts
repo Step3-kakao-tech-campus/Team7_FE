@@ -40,6 +40,11 @@ export const CardContainer = styled(Card)`
   flex-direction: column;
   align-items: center;
   height: 420px;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    border: none;
+    box-shadow: none;
+  }
 `;
 
 export const ImageContainer = styled.div`
