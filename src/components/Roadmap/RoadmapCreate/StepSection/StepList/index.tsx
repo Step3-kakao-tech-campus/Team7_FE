@@ -12,7 +12,7 @@ const StepList = () => {
     return (
       <Styled.Root>
         {stepList.map((step, idx) => (
-          <StepBox key={idx} idx={idx} step={step} />
+          <StepBox key={idx} idx={idx} step={step} where="create" />
         ))}
       </Styled.Root>
     );

@@ -28,6 +28,7 @@ export const ROADMAP_QUERY_KEY = {
   all: ['roadmaps'],
   getRoadmapsMy: 'getRoadmapsMy',
   getRoadmaps: () => [...ROADMAP_QUERY_KEY.all, 'list'],
+  getRoadmapsById: (roadmapId: number) => [...ROADMAP_QUERY_KEY.all, roadmapId],
   getRoadmapsFiltered: (filters: ParsedUrlQuery) => [...ROADMAP_QUERY_KEY.getRoadmaps(), filters],
   getRoadmapSteps: 'getRoadmapSteps',
   getRoadmapGroupMember: 'getRoadmapGroupMember',
@@ -169,9 +170,12 @@ export const usePostRoadmaps = () => {
 };
 
 export const useGetRoadmapsById = (roadmapId: number) => {
-  const { data } = useQuery([ROADMAP_QUERY_KEY.all, roadmapId], () => getRoadmapsById(roadmapId));
+  const enabled = roadmapId > 0;
+  const { data } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId), () => getRoadmapsById(roadmapId), {
+    enabled,
+  });
 
-  console.log(data);
+  return data;
 };
 
 export const useGetRoadmapGroupMember = (roadmapId: number) => {
