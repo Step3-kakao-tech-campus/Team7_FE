@@ -62,7 +62,7 @@ export const Item = styled.li<{ selected?: boolean }>`
   text-overflow: ellipsis;
   cursor: pointer;
 
-  background-color: ${({ selected, theme }) => (selected ? theme.colors.rose_light : '#ffffff')};
+  background-color: ${({ selected, theme }) => (selected ? theme.colors.rose_light : 'transparent')};
 
   &:hover {
     background-color: ${({ selected, theme }) => (selected ? theme.colors.rose_light : theme.colors.gray_200)};
@@ -114,7 +114,7 @@ export const Container = styled.li<{ selected?: boolean }>`
 export const IconStyles = css`
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  margin-right: 0.75rem;
+  margin-right: 10px;
 `;
 
 export const ItemStyles = css`
