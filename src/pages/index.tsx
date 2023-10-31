@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import Image from 'next/image';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useGetUser } from '@/api/hooks/user';
@@ -94,7 +92,7 @@ const LeftArea = styled.div`
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 
   padding: 2.5rem;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 const RightArea = styled.div`
@@ -143,6 +141,6 @@ const MenuBarStyles = (theme: EmotionTheme) => css`
 `;
 
 const LayoutElement = styled.div`
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
 `;

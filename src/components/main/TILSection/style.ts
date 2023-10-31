@@ -37,11 +37,17 @@ export const SkeletonStyles = css`
 export const EmptyRoot = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 850px;
   height: 500px;
   margin-left: 2.5rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    width: 100%;
+    margin-left: 0;
+    grid-column: 1 / 3;
+  }
 `;
 
 export const Description = styled.p`
@@ -49,16 +55,20 @@ export const Description = styled.p`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 1.375rem;
+
   & > span:first-of-type {
     font-weight: 700;
-    font-size: 1.375rem;
   }
 
   & > span:last-of-type {
     margin-top: 0.5rem;
     font-weight: 700;
-    font-size: 1.375rem;
     margin-bottom: 5rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    font-size: 16px;
   }
 `;
 
