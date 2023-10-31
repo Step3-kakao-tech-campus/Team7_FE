@@ -6,18 +6,15 @@ export const RoadmapContainer = styled.section`
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 40px;
-  margin: 0 auto;
 
-  @media ${({ theme }) => theme.mediaQuery.lg} {
+  @media ${({ theme }) => theme.mediaQuery.md} {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media ${({ theme }) => theme.mediaQuery.md} {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   @media ${({ theme }) => theme.mediaQuery.sm} {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
   }
 `;
 
@@ -27,8 +24,12 @@ export const ObserverInterSectionTarget = styled.div`
 `;
 
 export const Skeleton = styled(SkeletonBox)`
-  width: 211px;
+  width: 100%;
   height: 230px;
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    height: 200px;
+  }
 `;
 
 export const EmptyRoot = styled.section`

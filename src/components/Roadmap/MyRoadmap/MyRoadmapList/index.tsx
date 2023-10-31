@@ -38,6 +38,7 @@ const MyRoadmapSkeleton = () => {
       <Responsive device="mobile">
         <Styled.SkeletonRoot>
           <Styled.Skeleton />
+          <Styled.Skeleton />
         </Styled.SkeletonRoot>
       </Responsive>
     </>
@@ -54,31 +55,25 @@ const EmptyMyRoadmap = () => {
 };
 
 const setting = {
+  dots: true,
   infinite: false,
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 4,
-
   responsive: [
     {
-      breakpoint: 1024,
+      breakpoint: 770,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
       },
     },
     {
-      breakpoint: 760,
+      breakpoint: 640,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 550,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        arrows: false,
       },
     },
   ],

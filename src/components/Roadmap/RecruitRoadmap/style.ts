@@ -11,7 +11,7 @@ export const Navbar = styled.section`
     width: 50%;
   }
 
-  @media ${({ theme }) => theme.mediaQuery.md} {
+  @media ${({ theme }) => theme.mediaQuery.sm} {
     flex-direction: column-reverse;
 
     & > div {
