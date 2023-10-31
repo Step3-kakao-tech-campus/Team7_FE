@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import type { Tily } from '@/api/type';
-import * as Style from '@/components/Roadmap/TilyCard/style';
+import * as Style from '@/components/Roadmap/RoadmapList/TilyCard/style';
 import Logo from '@/components/common/Logo';
 
 interface TilyCardProps {

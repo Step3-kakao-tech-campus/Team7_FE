@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import MyRoadmap from '@/components/Roadmap/MyRoadmap';
-import RecruitRoadmap from '@/components/Roadmap/RecruitRoadmap';
+import MyRoadmap from '@/components/Roadmap/RoadmapList/MyRoadmap';
+import RecruitRoadmap from '@/components/Roadmap/RoadmapList/RecruitRoadmap';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import { setLayout } from '@/utils/layout';
 

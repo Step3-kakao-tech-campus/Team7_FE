@@ -1,5 +1,5 @@
 import type { Group } from '@/api/type';
-import * as Style from '@/components/Roadmap/GroupCard/style';
+import * as Style from '@/components/Roadmap/RoadmapList/GroupCard/style';
 import { Avatar } from '@/components/common/Avatar/style';
 
 interface GroupCardProps {

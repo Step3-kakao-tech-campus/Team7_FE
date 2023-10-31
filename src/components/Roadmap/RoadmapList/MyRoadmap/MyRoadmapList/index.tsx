@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useGetRoadmapsMyList } from '@/api/hooks/roadmap';
-import GroupCard from '@/components/Roadmap/GroupCard';
-import * as Styled from '@/components/Roadmap/MyRoadmap/MyRoadmapList/style';
-import TilyCard from '@/components/Roadmap/TilyCard';
+import GroupCard from '@/components/Roadmap/RoadmapList/GroupCard';
+import * as Styled from '@/components/Roadmap/RoadmapList/MyRoadmap/MyRoadmapList/style';
+import TilyCard from '@/components/Roadmap/RoadmapList/TilyCard';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Responsive from '@/components/common/Responsive';
 
