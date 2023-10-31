@@ -12,11 +12,11 @@ import * as Styled from './style';
 dayjs.extend(relativeTime);
 dayjs.locale('ko');
 
-type NonNullableMemberTil = {
-  [P in keyof MemberTil]: NonNullable<MemberTil[P]>;
-};
+// type NonNullableMemberTil = {
+//   [P in keyof MemberTil]: NonNullable<MemberTil[P]>;
+// };
 
-const TIL = (props: NonNullableMemberTil) => {
+const TIL = (props: MemberTil) => {
   const { tilId, name, image, content, submitDate, commentNum } = props;
 
   const router = useRouter();
@@ -26,7 +26,7 @@ const TIL = (props: NonNullableMemberTil) => {
       tilyLinks.tilView({
         roadmapId: Number(router.query.roadmapId),
         stepId: Number(router.query.stepId),
-        tilId,
+        tilId: tilId as number,
       }),
     );
   };
