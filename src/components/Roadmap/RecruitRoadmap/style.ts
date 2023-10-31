@@ -11,15 +11,15 @@ export const Navbar = styled.section`
     width: 50%;
   }
 
-  @media (max-width: 760px) {
-    flex-wrap: wrap-reverse;
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    flex-direction: column-reverse;
 
     & > div {
-      width: 100%;
+      width: 90%;
     }
 
     & > form {
-      width: 100%;
+      width: 90%;
     }
   }
 `;
@@ -34,23 +34,5 @@ export const InputContainerStyles = (theme: EmotionTheme) => css`
 
   @media (max-width: 760px) {
     width: 100%;
-  }
-`;
-
-export const RoadmapContainer = styled.section`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: 40px;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (max-width: 760px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 550px) {
-    grid-template-columns: repeat(1, 1fr);
   }
 `;
