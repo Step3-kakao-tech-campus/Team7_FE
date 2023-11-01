@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/ReferenceList/style';
-import { useReference } from '@/hooks/useRoadmapCreate';
+import { useReference } from '@/hooks/useRoadmap';
 
 interface ReferenceListProps {
   type: string;

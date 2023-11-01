@@ -12,7 +12,7 @@ const SideBar = () => {
       <Styled.NavItem
         href={tilyLinks.manageGroupInfo(Number(router.query.roadmapId))}
         active={+activePathMatcher(tilyLinks.manageGroupInfo(Number(router.query.roadmapId)))}>
-        그룹 정보
+        로드맵 정보
       </Styled.NavItem>
       <Styled.NavItem
         href={tilyLinks.manageMember(Number(router.query.roadmapId))}

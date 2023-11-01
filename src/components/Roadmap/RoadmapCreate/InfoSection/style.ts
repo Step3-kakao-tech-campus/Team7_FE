@@ -1,18 +1,17 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.section`
+export const Root = styled.section<{ where: 'create' | 'edit' }>`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding: 0 15px;
+  padding: ${({ where }) => (where === 'create' ? '0 15px' : '0')};
 `;
 
-export const Header = styled.header`
+export const CreateHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 3rem;
-
+  margin-top: 35px;
   @media ${({ theme }) => theme.mediaQuery.xs} {
     margin-top: 20px;
 
@@ -26,9 +25,20 @@ export const Header = styled.header`
   }
 `;
 
+export const EditHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > h1 {
+    font-size: 32px;
+  }
+`;
+
 export const RadioContainer = styled.section`
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 export const ButtonContainer = styled.section`

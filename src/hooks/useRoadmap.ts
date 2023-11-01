@@ -3,53 +3,50 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmapsById, usePostRoadmaps } from '@/api/hooks/roadmap';
 import type { StepForm } from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
-import {
-  roadmapFormDataSelector,
-  roadmapInfoAtoms,
-  roadmapStepAtoms,
-} from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import { tilyLinks } from '@/constants/links';
 import useQueryParam from '@/hooks/useQueryParam';
 
-export const useRoadmapInfo = () => {
-  const [roadmapValid, setRoadmapValid] = useState(true);
+const handleValue = (value: string) => {
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  return value;
+};
+
+export const useRoadmap = () => {
+  // const [roadmapValid, setRoadmapValid] = useState(true);
   const router = useRouter();
 
-  const [info, setInfo] = useRecoilState(roadmapInfoAtoms);
-  const roadmapFormData = useRecoilValue(roadmapFormDataSelector);
-  const resetRoadmapInfo = useResetRecoilState(roadmapInfoAtoms);
-  const resetRoadmapStep = useResetRecoilState(roadmapStepAtoms);
+  const [roadmap, setRoadmap] = useRecoilState(roadmapAtoms);
+  const resetRoadmap = useRecoilState(roadmapAtoms);
+  // const roadmapFormData = useRecoilValue(roadmapFormDataSelector);
+  // const resetRoadmapInfo = useResetRecoilState(roadmapInfoAtoms);
+  // const resetRoadmapStep = useResetRecoilState(roadmapStepAtoms);
 
   const { postRoadmaps, isLoading } = usePostRoadmaps();
 
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
-    setInfo((prev) => ({ ...prev, [name]: handleValue(value) }));
+    setRoadmap((prev) => ({ ...prev, [name]: handleValue(value) }));
   };
 
-  const onCreateRoadmapHandler = async () => {
-    if (info.name === '') {
-      setRoadmapValid(false);
-    } else {
-      setRoadmapValid(true);
-      const data = await postRoadmaps(roadmapFormData);
+  // const onCreateRoadmapHandler = async () => {
+  //   if (info.name === '') {
+  //     setRoadmapValid(false);
+  //   } else {
+  //     setRoadmapValid(true);
+  //     const data = await postRoadmaps(roadmapFormData);
 
-      if (data.success) {
-        router.replace(tilyLinks.roadmap());
-        resetRoadmapInfo();
-        resetRoadmapStep();
-      }
-    }
-  };
+  //     if (data.success) {
+  //       router.replace(tilyLinks.roadmap());
+  //       resetRoadmapInfo();
+  //       resetRoadmapStep();
+  //     }
+  //   }
+  // };
 
-  const handleValue = (value: string) => {
-    if (value === 'public') return true;
-    if (value === 'private') return false;
-    return value;
-  };
-
-  return { info, handleInfoChange, roadmapValid, onCreateRoadmapHandler, isLoading };
+  return { roadmap, handleInfoChange };
 };
 
 /**

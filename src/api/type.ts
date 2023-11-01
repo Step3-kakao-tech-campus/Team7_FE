@@ -58,7 +58,7 @@ export interface Group {
 }
 
 export interface Creator {
-  id: number;
+  id?: number;
   name: string;
   image: string;
 }

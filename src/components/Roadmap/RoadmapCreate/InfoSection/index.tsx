@@ -3,26 +3,45 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
-import { useRoadmapInfo } from '@/hooks/useRoadmapCreate';
+import { useRoadmap } from '@/hooks/useRoadmap';
 
-const InfoSection = () => {
-  const { info, handleInfoChange, roadmapValid, onCreateRoadmapHandler, isLoading } = useRoadmapInfo();
+interface InfoSectionProps {
+  where: 'create' | 'edit';
+}
+
+const InfoSection = (props: InfoSectionProps) => {
+  const { where } = props;
+
+  const { roadmap, handleInfoChange } = useRoadmap();
+
+  console.log(roadmap);
+
   return (
-    <Styled.Root>
-      <Styled.Header>
-        <h1>그룹 로드맵 생성</h1>
-        <Button onClick={onCreateRoadmapHandler} isLoading={isLoading}>
-          생성하기
-        </Button>
-      </Styled.Header>
+    <Styled.Root where={where}>
+      {where === 'create' ? (
+        <Styled.CreateHeader>
+          <h1>그룹 로드맵 생성</h1>
+          <Button
+          //  onClick={onCreateRoadmapHandler} isLoading={isLoading}
+          >
+            생성하기
+          </Button>
+        </Styled.CreateHeader>
+      ) : (
+        <Styled.EditHeader>
+          <h1>로드맵 정보</h1>
+          <Button>수정 완료</Button>
+        </Styled.EditHeader>
+      )}
+
       <Input
         label="로드맵 이름"
         labelType="bold"
         placeholder="이름을 입력해주세요."
         name="name"
-        status={roadmapValid ? 'default' : 'error'}
+        // status={roadmapValid ? 'default' : 'error'}
         message={'필수 정보 입니다.'}
-        value={info?.name}
+        value={roadmap.name}
         onChange={handleInfoChange}
       />
       <TextArea
@@ -31,7 +50,7 @@ const InfoSection = () => {
         placeholder="설명을 입력해주세요."
         rows={7}
         name="description"
-        value={info?.description}
+        value={roadmap.description}
         onChange={handleInfoChange}
       />
 
@@ -41,19 +60,43 @@ const InfoSection = () => {
           <RadioButton
             label="공개"
             name="isPublic"
-            value="public"
-            checked={info?.isPublic}
+            value="true"
+            checked={roadmap.isPublic}
             onChange={handleInfoChange}
           />
           <RadioButton
             label="비공개"
             name="isPublic"
-            value="private"
-            checked={!info?.isPublic}
+            value="false"
+            checked={!roadmap.isPublic}
             onChange={handleInfoChange}
           />
         </Styled.ButtonContainer>
       </Styled.RadioContainer>
+      {where === 'edit' && (
+        <>
+          <Styled.RadioContainer>
+            <h3>모집 여부</h3>
+            <Styled.ButtonContainer>
+              <RadioButton
+                label="희망"
+                name="isRecruit"
+                value="true"
+                checked={roadmap.isRecruit}
+                onChange={handleInfoChange}
+              />
+              <RadioButton
+                label="비희망"
+                name="isRecruit"
+                value="false"
+                checked={!roadmap.isRecruit}
+                onChange={handleInfoChange}
+              />
+            </Styled.ButtonContainer>
+          </Styled.RadioContainer>
+          <Input label="참여 코드" value={roadmap.code} disabled />
+        </>
+      )}
     </Styled.Root>
   );
 };
