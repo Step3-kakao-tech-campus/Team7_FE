@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
 import { tilyLinks } from '@/constants/links';
-import { TextButton } from '../../TextButton';
+import { TextButton } from '../../common/TextButton';
 import ByEmail from '../ByEmail';
 
 interface VerifyFormProps {

@@ -12,7 +12,7 @@ import Responsive from '@/components/common/Responsive';
 import { tilyLinks } from '@/constants/links';
 import { PASSWORD_REGEX } from '@/constants/regex';
 import { useModalState } from '@/hooks/useModalState';
-import AuthModal from '../AuthModal';
+import AuthModal from '../register/RegisterCompeleteModal';
 
 export interface ChangePasswordFormInput {
   email: string;

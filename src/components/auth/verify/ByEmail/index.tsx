@@ -1,57 +1,31 @@
-import { useState } from 'react';
-import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
-import { usePostEmailCheck, usePostEmailCode } from '@/api/hooks/auth';
+import { Controller } from 'react-hook-form';
 import * as Styled from '@/components/auth/verify/ByEmail/style';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { EMAIL_REGEX } from '@/constants/regex';
-import { useModalState } from '@/hooks/useModalState';
-import { TextButton } from '../../TextButton';
+import useByEamil from './useByEmail';
+import { TextButton } from '../../common/TextButton';
 import CodeCheck from '../CodeCheck';
-import VerifyModal from '../VerifyModal';
+import DuplicateEmailModal from '../DuplicateEmailModal';
 
 interface ByEmailProps {
   location: 'register' | 'password';
 }
 
 const ByEmail = ({ location }: ByEmailProps) => {
-  const [isEmail, setIsEmail] = useState<boolean>(false);
-  const { isOpen, handleOpen, handleClose } = useModalState();
-
-  const { postEmailCheckAsync, isLoading: registerLoading } = usePostEmailCheck();
-  const { postEmailCodeAsync, isLoading: passwordLoading } = usePostEmailCode();
-
   const {
+    isOpen,
+    handleClose,
+    isEmail,
+    registerLoading,
+    passwordLoading,
     control,
     handleSubmit,
     getValues,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: '',
-    },
-    mode: 'onSubmit',
-  });
-
-  const onSubmit: SubmitHandler<{ email: string }> = async (formData) => {
-    const email = formData.email;
-
-    const data = location === 'register' ? await postEmailCheckAsync({ email }) : await postEmailCodeAsync({ email });
-
-    if (data?.code === 200) {
-      setIsEmail(true);
-    } else {
-      if (location === 'register') {
-        handleOpen();
-      }
-    }
-  };
-
-  const resend = async () => {
-    const email = getValues('email');
-    location === 'register' ? await postEmailCheckAsync({ email }) : await postEmailCodeAsync({ email });
-  };
-
+    errors,
+    onSubmit,
+    resend,
+  } = useByEamil(location);
   return (
     <>
       <Styled.EmailForm onSubmit={handleSubmit(onSubmit)}>
@@ -93,7 +67,7 @@ const ByEmail = ({ location }: ByEmailProps) => {
       </Styled.EmailForm>
       {isEmail && <CodeCheck location={location} email={getValues('email')} />}
 
-      <VerifyModal isOpen={isOpen} onClose={handleClose} />
+      <DuplicateEmailModal isOpen={isOpen} onClose={handleClose} />
     </>
   );
 };

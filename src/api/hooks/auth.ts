@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import type { ChangePasswordFormInput } from '@/components/auth/change-password';
 import type { LoginFormInput } from '@/components/auth/login';
-import type { RegisterFormInput } from '@/components/auth/register';
+import type { RegisterFormInput } from '@/components/auth/register/RegisterForm';
 import { useApiError } from '@/hooks/useApiError';
 import {
   postPasswordChange as postPasswordChangeAPI,

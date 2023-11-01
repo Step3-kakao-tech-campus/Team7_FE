@@ -12,7 +12,7 @@ import Responsive from '@/components/common/Responsive';
 import { tilyLinks } from '@/constants/links';
 import { NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
 import { useModalState } from '@/hooks/useModalState';
-import AuthModal from '../AuthModal';
+import RegisterCompeleteModal from '../RegisterCompeleteModal';
 
 export interface RegisterFormInput {
   email: string;
@@ -160,7 +160,7 @@ const Register = () => {
           </StyledButtonContainer>
         </StyledForm>
       </StyledFlex>
-      <AuthModal isOpen={isOpen} handleClose={handleClose} content="회원가입이 완료되었습니다." />
+      <RegisterCompeleteModal isOpen={isOpen} handleClose={handleClose} content="회원가입이 완료되었습니다." />
     </>
   );
 };

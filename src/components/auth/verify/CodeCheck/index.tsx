@@ -1,13 +1,10 @@
 import { motion } from 'framer-motion';
-import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
-import { useRouter } from 'next/router';
-import type { EmailCodeCheckRequest } from '@/api/auth/type';
-import { usePostEmailCodeCheck } from '@/api/hooks/auth';
+import { Controller } from 'react-hook-form';
 import * as Styled from '@/components/auth/verify/CodeCheck/style';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
-import { tilyLinks } from '@/constants/links';
+import useCodeCheck from './useCodeCheck';
 
 interface CodeCheckProps {
   location: 'register' | 'password';
@@ -16,44 +13,8 @@ interface CodeCheckProps {
 
 const CodeCheck = (props: CodeCheckProps) => {
   const { location, email } = props;
-  const router = useRouter();
 
-  const { postEmailCodeCheckAsync, isLoading } = usePostEmailCodeCheck();
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email,
-      code: '',
-    },
-    mode: 'onSubmit',
-  });
-
-  const onSubmit: SubmitHandler<EmailCodeCheckRequest> = async (formData) => {
-    console.log(formData);
-    const data = await postEmailCodeCheckAsync(formData);
-
-    if (data?.code === 200) {
-      if (location === 'register') {
-        router.push({
-          pathname: tilyLinks.register(),
-          query: {
-            email: email,
-          },
-        });
-      } else {
-        router.push({
-          pathname: tilyLinks.changePassword(),
-          query: {
-            email: email,
-          },
-        });
-      }
-    }
-  };
+  const { isLoading, control, handleSubmit, errors, onSubmit } = useCodeCheck(location, email);
 
   return (
     <Styled.CodeDiv onSubmit={handleSubmit(onSubmit)}>

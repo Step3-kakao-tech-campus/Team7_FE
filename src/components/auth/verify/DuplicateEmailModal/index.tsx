@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import * as Styled from '@/components/auth/verify/VerifyModal/style';
+import * as Styled from '@/components/auth/verify/DuplicateEmailModal/style';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import { tilyLinks } from '@/constants/links';
 
-const VerifyModal = (props: ModalProps) => {
+const DuplicateEmailModal = (props: ModalProps) => {
   const { isOpen, onClose } = props;
 
   const router = useRouter();
@@ -27,4 +27,4 @@ const VerifyModal = (props: ModalProps) => {
   );
 };
 
-export default VerifyModal;
+export default DuplicateEmailModal;

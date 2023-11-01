@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import * as Styled from '@/components/auth/AuthModal/style';
+import * as Styled from '@/components/auth/register/RegisterCompeleteModal/style';
 import Modal from '@/components/common/Modal';
 import { tilyLinks } from '@/constants/links';
 
@@ -9,7 +9,7 @@ interface AuthModalProps {
   content: string;
 }
 
-const AuthModal = (props: AuthModalProps) => {
+const RegisterCompeleteModal = (props: AuthModalProps) => {
   const { isOpen, handleClose, content } = props;
   const router = useRouter();
 
@@ -29,4 +29,4 @@ const AuthModal = (props: AuthModalProps) => {
   );
 };
 
-export default AuthModal;
+export default RegisterCompeleteModal;
