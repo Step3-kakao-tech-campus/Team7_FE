@@ -5,6 +5,10 @@ export const Root = styled.section<{ where: 'create' | 'manage' }>`
   flex-direction: column;
   gap: 25px;
   padding: ${({ where }) => (where === 'create' ? '0 15px' : '0')};
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    padding: 0 10px;
+  }
 `;
 
 export const CreateHeader = styled.header`

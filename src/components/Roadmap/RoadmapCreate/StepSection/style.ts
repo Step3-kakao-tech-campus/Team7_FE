@@ -9,6 +9,10 @@ export const Root = styled.section<{ where: 'create' | 'manage' }>`
   & > h2 {
     ${({ where }) => where === 'manage' && ' font-size: 32px'};
   }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    padding: 0 15px;
+  }
 `;
 
 export const HeaderTitle = styled.h2`
