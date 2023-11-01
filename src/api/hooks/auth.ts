@@ -15,15 +15,9 @@ import {
 
 export const usePostEmailCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCheckAPI);
-  const { handleError } = useApiError();
 
   const postEmailCheck = async (email: string) => {
-    const data = await mutateAsync(
-      { email: email },
-      {
-        onError: handleError,
-      },
-    );
+    const data = await mutateAsync({ email: email });
 
     return data;
   };

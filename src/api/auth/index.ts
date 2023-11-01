@@ -21,6 +21,8 @@ export const postEmailCheck = async ({ email }: EmailCheckRequest) => {
     data: { email },
   });
 
+  console.log(data);
+
   return data;
 };
 
