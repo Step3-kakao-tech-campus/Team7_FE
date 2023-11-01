@@ -93,7 +93,7 @@ const ByEmail = ({ location }: ByEmailProps) => {
       </Styled.EmailForm>
       {isEmail && <CodeCheck location={location} email={getValues('email')} />}
 
-      <VerifyModal isOpen={isOpen} handleClose={handleClose} />
+      <VerifyModal isOpen={isOpen} onClose={handleClose} />
     </>
   );
 };
