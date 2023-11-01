@@ -28,7 +28,7 @@ export const getRoadmapsResponse: GetRoadmapsMyResponse = {
       },
     ],
     roadmaps: {
-      tily: [
+      tilys: [
         {
           id: 1,
           name: '알고리즘 격파파파파파파파파파파파파파파',
@@ -40,7 +40,7 @@ export const getRoadmapsResponse: GetRoadmapsMyResponse = {
           stepNum: 50,
         },
       ],
-      group: [
+      groups: [
         {
           id: 3,
           name: '준서좌의 나도 할 수 있다 알고리즘즘즘즘즘즘즘',
