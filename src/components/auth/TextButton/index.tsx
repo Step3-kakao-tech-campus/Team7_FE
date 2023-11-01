@@ -3,7 +3,7 @@ import Button from '@/components/common/Button';
 
 export const TextButton = styled(Button)`
   align-self: flex-end;
-  margin-top: 0.5rem;
+  margin-top: 8px;
   padding: 0;
   background-color: transparent;
   font-size: 0.8rem;

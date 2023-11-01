@@ -20,7 +20,7 @@ export const InputContainer = styled.div<InputStateProps>`
   ${({ theme, status, disabled }) => css`
     display: flex;
     width: 100%;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 0 0;
     padding: 0.9rem 0.6rem;
     border-radius: 0.35rem;
     transition: all 0.2s;
