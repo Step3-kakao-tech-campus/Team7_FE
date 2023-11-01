@@ -18,11 +18,19 @@ const RoadmapDetailInfo = () => {
 
   return (
     <>
-      {' '}
       <Styled.Root>
         <Flex justify="space-between" align="flex-start" gap={0.8}>
           <h1>{data?.result.name}</h1>
-          <Button onClick={handleOpen}>신청하기</Button>
+          {data?.result.role === null ? (
+            <Button onClick={handleOpen}>신청하기</Button>
+          ) : (
+            <Button
+              onClick={() => {
+                // tilyLinks.tilWrite();
+              }}>
+              학습하기
+            </Button>
+          )}
         </Flex>
         <Styled.InfoBox>
           <Flex align="center">
