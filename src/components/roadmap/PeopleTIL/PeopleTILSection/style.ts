@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Card from '@/components/common/Card';
-import { EmotionTheme } from '@/styles/emotion';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.section`
   width: 100%;
