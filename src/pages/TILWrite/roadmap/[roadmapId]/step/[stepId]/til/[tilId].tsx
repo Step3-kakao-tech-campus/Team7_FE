@@ -10,6 +10,7 @@ import Header from '@/components/TILWrite/Header';
 import Reference from '@/components/TILWrite/Reference';
 import RoadMap from '@/components/TILWrite/RoadMap';
 import MobileHeader from '@/components/TILWrite/mobile/MobileHeader';
+import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
 import Responsive from '@/components/common/Responsive';
 import EmptyLayout from '@/components/layout/EmptyLayout';
 import { useDrawerState } from '@/hooks/useDrawerState';
@@ -114,7 +115,9 @@ const TILWrite = () => {
               animate={referenceOpen ? 'open' : 'closed'}
               variants={extraDrawerVariants}
               transition={{ type: 'tween', duration: DURATION }}>
-              <Reference handleCloseReferenceAside={() => handleCloseReference()} />
+              <FallbackErrorBoundary FallbackRender={Reference.Fallback}>
+                <Reference handleCloseReferenceAside={() => handleCloseReference()} />
+              </FallbackErrorBoundary>
             </ExtraDrawerMotion>
 
             <ExtraDrawerMotion

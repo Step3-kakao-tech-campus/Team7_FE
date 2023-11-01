@@ -57,7 +57,7 @@ const Home = () => {
 
             <RightArea>
               <History />
-              <FallbackErrorBoundary fallbackRender={TILSection.Fallback}>
+              <FallbackErrorBoundary FallbackRender={TILSection.Fallback}>
                 <TILSection />
               </FallbackErrorBoundary>
             </RightArea>
