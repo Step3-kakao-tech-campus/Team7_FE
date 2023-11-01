@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapsByIdManage } from '@/api/hooks/roadmap';
 import InfoSection from '@/components/Roadmap/RoadmapCreate/InfoSection';
+import StepSection from '@/components/Roadmap/RoadmapCreate/StepSection';
+import Flex from '@/components/common/Flex';
 import useQueryParam from '@/hooks/useQueryParam';
 
-const GroupInfo = () => {
+const Info = () => {
   const router = useRouter();
   const roadmapId = useQueryParam(router.query.roadmapId);
 
@@ -14,10 +16,11 @@ const GroupInfo = () => {
   }
 
   return (
-    <>
-      <InfoSection where="edit" />
-    </>
+    <Flex dir="col" gap={3}>
+      <InfoSection where="manage" />
+      <StepSection where="manage" />
+    </Flex>
   );
 };
 
-export default GroupInfo;
+export default Info;

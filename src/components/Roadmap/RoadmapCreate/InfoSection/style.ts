@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.section<{ where: 'create' | 'edit' }>`
+export const Root = styled.section<{ where: 'create' | 'manage' }>`
   display: flex;
   flex-direction: column;
   gap: 25px;

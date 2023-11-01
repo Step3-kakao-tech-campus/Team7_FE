@@ -1,10 +1,14 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.section`
+export const Root = styled.section<{ where: 'create' | 'manage' }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 15px;
+  padding: ${({ where }) => (where === 'create' ? '0 15px' : '0')};
+
+  & > h2 {
+    ${({ where }) => where === 'manage' && ' font-size: 32px'};
+  }
 `;
 
 export const HeaderTitle = styled.h2`

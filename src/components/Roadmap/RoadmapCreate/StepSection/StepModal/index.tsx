@@ -1,7 +1,6 @@
-import { useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal/style';
-import { roadmapStepAtoms, type ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { type ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import Calendar from '@/components/common/Calendar';
 import InfoArea from '@/components/common/InfoArea';
@@ -9,12 +8,13 @@ import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
-import { useStepInfo } from '@/hooks/useRoadmap';
+import { useRoadmap } from '@/hooks/useRoadmap';
 
 export interface StepForm {
+  id?: number;
   title: string;
   description: string;
-  dueDate: Date | null;
+  dueDate?: Date | null;
   references: {
     youtube: ReferenceLink[];
     web: ReferenceLink[];
@@ -30,17 +30,14 @@ interface StepModalProps extends ModalProps {
 const StepModal = (props: StepModalProps) => {
   const { type, idx, isOpen, onClose } = props;
 
-  const { step, setStep, isValid, handleResetStep, handleStepChange, handleCreateStep, handleEditStep } =
-    useStepInfo(defaultValue);
+  const { roadmap, stepForm, setStepForm, handleStepFormChange, handleCreateStep, stepValid, handleResetStep } =
+    useRoadmap();
 
-  const editValue = useRecoilValue(roadmapStepAtoms);
-
-  // 수정하기로 들어오면 해당 STEP의 정보들이 미리 주입된다.
   useEffect(() => {
     if (type === 'edit' && idx !== undefined) {
-      setStep(editValue[idx]);
+      setStepForm(roadmap.steps[idx]);
     }
-  }, [editValue, idx, setStep, type]);
+  }, [type, idx, roadmap.steps, setStepForm]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
@@ -57,11 +54,11 @@ const StepModal = (props: StepModalProps) => {
           <Input
             placeholder="제목을 입력해주세요."
             name="title"
-            value={step.title}
-            status={!isValid ? 'error' : 'default'}
+            value={stepForm.title}
+            status={!stepValid ? 'error' : 'default'}
             message="필수 정보 입니다."
             onChange={(e) => {
-              handleStepChange(e.target.name, e.target.value);
+              handleStepFormChange(e.target.name, e.target.value);
             }}
           />
         </Styled.Label>
@@ -71,9 +68,9 @@ const StepModal = (props: StepModalProps) => {
             placeholder="설명을 입력해주세요."
             rows={5}
             name="description"
-            value={step.description}
+            value={stepForm.description}
             onChange={(e) => {
-              handleStepChange(e.target.name, e.target.value);
+              handleStepFormChange(e.target.name, e.target.value);
             }}
           />
         </Styled.Label>
@@ -84,27 +81,27 @@ const StepModal = (props: StepModalProps) => {
             label="종료일 이후 제출 제한"
             textPosition="right"
             textSize={0.8}
-            checked={!!step.dueDate}
+            checked={!!stepForm.dueDate}
             onChange={() => {
-              handleStepChange('dueDate', new Date());
+              handleStepFormChange('dueDate', new Date());
             }}
           />
-          {!!step.dueDate && (
+          {!!stepForm.dueDate && (
             <Calendar
               popperPlacement="top"
-              onChangeDate={(date: Date) => handleStepChange('dueDate', date)}
+              onChangeDate={(date: Date) => handleStepFormChange('dueDate', date)}
               isTimeInclude={true}
               minDate={new Date()}
-              date={step.dueDate}
+              date={stepForm.dueDate}
             />
           )}
           <RadioButton
             label="기간 제한 없음"
             textPosition="right"
             textSize={0.8}
-            checked={!step.dueDate}
+            checked={!stepForm.dueDate}
             onChange={() => {
-              handleStepChange('dueDate', null);
+              handleStepFormChange('dueDate', null);
             }}
           />
         </Styled.Label>
@@ -114,13 +111,13 @@ const StepModal = (props: StepModalProps) => {
             onClick={() => {
               onClose();
               // 수정하다가 취소하고 나오면, 기존 값으로 상태를 다시 맞춰준다.
-              type === 'edit' && idx !== undefined ? setStep(editValue[idx]) : handleResetStep();
+              type === 'edit' && idx !== undefined ? setStepForm(roadmap.steps[idx]) : handleResetStep();
             }}>
             취소
           </Button>
           <Button
             onClick={() => {
-              type === 'edit' && idx !== undefined ? handleEditStep(onClose, idx) : handleCreateStep(onClose);
+              type === 'edit' && idx !== undefined ? '' : handleCreateStep(onClose);
             }}>
             확인
           </Button>
@@ -131,13 +128,3 @@ const StepModal = (props: StepModalProps) => {
 };
 
 export default StepModal;
-
-const defaultValue = {
-  title: '',
-  description: '',
-  dueDate: new Date(),
-  references: {
-    youtube: [],
-    web: [],
-  },
-};

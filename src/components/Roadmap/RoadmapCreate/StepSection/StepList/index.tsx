@@ -1,18 +1,19 @@
 import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 import Image from 'next/image';
 import StepBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/style';
-import { roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
 const StepList = () => {
-  const stepList = useRecoilValue(roadmapStepAtoms);
+  const roadmap = useRecoilValue(roadmapAtoms);
 
-  if (stepList.length === 0) return <StepList.Empty />;
+  if (roadmap.steps.length === 0) return <StepList.Empty />;
   else {
     return (
       <Styled.Root>
-        {stepList.map((step, idx) => (
-          <StepBox key={idx} idx={idx} step={step} where="create" />
+        {roadmap.steps.map((step, idx) => (
+          <StepBox key={step.id ?? idx} idx={idx} step={step} where="create" />
         ))}
       </Styled.Root>
     );

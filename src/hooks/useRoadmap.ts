@@ -1,3 +1,4 @@
+import { produce } from 'immer';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -14,11 +15,10 @@ const handleValue = (value: string) => {
 };
 
 export const useRoadmap = () => {
-  // const [roadmapValid, setRoadmapValid] = useState(true);
-  const router = useRouter();
-
   const [roadmap, setRoadmap] = useRecoilState(roadmapAtoms);
-  const resetRoadmap = useRecoilState(roadmapAtoms);
+  const [stepValid, setStepValid] = useState<boolean>(true);
+  const [stepForm, setStepForm] = useState<StepForm>(defaultStepForm);
+
   // const roadmapFormData = useRecoilValue(roadmapFormDataSelector);
   // const resetRoadmapInfo = useResetRecoilState(roadmapInfoAtoms);
   // const resetRoadmapStep = useResetRecoilState(roadmapStepAtoms);
@@ -29,6 +29,31 @@ export const useRoadmap = () => {
     const { name, value } = e.target;
 
     setRoadmap((prev) => ({ ...prev, [name]: handleValue(value) }));
+  };
+
+  const handleStepFormChange = (name: string, value: string | Date | null) => {
+    setStepValid(true);
+    setStepForm({ ...stepForm, [name]: value });
+  };
+
+  const handleCreateStep = (callback: () => void) => {
+    if (!stepForm.title) {
+      setStepValid(false);
+    } else {
+      setStepValid(true);
+      setRoadmap((prev) =>
+        produce(prev, (draft) => {
+          draft.steps.push(stepForm);
+        }),
+      );
+      handleResetStep();
+      callback();
+    }
+  };
+
+  const handleResetStep = () => {
+    setStepForm(defaultStepForm);
+    setStepValid(true);
   };
 
   // const onCreateRoadmapHandler = async () => {
@@ -46,7 +71,16 @@ export const useRoadmap = () => {
   //   }
   // };
 
-  return { roadmap, handleInfoChange };
+  return {
+    roadmap,
+    handleInfoChange,
+    stepForm,
+    setStepForm,
+    handleStepFormChange,
+    handleCreateStep,
+    stepValid,
+    handleResetStep,
+  };
 };
 
 /**
@@ -58,11 +92,6 @@ export const useStepInfo = (defaultValue: StepForm) => {
   const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
   const [step, setStep] = useState<StepForm>(defaultValue);
   const [isValid, setIsValid] = useState(true);
-
-  const handleStepChange = (name: string, value: string | Date | null) => {
-    setIsValid(true);
-    setStep({ ...step, [name]: value });
-  };
 
   /**
    * Step을 생성한다.
@@ -150,4 +179,14 @@ export const useReference = (type: string, stepIdx: number, where: 'detail' | 'c
   };
 
   return { references, handleDeleteReference };
+};
+
+const defaultStepForm = {
+  title: '',
+  description: '',
+  dueDate: new Date(),
+  references: {
+    youtube: [],
+    web: [],
+  },
 };

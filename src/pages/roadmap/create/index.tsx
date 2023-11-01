@@ -17,7 +17,7 @@ const RoadmapCreate = () => {
   return (
     <RoadmapCreatePage>
       <InfoSection where="create" />
-      {/* <StepSection /> */}
+      <StepSection where="create" />
     </RoadmapCreatePage>
   );
 };

@@ -4,15 +4,20 @@ import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/style';
 import Button from '@/components/common/Button';
 import { useModalState } from '@/hooks/useModalState';
 
-const StepSection = () => {
+interface StepSectionProps {
+  where: 'create' | 'manage';
+}
+
+const StepSection = (props: StepSectionProps) => {
+  const { where } = props;
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   return (
     <>
-      <Styled.Root>
-        <Styled.HeaderTitle>STEP 생성</Styled.HeaderTitle>
+      <Styled.Root where={where}>
+        <Styled.HeaderTitle>STEP{where === 'create' && ' 생성'}</Styled.HeaderTitle>
         <Styled.ButtonContainer>
-          <Button>STEP 불러오기</Button>
+          {where === 'create' && <Button>STEP 불러오기</Button>}
           <Button
             onClick={() => {
               handleOpen();

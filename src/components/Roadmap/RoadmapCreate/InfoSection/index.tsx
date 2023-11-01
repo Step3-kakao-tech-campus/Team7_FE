@@ -6,15 +6,13 @@ import TextArea from '@/components/common/TextArea';
 import { useRoadmap } from '@/hooks/useRoadmap';
 
 interface InfoSectionProps {
-  where: 'create' | 'edit';
+  where: 'create' | 'manage';
 }
 
 const InfoSection = (props: InfoSectionProps) => {
   const { where } = props;
 
   const { roadmap, handleInfoChange } = useRoadmap();
-
-  console.log(roadmap);
 
   return (
     <Styled.Root where={where}>
@@ -73,7 +71,7 @@ const InfoSection = (props: InfoSectionProps) => {
           />
         </Styled.ButtonContainer>
       </Styled.RadioContainer>
-      {where === 'edit' && (
+      {where === 'manage' && (
         <>
           <Styled.RadioContainer>
             <h3>모집 여부</h3>

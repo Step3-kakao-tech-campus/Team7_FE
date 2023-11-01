@@ -1,4 +1,4 @@
-import GroupInfo from '@/components/Roadmap/manage/GroupInfo';
+import Info from '@/components/Roadmap/manage/GroupInfo/Info';
 import SideBar from '@/components/Roadmap/manage/SideBar';
 import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
 import Responsive from '@/components/common/Responsive';
@@ -21,7 +21,7 @@ const GroupInfoPage = () => {
         </Responsive>
 
         <RightArea>
-          <GroupInfo />
+          <Info />
         </RightArea>
       </Container>
     </Root>
