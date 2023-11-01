@@ -12,16 +12,14 @@ interface InfoSectionProps {
 const InfoSection = (props: InfoSectionProps) => {
   const { where } = props;
 
-  const { roadmap, handleInfoChange } = useRoadmap();
+  const { roadmap, handleInfoChange, infoValid, onCreateRoadmapHandler, isLoading } = useRoadmap();
 
   return (
     <Styled.Root where={where}>
       {where === 'create' ? (
         <Styled.CreateHeader>
           <h1>그룹 로드맵 생성</h1>
-          <Button
-          //  onClick={onCreateRoadmapHandler} isLoading={isLoading}
-          >
+          <Button onClick={onCreateRoadmapHandler} isLoading={isLoading}>
             생성하기
           </Button>
         </Styled.CreateHeader>
@@ -37,7 +35,7 @@ const InfoSection = (props: InfoSectionProps) => {
         labelType="bold"
         placeholder="이름을 입력해주세요."
         name="name"
-        // status={roadmapValid ? 'default' : 'error'}
+        status={infoValid ? 'default' : 'error'}
         message={'필수 정보 입니다.'}
         value={roadmap.name}
         onChange={handleInfoChange}

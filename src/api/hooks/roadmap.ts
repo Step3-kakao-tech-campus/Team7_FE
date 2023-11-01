@@ -1,6 +1,6 @@
 import qs from 'qs';
 import type { ParsedUrlQuery } from 'querystring';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import {
@@ -22,7 +22,7 @@ import {
   postRoadmapsApply as postRoadmapsApplyAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, GetRoadmapsResponse, Role } from '@/api/roadmap/type';
-import { RoadmapForm, roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { type RoadmapForm, roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
@@ -173,15 +173,6 @@ export const usePostRoadmaps = () => {
 
 export const useGetRoadmapsById = (roadmapId: number) => {
   const enabled = roadmapId > 0;
-  const { data } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId), () => getRoadmapsById(roadmapId), {
-    enabled,
-  });
-
-  return data;
-};
-
-export const useGetRoadmapsByIdManage = (roadmapId: number) => {
-  const enabled = roadmapId > 0;
   const { data, isLoading } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId), () => getRoadmapsById(roadmapId), {
     enabled,
   });
@@ -192,7 +183,7 @@ export const useGetRoadmapsByIdManage = (roadmapId: number) => {
     setRoadmap(data?.result);
   }
 
-  return { isLoading };
+  return { data, isLoading };
 };
 
 export const usePostRoadmapsApply = () => {

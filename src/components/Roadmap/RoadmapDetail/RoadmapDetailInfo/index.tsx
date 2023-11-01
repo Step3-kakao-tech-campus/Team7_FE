@@ -12,7 +12,7 @@ const RoadmapDetailInfo = () => {
   const router = useRouter();
   const roadmapId = useQueryParam(router.query.roadmapId);
 
-  const data = useGetRoadmapsById(Number(roadmapId));
+  const { data } = useGetRoadmapsById(Number(roadmapId));
 
   const { isOpen, handleOpen, handleClose } = useModalState();
 

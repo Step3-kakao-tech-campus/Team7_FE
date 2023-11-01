@@ -9,7 +9,7 @@ const RoadmapDetailStep = () => {
   const router = useRouter();
   const roadmapId = useQueryParam(router.query.roadmapId);
 
-  const data = useGetRoadmapsById(Number(roadmapId));
+  const { data } = useGetRoadmapsById(Number(roadmapId));
 
   if (data?.result.steps.length === 0) return <StepList.Empty />;
   else {

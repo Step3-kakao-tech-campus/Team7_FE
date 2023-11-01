@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { useState } from 'react';
 import Image from 'next/image';
 import type { StepWithReferences } from '@/api/type';
@@ -80,8 +79,8 @@ const StepBox = (props: StepBoxProps) => {
         {isOpen && (
           <Styled.ContentContainer>
             <p>{step.description}</p>
-            {/* <YoutubeBox idx={idx} where={where} />
-            <WebBox idx={idx} where={where} /> */}
+            <YoutubeBox idx={idx} where={where} />
+            <WebBox idx={idx} where={where} />
           </Styled.ContentContainer>
         )}
       </Styled.StepContainer>

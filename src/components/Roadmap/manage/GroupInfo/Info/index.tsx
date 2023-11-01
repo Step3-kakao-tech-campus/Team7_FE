@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useGetRoadmapsByIdManage } from '@/api/hooks/roadmap';
+import { useGetRoadmapsById } from '@/api/hooks/roadmap';
 import InfoSection from '@/components/Roadmap/RoadmapCreate/InfoSection';
 import StepSection from '@/components/Roadmap/RoadmapCreate/StepSection';
 import Flex from '@/components/common/Flex';
@@ -9,7 +9,7 @@ const Info = () => {
   const router = useRouter();
   const roadmapId = useQueryParam(router.query.roadmapId);
 
-  const { isLoading } = useGetRoadmapsByIdManage(Number(roadmapId));
+  const { isLoading } = useGetRoadmapsById(Number(roadmapId));
 
   if (isLoading) {
     return <></>;
