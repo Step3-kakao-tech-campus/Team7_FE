@@ -1,36 +1,63 @@
 import { motion } from 'framer-motion';
-import { type Control, Controller, type FieldErrors } from 'react-hook-form';
+import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import type { EmailCodeCheckRequest } from '@/api/auth/type';
+import { usePostEmailCodeCheck } from '@/api/hooks/auth';
 import * as Styled from '@/components/auth/verify/CodeCheck/style';
+import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
-import { type EmailFormInput } from '../ByEmail';
+import { tilyLinks } from '@/constants/links';
 
 interface CodeCheckProps {
-  registerEmailMutateAsync: (email: string) => Promise<unknown>;
-  passwordEmailMutateAsync: (email: string) => Promise<unknown>;
-  type: 'register' | 'changePassword';
+  location: 'register' | 'password';
   email: string;
-  control: Control<EmailFormInput>;
-  errors: FieldErrors<EmailFormInput>;
 }
 
 const CodeCheck = (props: CodeCheckProps) => {
-  const { registerEmailMutateAsync, passwordEmailMutateAsync, type, email, control, errors } = props;
+  const { location, email } = props;
+  const router = useRouter();
+
+  const { postEmailCodeCheckAsync, isLoading } = usePostEmailCodeCheck();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email,
+      code: '',
+    },
+    mode: 'onSubmit',
+  });
+
+  const onSubmit: SubmitHandler<EmailCodeCheckRequest> = async (formData) => {
+    console.log(formData);
+    const data = await postEmailCodeCheckAsync(formData);
+
+    if (data?.code === 200) {
+      if (location === 'register') {
+        router.push({
+          pathname: tilyLinks.register(),
+          query: {
+            email: email,
+          },
+        });
+      } else {
+        router.push({
+          pathname: tilyLinks.changePassword(),
+          query: {
+            email: email,
+          },
+        });
+      }
+    }
+  };
+
   return (
-    <Styled.CodeDiv
-      initial={{ height: 0, opacity: 0 }}
-      animate={{ height: 'auto', opacity: 1 }}
-      transition={{ duration: 0.3 }}>
-      <Styled.ReSendButton
-        type="button"
-        variant="ghost"
-        onClick={async (e) => {
-          e.preventDefault();
-          type === 'register' ? registerEmailMutateAsync(email) : passwordEmailMutateAsync(email);
-        }}>
-        재전송하기
-      </Styled.ReSendButton>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }}>
+    <Styled.CodeDiv onSubmit={handleSubmit(onSubmit)}>
+      <motion.div>
         <InfoArea textAlign="center" isDot={false}>
           <InfoArea.Info>해당 이메일로 인증코드를 전송하였습니다.</InfoArea.Info>
           <InfoArea.Info>아래에 인증코드를 입력해주세요.</InfoArea.Info>
@@ -44,7 +71,7 @@ const CodeCheck = (props: CodeCheckProps) => {
           <Input
             placeholder="인증 코드를 입력해주세요."
             message={errors.code?.message}
-            status={errors.code ? 'error' : 'default'}
+            status={errors.code && 'error'}
             {...field}
             onBlur={() => {
               scrollTo(0, 0);
@@ -52,6 +79,9 @@ const CodeCheck = (props: CodeCheckProps) => {
           />
         )}
       />
+      <Button fullWidth isLoading={isLoading}>
+        인증하기
+      </Button>
     </Styled.CodeDiv>
   );
 };

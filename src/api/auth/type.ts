@@ -1,11 +1,3 @@
-export interface EmailCheckRequest {
-  email: string;
-}
-
-export interface EmailCodeRequest {
-  email: string;
-}
-
 export interface EmailCodeCheckRequest {
   email: string;
   code: string;

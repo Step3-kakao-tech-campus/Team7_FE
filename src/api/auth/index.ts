@@ -1,10 +1,8 @@
 import { axiosInstance } from '@/api';
 import type {
-  EmailCheckRequest,
   EmailCheckResponse,
   EmailCodeCheckRequest,
   EmailCodeCheckResponse,
-  EmailCodeRequest,
   EmailCodeResponse,
   JoinRequest,
   JoinResponse,
@@ -14,33 +12,31 @@ import type {
   PasswordChangeResponse,
 } from './type';
 
-export const postEmailCheck = async ({ email }: EmailCheckRequest) => {
+export const postEmailCheck = async (body: { email: string }) => {
   const { data } = await axiosInstance.request<EmailCheckResponse>({
     method: 'POST',
     url: '/email/check',
-    data: { email },
+    data: body,
   });
-
-  console.log(data);
 
   return data;
 };
 
-export const postEmailCode = async ({ email }: EmailCodeRequest) => {
+export const postEmailCode = async (body: { email: string }) => {
   const { data } = await axiosInstance.request<EmailCodeResponse>({
     method: 'POST',
     url: '/email/code',
-    data: { email },
+    data: body,
   });
 
   return data;
 };
 
-export const postEmailCodeCheck = async ({ email, code }: EmailCodeCheckRequest) => {
+export const postEmailCodeCheck = async (body: EmailCodeCheckRequest) => {
   const { data } = await axiosInstance.request<EmailCodeCheckResponse>({
     method: 'POST',
     url: '/email/code/check',
-    data: { email, code },
+    data: body,
   });
 
   return data;

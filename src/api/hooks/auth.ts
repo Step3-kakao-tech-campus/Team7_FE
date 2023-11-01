@@ -2,53 +2,35 @@ import { useMutation } from '@tanstack/react-query';
 import type { ChangePasswordFormInput } from '@/components/auth/change-password';
 import type { LoginFormInput } from '@/components/auth/login';
 import type { RegisterFormInput } from '@/components/auth/register';
-import type { EmailFormInput } from '@/components/auth/verify/ByEmail';
 import { useApiError } from '@/hooks/useApiError';
 import {
   postPasswordChange as postPasswordChangeAPI,
-  postEmailCheck as postEmailCheckAPI,
-  postEmailCode as postEmailCodeAPI,
-  postEmailCodeCheck as postEmailCodeCheckAPI,
+  postEmailCheck,
+  postEmailCode,
+  postEmailCodeCheck,
   postJoin as postJoinAPI,
   postLogin as postLoginAPI,
 } from '../auth';
+import type { EmailCodeCheckRequest } from '../auth/type';
 
 export const usePostEmailCheck = () => {
-  const { mutateAsync, isLoading } = useMutation(postEmailCheckAPI);
+  const { mutateAsync, isLoading } = useMutation(postEmailCheck);
 
-  const postEmailCheck = async (email: string) => {
-    const data = await mutateAsync({ email: email });
+  const postEmailCheckAsync = async (body: { email: string }) => {
+    const data = await mutateAsync(body);
 
     return data;
   };
 
-  return { postEmailCheck, isLoading };
+  return { postEmailCheckAsync, isLoading };
 };
 
 export const usePostEmailCode = () => {
-  const { mutateAsync, isLoading } = useMutation(postEmailCodeAPI);
+  const { mutateAsync, isLoading } = useMutation(postEmailCode);
 
   const { handleError } = useApiError();
 
-  const postEmailCode = async (email: string) => {
-    const data = await mutateAsync(
-      { email: email },
-      {
-        onError: handleError,
-      },
-    );
-
-    return data;
-  };
-
-  return { postEmailCode, isLoading };
-};
-
-export const usePostEmailCodeCheck = () => {
-  const { mutateAsync, isLoading } = useMutation(postEmailCodeCheckAPI);
-  const { handleError } = useApiError();
-
-  const postEmailCodeCheck = async (body: EmailFormInput) => {
+  const postEmailCodeAsync = async (body: { email: string }) => {
     const data = await mutateAsync(body, {
       onError: handleError,
     });
@@ -56,7 +38,22 @@ export const usePostEmailCodeCheck = () => {
     return data;
   };
 
-  return { postEmailCodeCheck, isLoading };
+  return { postEmailCodeAsync, isLoading };
+};
+
+export const usePostEmailCodeCheck = () => {
+  const { mutateAsync, isLoading } = useMutation(postEmailCodeCheck);
+  const { handleError } = useApiError();
+
+  const postEmailCodeCheckAsync = async (body: EmailCodeCheckRequest) => {
+    const data = await mutateAsync(body, {
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { postEmailCodeCheckAsync, isLoading };
 };
 
 export const usePostJoin = () => {
