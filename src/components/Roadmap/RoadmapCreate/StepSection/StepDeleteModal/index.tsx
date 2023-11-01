@@ -1,6 +1,7 @@
+import { produce } from 'immer';
 import { useRecoilState } from 'recoil';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal/style';
-import { roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import type { ModalProps } from '@/components/common/Modal';
 import Modal from '@/components/common/Modal';
@@ -11,12 +12,14 @@ interface StepDeleteModalProps extends ModalProps {
 
 const StepDeleteModal = (props: StepDeleteModalProps) => {
   const { idx, isOpen, onClose } = props;
-  const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
+  const [roadmap, setRoadmap] = useRecoilState(roadmapAtoms);
 
   const handleStepDelete = () => {
-    const newStepList = [...stepList];
-    newStepList.splice(idx, 1);
-    setStepList(newStepList);
+    setRoadmap((prev) =>
+      produce(prev, (draft) => {
+        draft.steps.splice(idx, 1);
+      }),
+    );
   };
 
   return (
@@ -25,7 +28,7 @@ const StepDeleteModal = (props: StepDeleteModalProps) => {
         <Styled.Root>
           <h2>STEP 삭제하기</h2>
           <p>
-            <b>{stepList[idx].title}</b> STEP을 삭제하시겠습니까?
+            <b>{roadmap.steps[idx].title}</b> STEP을 삭제하시겠습니까?
           </p>
           <Styled.ButtonContainer>
             <Button variant="ghost" onClick={onClose}>

@@ -1,5 +1,4 @@
 import { useRecoilValue } from 'recoil';
-import { useEffect } from 'react';
 import Image from 'next/image';
 import StepBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/style';

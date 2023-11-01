@@ -51,6 +51,21 @@ export const useRoadmap = () => {
     }
   };
 
+  const handleEditStep = (callback: () => void, idx: number) => {
+    if (!stepForm.title) {
+      setStepValid(false);
+    } else {
+      setStepValid(true);
+      setRoadmap((prev) =>
+        produce(prev, (draft) => {
+          draft.steps[idx] = stepForm;
+        }),
+      );
+      handleResetStep();
+      callback();
+    }
+  };
+
   const handleResetStep = () => {
     setStepForm(defaultStepForm);
     setStepValid(true);
@@ -78,6 +93,7 @@ export const useRoadmap = () => {
     setStepForm,
     handleStepFormChange,
     handleCreateStep,
+    handleEditStep,
     stepValid,
     handleResetStep,
   };

@@ -30,8 +30,16 @@ interface StepModalProps extends ModalProps {
 const StepModal = (props: StepModalProps) => {
   const { type, idx, isOpen, onClose } = props;
 
-  const { roadmap, stepForm, setStepForm, handleStepFormChange, handleCreateStep, stepValid, handleResetStep } =
-    useRoadmap();
+  const {
+    roadmap,
+    stepForm,
+    setStepForm,
+    handleStepFormChange,
+    handleCreateStep,
+    handleEditStep,
+    stepValid,
+    handleResetStep,
+  } = useRoadmap();
 
   useEffect(() => {
     if (type === 'edit' && idx !== undefined) {
@@ -110,14 +118,13 @@ const StepModal = (props: StepModalProps) => {
             variant="ghost"
             onClick={() => {
               onClose();
-              // 수정하다가 취소하고 나오면, 기존 값으로 상태를 다시 맞춰준다.
               type === 'edit' && idx !== undefined ? setStepForm(roadmap.steps[idx]) : handleResetStep();
             }}>
             취소
           </Button>
           <Button
             onClick={() => {
-              type === 'edit' && idx !== undefined ? '' : handleCreateStep(onClose);
+              type === 'edit' && idx !== undefined ? handleEditStep(onClose, idx) : handleCreateStep(onClose);
             }}>
             확인
           </Button>
