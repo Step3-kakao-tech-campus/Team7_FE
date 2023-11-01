@@ -107,7 +107,6 @@ export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest)
 
   const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapSteps, body], () => getRoadmapStepReference(body), {
     enabled,
-    useErrorBoundary: true,
   });
 
   return {
