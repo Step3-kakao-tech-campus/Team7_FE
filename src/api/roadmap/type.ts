@@ -116,6 +116,12 @@ export interface GetRoadmapsByIdResponse {
   };
 }
 
+export interface PostRoadmapsByIdResponse {
+  success: boolean;
+  message: string;
+  result: null;
+}
+
 export interface PostRoadmapsApplyResponse {
   success: boolean;
   message: string;

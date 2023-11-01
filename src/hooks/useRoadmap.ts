@@ -2,7 +2,7 @@ import { produce } from 'immer';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { usePostRoadmaps } from '@/api/hooks/roadmap';
+import { usePostRoadmaps, usePostRoadmapsById } from '@/api/hooks/roadmap';
 import type { StepForm } from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
 import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import { tilyLinks } from '@/constants/links';
@@ -23,7 +23,8 @@ export const useRoadmap = () => {
   const [infoValid, setInfoValid] = useState<boolean>(true);
   const [stepForm, setStepForm] = useState<StepForm>(defaultStepForm);
 
-  const { postRoadmaps, isLoading } = usePostRoadmaps();
+  const { postRoadmaps, isLoading: createLoading } = usePostRoadmaps();
+  const { postRoadmapsById, isLoading: editLoading } = usePostRoadmapsById();
 
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -102,6 +103,19 @@ export const useRoadmap = () => {
     }
   };
 
+  const onEditRoadmapHandler = async () => {
+    const roadmapId = router.query.roadmapId;
+    console.log(roadmapId);
+    if (roadmap.name === '') {
+      setInfoValid(false);
+    } else {
+      setInfoValid(true);
+      const { steps, ...roadmapInfo } = roadmap;
+      const body = { roadmap: roadmapInfo, steps };
+      await postRoadmapsById({ roadmapId: Number(roadmapId), body });
+    }
+  };
+
   return {
     roadmap,
     handleInfoChange,
@@ -115,7 +129,9 @@ export const useRoadmap = () => {
     handleResetStep,
     handleDeleteReference,
     onCreateRoadmapHandler,
-    isLoading,
+    onEditRoadmapHandler,
+    createLoading,
+    editLoading,
   };
 };
 

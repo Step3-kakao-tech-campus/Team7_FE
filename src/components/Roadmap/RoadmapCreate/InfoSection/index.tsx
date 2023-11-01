@@ -12,21 +12,31 @@ interface InfoSectionProps {
 const InfoSection = (props: InfoSectionProps) => {
   const { where } = props;
 
-  const { roadmap, handleInfoChange, infoValid, onCreateRoadmapHandler, isLoading } = useRoadmap();
+  const {
+    roadmap,
+    handleInfoChange,
+    infoValid,
+    onCreateRoadmapHandler,
+    onEditRoadmapHandler,
+    createLoading,
+    editLoading,
+  } = useRoadmap();
 
   return (
     <Styled.Root where={where}>
       {where === 'create' ? (
         <Styled.CreateHeader>
           <h1>그룹 로드맵 생성</h1>
-          <Button onClick={onCreateRoadmapHandler} isLoading={isLoading}>
+          <Button onClick={onCreateRoadmapHandler} isLoading={createLoading}>
             생성하기
           </Button>
         </Styled.CreateHeader>
       ) : (
         <Styled.EditHeader>
           <h1>로드맵 정보</h1>
-          <Button>수정 완료</Button>
+          <Button onClick={onEditRoadmapHandler} isLoading={editLoading}>
+            수정 완료
+          </Button>
         </Styled.EditHeader>
       )}
 
