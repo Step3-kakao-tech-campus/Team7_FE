@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 
 const AuthLogo = () => {
   const router = useRouter();
-  const goLogin = () => router.push(tilyLinks.login());
+  const goLogin = () => router.push(TILY_LINKS.login());
 
   return (
     <>

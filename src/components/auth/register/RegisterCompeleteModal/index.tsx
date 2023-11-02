@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import * as Styled from '@/components/auth/register/RegisterCompeleteModal/style';
 import Modal, { type ModalProps } from '@/components/common/Modal';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 
 const RegisterCompeleteModal = (props: ModalProps) => {
   const { isOpen, onClose } = props;
@@ -13,10 +13,10 @@ const RegisterCompeleteModal = (props: ModalProps) => {
       isOpen={isOpen}
       onClose={() => {
         onClose();
-        router.replace(tilyLinks.login());
+        router.replace(TILY_LINKS.login());
       }}>
       <Styled.Title>회원가입이 완료되었습니다.</Styled.Title>
-      <Styled.LoginButton href={tilyLinks.login()} replace={true}>
+      <Styled.LoginButton href={TILY_LINKS.login()} replace={true}>
         로그인 페이지로 이동
       </Styled.LoginButton>
     </Modal>

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import * as Styled from '@/components/auth/verify/DuplicateEmailModal/style';
 import Modal, { type ModalProps } from '@/components/common/Modal';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 
 const DuplicateEmailModal = (props: ModalProps) => {
   const { isOpen, onClose } = props;
@@ -17,7 +17,7 @@ const DuplicateEmailModal = (props: ModalProps) => {
           <Styled.InfoText>다른 이메일 주소를 입력해 주세요.</Styled.InfoText>
         </Styled.Info>
         <Styled.ButtonContainer dir="col">
-          <Styled.LoginButton onClick={() => router.push(tilyLinks.login())}>로그인</Styled.LoginButton>
+          <Styled.LoginButton onClick={() => router.push(TILY_LINKS.login())}>로그인</Styled.LoginButton>
           <Styled.TryButton onClick={onClose} variant="ghost">
             다시 입력
           </Styled.TryButton>

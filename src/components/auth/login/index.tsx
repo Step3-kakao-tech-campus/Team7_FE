@@ -9,7 +9,7 @@ import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import type { EmotionTheme } from '@/styles/emotion';
 import { accessTokenAtom } from '../states/accessTokenAtoms';
 
@@ -42,7 +42,7 @@ const Login = () => {
 
     if (data?.code === 200 && data?.result?.accessToken) {
       setAccessToken(data?.result?.accessToken);
-      router.replace(tilyLinks.home());
+      router.replace(TILY_LINKS.home());
     } else {
       // 에러 처리
     }
@@ -50,12 +50,12 @@ const Login = () => {
   return (
     <StyledFlex dir="col" align="center">
       <Responsive device="desktop">
-        <button onClick={() => router.push(tilyLinks.login())}>
+        <button onClick={() => router.push(TILY_LINKS.login())}>
           <Logo />
         </button>
       </Responsive>
       <Responsive device="mobile">
-        <button onClick={() => router.push(tilyLinks.login())}>
+        <button onClick={() => router.push(TILY_LINKS.login())}>
           <Logo imageSize={42} />
         </button>
       </Responsive>

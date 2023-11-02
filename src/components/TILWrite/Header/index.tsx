@@ -6,7 +6,7 @@ import ExtensionInfoModal from '@/components/TILWrite/ExtensionInfoModal';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
 import { useToast } from '@/components/common/Toast/useToast';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
@@ -68,7 +68,7 @@ const Header = (props: HeaderProps) => {
 
   return (
     <Styled.Root>
-      <button onClick={() => router.push(tilyLinks.home())}>
+      <button onClick={() => router.push(TILY_LINKS.home())}>
         <Logo type="logo" imageSize={32} />
       </button>
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>

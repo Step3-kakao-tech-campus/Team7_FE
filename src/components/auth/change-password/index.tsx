@@ -9,7 +9,7 @@ import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import REGEX from '@/constants/regex';
 import { useModalState } from '@/hooks/useModalState';
 import AuthModal from '../register/RegisterCompeleteModal';
@@ -62,12 +62,12 @@ const ChangePassword = () => {
     <>
       <StyledFlex dir="col" align="center" gap={2}>
         <Responsive device="desktop">
-          <button onClick={() => router.push(tilyLinks.login())}>
+          <button onClick={() => router.push(TILY_LINKS.login())}>
             <Logo />
           </button>
         </Responsive>
         <Responsive device="mobile">
-          <button onClick={() => router.push(tilyLinks.login())}>
+          <button onClick={() => router.push(TILY_LINKS.login())}>
             <Logo imageSize={42} />
           </button>
         </Responsive>
@@ -117,7 +117,7 @@ const ChangePassword = () => {
             )}
           />
           <StyledButtonContainer>
-            <StyledCancelButton href={tilyLinks.verify()}>취소</StyledCancelButton>
+            <StyledCancelButton href={TILY_LINKS.verify()}>취소</StyledCancelButton>
             <Button type="submit" isLoading={isLoading}>
               변경
             </Button>

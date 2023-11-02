@@ -1,4 +1,4 @@
-export const tilyLinks = {
+const TILY_LINKS = {
   intro: () => '/intro',
   home: () => '/',
   verify: () => '/auth/register/verify',
@@ -19,6 +19,8 @@ export const tilyLinks = {
   manageTIL: (roadmapId: number) => `/roadmap/${roadmapId}/manage/TIL`,
   manageApply: (roadmapId: number) => `/roadmap/${roadmapId}/manage/apply`,
 };
+
+export default TILY_LINKS;
 
 interface tilWriteParams {
   roadmapId: number;

@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import type { Layout } from '@/utils/layout';
 import { accessTokenAtom } from '../states/accessTokenAtoms';
 
@@ -12,7 +12,7 @@ function withAuth(WrappedComponent: Layout) {
 
     useEffect(() => {
       if (accessToken === null) {
-        router.replace(tilyLinks.login());
+        router.replace(TILY_LINKS.login());
       }
     });
 

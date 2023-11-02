@@ -2,7 +2,7 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { type EmailCodeCheckRequest } from '@/api/auth/type';
 import { usePostEmailCodeCheck } from '@/api/hooks/auth';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 
 const useCodeCheck = (location: 'register' | 'password', email: string) => {
   const router = useRouter();
@@ -27,14 +27,14 @@ const useCodeCheck = (location: 'register' | 'password', email: string) => {
     if (data?.code === 200) {
       if (location === 'register') {
         router.push({
-          pathname: tilyLinks.register(),
+          pathname: TILY_LINKS.register(),
           query: {
             email: email,
           },
         });
       } else {
         router.push({
-          pathname: tilyLinks.changePassword(),
+          pathname: TILY_LINKS.changePassword(),
           query: {
             email: email,
           },

@@ -6,7 +6,7 @@ import * as Styled from '@/components/auth/register/RegisterForm/style';
 import useRegister from '@/components/auth/register/RegisterForm/useRegister';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import REGEX from '@/constants/regex';
 
 const RegisterForm = () => {
@@ -91,7 +91,7 @@ const RegisterForm = () => {
           )}
         />
         <Styled.RegisterButtonContainer>
-          <Link href={tilyLinks.verify()}>취소</Link>
+          <Link href={TILY_LINKS.verify()}>취소</Link>
           <Button type="submit" isLoading={isLoading}>
             완료
           </Button>
