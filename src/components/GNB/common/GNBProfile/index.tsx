@@ -1,18 +1,18 @@
 import { useRef } from 'react';
-import { useGetAlarms, useGetUser, usePatchAlarm } from '@/api/hooks/user';
+import { useGetAlarms, useGetUsers, usePatchAlarm } from '@/api/hooks/user';
+import Alarm from '@/components/GNB/UserGNB/desktop/Alarm';
+import MobileAlarm from '@/components/GNB/UserGNB/mobile/MobileAlarm';
 import * as Styled from '@/components/GNB/common/GNBProfile/style';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
 import { useModalState } from '@/hooks/useModalState';
-import Alarm from '../../UserGNB/desktop/Alarm';
-import MobileAlarm from '../../UserGNB/mobile/MobileAlarm';
 
 const GNBProfile = () => {
-  const { user, isLoading } = useGetUser();
+  const { user, isLoading } = useGetUsers();
   const { isNewAlarm, patchAlarmRequset } = useGetAlarms();
-  const { patchAlarm } = usePatchAlarm();
+  const { patchAlarmAsync } = usePatchAlarm();
 
   const { isOpen: isAlarmOpen, handleClose: handleCloseAlarm, handleToggle: handleToggleAlarm } = useModalState(false);
 
@@ -20,7 +20,7 @@ const GNBProfile = () => {
 
   const handleAlarm = () => {
     handleToggleAlarm();
-    patchAlarm(patchAlarmRequset);
+    patchAlarmAsync(patchAlarmRequset);
   };
 
   return (

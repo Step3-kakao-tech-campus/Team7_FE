@@ -1,4 +1,4 @@
-import { useGetUser } from '@/api/hooks/user';
+import { useGetUsers } from '@/api/hooks/user';
 import GNB from '@/components/GNB/UserGNB';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
@@ -14,7 +14,7 @@ import SideBar from '@/components/main/mobile/SideBar';
 import * as Styled from './style';
 
 const LoggedInUser = () => {
-  const { user, isLoading: userIsLoading } = useGetUser();
+  const { user, isLoading: userIsLoading } = useGetUsers();
 
   return (
     <>

@@ -1,10 +1,10 @@
-import { useGetUser } from '@/api/hooks/user';
+import { useGetUsers } from '@/api/hooks/user';
 import Responsive from '@/components/common/Responsive';
 import ImageUploader from '@/components/mypage/ProfileSection/ImageUploader';
 import * as Styled from './style';
 
 const ProfileSection = () => {
-  const { user } = useGetUser();
+  const { user } = useGetUsers();
 
   return (
     <Styled.Root>

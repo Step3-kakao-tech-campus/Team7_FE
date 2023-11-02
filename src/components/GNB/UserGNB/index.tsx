@@ -33,6 +33,7 @@ const GNB = () => {
             <Button onClick={handleOpenTilModal} css={Styled.TILButtonStyles} variant="ghost">
               TIL
             </Button>
+
             <GNBProfile />
           </Flex>
         </Styled.Inner>
