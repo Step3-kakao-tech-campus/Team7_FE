@@ -53,7 +53,7 @@ export const Input = styled.input`
   outline: none;
 
   &:focus-visible {
-    outline: none;
+    outline: none !important;
   }
 `;
 

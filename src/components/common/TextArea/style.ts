@@ -27,6 +27,6 @@ export const TextArea = styled.textarea`
   }
 
   &:focus-visible {
-    outline: none;
+    outline: none !important;
   }
 `;
