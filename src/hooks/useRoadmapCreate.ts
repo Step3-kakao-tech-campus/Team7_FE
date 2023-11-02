@@ -8,7 +8,7 @@ import {
   roadmapInfoAtoms,
   roadmapStepAtoms,
 } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import useQueryParam from '@/hooks/useQueryParam';
 
 export const useRoadmapInfo = () => {
@@ -36,7 +36,7 @@ export const useRoadmapInfo = () => {
       const data = await postRoadmaps(roadmapFormData);
 
       if (data.success) {
-        router.replace(tilyLinks.roadmap());
+        router.replace(TILY_LINKS.roadmap());
         resetRoadmapInfo();
         resetRoadmapStep();
       }
