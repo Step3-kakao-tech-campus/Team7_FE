@@ -6,10 +6,11 @@ import { useModalState } from '@/hooks/useModalState';
 
 interface YoutubeBoxProps {
   idx: number;
+  where: 'detail' | 'create';
 }
 
 const YoutubeBox = (props: YoutubeBoxProps) => {
-  const { idx } = props;
+  const { idx, where } = props;
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   return (
@@ -17,14 +18,16 @@ const YoutubeBox = (props: YoutubeBoxProps) => {
       <Styled.Root>
         <Styled.Header>
           <h3>유튜브 링크</h3>
-          <Button
-            onClick={() => {
-              handleOpen();
-            }}>
-            유튜브 영상 추가하기
-          </Button>
+          {where === 'create' && (
+            <Button
+              onClick={() => {
+                handleOpen();
+              }}>
+              유튜브 영상 추가하기
+            </Button>
+          )}
         </Styled.Header>
-        <ReferenceList type="youtube" stepIdx={idx} />
+        <ReferenceList type="youtube" stepIdx={idx} where={where} />
       </Styled.Root>
       <YoutubeModal isOpen={isOpen} onClose={handleClose} idx={idx} />
     </>

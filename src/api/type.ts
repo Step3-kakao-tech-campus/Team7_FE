@@ -26,6 +26,13 @@ export interface Step {
   name?: string;
 }
 
+export interface StepWithReferences {
+  id: number;
+  title: string;
+  description: string;
+  references: References;
+}
+
 export interface Category {
   id: number;
   name: string;

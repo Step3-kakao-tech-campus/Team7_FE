@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import RecruitRoadmapList from '@/components/Roadmap/RecruitRoadmap/RecruitRoadmapList';
-import * as Styled from '@/components/Roadmap/RecruitRoadmap/style';
+import RecruitRoadmapList from '@/components/Roadmap/RoadmapList/RecruitRoadmap/RecruitRoadmapList';
+import * as Styled from '@/components/Roadmap/RoadmapList/RecruitRoadmap/style';
 import Input from '@/components/common/Input';
 import Tab from '@/components/common/Tab';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';

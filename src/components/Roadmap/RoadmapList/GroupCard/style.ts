@@ -10,6 +10,8 @@ export const Root = styled(Card)`
   margin: 0 auto;
   padding: 20px 10px 10px;
   cursor: pointer;
+  overflow: hidden;
+  word-wrap: break-word;
 
   & > section > p {
     font-size: 12px;
