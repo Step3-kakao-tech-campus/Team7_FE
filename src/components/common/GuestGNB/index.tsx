@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 const GuestGNB = () => {
@@ -36,7 +36,7 @@ const GuestGNB = () => {
     <>
       <Styled.Root isScrolled={isScrolled}>
         <Styled.Inner>
-          <button onClick={() => router.push(tilyLinks.home())}>
+          <button onClick={() => router.push(TILY_LINKS.home())}>
             <Responsive device="mobile">
               <Styled.Logo>
                 <Logo imageSize={24} />
@@ -51,27 +51,27 @@ const GuestGNB = () => {
           </button>
 
           <Styled.NavArea>
-            {/* <Styled.NavItem href={tilyLinks.home()} active={+activePathMatcher(tilyLinks.home())}>
+            {/* <Styled.NavItem href={TILY_LINKS.home()} active={+activePathMatcher(TILY_LINKS.home())}>
               홈
             </Styled.NavItem>
-            <Styled.NavItem href={tilyLinks.roadmap()} active={+activePathMatcher(tilyLinks.roadmap())}>
+            <Styled.NavItem href={TILY_LINKS.roadmap()} active={+activePathMatcher(TILY_LINKS.roadmap())}>
               로드맵
             </Styled.NavItem> */}
           </Styled.NavArea>
 
           <Responsive device="mobile">
             <Styled.ActionArea>
-              <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.login())}>
+              <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.login())}>
                 로그인
               </Button>
             </Styled.ActionArea>
           </Responsive>
           <Responsive device="desktop">
             <Styled.ActionArea>
-              <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.login())}>
+              <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.login())}>
                 로그인
               </Button>
-              <Button css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.verify())}>
+              <Button css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.verify())}>
                 회원가입
               </Button>
             </Styled.ActionArea>
