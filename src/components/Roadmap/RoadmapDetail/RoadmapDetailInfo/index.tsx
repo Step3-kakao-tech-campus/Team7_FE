@@ -15,9 +15,7 @@ const RoadmapDetailInfo = () => {
   const roadmapId = Number(useQueryParam('roadmapId'));
   const toast = useToast();
 
-  const data = useGetRoadmapsById(roadmapId);
-
-  const data = useGetRoadmapsById(Number(roadmapId));
+  const { data } = useGetRoadmapsById(roadmapId);
 
   const { isOpen, handleOpen, handleClose } = useModalState();
 

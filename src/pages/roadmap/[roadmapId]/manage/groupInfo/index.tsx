@@ -1,3 +1,5 @@
+import { type GetServerSideProps } from 'next';
+import { axiosInstance } from '@/api';
 import Info from '@/components/Roadmap/manage/GroupInfo/Info';
 import SideBar from '@/components/Roadmap/manage/SideBar';
 import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
@@ -28,32 +30,9 @@ const GroupInfoPage = () => {
   );
 };
 
-setLayout(GroupInfoPage, HeaderLayout, true);
+setLayout(GroupInfoPage, HeaderLayout);
 
 export default GroupInfoPage;
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { cookies } = context.req;
-  let isUserLogin = true;
-
-  try {
-    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
-    await axiosInstance.get('users');
-  } catch (err) {
-    isUserLogin = false;
-  }
-
-  if (!isUserLogin) {
-    return {
-      redirect: {
-        destination: '/auth/login',
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: {} };
-};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cookies } = context.req;
