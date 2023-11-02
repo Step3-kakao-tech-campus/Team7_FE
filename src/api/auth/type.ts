@@ -1,3 +1,5 @@
+import { type CommonResponse } from '@/api/type';
+
 // Auth 요청 인터페이스
 export interface EmailCodeCheckRequest {
   email: string;
@@ -22,11 +24,8 @@ export interface PasswordChangeRequest {
 }
 
 // Auth 응답 인터페이스
-export interface LoginResponse {
-  success: boolean;
-  code: number;
-  message: string;
-  result: { accessToken: string } | null;
+export interface LoginResponse extends CommonResponse {
+  result: { accessToken: string };
 }
 
 export interface PasswordChangeResponse {

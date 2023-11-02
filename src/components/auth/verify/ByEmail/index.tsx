@@ -1,5 +1,5 @@
 import { Controller } from 'react-hook-form';
-import { TextButton } from '@/components/auth/common/TextButton';
+import TextButton from '@/components/auth/common/TextButton';
 import * as Styled from '@/components/auth/verify/ByEmail/style';
 import useByEamil from '@/components/auth/verify/ByEmail/useByEmail';
 import CodeCheck from '@/components/auth/verify/CodeCheck';

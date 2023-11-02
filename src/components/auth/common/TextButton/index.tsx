@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Button from '@/components/common/Button';
 
-export const TextButton = styled(Button)`
+const TextButton = styled(Button)`
   align-self: flex-end;
   margin-top: 8px;
   padding: 0;
@@ -16,3 +16,5 @@ export const TextButton = styled(Button)`
     color: #5d5d5d;
   }
 `;
+
+export default TextButton;

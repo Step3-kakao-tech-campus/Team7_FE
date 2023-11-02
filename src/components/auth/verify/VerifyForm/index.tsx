@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import AuthLogo from '@/components/auth/common/AuthLogo';
-import { TextButton } from '@/components/auth/common/TextButton';
+import TextButton from '@/components/auth/common/TextButton';
 import ByEmail from '@/components/auth/verify/ByEmail';
 import TILY_LINKS from '@/constants/links';
 

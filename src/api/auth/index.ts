@@ -1,4 +1,5 @@
 import { axiosInstance } from '@/api';
+import type { NullResultResponse } from '@/api/type';
 import type {
   EmailCodeCheckRequest,
   JoinRequest,
@@ -7,7 +8,6 @@ import type {
   PasswordChangeRequest,
   PasswordChangeResponse,
 } from './type';
-import type { NullResultResponse } from '../type';
 
 export const postEmailCheck = async (body: { email: string }) => {
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -49,11 +49,11 @@ export const postJoin = async (body: JoinRequest) => {
   return data;
 };
 
-export const postLogin = async ({ email, password }: LoginRequest) => {
+export const postLogin = async (body: LoginRequest) => {
   const { data } = await axiosInstance.request<LoginResponse>({
     method: 'POST',
     url: '/login',
-    data: { email, password },
+    data: body,
   });
 
   return data;

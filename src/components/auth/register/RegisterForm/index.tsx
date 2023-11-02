@@ -1,5 +1,6 @@
 import { Controller } from 'react-hook-form';
 import Link from 'next/link';
+import AuthForm from '@/components/auth/common/AuthForm';
 import AuthLogo from '@/components/auth/common/AuthLogo';
 import RegisterCompeleteModal from '@/components/auth/register/RegisterCompeleteModal';
 import * as Styled from '@/components/auth/register/RegisterForm/style';
@@ -15,7 +16,7 @@ const RegisterForm = () => {
   return (
     <>
       <AuthLogo />
-      <Styled.RegisterFormRoot onSubmit={handleSubmit(onSubmit)}>
+      <AuthForm onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="email"
           control={control}
@@ -96,7 +97,7 @@ const RegisterForm = () => {
             완료
           </Button>
         </Styled.RegisterButtonContainer>
-      </Styled.RegisterFormRoot>
+      </AuthForm>
       <RegisterCompeleteModal isOpen={isOpen} onClose={handleClose} />
     </>
   );

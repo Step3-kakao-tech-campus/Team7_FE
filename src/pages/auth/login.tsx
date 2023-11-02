@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { TextButton } from '@/components/auth/common/TextButton';
-import Login from '@/components/auth/login';
+import TextButton from '@/components/auth/common/TextButton';
+import Login from '@/components/auth/login/LoginForm';
 import Flex from '@/components/common/Flex';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import TILY_LINKS from '@/constants/links';

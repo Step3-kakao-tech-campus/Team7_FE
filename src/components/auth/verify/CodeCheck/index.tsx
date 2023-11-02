@@ -17,7 +17,7 @@ const CodeCheck = (props: CodeCheckProps) => {
   const { isLoading, control, handleSubmit, errors, onSubmit } = useCodeCheck(location, email);
 
   return (
-    <Styled.CodeDiv onSubmit={handleSubmit(onSubmit)}>
+    <Styled.CodeForm onSubmit={handleSubmit(onSubmit)}>
       <motion.div>
         <InfoArea textAlign="center" isDot={false}>
           <InfoArea.Info>해당 이메일로 인증코드를 전송하였습니다.</InfoArea.Info>
@@ -43,7 +43,7 @@ const CodeCheck = (props: CodeCheckProps) => {
       <Button fullWidth isLoading={isLoading}>
         인증하기
       </Button>
-    </Styled.CodeDiv>
+    </Styled.CodeForm>
   );
 };
 
