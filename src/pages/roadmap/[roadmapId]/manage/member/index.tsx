@@ -87,7 +87,7 @@ export const LeftArea = styled.aside`
 `;
 
 export const RightArea = styled.main`
-  padding: 2.5rem 6.25rem 5rem 6.25rem;
+  padding: 2.5rem 5rem 5rem 3.5rem;
   flex: 1;
 
   @media ${({ theme }) => theme.mediaQuery.sm} {

@@ -1,5 +1,6 @@
 import qs from 'qs';
 import type { ParsedUrlQuery } from 'querystring';
+import { useSetRecoilState } from 'recoil';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import {
@@ -19,9 +20,10 @@ import {
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
   getRoadmapsById,
   postRoadmapsApply as postRoadmapsApplyAPI,
+  postRoadmapsById as postRoadmapsByIdAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, GetRoadmapsResponse, Role } from '@/api/roadmap/type';
-import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { type RoadmapForm, roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
@@ -170,13 +172,45 @@ export const usePostRoadmaps = () => {
   return { postRoadmaps, isLoading };
 };
 
+export const usePostRoadmapsById = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const { handleError } = useApiError();
+  const { mutateAsync, isLoading } = useMutation(postRoadmapsByIdAPI);
+
+  const postRoadmapsById = async ({ roadmapId, body }: { roadmapId: number; body: RoadmapForm }) => {
+    const data = await mutateAsync(
+      { roadmapId, body },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId)]);
+          toast.show({
+            message: '로드맵이 수정되었습니다.',
+          });
+        },
+        onError: handleError,
+      },
+    );
+
+    return data;
+  };
+
+  return { postRoadmapsById, isLoading };
+};
+
 export const useGetRoadmapsById = (roadmapId: number) => {
   const enabled = roadmapId > 0;
-  const { data } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId), () => getRoadmapsById(roadmapId), {
+  const { data, isLoading } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId), () => getRoadmapsById(roadmapId), {
     enabled,
   });
 
-  return data;
+  const setRoadmap = useSetRecoilState(roadmapAtoms);
+
+  if (!isLoading && data) {
+    setRoadmap(data?.result);
+  }
+
+  return { data, isLoading };
 };
 
 export const usePostRoadmapsApply = () => {

@@ -7,7 +7,7 @@ import useQueryParam from '@/hooks/useQueryParam';
 const RoadmapDetailStep = () => {
   const roadmapId = useQueryParam('roadmapId');
 
-  const data = useGetRoadmapsById(Number(roadmapId));
+  const { data } = useGetRoadmapsById(Number(roadmapId));
 
   if (data?.result.steps.length === 0) return <StepList.Empty />;
   else {

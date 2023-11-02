@@ -15,9 +15,9 @@ const RoadmapDetailInfo = () => {
   const roadmapId = Number(useQueryParam('roadmapId'));
   const toast = useToast();
 
-  const data = useGetRoadmapsById(roadmapId);
+  const { data } = useGetRoadmapsById(roadmapId);
 
-  console.log(data);
+  const myRole = data?.result.myRole;
 
   const { isOpen, handleOpen, handleClose } = useModalState();
 
@@ -44,10 +44,17 @@ const RoadmapDetailInfo = () => {
       <Styled.Root>
         <Flex justify="space-between" align="flex-start" gap={0.8}>
           <h1>{data?.result.name}</h1>
-          {data?.result.myRole === 'none' ? (
+          {myRole === 'none' ? (
             <Button onClick={handleOpen}>신청하기</Button>
-          ) : (
+          ) : myRole === 'member' ? (
             <Button onClick={routeTILWrite}>학습하기</Button>
+          ) : (
+            <Flex gap={1}>
+              <Button variant="outline" onClick={() => router.push(TILY_LINKS.manageGroupInfo(roadmapId))}>
+                로드맵 관리
+              </Button>
+              <Button onClick={routeTILWrite}>학습하기</Button>
+            </Flex>
           )}
         </Flex>
         <Styled.InfoBox>

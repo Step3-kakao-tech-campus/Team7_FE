@@ -59,11 +59,12 @@ export interface Group {
   name: string;
   stepNum: number;
   image: string;
+  isManager: boolean;
   creator: Creator;
 }
 
 export interface Creator {
-  id: number;
+  id?: number;
   name: string;
   image: string;
 }

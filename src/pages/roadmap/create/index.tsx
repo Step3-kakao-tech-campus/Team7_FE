@@ -5,23 +5,21 @@ import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
 import InfoSection from '@/components/Roadmap/RoadmapCreate/InfoSection';
 import StepSection from '@/components/Roadmap/RoadmapCreate/StepSection';
-import { roadmapInfoAtoms, roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import { setLayout } from '@/utils/layout';
 
 const RoadmapCreate = () => {
-  const resetRoadmapInfo = useResetRecoilState(roadmapInfoAtoms);
-  const resetRoadmapStep = useResetRecoilState(roadmapStepAtoms);
+  const resetRoadmap = useResetRecoilState(roadmapAtoms);
 
   useEffect(() => {
-    resetRoadmapInfo();
-    resetRoadmapStep();
-  }, [resetRoadmapInfo, resetRoadmapStep]);
+    resetRoadmap();
+  }, [resetRoadmap]);
 
   return (
     <RoadmapCreatePage>
-      <InfoSection />
-      <StepSection />
+      <InfoSection where="create" />
+      <StepSection where="create" />
     </RoadmapCreatePage>
   );
 };

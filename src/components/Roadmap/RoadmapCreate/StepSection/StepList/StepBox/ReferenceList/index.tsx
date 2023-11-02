@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/ReferenceList/style';
-import { useReference } from '@/hooks/useRoadmapCreate';
+import { useRoadmap } from '@/hooks/useRoadmap';
 
 interface ReferenceListProps {
-  type: string;
+  type: 'youtube' | 'web';
   stepIdx: number;
   where: 'detail' | 'create';
 }
@@ -13,9 +13,17 @@ const ReferenceList = (props: ReferenceListProps) => {
   const { type, stepIdx, where } = props;
 
   // 참고자료 리스트에서 사용될 커스텀 훅
-  const { references, handleDeleteReference } = useReference(type, stepIdx, where);
+  const { roadmap, handleDeleteReference } = useRoadmap();
 
-  if (references?.length === 0) {
+  let references = [];
+
+  if (type === 'youtube') {
+    references = roadmap.steps[stepIdx].references.youtube;
+  } else {
+    references = roadmap.steps[stepIdx].references.web;
+  }
+
+  if (references.length === 0) {
     return <ReferenceList.Empty />;
   }
 
@@ -35,7 +43,7 @@ const ReferenceList = (props: ReferenceListProps) => {
               width={25}
               height={25}
               onClick={() => {
-                handleDeleteReference(idx);
+                handleDeleteReference(type, stepIdx, idx);
               }}
             />
           )}

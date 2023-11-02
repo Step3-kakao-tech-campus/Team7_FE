@@ -88,7 +88,7 @@ const StepBox = (props: StepBoxProps) => {
       {where === 'create' && (
         <>
           <StepModal type="edit" idx={idx} isOpen={isEditOpen} onClose={handleEditClose} />
-          <StepDeleteModal idx={idx} isOpen={isDeleteOpen} onClose={handleDeleteClose} />{' '}
+          <StepDeleteModal idx={idx} isOpen={isDeleteOpen} onClose={handleDeleteClose} />
         </>
       )}
     </>
