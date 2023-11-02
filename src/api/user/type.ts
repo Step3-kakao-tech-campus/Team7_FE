@@ -10,9 +10,7 @@ export interface GetUserHistoryResponse {
 }
 
 // getUser
-export interface GetUserResponse extends CommonResponse {
-  result: User;
-}
+export interface GetUserResponse extends User {}
 
 // deleteUser
 export interface DeleteUserResponse extends CommonResponse {}
