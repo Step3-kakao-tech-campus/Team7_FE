@@ -1,4 +1,6 @@
+import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
+import { axiosInstance } from '@/api';
 import SideBar from '@/components/Roadmap/manage/SideBar';
 import Table from '@/components/Roadmap/manage/member/Table';
 import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
@@ -29,9 +31,32 @@ const Member = () => {
   );
 };
 
-setLayout(Member, HeaderLayout, true);
+setLayout(Member, HeaderLayout);
 
 export default Member;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
 
 export const Root = styled.div`
   max-width: 1440px;

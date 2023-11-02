@@ -1,6 +1,8 @@
 import { useResetRecoilState } from 'recoil';
 import { useEffect } from 'react';
+import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
+import { axiosInstance } from '@/api';
 import InfoSection from '@/components/Roadmap/RoadmapCreate/InfoSection';
 import StepSection from '@/components/Roadmap/RoadmapCreate/StepSection';
 import { roadmapInfoAtoms, roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
@@ -24,9 +26,32 @@ const RoadmapCreate = () => {
   );
 };
 
-setLayout(RoadmapCreate, HeaderLayout, true);
+setLayout(RoadmapCreate, HeaderLayout);
 
 export default RoadmapCreate;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
 
 const RoadmapCreatePage = styled.main`
   display: flex;

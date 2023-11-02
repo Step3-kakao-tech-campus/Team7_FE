@@ -1,4 +1,6 @@
+import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
+import { axiosInstance } from '@/api';
 import Comment from '@/components/TILView/Comments';
 import Footer from '@/components/TILView/Footer';
 import Header from '@/components/TILView/Header';
@@ -66,4 +68,27 @@ const TILView = () => {
 
 export default TILView;
 
-setLayout(TILView, EmptyLayout, true);
+setLayout(TILView, EmptyLayout);
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};

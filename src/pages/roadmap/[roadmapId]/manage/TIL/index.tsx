@@ -1,3 +1,5 @@
+import type { GetServerSideProps } from 'next';
+import { axiosInstance } from '@/api';
 import SideBar from '@/components/Roadmap/manage/SideBar';
 import ManagePeopleTIL from '@/components/Roadmap/manage/TIL/ManagePeopleTIL';
 import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
@@ -29,6 +31,29 @@ const TIL = () => {
   );
 };
 
-setLayout(TIL, HeaderLayout, true);
+setLayout(TIL, HeaderLayout);
 
 export default TIL;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
