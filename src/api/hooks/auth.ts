@@ -1,21 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import {
-  postPasswordChange as postPasswordChangeAPI,
-  postEmailCheck,
-  postEmailCode,
-  postEmailCodeCheck,
-  postJoin,
-  postLogin,
-} from '@/api/auth';
-import type { EmailCodeCheckRequest, JoinRequest, LoginRequest } from '@/api/auth/type';
-import type { ChangePasswordFormInput } from '@/components/auth/change-password';
+import { postPasswordChange, postEmailCheck, postEmailCode, postEmailCodeCheck, postJoin, postLogin } from '@/api/auth';
+import type { EmailCodeCheckRequest, JoinRequest, EmailPasswordRequest } from '@/api/auth/type';
 import { useApiError } from '@/hooks/useApiError';
 
 export const usePostLogin = () => {
   const { mutateAsync, isLoading } = useMutation(postLogin);
   const { handleError } = useApiError();
 
-  const postLoginAsync = async (body: LoginRequest) => {
+  const postLoginAsync = async (body: EmailPasswordRequest) => {
     const data = await mutateAsync(body, {
       onError: handleError,
     });
@@ -85,10 +77,10 @@ export const usePostJoin = () => {
 };
 
 export const usePostPasswordChange = () => {
-  const { mutateAsync, isLoading } = useMutation(postPasswordChangeAPI);
+  const { mutateAsync, isLoading } = useMutation(postPasswordChange);
   const { handleError } = useApiError();
 
-  const postPasswordChange = async (body: ChangePasswordFormInput) => {
+  const postPasswordChangeAsync = async (body: EmailPasswordRequest) => {
     const data = await mutateAsync(body, {
       onError: handleError,
     });
@@ -96,5 +88,5 @@ export const usePostPasswordChange = () => {
     return data;
   };
 
-  return { postPasswordChange, isLoading };
+  return { postPasswordChangeAsync, isLoading };
 };

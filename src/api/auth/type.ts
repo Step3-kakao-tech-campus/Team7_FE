@@ -13,12 +13,7 @@ export interface JoinRequest {
   passwordConfirm: string;
 }
 
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-export interface PasswordChangeRequest {
+export interface EmailPasswordRequest {
   email: string;
   password: string;
 }
@@ -26,11 +21,4 @@ export interface PasswordChangeRequest {
 // Auth 응답 인터페이스
 export interface LoginResponse extends CommonResponse {
   result: { accessToken: string };
-}
-
-export interface PasswordChangeResponse {
-  success: boolean;
-  code: number;
-  message: string;
-  result: null;
 }

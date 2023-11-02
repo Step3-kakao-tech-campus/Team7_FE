@@ -1,9 +1,9 @@
 import { Controller } from 'react-hook-form';
 import Link from 'next/link';
+import AuthButtonContainer from '@/components/auth/common/AuthButtonContainer';
 import AuthForm from '@/components/auth/common/AuthForm';
 import AuthLogo from '@/components/auth/common/AuthLogo';
-import RegisterCompeleteModal from '@/components/auth/register/RegisterCompeleteModal';
-import * as Styled from '@/components/auth/register/RegisterForm/style';
+import AuthModal from '@/components/auth/common/AuthModal';
 import useRegister from '@/components/auth/register/RegisterForm/useRegister';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
@@ -91,14 +91,14 @@ const RegisterForm = () => {
             />
           )}
         />
-        <Styled.RegisterButtonContainer>
+        <AuthButtonContainer>
           <Link href={TILY_LINKS.verify()}>취소</Link>
           <Button type="submit" isLoading={isLoading}>
             완료
           </Button>
-        </Styled.RegisterButtonContainer>
+        </AuthButtonContainer>
       </AuthForm>
-      <RegisterCompeleteModal isOpen={isOpen} onClose={handleClose} />
+      <AuthModal isOpen={isOpen} onClose={handleClose} content="회원가입이 완료되었습니다." />
     </>
   );
 };

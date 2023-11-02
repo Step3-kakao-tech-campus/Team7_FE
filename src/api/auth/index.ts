@@ -1,13 +1,16 @@
 import { axiosInstance } from '@/api';
+import type { EmailCodeCheckRequest, JoinRequest, EmailPasswordRequest, LoginResponse } from '@/api/auth/type';
 import type { NullResultResponse } from '@/api/type';
-import type {
-  EmailCodeCheckRequest,
-  JoinRequest,
-  LoginRequest,
-  LoginResponse,
-  PasswordChangeRequest,
-  PasswordChangeResponse,
-} from './type';
+
+export const postLogin = async (body: EmailPasswordRequest) => {
+  const { data } = await axiosInstance.request<LoginResponse>({
+    method: 'POST',
+    url: '/login',
+    data: body,
+  });
+
+  return data;
+};
 
 export const postEmailCheck = async (body: { email: string }) => {
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -49,21 +52,11 @@ export const postJoin = async (body: JoinRequest) => {
   return data;
 };
 
-export const postLogin = async (body: LoginRequest) => {
-  const { data } = await axiosInstance.request<LoginResponse>({
-    method: 'POST',
-    url: '/login',
-    data: body,
-  });
-
-  return data;
-};
-
-export const postPasswordChange = async ({ email, password }: PasswordChangeRequest) => {
-  const { data } = await axiosInstance.request<PasswordChangeResponse>({
+export const postPasswordChange = async (body: EmailPasswordRequest) => {
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/password/change',
-    data: { email, password },
+    data: body,
   });
 
   return data;

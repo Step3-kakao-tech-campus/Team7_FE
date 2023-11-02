@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
-import { type JoinRequest } from '@/api/auth/type';
-import { usePostJoin } from '@/api/hooks/auth';
+import type { EmailPasswordRequest } from '@/api/auth/type';
+import { usePostPasswordChange } from '@/api/hooks/auth';
 import { useModalState } from '@/hooks/useModalState';
 import useQueryParam from '@/hooks/useQueryParam';
 
-const useRegister = () => {
+const usePassword = () => {
   const email = useQueryParam('email');
   const { isOpen, handleOpen, handleClose } = useModalState();
-
-  const { postJoinAsync, isLoading } = usePostJoin();
+  const { postPasswordChangeAsync, isLoading } = usePostPasswordChange();
 
   const {
     control,
@@ -20,16 +19,14 @@ const useRegister = () => {
   } = useForm({
     defaultValues: {
       email: '',
-      name: '',
       password: '',
       passwordConfirm: '',
     },
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<JoinRequest> = async (formData) => {
-    const data = await postJoinAsync(formData);
-
+  const onSubmit: SubmitHandler<EmailPasswordRequest> = async (formData) => {
+    const data = await postPasswordChangeAsync(formData);
     if (data?.code === 200) {
       handleOpen();
     }
@@ -42,4 +39,4 @@ const useRegister = () => {
   return { isOpen, handleClose, isLoading, control, handleSubmit, getValues, errors, onSubmit };
 };
 
-export default useRegister;
+export default usePassword;

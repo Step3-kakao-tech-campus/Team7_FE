@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const RegisterButtonContainer = styled.div`
+const AuthButtonContainer = styled.div`
   display: flex;
   gap: 0.5rem;
   align-self: flex-end;
@@ -11,13 +11,12 @@ export const RegisterButtonContainer = styled.div`
 
   & > a {
     font-weight: 600;
+    margin-top: 2px;
 
     &:hover {
       text-decoration: underline;
     }
   }
-
-  & > a {
-    margin-top: 2px;
-  }
 `;
+
+export default AuthButtonContainer;
