@@ -7,10 +7,17 @@ export const useApiError = () => {
   const handleError = (error: unknown) => {
     // axios error
     if (axios.isAxiosError(error)) {
-      toast.show({
-        message: error.response?.data.message || '에러가 발생했습니다.',
-        isError: true,
-      });
+      if (error.response?.data.code === 500) {
+        toast.show({
+          message: '에러가 발생했습니다.',
+          isError: true,
+        });
+      } else {
+        toast.show({
+          message: error.response?.data.message || '에러가 발생했습니다.',
+          isError: true,
+        });
+      }
     }
 
     if (!axios.isAxiosError(error)) {

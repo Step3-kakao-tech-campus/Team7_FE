@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import type { MemberTil } from '@/api/til/type';
 import Avatar from '@/components/common/Avatar';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 // 플러그인과 로케일 설정
@@ -23,7 +23,7 @@ const TIL = (props: MemberTil) => {
 
   const handleRouteTILView = () => {
     router.push(
-      tilyLinks.tilView({
+      TILY_LINKS.tilView({
         roadmapId: Number(router.query.roadmapId),
         stepId: Number(router.query.stepId),
         tilId: tilId as number,

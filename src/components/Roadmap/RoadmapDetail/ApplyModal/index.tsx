@@ -1,5 +1,4 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import { usePostRoadmapsApply } from '@/api/hooks/roadmap';
 import * as Styled from '@/components/Roadmap/RoadmapDetail/ApplyModal/style';
 import Button from '@/components/common/Button';
@@ -10,8 +9,7 @@ import TextArea from '@/components/common/TextArea';
 import useQueryParam from '@/hooks/useQueryParam';
 
 const ApplyModal = (props: ModalProps) => {
-  const router = useRouter();
-  const roadmapId = useQueryParam(router.query.roadmapId);
+  const roadmapId = useQueryParam('roadmapId');
   const { isOpen, onClose } = props;
 
   const { postRoadmapsApply, isLoading } = usePostRoadmapsApply();
@@ -28,7 +26,7 @@ const ApplyModal = (props: ModalProps) => {
   });
 
   const onSubmit: SubmitHandler<{ aboutMe: string }> = async (formData) => {
-    const data = await postRoadmapsApply({ roadmapId, content: formData.aboutMe });
+    const data = await postRoadmapsApply({ roadmapId: Number(roadmapId), content: formData.aboutMe });
 
     if (data?.success) {
       onClose();

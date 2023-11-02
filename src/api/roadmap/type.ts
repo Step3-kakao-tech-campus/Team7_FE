@@ -48,8 +48,8 @@ export interface GetRoadmapStepReferenceResponse extends CommonResponse {
   result: {
     id: number;
     description: string;
-    youtube: Youtube[];
-    web: Web[];
+    youtubes: Youtubes[];
+    references: References[];
   };
 }
 
@@ -63,7 +63,7 @@ export interface Youtube {
   link: string;
 }
 
-export interface Web {
+export interface References {
   id: number;
   link: string;
 }
@@ -109,9 +109,10 @@ export interface GetRoadmapsByIdResponse {
     creator: Omit<Creator, 'id'>;
     name: string;
     description: string;
-    role?: 'master' | 'manager' | 'member' | null;
-    recentTilId?: number;
-    code?: string;
+    myRole: 'master' | 'manager' | 'member' | 'none';
+    recentTilId: number | null;
+    recentStepId: number | null;
+    code: string | null;
     steps: StepWithReferences[];
   };
 }

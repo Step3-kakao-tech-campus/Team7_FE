@@ -1,4 +1,6 @@
+import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
+import { axiosInstance } from '@/api';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import DeleteUserSection from '@/components/mypage/DeleteUserSection';
 import EditSection from '@/components/mypage/EditSection';
@@ -18,7 +20,30 @@ const Mypage = () => {
 
 export default Mypage;
 
-setLayout(Mypage, HeaderLayout, true);
+setLayout(Mypage, HeaderLayout);
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
 
 const Root = styled.div`
   max-width: 640px;

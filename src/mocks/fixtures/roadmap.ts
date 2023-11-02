@@ -28,7 +28,7 @@ export const getRoadmapsResponse: GetRoadmapsMyResponse = {
       },
     ],
     roadmaps: {
-      tily: [
+      tilys: [
         {
           id: 1,
           name: '알고리즘 격파파파파파파파파파파파파파파',
@@ -40,7 +40,7 @@ export const getRoadmapsResponse: GetRoadmapsMyResponse = {
           stepNum: 50,
         },
       ],
-      group: [
+      groups: [
         {
           id: 3,
           name: '준서좌의 나도 할 수 있다 알고리즘즘즘즘즘즘즘',
@@ -180,13 +180,13 @@ export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = 
   result: {
     id: 1,
     description: '7조 화이팅',
-    youtube: [
+    youtubes: [
       {
         id: 1,
         link: `<iframe width="560" height="315" src="https://www.youtube.com/embed/9KOaR6QMb9A?si=HA3x3k-PLh9dmO03" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
       },
     ],
-    web: [
+    references: [
       {
         id: 1,
         link: 'https://nextjs.org/docs/getting-started/installation',

@@ -7,7 +7,7 @@ import useQueryParam from '@/hooks/useQueryParam';
 
 const Info = () => {
   const router = useRouter();
-  const roadmapId = useQueryParam(router.query.roadmapId);
+  const roadmapId = useQueryParam('roadmapId');
 
   const { isLoading } = useGetRoadmapsById(Number(roadmapId));
 

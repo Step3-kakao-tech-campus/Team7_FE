@@ -31,3 +31,49 @@ const GroupInfoPage = () => {
 setLayout(GroupInfoPage, HeaderLayout, true);
 
 export default GroupInfoPage;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};

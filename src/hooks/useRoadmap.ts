@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { usePostRoadmaps, usePostRoadmapsById } from '@/api/hooks/roadmap';
 import type { StepForm } from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
 import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 
 const handleValue = (value: string) => {
   if (value === 'true') return true;
@@ -97,7 +97,7 @@ export const useRoadmap = () => {
       const data = await postRoadmaps({ roadmap: roadmapInfo, steps });
 
       if (data.success) {
-        router.replace(tilyLinks.roadmapDetail(data.result.id));
+        router.replace(TILY_LINKS.roadmapDetail(data.result.id));
         resetRoadmap();
       }
     }

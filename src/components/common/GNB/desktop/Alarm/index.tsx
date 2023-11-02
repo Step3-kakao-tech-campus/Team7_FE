@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetAlarms } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import useAuth from '@/hooks/useAuth';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
@@ -51,7 +51,7 @@ const Alarm = (props: AlarmProps) => {
         ) : (
           alarms.map((alarm:Alarm) => {
             return (
-              <Styled.Item key={alarm.id} onClick={() => router.push(tilyLinks.tilWrite({roadmapId: alarm.roadmap.id, stepId: alarm.step.id, tilId: alarm.tilId}))}>
+              <Styled.Item key={alarm.id} onClick={() => router.push(TILY_LINKS.tilWrite({roadmapId: alarm.roadmap.id, stepId: alarm.step.id, tilId: alarm.tilId}))}>
                 <Avatar imageSize={40} imageUrl={alarm.sender.image} alt="프로필 이미지" />
                 <Styled.Content>
                   <Styled.Title>
@@ -73,7 +73,7 @@ const Alarm = (props: AlarmProps) => {
       </Styled.List>
 
       <Styled.Footer>
-        <button onClick={() => router.push(tilyLinks.mypage())}>
+        <button onClick={() => router.push(TILY_LINKS.mypage())}>
           <Image src="/assets/icons/ic_smile.svg" width={20} height={20} alt="마이페이지 버튼 아이콘" />
           <span>마이페이지</span>
         </button>

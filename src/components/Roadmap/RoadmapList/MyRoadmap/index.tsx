@@ -3,7 +3,7 @@ import MyRoadmapList from '@/components/Roadmap/RoadmapList/MyRoadmap/MyRoadmapL
 import * as Style from '@/components/Roadmap/RoadmapList/MyRoadmap/style';
 import RoadmapCodeModal from '@/components/Roadmap/RoadmapList/RoadmapCodeModal';
 import Button from '@/components/common/Button';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 
 const MyRoadmap = () => {
@@ -26,7 +26,7 @@ const MyRoadmap = () => {
           <Button
             variant="outline"
             onClick={() => {
-              router.push(tilyLinks.roadmapCreate());
+              router.push(TILY_LINKS.roadmapCreate());
             }}>
             로드맵 생성
           </Button>

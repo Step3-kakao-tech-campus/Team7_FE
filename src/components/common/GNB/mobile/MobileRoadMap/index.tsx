@@ -8,7 +8,7 @@ import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import * as Styled from '@/components/common/GNB/mobile/MobilePersonal/style';
 import Icon from '@/components/common/Icon';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 
 const MobileRoadMap = () => {
   const router = useRouter();
@@ -27,9 +27,9 @@ const MobileRoadMap = () => {
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
       const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
-      router.push(tilyLinks.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
+      router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
-      router.push(tilyLinks.tilWrite({ roadmapId, stepId, tilId }));
+      router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));
     }
   };
 

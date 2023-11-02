@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
 import Footer from '@/components/common/Footer';
+import GuestGNB from '@/components/common/GuestGNB';
 import Responsive from '@/components/common/Responsive';
 import FeatureSection from '@/components/main/Guest/FeatureSection';
 import * as SectionStyled from '@/components/main/Guest/FeatureSection/style';
 import Typer from '@/components/main/Guest/Typer';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 const Guest = () => {
@@ -18,6 +19,7 @@ const Guest = () => {
 
   return (
     <>
+      <GuestGNB />
       <Styled.Root>
         <Styled.LeftTopGradientContainer>
           <Styled.LeftTopGradient />
@@ -58,7 +60,7 @@ const Guest = () => {
           </Styled.SubTitle>
         </Responsive>
 
-        <Styled.ButtonContainer onClick={() => router.push(tilyLinks.verify())}>
+        <Styled.ButtonContainer onClick={() => router.push(TILY_LINKS.verify())}>
           <Button css={Styled.ButtonStyles}>Get Started</Button>
         </Styled.ButtonContainer>
 
@@ -75,7 +77,7 @@ const Guest = () => {
         <SectionStyled.FeatureSection>
           <SectionStyled.SectionTitle>이 모든것을 TIL-y 에서</SectionStyled.SectionTitle>
           <Styled.ButtonContainer>
-            <Button css={Styled.StartButtonStyles} onClick={() => router.push(tilyLinks.verify())}>
+            <Button css={Styled.StartButtonStyles} onClick={() => router.push(TILY_LINKS.verify())}>
               시작하기
             </Button>
           </Styled.ButtonContainer>

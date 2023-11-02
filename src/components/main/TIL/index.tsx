@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import type { Til } from '@/api/type';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 interface TILProps {
@@ -15,7 +15,7 @@ const TIL = (props: TILProps) => {
   return (
     <Styled.Root
       onClick={() =>
-        router.push(tilyLinks.tilWrite({ roadmapId: til.roadmap.id, stepId: til.step.id, tilId: til.id }))
+        router.push(TILY_LINKS.tilWrite({ roadmapId: til.roadmap.id, stepId: til.step.id, tilId: til.id }))
       }>
       <Styled.Badge>{til.roadmap.name}</Styled.Badge>
       <Styled.Title>{til.step.title}</Styled.Title>
