@@ -11,7 +11,7 @@ import { useModalState } from '@/hooks/useModalState';
 import StepDeleteModal from '../../StepDeleteModal';
 
 interface StepBoxProps {
-  step: Step | StepWithReferences;
+  step: Step;
   idx: number;
   where: 'detail' | 'create';
 }
@@ -43,12 +43,12 @@ const StepBox = (props: StepBoxProps) => {
             <h3>{step.title}</h3>
           </Styled.TitleContainer>
           <Styled.ButtonContainer>
-            {/* {step.dueDate && (
+            {step.dueDate && (
               <section>
                 <b>제출기한</b>
                 <p>{dayjs(step.dueDate).format('YYYY-MM-DD | HH:mm')}</p>
               </section>
-            )} */}
+            )}
             {where === 'create' && (
               <section>
                 <Image
