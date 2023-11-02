@@ -35,7 +35,6 @@ const Footer = (props: FooterProps) => {
       stepId: Number(router.query.stepId),
       tilId: Number(router.query.tilId),
       content: TILContent,
-      title: tilDetail?.step.title,
     });
   };
 
@@ -44,8 +43,7 @@ const Footer = (props: FooterProps) => {
       roadmapId: Number(router.query.roadmapId),
       stepId: Number(router.query.stepId),
       tilId: Number(router.query.tilId),
-      title: 'title',
-      content: 'content',
+      content: TILContent,
     });
     handleClose();
   };

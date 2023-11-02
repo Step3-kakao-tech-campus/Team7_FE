@@ -73,7 +73,7 @@ export interface PatchTilRequest {
   roadmapId: number;
   stepId: number;
   tilId: number;
-  title: string;
+  title?: string;
   content: string;
 }
 

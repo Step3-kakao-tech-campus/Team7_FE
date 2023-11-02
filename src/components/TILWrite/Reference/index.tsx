@@ -29,7 +29,7 @@ const Reference = (props: ReferenceProps) => {
         return <Youtube key={item.id} index={index + 1} link={item.link} />;
       })}
 
-      {reference?.references?.map((item, index) => {
+      {reference?.webs?.map((item, index) => {
         return <Docs key={item.id} index={index + 1} link={item.link} />;
       })}
     </Styled.Root>
