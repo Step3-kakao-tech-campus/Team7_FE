@@ -59,6 +59,7 @@ export interface Group {
   name: string;
   stepNum: number;
   image: string;
+  isManager: boolean;
   creator: Creator;
 }
 
