@@ -54,7 +54,7 @@ export const Input = styled.input`
 `;
 
 export const Message = styled.p`
-  margin: 0;
+  margin-top: 5px;
   padding-left: 0.25rem;
   color: ${({ theme }) => theme.colors.red};
   font-size: 0.75rem;

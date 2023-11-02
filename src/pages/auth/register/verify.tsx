@@ -5,9 +5,9 @@ import { setLayout } from '@/utils/layout';
 
 const RegisterVerifyPage = () => {
   return (
-    <VerifyPage>
+    <AuthPageContainer>
       <VerifyForm location="register" />
-    </VerifyPage>
+    </AuthPageContainer>
   );
 };
 
@@ -15,7 +15,7 @@ setLayout(RegisterVerifyPage, FullHeightLayout);
 
 export default RegisterVerifyPage;
 
-export const VerifyPage = styled.main`
+export const AuthPageContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
