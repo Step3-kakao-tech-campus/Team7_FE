@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import type { InputProps } from './index';
+import type { InputProps } from '@/components/common/Input';
 
 type LabelTextProps = Pick<InputProps, 'labelType'>;
 type InputStateProps = Pick<InputProps, 'status' | 'disabled'>;
@@ -20,7 +20,7 @@ export const InputContainer = styled.div<InputStateProps>`
   ${({ theme, status, disabled }) => css`
     display: flex;
     width: 100%;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 0 0;
     padding: 0.9rem 0.6rem;
     border-radius: 0.35rem;
     transition: all 0.2s;
@@ -58,7 +58,7 @@ export const Input = styled.input`
 `;
 
 export const Message = styled.p`
-  margin: 0;
+  margin-top: 5px;
   padding-left: 0.25rem;
   color: ${({ theme }) => theme.colors.red};
   font-size: 0.75rem;

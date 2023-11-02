@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 const FeatureInfoSection = () => {
@@ -12,7 +12,7 @@ const FeatureInfoSection = () => {
       <Card css={Styled.LeftCardStyles}>
         <Styled.Container>
           <div>공부 방향에 대한 고민이 있는 분들께 드리는 TIL-y의 로드맵!</div>
-          <Button css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.roadmap())}>
+          <Button css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.roadmap())}>
             바로 가기
           </Button>
         </Styled.Container>

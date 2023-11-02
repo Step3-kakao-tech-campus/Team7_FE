@@ -9,11 +9,10 @@ import useQueryParam from '@/hooks/useQueryParam';
 
 const RecruitRoadmap = () => {
   const router = useRouter();
-  const initialCategory = useQueryParam(router.query.category);
-  const initialName = useQueryParam(router.query.name);
+  const initialCategory = useQueryParam('category');
+  const initialName = useQueryParam('name');
 
-  // 초기값을 'tily'로 주면 깜빡임이 너무 심해보여서 차라리 null로 했습니다.
-  const [category, setCategory] = useState<'tily' | 'group' | null>(null);
+  const [category, setCategory] = useState<string | null>(null);
   const [name, setName] = useState<string>('');
 
   const { overlapParamsToUrl, deleteParamsFromUrl } = useParamsToUrl();

@@ -13,7 +13,8 @@ import MobileTILModal from '@/components/common/GNB/mobile/MobileTILModal';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
+import useAuth from '@/hooks/useAuth';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
@@ -38,7 +39,7 @@ const GNB = () => {
     <>
       <Styled.Root>
         <Styled.Inner>
-          <button onClick={() => router.push(tilyLinks.home())}>
+          <button onClick={() => router.push(TILY_LINKS.home())}>
             <Responsive device="mobile">
               <Styled.Logo>
                 <Logo imageSize={24} />
@@ -53,10 +54,10 @@ const GNB = () => {
           </button>
 
           <Styled.NavArea>
-            <Styled.NavItem href={tilyLinks.home()} active={+activePathMatcher(tilyLinks.home())}>
+            <Styled.NavItem href={TILY_LINKS.home()} active={+activePathMatcher(TILY_LINKS.home())}>
               홈
             </Styled.NavItem>
-            <Styled.NavItem href={tilyLinks.roadmap()} active={+activePathMatcher(tilyLinks.roadmap())}>
+            <Styled.NavItem href={TILY_LINKS.roadmap()} active={+activePathMatcher(TILY_LINKS.roadmap())}>
               로드맵
             </Styled.NavItem>
           </Styled.NavArea>

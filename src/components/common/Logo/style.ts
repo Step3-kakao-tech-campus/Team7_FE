@@ -3,10 +3,12 @@ import type { LogoProps } from '@/components/common/Logo';
 
 type TextProps = Pick<LogoProps, 'imageSize'>;
 
-export const Root = styled.div`
+export const Root = styled.div<{ isPointer: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.8rem;
+
+  ${({ isPointer }) => isPointer && 'cursor: pointer'};
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     gap: 8px;
