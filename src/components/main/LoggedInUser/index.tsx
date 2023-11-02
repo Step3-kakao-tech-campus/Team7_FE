@@ -1,8 +1,8 @@
 import { useGetUser } from '@/api/hooks/user';
+import GNB from '@/components/GNB/UserGNB';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
-import GNB from '@/components/common/GNB';
 import Icon from '@/components/common/Icon';
 import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';

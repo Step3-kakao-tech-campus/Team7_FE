@@ -4,9 +4,9 @@ import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
+import * as Styled from '@/components/GNB/UserGNB/desktop/Personal/style';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
-import * as Styled from '@/components/common/GNB/desktop/Personal/style';
 import Icon from '@/components/common/Icon';
 import TILY_LINKS from '@/constants/links';
 

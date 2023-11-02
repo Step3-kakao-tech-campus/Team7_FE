@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router';
+import * as Styled from '@/components/GNB/GuestGNB/style';
+import useGuestGNB from '@/components/GNB/GuestGNB/useGuestGNB';
+import GNBLogo from '@/components/GNB/common/GNBLogo';
+import GNBNav from '@/components/GNB/common/GNBNav';
 import Button from '@/components/common/Button';
-import * as Styled from '@/components/common/GuestGNB/style';
-import Logo from '@/components/common/Logo';
+import Flex from '@/components/common/Flex';
 import Responsive from '@/components/common/Responsive';
 import TILY_LINKS from '@/constants/links';
-import useGuestGNB from './useGuestGNB';
-import Flex from '../Flex';
 
 const GuestGNB = () => {
   const router = useRouter();
@@ -17,24 +18,8 @@ const GuestGNB = () => {
     <>
       <Styled.Root isScrolled={isScrolled}>
         <Styled.Inner>
-          <button onClick={() => router.push(TILY_LINKS.home())}>
-            <Responsive device="mobile">
-              <Logo imageSize={24} />
-            </Responsive>
-
-            <Responsive device="desktop">
-              <Logo imageSize={32} />
-            </Responsive>
-          </button>
-
-          <Styled.NavArea>
-            {/* <Styled.NavItem href={TILY_LINKS.home()} active={+activePathMatcher(TILY_LINKS.home())}>
-              홈
-            </Styled.NavItem>
-            <Styled.NavItem href={TILY_LINKS.roadmap()} active={+activePathMatcher(TILY_LINKS.roadmap())}>
-              로드맵
-            </Styled.NavItem> */}
-          </Styled.NavArea>
+          <GNBLogo />
+          {/* <GNBNav/> */}
 
           <Responsive device="mobile">
             <Flex>
