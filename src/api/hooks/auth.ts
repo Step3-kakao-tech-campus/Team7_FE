@@ -1,17 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
 import type { ChangePasswordFormInput } from '@/components/auth/change-password';
 import type { LoginFormInput } from '@/components/auth/login';
-import type { RegisterFormInput } from '@/components/auth/register/RegisterForm';
 import { useApiError } from '@/hooks/useApiError';
 import {
   postPasswordChange as postPasswordChangeAPI,
   postEmailCheck,
   postEmailCode,
   postEmailCodeCheck,
-  postJoin as postJoinAPI,
+  postJoin,
   postLogin as postLoginAPI,
 } from '../auth';
-import type { EmailCodeCheckRequest } from '../auth/type';
+import type { EmailCodeCheckRequest, JoinRequest } from '../auth/type';
 
 export const usePostEmailCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCheck);
@@ -57,10 +56,10 @@ export const usePostEmailCodeCheck = () => {
 };
 
 export const usePostJoin = () => {
-  const { mutateAsync, isLoading } = useMutation(postJoinAPI);
+  const { mutateAsync, isLoading } = useMutation(postJoin);
   const { handleError } = useApiError();
 
-  const postJoin = async (body: RegisterFormInput) => {
+  const postJoinAsync = async (body: JoinRequest) => {
     const data = await mutateAsync(body, {
       onError: handleError,
     });
@@ -68,7 +67,7 @@ export const usePostJoin = () => {
     return data;
   };
 
-  return { postJoin, isLoading };
+  return { postJoinAsync, isLoading };
 };
 
 export const usePostLogin = () => {

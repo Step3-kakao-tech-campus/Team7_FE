@@ -1,19 +1,16 @@
 import { axiosInstance } from '@/api';
 import type {
-  EmailCheckResponse,
   EmailCodeCheckRequest,
-  EmailCodeCheckResponse,
-  EmailCodeResponse,
   JoinRequest,
-  JoinResponse,
   LoginRequest,
   LoginResponse,
   PasswordChangeRequest,
   PasswordChangeResponse,
 } from './type';
+import type { NullResultResponse } from '../type';
 
 export const postEmailCheck = async (body: { email: string }) => {
-  const { data } = await axiosInstance.request<EmailCheckResponse>({
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/email/check',
     data: body,
@@ -23,7 +20,7 @@ export const postEmailCheck = async (body: { email: string }) => {
 };
 
 export const postEmailCode = async (body: { email: string }) => {
-  const { data } = await axiosInstance.request<EmailCodeResponse>({
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/email/code',
     data: body,
@@ -33,7 +30,7 @@ export const postEmailCode = async (body: { email: string }) => {
 };
 
 export const postEmailCodeCheck = async (body: EmailCodeCheckRequest) => {
-  const { data } = await axiosInstance.request<EmailCodeCheckResponse>({
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/email/code/check',
     data: body,
@@ -42,11 +39,11 @@ export const postEmailCodeCheck = async (body: EmailCodeCheckRequest) => {
   return data;
 };
 
-export const postJoin = async ({ email, name, password, passwordConfirm }: JoinRequest) => {
-  const { data } = await axiosInstance.request<JoinResponse>({
+export const postJoin = async (body: JoinRequest) => {
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/join',
-    data: { email, name, password, passwordConfirm },
+    data: body,
   });
 
   return data;

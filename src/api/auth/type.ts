@@ -1,3 +1,4 @@
+// Auth 요청 인터페이스
 export interface EmailCodeCheckRequest {
   email: string;
   code: string;
@@ -20,34 +21,7 @@ export interface PasswordChangeRequest {
   password: string;
 }
 
-export interface EmailCheckResponse {
-  success: boolean;
-  code: number;
-  message: string;
-  result: null;
-}
-
-export interface EmailCodeResponse {
-  success: boolean;
-  code: number;
-  message: string;
-  result: null;
-}
-
-export interface EmailCodeCheckResponse {
-  success: boolean;
-  code: number;
-  message: string;
-  result: { email: string } | null;
-}
-
-export interface JoinResponse {
-  success: boolean;
-  code: number;
-  message: string;
-  result: null;
-}
-
+// Auth 응답 인터페이스
 export interface LoginResponse {
   success: boolean;
   code: number;
