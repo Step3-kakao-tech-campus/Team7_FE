@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.main`
   display: flex;
@@ -27,11 +28,15 @@ export const Container = styled.div`
   }
 `;
 
-export const SkeletonStyles = css`
+export const SkeletonStyles = (theme: EmotionTheme) => css`
   width: 16.875rem;
   height: 9.375rem;
 
   padding: 1.25rem;
+
+  @media ${theme.mediaQuery.md} {
+    width: 100%;
+  }
 `;
 
 export const EmptyRoot = styled.section`

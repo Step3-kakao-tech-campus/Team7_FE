@@ -3,14 +3,20 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { EmotionTheme } from '@/styles/emotion';
 
-export const Root = styled.div`
+export const Root = styled.div<{ isScrolled: boolean }>`
   position: fixed;
   top: 0;
   width: 100%;
   z-index: ${({ theme }) => theme.layer.header};
 
-  background-color: #fff;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray_500};
+  ${({ theme, isScrolled }) =>
+    isScrolled &&
+    css`
+      background-color: #fff;
+      border-bottom: 1px solid ${theme.colors.gray_500};
+    `}
+
+  transition: background-color 0.2s ease-in-out;
 `;
 
 export const BellowRoot = styled.div`
