@@ -1,34 +1,15 @@
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
+import * as Styled from '@/components/common/GuestGNB/style';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
 import TILY_LINKS from '@/constants/links';
-import * as Styled from './style';
+import useGuestGNB from './useGuestGNB';
+import Flex from '../Flex';
 
 const GuestGNB = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
   const router = useRouter();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    // Call handleScroll on initial render
-    handleScroll();
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const { isScrolled } = useGuestGNB();
 
   // const activePathMatcher = (path: string) => `/${router.pathname.split('/')[1]}` === path;
 
@@ -38,15 +19,11 @@ const GuestGNB = () => {
         <Styled.Inner>
           <button onClick={() => router.push(TILY_LINKS.home())}>
             <Responsive device="mobile">
-              <Styled.Logo>
-                <Logo imageSize={24} />
-              </Styled.Logo>
+              <Logo imageSize={24} />
             </Responsive>
 
             <Responsive device="desktop">
-              <Styled.Logo>
-                <Logo imageSize={32} />
-              </Styled.Logo>
+              <Logo imageSize={32} />
             </Responsive>
           </button>
 
@@ -60,21 +37,21 @@ const GuestGNB = () => {
           </Styled.NavArea>
 
           <Responsive device="mobile">
-            <Styled.ActionArea>
+            <Flex>
               <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.login())}>
                 로그인
               </Button>
-            </Styled.ActionArea>
+            </Flex>
           </Responsive>
           <Responsive device="desktop">
-            <Styled.ActionArea>
+            <Flex>
               <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.login())}>
                 로그인
               </Button>
               <Button css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.verify())}>
                 회원가입
               </Button>
-            </Styled.ActionArea>
+            </Flex>
           </Responsive>
         </Styled.Inner>
       </Styled.Root>
