@@ -45,11 +45,19 @@ const TILWrite = () => {
     setTILContent(content);
   };
 
-  const handleAutoSaveTime = () => {
-    setAutoSaveTime({
-      active: true,
-      time: new Date(),
-    });
+  const handleAutoSaveTime = {
+    activeAutoSave() {
+      setAutoSaveTime({
+        active: true,
+        time: new Date(),
+      });
+    },
+    clearAutoSave() {
+      setAutoSaveTime({
+        active: false,
+        time: new Date(),
+      });
+    },
   };
 
   const {
@@ -125,6 +133,7 @@ const TILWrite = () => {
                 asideMount={asideMount}
                 handleCloseAside={() => handleCloseAside(handleCloseReference)}
                 handleOpenReferenceAside={handleOpenReference}
+                handleAutoSaveTime={handleAutoSaveTime}
               />
             )}
 

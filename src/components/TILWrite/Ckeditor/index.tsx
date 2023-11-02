@@ -9,7 +9,10 @@ import * as Styled from './style';
 
 interface CkEditorProps {
   handleTILContent: (content: string) => void;
-  handleAutoSaveTime: () => void;
+  handleAutoSaveTime: {
+    activeAutoSave: () => void;
+    clearAutoSave: () => void;
+  };
 }
 
 const CkEditor = (props: CkEditorProps) => {
@@ -52,7 +55,7 @@ const CkEditor = (props: CkEditorProps) => {
         onBlur={(event, editor) => {
           if (prevContent !== editor.getData() && editor.getData() !== '') {
             autoSaveTIL(editor.getData());
-            handleAutoSaveTime();
+            handleAutoSaveTime.activeAutoSave();
           }
           setPrevContent(editor.getData());
         }}
