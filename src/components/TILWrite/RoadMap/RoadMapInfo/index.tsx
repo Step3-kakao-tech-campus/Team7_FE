@@ -33,7 +33,7 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
         <Styled.Title>{tilDetail?.roadmapName}</Styled.Title>
 
         <CustomSuspense isLoading={isLoading} fallback={<ProgressSkeleton />}>
-          <Progress ProgressRate={steps?.result.progress} steps={steps?.result.steps} />
+          <Progress steps={steps?.result.steps} />
         </CustomSuspense>
       </Styled.Container>
     </Styled.Root>
