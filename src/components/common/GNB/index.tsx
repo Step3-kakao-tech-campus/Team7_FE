@@ -14,7 +14,6 @@ import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
 import TILY_LINKS from '@/constants/links';
-import useAuth from '@/hooks/useAuth';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
