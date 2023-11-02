@@ -1,25 +1,38 @@
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { useGetTil } from '@/api/hooks/til';
+import { useGetTil, usePatchTil } from '@/api/hooks/til';
 import { defaultData } from '@/components/TILWrite/Ckeditor/defaultData';
 import { editorConfiguration } from './plugin';
 import * as Styled from './style';
 
 interface CkEditorProps {
   handleTILContent: (content: string) => void;
+  handleAutoSaveTime: () => void;
 }
 
 const CkEditor = (props: CkEditorProps) => {
-  const { handleTILContent } = props;
+  const { handleTILContent, handleAutoSaveTime } = props;
+
+  const [prevContent, setPrevContent] = useState<string>('');
 
   const { query } = useRouter();
-
+  const { patchTil } = usePatchTil();
   const { tilDetail } = useGetTil({
     roadmapId: Number(query.roadmapId),
     stepId: Number(query.stepId),
     tilId: Number(query.tilId),
   });
+
+  const autoSaveTIL = (TILContent: string) => {
+    patchTil({
+      roadmapId: Number(query.roadmapId),
+      stepId: Number(query.stepId),
+      tilId: Number(query.tilId),
+      content: TILContent,
+    });
+  };
 
   return (
     <Styled.Root>
@@ -37,7 +50,11 @@ const CkEditor = (props: CkEditorProps) => {
           handleTILContent(editor.getData());
         }}
         onBlur={(event, editor) => {
-          console.log('Blur.', editor);
+          if (prevContent !== editor.getData() && editor.getData() !== '') {
+            autoSaveTIL(editor.getData());
+            handleAutoSaveTime();
+          }
+          setPrevContent(editor.getData());
         }}
         onFocus={(event, editor) => {
           console.log('Focus.', editor);

@@ -28,6 +28,16 @@ export const Container = styled.div`
   gap: 1rem;
 `;
 
+export const AutoSaveTime = styled.div`
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  & > span:first-of-type {
+    margin-right: 4px;
+  }
+`;
+
 export const ButtonStyles = css`
   font-size: 1.125rem;
   font-weight: 600;

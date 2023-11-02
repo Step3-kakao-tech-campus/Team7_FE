@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
@@ -5,17 +6,20 @@ import { useSubmitTil } from '@/api/hooks/til';
 import SubmitModal from '@/components/TILWrite/SubmitModal';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
+import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
+import type { AutoSaveTime } from '@/pages/TILWrite/roadmap/[roadmapId]/step/[stepId]/til/[tilId]';
 import * as Styled from './style';
 
 interface FooterProps {
   TILContent: string;
+  autoSaveTime: AutoSaveTime;
 }
 
 const Footer = (props: FooterProps) => {
-  const { TILContent } = props;
+  const { TILContent, autoSaveTime } = props;
 
   const router = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState();
@@ -56,6 +60,14 @@ const Footer = (props: FooterProps) => {
       </Styled.ExitContainer>
 
       <Styled.Container>
+        <Responsive device="desktop" asChild>
+          {autoSaveTime.active && (
+            <Styled.AutoSaveTime>
+              <span>자동 저장 완료</span>
+              <span>{dayjs(autoSaveTime.time).format('HH:mm:ss')}</span>
+            </Styled.AutoSaveTime>
+          )}
+        </Responsive>
         <CustomSuspense fallback={<SkeletonButton />} isLoading={isLoading}>
           {!tilDetail?.isPersonal && (
             <>
