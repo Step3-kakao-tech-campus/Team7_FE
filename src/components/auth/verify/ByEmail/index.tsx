@@ -6,7 +6,7 @@ import CodeCheck from '@/components/auth/verify/CodeCheck';
 import DuplicateEmailModal from '@/components/auth/verify/DuplicateEmailModal';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import { EMAIL_REGEX } from '@/constants/regex';
+import REGEX from '@/constants/regex';
 
 interface ByEmailProps {
   location: 'register' | 'password';
@@ -35,7 +35,7 @@ const ByEmail = ({ location }: ByEmailProps) => {
           rules={{
             required: '이메일을 입력해주세요.',
             pattern: {
-              value: EMAIL_REGEX,
+              value: REGEX.email(),
               message: '이메일의 형식을 확인해주세요.',
             },
           }}

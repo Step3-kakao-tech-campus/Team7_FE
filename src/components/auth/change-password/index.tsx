@@ -10,7 +10,7 @@ import Input from '@/components/common/Input';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
 import { tilyLinks } from '@/constants/links';
-import { PASSWORD_REGEX } from '@/constants/regex';
+import REGEX from '@/constants/regex';
 import { useModalState } from '@/hooks/useModalState';
 import AuthModal from '../register/RegisterCompeleteModal';
 
@@ -78,7 +78,7 @@ const ChangePassword = () => {
             rules={{
               required: '필수 정보입니다.',
               pattern: {
-                value: PASSWORD_REGEX,
+                value: REGEX.password(),
                 message: '영문, 숫자, 특수문자 포함한 8~20자의 비밀번호만 사용가능합니다.',
               },
             }}
@@ -124,7 +124,7 @@ const ChangePassword = () => {
           </StyledButtonContainer>
         </StyledForm>
       </StyledFlex>
-      <AuthModal isOpen={isOpen} handleClose={handleClose} content="비밀번호 변경이 완료되었습니다." />
+      <AuthModal isOpen={isOpen} onClose={handleClose} content="비밀번호 변경이 완료되었습니다." />
     </>
   );
 };

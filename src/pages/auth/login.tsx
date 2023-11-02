@@ -1,55 +1,25 @@
-import Link from 'next/link';
-import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
+import { TextButton } from '@/components/auth/common/TextButton';
 import Login from '@/components/auth/login';
 import Flex from '@/components/common/Flex';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { tilyLinks } from '@/constants/links';
+import { AuthPageContainer } from '@/pages/auth/register/verify';
 import { setLayout } from '@/utils/layout';
 
 export const LoginPage = () => {
+  const router = useRouter();
   return (
-    <StyledRegisterPage>
+    <AuthPageContainer>
       <Login />
-      <StyledButtonContainer justify="space-between">
-        <Link href={tilyLinks.verify()}>회원가입</Link>
-        <Link href={tilyLinks.findPwVerify()}>비밀번호 찾기</Link>
-      </StyledButtonContainer>
-    </StyledRegisterPage>
+      <Flex justify="space-between" fullWidth>
+        <TextButton onClick={() => router.push(tilyLinks.verify())}>회원가입</TextButton>
+        <TextButton onClick={() => router.push(tilyLinks.passwordVerify())}>비밀번호 찾기</TextButton>
+      </Flex>
+    </AuthPageContainer>
   );
 };
 
 setLayout(LoginPage, FullHeightLayout);
 
 export default LoginPage;
-
-const StyledRegisterPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 30px;
-  max-width: 400px;
-
-  @media ${({ theme }) => theme.mediaQuery.sm} {
-    height: 100dvh;
-  }
-`;
-
-const StyledButtonContainer = styled(Flex)`
-  width: 100%;
-  margin-top: 0.4rem;
-
-  & > a {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.gray_800};
-
-    transition: all 0.1s;
-
-    &:hover {
-      color: #5d5d5d;
-    }
-  }
-`;

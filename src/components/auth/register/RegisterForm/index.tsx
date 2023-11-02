@@ -7,7 +7,7 @@ import useRegister from '@/components/auth/register/RegisterForm/useRegister';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { tilyLinks } from '@/constants/links';
-import { NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
+import REGEX from '@/constants/regex';
 
 const RegisterForm = () => {
   const { isOpen, handleClose, isLoading, control, handleSubmit, getValues, errors, onSubmit } = useRegister();
@@ -28,7 +28,7 @@ const RegisterForm = () => {
           rules={{
             required: '필수 정보입니다.',
             pattern: {
-              value: NAME_REGEX,
+              value: REGEX.name(),
               message: '2~10글자의 이름만 사용 가능합니다.',
             },
           }}
@@ -51,7 +51,7 @@ const RegisterForm = () => {
           rules={{
             required: '필수 정보입니다.',
             pattern: {
-              value: PASSWORD_REGEX,
+              value: REGEX.password(),
               message: '영문, 숫자, 특수문자 포함한 8~20자의 비밀번호만 사용가능합니다.',
             },
           }}
