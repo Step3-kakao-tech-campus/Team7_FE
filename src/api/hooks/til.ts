@@ -24,6 +24,7 @@ import type {
   PatchTilRequest,
   SubmitTilRequest,
 } from '@/api/til/type';
+import { useApiError } from '@/hooks/useApiError';
 
 const QUERY_KEY = {
   getTils: 'getTils',
@@ -93,6 +94,7 @@ export const usePostTil = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(postTilAPI);
+  const { handleError } = useApiError();
 
   const postTil = async (body: PostTilRequest) => {
     const { roadmapId } = body;
@@ -101,6 +103,7 @@ export const usePostTil = () => {
       onSuccess: () => {
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId.toString()]);
       },
+      onError: handleError,
     });
 
     return data;

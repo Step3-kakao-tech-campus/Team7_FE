@@ -1,111 +1,31 @@
-import { useState } from 'react';
-import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
-import { useRouter } from 'next/router';
-import { usePostEmailCodeCheck, usePostEmailCheck, usePostEmailCode } from '@/api/hooks/auth';
+import { Controller } from 'react-hook-form';
+import TextButton from '@/components/auth/common/TextButton';
 import * as Styled from '@/components/auth/verify/ByEmail/style';
+import useByEamil from '@/components/auth/verify/ByEmail/useByEmail';
+import CodeCheck from '@/components/auth/verify/CodeCheck';
+import DuplicateEmailModal from '@/components/auth/verify/DuplicateEmailModal';
+import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import { tilyLinks } from '@/constants/links';
-import { EMAIL_REGEX } from '@/constants/regex';
-import { useModalState } from '@/hooks/useModalState';
-import CodeCheck from '../CodeCheck';
-import VerifyModal from '../VerifyModal';
-
-interface EmailFormStates {
-  state: 'emailReady' | 'codeReady' | 'valid';
-  email: string;
-}
-
-export interface EmailFormInput {
-  email: string;
-  code: string;
-}
+import REGEX from '@/constants/regex';
 
 interface ByEmailProps {
-  type: 'changePassword' | 'register';
+  location: 'register' | 'password';
 }
 
-const ByEmail = ({ type }: ByEmailProps) => {
-  const { postEmailCheck, isLoading: registerEmailIsLoading } = usePostEmailCheck();
-
-  const { postEmailCode, isLoading: passwordEmailIsLoading } = usePostEmailCode();
-
-  const { postEmailCodeCheck, isLoading: codeIsLoading } = usePostEmailCodeCheck();
-
-  const [email, setEmail] = useState<EmailFormStates>({ state: 'emailReady', email: '' });
-  const { isOpen, handleOpen, handleClose } = useModalState();
-
-  const router = useRouter();
-
+const ByEmail = ({ location }: ByEmailProps) => {
   const {
+    isOpen,
+    handleClose,
+    isEmail,
+    registerLoading,
+    passwordLoading,
     control,
     handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: '',
-      code: '',
-    },
-    mode: 'onSubmit',
-  });
-
-  const onSubmit: SubmitHandler<EmailFormInput> = async (formData) => {
-    if (email.state === 'emailReady' && !formData.code) {
-      const email = formData.email;
-      switch (type) {
-        case 'register': {
-          const data = await postEmailCheck(email);
-
-          if (data?.code === 200) {
-            setEmail({ state: 'codeReady', email: email });
-          } else {
-            handleOpen();
-          }
-          break;
-        }
-        case 'changePassword': {
-          const data = await postEmailCode(email);
-
-          if (data?.code === 200) {
-            setEmail({ state: 'codeReady', email: email });
-          } else {
-            // 등록되지 않은 이메일
-          }
-          break;
-        }
-      }
-    } else if (email.state === 'codeReady') {
-      const email = formData.email;
-      const verifyCode = formData.code;
-      const data = await postEmailCodeCheck({ email: email, code: verifyCode });
-
-      if (data?.code === 200) {
-        switch (type) {
-          case 'register': {
-            router.push({
-              pathname: tilyLinks.register(),
-              query: {
-                email: email,
-              },
-            });
-            break;
-          }
-          case 'changePassword': {
-            router.push({
-              pathname: tilyLinks.changePassword(),
-              query: {
-                email: email,
-              },
-            });
-            break;
-          }
-        }
-      } else {
-        setError('code', { type: '400', message: data.message });
-      }
-    }
-  };
-
+    getValues,
+    errors,
+    onSubmit,
+    resend,
+  } = useByEamil(location);
   return (
     <>
       <Styled.EmailForm onSubmit={handleSubmit(onSubmit)}>
@@ -115,7 +35,7 @@ const ByEmail = ({ type }: ByEmailProps) => {
           rules={{
             required: '이메일을 입력해주세요.',
             pattern: {
-              value: EMAIL_REGEX,
+              value: REGEX.email(),
               message: '이메일의 형식을 확인해주세요.',
             },
           }}
@@ -124,8 +44,8 @@ const ByEmail = ({ type }: ByEmailProps) => {
               label="이메일"
               placeholder="이메일을 입력해주세요."
               message={errors.email?.message}
-              status={errors.email ? 'error' : 'default'}
-              disabled={email.state === 'codeReady'}
+              status={errors.email && 'error'}
+              disabled={isEmail}
               {...field}
               onBlur={() => {
                 scrollTo(0, 0);
@@ -133,22 +53,21 @@ const ByEmail = ({ type }: ByEmailProps) => {
             />
           )}
         />
-        {email.state === 'codeReady' && (
-          <CodeCheck
-            registerEmailMutateAsync={postEmailCheck}
-            passwordEmailMutateAsync={postEmailCode}
-            type={type}
-            email={email.email}
-            control={control}
-            errors={errors}
-          />
+        {isEmail && (
+          <TextButton type="button" variant="ghost" onClick={resend}>
+            재전송하기
+          </TextButton>
         )}
 
-        <Styled.VerifyButton fullWidth isLoading={registerEmailIsLoading || passwordEmailIsLoading || codeIsLoading}>
-          {email.state !== 'codeReady' ? '이메일 확인' : '인증하기'}
-        </Styled.VerifyButton>
+        {!isEmail && (
+          <Button fullWidth isLoading={registerLoading || passwordLoading}>
+            이메일 확인
+          </Button>
+        )}
       </Styled.EmailForm>
-      <VerifyModal isOpen={isOpen} handleClose={handleClose} />
+      {isEmail && <CodeCheck location={location} email={getValues('email')} />}
+
+      <DuplicateEmailModal isOpen={isOpen} onClose={handleClose} />
     </>
   );
 };

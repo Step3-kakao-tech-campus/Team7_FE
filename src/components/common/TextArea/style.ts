@@ -28,6 +28,10 @@ export const TextArea = styled.textarea<TextAreaStateProps>`
     border: ${({ theme }) => `0.1rem solid ${theme.colors.gray_700}`};
     background-color: ${({ theme }) => theme.colors.gray_100};
   }
+
+  &:focus-visible {
+    outline: none !important;
+  }
 `;
 
 export const Message = styled.p`

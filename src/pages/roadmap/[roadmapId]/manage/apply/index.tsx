@@ -1,3 +1,5 @@
+import type { GetServerSideProps } from 'next';
+import { axiosInstance } from '@/api';
 import SideBar from '@/components/Roadmap/manage/SideBar';
 import ApplyTable from '@/components/Roadmap/manage/apply/Table';
 import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
@@ -29,6 +31,29 @@ const Apply = () => {
   );
 };
 
-setLayout(Apply, HeaderLayout, true);
+setLayout(Apply, HeaderLayout);
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
 
 export default Apply;

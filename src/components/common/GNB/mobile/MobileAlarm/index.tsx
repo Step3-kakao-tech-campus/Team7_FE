@@ -6,7 +6,7 @@ import { useGetAlarms } from '@/api/hooks/user';
 import type { Alarm } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import Responsive from '@/components/common/Responsive';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import useAuth from '@/hooks/useAuth';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
@@ -51,7 +51,7 @@ const MobileAlarm = (props: AlarmProps) => {
                   key={alarm.id}
                   onClick={() =>
                     router.push(
-                      tilyLinks.tilWrite({ roadmapId: alarm.roadmap.id, stepId: alarm.step.id, tilId: alarm.tilId }),
+                      TILY_LINKS.tilWrite({ roadmapId: alarm.roadmap.id, stepId: alarm.step.id, tilId: alarm.tilId }),
                     )
                   }>
                   <Avatar imageSize={40} imageUrl={alarm.sender.image} alt="프로필 이미지" />
@@ -75,7 +75,7 @@ const MobileAlarm = (props: AlarmProps) => {
         </Styled.List>
 
         <Styled.Footer>
-          <button onClick={() => router.push(tilyLinks.mypage())}>
+          <button onClick={() => router.push(TILY_LINKS.mypage())}>
             <Image src="/assets/icons/ic_smile.svg" width={20} height={20} alt="마이페이지 버튼 아이콘" />
             <span>마이페이지</span>
           </button>

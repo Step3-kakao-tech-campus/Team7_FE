@@ -1,9 +1,14 @@
 import type { References } from './roadmap/type';
 
+// 공통 응답 인터페이스
 export interface CommonResponse {
   success: boolean;
+  code: number;
   message: string;
-  code?: number;
+}
+
+export interface NullResultResponse extends CommonResponse {
+  result: null;
 }
 
 export interface Til {

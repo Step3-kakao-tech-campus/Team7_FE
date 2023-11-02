@@ -3,20 +3,14 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { EmotionTheme } from '@/styles/emotion';
 
-export const Root = styled.div<{ isLoggedIn: boolean; isScrolled: boolean }>`
+export const Root = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
   z-index: ${({ theme }) => theme.layer.header};
 
-  ${({ isLoggedIn, theme, isScrolled }) =>
-    (isLoggedIn || isScrolled) &&
-    css`
-      background-color: #fff;
-      border-bottom: 1px solid ${theme.colors.gray_500};
-    `}
-
-  transition: background-color 0.2s ease-in-out;
+  background-color: #fff;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
 
 export const BellowRoot = styled.div`
@@ -106,7 +100,6 @@ export const TILInfo = styled.div`
   background-color: ${({ theme }) => theme.colors.gray_200};
   padding: 1.125rem;
   border-radius: 1rem;
-  margin-right: 1rem;
 
   & > span:nth-of-type(2) {
     color: ${({ theme }) => theme.colors.rose};

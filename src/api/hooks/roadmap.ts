@@ -89,7 +89,7 @@ export const useGetRoadmapsMyList = () => {
 };
 
 export const useGetRoadmapSteps = (roadmapId: number) => {
-  const enabled = roadmapId !== 0;
+  const enabled = roadmapId !== 0 && !!roadmapId;
 
   const { data, isLoading } = useQuery(
     [ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId],
@@ -127,7 +127,7 @@ export const usePostRoadmapIndividual = () => {
   const postRoadmapsIndividual = async (title: string) => {
     const data = await mutation.mutateAsync(title, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmaps]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy]);
         toast.show({
           message: '로드맵이 생성되었습니다.',
         });

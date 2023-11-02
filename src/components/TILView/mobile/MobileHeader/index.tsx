@@ -4,7 +4,7 @@ import { useGetTil } from '@/api/hooks/til';
 import SideBar from '@/components/TILView/mobile/SideBar';
 import ExtensionInfoModal from '@/components/TILWrite/ExtensionInfoModal';
 import Icon from '@/components/common/Icon';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
@@ -25,7 +25,7 @@ const MobileHeader = () => {
         imageSize={24}
         ext="svg"
         alt="뒤로가기"
-        onClick={() => router.push(tilyLinks.home())}
+        onClick={() => router.push(TILY_LINKS.home())}
       />
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
 
