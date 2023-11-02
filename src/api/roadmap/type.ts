@@ -109,8 +109,9 @@ export interface GetRoadmapsByIdResponse {
     creator: Omit<Creator, 'id'>;
     name: string;
     description: string;
-    role: 'master' | 'manager' | 'member' | null;
+    myRole: 'master' | 'manager' | 'member' | 'none';
     recentTilId: number | null;
+    recentStepId: number | null;
     code: string | null;
     steps: StepWithReferences[];
   };

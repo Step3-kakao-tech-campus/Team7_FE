@@ -14,7 +14,7 @@ const RoadmapDetail = () => {
   );
 };
 
-setLayout(RoadmapDetail, HeaderLayout, false);
+setLayout(RoadmapDetail, HeaderLayout);
 
 export default RoadmapDetail;
 

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import type { Group } from '@/api/type';
 import * as Style from '@/components/Roadmap/RoadmapList/GroupCard/style';
 import { Avatar } from '@/components/common/Avatar/style';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINK from '@/constants/links';
 
 interface GroupCardProps {
   roadmap: Group;
@@ -14,7 +14,7 @@ const GroupCard = (props: GroupCardProps) => {
   return (
     <Style.Root
       onClick={() => {
-        router.push(tilyLinks.roadmapDetail(roadmap.id));
+        router.push(TILY_LINK.roadmapDetail(roadmap.id));
       }}>
       <h5>{roadmap.name}</h5>
       <section>

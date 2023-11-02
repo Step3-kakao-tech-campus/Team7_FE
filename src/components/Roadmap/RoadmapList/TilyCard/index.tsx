@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import type { Tily } from '@/api/type';
 import * as Style from '@/components/Roadmap/RoadmapList/TilyCard/style';
 import Logo from '@/components/common/Logo';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINK from '@/constants/links';
 
 interface TilyCardProps {
   roadmap: Tily;
@@ -16,7 +16,7 @@ const TilyCard = (props: TilyCardProps) => {
   return (
     <Style.Root
       onClick={() => {
-        router.push(tilyLinks.roadmapDetail(roadmap.id));
+        router.push(TILY_LINK.roadmapDetail(roadmap.id));
       }}>
       <section>
         <Logo type="logo" imageSize={25} />

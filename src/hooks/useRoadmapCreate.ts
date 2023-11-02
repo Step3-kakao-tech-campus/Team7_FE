@@ -110,8 +110,7 @@ export const useStepInfo = (defaultValue: StepForm) => {
  * @returns
  */
 export const useReference = (type: string, stepIdx: number, where: 'detail' | 'create') => {
-  const router = useRouter();
-  const roadmapId = useQueryParam(router.query.roadmapId);
+  const roadmapId = useQueryParam('roadmapId');
 
   const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
   const data = useGetRoadmapsById(Number(roadmapId));
