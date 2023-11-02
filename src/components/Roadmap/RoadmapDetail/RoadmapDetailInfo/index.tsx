@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useGetRoadmapsById } from '@/api/hooks/roadmap';
 import * as Styled from '@/components/Roadmap/RoadmapDetail/RoadmapDetailInfo/style';
 import Avatar from '@/components/common/Avatar';
@@ -9,8 +8,7 @@ import useQueryParam from '@/hooks/useQueryParam';
 import ApplyModal from '../ApplyModal';
 
 const RoadmapDetailInfo = () => {
-  const router = useRouter();
-  const roadmapId = useQueryParam(router.query.roadmapId);
+  const roadmapId = useQueryParam('roadmapId');
 
   const { data } = useGetRoadmapsById(Number(roadmapId));
 
