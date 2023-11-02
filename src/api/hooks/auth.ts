@@ -4,6 +4,7 @@ import type { LoginFormInput } from '@/components/auth/login';
 import type { RegisterFormInput } from '@/components/auth/register';
 import type { EmailFormInput } from '@/components/auth/verify/ByEmail';
 import { useApiError } from '@/hooks/useApiError';
+import { setCookie } from '@/utils/cookie';
 import {
   postPasswordChange as postPasswordChangeAPI,
   postEmailCheck as postEmailCheckAPI,
@@ -88,6 +89,8 @@ export const usePostLogin = () => {
     const data = await mutateAsync(body, {
       onError: handleError,
     });
+
+    setCookie('accessToken', data.result?.accessToken as string, { path: '/' });
 
     return data;
   };
