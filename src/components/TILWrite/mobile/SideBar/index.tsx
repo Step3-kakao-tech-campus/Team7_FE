@@ -87,7 +87,7 @@ const SideBar = (props: PropsWithChildren) => {
                               key={step.id}
                               stepId={step.id}
                               title={step.title}
-                              isCompleted={step.isCompleted}
+                              isSubmit={step.isSubmit}
                               tilId={step.tilId}
                               handleOpenReferenceAside={() => {
                                 setReferenceOpen(true);

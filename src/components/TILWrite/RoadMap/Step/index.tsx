@@ -9,14 +9,14 @@ import * as Styled from './style';
 interface StepProps {
   stepId: number;
   title: string;
-  isCompleted: boolean;
+  isSubmit: boolean;
   tilId: number | null;
   handleOpenReferenceAside: () => void;
   handleMobileSideBar?: () => void;
 }
 
 const Step = (props: StepProps) => {
-  const { stepId, title, isCompleted, tilId, handleOpenReferenceAside, handleMobileSideBar } = props;
+  const { stepId, title, isSubmit, tilId, handleOpenReferenceAside, handleMobileSideBar } = props;
 
   const router = useRouter();
   const { postTil } = usePostTil();
@@ -47,7 +47,7 @@ const Step = (props: StepProps) => {
     <Styled.Root isActiveStep={isActiveStep} onClick={routeTILWrite}>
       <Styled.Container>
         <Styled.CheckIconContainer>
-          {isCompleted ? (
+          {isSubmit ? (
             <Image src="/assets/icons/ic_checkButton.svg" width={28} height={28} alt="체크 버튼" />
           ) : (
             <Image src="/assets/icons/ic_unCheckButton.svg" width={28} height={28} alt="체크 버튼" />

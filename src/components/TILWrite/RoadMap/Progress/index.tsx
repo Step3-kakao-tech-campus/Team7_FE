@@ -10,7 +10,7 @@ const Progress = (props: ProgressProps) => {
   const { ProgressRate, steps } = props;
 
   const totalStepCount = steps?.length;
-  const completedStepCount = steps?.filter((step) => step.isCompleted).length;
+  const completedStepCount = steps?.filter((step) => step.isSubmit).length;
 
   return (
     <Styled.Root>

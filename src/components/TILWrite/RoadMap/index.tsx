@@ -34,7 +34,7 @@ const RoadMap = (props: RoadMapProps) => {
               key={step.id}
               stepId={step.id}
               title={step.title}
-              isCompleted={step.isCompleted}
+              isSubmit={step.isSubmit}
               tilId={step.tilId}
               handleOpenReferenceAside={handleOpenReferenceAside}
             />

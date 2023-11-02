@@ -61,7 +61,7 @@ const Footer = (props: FooterProps) => {
         <CustomSuspense fallback={<SkeletonButton />} isLoading={isLoading}>
           {!tilDetail?.isPersonal && (
             <>
-              {tilDetail?.isCompleted ? (
+              {tilDetail?.isSubmit ? (
                 <Button
                   css={Styled.ButtonStyles}
                   onClick={() =>
