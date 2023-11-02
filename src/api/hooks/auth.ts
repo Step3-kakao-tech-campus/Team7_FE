@@ -2,6 +2,15 @@ import { useMutation } from '@tanstack/react-query';
 import { postPasswordChange, postEmailCheck, postEmailCode, postEmailCodeCheck, postJoin, postLogin } from '@/api/auth';
 import type { EmailCodeCheckRequest, JoinRequest, EmailPasswordRequest } from '@/api/auth/type';
 import { useApiError } from '@/hooks/useApiError';
+import { setCookie } from '@/utils/cookie';
+import {
+  postPasswordChange as postPasswordChangeAPI,
+  postEmailCheck as postEmailCheckAPI,
+  postEmailCode as postEmailCodeAPI,
+  postEmailCodeCheck as postEmailCodeCheckAPI,
+  postJoin as postJoinAPI,
+  postLogin as postLoginAPI,
+} from '../auth';
 
 export const usePostLogin = () => {
   const { mutateAsync, isLoading } = useMutation(postLogin);
@@ -69,6 +78,8 @@ export const usePostJoin = () => {
     const data = await mutateAsync(body, {
       onError: handleError,
     });
+
+    setCookie('accessToken', data.result?.accessToken as string, { path: '/' });
 
     return data;
   };

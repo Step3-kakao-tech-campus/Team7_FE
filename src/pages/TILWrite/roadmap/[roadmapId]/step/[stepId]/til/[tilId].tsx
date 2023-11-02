@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { axiosInstance } from '@/api';
 import { useGetTil } from '@/api/hooks/til';
 import Comment from '@/components/TILWrite/Comments';
 import Footer from '@/components/TILWrite/Footer';
@@ -10,6 +12,7 @@ import Header from '@/components/TILWrite/Header';
 import Reference from '@/components/TILWrite/Reference';
 import RoadMap from '@/components/TILWrite/RoadMap';
 import MobileHeader from '@/components/TILWrite/mobile/MobileHeader';
+import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
 import Responsive from '@/components/common/Responsive';
 import EmptyLayout from '@/components/layout/EmptyLayout';
 import { useDrawerState } from '@/hooks/useDrawerState';
@@ -114,7 +117,9 @@ const TILWrite = () => {
               animate={referenceOpen ? 'open' : 'closed'}
               variants={extraDrawerVariants}
               transition={{ type: 'tween', duration: DURATION }}>
-              <Reference handleCloseReferenceAside={() => handleCloseReference()} />
+              <FallbackErrorBoundary FallbackRender={Reference.Fallback}>
+                <Reference handleCloseReferenceAside={() => handleCloseReference()} />
+              </FallbackErrorBoundary>
             </ExtraDrawerMotion>
 
             <ExtraDrawerMotion
@@ -135,7 +140,30 @@ const TILWrite = () => {
 
 export default TILWrite;
 
-setLayout(TILWrite, EmptyLayout, true);
+setLayout(TILWrite, EmptyLayout);
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
 
 export const editorVariants = {
   asideOpen: {

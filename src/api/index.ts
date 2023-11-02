@@ -21,6 +21,9 @@ axiosInstance.interceptors.response.use(
           return Promise.resolve(error);
         }
       }
+      if (status === 401) {
+        window.location.href = 'auth/login';
+      }
     }
     return Promise.reject(error);
   },

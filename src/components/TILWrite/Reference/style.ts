@@ -10,3 +10,10 @@ export const Reference = styled.div`
   font-weight: 600;
   margin-top: 1.375rem;
 `;
+
+export const FallbackRoot = styled.div`
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;

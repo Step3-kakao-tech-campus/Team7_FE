@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Card from '@/components/common/Card';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.section`
   width: 100%;
@@ -40,6 +41,11 @@ export const CardContainer = styled(Card)`
   flex-direction: column;
   align-items: center;
   height: 420px;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    border: none;
+    box-shadow: none;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -65,9 +71,13 @@ export const ButtonStyles = css`
 `;
 
 // PeopleTILSection.Skeleton
-export const SkeletonCardStyles = css`
+export const SkeletonCardStyles = (theme: EmotionTheme) => css`
   width: 20rem;
   height: 11rem;
+
+  @media ${theme.mediaQuery.md} {
+    width: 100%;
+  }
 `;
 
 // PeopleTILSection.Fallback

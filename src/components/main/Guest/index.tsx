@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
 import Footer from '@/components/common/Footer';
+import GuestGNB from '@/components/common/GuestGNB';
 import Responsive from '@/components/common/Responsive';
 import FeatureSection from '@/components/main/Guest/FeatureSection';
 import * as SectionStyled from '@/components/main/Guest/FeatureSection/style';
@@ -18,6 +19,7 @@ const Guest = () => {
 
   return (
     <>
+      <GuestGNB />
       <Styled.Root>
         <Styled.LeftTopGradientContainer>
           <Styled.LeftTopGradient />
