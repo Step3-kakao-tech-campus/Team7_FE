@@ -1,13 +1,13 @@
 import { Controller } from 'react-hook-form';
 import Link from 'next/link';
 import AuthLogo from '@/components/auth/common/AuthLogo';
+import RegisterCompeleteModal from '@/components/auth/register/RegisterCompeleteModal';
 import * as Styled from '@/components/auth/register/RegisterForm/style';
+import useRegister from '@/components/auth/register/RegisterForm/useRegister';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { tilyLinks } from '@/constants/links';
 import { NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
-import useRegister from './useRegister';
-import RegisterCompeleteModal from '../RegisterCompeleteModal';
 
 const RegisterForm = () => {
   const { isOpen, handleClose, isLoading, control, handleSubmit, getValues, errors, onSubmit } = useRegister();

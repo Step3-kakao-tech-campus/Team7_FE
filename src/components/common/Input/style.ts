@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import type { InputProps } from './index';
+import type { InputProps } from '@/components/common/Input';
 
 type LabelTextProps = Pick<InputProps, 'labelType'>;
 type InputStateProps = Pick<InputProps, 'status' | 'disabled'>;

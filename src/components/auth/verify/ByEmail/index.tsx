@@ -1,12 +1,12 @@
 import { Controller } from 'react-hook-form';
+import { TextButton } from '@/components/auth/common/TextButton';
 import * as Styled from '@/components/auth/verify/ByEmail/style';
+import useByEamil from '@/components/auth/verify/ByEmail/useByEmail';
+import CodeCheck from '@/components/auth/verify/CodeCheck';
+import DuplicateEmailModal from '@/components/auth/verify/DuplicateEmailModal';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import { EMAIL_REGEX } from '@/constants/regex';
-import useByEamil from './useByEmail';
-import { TextButton } from '../../common/TextButton';
-import CodeCheck from '../CodeCheck';
-import DuplicateEmailModal from '../DuplicateEmailModal';
 
 interface ByEmailProps {
   location: 'register' | 'password';

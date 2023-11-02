@@ -1,7 +1,7 @@
 import RegisterForm from '@/components/auth/register/RegisterForm';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
+import { AuthPageContainer } from '@/pages/auth/register/verify';
 import { setLayout } from '@/utils/layout';
-import { AuthPageContainer } from './verify';
 
 export const RegisterPage = () => {
   return (

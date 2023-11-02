@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { Controller } from 'react-hook-form';
 import * as Styled from '@/components/auth/verify/CodeCheck/style';
+import useCodeCheck from '@/components/auth/verify/CodeCheck/useCodeCheck';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
-import useCodeCheck from './useCodeCheck';
 
 interface CodeCheckProps {
   location: 'register' | 'password';

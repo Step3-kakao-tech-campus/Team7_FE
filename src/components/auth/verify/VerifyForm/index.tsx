@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
+import AuthLogo from '@/components/auth/common/AuthLogo';
+import { TextButton } from '@/components/auth/common/TextButton';
+import ByEmail from '@/components/auth/verify/ByEmail';
 import { tilyLinks } from '@/constants/links';
-import AuthLogo from '../../common/AuthLogo';
-import { TextButton } from '../../common/TextButton';
-import ByEmail from '../ByEmail';
 
 interface VerifyFormProps {
   location: 'register' | 'password';
