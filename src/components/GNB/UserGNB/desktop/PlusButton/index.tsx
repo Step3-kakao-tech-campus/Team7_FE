@@ -11,7 +11,7 @@ const PlusButton = (props: PlusButtonProps) => {
 
   return (
     <Styled.PlusButton onClick={onClick}>
-      <Image src="/assets/icons/ic_plusButton.svg" alt="plus" width={20} height={20} />
+      <Image src="/assets/icons/ic_plusButton.svg" alt="추가버튼" width={20} height={20} />
       <span>{title}</span>
     </Styled.PlusButton>
   );

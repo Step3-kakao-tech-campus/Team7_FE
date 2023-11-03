@@ -1,16 +1,11 @@
 import { useState } from 'react';
+import * as Styled from '@/components/GNB/UserGNB/desktop/TILModal/style';
 import MobilePersonal from '@/components/GNB/UserGNB/mobile/MobilePersonal';
 import MobileRoadMap from '@/components/GNB/UserGNB/mobile/MobileRoadMap';
-import Modal from '@/components/common/Modal';
+import Modal, { type ModalProps } from '@/components/common/Modal';
 import Tab from '@/components/common/Tab';
-import * as Styled from './style';
 
-interface MobileTILModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const MobileTILModal = (props: MobileTILModalProps) => {
+const MobileTILModal = (props: ModalProps) => {
   const { isOpen, onClose } = props;
 
   const [curTab, setCurTab] = useState<'personal' | 'roadmap'>('personal');
@@ -19,7 +14,7 @@ const MobileTILModal = (props: MobileTILModalProps) => {
 
   return (
     <Modal
-      css={Styled.ModalContainerStyles}
+      css={Styled.MobileModalContainerStyles}
       closeButtonStyles={Styled.CloseButtonStyles}
       closeButtonSize={28}
       modalContentStyles={Styled.ModalContentStyles}

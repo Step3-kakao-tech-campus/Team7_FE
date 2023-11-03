@@ -1,8 +1,12 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const ModalContainerStyles = css`
+export const DesktopModalContainerStyles = css`
   width: 37.5rem;
+`;
+
+export const MobileModalContainerStyles = css`
+  width: 90vw;
 `;
 
 export const CloseButtonStyles = () => css`

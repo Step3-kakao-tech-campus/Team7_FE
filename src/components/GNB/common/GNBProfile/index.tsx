@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useGetAlarms, useGetUsers, usePatchAlarm } from '@/api/hooks/user';
-import Alarm from '@/components/GNB/UserGNB/desktop/Alarm';
-import MobileAlarm from '@/components/GNB/UserGNB/mobile/MobileAlarm';
+import AlarmModal from '@/components/GNB/UserGNB/desktop/AlarmModal';
+import MobileAlarmModal from '@/components/GNB/UserGNB/mobile/MobileAlarmModal';
 import * as Styled from '@/components/GNB/common/GNBProfile/style';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
@@ -38,10 +38,10 @@ const GNBProfile = () => {
       {isNewAlarm && <Styled.AlarmActiveDot />}
 
       <Responsive device="desktop">
-        <Alarm alarmButtonRef={alarmButtonRef} isAlarmOpen={isAlarmOpen} handleCloseAlarm={handleCloseAlarm} />
+        <AlarmModal alarmButtonRef={alarmButtonRef} isOpen={isAlarmOpen} onClose={handleCloseAlarm} />
       </Responsive>
       <Responsive device="mobile">
-        <MobileAlarm alarmButtonRef={alarmButtonRef} isAlarmOpen={isAlarmOpen} handleCloseAlarm={handleCloseAlarm} />
+        <MobileAlarmModal alarmButtonRef={alarmButtonRef} isOpen={isAlarmOpen} onClose={handleCloseAlarm} />
       </Responsive>
     </Styled.NoticeContainer>
   );

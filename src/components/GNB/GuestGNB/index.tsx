@@ -12,14 +12,12 @@ const GuestGNB = () => {
   const router = useRouter();
   const { isScrolled } = useGuestGNB();
 
-  // const activePathMatcher = (path: string) => `/${router.pathname.split('/')[1]}` === path;
-
   return (
     <>
       <Styled.Root isScrolled={isScrolled}>
         <Styled.Inner>
           <GNBLogo />
-          {/* <GNBNav/> */}
+          <GNBNav />
 
           <Responsive device="mobile">
             <Flex>
