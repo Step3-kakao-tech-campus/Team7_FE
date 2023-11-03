@@ -22,7 +22,7 @@ export const ToastContainer = styled.div<{ animation: string; position?: string 
 
     ${position === 'right' &&
     css`
-      top: 20px;
+      top: 80px;
       right: 20px;
 
       justify-content: flex-end;

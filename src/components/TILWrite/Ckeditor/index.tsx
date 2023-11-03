@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
 import { defaultData } from '@/components/TILWrite/Ckeditor/defaultData';
+import { useToast } from '@/components/common/Toast/useToast';
 import { editorConfiguration } from './plugin';
 import * as Styled from './style';
 
@@ -17,6 +18,8 @@ interface CkEditorProps {
 
 const CkEditor = (props: CkEditorProps) => {
   const { handleTILContent, handleAutoSaveTime } = props;
+
+  const toast = useToast();
 
   const [prevContent, setPrevContent] = useState<string>('');
 
@@ -55,6 +58,9 @@ const CkEditor = (props: CkEditorProps) => {
         onBlur={(event, editor) => {
           if (prevContent !== editor.getData() && editor.getData() !== '') {
             autoSaveTIL(editor.getData());
+            toast.showRight({
+              message: '자동 저장되었습니다.',
+            });
             handleAutoSaveTime.activeAutoSave();
           }
           setPrevContent(editor.getData());
