@@ -1,5 +1,5 @@
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
@@ -21,6 +21,7 @@ const CkEditor = (props: CkEditorProps) => {
 
   const toast = useToast();
 
+  const [content, setContent] = useState<string>('');
   const [prevContent, setPrevContent] = useState<string>('');
 
   const { query } = useRouter();
@@ -40,6 +41,21 @@ const CkEditor = (props: CkEditorProps) => {
     });
   };
 
+  // 유저가 입력을 하고 있는지에 대한 상태를 관리하는 useEffect
+  // 유저가 입력을 멈추면 디바운스가 동작하여 10000ms 후에 자동저장 요청을 보낸다.
+  useEffect(() => {
+    if (content === '') return;
+
+    const debounce = setTimeout(() => {
+      autoSaveTIL(content);
+      handleAutoSaveTime.activeAutoSave();
+      toast.showRight({
+        message: '자동 저장되었습니다.',
+      });
+    }, 10000);
+    return () => clearTimeout(debounce);
+  }, [prevContent, content]);
+
   return (
     <Styled.Root>
       <CKEditor
@@ -51,9 +67,11 @@ const CkEditor = (props: CkEditorProps) => {
           handleTILContent(editor.getData());
         }}
         onChange={(event, editor) => {
+          console.log(event);
           const data = editor.getData();
           console.log({ event, editor, data });
           handleTILContent(editor.getData());
+          setContent(editor.getData());
         }}
         onBlur={(event, editor) => {
           if (prevContent !== editor.getData() && editor.getData() !== '') {
