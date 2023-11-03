@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
@@ -20,6 +20,10 @@ const RoadMap = () => {
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
   const { postTil } = usePostTil();
+
+  useEffect(() => {
+    if (roadmaps.roadmaps.length !== 0) setRoadmapId(roadmaps.roadmaps[0].id);
+  }, [roadmaps]);
 
   // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수
   const routeTILWrite = async () => {
