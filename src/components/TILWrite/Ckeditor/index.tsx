@@ -1,5 +1,5 @@
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
@@ -23,6 +23,7 @@ const CkEditor = (props: CkEditorProps) => {
 
   const [content, setContent] = useState<string>('');
   const [prevContent, setPrevContent] = useState<string>('');
+  const [isUserExcuteSave, setIsUserExcuteSave] = useState<boolean>(false);
 
   const { query } = useRouter();
   const { patchTil } = usePatchTil();
@@ -39,22 +40,31 @@ const CkEditor = (props: CkEditorProps) => {
       tilId: Number(query.tilId),
       content: TILContent,
     });
+
+    toast.showRight({
+      message: '자동 저장되었습니다.',
+    });
   };
 
   // 유저가 입력을 하고 있는지에 대한 상태를 관리하는 useEffect
   // 유저가 입력을 멈추면 디바운스가 동작하여 10000ms 후에 자동저장 요청을 보낸다.
+  // isUserExcuteSave 는 유저가 Ctrl + S 또는 Blur 를 통해 저장을 했을떄 자동저장을 막기 위해 사용한다.
   useEffect(() => {
     if (content === '') return;
 
     const debounce = setTimeout(() => {
       autoSaveTIL(content);
       handleAutoSaveTime.activeAutoSave();
-      toast.showRight({
-        message: '자동 저장되었습니다.',
-      });
-    }, 10000);
-    return () => clearTimeout(debounce);
-  }, [prevContent, content]);
+    }, 6000);
+
+    if (isUserExcuteSave) {
+      clearTimeout(debounce);
+    }
+
+    return () => {
+      clearTimeout(debounce);
+    };
+  }, [prevContent, content, isUserExcuteSave]);
 
   return (
     <Styled.Root>
@@ -65,20 +75,35 @@ const CkEditor = (props: CkEditorProps) => {
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
           handleTILContent(editor.getData());
+          setPrevContent(editor.getData());
+          let throttle = false;
+
+          editor.keystrokes.set('Ctrl+S', (keyEvtData, cancel) => {
+            // 이벤트를 취소하여 브라우저의 기본 동작을 방지합니다.
+            cancel();
+
+            // 여기에 사용자 정의 동작을 추가합니다.
+            // Ctrl+S 로 저장은 쓰로틀을 적용에 5초에 한번씩 발생하도록 합니다.
+            if (throttle) return;
+            if (!throttle) {
+              throttle = true;
+              setIsUserExcuteSave(true);
+              autoSaveTIL(editor.getData());
+              setTimeout(async () => {
+                throttle = false;
+              }, 5000);
+            }
+          });
         }}
         onChange={(event, editor) => {
-          console.log(event);
-          const data = editor.getData();
-          console.log({ event, editor, data });
           handleTILContent(editor.getData());
           setContent(editor.getData());
+          setIsUserExcuteSave(false);
         }}
         onBlur={(event, editor) => {
-          if (prevContent !== editor.getData() && editor.getData() !== '') {
+          if (isContentChange(prevContent, editor.getData()) && isContentNotEmpty(editor.getData())) {
             autoSaveTIL(editor.getData());
-            toast.showRight({
-              message: '자동 저장되었습니다.',
-            });
+            setIsUserExcuteSave(true);
             handleAutoSaveTime.activeAutoSave();
           }
           setPrevContent(editor.getData());
@@ -92,3 +117,11 @@ const CkEditor = (props: CkEditorProps) => {
 };
 
 export default CkEditor;
+
+const isContentChange = (prevContent: string, content: string) => {
+  return prevContent !== content;
+};
+
+const isContentNotEmpty = (content: string) => {
+  return content !== '';
+};
