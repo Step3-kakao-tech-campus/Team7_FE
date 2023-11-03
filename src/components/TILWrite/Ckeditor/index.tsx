@@ -24,6 +24,7 @@ const CkEditor = (props: CkEditorProps) => {
   const [content, setContent] = useState<string>('');
   const [prevContent, setPrevContent] = useState<string>('');
   const [isUserExcuteSave, setIsUserExcuteSave] = useState<boolean>(false);
+  const [editor, setEditor] = useState<any>();
 
   const { query } = useRouter();
   const { patchTil } = usePatchTil();
@@ -43,6 +44,13 @@ const CkEditor = (props: CkEditorProps) => {
 
     toast.showRight({
       message: '자동 저장되었습니다.',
+    });
+  };
+
+  const focusEditor = () => {
+    editor.model.change((writer: any) => {
+      writer.setSelection(writer.createPositionAt(editor.model.document.getRoot(), 'end'));
+      editor.editing.view.focus();
     });
   };
 
@@ -67,13 +75,14 @@ const CkEditor = (props: CkEditorProps) => {
   }, [prevContent, content, isUserExcuteSave]);
 
   return (
-    <Styled.Root>
+    <Styled.Root onClick={focusEditor}>
       <CKEditor
         editor={Editor}
         config={editorConfiguration}
         data={tilDetail ? tilDetail.content || defaultData : defaultData}
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
+          setEditor(editor);
           handleTILContent(editor.getData());
           setPrevContent(editor.getData());
           let throttle = false;
