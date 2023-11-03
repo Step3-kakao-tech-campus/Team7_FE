@@ -1,7 +1,8 @@
-import { useRecoilState } from 'recoil';
+import { produce } from 'immer';
+import { useSetRecoilState } from 'recoil';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeModal/style';
-import { roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
@@ -18,7 +19,7 @@ interface WebFormInput {
 
 const WebModal = (props: WebModalProps) => {
   const { idx, isOpen, onClose } = props;
-  const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
+  const setRoadmap = useSetRecoilState(roadmapAtoms);
 
   const {
     control,
@@ -33,14 +34,11 @@ const WebModal = (props: WebModalProps) => {
   });
 
   const onSubmit: SubmitHandler<WebFormInput> = (formData) => {
-    const newStepList = [...stepList];
-    const newReferences = { ...stepList[idx].references };
-    const newWeb = [...stepList[idx].references.web];
-    newWeb.push({ link: formData.link });
-    newReferences.web = newWeb;
-    newStepList[idx] = { ...newStepList[idx], references: newReferences };
-
-    setStepList(newStepList);
+    setRoadmap((prev) =>
+      produce(prev, (draft) => {
+        draft.steps[idx].references.web.push(formData);
+      }),
+    );
     reset();
     onClose();
   };

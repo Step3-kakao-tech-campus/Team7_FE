@@ -7,6 +7,7 @@ const TILY_LINKS = {
   passwordVerify: () => '/auth/change-password/verify',
   changePassword: () => '/auth/change-password/',
   roadmap: () => '/roadmap',
+  roadmapDetail: (roadmapId: number) => `/roadmap/${roadmapId}`,
   roadmapCreate: () => '/roadmap/create',
   mypage: () => '/mypage',
   tilWrite: ({ roadmapId, stepId, tilId }: tilWriteParams) =>
