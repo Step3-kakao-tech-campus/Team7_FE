@@ -5,6 +5,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
 import { defaultData } from '@/components/TILWrite/Ckeditor/defaultData';
 import { useToast } from '@/components/common/Toast/useToast';
+import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import { editorConfiguration } from './plugin';
 import * as Styled from './style';
 
@@ -25,6 +26,7 @@ const CkEditor = (props: CkEditorProps) => {
   const [prevContent, setPrevContent] = useState<string>('');
   const [isUserExcuteSave, setIsUserExcuteSave] = useState<boolean>(false);
   const [editor, setEditor] = useState<any>();
+  const editorRef = useRef<HTMLDivElement>(null);
 
   const { query } = useRouter();
   const { patchTil } = usePatchTil();
@@ -47,7 +49,9 @@ const CkEditor = (props: CkEditorProps) => {
     });
   };
 
-  const focusEditor = () => {
+  const focusEditor = (e: MouseEvent) => {
+    if (e.target !== editorRef.current) return;
+
     editor.model.change((writer: any) => {
       writer.setSelection(writer.createPositionAt(editor.model.document.getRoot(), 'end'));
       editor.editing.view.focus();
@@ -75,7 +79,7 @@ const CkEditor = (props: CkEditorProps) => {
   }, [prevContent, content, isUserExcuteSave]);
 
   return (
-    <Styled.Root onClick={focusEditor}>
+    <Styled.Root ref={editorRef} onClick={(e) => focusEditor(e)}>
       <CKEditor
         editor={Editor}
         config={editorConfiguration}
@@ -105,6 +109,7 @@ const CkEditor = (props: CkEditorProps) => {
           });
         }}
         onChange={(event, editor) => {
+          console.log(editor.getData());
           handleTILContent(editor.getData());
           setContent(editor.getData());
           setIsUserExcuteSave(false);
