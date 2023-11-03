@@ -12,7 +12,7 @@ export const ToastContainer = styled.div<{ animation: string }>`
   // fowards 애니메이션의 마지막 상태를 유지
   animation: 0.5s forwards ${(props) => props.animation};
 
-  @keyframes slide-in {
+  @keyframes slide-bottom-in {
     from {
       transform: translateY(300%);
     }
@@ -22,7 +22,7 @@ export const ToastContainer = styled.div<{ animation: string }>`
     }
   }
 
-  @keyframes slide-out {
+  @keyframes slide-bottom-out {
     from {
       transform: translateY(0%);
     }
@@ -32,7 +32,7 @@ export const ToastContainer = styled.div<{ animation: string }>`
     }
   }
 
-  @keyframes slide-reset {
+  @keyframes slide-bottom-reset {
     from {
       transform: translateY(300%);
     }

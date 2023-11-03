@@ -130,7 +130,7 @@ export const usePostRoadmapIndividual = () => {
     const data = await mutation.mutateAsync(title, {
       onSuccess: () => {
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy]);
-        toast.show({
+        toast.showBottom({
           message: '로드맵이 생성되었습니다.',
         });
       },
@@ -269,7 +269,7 @@ export const usePatchRoadmapGroupMemberRole = () => {
   }) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
-        toast.show({
+        toast.showBottom({
           message: '멤버 권한이 변경되었습니다.',
         });
       },
@@ -289,7 +289,7 @@ export const useDeleteRoadmapGroupMember = () => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupMember, body.roadmapId]);
-        toast.show({
+        toast.showBottom({
           message: '멤버가 강퇴되었습니다.',
         });
       },
@@ -349,12 +349,12 @@ export const usePostRoadmapsGroupsParticipate = () => {
   const postRoadmapsGroupsParticipate = async (code: string) => {
     const data = await mutateAsync(code, {
       onSuccess: () => {
-        toast.show({
+        toast.showBottom({
           message: '로드맵에 참여되었습니다.',
         });
       },
       onError: () => {
-        toast.show({
+        toast.showBottom({
           message: '로드맵을 찾을 수 없습니다. 코드를 확인해주세요.',
         });
       },
