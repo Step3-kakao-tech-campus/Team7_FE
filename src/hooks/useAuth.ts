@@ -2,10 +2,8 @@ import { useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { accessTokenAtom } from '@/components/auth/states/accessTokenAtoms';
-
 import TILY_LINKS from '@/constants/links';
 import { removeCookie } from '@/utils/cookie';
-
 
 export const useAuth = () => {
   const router = useRouter();
@@ -19,7 +17,7 @@ export const useAuth = () => {
   return {
     logout() {
       removeCookie('accessToken');
-      router.push(TILY_LINKS.intro());
+      router.push(TILY_LINKS.home());
     },
     isLoggedIn,
   };
