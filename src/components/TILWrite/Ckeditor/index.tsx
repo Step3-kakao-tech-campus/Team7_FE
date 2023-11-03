@@ -55,7 +55,7 @@ const CkEditor = (props: CkEditorProps) => {
     const debounce = setTimeout(() => {
       autoSaveTIL(content);
       handleAutoSaveTime.activeAutoSave();
-    }, 6000);
+    }, 10000);
 
     if (isUserExcuteSave) {
       clearTimeout(debounce);
@@ -91,7 +91,7 @@ const CkEditor = (props: CkEditorProps) => {
               autoSaveTIL(editor.getData());
               setTimeout(async () => {
                 throttle = false;
-              }, 5000);
+              }, 3000);
             }
           });
         }}
