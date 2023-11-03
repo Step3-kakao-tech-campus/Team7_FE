@@ -130,7 +130,7 @@ export const usePostRoadmapIndividual = () => {
     const data = await mutation.mutateAsync(title, {
       onSuccess: () => {
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy]);
-        toast.showBottom({
+        toast.showRight({
           message: '로드맵이 생성되었습니다.',
         });
       },
@@ -184,7 +184,7 @@ export const usePostRoadmapsById = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId)]);
-          toast.show({
+          toast.showBottom({
             message: '로드맵이 수정되었습니다.',
           });
         },
@@ -221,12 +221,12 @@ export const usePostRoadmapsApply = () => {
     if (body.roadmapId > 0) {
       const data = await mutateAsync(body, {
         onSuccess: () => {
-          toast.show({
+          toast.showBottom({
             message: '신청이 완료되었습니다.',
           });
         },
         onError: () => {
-          toast.show({
+          toast.showBottom({
             message: '신청에 실패하였습니다.',
           });
         },

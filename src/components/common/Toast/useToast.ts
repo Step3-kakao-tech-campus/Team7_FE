@@ -9,5 +9,8 @@ export const useToast = () => {
     showBottom(toast: ToastOption) {
       controller.showBottom(toast);
     },
+    showRight(toast: ToastOption) {
+      controller.showRight(toast);
+    },
   };
 };
