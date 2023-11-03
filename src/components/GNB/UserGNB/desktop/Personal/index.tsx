@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import {
@@ -30,6 +30,10 @@ const Personal = () => {
   const { postRoadmapsIndividual } = usePostRoadmapIndividual();
   const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();
   const { postTil } = usePostTil();
+
+  useEffect(() => {
+    if (roadmaps.category.length !== 0) setRoadmapId(roadmaps.category[0].id);
+  }, [roadmaps]);
 
   const {
     control: roadmapControl,

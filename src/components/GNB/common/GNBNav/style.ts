@@ -24,7 +24,8 @@ export const NavItem = styled(Link)<{ active: number }>`
   margin-right: 2.5rem;
   min-width: 2.5rem;
   height: 2.5rem;
-  font-weight: ${({ active }) => (active ? 700 : 400)};
+  font-weight: ${({ active }) => (active ? 400 : 400)};
+  color: ${({ active, theme }) => (active ? theme.colors.black : theme.colors.gray_900)};
 
   ${({ active, theme }) =>
     active &&
@@ -44,5 +45,9 @@ export const NavItem = styled(Link)<{ active: number }>`
     min-width: fit-content;
     margin-right: 20px;
     height: auto;
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.black};
   }
 `;
