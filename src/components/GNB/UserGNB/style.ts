@@ -31,6 +31,7 @@ export const Inner = styled.header`
 `;
 
 export const TILInfo = styled.div`
+  position: relative;
   background-color: ${({ theme }) => theme.colors.gray_200};
   padding: 1rem;
   border-radius: 1rem;
@@ -38,6 +39,15 @@ export const TILInfo = styled.div`
 
   & > span:nth-of-type(2) {
     color: ${({ theme }) => theme.colors.rose};
+  }
+
+  & > span:last-of-type::after {
+    content: '';
+    position: absolute;
+    right: -12px;
+    top: 21px;
+    border-left: 20px solid ${({ theme }) => theme.colors.gray_200};
+    border-bottom: 20px solid transparent;
   }
 `;
 

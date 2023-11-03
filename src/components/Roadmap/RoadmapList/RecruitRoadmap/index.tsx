@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import RecruitRoadmapList from '@/components/Roadmap/RoadmapList/RecruitRoadmap/RecruitRoadmapList';
 import * as Styled from '@/components/Roadmap/RoadmapList/RecruitRoadmap/style';
 import Input from '@/components/common/Input';
+import Responsive from '@/components/common/Responsive';
 import Tab from '@/components/common/Tab';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import useQueryParam from '@/hooks/useQueryParam';
@@ -43,22 +44,56 @@ const RecruitRoadmap = () => {
     <>
       <h2>로드맵 목록</h2>
       <Styled.Navbar>
-        <Tab>
-          <Tab.Menu
-            onClick={() => {
-              setCategory('tily');
-            }}
-            className={category === 'tily' ? 'selected' : ''}>
-            TIL-y 로드맵
-          </Tab.Menu>
-          <Tab.Menu
-            onClick={() => {
-              setCategory('group');
-            }}
-            className={category === 'group' ? 'selected' : ''}>
-            그룹 로드맵
-          </Tab.Menu>
-        </Tab>
+        <Responsive device="desktop">
+          <Tab>
+            <Tab.Menu
+              onClick={() => {
+                setCategory('tily');
+              }}
+              className={category === 'tily' ? 'selected' : ''}
+              tooltipContent={() => (
+                <>
+                  <p>틸리에서 제공해주는 로드맵이에요.</p>
+                  <p>다양한 로드맵들을 제공하려 노력중입니다.</p>
+                </>
+              )}>
+              TIL-y 로드맵
+            </Tab.Menu>
+            <Tab.Menu
+              onClick={() => {
+                setCategory('group');
+              }}
+              className={category === 'group' ? 'selected' : ''}
+              tooltipContent={() => (
+                <>
+                  <p>사용자들이 직접 만든 로드맵이에요.</p>
+                  <p>서로의 TIL을 확인해보세요.</p>
+                </>
+              )}>
+              그룹 로드맵
+            </Tab.Menu>
+          </Tab>
+        </Responsive>
+        <Responsive device="mobile">
+          <Tab>
+            <Tab.Menu
+              onClick={() => {
+                setCategory('tily');
+              }}
+              className={category === 'tily' ? 'selected' : ''}
+              isTooltip={false}>
+              TIL-y 로드맵
+            </Tab.Menu>
+            <Tab.Menu
+              onClick={() => {
+                setCategory('group');
+              }}
+              className={category === 'group' ? 'selected' : ''}
+              isTooltip={false}>
+              그룹 로드맵
+            </Tab.Menu>
+          </Tab>
+        </Responsive>
         <form
           onSubmit={(e) => {
             e.preventDefault();
