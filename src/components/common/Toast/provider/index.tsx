@@ -11,7 +11,7 @@ export interface ToastOption {
 }
 
 export interface ToastController {
-  show: (option: ToastOption) => void;
+  showBottom: (option: ToastOption) => void;
 }
 
 export const ToastContext = createContext<ToastController>({} as ToastController);
@@ -24,20 +24,22 @@ const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
   const { duration = 2500, children } = props;
 
   const [toast, setToast] = useState<ToastOption | null>(null);
-  const [animation, setAnimation] = useState<'slide-in' | 'slide-out' | 'slide-reset'>('slide-in');
+  const [animation, setAnimation] = useState<'slide-bottom-in' | 'slide-bottom-out' | 'slide-bottom-reset'>(
+    'slide-bottom-in',
+  );
   const toastTimeout = useTimeout();
 
   const controller: ToastController = {
-    show: async ({ message, isError = false }: ToastOption) => {
+    showBottom: async ({ message, isError = false }: ToastOption) => {
       setToast({ message, isError });
-      setAnimation('slide-reset');
+      setAnimation('slide-bottom-reset');
 
       // 연속 클릭시 slide-reset이 실행된 후 slide-in이 실행되도록 함.
       await sleep(0);
 
-      setAnimation('slide-in');
+      setAnimation('slide-bottom-in');
       toastTimeout.set(() => {
-        setAnimation('slide-out');
+        setAnimation('slide-bottom-out');
       }, duration);
     },
   };
