@@ -49,7 +49,7 @@ export interface GetRoadmapStepReferenceResponse extends CommonResponse {
     id: number;
     description: string;
     youtubes: Youtubes[];
-    references: References[];
+    webs: References[];
   };
 }
 

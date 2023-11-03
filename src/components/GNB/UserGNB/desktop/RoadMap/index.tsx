@@ -67,7 +67,7 @@ const RoadMap = () => {
             {steps?.result.steps.map((step) => {
               return (
                 <Styled.Container key={step.id} selected={stepId === step.id}>
-                  {step.isCompleted ? (
+                  {step.isSubmit ? (
                     <Icon css={Styled.IconStyles} iconName="ic_checkButton" imageSize={20} ext="svg" alt="체크 버튼" />
                   ) : (
                     <Icon

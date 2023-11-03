@@ -77,7 +77,7 @@ const MobileRoadMap = () => {
               {steps?.result.steps.map((step) => {
                 return (
                   <Styled.Container key={step.id} selected={stepId === step.id}>
-                    {step.isCompleted ? (
+                    {step.isSubmit ? (
                       <Icon
                         css={Styled.IconStyles}
                         iconName="ic_checkButton"

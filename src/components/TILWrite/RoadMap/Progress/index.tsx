@@ -2,24 +2,23 @@ import type { Step } from '@/api/type';
 import * as Styled from './style';
 
 interface ProgressProps {
-  ProgressRate?: number;
   steps?: Step[];
 }
 
 const Progress = (props: ProgressProps) => {
-  const { ProgressRate, steps } = props;
+  const { steps } = props;
 
   const totalStepCount = steps?.length;
-  const completedStepCount = steps?.filter((step) => step.isCompleted).length;
+  const completedStepCount = steps?.filter((step) => step.isSubmit).length;
+
+  const percentage = ((completedStepCount! / totalStepCount!) * 100).toFixed(2);
 
   return (
     <Styled.Root>
-      {ProgressRate && (
-        <Styled.ProgressRate>{`진도율 : ${completedStepCount}/${totalStepCount} (${ProgressRate}.00%)`}</Styled.ProgressRate>
-      )}
+      <Styled.ProgressRate>{`진도율 : ${completedStepCount}/${totalStepCount} (${percentage}%)`}</Styled.ProgressRate>
       <Styled.ProgressContainer>
         <Styled.Rail />
-        {ProgressRate && <Styled.Progress progress={ProgressRate} />}
+        <Styled.Progress progress={percentage} />
       </Styled.ProgressContainer>
     </Styled.Root>
   );

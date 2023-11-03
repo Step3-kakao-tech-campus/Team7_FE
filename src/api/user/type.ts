@@ -8,10 +8,6 @@ export interface PatchAlarmRequest {
 
 // User + Alarm 응답
 
-export interface GetUsersResponse extends CommonResponse {
-  result: User;
-}
-
 export interface GetAlarmsResponse extends CommonResponse {
   result: {
     alarms: Alarm[];
@@ -26,6 +22,9 @@ export interface GetUserHistoryResponse {
     gardens: UserHistory[];
   };
 }
+
+// getUser
+export interface GetUsersResponse extends User {}
 
 // deleteUser
 export interface DeleteUserResponse extends CommonResponse {}

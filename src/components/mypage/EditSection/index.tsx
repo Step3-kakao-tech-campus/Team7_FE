@@ -20,6 +20,7 @@ const EditSection = () => {
     control,
     handleSubmit,
     getValues,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -41,6 +42,7 @@ const EditSection = () => {
       newPassword: formData.newPassword,
       newPasswordConfirm: formData.newPasswordConfirm,
     });
+    reset();
   };
 
   return (

@@ -58,15 +58,17 @@ export const UserName = styled.div`
 `;
 
 export const MenuBarStyles = (theme: EmotionTheme) => css`
-  display: flex !important;
-  justify-content: space-between;
-  position: sticky;
-  top: ${theme.layout.main.GNBHeight};
-  width: 100%;
-  padding: 16px;
-  z-index: 1;
-  background-color: #fff;
-  border-bottom: 1px solid ${theme.colors.gray_500};
+  @media ${theme.mediaQuery.md} {
+    display: flex !important;
+    justify-content: space-between;
+    position: sticky;
+    top: ${theme.layout.main.GNBHeight};
+    width: 100%;
+    padding: 16px;
+    z-index: 1;
+    background-color: #fff;
+    border-bottom: 1px solid ${theme.colors.gray_500};
+  }
 `;
 
 export const LayoutElement = styled.div`

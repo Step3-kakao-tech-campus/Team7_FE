@@ -9,14 +9,18 @@ import * as Styled from './style';
 interface StepProps {
   stepId: number;
   title: string;
-  isCompleted: boolean;
+  isSubmit: boolean;
   tilId: number | null;
   handleOpenReferenceAside: () => void;
   handleMobileSideBar?: () => void;
+  handleAutoSaveTime: {
+    activeAutoSave: () => void;
+    clearAutoSave: () => void;
+  };
 }
 
 const Step = (props: StepProps) => {
-  const { stepId, title, isCompleted, tilId, handleOpenReferenceAside, handleMobileSideBar } = props;
+  const { stepId, title, isSubmit, tilId, handleOpenReferenceAside, handleMobileSideBar, handleAutoSaveTime } = props;
 
   const router = useRouter();
   const { postTil } = usePostTil();
@@ -32,7 +36,7 @@ const Step = (props: StepProps) => {
   const routeTILWrite = async () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
     const roadmapId = Number(router.query.roadmapId) as number;
-
+    handleAutoSaveTime.clearAutoSave();
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
       const data = await postTil({ roadmapId, stepId, title });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
@@ -47,7 +51,7 @@ const Step = (props: StepProps) => {
     <Styled.Root isActiveStep={isActiveStep} onClick={routeTILWrite}>
       <Styled.Container>
         <Styled.CheckIconContainer>
-          {isCompleted ? (
+          {isSubmit ? (
             <Image src="/assets/icons/ic_checkButton.svg" width={28} height={28} alt="체크 버튼" />
           ) : (
             <Image src="/assets/icons/ic_unCheckButton.svg" width={28} height={28} alt="체크 버튼" />

@@ -3,6 +3,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { getAlarms, getUsers, getUserHistory } from '@/api/user';
 import { patchAlarm, patchUserPassword as patchUserPasswordAPI, deleteUser as deleteUserAPI } from '@/api/user';
 import type { PatchAlarmRequest, PatchUserPasswordRequest } from '@/api/user/type';
+import { useToast } from '@/components/common/Toast/useToast';
+import { useApiError } from '@/hooks/useApiError';
 
 const QUERY_KEY = {
   user: 'user',
@@ -16,7 +18,7 @@ export const useGetUsers = () => {
   const { data, isLoading } = useQuery([QUERY_KEY.user], () => getUsers());
 
   return {
-    user: data?.result,
+    user: data,
     isLoading,
   };
 };
@@ -74,9 +76,18 @@ export const useGetUserHistory = () => {
 
 export const usePatchUserPassword = () => {
   const { mutateAsync, isLoading } = useMutation(patchUserPasswordAPI);
+  const toast = useToast();
+  const { handleError } = useApiError();
 
   const patchUserPassword = async (body: PatchUserPasswordRequest) => {
-    const data = await mutateAsync(body);
+    const data = await mutateAsync(body, {
+      onSuccess: () => {
+        toast.show({
+          message: '비밀번호가 변경되었습니다.',
+        });
+      },
+      onError: handleError,
+    });
 
     return {
       data,
@@ -88,9 +99,12 @@ export const usePatchUserPassword = () => {
 
 export const useDeleteUser = () => {
   const { mutateAsync } = useMutation(deleteUserAPI);
+  const { handleError } = useApiError();
 
   const deleteUser = async (password: string) => {
-    const data = await mutateAsync(password);
+    const data = await mutateAsync(password, {
+      onError: handleError,
+    });
 
     return {
       data,

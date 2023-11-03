@@ -21,8 +21,17 @@ import { setLayout } from '@/utils/layout';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
+export interface AutoSaveTime {
+  active: boolean;
+  time: Date;
+}
+
 const TILWrite = () => {
   const [TILContent, setTILContent] = useState<string>('');
+  const [autoSaveTime, setAutoSaveTime] = useState<AutoSaveTime>({
+    active: false,
+    time: new Date('2023-11-03'),
+  });
 
   const { query } = useRouter();
 
@@ -34,6 +43,21 @@ const TILWrite = () => {
 
   const handleTILContent = (content: string) => {
     setTILContent(content);
+  };
+
+  const handleAutoSaveTime = {
+    activeAutoSave() {
+      setAutoSaveTime({
+        active: true,
+        time: new Date(),
+      });
+    },
+    clearAutoSave() {
+      setAutoSaveTime({
+        active: false,
+        time: new Date(),
+      });
+    },
   };
 
   const {
@@ -92,11 +116,11 @@ const TILWrite = () => {
             animate={asideOpen ? 'asideOpen' : 'asideClosed'}
             variants={editorVariants}
             transition={{ type: 'tween', duration: DURATION }}>
-            <Editor handleTILContent={handleTILContent} />
+            <Editor handleTILContent={handleTILContent} handleAutoSaveTime={handleAutoSaveTime} />
           </EditorContainer>
         ) : (
           <PersonalEditorContainer>
-            <Editor handleTILContent={handleTILContent} />
+            <Editor handleTILContent={handleTILContent} handleAutoSaveTime={handleAutoSaveTime} />
           </PersonalEditorContainer>
         )}
 
@@ -109,6 +133,7 @@ const TILWrite = () => {
                 asideMount={asideMount}
                 handleCloseAside={() => handleCloseAside(handleCloseReference)}
                 handleOpenReferenceAside={handleOpenReference}
+                handleAutoSaveTime={handleAutoSaveTime}
               />
             )}
 
@@ -133,7 +158,7 @@ const TILWrite = () => {
         )}
       </Container>
 
-      <Footer TILContent={TILContent} />
+      <Footer TILContent={TILContent} autoSaveTime={autoSaveTime} />
     </Root>
   );
 };

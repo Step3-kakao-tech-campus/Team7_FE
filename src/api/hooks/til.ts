@@ -114,9 +114,12 @@ export const usePostTil = () => {
 
 export const usePatchTil = () => {
   const mutation = useMutation(patchTilAPI);
+  const { handleError } = useApiError();
 
   const patchTil = async (body: PatchTilRequest) => {
-    const data = await mutation.mutateAsync(body);
+    const data = await mutation.mutateAsync(body, {
+      onError: handleError,
+    });
 
     return data;
   };
@@ -124,10 +127,18 @@ export const usePatchTil = () => {
 };
 
 export const useSubmitTil = () => {
+  const queryClient = useQueryClient();
+
   const mutation = useMutation(submitTilAPI);
+  const { handleError } = useApiError();
 
   const submitTil = async (body: SubmitTilRequest) => {
-    const data = await mutation.mutateAsync(body);
+    const data = await mutation.mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
+      },
+      onError: handleError,
+    });
 
     return data;
   };
@@ -138,6 +149,7 @@ export const usePostComment = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(postCommentAPI);
+  const { handleError } = useApiError();
 
   const postComment = async (body: PostCommentRequest) => {
     const data = await mutation.mutateAsync(body, {
@@ -151,6 +163,7 @@ export const usePostComment = () => {
           },
         ]);
       },
+      onError: handleError,
     });
 
     return data;
@@ -163,6 +176,7 @@ export const usePatchComment = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(patchCommentAPI);
+  const { handleError } = useApiError();
 
   const patchComment = async (body: PatchCommentRequest) => {
     const data = await mutation.mutateAsync(body, {
@@ -176,6 +190,7 @@ export const usePatchComment = () => {
           },
         ]);
       },
+      onError: handleError,
     });
 
     return data;
@@ -188,6 +203,7 @@ export const useDeleteComment = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(deleteCommentAPI);
+  const { handleError } = useApiError();
 
   const deleteComment = async (body: DeleteCommentRequest) => {
     const data = await mutation.mutateAsync(body, {
@@ -201,6 +217,7 @@ export const useDeleteComment = () => {
           },
         ]);
       },
+      onError: handleError,
     });
 
     return data;

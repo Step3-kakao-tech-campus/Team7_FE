@@ -1,5 +1,3 @@
-import type { References } from './roadmap/type';
-
 // 공통 응답 인터페이스
 export interface CommonResponse {
   success: boolean;
@@ -41,7 +39,7 @@ export interface Til {
 export interface Step {
   id: number;
   title: string;
-  isCompleted: boolean;
+  isSubmit: boolean;
   tilId: number | null;
   name?: string;
 }
