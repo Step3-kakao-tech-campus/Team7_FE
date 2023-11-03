@@ -1,27 +1,51 @@
 import { axiosInstance } from '@/api';
+import type { NullResultResponse } from '@/api/type';
 import type {
   GetAlarmsResponse,
   GetUserHistoryResponse,
-  GetUserResponse,
+  GetUsersResponse,
   PatchAlarmRequest,
   PatchUserPasswordRequest,
   PatchUserPasswordResponse,
   DeleteUserResponse,
 } from '@/api/user/type';
 
-export const getUserHistory = async () => {
-  const { data } = await axiosInstance.request<GetUserHistoryResponse>({
+// User
+
+export const getUsers = async () => {
+  const { data } = await axiosInstance.request<GetUsersResponse>({
     method: 'GET',
-    url: `/gardens`,
+    url: `/users`,
   });
 
   return data;
 };
 
-export const getUser = async () => {
-  const { data } = await axiosInstance.request<GetUserResponse>({
+// Alarm
+
+export const getAlarms = async () => {
+  const { data } = await axiosInstance.request<GetAlarmsResponse>({
     method: 'GET',
-    url: `/users`,
+    url: `/alarms`,
+  });
+
+  return data;
+};
+
+export const patchAlarm = async (body: PatchAlarmRequest) => {
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'PATCH',
+    url: `/alarms/read`,
+    data: body,
+  });
+
+  return data;
+};
+
+export const getUserHistory = async () => {
+  const { data } = await axiosInstance.request<GetUserHistoryResponse>({
+    method: 'GET',
+    url: `/gardens`,
   });
 
   return data;
@@ -42,25 +66,6 @@ export const deleteUser = async (password: string) => {
     method: 'DELETE',
     url: `/users`,
     data: { password },
-  });
-
-  return data;
-};
-
-export const getAlarms = async () => {
-  const { data } = await axiosInstance.request<GetAlarmsResponse>({
-    method: 'GET',
-    url: `/alarms`,
-  });
-
-  return data;
-};
-
-export const patchAlarm = async (body: PatchAlarmRequest) => {
-  const { data } = await axiosInstance.request<GetAlarmsResponse>({
-    method: 'PATCH',
-    url: `/alarms/read`,
-    data: body,
   });
 
   return data;

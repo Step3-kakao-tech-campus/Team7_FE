@@ -1,5 +1,23 @@
 import type { CommonResponse, UserHistory, User, Alarm } from '@/api/type';
 
+// User + Alarm 요청
+
+export interface PatchAlarmRequest {
+  alarms: Pick<Alarm, 'id'>[];
+}
+
+// User + Alarm 응답
+
+export interface GetUsersResponse extends CommonResponse {
+  result: User;
+}
+
+export interface GetAlarmsResponse extends CommonResponse {
+  result: {
+    alarms: Alarm[];
+  };
+}
+
 // getUserHistory
 export interface GetUserHistoryResponse {
   success: boolean;
@@ -8,9 +26,6 @@ export interface GetUserHistoryResponse {
     gardens: UserHistory[];
   };
 }
-
-// getUser
-export interface GetUserResponse extends User {}
 
 // deleteUser
 export interface DeleteUserResponse extends CommonResponse {}
@@ -24,16 +39,4 @@ export interface PatchUserPasswordRequest {
 
 export interface PatchUserPasswordResponse extends CommonResponse {
   result: null;
-}
-
-// getAlarm
-export interface GetAlarmsResponse extends CommonResponse {
-  result: {
-    alarms: Alarm[];
-  };
-}
-
-// patchAlarm
-export interface PatchAlarmRequest {
-  alarms: Pick<Alarm, 'id'>[];
 }

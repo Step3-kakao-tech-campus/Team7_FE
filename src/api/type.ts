@@ -9,6 +9,25 @@ export interface NullResultResponse extends CommonResponse {
   result: null;
 }
 
+// User 인터페이스
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  image: string;
+}
+
+// Alarm 인터페이스
+export interface Alarm {
+  id: number;
+  tilId: number;
+  isChecked: boolean;
+  roadmap: Roadmap;
+  step: Pick<Step, 'id' | 'title'>;
+  sender: Pick<User, 'name' | 'image'>;
+  createdAt: Date;
+}
+
 export interface Til {
   id: number;
   createDate: string;
@@ -16,12 +35,20 @@ export interface Til {
   roadmap: Roadmap;
 }
 
+// Step 인터페이스
 export interface Step {
   id: number;
   title: string;
   isSubmit: boolean;
   tilId: number | null;
   name?: string;
+}
+
+export interface StepWithReferences {
+  id: number;
+  title: string;
+  description: string;
+  references: References;
 }
 
 export interface Category {
@@ -34,6 +61,7 @@ export interface Roadmaps {
   groups: Group[];
 }
 
+// 로드맵 인터페이스
 export interface Roadmap {
   id: number;
   name: string;
@@ -50,11 +78,12 @@ export interface Group {
   name: string;
   stepNum: number;
   image: string;
+  isManager: boolean;
   creator: Creator;
 }
 
 export interface Creator {
-  id: number;
+  id?: number;
   name: string;
   image: string;
 }
@@ -62,31 +91,6 @@ export interface Creator {
 export interface UserHistory {
   day: string;
   value: number;
-}
-
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  image: string;
-}
-
-export interface Alarm {
-  id: number;
-  tilId: number;
-  isChecked: boolean;
-  roadmap: Roadmap;
-  step: {
-    id: number;
-    name: string;
-  };
-  sender: Sender;
-  createdAt: Date;
-}
-
-export interface Sender {
-  name: string;
-  image: string;
 }
 
 export interface Comment {

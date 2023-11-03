@@ -1,6 +1,6 @@
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { usePatchUserPassword } from '@/api/hooks/user';
-import { useGetUser } from '@/api/hooks/user';
+import { useGetUsers } from '@/api/hooks/user';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import REGEX from '@/constants/regex';
@@ -13,7 +13,7 @@ interface ChangePasswordFormInput {
 }
 
 const EditSection = () => {
-  const { user } = useGetUser();
+  const { user } = useGetUsers();
   const { patchUserPassword, isLoading } = usePatchUserPassword();
 
   const {

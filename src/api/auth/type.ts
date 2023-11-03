@@ -1,6 +1,6 @@
 import { type CommonResponse } from '@/api/type';
 
-// Auth 요청 인터페이스
+// Auth 요청
 export interface EmailCodeCheckRequest {
   email: string;
   code: string;
@@ -18,7 +18,7 @@ export interface EmailPasswordRequest {
   password: string;
 }
 
-// Auth 응답 인터페이스
+// Auth 응답
 export interface LoginResponse extends CommonResponse {
   result: { accessToken: string };
 }

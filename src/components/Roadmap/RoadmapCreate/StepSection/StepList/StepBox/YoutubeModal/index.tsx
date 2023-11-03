@@ -1,7 +1,8 @@
-import { useRecoilState } from 'recoil';
+import { produce } from 'immer';
+import { useSetRecoilState } from 'recoil';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeModal/style';
-import { roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
@@ -17,7 +18,7 @@ interface YoutubeFormInput {
 
 const YoutubeModal = (props: YoutubeModalProps) => {
   const { idx, isOpen, onClose } = props;
-  const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
+  const setRoadmap = useSetRecoilState(roadmapAtoms);
 
   const {
     control,
@@ -32,14 +33,11 @@ const YoutubeModal = (props: YoutubeModalProps) => {
   });
 
   const onSubmit: SubmitHandler<YoutubeFormInput> = (formData) => {
-    const newStepList = [...stepList];
-    const newReferences = { ...stepList[idx].references };
-    const newYoutube = [...stepList[idx].references.youtube];
-    newYoutube.push({ link: formData.link });
-    newReferences.youtube = newYoutube;
-    newStepList[idx] = { ...newStepList[idx], references: newReferences };
-
-    setStepList(newStepList);
+    setRoadmap((prev) =>
+      produce(prev, (draft) => {
+        draft.steps[idx].references.youtube.push(formData);
+      }),
+    );
     reset();
     onClose();
   };
