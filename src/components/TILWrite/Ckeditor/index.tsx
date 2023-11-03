@@ -42,7 +42,7 @@ const CkEditor = (props: CkEditorProps) => {
       <CKEditor
         editor={Editor}
         config={editorConfiguration}
-        data={tilDetail ? tilDetail.content : defaultData}
+        data={tilDetail ? tilDetail.content || '' : defaultData}
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
           handleTILContent(editor.getData());
