@@ -17,7 +17,7 @@ const MobileTILModal = (props: ModalProps) => {
       css={Styled.MobileModalContainerStyles}
       closeButtonStyles={Styled.CloseButtonStyles}
       closeButtonSize={28}
-      modalContentStyles={Styled.ModalContentStyles}
+      modalContentStyles={Styled.MobileModalContentStyles}
       isOpen={isOpen}
       onClose={onClose}>
       <Styled.ModalTitle>학습 선택</Styled.ModalTitle>

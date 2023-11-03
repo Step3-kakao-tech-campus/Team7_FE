@@ -21,6 +21,13 @@ export const ModalContentStyles = () => css`
   width: 37.5rem;
 `;
 
+export const MobileModalContentStyles = () => css`
+  padding: 1.5rem 2rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  width: 100%;
+`;
+
 export const ModalTitle = styled.h3`
   font-size: 1.5rem;
   font-weight: 700;
