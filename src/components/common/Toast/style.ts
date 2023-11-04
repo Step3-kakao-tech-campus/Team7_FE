@@ -16,6 +16,10 @@ export const Root = styled.div<{ isError: boolean; position?: string }>`
     ${position === 'bottom' &&
     css`
       width: 50%;
+
+      @media ${theme.mediaQuery.xs} {
+        width: 70%;
+      }
     `}
 
     ${position === 'right' &&

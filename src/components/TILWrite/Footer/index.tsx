@@ -6,7 +6,6 @@ import { useSubmitTil } from '@/api/hooks/til';
 import SubmitModal from '@/components/TILWrite/SubmitModal';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
-import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';

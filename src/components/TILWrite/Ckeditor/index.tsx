@@ -101,6 +101,7 @@ const CkEditor = (props: CkEditorProps) => {
               throttle = true;
               setIsUserExcuteSave(true);
               autoSaveTIL(editor.getData());
+              handleAutoSaveTime.activeAutoSave();
               setTimeout(async () => {
                 throttle = false;
               }, 3000);
