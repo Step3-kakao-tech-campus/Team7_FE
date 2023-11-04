@@ -60,14 +60,12 @@ const Footer = (props: FooterProps) => {
       </Styled.ExitContainer>
 
       <Styled.Container>
-        <Responsive device="desktop" asChild>
-          {autoSaveTime.active && (
-            <Styled.AutoSaveTime>
-              <span>자동 저장 완료</span>
-              <span>{dayjs(autoSaveTime.time).format('HH:mm:ss')}</span>
-            </Styled.AutoSaveTime>
-          )}
-        </Responsive>
+        {autoSaveTime.active && (
+          <Styled.AutoSaveTime>
+            <span>자동 저장 완료</span>
+            <span>{dayjs(autoSaveTime.time).format('HH:mm:ss')}</span>
+          </Styled.AutoSaveTime>
+        )}
         <CustomSuspense fallback={<SkeletonButton />} isLoading={isLoading}>
           {!tilDetail?.isPersonal && (
             <>

@@ -10,8 +10,15 @@ import Step from '@/components/TILWrite/RoadMap/Step';
 import Icon from '@/components/common/Icon';
 import * as Styled from './style';
 
-const SideBar = (props: PropsWithChildren) => {
-  const { children } = props;
+interface SideBarProps {
+  handleAutoSaveTime: {
+    activeAutoSave: () => void;
+    clearAutoSave: () => void;
+  };
+}
+
+const SideBar = (props: PropsWithChildren<SideBarProps>) => {
+  const { children, handleAutoSaveTime } = props;
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<'roadmap' | 'comment'>('roadmap');
@@ -93,6 +100,7 @@ const SideBar = (props: PropsWithChildren) => {
                                 setReferenceOpen(true);
                               }}
                               handleMobileSideBar={handleMobileSideBar}
+                              handleAutoSaveTime={handleAutoSaveTime}
                             />
                           );
                         })}

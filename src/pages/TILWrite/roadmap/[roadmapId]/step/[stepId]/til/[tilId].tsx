@@ -106,7 +106,7 @@ const TILWrite = () => {
       </Responsive>
 
       <Responsive device="mobile">
-        <MobileHeader />
+        <MobileHeader handleAutoSaveTime={handleAutoSaveTime} />
       </Responsive>
 
       <Container>
