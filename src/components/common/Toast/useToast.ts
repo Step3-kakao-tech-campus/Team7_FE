@@ -6,8 +6,11 @@ export const useToast = () => {
   const controller = useContext(ToastContext);
 
   return {
-    show(toast: ToastOption) {
-      controller.show(toast);
+    showBottom(toast: ToastOption) {
+      controller.showBottom(toast);
+    },
+    showRight(toast: ToastOption) {
+      controller.showRight(toast);
     },
   };
 };

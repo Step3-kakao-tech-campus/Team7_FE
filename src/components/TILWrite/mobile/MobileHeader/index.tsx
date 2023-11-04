@@ -8,7 +8,16 @@ import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
-const MobileHeader = () => {
+interface MobileHeaderProps {
+  handleAutoSaveTime: {
+    activeAutoSave: () => void;
+    clearAutoSave: () => void;
+  };
+}
+
+const MobileHeader = (props: MobileHeaderProps) => {
+  const { handleAutoSaveTime } = props;
+
   const router = useRouter();
   const { isOpen, handleClose } = useModalState();
 
@@ -30,7 +39,7 @@ const MobileHeader = () => {
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
 
       <Styled.Container>
-        <SideBar>
+        <SideBar handleAutoSaveTime={handleAutoSaveTime}>
           <Icon iconName="ic_hamburger" imageSize={24} ext="svg" alt="사이드바 아이콘" />
         </SideBar>
       </Styled.Container>

@@ -32,4 +32,8 @@ export const Item = styled.button`
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+
+  &:hover {
+    font-weight: 700;
+  }
 `;

@@ -29,12 +29,16 @@ export const Container = styled.div`
 `;
 
 export const AutoSaveTime = styled.div`
-  display: flex !important;
+  display: flex;
   align-items: center;
   justify-content: center;
 
   & > span:first-of-type {
     margin-right: 4px;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    font-size: 14px;
   }
 `;
 

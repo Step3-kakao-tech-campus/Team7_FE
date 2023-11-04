@@ -25,7 +25,7 @@ const RoadmapDetailInfo = () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
 
     if (!data?.result.steps.length) {
-      toast.show({ message: '생성된 STEP이 없습니다.' });
+      toast.showBottom({ message: '생성된 STEP이 없습니다.' });
     } else {
       const recentTilId = data?.result.recentTilId;
       const recentStepId = data?.result.recentStepId;

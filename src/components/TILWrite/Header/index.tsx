@@ -42,11 +42,11 @@ const Header = (props: HeaderProps) => {
 
   useEffect(() => {
     const handleCustomEventError = (event: CustomEvent<{ message: string }>) => {
-      toast.show({ message: event.detail.message, isError: true });
+      toast.showBottom({ message: event.detail.message, isError: true });
     };
 
     const handleCustomEventSuccess = (event: CustomEvent<{ message: string }>) => {
-      toast.show({ message: event.detail.message });
+      toast.showBottom({ message: event.detail.message });
     };
 
     document.addEventListener('크롬익스텐션에러', (event) =>
@@ -78,6 +78,14 @@ const Header = (props: HeaderProps) => {
           <button
             id="github_extenstion"
             onClick={() => {
+              if (!TILContent) {
+                toast.showBottom({
+                  message: 'TIL을 작성해주세요.',
+                  isError: true,
+                });
+                return;
+              }
+
               const detail = {
                 isPersonal: tilDetail?.isPersonal,
                 roadmapTitle: '조금만 더 화이팅',

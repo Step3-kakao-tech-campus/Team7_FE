@@ -17,6 +17,9 @@ const GroupCard = (props: GroupCardProps) => {
         router.push(TILY_LINK.roadmapDetail(roadmap.id));
       }}>
       <h5>{roadmap.name}</h5>
+      <p>
+        대충 로드맵 설명, 대충 로드맵 설명, 대충 로드맵 설명, 대충 로드맵 설명명, 대충 로드맵 설명명, 대충 로드맵 설명
+      </p>
       <section>
         <p>{roadmap.stepNum}개 STEP</p>
         <section>

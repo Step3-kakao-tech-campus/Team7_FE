@@ -12,13 +12,13 @@ interface RoadmapListProps {
 
 const RoadmapList = ({ isUserLogin }: RoadmapListProps) => {
   return (
-    <>
+    <Root>
       {isUserLogin ? <GNB /> : <GuestGNB />}
       <RoadmapListPage>
         {isUserLogin && <MyRoadmap />}
         <RecruitRoadmap />
       </RoadmapListPage>
-    </>
+    </Root>
   );
 };
 
@@ -42,13 +42,15 @@ export const getServerSideProps: GetServerSideProps<RoadmapListProps> = async (c
   };
 };
 
+const Root = styled.div``;
+
 const RoadmapListPage = styled.main`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 960px;
+  max-width: 1120px;
   padding: 0 40px;
-  margin: 3rem auto 0;
+  margin: 40px auto 0;
 
   @media ${({ theme }) => theme.mediaQuery.sm} {
     margin: 20px auto;

@@ -41,12 +41,13 @@ const RecruitRoadmap = () => {
   }, [category]);
 
   return (
-    <>
+    <Styled.Root>
       <h2>로드맵 목록</h2>
       <Styled.Navbar>
         <Responsive device="desktop">
-          <Tab>
+          <Tab css={Styled.TabStyles}>
             <Tab.Menu
+              css={Styled.TabMenuStyles}
               onClick={() => {
                 setCategory('tily');
               }}
@@ -60,6 +61,7 @@ const RecruitRoadmap = () => {
               TIL-y 로드맵
             </Tab.Menu>
             <Tab.Menu
+              css={Styled.TabMenuStyles}
               onClick={() => {
                 setCategory('group');
               }}
@@ -111,7 +113,7 @@ const RecruitRoadmap = () => {
         </form>
       </Styled.Navbar>
       <RecruitRoadmapList />
-    </>
+    </Styled.Root>
   );
 };
 

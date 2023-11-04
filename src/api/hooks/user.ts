@@ -82,7 +82,7 @@ export const usePatchUserPassword = () => {
   const patchUserPassword = async (body: PatchUserPasswordRequest) => {
     const data = await mutateAsync(body, {
       onSuccess: () => {
-        toast.show({
+        toast.showBottom({
           message: '비밀번호가 변경되었습니다.',
         });
       },
