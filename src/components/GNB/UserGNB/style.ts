@@ -28,9 +28,17 @@ export const Inner = styled.header`
   @media ${({ theme }) => theme.mediaQuery.md} {
     padding: 0 8px;
   }
+
+  & > div > button {
+    z-index: 20;
+    &:hover {
+      visibility: hidden;
+    }
+  }
 `;
 
 export const TILInfo = styled.div`
+  position: relative;
   background-color: ${({ theme }) => theme.colors.gray_200};
   padding: 1rem;
   border-radius: 1rem;

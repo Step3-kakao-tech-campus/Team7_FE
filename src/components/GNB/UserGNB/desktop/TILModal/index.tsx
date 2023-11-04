@@ -20,7 +20,7 @@ const TILModal = (props: ModalProps) => {
       modalContentStyles={Styled.ModalContentStyles}
       isOpen={isOpen}
       onClose={onClose}>
-      <Styled.ModalTitle>학습 선택</Styled.ModalTitle>
+      <Styled.ModalTitle>TIL 선택</Styled.ModalTitle>
 
       <Tab css={Styled.TabStyles}>
         {tabMenu.map((menu) => {
@@ -29,7 +29,22 @@ const TILModal = (props: ModalProps) => {
               key={menu.name}
               css={Styled.TabMenuStyles}
               onClick={() => setCurTab(menu.status)}
-              className={curTab === menu.status ? 'selected' : ''}>
+              className={curTab === menu.status ? 'selected' : ''}
+              tooltipContent={
+                menu.name === '개인 TIL'
+                  ? () => (
+                      <>
+                        <p>혼자 공부할 수 있는 공간이에요.</p>
+                        <p>카테고리별로 TIL을 작성해보세요.</p>
+                      </>
+                    )
+                  : () => (
+                      <>
+                        <p>참여중인 로드맵들을 확인하고.</p>
+                        <p>각 STEP을 공부해보세요.</p>
+                      </>
+                    )
+              }>
               {menu.name}
             </Tab.Menu>
           );
