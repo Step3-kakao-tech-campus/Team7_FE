@@ -41,6 +41,18 @@ export const EmptyRoot = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  margin: 110px auto 55px;
+  margin: 100px auto 55px;
+
+  & > img {
+    margin-bottom: 20px;
+  }
+  & > p {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 7px;
+
+    &:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
 `;
