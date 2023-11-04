@@ -4,21 +4,23 @@ import styled from '@emotion/styled';
 export const Root = styled.div``;
 
 export const Wrapper = styled.div`
+  width: 95%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid ${({ theme }) => theme.colors.gray_500};
+  border-radius: 6px;
   @media ${({ theme }) => theme.mediaQuery.md} {
-    border: 1px solid ${({ theme }) => theme.colors.gray_500};
-    border-radius: 6px;
     width: 100%;
-    overflow-x: scroll;
-    overflow-y: hidden;
   }
 `;
 
 export const CalendarContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 200px;
+
+  & > div {
+    width: 20px;
+  }
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     min-width: 1000px;
@@ -31,6 +33,7 @@ export const SkeletonStyles = css`
 `;
 
 export const HistoryTitle = styled.h1`
+  margin-bottom: 20px;
   & > span:nth-of-type(1) {
     font-size: 2rem;
     margin-right: 1px;

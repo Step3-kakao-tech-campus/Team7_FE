@@ -111,6 +111,7 @@ export const useRoadmap = () => {
       setInfoValid(false);
     } else {
       setInfoValid(true);
+      setIsSaved(true);
       const { steps, ...roadmapInfo } = roadmap;
       const body = { roadmap: roadmapInfo, steps };
       await postRoadmapsById({ roadmapId: Number(roadmapId), body });

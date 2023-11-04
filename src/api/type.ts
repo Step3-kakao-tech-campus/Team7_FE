@@ -73,6 +73,7 @@ export interface Tily {
   id: number;
   name: string;
   stepNum: number;
+  image: string;
 }
 
 export interface Group {

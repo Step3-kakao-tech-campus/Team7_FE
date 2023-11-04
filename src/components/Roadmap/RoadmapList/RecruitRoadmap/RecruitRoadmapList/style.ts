@@ -8,11 +8,11 @@ export const RoadmapContainer = styled.section`
   grid-row-gap: 40px;
   padding-top: 26px;
 
-  @media ${({ theme }) => theme.mediaQuery.md} {
+  @media ${({ theme }) => theme.mediaQuery.lg} {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media ${({ theme }) => theme.mediaQuery.sm} {
+  @media ${({ theme }) => theme.mediaQuery.md} {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 20px;
@@ -41,6 +41,18 @@ export const EmptyRoot = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  margin: 110px auto 55px;
+  margin: 100px auto 55px;
+
+  & > img {
+    margin-bottom: 20px;
+  }
+  & > p {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 7px;
+
+    &:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
 `;

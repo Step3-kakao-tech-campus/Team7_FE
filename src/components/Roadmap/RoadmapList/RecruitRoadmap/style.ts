@@ -32,12 +32,12 @@ export const Navbar = styled.section`
 
     & > form {
       width: 90%;
+      margin-bottom: 20px;
     }
   }
 
   @media ${({ theme }) => theme.mediaQuery.xs} {
     & > div {
-      margin-top: 16px;
       width: 100%;
     }
 
@@ -49,7 +49,7 @@ export const Navbar = styled.section`
 
 export const InputContainerStyles = (theme: EmotionTheme) => css`
   background-color: ${theme.colors.gray_100};
-  border: 0.1rem solid ${theme.colors.gray_100};
+  border: 0.1rem solid ${theme.colors.gray_300};
   width: 275px;
   font-size: 16px;
   border-radius: 100px;

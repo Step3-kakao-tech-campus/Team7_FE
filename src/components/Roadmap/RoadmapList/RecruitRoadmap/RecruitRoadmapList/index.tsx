@@ -5,8 +5,10 @@ import { useGetRoadmaps } from '@/api/hooks/roadmap';
 import GroupCard from '@/components/Roadmap/RoadmapList/GroupCard';
 import * as Styled from '@/components/Roadmap/RoadmapList/RecruitRoadmap/RecruitRoadmapList/style';
 import TilyCard from '@/components/Roadmap/RoadmapList/TilyCard';
+import Button from '@/components/common/Button';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';
+import TILY_LINKS from '@/constants/links';
 import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 
 const RecruitRoadmapList = () => {
@@ -54,10 +56,18 @@ const RoadmapSkeleton = () => {
 };
 
 const EmptyRecruitRoadmap = () => {
+  const router = useRouter();
   return (
     <Styled.EmptyRoot>
       <Image src="/assets/icons/ic_step.svg" alt="빈 로드맵" width={60} height={60} />
-      <h3>모집중인 로드맵이 없습니다.</h3>
+      <p>모집중인 로드맵이 없습니다.</p>
+      <p>직접 로드맵을 만들어보세요!</p>
+      <Button
+        onClick={() => {
+          router.push(TILY_LINKS.roadmapCreate());
+        }}>
+        로드맵 만들기
+      </Button>
     </Styled.EmptyRoot>
   );
 };
