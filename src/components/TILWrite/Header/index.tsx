@@ -78,6 +78,14 @@ const Header = (props: HeaderProps) => {
           <button
             id="github_extenstion"
             onClick={() => {
+              if (!TILContent) {
+                toast.showBottom({
+                  message: 'TIL을 작성해주세요.',
+                  isError: true,
+                });
+                return;
+              }
+
               const detail = {
                 isPersonal: tilDetail?.isPersonal,
                 roadmapTitle: '조금만 더 화이팅',
