@@ -8,10 +8,24 @@ export const Root = styled(Card)`
   width: 100%;
   height: 230px;
   margin: 0 auto;
-  padding: 20px 10px 10px;
+  padding: 16px 12px 10px;
   cursor: pointer;
   overflow: hidden;
   word-wrap: break-word;
+
+  & > p {
+    font-size: 16px;
+    line-height: 1.3;
+    display: -webkit-box;
+    width: 100%;
+    font-size: 16px;
+    word-wrap: break-word;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    height: 60px;
+  }
 
   & > section > p {
     font-size: 12px;
@@ -22,8 +36,8 @@ export const Root = styled(Card)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 5px;
-    padding-top: 5px;
+    margin-top: 8px;
+    padding-top: 10px;
     border-top: 1px solid ${({ theme }) => theme.colors.gray_300};
 
     & > span {
@@ -34,8 +48,17 @@ export const Root = styled(Card)`
   }
 
   & > h5 {
+    display: -webkit-box;
+    width: 100%;
     font-size: 16px;
-    font-weight: 00;
+    line-height: 1.4;
+    font-weight: 600;
+    word-wrap: break-word;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    height: 44px;
   }
 
   @media ${({ theme }) => theme.mediaQuery.sm} {

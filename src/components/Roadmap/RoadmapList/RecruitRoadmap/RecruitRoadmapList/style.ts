@@ -6,7 +6,7 @@ export const RoadmapContainer = styled.section`
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 26px;
   grid-row-gap: 40px;
-  padding-top: 20px;
+  padding-top: 26px;
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     grid-template-columns: repeat(3, 1fr);
