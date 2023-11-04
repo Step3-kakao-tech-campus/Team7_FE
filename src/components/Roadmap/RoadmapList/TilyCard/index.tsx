@@ -19,18 +19,24 @@ const TilyCard = (props: TilyCardProps) => {
         router.push(TILY_LINK.roadmapDetail(roadmap.id));
       }}>
       <section>
-        <Logo type="logo" imageSize={25} />
+        <Style.Container>
+          <Logo type="logo" imageSize={25} />
+        </Style.Container>
         <Image
-          src={'https://ppss.kr/wp-content/uploads/2022/10/1-6.jpg'}
+          src={'https://cdn.inflearn.com/public/roadmaps/39a4366c-b886-4b38-87da-7797f0ef6ac7/roadmap-2.png'}
           width={500}
           height={250}
           style={{ width: '100%', height: 'auto' }}
           alt={'roadmapImg'}
         />
-        <h5>{roadmap.name}</h5>
+        <Style.Container>
+          <h5>{roadmap.name}</h5>
+        </Style.Container>
       </section>
 
-      <p>{roadmap.stepNum}개 STEP</p>
+      <Style.Container>
+        <p>{roadmap.stepNum}개 STEP</p>
+      </Style.Container>
     </Style.Root>
   );
 };

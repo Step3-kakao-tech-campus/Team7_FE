@@ -5,15 +5,20 @@ export const Root = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 211px;
+  width: 100%;
   height: 230px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 10px 0;
   cursor: pointer;
-  box-shadow: 4px 12px 30px 6px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 4px 10px rgba(26, 28, 29, 0.06);
+
   & > section > * {
     margin-bottom: 7px;
   }
+`;
+
+export const Container = styled.div`
+  padding: 0 10px;
 
   & > p {
     font-size: 12px;
@@ -21,6 +26,6 @@ export const Root = styled(Card)`
   }
 
   & > h5 {
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
