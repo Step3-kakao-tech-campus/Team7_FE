@@ -8,11 +8,11 @@ export const RoadmapContainer = styled.section`
   grid-row-gap: 40px;
   padding-top: 26px;
 
-  @media ${({ theme }) => theme.mediaQuery.md} {
+  @media ${({ theme }) => theme.mediaQuery.lg} {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media ${({ theme }) => theme.mediaQuery.sm} {
+  @media ${({ theme }) => theme.mediaQuery.md} {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 20px;
