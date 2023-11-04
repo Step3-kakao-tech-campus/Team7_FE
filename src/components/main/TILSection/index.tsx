@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTilsParam } from '@/api/hooks/til';
+import TILModal from '@/components/GNB/UserGNB/desktop/TILModal';
+import MobileTILModal from '@/components/GNB/UserGNB/mobile/MobileTILModal';
+import Button from '@/components/common/Button';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Fallback from '@/components/common/Fallback';
@@ -11,6 +14,7 @@ import Skeleton from '@/components/common/Skeleton';
 import SearchBar from '@/components/main/SearchBar';
 import TIL from '@/components/main/TIL';
 import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
+import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 const TILSection = () => {
@@ -31,7 +35,7 @@ const TILSection = () => {
       </Responsive>
       <Styled.Container>
         <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
-          <ConditionalRender data={tils} EmptyUI={<TILSection.Empty />}>
+          <ConditionalRender data={tils} EmptyUI={<EmptyTilSection />}>
             <>
               {tils.map((til, index) => {
                 return <TIL til={til} key={index} />;
@@ -47,14 +51,23 @@ const TILSection = () => {
 
 export default TILSection;
 
-TILSection.Empty = function () {
+export const EmptyTilSection = () => {
+  const { isOpen, handleOpen, handleClose } = useModalState();
+
   return (
     <Styled.EmptyRoot>
-      <Image src="/assets/icons/ic_peopleTILEmpty.svg" width={200} height={200} alt="다른 사람의 TIL이 없습니다." />
+      <Image src="/assets/icons/ic_peopleTILEmpty.svg" width={200} height={200} alt="작성된 TIL이 없습니다." />
       <Styled.Description>
         <span>작성된 TIL이 없습니다</span>
-        <span>TIL 를 작성하고 학습 히스토리를 남겨보세요!</span>
+        <span>새로운 TIL을 작성해보세요!</span>
+        <Button onClick={handleOpen}>TIL 작성하기</Button>
       </Styled.Description>
+      <Responsive device="desktop">
+        <TILModal isOpen={isOpen} onClose={handleClose} />
+      </Responsive>
+      <Responsive device="mobile">
+        <MobileTILModal isOpen={isOpen} onClose={handleClose} />
+      </Responsive>
     </Styled.EmptyRoot>
   );
 };
