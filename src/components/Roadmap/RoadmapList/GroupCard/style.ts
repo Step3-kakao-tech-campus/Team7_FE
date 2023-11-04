@@ -60,10 +60,9 @@ export const Root = styled(Card)`
     font-weight: 600;
     word-wrap: break-word;
     overflow: hidden;
-    -webkit-line-clamp: 2;
+    white-space: nowrap;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-    height: 44px;
   }
 
   @media ${({ theme }) => theme.mediaQuery.sm} {
