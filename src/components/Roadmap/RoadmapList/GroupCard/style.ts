@@ -25,6 +25,11 @@ export const Root = styled(Card)`
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     height: 60px;
+
+    @media ${({ theme }) => theme.mediaQuery.xs} {
+      -webkit-line-clamp: 2;
+      height: 40px;
+    }
   }
 
   & > section > p {

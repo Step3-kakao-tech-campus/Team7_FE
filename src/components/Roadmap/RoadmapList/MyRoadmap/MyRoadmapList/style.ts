@@ -14,6 +14,10 @@ export const Slider = styled(SliderList)`
     justify-content: space-evenly;
     gap: 20px;
     padding: 10px;
+
+    @media ${({ theme }) => theme.mediaQuery.sm} {
+      padding: 0;
+    }
   }
 
   & > button:nth-of-type(1) {

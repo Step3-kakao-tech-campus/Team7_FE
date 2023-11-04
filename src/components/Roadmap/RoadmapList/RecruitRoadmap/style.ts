@@ -6,6 +6,11 @@ export const Root = styled.div`
   & > h2 {
     font-size: 28px;
     margin-bottom: 16px;
+
+    @media ${({ theme }) => theme.mediaQuery.sm} {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
   }
 `;
 
@@ -27,6 +32,17 @@ export const Navbar = styled.section`
 
     & > form {
       width: 90%;
+    }
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    & > div {
+      margin-top: 16px;
+      width: 100%;
+    }
+
+    & > form {
+      width: 100%;
     }
   }
 `;

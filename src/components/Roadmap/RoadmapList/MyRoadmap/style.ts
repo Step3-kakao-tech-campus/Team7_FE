@@ -8,6 +8,10 @@ export const Header = styled.header`
 
   & > h2 {
     font-size: 28px;
+
+    @media ${({ theme }) => theme.mediaQuery.sm} {
+      font-size: 20px;
+    }
   }
 `;
 

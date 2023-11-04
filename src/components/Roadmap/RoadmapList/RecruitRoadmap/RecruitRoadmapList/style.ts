@@ -17,6 +17,10 @@ export const RoadmapContainer = styled.section`
     grid-column-gap: 10px;
     grid-row-gap: 20px;
   }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    padding-top: 16px;
+  }
 `;
 
 export const ObserverInterSectionTarget = styled.div`
