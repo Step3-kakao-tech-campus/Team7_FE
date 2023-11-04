@@ -13,7 +13,7 @@ interface Roadmap extends RoadmapInfo {
 interface RoadmapInfo {
   name: string;
   description: string;
-  code?: string;
+  code?: string | null;
   recentTilId?: number | null;
   isPublic?: boolean;
   isRecruit?: boolean;

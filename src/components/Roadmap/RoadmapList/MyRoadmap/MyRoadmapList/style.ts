@@ -13,6 +13,11 @@ export const Slider = styled(SliderList)`
     display: flex;
     justify-content: space-evenly;
     gap: 20px;
+    padding: 10px;
+
+    @media ${({ theme }) => theme.mediaQuery.sm} {
+      padding: 0;
+    }
   }
 
   & > button:nth-of-type(1) {
@@ -88,5 +93,5 @@ export const EmptyRoot = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  margin: 55px auto 55px;
+  margin: 110px auto 55px;
 `;

@@ -12,16 +12,24 @@ export const Root = styled.div<{ isError: boolean; position?: string }>`
     0px 10px 15px -3px rgba(0, 0, 0, 0.1),
     0px 4px 6px -4px rgba(16, 24, 40, 0.1);
 
-  ${({ position }) => css`
+  ${({ position, theme }) => css`
     ${position === 'bottom' &&
     css`
       width: 50%;
+
+      @media ${theme.mediaQuery.xs} {
+        width: 70%;
+      }
     `}
 
     ${position === 'right' &&
     css`
       width: 20%;
       background-color: #06bc0b;
+
+      @media ${theme.mediaQuery.xs} {
+        width: 50%;
+      }
     `}
   `};
 `;

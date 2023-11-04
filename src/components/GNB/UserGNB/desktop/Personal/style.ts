@@ -20,6 +20,13 @@ export const CardStyles = css`
   height: 23rem;
   margin-top: 0.5rem;
   margin-bottom: 1.25rem;
+  box-shadow: 0px 4px 4px 0px rgba(174, 174, 174, 0.25);
+
+  &:hover {
+    transition: none;
+    transform: none;
+    box-shadow: 0px 4px 4px 0px rgba(174, 174, 174, 0.25);
+  }
 `;
 
 export const RoadmapSection = styled.div`

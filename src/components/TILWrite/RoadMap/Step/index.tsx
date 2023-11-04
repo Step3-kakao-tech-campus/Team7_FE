@@ -63,6 +63,7 @@ const Step = (props: StepProps) => {
       {isActiveStep && (
         <Icon
           className="icon"
+          css={Styled.ButtonStyles}
           onClick={handleSelectReference}
           iconName="ic_chevronRight"
           imageSize={14}

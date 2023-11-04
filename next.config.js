@@ -13,6 +13,10 @@ const nextConfig = {
         hostname: 'ppss.kr',
       },
       {
+        protocol: 'https',
+        hostname: 'cdn.inflearn.com',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
       },

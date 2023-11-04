@@ -5,7 +5,6 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
 import { defaultData } from '@/components/TILWrite/Ckeditor/defaultData';
 import { useToast } from '@/components/common/Toast/useToast';
-import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import { editorConfiguration } from './plugin';
 import * as Styled from './style';
 
@@ -79,7 +78,7 @@ const CkEditor = (props: CkEditorProps) => {
   }, [prevContent, content, isUserExcuteSave]);
 
   return (
-    <Styled.Root ref={editorRef} onClick={(e) => focusEditor(e)}>
+    <Styled.Root ref={editorRef} onClick={(e: any) => focusEditor(e)}>
       <CKEditor
         editor={Editor}
         config={editorConfiguration}
@@ -102,6 +101,7 @@ const CkEditor = (props: CkEditorProps) => {
               throttle = true;
               setIsUserExcuteSave(true);
               autoSaveTIL(editor.getData());
+              handleAutoSaveTime.activeAutoSave();
               setTimeout(async () => {
                 throttle = false;
               }, 3000);
