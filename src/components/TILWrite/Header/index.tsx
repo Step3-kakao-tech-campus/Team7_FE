@@ -42,11 +42,11 @@ const Header = (props: HeaderProps) => {
 
   useEffect(() => {
     const handleCustomEventError = (event: CustomEvent<{ message: string }>) => {
-      toast.show({ message: event.detail.message, isError: true });
+      toast.showBottom({ message: event.detail.message, isError: true });
     };
 
     const handleCustomEventSuccess = (event: CustomEvent<{ message: string }>) => {
-      toast.show({ message: event.detail.message });
+      toast.showBottom({ message: event.detail.message });
     };
 
     document.addEventListener('크롬익스텐션에러', (event) =>
