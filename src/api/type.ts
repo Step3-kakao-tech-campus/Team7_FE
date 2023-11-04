@@ -1,3 +1,5 @@
+import { References } from './roadmap/type';
+
 // 공통 응답 인터페이스
 export interface CommonResponse {
   success: boolean;

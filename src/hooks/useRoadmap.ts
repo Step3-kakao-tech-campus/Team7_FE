@@ -22,6 +22,7 @@ export const useRoadmap = () => {
   const [stepValid, setStepValid] = useState<boolean>(true);
   const [infoValid, setInfoValid] = useState<boolean>(true);
   const [stepForm, setStepForm] = useState<StepForm>(defaultStepForm);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
 
   const { postRoadmaps, isLoading: createLoading } = usePostRoadmaps();
   const { postRoadmapsById, isLoading: editLoading } = usePostRoadmapsById();
@@ -93,6 +94,7 @@ export const useRoadmap = () => {
       setInfoValid(false);
     } else {
       setInfoValid(true);
+      setIsSaved(true);
       const { steps, ...roadmapInfo } = roadmap;
       const data = await postRoadmaps({ roadmap: roadmapInfo, steps });
 
@@ -105,7 +107,6 @@ export const useRoadmap = () => {
 
   const onEditRoadmapHandler = async () => {
     const roadmapId = router.query.roadmapId;
-    console.log(roadmapId);
     if (roadmap.name === '') {
       setInfoValid(false);
     } else {
@@ -132,6 +133,8 @@ export const useRoadmap = () => {
     onEditRoadmapHandler,
     createLoading,
     editLoading,
+    isSaved,
+    setIsSaved,
   };
 };
 
