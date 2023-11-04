@@ -5,5 +5,11 @@ export const Card = styled.div`
   border-radius: 6px;
   border: 1px solid #e5e7eb;
   background: #fff;
-  box-shadow: 0px 4px 4px 0px rgba(174, 174, 174, 0.25);
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+
+  &:hover {
+    transition: all 0.3s ease;
+    transform: translateY(-7px);
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.13);
+  }
 `;

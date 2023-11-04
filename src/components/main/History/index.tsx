@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import { css } from '@emotion/react';
 import type { CalendarTooltipProps } from '@nivo/calendar';
 import { ResponsiveCalendar } from '@nivo/calendar';
-import { useGetUserHistory } from '@/api/hooks/user';
+import { useGetUserHistory, useGetUsers } from '@/api/hooks/user';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
@@ -19,11 +19,13 @@ const History = () => {
     addParamsToUrl({ date });
   };
 
+  const { user } = useGetUsers();
+
   return (
     <Styled.Root>
       <Responsive device="desktop">
         <Styled.HistoryTitle>
-          <span>홍박사</span>
+          <span>{user?.name}</span>
           <span>님의 학습 히스토리</span>
         </Styled.HistoryTitle>
       </Responsive>

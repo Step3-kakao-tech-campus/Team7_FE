@@ -9,8 +9,6 @@ import Responsive from '@/components/common/Responsive';
 const Slider = () => {
   const { roadmaps, isLoading: isRoadmapLoading } = useGetRoadmapsMyList();
 
-  console.log(roadmaps);
-
   if (roadmaps?.groups.length === 0 && roadmaps?.tilys.length === 0) {
     return <EmptyMyRoadmap />;
   }

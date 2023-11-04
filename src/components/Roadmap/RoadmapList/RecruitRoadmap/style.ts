@@ -2,6 +2,13 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { EmotionTheme } from '@/styles/emotion';
 
+export const Root = styled.div`
+  & > h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+`;
+
 export const Navbar = styled.section`
   display: flex;
   justify-content: space-between;

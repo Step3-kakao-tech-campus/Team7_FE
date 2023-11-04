@@ -40,7 +40,7 @@ const RecruitRoadmap = () => {
   }, [category]);
 
   return (
-    <>
+    <Styled.Root>
       <h2>로드맵 목록</h2>
       <Styled.Navbar>
         <Tab>
@@ -76,7 +76,7 @@ const RecruitRoadmap = () => {
         </form>
       </Styled.Navbar>
       <RecruitRoadmapList />
-    </>
+    </Styled.Root>
   );
 };
 
