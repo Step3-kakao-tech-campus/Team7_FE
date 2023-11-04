@@ -33,6 +33,11 @@ export const Root = styled(Card)`
     }
   }
 
+  & > h5 {
+    font-size: 16px;
+    font-weight: 00;
+  }
+
   @media ${({ theme }) => theme.mediaQuery.sm} {
     height: 200px;
   }

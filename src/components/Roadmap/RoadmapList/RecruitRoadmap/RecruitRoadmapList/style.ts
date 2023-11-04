@@ -4,8 +4,9 @@ import SkeletonBox from '@/components/common/Skeleton';
 export const RoadmapContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 20px;
+  grid-column-gap: 26px;
   grid-row-gap: 40px;
+  padding-top: 20px;
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     grid-template-columns: repeat(3, 1fr);
@@ -37,5 +38,5 @@ export const EmptyRoot = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  margin: 55px auto 55px;
+  margin: 110px auto 55px;
 `;

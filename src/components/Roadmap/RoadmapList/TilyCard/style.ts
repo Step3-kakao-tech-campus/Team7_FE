@@ -10,7 +10,7 @@ export const Root = styled(Card)`
   margin: 0 auto;
   padding: 10px;
   cursor: pointer;
-
+  box-shadow: 4px 12px 30px 6px rgba(0, 0, 0, 0.09);
   & > section > * {
     margin-bottom: 7px;
   }
@@ -18,5 +18,9 @@ export const Root = styled(Card)`
   & > p {
     font-size: 12px;
     color: ${({ theme }) => theme.colors.gray_700};
+  }
+
+  & > h5 {
+    font-size: 18px;
   }
 `;
