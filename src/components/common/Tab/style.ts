@@ -54,7 +54,7 @@ export const TooltipBox = styled.section`
   color: ${({ theme }) => theme.colors.gray_700};
   text-align: center;
   font-size: 14px;
-  box-shadow: 2px 2px 7px 1px ${({ theme }) => theme.colors.gray_400};
+  box-shadow: 2px 2px 4px 1px ${({ theme }) => theme.colors.gray_400};
 
   &::after {
     content: '';

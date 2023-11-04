@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import TILModal from '@/components/GNB/UserGNB/desktop/TILModal';
 import MobileTILModal from '@/components/GNB/UserGNB/mobile/MobileTILModal';
@@ -9,9 +10,13 @@ import * as Styled from './style';
 import GNBLogo from '../common/GNBLogo';
 import GNBNav from '../common/GNBNav';
 import GNBProfile from '../common/GNBProfile';
+import Flower from '../common/flower';
 
 const GNB = () => {
   useGetRoadmapsMy();
+
+  const [isButton, setIsButton] = useState(true);
+  const [isFlower, setIsFlower] = useState(false);
 
   const { isOpen: isTilModalOpen, handleOpen: handleOpenTilModal, handleClose: handleCloseTilModal } = useModalState();
 
@@ -29,10 +34,28 @@ const GNB = () => {
                 <span>를 심어보세요</span>
               </Styled.TILInfo>
             </Responsive>
+            {isButton && (
+              <Button
+                onMouseEnter={() => {
+                  setIsButton(false);
+                  setIsFlower(true);
+                }}
+                onClick={handleOpenTilModal}
+                css={Styled.TILButtonStyles}
+                variant="ghost">
+                TIL
+              </Button>
+            )}
 
-            <Button onClick={handleOpenTilModal} css={Styled.TILButtonStyles} variant="ghost">
-              TIL
-            </Button>
+            {isFlower && (
+              <Flower
+                onMouseLeave={() => {
+                  setIsButton(true);
+                  setIsFlower(false);
+                }}
+                onClick={handleOpenTilModal}
+              />
+            )}
 
             <GNBProfile />
           </Flex>

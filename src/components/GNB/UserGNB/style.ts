@@ -28,6 +28,13 @@ export const Inner = styled.header`
   @media ${({ theme }) => theme.mediaQuery.md} {
     padding: 0 8px;
   }
+
+  & > div > button {
+    z-index: 20;
+    &:hover {
+      visibility: hidden;
+    }
+  }
 `;
 
 export const TILInfo = styled.div`
@@ -39,15 +46,6 @@ export const TILInfo = styled.div`
 
   & > span:nth-of-type(2) {
     color: ${({ theme }) => theme.colors.rose};
-  }
-
-  & > span:last-of-type::after {
-    content: '';
-    position: absolute;
-    right: -12px;
-    top: 21px;
-    border-left: 20px solid ${({ theme }) => theme.colors.gray_200};
-    border-bottom: 20px solid transparent;
   }
 `;
 
