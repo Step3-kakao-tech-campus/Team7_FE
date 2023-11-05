@@ -1,3 +1,5 @@
+import { References } from './roadmap/type';
+
 // 공통 응답 인터페이스
 export interface CommonResponse {
   success: boolean;
@@ -70,12 +72,15 @@ export interface Roadmap {
 export interface Tily {
   id: number;
   name: string;
+  description: string | null;
   stepNum: number;
+  image: string;
 }
 
 export interface Group {
   id: number;
   name: string;
+  description: string | null;
   stepNum: number;
   image: string;
   isManager: boolean;

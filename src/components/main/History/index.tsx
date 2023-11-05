@@ -1,8 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { forwardRef } from 'react';
 import { css } from '@emotion/react';
-import type { CalendarTooltipProps } from '@nivo/calendar';
-import { ResponsiveCalendar } from '@nivo/calendar';
+import { Calendar, type CalendarTooltipProps } from '@nivo/calendar';
 import { useGetUserHistory, useGetUsers } from '@/api/hooks/user';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Responsive from '@/components/common/Responsive';
@@ -36,11 +35,12 @@ const History = forwardRef<HTMLDivElement, HistoryProps>((_, ref) => {
       <Styled.Wrapper ref={ref}>
         <Styled.CalendarContainer>
           <CustomSuspense isLoading={isLoading} fallback={<Skeleton css={Styled.SkeletonStyles} />}>
-            <ResponsiveCalendar
+            <Calendar
               data={history}
+              width={970}
+              height={200}
               from="2023-01-01"
               to="2023-12-31"
-              align="center"
               emptyColor="#eeeeee"
               colors={['#EF4365']}
               margin={{ top: 20, right: 40, bottom: 10, left: 40 }}

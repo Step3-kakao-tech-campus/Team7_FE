@@ -48,8 +48,8 @@ export interface GetRoadmapStepReferenceResponse extends CommonResponse {
   result: {
     id: number;
     description: string;
-    youtubes: Youtubes[];
-    webs: References[];
+    youtubes: Youtube[];
+    webs: Web[];
   };
 }
 
@@ -59,6 +59,11 @@ export interface References {
 }
 
 export interface Youtube {
+  id: number;
+  link: string;
+}
+
+export interface Web {
   id: number;
   link: string;
 }
@@ -112,7 +117,7 @@ export interface GetRoadmapsByIdResponse {
     myRole: 'master' | 'manager' | 'member' | 'none';
     recentTilId: number | null;
     recentStepId: number | null;
-    code: string | null;
+    code: string;
     steps: StepWithReferences[];
   };
 }
@@ -182,4 +187,4 @@ export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
 
 // delelteRoadmapGroupApplyReject
 
-export interface DelelteRoadmapGroupApplyRejectResponse extends CommonResponse {}
+export interface DeleteRoadmapGroupApplyRejectResponse extends CommonResponse {}

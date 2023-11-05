@@ -33,7 +33,7 @@ const Personal = () => {
 
   useEffect(() => {
     if (roadmaps.category.length !== 0) setRoadmapId(roadmaps.category[0].id);
-  }, [roadmaps]);
+  }, []);
 
   const {
     control: roadmapControl,

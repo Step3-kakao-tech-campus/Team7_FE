@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import SocialLogin from '@/components/auth/common/SocialLogin';
 import VerifyForm from '@/components/auth/verify/VerifyForm';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { setLayout } from '@/utils/layout';
@@ -7,6 +8,7 @@ const RegisterVerifyPage = () => {
   return (
     <AuthPageContainer>
       <VerifyForm location="register" />
+      <SocialLogin />
     </AuthPageContainer>
   );
 };

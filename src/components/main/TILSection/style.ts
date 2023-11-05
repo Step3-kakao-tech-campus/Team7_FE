@@ -14,9 +14,7 @@ export const Container = styled.div`
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   gap: 2rem;
-  margin-left: 2.6rem;
   margin-top: 1.5rem;
-  margin: 1.5rem 0 0 1.5rem;
 
   @media (max-width: 1280px) {
     grid-template-columns: repeat(2, 1fr);
@@ -53,7 +51,7 @@ export const EmptyRoot = styled.section`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 850px;
+  width: 100%;
   height: 500px;
   margin-left: 2.5rem;
 
@@ -69,7 +67,7 @@ export const Description = styled.p`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.375rem;
+  font-size: 1.25rem;
 
   & > span:first-of-type {
     font-weight: 700;
@@ -78,7 +76,7 @@ export const Description = styled.p`
   & > span:last-of-type {
     margin-top: 0.5rem;
     font-weight: 700;
-    margin-bottom: 5rem;
+    margin-bottom: 20px;
   }
 
   @media ${({ theme }) => theme.mediaQuery.xs} {

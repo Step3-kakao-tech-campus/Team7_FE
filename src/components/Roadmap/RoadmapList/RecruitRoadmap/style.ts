@@ -32,12 +32,12 @@ export const Navbar = styled.section`
 
     & > form {
       width: 90%;
+      margin-bottom: 20px;
     }
   }
 
   @media ${({ theme }) => theme.mediaQuery.xs} {
     & > div {
-      margin-top: 16px;
       width: 100%;
     }
 
@@ -49,20 +49,15 @@ export const Navbar = styled.section`
 
 export const InputContainerStyles = (theme: EmotionTheme) => css`
   background-color: ${theme.colors.gray_100};
-  border: 0.1rem solid ${theme.colors.gray_100};
+  border: 1px solid ${theme.colors.gray_400};
   width: 275px;
   font-size: 16px;
   border-radius: 100px;
   padding: 8px 14px;
-  box-shadow: 0 4px 10px rgba(26, 28, 29, 0.06);
 
   @media (max-width: 760px) {
     width: 100%;
   }
-`;
-
-export const TabStyles = css`
-  box-shadow: 0 4px 10px rgba(26, 28, 29, 0.06);
 `;
 
 export const TabMenuStyles = css`

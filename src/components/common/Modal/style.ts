@@ -19,7 +19,7 @@ export const Container = styled.div<{ width?: number }>`
   position: relative;
   z-index: 101;
   max-height: 90vh;
-  border-radius: 20px;
+  border-radius: 10px;
   background: #fff;
   width: ${({ width }) => width ?? 28}rem;
   color: ${({ theme }) => theme.colors.black};

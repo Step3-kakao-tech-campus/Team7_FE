@@ -333,6 +333,17 @@ progress {
   vertical-align: baseline;
 }
 
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(208, 208, 208);
+  border-radius: 4px;
+}
+
 /**
   * Remove the default vertical scrollbar in IE 10+.
   */

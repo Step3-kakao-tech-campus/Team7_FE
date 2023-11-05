@@ -45,7 +45,7 @@ const RecruitRoadmap = () => {
       <h2>로드맵 목록</h2>
       <Styled.Navbar>
         <Responsive device="desktop">
-          <Tab css={Styled.TabStyles}>
+          <Tab>
             <Tab.Menu
               css={Styled.TabMenuStyles}
               onClick={() => {

@@ -16,7 +16,7 @@ import {
   patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
-  delelteRoadmapGroupApplyReject as delelteRoadmapGroupApplyRejectAPI,
+  deleteRoadmapGroupApplyReject as deleteRoadmapGroupApplyRejectAPI,
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
   getRoadmapsById,
   postRoadmapsApply as postRoadmapsApplyAPI,
@@ -325,12 +325,12 @@ export const usePostRoadmapGroupApplyAccept = () => {
   return { postRoadmapGroupApplyAccept };
 };
 
-export const useDelelteRoadmapGroupApplyReject = () => {
+export const useDeleteRoadmapGroupApplyReject = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(delelteRoadmapGroupApplyRejectAPI);
+  const mutation = useMutation(deleteRoadmapGroupApplyRejectAPI);
 
-  const delelteRoadmapGroupApplyReject = async (body: { roadmapId: number; userId: number }) => {
+  const deleteRoadmapGroupApplyReject = async (body: { roadmapId: number; userId: number }) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupApply, body.roadmapId]);
@@ -339,7 +339,7 @@ export const useDelelteRoadmapGroupApplyReject = () => {
 
     return data;
   };
-  return { delelteRoadmapGroupApplyReject };
+  return { deleteRoadmapGroupApplyReject };
 };
 
 export const usePostRoadmapsGroupsParticipate = () => {
