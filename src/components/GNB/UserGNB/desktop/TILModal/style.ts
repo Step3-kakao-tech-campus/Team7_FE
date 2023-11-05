@@ -31,6 +31,7 @@ export const MobileModalContentStyles = () => css`
 export const ModalTitle = styled.h3`
   font-size: 1.5rem;
   font-weight: 700;
+  width: fit-content;
 `;
 
 export const TabStyles = css`
