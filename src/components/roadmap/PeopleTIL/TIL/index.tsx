@@ -31,6 +31,14 @@ const TIL = (props: MemberTil) => {
     );
   };
 
+  const parseString = (html: any) => {
+    // DOM Parser를 생성합니다. 문자열로 된 데이터를 DOM Document로 변환합니다.
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+
+    // parsed document에서 textContent를 사용하여 순수 텍스트만을 추출합니다.
+    return doc.body.textContent || '';
+  };
+
   return (
     <Styled.Root onClick={handleRouteTILView}>
       <Styled.Header>
@@ -41,7 +49,7 @@ const TIL = (props: MemberTil) => {
         </Styled.Container>
       </Styled.Header>
 
-      <Styled.Body>{content}</Styled.Body>
+      <Styled.Body>{parseString(content)}</Styled.Body>
 
       <Styled.Footer>
         <Image src="/assets/icons/ic_comment.svg" width={16} height={16} alt="좋아요" />

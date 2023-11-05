@@ -90,10 +90,11 @@ export const LeftArea = styled.aside`
 export const RightArea = styled.main`
   max-width: 1100px;
   width: 70vw;
-  padding: 40px 56px 80px 56px;
+  padding: 40px 80px 80px 80px;
   flex: 1;
 
   @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 40px 56px 80px 56px;
     width: auto;
   }
 
