@@ -28,7 +28,7 @@ const KakaoLoginPage = () => {
   if (isLoading) {
     return (
       <CallbackPage dir="col" align="center" justify="center" gap={3}>
-        <h2>로그인 정보를 가져오는 중입니다.</h2>
+        <h3>로그인 정보를 가져오는 중입니다.</h3>
         <Spinner
           width={5}
           height={5}
