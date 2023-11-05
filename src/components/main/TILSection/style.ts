@@ -4,7 +4,7 @@ import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.main`
   display: flex;
-  width: 100%;
+  width: 95%;
   flex-direction: column;
   flex: 1;
 `;
