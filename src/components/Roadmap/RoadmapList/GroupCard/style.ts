@@ -75,7 +75,7 @@ export const Root = styled(Card)`
 
 export const RoadmapEdit = styled(Flex)`
   padding: 2px 8px;
-  background-color: ${({ theme }) => theme.colors.blue};
+  background-color: #09b707;
   border-radius: 8px;
   color: white;
 

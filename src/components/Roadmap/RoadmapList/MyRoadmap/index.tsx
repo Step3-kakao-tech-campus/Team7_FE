@@ -17,7 +17,7 @@ const MyRoadmap = () => {
         <h2>참여중인 로드맵</h2>
         <Style.ButtonContainer>
           <Button
-            variant="default"
+            variant="outline"
             onClick={() => {
               handleOpen();
             }}>
