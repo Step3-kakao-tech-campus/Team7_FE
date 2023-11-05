@@ -88,7 +88,7 @@ const Header = (props: HeaderProps) => {
 
               const detail = {
                 isPersonal: tilDetail?.isPersonal,
-                roadmapTitle: '조금만 더 화이팅',
+                roadmapTitle: tilDetail?.roadmapName,
                 stepTitle: tilDetail?.step.title,
                 content: TILContent,
               };

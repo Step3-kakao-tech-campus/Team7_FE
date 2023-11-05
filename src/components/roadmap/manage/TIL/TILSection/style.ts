@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const Root = styled.section`
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, 1fr);
   padding: 16px 0;
 
   @media ${({ theme }) => theme.mediaQuery.md} {

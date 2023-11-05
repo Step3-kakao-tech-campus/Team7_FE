@@ -25,7 +25,9 @@ const commitContentToGitHub = async ({ isPersonal, roadmapTitle, stepTitle, cont
  * @returns {Object} { directory, message, readme }
  */
 const getGitUploadData = ({ isPersonal, roadmapTitle, stepTitle, content }) => {
-  const directory = isPersonal ? `개인 로드맵/${stepTitle}` : `틸리 로드맵 + 그룹 로드맵/${roadmapTitle}/${stepTitle}`;
+  const directory = isPersonal
+    ? `개인 로드맵/${roadmapTitle}/${stepTitle}`
+    : `틸리 로드맵 + 그룹 로드맵/${roadmapTitle}/${stepTitle}`;
   const message = `Sync TIL to GitHub - ${stepTitle}`;
   const readme = content;
   // prettier-ignore-end

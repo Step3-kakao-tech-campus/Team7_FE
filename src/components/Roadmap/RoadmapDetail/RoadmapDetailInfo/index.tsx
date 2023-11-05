@@ -59,7 +59,7 @@ const RoadmapDetailInfo = () => {
         </Flex>
         <Styled.InfoBox>
           <Flex align="center">
-            <b>생성자</b> <Avatar imageSize={25} alt="생성자 이미지" />
+            <b>생성자</b> <Avatar imageUrl={data?.result.creator.image} imageSize={25} alt="생성자 이미지" />
             <p>{data?.result.creator.name}</p>
           </Flex>
           <b>로드맵 설명</b>

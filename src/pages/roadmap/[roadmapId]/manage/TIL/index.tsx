@@ -18,7 +18,7 @@ const TIL = () => {
           </LeftArea>
         </Responsive>
 
-        <Responsive device="mobile" asChild>
+        <Responsive device="mobile">
           <TabBar />
         </Responsive>
 
