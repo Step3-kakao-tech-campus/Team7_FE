@@ -6,6 +6,7 @@ export const useOnbaording = () => {
   const [stepIndex, setStepIndex] = useState<number>(0);
   const [steps, setSteps] = useState<any>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isCategoryNextStep, setIsCategoryNextStep] = useState<boolean>(false);
 
   const historyRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLFormElement>(null);
@@ -47,7 +48,7 @@ export const useOnbaording = () => {
         hideCloseButton: true, // 닫기 버튼
         hideFooter: false,
         spotlightPadding: 0,
-
+        hideBackButton: true,
         placement: 'bottom',
         spotlightClicks: false, // 스포트 라이트된 영역 클릭
         showSkipButton: false,
@@ -65,7 +66,7 @@ export const useOnbaording = () => {
         disableOverlayClose: true, // 오버레이 클릭시 닫히는 기능
         hideCloseButton: true, // 닫기 버튼
         hideFooter: false,
-        spotlightPadding: 0,
+        spotlightPadding: 14,
         placement: 'right',
         disableScrolling: true, // 스크롤 방지
         showSkipButton: false,
@@ -74,7 +75,7 @@ export const useOnbaording = () => {
             zIndex: 10000, // backdrop z-index
           },
         },
-        target: '[data-testid="modal"]:nth-of-type(1)',
+        target: '[data-testid="TILSelect"]:nth-of-type(1)',
         title: 'TIL 선택하기',
       },
       {
@@ -120,7 +121,25 @@ export const useOnbaording = () => {
         title: '카테고리 생성',
       },
       {
-        content: <div>학습할 내용에 대한 TIL을 생성할 수 있어요.</div>,
+        content: <div>학습할 카테고리를 선택할 수 있어요!</div>,
+        disableBeacon: true, // 초기에 Step 시작되게 하는 기능
+        disableOverlayClose: true, // 오버레이 클릭시 닫히는 기능
+        hideCloseButton: true, // 닫기 버튼
+        hideFooter: false,
+        spotlightPadding: 12,
+        placement: 'right',
+        disableScrolling: true, // 스크롤 방지
+        showSkipButton: false,
+        styles: {
+          options: {
+            zIndex: 10000, // backdrop z-index
+          },
+        },
+        target: '[data-testid="RoadmapSectionItem"]:nth-of-type(1)',
+        title: '카테고리 선택',
+      },
+      {
+        content: <div>선택한 카테고리에 대한 TIL을 생성할 수 있어요.</div>,
         disableBeacon: true, // 초기에 Step 시작되게 하는 기능
         disableOverlayClose: true, // 오버레이 클릭시 닫히는 기능
         hideCloseButton: true, // 닫기 버튼
@@ -247,13 +266,12 @@ export const useOnbaording = () => {
 
   const handleJoyrideCallback = (data: CallBackProps) => {
     const { action, index, status, type } = data;
-    console.log(action, 'action', index);
 
     if ((action === ACTIONS.PREV, index === 1)) {
       setIsModalOpen(false);
     }
 
-    if ((action === ACTIONS.PREV, index === 5)) {
+    if ((action === ACTIONS.PREV, index === 6)) {
       setIsModalOpen(true);
     }
 
@@ -304,9 +322,18 @@ export const useOnbaording = () => {
         setStepIndex(nextStepIndex);
         setRun(false);
         setTimeout(() => {
+          setIsCategoryNextStep(true);
           setRun(true);
         }, 300);
       } else if (index === 5) {
+        // title: '카테고리 선택',
+
+        setStepIndex(nextStepIndex);
+        setRun(false);
+        setTimeout(() => {
+          setRun(true);
+        }, 300);
+      } else if (index === 6) {
         // title: 'TIL 추가하기',
 
         setStepIndex(nextStepIndex);
@@ -315,7 +342,7 @@ export const useOnbaording = () => {
         setTimeout(() => {
           setRun(true);
         }, 300);
-      } else if (index === 6) {
+      } else if (index === 7) {
         // title: '검색창',
 
         setStepIndex(nextStepIndex);
@@ -324,7 +351,7 @@ export const useOnbaording = () => {
         setTimeout(() => {
           setRun(true);
         }, 300);
-      } else if (index === 7) {
+      } else if (index === 8) {
         // title: '카테고리',
 
         setStepIndex(nextStepIndex);
@@ -333,7 +360,7 @@ export const useOnbaording = () => {
         setTimeout(() => {
           setRun(true);
         }, 300);
-      } else if (index === 8) {
+      } else if (index === 9) {
         // title: '히스토리',
 
         setStepIndex(nextStepIndex);
@@ -342,7 +369,7 @@ export const useOnbaording = () => {
         setTimeout(() => {
           setRun(true);
         }, 300);
-      } else if (index === 9) {
+      } else if (index === 10) {
         // title: '감사합니다.',
 
         setStepIndex(nextStepIndex);
@@ -358,6 +385,7 @@ export const useOnbaording = () => {
       stepIndex,
       steps,
       isModalOpen,
+      isCategoryNextStep,
     },
     ref: {
       historyRef,

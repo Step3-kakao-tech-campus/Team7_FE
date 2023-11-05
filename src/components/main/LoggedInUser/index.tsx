@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useGetUsers } from '@/api/hooks/user';
 import GNB from '@/components/GNB/UserGNB';
-import TILModal from '@/components/GNB/UserGNB/desktop/TILModal';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
@@ -12,6 +11,7 @@ import Skeleton from '@/components/common/Skeleton';
 import CategorySection from '@/components/main/CategorySection';
 import History from '@/components/main/History';
 import { useOnbaording } from '@/components/main/LoggedInUser/useOnboarding';
+import TILModal from '@/components/main/Onboarding/TILModal';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
 import SideBar from '@/components/main/mobile/SideBar';
@@ -87,7 +87,12 @@ const LoggedInUser = () => {
         </Styled.Inner>
       </Styled.Root>
 
-      <TILModal isOpen={state.isModalOpen} isOnClickOutsideClose={false} isBackDrop={false} />
+      <TILModal
+        isOpen={state.isModalOpen}
+        isOnClickOutsideClose={false}
+        isBackDrop={false}
+        isCategoryNextStep={state.isCategoryNextStep}
+      />
     </>
   );
 };
