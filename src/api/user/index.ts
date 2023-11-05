@@ -8,6 +8,8 @@ import type {
   PatchUserPasswordRequest,
   PatchUserPasswordResponse,
   DeleteUserResponse,
+  PostUserProfileImageResponse,
+  PostUserProfileImageRequset,
 } from '@/api/user/type';
 
 // User
@@ -66,6 +68,21 @@ export const deleteUser = async (password: string) => {
     method: 'DELETE',
     url: `/users`,
     data: { password },
+  });
+
+  return data;
+};
+
+export const postUserProfileImage = async (body: PostUserProfileImageRequset) => {
+  const { userId, formData } = body;
+
+  const { data } = await axiosInstance.request<PostUserProfileImageResponse>({
+    method: 'POST',
+    url: `user/${userId}/image`,
+    data: formData,
+    headers: {
+      'Content-Type': 'multipart/form-data', // Content-Type을 반드시 이렇게 하여야 한다.
+    },
   });
 
   return data;

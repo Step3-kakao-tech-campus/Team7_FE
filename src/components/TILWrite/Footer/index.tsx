@@ -7,6 +7,7 @@ import SubmitModal from '@/components/TILWrite/SubmitModal';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
+import { useToast } from '@/components/common/Toast/useToast';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import type { AutoSaveTime } from '@/pages/TILWrite/roadmap/[roadmapId]/step/[stepId]/til/[tilId]';
@@ -30,6 +31,8 @@ const Footer = (props: FooterProps) => {
     tilId: Number(router.query.tilId),
   });
 
+  const toast = useToast();
+
   const handleSaveTIL = () => {
     if (!tilDetail) return;
 
@@ -39,6 +42,8 @@ const Footer = (props: FooterProps) => {
       tilId: Number(router.query.tilId),
       content: TILContent,
     });
+
+    toast.showRight({ message: '저장되었습니다.' });
   };
 
   const handleSubmitTIL = () => {

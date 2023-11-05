@@ -13,7 +13,13 @@ const Avatar = (props: AvatarProps) => {
   return (
     <>
       {imageUrl ? (
-        <Styled.Avatar src={imageUrl} alt={alt} width={imageSize} height={imageSize} {...rest} />
+        <Styled.Avatar
+          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${imageUrl}`}
+          alt={alt}
+          width={imageSize}
+          height={imageSize}
+          {...rest}
+        />
       ) : (
         <Styled.Avatar src={`/assets/icons/${iconName}.svg`} alt={alt} width={imageSize} height={imageSize} {...rest} />
       )}

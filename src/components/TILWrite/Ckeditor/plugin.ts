@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axiosInstance } from '@/api';
 
 const customUploadAdapter = (loader: any) => {
   return {
@@ -7,12 +7,15 @@ const customUploadAdapter = (loader: any) => {
         const formData = new FormData();
         loader.file.then((file: any) => {
           formData.append('image', file);
-          formData.append('key', '6a18ed9fbcb9bcdac5cfe389fd389fdc');
-          axios
-            .post('https://api.imgbb.com/1/upload', formData)
+          axiosInstance
+            .post('/image/post', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            })
             .then((res) => {
               resolve({
-                default: res.data.data.url,
+                default: res.data.result.url,
               });
             })
             .catch((err) => reject(err));

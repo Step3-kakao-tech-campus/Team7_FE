@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useGetUsers, usePostUserProfileImage } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import * as Styled from './style';
 
@@ -9,15 +10,22 @@ interface ImageUploaderProps {
 
 const ImageUploader = (props: ImageUploaderProps) => {
   const { imageUrl, imgSize = 160 } = props;
+  const { user } = useGetUsers();
 
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const { postUserProfileImage } = usePostUserProfileImage();
 
   const handleClick = () => {
     const inputEl = inputRef.current;
     if (!inputEl) return;
     inputEl.value = '';
     inputEl.onchange = async () => {
-      // 이미지 업로드 처리 로직
+      const formData = new FormData();
+      [].forEach.call(inputEl.files, (image) => {
+        formData.append('image', image);
+      });
+      await postUserProfileImage({ userId: user?.id as number, formData });
     };
     inputEl.click();
   };

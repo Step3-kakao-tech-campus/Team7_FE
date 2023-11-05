@@ -24,6 +24,7 @@ import type {
   PatchTilRequest,
   SubmitTilRequest,
 } from '@/api/til/type';
+import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
 const QUERY_KEY = {
@@ -115,7 +116,6 @@ export const usePostTil = () => {
 export const usePatchTil = () => {
   const mutation = useMutation(patchTilAPI);
   const { handleError } = useApiError();
-
   const patchTil = async (body: PatchTilRequest) => {
     const data = await mutation.mutateAsync(body, {
       onError: handleError,
@@ -131,10 +131,12 @@ export const useSubmitTil = () => {
 
   const mutation = useMutation(submitTilAPI);
   const { handleError } = useApiError();
+  const toast = useToast();
 
   const submitTil = async (body: SubmitTilRequest) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
+        toast.showBottom({ message: 'TIL이 제출 되었습니다.' });
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
       },
       onError: handleError,
@@ -150,10 +152,12 @@ export const usePostComment = () => {
 
   const mutation = useMutation(postCommentAPI);
   const { handleError } = useApiError();
+  const toast = useToast();
 
   const postComment = async (body: PostCommentRequest) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
+        toast.showBottom({ message: '댓글이 작성되었습니다.' });
         queryClient.invalidateQueries([
           QUERY_KEY.getTil,
           {
@@ -177,10 +181,12 @@ export const usePatchComment = () => {
 
   const mutation = useMutation(patchCommentAPI);
   const { handleError } = useApiError();
+  const toast = useToast();
 
   const patchComment = async (body: PatchCommentRequest) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
+        toast.showBottom({ message: '댓글이 수정 되었습니다.' });
         queryClient.invalidateQueries([
           QUERY_KEY.getTil,
           {
@@ -204,10 +210,12 @@ export const useDeleteComment = () => {
 
   const mutation = useMutation(deleteCommentAPI);
   const { handleError } = useApiError();
+  const toast = useToast();
 
   const deleteComment = async (body: DeleteCommentRequest) => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
+        toast.showBottom({ message: '댓글이 삭제 되었습니다.' });
         queryClient.invalidateQueries([
           QUERY_KEY.getTil,
           {

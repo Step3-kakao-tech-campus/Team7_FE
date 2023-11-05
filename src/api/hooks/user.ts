@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
-import { getAlarms, getUsers, getUserHistory } from '@/api/user';
+import { getAlarms, getUsers, getUserHistory, postUserProfileImage as postUserProfileImageAPI } from '@/api/user';
 import { patchAlarm, patchUserPassword as patchUserPasswordAPI, deleteUser as deleteUserAPI } from '@/api/user';
-import type { PatchAlarmRequest, PatchUserPasswordRequest } from '@/api/user/type';
+import type { PatchAlarmRequest, PatchUserPasswordRequest, PostUserProfileImageRequset } from '@/api/user/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
@@ -112,4 +112,25 @@ export const useDeleteUser = () => {
   };
 
   return { deleteUser };
+};
+
+export const usePostUserProfileImage = () => {
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useMutation(postUserProfileImageAPI);
+  const { handleError } = useApiError();
+
+  const postUserProfileImage = async (body: PostUserProfileImageRequset) => {
+    const data = await mutateAsync(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QUERY_KEY.user]);
+      },
+      onError: handleError,
+    });
+
+    return {
+      data,
+    };
+  };
+
+  return { postUserProfileImage };
 };
