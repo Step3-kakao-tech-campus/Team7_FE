@@ -81,21 +81,30 @@ export const LeftArea = styled.aside`
   position: sticky;
   top: ${({ theme }) => theme.layout.main.GNBHeight};
   width: 200px;
+
   padding: 0.5rem;
   height: ${({ theme }) => `calc(100vh - ${theme.layout.main.GNBHeight})`};
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
 
 export const RightArea = styled.main`
-  padding: 50px 200px 80px 100px;
+  max-width: 1100px;
+  width: 70vw;
+  padding: 40px 56px 80px 56px;
   flex: 1;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    width: auto;
+  }
 
   @media ${({ theme }) => theme.mediaQuery.sm} {
     padding: 20px 48px;
+    width: auto;
   }
 
   @media ${({ theme }) => theme.mediaQuery.xs} {
     padding: 0;
+    width: auto;
   }
 `;
 
