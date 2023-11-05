@@ -3,11 +3,10 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Root = styled.div`
-  display: flex;
-  gap: 4px;
-  background-color: white;
-
   @media ${({ theme }) => theme.mediaQuery.md} {
+    display: flex;
+    gap: 4px;
+    background-color: white;
     padding: 8px;
     position: sticky;
     top: 72px;
