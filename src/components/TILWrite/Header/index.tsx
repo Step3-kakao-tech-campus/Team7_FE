@@ -95,11 +95,11 @@ const Header = (props: HeaderProps) => {
               const event = new CustomEvent('크롬익스텐션이벤트', { detail });
               document.dispatchEvent(event);
             }}>
-            <Image src="/assets/icons/ic_github.svg" width={32} height={32} alt="깃허브 익스텐션" />
+            <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
           </button>
         ) : (
           <button id="github_extenstion" onClick={handleOpen}>
-            <Image src="/assets/icons/ic_github.svg" width={32} height={32} alt="깃허브 익스텐션" />
+            <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
           </button>
         )}
 

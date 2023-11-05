@@ -29,6 +29,12 @@ export const Container = styled.div<{ width?: number }>`
     0px 0px 0px 1px rgba(0, 0, 0, 0.1);
   overflow: auto;
 
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+
   & :focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.black};
   }
