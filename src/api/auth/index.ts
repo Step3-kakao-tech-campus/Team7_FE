@@ -1,5 +1,11 @@
 import { axiosInstance } from '@/api';
-import type { EmailCodeCheckRequest, JoinRequest, EmailPasswordRequest, LoginResponse } from '@/api/auth/type';
+import type {
+  EmailCodeCheckRequest,
+  JoinRequest,
+  EmailPasswordRequest,
+  LoginResponse,
+  KakaoLoginRequest,
+} from '@/api/auth/type';
 import type { NullResultResponse } from '@/api/type';
 
 export const postLogin = async (body: EmailPasswordRequest) => {
@@ -56,6 +62,16 @@ export const postPasswordChange = async (body: EmailPasswordRequest) => {
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/password/change',
+    data: body,
+  });
+
+  return data;
+};
+
+export const getKakaoLogin = async (body: KakaoLoginRequest) => {
+  const { data } = await axiosInstance.request<LoginResponse>({
+    method: 'GET',
+    url: `/auth/kakao/callback?code=${body.code}`,
     data: body,
   });
 

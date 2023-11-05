@@ -1,6 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
-import { postPasswordChange, postEmailCheck, postEmailCode, postEmailCodeCheck, postJoin, postLogin } from '@/api/auth';
-import type { EmailCodeCheckRequest, JoinRequest, EmailPasswordRequest } from '@/api/auth/type';
+import {
+  postPasswordChange,
+  postEmailCheck,
+  postEmailCode,
+  postEmailCodeCheck,
+  postJoin,
+  postLogin,
+  getKakaoLogin,
+} from '@/api/auth';
+import type { EmailCodeCheckRequest, JoinRequest, EmailPasswordRequest, KakaoLoginRequest } from '@/api/auth/type';
 import { useApiError } from '@/hooks/useApiError';
 import { setCookie } from '@/utils/cookie';
 
@@ -92,4 +100,21 @@ export const usePostPasswordChange = () => {
   };
 
   return { postPasswordChangeAsync, isLoading };
+};
+
+export const useGetKakaoLogin = () => {
+  const { mutateAsync, isLoading } = useMutation(getKakaoLogin);
+  const { handleError } = useApiError();
+
+  const getKakaoLoginAsync = async (body: KakaoLoginRequest) => {
+    const data = await mutateAsync(body, {
+      onError: handleError,
+    });
+
+    setCookie('accessToken', data.result?.accessToken as string, { path: '/' });
+
+    return data;
+  };
+
+  return { getKakaoLoginAsync, isLoading };
 };
