@@ -33,6 +33,7 @@ const ImageUploader = (props: ImageUploaderProps) => {
     <Styled.Root onClick={handleClick}>
       <Styled.ImageInput type="file" accept="image/*" ref={inputRef} />
       <Avatar imageUrl={imageUrl} alt="프로필 이미지" imageSize={imgSize} />
+      <Styled.EditTag>Edit</Styled.EditTag>
     </Styled.Root>
   );
 };
