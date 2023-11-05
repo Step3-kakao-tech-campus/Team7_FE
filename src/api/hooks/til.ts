@@ -138,6 +138,10 @@ export const useSubmitTil = () => {
       onSuccess: () => {
         toast.showBottom({ message: 'TIL이 제출 되었습니다.' });
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
+        queryClient.invalidateQueries([
+          QUERY_KEY.getTil,
+          { roadmapId: body.roadmapId, stepId: body.stepId, tilId: body.tilId },
+        ]);
       },
       onError: handleError,
     });
