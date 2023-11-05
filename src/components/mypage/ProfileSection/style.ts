@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 export const Root = styled.form`
   display: flex;
+  justify-content: center;
   margin-top: 2rem;
 
   @media ${({ theme }) => theme.mediaQuery.md} {

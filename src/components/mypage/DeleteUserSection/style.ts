@@ -4,8 +4,7 @@ import styled from '@emotion/styled';
 export const Root = styled.form`
   display: flex;
   justify-content: space-between;
-  padding: 0 0 3rem 6.25rem;
-
+  padding: 0 0 3rem 0;
   @media ${({ theme }) => theme.mediaQuery.md} {
     padding: 0;
   }
