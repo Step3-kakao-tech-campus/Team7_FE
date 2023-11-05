@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import SocialLogin from '@/components/auth/common/SocialLogin';
 import TextButton from '@/components/auth/common/TextButton';
 import LoginForm from '@/components/auth/login/LoginForm';
 import Flex from '@/components/common/Flex';
@@ -16,6 +17,7 @@ export const LoginPage = () => {
         <TextButton onClick={() => router.push(TILY_LINKS.verify())}>회원가입</TextButton>
         <TextButton onClick={() => router.push(TILY_LINKS.passwordVerify())}>비밀번호 찾기</TextButton>
       </Flex>
+      <SocialLogin />
     </AuthPageContainer>
   );
 };

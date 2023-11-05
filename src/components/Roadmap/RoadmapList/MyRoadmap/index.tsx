@@ -17,14 +17,14 @@ const MyRoadmap = () => {
         <h2>참여중인 로드맵</h2>
         <Style.ButtonContainer>
           <Button
-            variant="outline"
+            variant="default"
             onClick={() => {
               handleOpen();
             }}>
-            코드로 참여하기
+            코드 참여
           </Button>
           <Button
-            variant="outline"
+            variant="default"
             onClick={() => {
               router.push(TILY_LINKS.roadmapCreate());
             }}>

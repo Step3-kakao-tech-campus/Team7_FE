@@ -19,18 +19,6 @@ export const ButtonContainer = styled.section`
   display: flex;
   gap: 1rem;
 
-  & > button {
-    border-color: black;
-    border-radius: 1.5rem;
-    font-weight: 600;
-
-    &:hover {
-      background-color: black;
-      color: white;
-      transition: all 0.3s ease-in-out;
-    }
-  }
-
   @media ${({ theme }) => theme.mediaQuery.sm} {
     justify-content: space-around;
     width: 100%;
