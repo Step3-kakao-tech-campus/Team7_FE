@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Card from '@/components/common/Card';
 
 export const Root = styled(Card)`
-  width: 16.875rem;
+  width: 100%;
   height: 9.375rem;
 
   padding: 1.25rem;

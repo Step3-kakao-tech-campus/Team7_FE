@@ -45,3 +45,5 @@ export const TabMenuStyles = css`
   height: 2rem;
   font-size: 1.125rem;
 `;
+
+export const TabOnboardRefContainer = styled.div``;

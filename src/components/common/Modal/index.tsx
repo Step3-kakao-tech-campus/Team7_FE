@@ -9,9 +9,11 @@ import type { EmotionTheme } from '@/styles/emotion';
 import * as Styled from './style';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
+  isOnClickOutsideClose?: boolean;
+  isBackDrop?: boolean;
   width?: number;
   isOpen?: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   modalContentStyles?: (theme: EmotionTheme) => SerializedStyles;
   closeButtonStyles?: (theme: EmotionTheme) => SerializedStyles;
   closeButtonSize?: number;
@@ -22,6 +24,8 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
     children,
     width,
     isOpen,
+    isOnClickOutsideClose = true,
+    isBackDrop = true,
     onClose,
     modalContentStyles,
     closeButtonStyles,
@@ -31,9 +35,13 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  useOnClickOutside(modalRef, () => {
-    onClose();
-  });
+  useOnClickOutside(
+    modalRef,
+    () => {
+      onClose?.();
+    },
+    isOnClickOutsideClose,
+  );
 
   if (!isOpen) {
     return null;
@@ -41,8 +49,9 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
 
   return (
     <Portal>
-      <Styled.Background>
+      <Styled.Background isBackDrop={isBackDrop}>
         <Styled.Root
+          data-testid="modal"
           initial="closed"
           animate={isOpen ? 'open' : 'closed'}
           variants={{
@@ -50,21 +59,21 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
             closed: { opacity: 0 },
           }}
           transition={{ type: 'tween', duration: 0.2 }}>
-          <FocusTrap>
-            <RemoveScroll>
-              <Styled.Container role="dialog" ref={modalRef} width={width} {...rest}>
-                <Styled.CloseButton css={closeButtonStyles} onClick={onClose}>
-                  <Image
-                    src="/assets/icons/ic_closeButton.svg"
-                    alt="close"
-                    width={closeButtonSize}
-                    height={closeButtonSize}
-                  />
-                </Styled.CloseButton>
-                <Styled.Content css={modalContentStyles}>{children}</Styled.Content>
-              </Styled.Container>
-            </RemoveScroll>
-          </FocusTrap>
+          {/* <FocusTrap> */}
+          <RemoveScroll>
+            <Styled.Container role="dialog" ref={modalRef} width={width} {...rest}>
+              <Styled.CloseButton css={closeButtonStyles} onClick={onClose}>
+                <Image
+                  src="/assets/icons/ic_closeButton.svg"
+                  alt="close"
+                  width={closeButtonSize}
+                  height={closeButtonSize}
+                />
+              </Styled.CloseButton>
+              <Styled.Content css={modalContentStyles}>{children}</Styled.Content>
+            </Styled.Container>
+          </RemoveScroll>
+          {/* </FocusTrap> */}
         </Styled.Root>
       </Styled.Background>
     </Portal>

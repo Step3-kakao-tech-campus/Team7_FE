@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 
-export const Background = styled.div`
+export const Background = styled.div<{ isBackDrop: boolean }>`
   display: flex;
   position: fixed;
   top: 0;
@@ -9,7 +9,7 @@ export const Background = styled.div`
   align-items: center;
   justify-content: center;
   z-index: ${({ theme }) => theme.layer.modalBackground};
-  background-color: rgb(0 0 0 / 70%);
+  background-color: ${({ isBackDrop }) => (isBackDrop ? 'rgb(0 0 0 / 70%)' : 'transparent')};
   width: 100%;
   height: 100%;
 `;

@@ -502,3 +502,11 @@ button {
   --ck-color-widget-hover-border: #0f172a !important
 ;
 }
+
+.react-joyride__tooltip [data-test-id='button-primary'] {
+  background-color: #ef4365 !important;
+}
+
+.react-joyride__spotlight {
+  border-radius: 20px !important;
+}

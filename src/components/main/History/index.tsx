@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from 'react';
+import { forwardRef } from 'react';
 import { css } from '@emotion/react';
 import { Calendar, type CalendarTooltipProps } from '@nivo/calendar';
 import { useGetUserHistory, useGetUsers } from '@/api/hooks/user';
@@ -8,7 +9,9 @@ import Skeleton from '@/components/common/Skeleton';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 
-const History = () => {
+interface HistoryProps {}
+
+const History = forwardRef<HTMLDivElement, HistoryProps>((_, ref) => {
   const { addParamsToUrl } = useParamsToUrl();
 
   const { history, isLoading } = useGetUserHistory();
@@ -29,7 +32,7 @@ const History = () => {
         </Styled.HistoryTitle>
       </Responsive>
 
-      <Styled.Wrapper>
+      <Styled.Wrapper ref={ref}>
         <Styled.CalendarContainer>
           <CustomSuspense isLoading={isLoading} fallback={<Skeleton css={Styled.SkeletonStyles} />}>
             <Calendar
@@ -68,7 +71,7 @@ const History = () => {
       </Styled.Wrapper>
     </Styled.Root>
   );
-};
+});
 
 export default History;
 

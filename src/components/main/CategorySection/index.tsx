@@ -16,10 +16,10 @@ const CategorySection = () => {
   };
 
   return (
-    <>
+    <Styled.Root>
       <Styled.CategoryTitle>TIL 목록</Styled.CategoryTitle>
       <Styled.ShowAllButton onClick={() => router.push('/')}>목록 전체보기</Styled.ShowAllButton>
-      <Styled.CollapsibleContainer>
+      <Styled.CollapsibleContainer data-testid="categorySection">
         <Collapsible>
           <Collapsible.Header>개인 TIL</Collapsible.Header>
           <Collapsible.Item>
@@ -45,7 +45,7 @@ const CategorySection = () => {
           </Collapsible.Item>
         </Collapsible>
       </Styled.CollapsibleContainer>
-    </>
+    </Styled.Root>
   );
 };
 

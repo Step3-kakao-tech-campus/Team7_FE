@@ -4,16 +4,25 @@ import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.main`
   display: flex;
+  width: 100%;
   flex-direction: column;
   flex: 1;
 `;
 
 export const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   gap: 2rem;
   margin-top: 1.5rem;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 1020px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     display: grid;
@@ -27,7 +36,7 @@ export const Container = styled.div`
 `;
 
 export const SkeletonStyles = (theme: EmotionTheme) => css`
-  width: 16.875rem;
+  width: 100%;
   height: 9.375rem;
 
   padding: 1.25rem;

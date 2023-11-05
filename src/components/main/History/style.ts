@@ -3,12 +3,14 @@ import styled from '@emotion/styled';
 
 export const Root = styled.div``;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div
+  background-color: #fff
   width: 95%;
   overflow-x: auto;
   overflow-y: hidden;
   border: 1px solid ${({ theme }) => theme.colors.gray_500};
   border-radius: 6px;
+
   @media ${({ theme }) => theme.mediaQuery.md} {
     width: 100%;
   }
@@ -33,7 +35,9 @@ export const SkeletonStyles = css`
 `;
 
 export const HistoryTitle = styled.h1`
+  background-color: #fff;
   margin-bottom: 20px;
+
   & > span:nth-of-type(1) {
     font-size: 2rem;
     margin-right: 1px;

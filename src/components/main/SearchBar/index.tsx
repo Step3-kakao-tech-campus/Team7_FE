@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import Input from '@/components/common/Input';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 
-const SearchBar = () => {
+interface SearchBarProps {}
+
+const SearchBar = forwardRef<HTMLFormElement, SearchBarProps>((_, ref) => {
   const [tilName, setTilName] = useState<string>('');
 
   const { addParamsToUrl } = useParamsToUrl();
@@ -15,6 +17,7 @@ const SearchBar = () => {
 
   return (
     <Styled.Root
+      ref={ref}
       onSubmit={(e) => {
         e.preventDefault();
         handleSearch(tilName);
@@ -30,6 +33,6 @@ const SearchBar = () => {
       />
     </Styled.Root>
   );
-};
+});
 
 export default SearchBar;

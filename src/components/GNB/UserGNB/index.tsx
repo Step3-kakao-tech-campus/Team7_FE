@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { forwardRef } from 'react';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import TILModal from '@/components/GNB/UserGNB/desktop/TILModal';
 import MobileTILModal from '@/components/GNB/UserGNB/mobile/MobileTILModal';
@@ -12,7 +13,9 @@ import GNBNav from '../common/GNBNav';
 import GNBProfile from '../common/GNBProfile';
 import Flower from '../common/flower';
 
-const GNB = () => {
+interface GNBProps {}
+
+const GNB = forwardRef<HTMLDivElement, GNBProps>((_, ref) => {
   useGetRoadmapsMy();
 
   const [isButton, setIsButton] = useState(true);
@@ -34,28 +37,31 @@ const GNB = () => {
                 <span>를 심어보세요</span>
               </Styled.TILInfo>
             </Responsive>
-            {isButton && (
-              <Button
-                onMouseEnter={() => {
-                  setIsButton(false);
-                  setIsFlower(true);
-                }}
-                onClick={handleOpenTilModal}
-                css={Styled.TILButtonStyles}
-                variant="ghost">
-                TIL
-              </Button>
-            )}
 
-            {isFlower && (
-              <Flower
-                onMouseLeave={() => {
-                  setIsButton(true);
-                  setIsFlower(false);
-                }}
-                onClick={handleOpenTilModal}
-              />
-            )}
+            <Styled.RefContainer ref={ref}>
+              {isButton && (
+                <Button
+                  onMouseEnter={() => {
+                    setIsButton(false);
+                    setIsFlower(true);
+                  }}
+                  onClick={handleOpenTilModal}
+                  css={Styled.TILButtonStyles}
+                  variant="ghost">
+                  TIL
+                </Button>
+              )}
+
+              {isFlower && (
+                <Flower
+                  onMouseLeave={() => {
+                    setIsButton(true);
+                    setIsFlower(false);
+                  }}
+                  onClick={handleOpenTilModal}
+                />
+              )}
+            </Styled.RefContainer>
 
             <GNBProfile />
           </Flex>
@@ -72,6 +78,6 @@ const GNB = () => {
       </Responsive>
     </>
   );
-};
+});
 
 export default GNB;
