@@ -17,8 +17,6 @@ const RoadmapDetailInfo = () => {
 
   const { data } = useGetRoadmapsById(roadmapId);
 
-  console.log(data, 'data');
-
   const myRole = data?.result.myRole;
 
   const { isOpen, handleOpen, handleClose } = useModalState();

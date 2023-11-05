@@ -265,12 +265,19 @@ export const useGetStepTilsManage = ({ queryKey }: { queryKey: QueryKey }) => {
 
   const { roadmapId, stepId, isSubmit, isMember, name } = query;
 
-  const { data, isLoading } = useQuery([QUERY_KEY.getStepTils, ..._queryKey], () =>
-    getStepTils({
-      roadmapId: Number(roadmapId),
-      stepId: Number(stepId),
-      input: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
-    }),
+  const enabled = !!stepId;
+
+  const { data, isLoading } = useQuery(
+    [QUERY_KEY.getStepTils, ..._queryKey],
+    () =>
+      getStepTils({
+        roadmapId: Number(roadmapId),
+        stepId: Number(stepId),
+        input: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
+      }),
+    {
+      enabled,
+    },
   );
 
   return {
