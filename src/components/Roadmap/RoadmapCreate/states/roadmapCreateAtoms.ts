@@ -1,20 +1,31 @@
-import { atom, selector } from 'recoil';
+import { atom } from 'recoil';
+import { type Creator } from '@/api/type';
 
 export interface RoadmapForm {
   roadmap: RoadmapInfo;
   steps: Step[];
 }
 
+interface Roadmap extends RoadmapInfo {
+  steps: Step[];
+}
+
 interface RoadmapInfo {
   name: string;
   description: string;
-  isPublic: boolean;
+  code?: string | null;
+  recentTilId?: number | null;
+  isPublic?: boolean;
+  isRecruit?: boolean;
+  role?: 'master' | 'manager' | 'member' | null;
+  creator?: Creator;
 }
 
 export interface Step {
+  id?: number;
   title: string;
   description: string;
-  dueDate: Date | null;
+  dueDate?: Date | null;
   references: Reference;
 }
 
@@ -24,29 +35,16 @@ export interface Reference {
 }
 
 export interface ReferenceLink {
+  id?: number;
   link: string;
 }
 
-export const roadmapInfoAtoms = atom<RoadmapInfo>({
-  key: 'roadmapInfo',
+export const roadmapAtoms = atom<Roadmap>({
+  key: 'roadmap',
   default: {
     name: '',
     description: '',
     isPublic: true,
-  },
-});
-
-export const roadmapStepAtoms = atom<Step[]>({
-  key: 'roadmapStep',
-  default: [],
-});
-
-export const roadmapFormDataSelector = selector({
-  key: 'roadmapFormData',
-  get: ({ get }) => {
-    const roadmap = get(roadmapInfoAtoms);
-    const steps = get(roadmapStepAtoms);
-
-    return { roadmap, steps };
+    steps: [],
   },
 });

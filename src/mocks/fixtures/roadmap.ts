@@ -1,6 +1,6 @@
 import type {
   GetRoadmapStepsResponse,
-  GetRoadmapsResponse,
+  GetRoadmapsMyResponse,
   GetRoadmapStepReferenceResponse,
   PostRoadmapsResponse,
   GetRoadmapGroupMemberResponse,
@@ -9,7 +9,7 @@ import type {
   PostRoadmapsGroupsParticipateResponse,
 } from '@/api/roadmap/type';
 
-export const getRoadmapsResponse: GetRoadmapsResponse = {
+export const getRoadmapsResponse: GetRoadmapsMyResponse = {
   success: true,
   message: 'ok',
   result: {
@@ -28,7 +28,7 @@ export const getRoadmapsResponse: GetRoadmapsResponse = {
       },
     ],
     roadmaps: {
-      tily: [
+      tilys: [
         {
           id: 1,
           name: '알고리즘 격파파파파파파파파파파파파파파',
@@ -40,7 +40,7 @@ export const getRoadmapsResponse: GetRoadmapsResponse = {
           stepNum: 50,
         },
       ],
-      group: [
+      groups: [
         {
           id: 3,
           name: '준서좌의 나도 할 수 있다 알고리즘즘즘즘즘즘즘',
@@ -87,85 +87,85 @@ export const getRoadmapStepsResponse: GetRoadmapStepsResponse = {
       {
         id: 1,
         title: 'Next.js 란 무엇인가?',
-        isCompleted: true,
+        isSubmit: true,
         tilId: 1,
       },
       {
         id: 2,
         title: '설치와 실행',
-        isCompleted: false,
+        isSubmit: false,
         tilId: null,
       },
       {
         id: 3,
         title: '샘플앱 세탁',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 4,
         title: '배포',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 5,
         title: '뼈대 만들기',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 6,
         title: '라우팅',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 7,
         title: 'Single Page Application',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 8,
         title: '정적 자원 사용하기',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 9,
         title: '클래스 기초',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 10,
         title: 'css',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 11,
         title: 'backend',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 12,
         title: '글 목록 가져오기',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 13,
         title: '글 생성',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
       {
         id: 14,
         title: 'cache',
-        isCompleted: false,
+        isSubmit: false,
         tilId: 1,
       },
     ],
@@ -177,16 +177,17 @@ export const getRoadmapStepsResponse: GetRoadmapStepsResponse = {
 export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = {
   success: true,
   message: 'ok',
+  code: 200,
   result: {
     id: 1,
     description: '7조 화이팅',
-    youtube: [
+    youtubes: [
       {
         id: 1,
         link: `<iframe width="560" height="315" src="https://www.youtube.com/embed/9KOaR6QMb9A?si=HA3x3k-PLh9dmO03" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
       },
     ],
-    web: [
+    webs: [
       {
         id: 1,
         link: 'https://nextjs.org/docs/getting-started/installation',
@@ -211,6 +212,7 @@ export const getRoadmapStepReferenceResponse: GetRoadmapStepReferenceResponse = 
 export let getRoadmapGroupMemberResponse: GetRoadmapGroupMemberResponse = {
   success: true,
   message: 'ok',
+  code: 200,
   result: {
     users: [
       {
@@ -251,6 +253,7 @@ export let getRoadmapGroupMemberResponse: GetRoadmapGroupMemberResponse = {
 export const getRoadmapGroupApplyResponse: GetRoadmapGroupApplyResponse = {
   success: true,
   message: 'ok',
+  code: 200,
   result: {
     users: [
       {
@@ -302,7 +305,7 @@ export const updateGetRoadmapStepsResponseFixture = (name: string) => {
     {
       id: length + 1,
       title: name,
-      isCompleted: false,
+      isSubmit: false,
       tilId: null,
     },
   ];

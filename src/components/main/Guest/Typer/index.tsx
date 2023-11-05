@@ -39,8 +39,6 @@ const Typer = (props: PropsWithChildren<TyperProps>) => {
     });
   });
 
-  console.log(flatten);
-
   const filtered = flatten.slice(0, charId);
 
   useEffect(() => {

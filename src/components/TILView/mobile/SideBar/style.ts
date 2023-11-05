@@ -14,7 +14,7 @@ export const Content = styled.div<{ referenceOpen?: boolean }>`
   height: 100dvh;
   overflow-y: ${({ referenceOpen }) => (referenceOpen ? 'hidden' : 'scroll')};
   overflow-x: hidden;
-  animation: content-show 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: content- 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
   @keyframes content-show {
     from {

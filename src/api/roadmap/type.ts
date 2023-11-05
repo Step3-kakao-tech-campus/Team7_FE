@@ -1,4 +1,4 @@
-import type { Step, Category, Roadmaps, CommonResponse, Group } from '@/api/type';
+import type { Step, Category, Roadmaps, CommonResponse, Group, Creator, StepWithReferences } from '@/api/type';
 
 // getRoadmapsMy
 export interface GetRoadmapsMyResponse {
@@ -17,12 +17,12 @@ export interface GetRoadmapsResponse {
   success: boolean;
   message: string;
   result: GetRoadmapsResult;
-  hasNext: boolean;
 }
 
 interface GetRoadmapsResult {
   category: 'tily' | 'group';
   roadmaps: Group[];
+  hasNext: boolean;
 }
 
 // getRoadmapSteps
@@ -48,9 +48,14 @@ export interface GetRoadmapStepReferenceResponse extends CommonResponse {
   result: {
     id: number;
     description: string;
-    youtube: Youtube[];
-    web: Web[];
+    youtubes: Youtube[];
+    webs: Web[];
   };
+}
+
+export interface References {
+  youtube: Youtube[];
+  web: Web[];
 }
 
 export interface Youtube {
@@ -59,6 +64,11 @@ export interface Youtube {
 }
 
 export interface Web {
+  id: number;
+  link: string;
+}
+
+export interface References {
   id: number;
   link: string;
 }
@@ -95,6 +105,33 @@ export interface PostRoadmapsResponse {
   result: {
     id: number;
   };
+}
+
+export interface GetRoadmapsByIdResponse {
+  success: boolean;
+  message: string;
+  result: {
+    creator: Omit<Creator, 'id'>;
+    name: string;
+    description: string;
+    myRole: 'master' | 'manager' | 'member' | 'none';
+    recentTilId: number | null;
+    recentStepId: number | null;
+    code: string;
+    steps: StepWithReferences[];
+  };
+}
+
+export interface PostRoadmapsByIdResponse {
+  success: boolean;
+  message: string;
+  result: null;
+}
+
+export interface PostRoadmapsApplyResponse {
+  success: boolean;
+  message: string;
+  result: null;
 }
 
 // getRoadmapGroupMember

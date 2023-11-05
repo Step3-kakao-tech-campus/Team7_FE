@@ -6,7 +6,7 @@ import ExtensionInfoModal from '@/components/TILWrite/ExtensionInfoModal';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
 import { useToast } from '@/components/common/Toast/useToast';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
@@ -42,11 +42,11 @@ const Header = (props: HeaderProps) => {
 
   useEffect(() => {
     const handleCustomEventError = (event: CustomEvent<{ message: string }>) => {
-      toast.show({ message: event.detail.message, isError: true });
+      toast.showBottom({ message: event.detail.message, isError: true });
     };
 
     const handleCustomEventSuccess = (event: CustomEvent<{ message: string }>) => {
-      toast.show({ message: event.detail.message });
+      toast.showBottom({ message: event.detail.message });
     };
 
     document.addEventListener('크롬익스텐션에러', (event) =>
@@ -68,7 +68,7 @@ const Header = (props: HeaderProps) => {
 
   return (
     <Styled.Root>
-      <button onClick={() => router.push(tilyLinks.home())}>
+      <button onClick={() => router.push(TILY_LINKS.home())}>
         <Logo type="logo" imageSize={32} />
       </button>
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
@@ -78,6 +78,14 @@ const Header = (props: HeaderProps) => {
           <button
             id="github_extenstion"
             onClick={() => {
+              if (!TILContent) {
+                toast.showBottom({
+                  message: 'TIL을 작성해주세요.',
+                  isError: true,
+                });
+                return;
+              }
+
               const detail = {
                 isPersonal: tilDetail?.isPersonal,
                 roadmapTitle: '조금만 더 화이팅',

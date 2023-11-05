@@ -1,9 +1,9 @@
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { usePatchUserPassword } from '@/api/hooks/user';
-import { useGetUser } from '@/api/hooks/user';
+import { useGetUsers } from '@/api/hooks/user';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import { PASSWORD_REGEX } from '@/constants/regex';
+import REGEX from '@/constants/regex';
 import * as Styled from './style';
 
 interface ChangePasswordFormInput {
@@ -13,13 +13,14 @@ interface ChangePasswordFormInput {
 }
 
 const EditSection = () => {
-  const { user } = useGetUser();
+  const { user } = useGetUsers();
   const { patchUserPassword, isLoading } = usePatchUserPassword();
 
   const {
     control,
     handleSubmit,
     getValues,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -41,6 +42,7 @@ const EditSection = () => {
       newPassword: formData.newPassword,
       newPasswordConfirm: formData.newPasswordConfirm,
     });
+    reset();
   };
 
   return (
@@ -58,7 +60,7 @@ const EditSection = () => {
           rules={{
             required: '필수 정보입니다.',
             pattern: {
-              value: PASSWORD_REGEX,
+              value: REGEX.password(),
               message: '비밀 번호는 영문, 숫자, 특수문자 포함한 8~20자입니다.',
             },
           }}
@@ -80,7 +82,7 @@ const EditSection = () => {
           rules={{
             required: '필수 정보입니다.',
             pattern: {
-              value: PASSWORD_REGEX,
+              value: REGEX.password(),
               message: '영문, 숫자, 특수문자 포함한 8~20자의 비밀번호만 사용가능합니다.',
             },
           }}

@@ -28,6 +28,7 @@ export const userHistoryResponse: GetUserHistoryResponse = {
 export const getUserResponse: GetUserResponse = {
   success: true,
   message: 'ok',
+  code: 200,
   result: {
     id: 1,
     name: '김동영',
@@ -39,6 +40,7 @@ export const getUserResponse: GetUserResponse = {
 export const getAlarmsResponse: GetAlarmsResponse = {
   success: true,
   message: 'ok',
+  code: 200,
   result: {
     alarms: [
       {

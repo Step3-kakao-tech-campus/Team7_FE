@@ -1,14 +1,15 @@
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { usePostRoadmaps } from '@/api/hooks/roadmap';
+import { useGetRoadmapsById, usePostRoadmaps } from '@/api/hooks/roadmap';
 import type { StepForm } from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
 import {
   roadmapFormDataSelector,
   roadmapInfoAtoms,
   roadmapStepAtoms,
 } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
+import useQueryParam from '@/hooks/useQueryParam';
 
 export const useRoadmapInfo = () => {
   const [roadmapValid, setRoadmapValid] = useState(true);
@@ -35,7 +36,7 @@ export const useRoadmapInfo = () => {
       const data = await postRoadmaps(roadmapFormData);
 
       if (data.success) {
-        router.replace(tilyLinks.roadmap());
+        router.replace(TILY_LINKS.roadmap());
         resetRoadmapInfo();
         resetRoadmapStep();
       }
@@ -108,15 +109,26 @@ export const useStepInfo = (defaultValue: StepForm) => {
  * @param stepIdx
  * @returns
  */
-export const useReference = (type: string, stepIdx: number) => {
+export const useReference = (type: string, stepIdx: number, where: 'detail' | 'create') => {
+  const roadmapId = useQueryParam('roadmapId');
+
   const [stepList, setStepList] = useRecoilState(roadmapStepAtoms);
+  const data = useGetRoadmapsById(Number(roadmapId));
 
   // 타입에 따라서 step의 참고자료 목록에서 가져옴
   let references;
-  if (type === 'youtube') {
-    references = stepList[stepIdx].references.youtube;
-  } else {
-    references = stepList[stepIdx].references.web;
+  if (where === 'detail') {
+    if (type === 'youtube') {
+      references = data?.result.steps[stepIdx].references.youtube;
+    } else {
+      references = data?.result.steps[stepIdx].references.web;
+    }
+  } else if (where === 'create') {
+    if (type === 'youtube') {
+      references = stepList[stepIdx].references.youtube;
+    } else {
+      references = stepList[stepIdx].references.web;
+    }
   }
 
   // 참고자료 한가지를 삭제하는 함수

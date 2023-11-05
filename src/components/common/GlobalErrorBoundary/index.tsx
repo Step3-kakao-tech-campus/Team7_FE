@@ -13,6 +13,10 @@ export interface ErrorBoundaryProps {
 const GlobalErrorBoundary = (props: ErrorBoundaryProps) => {
   const { error, resetErrorBoundary } = props;
 
+  if (error.response?.status === 500) {
+    return <Fallback desc={'오류가 발생했습니다'} resetErrorBoundary={resetErrorBoundary} />;
+  }
+
   if (error.response?.status === 403) {
     return <Fallback desc={'접근 권한이 없습니다'} resetErrorBoundary={resetErrorBoundary} />;
   }

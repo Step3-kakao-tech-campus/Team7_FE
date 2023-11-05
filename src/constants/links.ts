@@ -1,12 +1,13 @@
-export const tilyLinks = {
+const TILY_LINKS = {
   intro: () => '/intro',
   home: () => '/',
   verify: () => '/auth/register/verify',
   register: () => '/auth/register/',
   login: () => '/auth/login',
-  findPwVerify: () => '/auth/change-password/verify',
+  passwordVerify: () => '/auth/change-password/verify',
   changePassword: () => '/auth/change-password/',
   roadmap: () => '/roadmap',
+  roadmapDetail: (roadmapId: number) => `/roadmap/${roadmapId}`,
   roadmapCreate: () => '/roadmap/create',
   mypage: () => '/mypage',
   tilWrite: ({ roadmapId, stepId, tilId }: tilWriteParams) =>
@@ -19,6 +20,8 @@ export const tilyLinks = {
   manageTIL: (roadmapId: number) => `/roadmap/${roadmapId}/manage/TIL`,
   manageApply: (roadmapId: number) => `/roadmap/${roadmapId}/manage/apply`,
 };
+
+export default TILY_LINKS;
 
 interface tilWriteParams {
   roadmapId: number;

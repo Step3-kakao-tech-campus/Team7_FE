@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetStepTils } from '@/api/hooks/til';
+import TIL from '@/components/Roadmap/PeopleTIL/TIL';
 import Button from '@/components/common/Button';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Fallback from '@/components/common/Fallback';
 import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary';
 import Skeleton from '@/components/common/Skeleton';
-import TIL from '@/components/roadmap/PeopleTIL/TIL';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 const PeopleTILSection = () => {
@@ -60,7 +60,7 @@ PeopleTILSection.Empty = function Empty() {
           <span>공개된 다른 TIL이 없습니다.</span>
         </Styled.Description>
 
-        <Button css={Styled.ButtonStyles} onClick={() => router.push(tilyLinks.home())}>
+        <Button css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.home())}>
           메인 페이지로 이동
         </Button>
       </Styled.CardContainer>

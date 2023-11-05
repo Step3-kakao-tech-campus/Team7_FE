@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
+import { type ButtonHTMLAttributes, type PropsWithChildren, forwardRef } from 'react';
 import Spinner from '@/components/common/Spinner';
 import * as Styled from './style';
 
@@ -11,7 +11,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-const Button = (props: PropsWithChildren<ButtonProps>) => {
+const Button = forwardRef((props: PropsWithChildren<ButtonProps>) => {
   const {
     variant = 'default',
     fullWidth = false,
@@ -29,6 +29,6 @@ const Button = (props: PropsWithChildren<ButtonProps>) => {
       {children}
     </Styled.Button>
   );
-};
+});
 
 export default Button;

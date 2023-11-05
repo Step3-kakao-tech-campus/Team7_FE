@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone',
   images: {
     remotePatterns: [
       {
@@ -10,6 +11,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'ppss.kr',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.inflearn.com',
       },
       {
         protocol: 'http',

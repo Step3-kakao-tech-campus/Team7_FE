@@ -3,6 +3,8 @@ import { useGetRoadmapStepReference } from '@/api/hooks/roadmap';
 import Docs from '@/components/TILWrite/Reference/Docs';
 import Header from '@/components/TILWrite/Reference/Header';
 import Youtube from '@/components/TILWrite/Reference/Youtube';
+import Fallback from '@/components/common/Fallback';
+import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary';
 import * as Styled from './style';
 
 interface ReferenceProps {
@@ -23,11 +25,11 @@ const Reference = (props: ReferenceProps) => {
 
       <Styled.Reference>참고 자료</Styled.Reference>
 
-      {reference?.youtube.map((item, index) => {
+      {reference?.youtubes?.map((item, index) => {
         return <Youtube key={item.id} index={index + 1} link={item.link} />;
       })}
 
-      {reference?.web.map((item, index) => {
+      {reference?.webs?.map((item, index) => {
         return <Docs key={item.id} index={index + 1} link={item.link} />;
       })}
     </Styled.Root>
@@ -35,3 +37,17 @@ const Reference = (props: ReferenceProps) => {
 };
 
 export default Reference;
+
+Reference.Fallback = function (props: ErrorBoundaryProps) {
+  const { resetErrorBoundary } = props;
+
+  return (
+    <Styled.FallbackRoot>
+      <Fallback
+        onClick={() => {
+          resetErrorBoundary();
+        }}
+      />
+    </Styled.FallbackRoot>
+  );
+};

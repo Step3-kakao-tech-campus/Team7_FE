@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.main`
   display: flex;
@@ -12,9 +13,7 @@ export const Container = styled.div`
   flex-wrap: wrap;
   align-items: center;
   gap: 2rem;
-  margin-left: 2.6rem;
   margin-top: 1.5rem;
-  margin: 1.5rem 0 0 1.5rem;
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     display: grid;
@@ -27,21 +26,31 @@ export const Container = styled.div`
   }
 `;
 
-export const SkeletonStyles = css`
+export const SkeletonStyles = (theme: EmotionTheme) => css`
   width: 16.875rem;
   height: 9.375rem;
 
   padding: 1.25rem;
+
+  @media ${theme.mediaQuery.md} {
+    width: 100%;
+  }
 `;
 
 export const EmptyRoot = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 850px;
+  width: 100%;
   height: 500px;
   margin-left: 2.5rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    width: 100%;
+    margin-left: 0;
+    grid-column: 1 / 3;
+  }
 `;
 
 export const Description = styled.p`
@@ -49,16 +58,20 @@ export const Description = styled.p`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 1.25rem;
+
   & > span:first-of-type {
     font-weight: 700;
-    font-size: 1.375rem;
   }
 
   & > span:last-of-type {
     margin-top: 0.5rem;
     font-weight: 700;
-    font-size: 1.375rem;
-    margin-bottom: 5rem;
+    margin-bottom: 20px;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    font-size: 16px;
   }
 `;
 

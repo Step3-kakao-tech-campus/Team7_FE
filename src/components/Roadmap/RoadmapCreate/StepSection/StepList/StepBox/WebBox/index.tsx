@@ -6,10 +6,11 @@ import { useModalState } from '@/hooks/useModalState';
 
 interface WebBoxProps {
   idx: number;
+  where: 'detail' | 'create';
 }
 
 const WebBox = (props: WebBoxProps) => {
-  const { idx } = props;
+  const { idx, where } = props;
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   return (
@@ -17,16 +18,18 @@ const WebBox = (props: WebBoxProps) => {
       <Styled.Root>
         <Styled.Header>
           <h3>참고자료 링크</h3>
-          <Button
-            onClick={() => {
-              handleOpen();
-            }}>
-            참고자료 추가하기
-          </Button>
+          {where === 'create' && (
+            <Button
+              onClick={() => {
+                handleOpen();
+              }}>
+              참고자료 추가하기
+            </Button>
+          )}
         </Styled.Header>
-        <ReferenceList type="web" stepIdx={idx} />
+        <ReferenceList type="web" stepIdx={idx} where={where} />
       </Styled.Root>
-      <WebModal isOpen={isOpen} onClose={handleClose} idx={idx} />
+      {where === 'create' && <WebModal isOpen={isOpen} onClose={handleClose} idx={idx} />}
     </>
   );
 };

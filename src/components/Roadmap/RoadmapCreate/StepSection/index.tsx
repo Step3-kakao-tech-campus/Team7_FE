@@ -2,18 +2,22 @@ import StepList from '@/components/Roadmap/RoadmapCreate/StepSection/StepList';
 import StepModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/style';
 import Button from '@/components/common/Button';
-import Flex from '@/components/common/Flex';
 import { useModalState } from '@/hooks/useModalState';
 
-const StepSection = () => {
+interface StepSectionProps {
+  where: 'create' | 'manage';
+}
+
+const StepSection = (props: StepSectionProps) => {
+  const { where } = props;
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   return (
     <>
-      <Flex justify="space-between">
-        <Styled.HeaderTitle>STEP 생성</Styled.HeaderTitle>
+      <Styled.Root where={where}>
+        <Styled.HeaderTitle>STEP{where === 'create' && ' 생성'}</Styled.HeaderTitle>
         <Styled.ButtonContainer>
-          <Button>STEP 불러오기</Button>
+          {where === 'create' && <Button>STEP 불러오기</Button>}
           <Button
             onClick={() => {
               handleOpen();
@@ -21,7 +25,7 @@ const StepSection = () => {
             STEP 추가
           </Button>
         </Styled.ButtonContainer>
-      </Flex>
+      </Styled.Root>
       <StepList />
 
       <StepModal type="create" isOpen={isOpen} onClose={handleClose} />

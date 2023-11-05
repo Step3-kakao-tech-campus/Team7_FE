@@ -1,53 +1,64 @@
 import Image from 'next/image';
 import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/ReferenceList/style';
-import { useReference } from '@/hooks/useRoadmapCreate';
+import { useRoadmap } from '@/hooks/useRoadmap';
 
 interface ReferenceListProps {
-  type: string;
+  type: 'youtube' | 'web';
   stepIdx: number;
+  where: 'detail' | 'create';
 }
 
 // youtube, web 에서 재사용하는 참고자료 리스트
 const ReferenceList = (props: ReferenceListProps) => {
-  const { type, stepIdx } = props;
+  const { type, stepIdx, where } = props;
 
   // 참고자료 리스트에서 사용될 커스텀 훅
-  const { references, handleDeleteReference } = useReference(type, stepIdx);
+  const { roadmap, handleDeleteReference } = useRoadmap();
+
+  let references = [];
+
+  if (type === 'youtube') {
+    references = roadmap.steps[stepIdx].references.youtube;
+  } else {
+    references = roadmap.steps[stepIdx].references.web;
+  }
 
   if (references.length === 0) {
     return <ReferenceList.Empty />;
   }
 
   return (
-    <Styled.EmptyRoot>
-      {references.map((reference, idx) => (
+    <Styled.Root>
+      {references?.map((reference, idx) => (
         <Styled.Link key={idx}>
           <section>
             <Image src={`/assets/icons/ic_${type}.svg`} alt="stepEmptyIcon" width={23} height={23} />
             <p>{`${idx + 1}. ${reference.link}`}</p>
           </section>
 
-          <Image
-            src="/assets/icons/ic_trash.svg"
-            alt="stepEmptyIcon"
-            width={25}
-            height={25}
-            onClick={() => {
-              handleDeleteReference(idx);
-            }}
-          />
+          {where === 'create' && (
+            <Image
+              src="/assets/icons/ic_trash.svg"
+              alt="stepEmptyIcon"
+              width={25}
+              height={25}
+              onClick={() => {
+                handleDeleteReference(type, stepIdx, idx);
+              }}
+            />
+          )}
         </Styled.Link>
       ))}
-    </Styled.EmptyRoot>
+    </Styled.Root>
   );
 };
 
 ReferenceList.Empty = function Empty() {
   return (
-    <Styled.EmptyRoot>
+    <Styled.Root>
       <Image src="/assets/icons/ic_noLink.svg" alt="stepEmptyIcon" width={35} height={35} />
       <h4>생성된 링크가 없습니다.</h4>
-    </Styled.EmptyRoot>
+    </Styled.Root>
   );
 };
 

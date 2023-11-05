@@ -1,7 +1,7 @@
 import type { ApplyMember } from '@/api/roadmap/type';
+import * as Styled from '@/components/Roadmap/manage/member/TableColumn/style';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
-import * as Styled from '@/components/roadmap/manage/member/TableColumn/style';
 
 interface TableColumnProps extends ApplyMember {
   handleUserId: (userId: number) => void;
