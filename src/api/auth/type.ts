@@ -24,5 +24,5 @@ export interface KakaoLoginRequest {
 
 // Auth 응답
 export interface LoginResponse extends CommonResponse {
-  token: string;
+  result: { accessToken: string };
 }

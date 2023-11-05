@@ -58,6 +58,7 @@ const Container = styled.section`
   position: relative;
   width: 100%;
   height: 42px;
+  min-height: 42px;
   margin-top: 20px;
   border-radius: 6px;
   background-color: #fee500;

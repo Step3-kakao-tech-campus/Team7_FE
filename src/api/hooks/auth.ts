@@ -111,7 +111,7 @@ export const useGetKakaoLogin = () => {
       onError: handleError,
     });
 
-    setCookie('accessToken', data?.token as string, { path: '/' });
+    setCookie('accessToken', data.result?.accessToken as string, { path: '/' });
 
     return data;
   };

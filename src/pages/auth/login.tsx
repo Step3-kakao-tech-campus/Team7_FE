@@ -14,8 +14,8 @@ export const LoginPage = () => {
     <AuthPageContainer>
       <LoginForm />
       <Flex justify="space-between" fullWidth>
-        <TextButton onClick={() => router.push(TILY_LINKS.verify())}>회원가입</TextButton>
         <TextButton onClick={() => router.push(TILY_LINKS.passwordVerify())}>비밀번호 찾기</TextButton>
+        <TextButton onClick={() => router.push(TILY_LINKS.verify())}>회원가입</TextButton>
       </Flex>
       <SocialLogin />
     </AuthPageContainer>
