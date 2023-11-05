@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Card from '@/components/common/Card';
+import Flex from '@/components/common/Flex';
 
 export const Root = styled(Card)`
   display: flex;
@@ -32,7 +33,7 @@ export const Root = styled(Card)`
     }
   }
 
-  & > section > p {
+  & > section > div > span {
     font-size: 12px;
     color: ${({ theme }) => theme.colors.gray_700};
   }
@@ -67,5 +68,22 @@ export const Root = styled(Card)`
 
   @media ${({ theme }) => theme.mediaQuery.sm} {
     height: 200px;
+  }
+`;
+
+export const RoadmapEdit = styled(Flex)`
+  padding: 2px 8px;
+  background-color: ${({ theme }) => theme.colors.blue};
+  border-radius: 8px;
+  color: white;
+
+  & > span {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &:hover {
+    color: black;
+    transition: all 0.2s ease;
   }
 `;
