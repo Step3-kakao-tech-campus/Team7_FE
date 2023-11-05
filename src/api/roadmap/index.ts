@@ -7,7 +7,7 @@ import type {
   GetRoadmapStepReferenceRequest,
   GetRoadmapStepReferenceResponse,
   PostRoadmapsGroupsParticipateResponse,
-  DelelteRoadmapGroupApplyRejectResponse,
+  DeleteRoadmapGroupApplyRejectResponse,
   PostRoadmapGroupApplyAcceptResponse,
   GetRoadmapGroupApplyResponse,
   DeleteRoadmapGroupMemberResponse,
@@ -173,8 +173,8 @@ export const postRoadmapGroupApplyAccept = async ({ roadmapId, userId }: { roadm
   return data;
 };
 
-export const delelteRoadmapGroupApplyReject = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
-  const { data } = await axiosInstance.request<DelelteRoadmapGroupApplyRejectResponse>({
+export const deleteRoadmapGroupApplyReject = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
+  const { data } = await axiosInstance.request<DeleteRoadmapGroupApplyRejectResponse>({
     method: 'DELETE',
     url: `/roadmaps/groups/${roadmapId}/members/${userId}/reject`,
   });

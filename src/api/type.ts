@@ -72,6 +72,7 @@ export interface Roadmap {
 export interface Tily {
   id: number;
   name: string;
+  description: string | null;
   stepNum: number;
   image: string;
 }
@@ -79,6 +80,7 @@ export interface Tily {
 export interface Group {
   id: number;
   name: string;
+  description: string | null;
   stepNum: number;
   image: string;
   isManager: boolean;

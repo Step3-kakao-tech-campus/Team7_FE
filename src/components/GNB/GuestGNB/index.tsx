@@ -28,11 +28,11 @@ const GuestGNB = () => {
           </Responsive>
           <Responsive device="desktop">
             <Flex>
-              <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.login())}>
-                로그인
-              </Button>
-              <Button css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.verify())}>
+              <Button variant="ghost" css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.verify())}>
                 회원가입
+              </Button>
+              <Button css={Styled.ButtonStyles} onClick={() => router.push(TILY_LINKS.login())}>
+                로그인
               </Button>
             </Flex>
           </Responsive>

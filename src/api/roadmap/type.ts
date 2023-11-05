@@ -187,4 +187,4 @@ export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
 
 // delelteRoadmapGroupApplyReject
 
-export interface DelelteRoadmapGroupApplyRejectResponse extends CommonResponse {}
+export interface DeleteRoadmapGroupApplyRejectResponse extends CommonResponse {}

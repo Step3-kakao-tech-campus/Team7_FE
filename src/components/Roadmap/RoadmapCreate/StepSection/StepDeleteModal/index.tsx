@@ -23,28 +23,26 @@ const StepDeleteModal = (props: StepDeleteModalProps) => {
   };
 
   return (
-    <>
-      <Modal isOpen={isOpen} onClose={onClose} width={35}>
-        <Styled.Root>
-          <h2>STEP 삭제하기</h2>
-          <p>
-            <b>{roadmap.steps[idx].title}</b> STEP을 삭제하시겠습니까?
-          </p>
-          <Styled.ButtonContainer>
-            <Button variant="ghost" onClick={onClose}>
-              취소
-            </Button>
-            <Button
-              onClick={() => {
-                handleStepDelete();
-                onClose();
-              }}>
-              확인
-            </Button>
-          </Styled.ButtonContainer>
-        </Styled.Root>
-      </Modal>
-    </>
+    <Modal isOpen={isOpen} onClose={onClose} width={35}>
+      <Styled.Root>
+        <h2>STEP 삭제하기</h2>
+        <p>
+          <b>{roadmap.steps[idx].title}</b> STEP을 삭제하시겠습니까?
+        </p>
+        <Styled.ButtonContainer>
+          <Button variant="ghost" onClick={onClose}>
+            취소
+          </Button>
+          <Button
+            onClick={() => {
+              handleStepDelete();
+              onClose();
+            }}>
+            확인
+          </Button>
+        </Styled.ButtonContainer>
+      </Styled.Root>
+    </Modal>
   );
 };
 

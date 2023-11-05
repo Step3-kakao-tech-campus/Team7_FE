@@ -18,6 +18,10 @@ export interface EmailPasswordRequest {
   password: string;
 }
 
+export interface KakaoLoginRequest {
+  code: string;
+}
+
 // Auth 응답
 export interface LoginResponse extends CommonResponse {
   result: { accessToken: string };

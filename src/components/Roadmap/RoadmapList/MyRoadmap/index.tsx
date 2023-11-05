@@ -21,10 +21,10 @@ const MyRoadmap = () => {
             onClick={() => {
               handleOpen();
             }}>
-            코드로 참여하기
+            코드 참여
           </Button>
           <Button
-            variant="outline"
+            variant="default"
             onClick={() => {
               router.push(TILY_LINKS.roadmapCreate());
             }}>
