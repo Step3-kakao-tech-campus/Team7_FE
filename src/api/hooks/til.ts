@@ -116,12 +116,8 @@ export const usePostTil = () => {
 export const usePatchTil = () => {
   const mutation = useMutation(patchTilAPI);
   const { handleError } = useApiError();
-  const toast = useToast();
   const patchTil = async (body: PatchTilRequest) => {
     const data = await mutation.mutateAsync(body, {
-      onSuccess: () => {
-        toast.showBottom({ message: 'TIL이 저장 되었습니다.' });
-      },
       onError: handleError,
     });
 
