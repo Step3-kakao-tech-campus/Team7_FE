@@ -39,3 +39,10 @@ export interface PatchUserPasswordRequest {
 export interface PatchUserPasswordResponse extends CommonResponse {
   result: null;
 }
+
+export interface PostUserProfileImageRequset {
+  userId: number;
+  formData: FormData;
+}
+
+export interface PostUserProfileImageResponse extends CommonResponse {}

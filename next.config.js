@@ -17,6 +17,10 @@ const nextConfig = {
         hostname: 'cdn.inflearn.com',
       },
       {
+        protocol: 'https',
+        hostname: 'tily-bucket.s3.ap-northeast-2.amazonaws.com',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
       },
