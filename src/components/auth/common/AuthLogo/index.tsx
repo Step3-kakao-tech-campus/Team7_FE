@@ -5,7 +5,7 @@ import TILY_LINKS from '@/constants/links';
 
 const AuthLogo = () => {
   const router = useRouter();
-  const goLogin = () => router.push(TILY_LINKS.login());
+  const goLogin = () => router.push(TILY_LINKS.home());
 
   return (
     <>
