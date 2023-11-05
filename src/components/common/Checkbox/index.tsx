@@ -14,7 +14,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
 
   return (
     <Styled.Label>
-      <Flex>
+      <Flex align="center" justify="center">
         <input ref={ref} type="checkbox" {...rest} />
         <Styled.Checkbox textSize={textSize} checked={checked}>
           {checked && <Styled.CheckboxImage src={`/assets/icons/ic_checkIcon.svg`} fill alt="" />}

@@ -1,16 +1,23 @@
 import * as Styled from './style';
 
 interface AvatarProps {
-  iconName: string;
-  imageWidth?: number;
-  imageHeight?: number;
+  iconName?: string;
+  imageUrl?: string;
+  imageSize?: number;
+  alt: string;
 }
 
 const Avatar = (props: AvatarProps) => {
-  const { iconName, imageWidth = 68, imageHeight = 68, ...rest } = props;
+  const { iconName, imageSize = 68, alt = 'icon', imageUrl, ...rest } = props;
 
   return (
-    <Styled.Avatar src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageWidth} height={imageHeight} {...rest} />
+    <>
+      {imageUrl ? (
+        <Styled.Avatar src={imageUrl} alt={alt} width={imageSize} height={imageSize} {...rest} />
+      ) : (
+        <Styled.Avatar src={`/assets/icons/${iconName}.svg`} alt={alt} width={imageSize} height={imageSize} {...rest} />
+      )}
+    </>
   );
 };
 

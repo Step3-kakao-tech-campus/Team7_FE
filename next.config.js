@@ -1,6 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ppss.kr',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+    ],
+  },
+
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -11,6 +28,15 @@ const nextConfig = {
           options: {
             svgo: false, // rect가 path로 렌더링되지 않도록
           },
+        },
+      ],
+    });
+
+    config.module.rules.push({
+      test: /\.(eot|ttf|woff|woff2)$/,
+      use: [
+        {
+          loader: 'url-loader',
         },
       ],
     });

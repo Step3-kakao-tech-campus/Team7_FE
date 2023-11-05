@@ -1,15 +1,16 @@
 import type { TextareaHTMLAttributes } from 'react';
 import * as Styled from '@/components/common/TextArea/style';
 
-interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
+  labelType?: 'bold' | 'regular';
 }
 
 const TextArea = (props: TextAreaProps) => {
-  const { label, ...rest } = props;
+  const { label, labelType, ...rest } = props;
   return (
     <label>
-      {label && <Styled.LabelText>{label}</Styled.LabelText>}
+      {label && <Styled.LabelText labelType={labelType}>{label}</Styled.LabelText>}
       <Styled.TextArea {...rest} />
     </label>
   );
