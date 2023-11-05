@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { useGetUsers } from '@/api/hooks/user';
 import GNB from '@/components/GNB/UserGNB';
+import TILModal from '@/components/GNB/UserGNB/desktop/TILModal';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
@@ -8,17 +11,44 @@ import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
 import CategorySection from '@/components/main/CategorySection';
 import History from '@/components/main/History';
+import { useOnbaording } from '@/components/main/LoggedInUser/useOnboarding';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
 import SideBar from '@/components/main/mobile/SideBar';
+import useViewport from '@/hooks/useViewport';
 import * as Styled from './style';
+
+const Joyride = dynamic(() => import('react-joyride'), { ssr: false });
 
 const LoggedInUser = () => {
   const { user, isLoading: userIsLoading } = useGetUsers();
+  const { state, ref, callback } = useOnbaording();
+  const [isOnboarding, setIsOnboarding] = useState(false);
+  const { isMobile } = useViewport();
+
+  useEffect(() => {
+    const mainOnboarding = localStorage.getItem('mainOnboarding');
+
+    if (mainOnboarding === null) {
+      setIsOnboarding(true);
+    }
+  }, []);
 
   return (
     <>
-      <GNB />
+      {isOnboarding && !isMobile && (
+        <Joyride
+          callback={callback.handleJoyrideCallback}
+          continuous
+          run={state.run}
+          scrollToFirstStep
+          showProgress
+          stepIndex={state.stepIndex}
+          steps={state.steps}
+        />
+      )}
+
+      <GNB ref={ref.TILButtonRef} />
       <Styled.Root>
         <Styled.Inner>
           <Responsive device="desktop">
@@ -32,7 +62,7 @@ const LoggedInUser = () => {
                   <Avatar imageSize={240} iconName="ic_profile" alt="프로필 이미지" />
                 )}
               </CustomSuspense>
-              <SearchBar />
+              <SearchBar ref={ref.searchRef} />
               <CategorySection />
             </Styled.LeftArea>
           </Responsive>
@@ -49,13 +79,15 @@ const LoggedInUser = () => {
           </Responsive>
 
           <Styled.RightArea>
-            <History />
+            <History ref={ref.historyRef} />
             <FallbackErrorBoundary FallbackRender={TILSection.Fallback}>
               <TILSection />
             </FallbackErrorBoundary>
           </Styled.RightArea>
         </Styled.Inner>
       </Styled.Root>
+
+      <TILModal isOpen={state.isModalOpen} isOnClickOutsideClose={false} isBackDrop={false} />
     </>
   );
 };

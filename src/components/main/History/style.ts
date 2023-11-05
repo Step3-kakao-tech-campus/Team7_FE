@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 export const Root = styled.div``;
 
 export const Wrapper = styled.div`
+  background-color: #fff;
   @media ${({ theme }) => theme.mediaQuery.md} {
     border: 1px solid ${({ theme }) => theme.colors.gray_500};
     border-radius: 6px;
@@ -31,6 +32,8 @@ export const SkeletonStyles = css`
 `;
 
 export const HistoryTitle = styled.h1`
+  background-color: #fff;
+
   & > span:nth-of-type(1) {
     font-size: 2rem;
     margin-right: 1px;

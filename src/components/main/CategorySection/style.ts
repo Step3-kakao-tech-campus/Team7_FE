@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+export const Root = styled.section``;
+
 export const CategoryTitle = styled.h3`
   width: fit-content;
   margin-top: 1.5rem;
@@ -9,6 +11,7 @@ export const CategoryTitle = styled.h3`
 `;
 
 export const CollapsibleContainer = styled.div`
+  background-color: #fff;
   & > button {
     margin-top: 1.5rem;
   }

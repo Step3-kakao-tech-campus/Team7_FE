@@ -123,7 +123,11 @@ const Personal = () => {
               />
             </Styled.Form>
           ) : (
-            <PlusButton title="카테고리 추가하기" onClick={() => setIsRoadmapButtonSelected(true)} />
+            <PlusButton
+              testid="plusButton1"
+              title="카테고리 추가하기"
+              onClick={() => setIsRoadmapButtonSelected(true)}
+            />
           )}
           <Styled.List>
             {roadmaps?.category.map((roadmap) => {
@@ -166,7 +170,7 @@ const Personal = () => {
                 />
               </Styled.Form>
             ) : (
-              <PlusButton title="TIL 추가하기" onClick={() => setIsStepButtonSelected(true)} />
+              <PlusButton testid="plusButton2" title="TIL 추가하기" onClick={() => setIsStepButtonSelected(true)} />
             ))}
 
           <Styled.List>

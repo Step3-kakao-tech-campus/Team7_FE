@@ -9,7 +9,11 @@ interface TabProps {
 const Tab = (props: PropsWithChildren<TabProps>) => {
   const { children, className } = props;
 
-  return <Styled.Root className={className}>{children}</Styled.Root>;
+  return (
+    <Styled.Root data-testid="tab" className={className}>
+      {children}
+    </Styled.Root>
+  );
 };
 
 interface MenuProps {
