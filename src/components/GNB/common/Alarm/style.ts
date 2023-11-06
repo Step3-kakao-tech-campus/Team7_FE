@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
 
-export const Item = styled.li`
+export const Item = styled.li<{ isRead: boolean }>`
   display: flex;
   align-items: center;
   padding-left: 1.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_200};
   list-style: none;
   cursor: pointer;
+
+  background-color: ${({ theme, isRead }) => (isRead ? theme.colors.white : theme.colors.rose_light)};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_200};

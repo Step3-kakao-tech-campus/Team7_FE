@@ -5,6 +5,8 @@ import TILY_LINKS from '@/constants/links';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { useQueryClient } from '@tanstack/react-query';
+import { USER_QUERY_KEY } from '@/api/hooks/user';
 
 interface AlarmProps {
   alarm: Alarm;
@@ -12,14 +14,17 @@ interface AlarmProps {
 
 const Alarm = (props: AlarmProps) => {
   const {alarm} = props;
-
+  const queryClient = useQueryClient();
   const router = useRouter();
+
   return (
     <Styled.Item
+      isRead={alarm.isRead}
       key={alarm.id}
-      onClick={() =>
+      onClick={() => {
+        queryClient.invalidateQueries([USER_QUERY_KEY.alarm]);
         router.push(TILY_LINKS.tilWrite({ roadmapId: alarm.roadmap.id, stepId: alarm.step.id, tilId: alarm.tilId }))
-      }>
+      }}>
       <Avatar imageSize={40} imageUrl={alarm.sender.image} alt="프로필 이미지" />
       <Styled.Content>
         <Styled.Title>

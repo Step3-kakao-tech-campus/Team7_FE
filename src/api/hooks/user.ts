@@ -6,7 +6,7 @@ import type { PatchAlarmRequest, PatchUserPasswordRequest, PostUserProfileImageR
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
-const QUERY_KEY = {
+export const USER_QUERY_KEY = {
   user: 'user',
   userHistory: 'userHistory',
   alarm: 'alarm',
@@ -15,7 +15,7 @@ const QUERY_KEY = {
 // User
 
 export const useGetUsers = () => {
-  const { data, isLoading } = useQuery([QUERY_KEY.user], () => getUsers());
+  const { data, isLoading } = useQuery([USER_QUERY_KEY.user], () => getUsers());
 
   return {
     user: data,
@@ -26,7 +26,7 @@ export const useGetUsers = () => {
 // Alarm
 
 export const useGetAlarms = () => {
-  const { data } = useQuery([QUERY_KEY.alarm], () => getAlarms());
+  const { data } = useQuery([USER_QUERY_KEY.alarm], () => getAlarms());
 
   const isNewAlarm = data?.result.alarms.some((alarm) => alarm.isRead === false);
 
@@ -45,16 +45,10 @@ export const useGetAlarms = () => {
 };
 
 export const usePatchAlarm = () => {
-  const queryClient = useQueryClient();
-
   const { mutateAsync } = useMutation(patchAlarm);
 
   const patchAlarmAsync = async (body: PatchAlarmRequest) => {
-    const data = await mutateAsync(body, {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.alarm]);
-      },
-    });
+    const data = await mutateAsync(body);
 
     return data;
   };
@@ -63,7 +57,7 @@ export const usePatchAlarm = () => {
 };
 
 export const useGetUserHistory = () => {
-  const { data, isLoading } = useQuery([QUERY_KEY.userHistory], () => getUserHistory());
+  const { data, isLoading } = useQuery([USER_QUERY_KEY.userHistory], () => getUserHistory());
 
   const history = data?.result.gardens.filter((garden) => garden.value !== 0);
 
@@ -122,7 +116,7 @@ export const usePostUserProfileImage = () => {
   const postUserProfileImage = async (body: PostUserProfileImageRequset) => {
     const data = await mutateAsync(body, {
       onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_KEY.user]);
+        queryClient.invalidateQueries([USER_QUERY_KEY.user]);
       },
       onError: handleError,
     });
