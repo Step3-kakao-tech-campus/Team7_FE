@@ -37,6 +37,7 @@ export interface GetTilRequest {
 export interface GetTilResponse extends CommonResponse {
   result: {
     content: string;
+    submitContent: string;
     isPersonal: boolean;
     isSubmit: boolean;
     step: Omit<Step, 'tilId' | 'isSubmit'>;
