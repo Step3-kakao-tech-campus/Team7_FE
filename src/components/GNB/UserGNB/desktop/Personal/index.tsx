@@ -9,6 +9,7 @@ import {
 } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
+import ListItem from '@/components/GNB/UserGNB/desktop/Personal/ListItem';
 import PlusButton from '@/components/GNB/UserGNB/desktop/PlusButton';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
@@ -132,12 +133,9 @@ const Personal = () => {
           <Styled.List>
             {roadmaps?.category.map((roadmap) => {
               return (
-                <Styled.Item
-                  selected={roadmapId === roadmap.id}
-                  onClick={() => setRoadmapId(roadmap.id)}
-                  key={roadmap.id}>
+                <ListItem selected={roadmapId === roadmap.id} onClick={() => setRoadmapId(roadmap.id)} key={roadmap.id}>
                   {roadmap.name}
-                </Styled.Item>
+                </ListItem>
               );
             })}
           </Styled.List>
@@ -176,9 +174,9 @@ const Personal = () => {
           <Styled.List>
             {steps?.result.steps.map((step: Step) => {
               return (
-                <Styled.Item selected={stepId === step.id} onClick={() => handleSelcteStep(step)} key={step.id}>
+                <ListItem selected={stepId === step.id} onClick={() => handleSelcteStep(step)} key={step.id}>
                   {step.title}
-                </Styled.Item>
+                </ListItem>
               );
             })}
           </Styled.List>
