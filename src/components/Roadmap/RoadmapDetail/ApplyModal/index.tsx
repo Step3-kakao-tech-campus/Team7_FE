@@ -1,5 +1,5 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { usePostRoadmapsApply } from '@/api/hooks/roadmap';
+import { usePostGroupRoadmapsApply } from '@/api/hooks/roadmap';
 import * as Styled from '@/components/Roadmap/RoadmapDetail/ApplyModal/style';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
@@ -12,7 +12,7 @@ const ApplyModal = (props: ModalProps) => {
   const roadmapId = useQueryParam('roadmapId');
   const { isOpen, onClose } = props;
 
-  const { postRoadmapsApply, isLoading } = usePostRoadmapsApply();
+  const { postGroupRoadmapsApply, isLoading } = usePostGroupRoadmapsApply();
 
   const {
     control,
@@ -26,7 +26,7 @@ const ApplyModal = (props: ModalProps) => {
   });
 
   const onSubmit: SubmitHandler<{ aboutMe: string }> = async (formData) => {
-    const data = await postRoadmapsApply({ roadmapId: Number(roadmapId), content: formData.aboutMe });
+    const data = await postGroupRoadmapsApply({ roadmapId: Number(roadmapId), content: formData.aboutMe });
 
     if (data?.success) {
       onClose();

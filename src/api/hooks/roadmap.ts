@@ -19,7 +19,7 @@ import {
   deleteRoadmapGroupApplyReject as deleteRoadmapGroupApplyRejectAPI,
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
   getRoadmapsById,
-  postRoadmapsApply as postRoadmapsApplyAPI,
+  postGroupRoadmapsApply as postGroupRoadmapsApplyAPI,
   postRoadmapsById as postRoadmapsByIdAPI,
 } from '@/api/roadmap';
 import type { GetRoadmapStepReferenceRequest, GetRoadmapsResponse, Role } from '@/api/roadmap/type';
@@ -213,11 +213,11 @@ export const useGetRoadmapsById = (roadmapId: number) => {
   return { data, isLoading };
 };
 
-export const usePostRoadmapsApply = () => {
-  const { mutateAsync, isLoading } = useMutation(postRoadmapsApplyAPI);
+export const usePostGroupRoadmapsApply = () => {
+  const { mutateAsync, isLoading } = useMutation(postGroupRoadmapsApplyAPI);
   const toast = useToast();
 
-  const postRoadmapsApply = async (body: { roadmapId: number; content: string }) => {
+  const postGroupRoadmapsApply = async (body: { roadmapId: number; content: string }) => {
     if (body.roadmapId > 0) {
       const data = await mutateAsync(body, {
         onSuccess: () => {
@@ -236,7 +236,7 @@ export const usePostRoadmapsApply = () => {
     } else return undefined;
   };
 
-  return { postRoadmapsApply, isLoading };
+  return { postGroupRoadmapsApply, isLoading };
 };
 
 export const useGetRoadmapGroupMember = (roadmapId: number) => {

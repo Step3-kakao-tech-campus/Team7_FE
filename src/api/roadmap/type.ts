@@ -128,7 +128,7 @@ export interface PostRoadmapsByIdResponse {
   result: null;
 }
 
-export interface PostRoadmapsApplyResponse {
+export interface PostGroupRoadmapsApplyResponse {
   success: boolean;
   message: string;
   result: null;
