@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import { useGetTil } from '@/api/hooks/til';
 import Progress from '@/components/TILWrite/RoadMap/Progress';
+import RoadmapPopover from '@/components/TILWrite/RoadMap/RoadMapInfo/Popover';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Icon from '@/components/common/Icon';
 import Skeleton from '@/components/common/Skeleton';
@@ -30,7 +31,9 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
           <Icon iconName="ic_close" imageSize={16} ext="svg" onClick={handleCloseAside} alt="닫기 버튼" />
         </Styled.RoadMapContainer>
 
-        <Styled.Title>{tilDetail?.roadmapName}</Styled.Title>
+        <Styled.Title>
+          <RoadmapPopover userRole={steps?.result.myRole}>{tilDetail?.roadmapName}</RoadmapPopover>
+        </Styled.Title>
 
         <CustomSuspense isLoading={isLoading} fallback={<ProgressSkeleton />}>
           <Progress steps={steps?.result.steps} />
