@@ -35,7 +35,7 @@ export interface GetRoadmapStepsResponse {
 export interface RoadmapStepsResult {
   steps: Step[];
   progress: number;
-  role: string;
+  myRole: string;
 }
 
 // getRoadmapStepReference

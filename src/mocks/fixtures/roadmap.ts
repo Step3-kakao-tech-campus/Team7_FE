@@ -170,7 +170,7 @@ export const getRoadmapStepsResponse: GetRoadmapStepsResponse = {
       },
     ],
     progress: 55,
-    role: 'member',
+    myRole: 'member',
   },
 };
 
