@@ -6,6 +6,7 @@ import RoadmapPopover from '@/components/TILWrite/RoadMap/RoadMapInfo/Popover';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Icon from '@/components/common/Icon';
 import Skeleton from '@/components/common/Skeleton';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 interface RoadMapInfoProps {
@@ -15,13 +16,23 @@ interface RoadMapInfoProps {
 const RoadMapInfo = (props: RoadMapInfoProps) => {
   const { handleCloseAside } = props;
 
-  const { query } = useRouter();
-  const { steps, isLoading } = useGetRoadmapSteps(Number(query.roadmapId));
+  const router = useRouter();
+  const { steps, isLoading } = useGetRoadmapSteps(Number(router.query.roadmapId));
   const { tilDetail } = useGetTil({
-    roadmapId: Number(query.roadmapId),
-    stepId: Number(query.stepId),
-    tilId: Number(query.tilId),
+    roadmapId: Number(router.query.roadmapId),
+    stepId: Number(router.query.stepId),
+    tilId: Number(router.query.tilId),
   });
+
+  const routeUserBasedOnRole = (userRole?: string) => {
+    if (!userRole) return;
+
+    if (userRole === 'member') {
+      router.push(TILY_LINKS.roadmapDetail(Number(router.query.roadmapId)));
+    } else {
+      router.push(TILY_LINKS.manageGroupInfo(Number(router.query.roadmapId)));
+    }
+  };
 
   return (
     <Styled.Root>
@@ -32,7 +43,9 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
         </Styled.RoadMapContainer>
 
         <Styled.Title>
-          <RoadmapPopover userRole={steps?.result.myRole}>{tilDetail?.roadmapName}</RoadmapPopover>
+          <RoadmapPopover userRole={steps?.result.myRole}>
+            <button onClick={() => routeUserBasedOnRole(steps?.result.myRole)}>{tilDetail?.roadmapName}</button>
+          </RoadmapPopover>
         </Styled.Title>
 
         <CustomSuspense isLoading={isLoading} fallback={<ProgressSkeleton />}>
