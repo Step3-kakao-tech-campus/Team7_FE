@@ -32,6 +32,7 @@ const TILWrite = () => {
     active: false,
     time: new Date('2023-11-03'),
   });
+  const [stepTitle, setStepTitle] = useState<string>('');
 
   const { query } = useRouter();
 
@@ -43,6 +44,10 @@ const TILWrite = () => {
 
   const handleTILContent = (content: string) => {
     setTILContent(content);
+  };
+
+  const handleStepTitle = (title: string) => {
+    setStepTitle(title);
   };
 
   const handleAutoSaveTime = {
@@ -134,6 +139,7 @@ const TILWrite = () => {
                 handleCloseAside={() => handleCloseAside(handleCloseReference)}
                 handleOpenReferenceAside={handleOpenReference}
                 handleAutoSaveTime={handleAutoSaveTime}
+                handleStepTitle={handleStepTitle}
               />
             )}
 
@@ -143,7 +149,7 @@ const TILWrite = () => {
               variants={extraDrawerVariants}
               transition={{ type: 'tween', duration: DURATION }}>
               <FallbackErrorBoundary FallbackRender={Reference.Fallback}>
-                <Reference handleCloseReferenceAside={() => handleCloseReference()} />
+                <Reference handleCloseReferenceAside={() => handleCloseReference()} stepTitle={stepTitle} />
               </FallbackErrorBoundary>
             </ExtraDrawerMotion>
 

@@ -12,10 +12,11 @@ interface RoadMapProps {
     activeAutoSave: () => void;
     clearAutoSave: () => void;
   };
+  handleStepTitle: (title: string) => void;
 }
 
 const RoadMap = (props: RoadMapProps) => {
-  const { handleCloseAside, handleOpenReferenceAside, handleAutoSaveTime, asideMount } = props;
+  const { asideMount, handleCloseAside, handleOpenReferenceAside, handleAutoSaveTime, handleStepTitle } = props;
 
   const { query } = useRouter();
   const { steps } = useGetRoadmapSteps(Number(query.roadmapId));
@@ -42,6 +43,7 @@ const RoadMap = (props: RoadMapProps) => {
               tilId={step.tilId}
               handleOpenReferenceAside={handleOpenReferenceAside}
               handleAutoSaveTime={handleAutoSaveTime}
+              handleStepTitle={handleStepTitle}
             />
           );
         })}

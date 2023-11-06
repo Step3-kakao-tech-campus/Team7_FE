@@ -17,10 +17,20 @@ interface StepProps {
     activeAutoSave: () => void;
     clearAutoSave: () => void;
   };
+  handleStepTitle: (title: string) => void;
 }
 
 const Step = (props: StepProps) => {
-  const { stepId, title, isSubmit, tilId, handleOpenReferenceAside, handleMobileSideBar, handleAutoSaveTime } = props;
+  const {
+    stepId,
+    title,
+    isSubmit,
+    tilId,
+    handleOpenReferenceAside,
+    handleMobileSideBar,
+    handleAutoSaveTime,
+    handleStepTitle,
+  } = props;
 
   const router = useRouter();
   const { postTil } = usePostTil();
@@ -30,6 +40,7 @@ const Step = (props: StepProps) => {
   const handleSelectReference: MouseEventHandler = (e) => {
     e.stopPropagation();
     handleOpenReferenceAside();
+    handleStepTitle(title);
   };
 
   // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수

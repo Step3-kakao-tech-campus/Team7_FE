@@ -11,6 +11,8 @@ const TILCard = (props: MemberTil) => {
   const { tilId, userId, name, image, content, submitDate, commentNum } = props;
 
   const handleRouteTILView = () => {
+    if (content === null) return;
+
     router.push(
       TILY_LINKS.tilView({
         roadmapId: Number(router.query.roadmapId),
