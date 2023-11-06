@@ -112,6 +112,7 @@ export interface GetRoadmapsByIdResponse {
   message: string;
   result: {
     creator: Omit<Creator, 'id'>;
+    category: 'tily' | 'group';
     name: string;
     description: string;
     myRole: 'master' | 'manager' | 'member' | 'none';
@@ -128,7 +129,13 @@ export interface PostRoadmapsByIdResponse {
   result: null;
 }
 
-export interface PostRoadmapsApplyResponse {
+export interface PostGroupRoadmapsApplyResponse {
+  success: boolean;
+  message: string;
+  result: null;
+}
+
+export interface PostGroupTilyApplyResponse {
   success: boolean;
   message: string;
   result: null;

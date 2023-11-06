@@ -1,5 +1,5 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { usePostRoadmapsApply } from '@/api/hooks/roadmap';
+import { useGetRoadmapsById, usePostGroupRoadmapsApply, usePostTilyRoadmapsApply } from '@/api/hooks/roadmap';
 import * as Styled from '@/components/Roadmap/RoadmapDetail/ApplyModal/style';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
@@ -9,10 +9,15 @@ import TextArea from '@/components/common/TextArea';
 import useQueryParam from '@/hooks/useQueryParam';
 
 const ApplyModal = (props: ModalProps) => {
-  const roadmapId = useQueryParam('roadmapId');
   const { isOpen, onClose } = props;
 
-  const { postRoadmapsApply, isLoading } = usePostRoadmapsApply();
+  const { postGroupRoadmapsApply, isLoading: isGroupApplyLoading } = usePostGroupRoadmapsApply();
+  const { postTilyRoadmapsApply, isLoading: isTilyApplyLoading } = usePostTilyRoadmapsApply();
+
+  const roadmapId = Number(useQueryParam('roadmapId'));
+
+  const { data: roadmapDetailInfo } = useGetRoadmapsById(roadmapId);
+  const category = roadmapDetailInfo?.result.category;
 
   const {
     control,
@@ -26,7 +31,10 @@ const ApplyModal = (props: ModalProps) => {
   });
 
   const onSubmit: SubmitHandler<{ aboutMe: string }> = async (formData) => {
-    const data = await postRoadmapsApply({ roadmapId: Number(roadmapId), content: formData.aboutMe });
+    const data =
+      category === 'tily'
+        ? await postTilyRoadmapsApply(roadmapId)
+        : await postGroupRoadmapsApply({ roadmapId: roadmapId, content: formData.aboutMe });
 
     if (data?.success) {
       onClose();
@@ -68,7 +76,7 @@ const ApplyModal = (props: ModalProps) => {
               }}>
               취소
             </Button>
-            <Button isLoading={isLoading}>신청</Button>
+            <Button isLoading={category === 'tily' ? isTilyApplyLoading : isGroupApplyLoading}>신청</Button>
           </Styled.ButtonContainer>
         </form>
       </Styled.Root>

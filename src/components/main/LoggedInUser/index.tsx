@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { useGetUsers } from '@/api/hooks/user';
 import GNB from '@/components/GNB/UserGNB';
 import Avatar from '@/components/common/Avatar';
@@ -15,6 +16,7 @@ import TILModal from '@/components/main/Onboarding/TILModal';
 import SearchBar from '@/components/main/SearchBar';
 import TILSection from '@/components/main/TILSection';
 import SideBar from '@/components/main/mobile/SideBar';
+import TILY_LINKS from '@/constants/links';
 import useViewport from '@/hooks/useViewport';
 import * as Styled from './style';
 
@@ -25,6 +27,7 @@ const LoggedInUser = () => {
   const { state, ref, callback } = useOnbaording();
   const [isOnboarding, setIsOnboarding] = useState(false);
   const { isMobile } = useViewport();
+  const router = useRouter();
 
   useEffect(() => {
     const mainOnboarding = localStorage.getItem('mainOnboarding');
@@ -56,11 +59,13 @@ const LoggedInUser = () => {
               <CustomSuspense
                 isLoading={userIsLoading}
                 fallback={<Skeleton type="circle" css={Styled.ProfileSkeletonStyles} />}>
-                {user?.image ? (
-                  <Avatar imageUrl={user?.image} imageSize={240} alt="프로필 이미지" />
-                ) : (
-                  <Avatar imageSize={240} iconName="ic_profile" alt="프로필 이미지" />
-                )}
+                <button onClick={() => router.push(TILY_LINKS.mypage())}>
+                  {user?.image ? (
+                    <Avatar imageUrl={user?.image} imageSize={240} alt="프로필 이미지" />
+                  ) : (
+                    <Avatar imageSize={240} iconName="ic_profile" alt="프로필 이미지" />
+                  )}
+                </button>
               </CustomSuspense>
               <SearchBar ref={ref.searchRef} />
               <CategorySection />
