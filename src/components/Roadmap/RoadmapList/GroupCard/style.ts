@@ -11,7 +11,7 @@ export const Root = styled(Card)`
   margin: 0 auto;
   padding: 16px 12px 10px;
   cursor: pointer;
-  max-width: 225px;
+  max-width: 240px;
 
   @media ${({ theme }) => theme.mediaQuery.lg} {
     max-width: 250px;

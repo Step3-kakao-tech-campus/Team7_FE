@@ -11,6 +11,7 @@ export const Root = styled(Card)`
   padding: 10px 0;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(26, 28, 29, 0.06);
+  max-width: 240px;
 
   & > section > * {
     margin-bottom: 7px;
