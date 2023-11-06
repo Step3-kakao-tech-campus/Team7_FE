@@ -16,7 +16,7 @@ const DeleteUserModal = (props: DeleteUserModalprops) => {
   const [password, setPassword] = useState<string>('');
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose}>
+    <Modal showCloseButton={false} isOpen={isOpen} onClose={handleClose}>
       <Styled.Title>회원 탈퇴</Styled.Title>
       <Styled.InputContainer>
         <div>현재 계정의 비밀번호를 입력해주세요.</div>
