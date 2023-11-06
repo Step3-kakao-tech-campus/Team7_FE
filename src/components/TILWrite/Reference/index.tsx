@@ -8,10 +8,11 @@ import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary
 import * as Styled from './style';
 
 interface ReferenceProps {
+  stepTitle: string;
   handleCloseReferenceAside: () => void;
 }
 const Reference = (props: ReferenceProps) => {
-  const { handleCloseReferenceAside } = props;
+  const { stepTitle, handleCloseReferenceAside } = props;
 
   const { query } = useRouter();
   const { reference } = useGetRoadmapStepReference({
@@ -21,7 +22,7 @@ const Reference = (props: ReferenceProps) => {
 
   return (
     <Styled.Root>
-      <Header handleCloseReferenceAside={handleCloseReferenceAside} />
+      <Header stepTitle={stepTitle} handleCloseReferenceAside={handleCloseReferenceAside} />
 
       <Styled.Reference>참고 자료</Styled.Reference>
 

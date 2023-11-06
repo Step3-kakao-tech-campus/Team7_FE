@@ -1,4 +1,6 @@
+import type { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
+import { axiosInstance } from '@/api';
 import SocialLogin from '@/components/auth/common/SocialLogin';
 import TextButton from '@/components/auth/common/TextButton';
 import LoginForm from '@/components/auth/login/LoginForm';
@@ -25,3 +27,26 @@ export const LoginPage = () => {
 setLayout(LoginPage, FullHeightLayout);
 
 export default LoginPage;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return { props: {} };
+  }
+
+  return {
+    redirect: {
+      destination: '/',
+      permanent: false,
+    },
+  };
+};
