@@ -23,11 +23,11 @@ export interface User {
 export interface Alarm {
   id: number;
   tilId: number;
-  isChecked: boolean;
+  isRead: boolean;
   roadmap: Roadmap;
   step: Pick<Step, 'id' | 'title'>;
   sender: Pick<User, 'name' | 'image'>;
-  createdAt: Date;
+  createDate: Date;
 }
 
 export interface Til {

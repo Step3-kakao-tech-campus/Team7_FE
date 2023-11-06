@@ -31,7 +31,7 @@ const Alarm = (props: AlarmProps) => {
             <span>님이 댓글을 남겼습니다.</span>
           </Styled.Commenter>
 
-          <Styled.Time>{dayjs(alarm.createdAt).format('YYYY.MM.DD')}</Styled.Time>
+          <Styled.Time>{dayjs(alarm.createDate).format('YYYY.MM.DD')}</Styled.Time>
         </Styled.Description>
       </Styled.Content>
     </Styled.Item>

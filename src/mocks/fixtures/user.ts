@@ -46,7 +46,7 @@ export const getAlarmsResponse: GetAlarmsResponse = {
       {
         id: 1,
         tilId: 1,
-        isChecked: false,
+        isRead: false,
         roadmap: {
           id: 1,
           name: 'Next JS',
@@ -59,12 +59,12 @@ export const getAlarmsResponse: GetAlarmsResponse = {
           name: '김동영',
           image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
         },
-        createdAt: new Date(),
+        createDate: new Date(),
       },
       {
         id: 2,
         tilId: 3,
-        isChecked: false,
+        isRead: false,
         roadmap: {
           id: 1,
           name: 'Next JS',
@@ -77,7 +77,7 @@ export const getAlarmsResponse: GetAlarmsResponse = {
           name: '이한홍',
           image: 'https://avatars.githubusercontent.com/u/6237',
         },
-        createdAt: new Date(),
+        createDate: new Date(),
       },
     ],
   },
@@ -87,7 +87,7 @@ export const updateGetAlarmsResponseFixture = () => {
   getAlarmsResponse.result.alarms = getAlarmsResponse.result.alarms.map((alarm) => {
     return {
       ...alarm,
-      isChecked: true,
+      isRead: true,
     };
   });
 };

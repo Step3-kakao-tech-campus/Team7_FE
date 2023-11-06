@@ -28,7 +28,7 @@ export const useGetUsers = () => {
 export const useGetAlarms = () => {
   const { data } = useQuery([QUERY_KEY.alarm], () => getAlarms());
 
-  const isNewAlarm = data?.result.alarms.some((alarm) => alarm.isChecked === false);
+  const isNewAlarm = data?.result.alarms.some((alarm) => alarm.isRead === false);
 
   const patchAlarmRequset: PatchAlarmRequest = {
     alarms:
