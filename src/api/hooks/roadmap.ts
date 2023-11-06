@@ -16,6 +16,7 @@ import {
   patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
+  postTilyRoadmapsApply as postTilyRoadmapsApplyAPI,
   deleteRoadmapGroupApplyReject as deleteRoadmapGroupApplyRejectAPI,
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
   getRoadmapsById,
@@ -237,6 +238,32 @@ export const usePostGroupRoadmapsApply = () => {
   };
 
   return { postGroupRoadmapsApply, isLoading };
+};
+
+export const usePostTilyRoadmapsApply = () => {
+  const { mutateAsync, isLoading } = useMutation(postTilyRoadmapsApplyAPI);
+  const toast = useToast();
+
+  const postTilyRoadmapsApply = async (roadmapId: number) => {
+    if (roadmapId > 0) {
+      const data = await mutateAsync(roadmapId, {
+        onSuccess: () => {
+          toast.showBottom({
+            message: '신청이 완료되었습니다.',
+          });
+        },
+        onError: () => {
+          toast.showBottom({
+            message: '신청에 실패하였습니다.',
+          });
+        },
+      });
+
+      return data;
+    } else return undefined;
+  };
+
+  return { postTilyRoadmapsApply, isLoading };
 };
 
 export const useGetRoadmapGroupMember = (roadmapId: number) => {

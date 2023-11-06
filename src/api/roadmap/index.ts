@@ -19,6 +19,7 @@ import type {
   GetRoadmapsByIdResponse,
   PostGroupRoadmapsApplyResponse,
   PostRoadmapsByIdResponse,
+  PostGroupTilyApplyResponse,
 } from '@/api/roadmap/type';
 import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
@@ -114,6 +115,15 @@ export const postGroupRoadmapsApply = async ({ roadmapId, content }: { roadmapId
     method: 'POST',
     url: `roadmaps/groups/${roadmapId}/apply`,
     data: { content },
+  });
+
+  return data;
+};
+
+export const postTilyRoadmapsApply = async (roadmapId: number) => {
+  const { data } = await axiosInstance.request<PostGroupTilyApplyResponse>({
+    method: 'POST',
+    url: `roadmaps/tily/${roadmapId}/apply`,
   });
 
   return data;
