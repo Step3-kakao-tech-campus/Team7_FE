@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import Collapsible from '@/components/main/LoggedInUser/CategorySection/Collapsible';
+import Collapsible from '@/components/main/LoggedInUser/LeftSideBar/CategorySection/Collapsible';
 
 export default {
   component: Collapsible,

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Icon from '@/components/common/Icon';
 import SideBar from '@/components/main/mobile/UserInfo/SideBar';
 import * as Styled from './style';
@@ -17,4 +18,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default memo(UserInfo);

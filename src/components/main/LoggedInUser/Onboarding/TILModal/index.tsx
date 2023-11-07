@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { memo } from 'react';
 import * as PersonalModalStyled from '@/components/GNB/UserGNB/desktop/Personal/style';
 import PlusButton from '@/components/GNB/UserGNB/desktop/PlusButton';
 import * as Styled from '@/components/GNB/UserGNB/desktop/TILModal/style';
@@ -70,4 +71,4 @@ const TILModal = forwardRef<HTMLDivElement, OnboardingModalProps>((props, ref) =
   );
 });
 
-export default TILModal;
+export default memo(TILModal);

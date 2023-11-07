@@ -15,22 +15,6 @@ export const Inner = styled(Flex)`
   }
 `;
 
-export const RightArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 101vh;
-  padding: 2.5rem 0 0 4rem;
-
-  @media (max-width: 1440px) {
-    padding: 3.5rem 4.5rem 0 4.5rem;
-  }
-
-  @media ${({ theme }) => theme.mediaQuery.md} {
-    padding: 20px;
-  }
-`;
-
 export const ProfileSkeletonStyles = css`
   width: 240px;
   height: 240px;
@@ -43,12 +27,12 @@ export const UserName = styled.div`
   align-items: center;
   & > span:first-of-type {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   & > span:nth-of-type(2) {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
   }
 `;
 

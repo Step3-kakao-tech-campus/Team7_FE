@@ -1,10 +1,11 @@
 import { forwardRef } from 'react';
+import { memo } from 'react';
 import { useGetUsers } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
-import CategorySection from '@/components/main/LoggedInUser/CategorySection';
-import SearchBar from '@/components/main/LoggedInUser/SearchBar';
+import CategorySection from '@/components/main/LoggedInUser/LeftSideBar/CategorySection';
+import SearchBar from '@/components/main/LoggedInUser/LeftSideBar/SearchBar';
 import * as Styled from './style';
 
 interface LeftSideBarProps {}
@@ -25,4 +26,4 @@ const LeftSideBar = forwardRef<HTMLFormElement, LeftSideBarProps>((_, ref) => {
   );
 });
 
-export default LeftSideBar;
+export default memo(LeftSideBar);

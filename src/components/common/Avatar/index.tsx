@@ -14,6 +14,7 @@ const Avatar = (props: AvatarProps) => {
     <>
       {imageUrl ? (
         <Styled.Avatar
+          priority={true}
           src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${imageUrl}`}
           alt={alt}
           width={imageSize}
@@ -22,6 +23,7 @@ const Avatar = (props: AvatarProps) => {
         />
       ) : (
         <Styled.Avatar
+          priority={true}
           src={iconName ? `/assets/icons/${iconName}.svg` : `/assets/icons/ic_profile.svg`}
           alt={alt}
           width={imageSize}
