@@ -3,20 +3,24 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { usePostTil } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 interface StepProps {
   stepId: number;
   title: string;
-  isCompleted: boolean;
+  isSubmit: boolean;
   tilId: number | null;
   handleOpenReferenceAside: () => void;
   handleMobileSideBar?: () => void;
+  handleAutoSaveTime: {
+    activeAutoSave: () => void;
+    clearAutoSave: () => void;
+  };
 }
 
 const Step = (props: StepProps) => {
-  const { stepId, title, isCompleted, tilId, handleOpenReferenceAside, handleMobileSideBar } = props;
+  const { stepId, title, isSubmit, tilId, handleOpenReferenceAside, handleMobileSideBar, handleAutoSaveTime } = props;
 
   const router = useRouter();
   const { postTil } = usePostTil();
@@ -32,12 +36,12 @@ const Step = (props: StepProps) => {
   const routeTILWrite = async () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
     const roadmapId = Number(router.query.roadmapId) as number;
-
+    handleAutoSaveTime.clearAutoSave();
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
       const data = await postTil({ roadmapId, stepId, title });
-      router.push(tilyLinks.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
+      router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
-      router.push(tilyLinks.tilWrite({ roadmapId, stepId, tilId }));
+      router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));
     }
 
     handleMobileSideBar?.();
@@ -47,7 +51,7 @@ const Step = (props: StepProps) => {
     <Styled.Root isActiveStep={isActiveStep} onClick={routeTILWrite}>
       <Styled.Container>
         <Styled.CheckIconContainer>
-          {isCompleted ? (
+          {isSubmit ? (
             <Image src="/assets/icons/ic_checkButton.svg" width={28} height={28} alt="체크 버튼" />
           ) : (
             <Image src="/assets/icons/ic_unCheckButton.svg" width={28} height={28} alt="체크 버튼" />
@@ -59,6 +63,7 @@ const Step = (props: StepProps) => {
       {isActiveStep && (
         <Icon
           className="icon"
+          css={Styled.ButtonStyles}
           onClick={handleSelectReference}
           iconName="ic_chevronRight"
           imageSize={14}

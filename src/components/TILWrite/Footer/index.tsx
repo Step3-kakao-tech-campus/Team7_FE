@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
@@ -6,16 +7,18 @@ import SubmitModal from '@/components/TILWrite/SubmitModal';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
+import type { AutoSaveTime } from '@/pages/TILWrite/roadmap/[roadmapId]/step/[stepId]/til/[tilId]';
 import * as Styled from './style';
 
 interface FooterProps {
   TILContent: string;
+  autoSaveTime: AutoSaveTime;
 }
 
 const Footer = (props: FooterProps) => {
-  const { TILContent } = props;
+  const { TILContent, autoSaveTime } = props;
 
   const router = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState();
@@ -35,7 +38,6 @@ const Footer = (props: FooterProps) => {
       stepId: Number(router.query.stepId),
       tilId: Number(router.query.tilId),
       content: TILContent,
-      title: tilDetail?.step.title,
     });
   };
 
@@ -44,29 +46,34 @@ const Footer = (props: FooterProps) => {
       roadmapId: Number(router.query.roadmapId),
       stepId: Number(router.query.stepId),
       tilId: Number(router.query.tilId),
-      title: 'title',
-      content: 'content',
+      content: TILContent,
     });
     handleClose();
   };
 
   return (
     <Styled.Root>
-      <Styled.ExitContainer onClick={() => router.push(tilyLinks.home())}>
+      <Styled.ExitContainer onClick={() => router.push(TILY_LINKS.home())}>
         <Image src={'/assets/icons/ic_arrowLeft.svg'} alt="Logo" width={20} height={20} />
         <Styled.Title>나가기</Styled.Title>
       </Styled.ExitContainer>
 
       <Styled.Container>
+        {autoSaveTime.active && (
+          <Styled.AutoSaveTime>
+            <span>자동 저장 완료</span>
+            <span>{dayjs(autoSaveTime.time).format('HH:mm:ss')}</span>
+          </Styled.AutoSaveTime>
+        )}
         <CustomSuspense fallback={<SkeletonButton />} isLoading={isLoading}>
           {!tilDetail?.isPersonal && (
             <>
-              {tilDetail?.isCompleted ? (
+              {tilDetail?.isSubmit ? (
                 <Button
                   css={Styled.ButtonStyles}
                   onClick={() =>
                     router.push(
-                      tilyLinks.peopleTil({
+                      TILY_LINKS.peopleTil({
                         roadmapId: Number(router.query.roadmapId) as number,
                         stepId: Number(router.query.stepId) as number,
                       }),

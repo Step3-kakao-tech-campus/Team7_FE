@@ -1,8 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { css } from '@emotion/react';
-import type { CalendarTooltipProps } from '@nivo/calendar';
-import { ResponsiveCalendar } from '@nivo/calendar';
-import { useGetUserHistory } from '@/api/hooks/user';
+import { Calendar, type CalendarTooltipProps } from '@nivo/calendar';
+import { useGetUserHistory, useGetUsers } from '@/api/hooks/user';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
@@ -19,11 +18,13 @@ const History = () => {
     addParamsToUrl({ date });
   };
 
+  const { user } = useGetUsers();
+
   return (
     <Styled.Root>
       <Responsive device="desktop">
         <Styled.HistoryTitle>
-          <span>홍박사</span>
+          <span>{user?.name}</span>
           <span>님의 학습 히스토리</span>
         </Styled.HistoryTitle>
       </Responsive>
@@ -31,11 +32,12 @@ const History = () => {
       <Styled.Wrapper>
         <Styled.CalendarContainer>
           <CustomSuspense isLoading={isLoading} fallback={<Skeleton css={Styled.SkeletonStyles} />}>
-            <ResponsiveCalendar
+            <Calendar
               data={history}
+              width={970}
+              height={200}
               from="2023-01-01"
               to="2023-12-31"
-              align="center"
               emptyColor="#eeeeee"
               colors={['#EF4365']}
               margin={{ top: 20, right: 40, bottom: 10, left: 40 }}

@@ -26,7 +26,7 @@ export const Rail = styled.div`
   background-color: ${({ theme }) => theme.colors.gray_500};
 `;
 
-export const Progress = styled.div<{ progress: number }>`
+export const Progress = styled.div<{ progress: string }>`
   position: absolute;
   top: 6px;
   left: 0;

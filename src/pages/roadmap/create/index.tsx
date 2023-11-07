@@ -1,37 +1,78 @@
 import { useResetRecoilState } from 'recoil';
 import { useEffect } from 'react';
+import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
+import { axiosInstance } from '@/api';
 import InfoSection from '@/components/Roadmap/RoadmapCreate/InfoSection';
 import StepSection from '@/components/Roadmap/RoadmapCreate/StepSection';
-import { roadmapInfoAtoms, roadmapStepAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import { setLayout } from '@/utils/layout';
 
 const RoadmapCreate = () => {
-  const resetRoadmapInfo = useResetRecoilState(roadmapInfoAtoms);
-  const resetRoadmapStep = useResetRecoilState(roadmapStepAtoms);
+  const resetRoadmap = useResetRecoilState(roadmapAtoms);
 
   useEffect(() => {
-    resetRoadmapInfo();
-    resetRoadmapStep();
-  }, [resetRoadmapInfo, resetRoadmapStep]);
+    resetRoadmap();
+  }, [resetRoadmap]);
 
   return (
     <RoadmapCreatePage>
-      <InfoSection />
-      <StepSection />
+      <InfoSection where="create" />
+      <StepSection where="create" />
     </RoadmapCreatePage>
   );
 };
 
-setLayout(RoadmapCreate, HeaderLayout, true);
+setLayout(RoadmapCreate, HeaderLayout);
 
 export default RoadmapCreate;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
 
 const RoadmapCreatePage = styled.main`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 900px;
+  max-width: 930px;
   margin: 0 auto;
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    gap: 1rem;
+
+    & label > div {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    & h3 {
+      font-weight: 600;
+    }
+
+    & label input,
+    textarea {
+      font-size: 15px;
+    }
+  }
 `;

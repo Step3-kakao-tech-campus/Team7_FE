@@ -7,6 +7,7 @@ type Handler = (event: MouseEvent) => void;
 export const useOnClickOutside = <T extends HTMLElement = HTMLElement>(ref: RefObject<T>, handler: Handler) => {
   useEffect(() => {
     const listener = (event: MouseEvent) => {
+      console.log(ref.current, ref.current?.contains(event?.target as Node));
       // ref.current 가 존재하지 않거나, ref.current 가 event.target(현재 클릭된 element)를 포함하고 있으면 handler 를 실행하지 않음.
       if (!ref.current || ref.current.contains(event?.target as Node)) {
         return;

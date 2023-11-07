@@ -23,7 +23,7 @@ import type {
 export const getTils = async (queryParamToString: GetTilsRequest) => {
   const { data } = await axiosInstance.request<GetTilsResponse>({
     method: 'GET',
-    url: `/tils/my/${queryParamToString}`,
+    url: `/tils/my${queryParamToString}`,
   });
 
   return data;

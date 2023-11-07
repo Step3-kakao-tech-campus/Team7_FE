@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
+import { useGetTil } from '@/api/hooks/til';
 import Progress from '@/components/TILWrite/RoadMap/Progress';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Icon from '@/components/common/Icon';
@@ -15,6 +16,11 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
 
   const { query } = useRouter();
   const { steps, isLoading } = useGetRoadmapSteps(Number(query.roadmapId));
+  const { tilDetail } = useGetTil({
+    roadmapId: Number(query.roadmapId),
+    stepId: Number(query.stepId),
+    tilId: Number(query.tilId),
+  });
 
   return (
     <Styled.Root>
@@ -24,10 +30,10 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
           <Icon iconName="ic_close" imageSize={16} ext="svg" onClick={handleCloseAside} alt="닫기 버튼" />
         </Styled.RoadMapContainer>
 
-        <Styled.Title>Next.js 13 (생활코딩)</Styled.Title>
+        <Styled.Title>{tilDetail?.roadmapName}</Styled.Title>
 
         <CustomSuspense isLoading={isLoading} fallback={<ProgressSkeleton />}>
-          <Progress ProgressRate={steps?.result.progress} steps={steps?.result.steps} />
+          <Progress steps={steps?.result.steps} />
         </CustomSuspense>
       </Styled.Container>
     </Styled.Root>

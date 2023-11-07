@@ -38,8 +38,9 @@ export interface GetTilResponse extends CommonResponse {
   result: {
     content: string;
     isPersonal: boolean;
-    isCompleted: boolean;
-    step: Omit<Step, 'tilId' | 'isCompleted'>;
+    isSubmit: boolean;
+    step: Omit<Step, 'tilId' | 'isSubmit'>;
+    roadmapName: string;
     comments: Comment[];
   };
 }
@@ -72,7 +73,7 @@ export interface PatchTilRequest {
   roadmapId: number;
   stepId: number;
   tilId: number;
-  title: string;
+  title?: string;
   content: string;
 }
 

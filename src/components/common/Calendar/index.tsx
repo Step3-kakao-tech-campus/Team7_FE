@@ -36,6 +36,7 @@ const Calendar = (props: CalendarProps) => {
   return (
     <Styled.CustomContainer isTimeInclude={isTimeInclude}>
       <DatePicker
+        onFocus={(e) => e.target.blur()}
         selected={date}
         onChange={(date) => setDate(date!)}
         onCalendarClose={handleCalendarClose}

@@ -1,5 +1,5 @@
-import SearchSection from '@/components/roadmap/manage/TIL/SearchSection';
-import TILSection from '@/components/roadmap/manage/TIL/TILSection';
+import SearchSection from '@/components/Roadmap/manage/TIL/SearchSection';
+import TILSection from '@/components/Roadmap/manage/TIL/TILSection';
 import * as Styled from './style';
 
 const ManagePeopleTIL = () => {

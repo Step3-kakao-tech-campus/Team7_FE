@@ -16,6 +16,9 @@ import type {
   GetRoadmapGroupMemberResponse,
   PostRoadmapsResponse,
   GetRoadmapsResponse,
+  GetRoadmapsByIdResponse,
+  PostRoadmapsApplyResponse,
+  PostRoadmapsByIdResponse,
 } from '@/api/roadmap/type';
 import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 
@@ -82,6 +85,35 @@ export const postRoadmaps = async (roadmapForm: RoadmapForm) => {
     method: 'POST',
     url: '/roadmaps',
     data: roadmapForm,
+  });
+
+  return data;
+};
+
+export const getRoadmapsById = async (roadmapId: number) => {
+  const { data } = await axiosInstance.request<GetRoadmapsByIdResponse>({
+    method: 'GET',
+    url: `roadmaps/${roadmapId}`,
+  });
+
+  return data;
+};
+
+export const postRoadmapsById = async ({ roadmapId, body }: { roadmapId: number; body: RoadmapForm }) => {
+  const { data } = await axiosInstance.request<PostRoadmapsByIdResponse>({
+    method: 'POST',
+    url: `/roadmaps/${roadmapId}`,
+    data: body,
+  });
+
+  return data;
+};
+
+export const postRoadmapsApply = async ({ roadmapId, content }: { roadmapId: number; content: string }) => {
+  const { data } = await axiosInstance.request<PostRoadmapsApplyResponse>({
+    method: 'POST',
+    url: `roadmaps/${roadmapId}/apply`,
+    data: { content },
   });
 
   return data;

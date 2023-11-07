@@ -30,7 +30,7 @@ const selectOptionItems: SelectOption[] = [
   },
 ];
 
-const defaultValue = { label: '7조', value: null };
+const defaultValue = { label: '7조', value: '' };
 
 export const WithState: StoryObj<typeof Select> = {
   render: function Render() {

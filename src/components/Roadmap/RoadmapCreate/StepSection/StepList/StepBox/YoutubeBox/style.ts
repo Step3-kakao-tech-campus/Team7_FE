@@ -19,4 +19,16 @@ export const Header = styled.header`
     color: black;
     font-weight: 600;
   }
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    padding: 10px 15px;
+
+    & > h3 {
+      font-size: 16px;
+    }
+
+    & > button {
+      font-size: 12px;
+    }
+  }
 `;

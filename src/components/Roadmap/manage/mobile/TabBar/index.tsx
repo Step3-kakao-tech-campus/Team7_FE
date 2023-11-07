@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 const TabBar = () => {
@@ -10,23 +10,23 @@ const TabBar = () => {
   return (
     <Styled.Root>
       <Styled.NavItem
-        href={tilyLinks.manageGroupInfo(Number(router.query.roadmapId))}
-        active={+activePathMatcher(tilyLinks.manageGroupInfo(Number(router.query.roadmapId)))}>
+        href={TILY_LINKS.manageGroupInfo(Number(router.query.roadmapId))}
+        active={+activePathMatcher(TILY_LINKS.manageGroupInfo(Number(router.query.roadmapId)))}>
         그룹 정보
       </Styled.NavItem>
       <Styled.NavItem
-        href={tilyLinks.manageMember(Number(router.query.roadmapId))}
-        active={+activePathMatcher(tilyLinks.manageMember(Number(router.query.roadmapId)))}>
+        href={TILY_LINKS.manageMember(Number(router.query.roadmapId))}
+        active={+activePathMatcher(TILY_LINKS.manageMember(Number(router.query.roadmapId)))}>
         구성원 관리
       </Styled.NavItem>
       <Styled.NavItem
-        href={tilyLinks.manageTIL(Number(router.query.roadmapId))}
-        active={+activePathMatcher(tilyLinks.manageTIL(Number(router.query.roadmapId)))}>
+        href={TILY_LINKS.manageTIL(Number(router.query.roadmapId))}
+        active={+activePathMatcher(TILY_LINKS.manageTIL(Number(router.query.roadmapId)))}>
         TIL 모아보기
       </Styled.NavItem>
       <Styled.NavItem
-        href={tilyLinks.manageApply(Number(router.query.roadmapId))}
-        active={+activePathMatcher(tilyLinks.manageApply(Number(router.query.roadmapId)))}>
+        href={TILY_LINKS.manageApply(Number(router.query.roadmapId))}
+        active={+activePathMatcher(TILY_LINKS.manageApply(Number(router.query.roadmapId)))}>
         신청 관리
       </Styled.NavItem>
     </Styled.Root>

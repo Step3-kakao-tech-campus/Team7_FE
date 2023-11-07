@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetStepTilsManage } from '@/api/hooks/til';
+import TILCard from '@/components/Roadmap/manage/TIL/TILSection/TILCard';
 import ConditionalRender from '@/components/common/ConditionalRender';
-import TILCard from '@/components/roadmap/manage/TIL/TILSection/TILCard';
 import * as Styled from './style';
 
 const TILSection = () => {

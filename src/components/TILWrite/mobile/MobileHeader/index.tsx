@@ -1,14 +1,23 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { useGetTil } from '@/api/hooks/til';
-import ExtensionInfoModal from '@/components/TILWrite/SubmitModal';
+import ExtensionInfoModal from '@/components/TILWrite/ExtensionInfoModal';
 import SideBar from '@/components/TILWrite/mobile/SideBar';
 import Icon from '@/components/common/Icon';
-import { tilyLinks } from '@/constants/links';
+import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
-const MobileHeader = () => {
+interface MobileHeaderProps {
+  handleAutoSaveTime: {
+    activeAutoSave: () => void;
+    clearAutoSave: () => void;
+  };
+}
+
+const MobileHeader = (props: MobileHeaderProps) => {
+  const { handleAutoSaveTime } = props;
+
   const router = useRouter();
   const { isOpen, handleClose } = useModalState();
 
@@ -25,15 +34,16 @@ const MobileHeader = () => {
         imageSize={24}
         ext="svg"
         alt="뒤로가기"
-        onClick={() => router.push(tilyLinks.home())}
+        onClick={() => router.push(TILY_LINKS.home())}
       />
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
 
       <Styled.Container>
-        <SideBar>
+        <SideBar handleAutoSaveTime={handleAutoSaveTime}>
           <Icon iconName="ic_hamburger" imageSize={24} ext="svg" alt="사이드바 아이콘" />
         </SideBar>
       </Styled.Container>
+
       <ExtensionInfoModal isOpen={isOpen} handleClose={handleClose} />
     </Styled.Root>
   );

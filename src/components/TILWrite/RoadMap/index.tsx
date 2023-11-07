@@ -5,13 +5,17 @@ import Step from '@/components/TILWrite/RoadMap/Step';
 import * as Styled from './style';
 
 interface RoadMapProps {
+  asideMount: boolean;
   handleCloseAside: () => void;
   handleOpenReferenceAside: () => void;
-  asideMount: boolean;
+  handleAutoSaveTime: {
+    activeAutoSave: () => void;
+    clearAutoSave: () => void;
+  };
 }
 
 const RoadMap = (props: RoadMapProps) => {
-  const { handleCloseAside, handleOpenReferenceAside, asideMount } = props;
+  const { handleCloseAside, handleOpenReferenceAside, handleAutoSaveTime, asideMount } = props;
 
   const { query } = useRouter();
   const { steps } = useGetRoadmapSteps(Number(query.roadmapId));
@@ -34,9 +38,10 @@ const RoadMap = (props: RoadMapProps) => {
               key={step.id}
               stepId={step.id}
               title={step.title}
-              isCompleted={step.isCompleted}
+              isSubmit={step.isSubmit}
               tilId={step.tilId}
               handleOpenReferenceAside={handleOpenReferenceAside}
+              handleAutoSaveTime={handleAutoSaveTime}
             />
           );
         })}

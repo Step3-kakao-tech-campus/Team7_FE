@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { axiosInstance } from '@/api';
 import { useGetTil } from '@/api/hooks/til';
 import Comment from '@/components/TILWrite/Comments';
 import Footer from '@/components/TILWrite/Footer';
@@ -10,6 +12,7 @@ import Header from '@/components/TILWrite/Header';
 import Reference from '@/components/TILWrite/Reference';
 import RoadMap from '@/components/TILWrite/RoadMap';
 import MobileHeader from '@/components/TILWrite/mobile/MobileHeader';
+import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
 import Responsive from '@/components/common/Responsive';
 import EmptyLayout from '@/components/layout/EmptyLayout';
 import { useDrawerState } from '@/hooks/useDrawerState';
@@ -18,8 +21,17 @@ import { setLayout } from '@/utils/layout';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
+export interface AutoSaveTime {
+  active: boolean;
+  time: Date;
+}
+
 const TILWrite = () => {
   const [TILContent, setTILContent] = useState<string>('');
+  const [autoSaveTime, setAutoSaveTime] = useState<AutoSaveTime>({
+    active: false,
+    time: new Date('2023-11-03'),
+  });
 
   const { query } = useRouter();
 
@@ -31,6 +43,21 @@ const TILWrite = () => {
 
   const handleTILContent = (content: string) => {
     setTILContent(content);
+  };
+
+  const handleAutoSaveTime = {
+    activeAutoSave() {
+      setAutoSaveTime({
+        active: true,
+        time: new Date(),
+      });
+    },
+    clearAutoSave() {
+      setAutoSaveTime({
+        active: false,
+        time: new Date(),
+      });
+    },
   };
 
   const {
@@ -79,7 +106,7 @@ const TILWrite = () => {
       </Responsive>
 
       <Responsive device="mobile">
-        <MobileHeader TILContent={TILContent} handleOpenCommentAside={handleOpenComment} />
+        <MobileHeader handleAutoSaveTime={handleAutoSaveTime} />
       </Responsive>
 
       <Container>
@@ -89,11 +116,11 @@ const TILWrite = () => {
             animate={asideOpen ? 'asideOpen' : 'asideClosed'}
             variants={editorVariants}
             transition={{ type: 'tween', duration: DURATION }}>
-            <Editor handleTILContent={handleTILContent} />
+            <Editor handleTILContent={handleTILContent} handleAutoSaveTime={handleAutoSaveTime} />
           </EditorContainer>
         ) : (
           <PersonalEditorContainer>
-            <Editor handleTILContent={handleTILContent} />
+            <Editor handleTILContent={handleTILContent} handleAutoSaveTime={handleAutoSaveTime} />
           </PersonalEditorContainer>
         )}
 
@@ -106,6 +133,7 @@ const TILWrite = () => {
                 asideMount={asideMount}
                 handleCloseAside={() => handleCloseAside(handleCloseReference)}
                 handleOpenReferenceAside={handleOpenReference}
+                handleAutoSaveTime={handleAutoSaveTime}
               />
             )}
 
@@ -114,7 +142,9 @@ const TILWrite = () => {
               animate={referenceOpen ? 'open' : 'closed'}
               variants={extraDrawerVariants}
               transition={{ type: 'tween', duration: DURATION }}>
-              <Reference handleCloseReferenceAside={() => handleCloseReference()} />
+              <FallbackErrorBoundary FallbackRender={Reference.Fallback}>
+                <Reference handleCloseReferenceAside={() => handleCloseReference()} />
+              </FallbackErrorBoundary>
             </ExtraDrawerMotion>
 
             <ExtraDrawerMotion
@@ -128,14 +158,37 @@ const TILWrite = () => {
         )}
       </Container>
 
-      <Footer TILContent={TILContent} />
+      <Footer TILContent={TILContent} autoSaveTime={autoSaveTime} />
     </Root>
   );
 };
 
 export default TILWrite;
 
-setLayout(TILWrite, EmptyLayout, true);
+setLayout(TILWrite, EmptyLayout);
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  if (!isUserLogin) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
 
 export const editorVariants = {
   asideOpen: {

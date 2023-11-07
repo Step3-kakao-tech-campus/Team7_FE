@@ -1,7 +1,33 @@
+import { References } from './roadmap/type';
+
+// 공통 응답 인터페이스
 export interface CommonResponse {
   success: boolean;
+  code: number;
   message: string;
-  code?: number;
+}
+
+export interface NullResultResponse extends CommonResponse {
+  result: null;
+}
+
+// User 인터페이스
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  image: string;
+}
+
+// Alarm 인터페이스
+export interface Alarm {
+  id: number;
+  tilId: number;
+  isChecked: boolean;
+  roadmap: Roadmap;
+  step: Pick<Step, 'id' | 'title'>;
+  sender: Pick<User, 'name' | 'image'>;
+  createdAt: Date;
 }
 
 export interface Til {
@@ -11,12 +37,20 @@ export interface Til {
   roadmap: Roadmap;
 }
 
+// Step 인터페이스
 export interface Step {
   id: number;
   title: string;
-  isCompleted: boolean;
+  isSubmit: boolean;
   tilId: number | null;
   name?: string;
+}
+
+export interface StepWithReferences {
+  id: number;
+  title: string;
+  description: string;
+  references: References;
 }
 
 export interface Category {
@@ -25,10 +59,11 @@ export interface Category {
 }
 
 export interface Roadmaps {
-  tily: Tily[];
-  group: Group[];
+  tilys: Tily[];
+  groups: Group[];
 }
 
+// 로드맵 인터페이스
 export interface Roadmap {
   id: number;
   name: string;
@@ -38,6 +73,7 @@ export interface Tily {
   id: number;
   name: string;
   stepNum: number;
+  image: string;
 }
 
 export interface Group {
@@ -45,11 +81,12 @@ export interface Group {
   name: string;
   stepNum: number;
   image: string;
+  isManager: boolean;
   creator: Creator;
 }
 
 export interface Creator {
-  id: number;
+  id?: number;
   name: string;
   image: string;
 }
@@ -57,28 +94,6 @@ export interface Creator {
 export interface UserHistory {
   day: string;
   value: number;
-}
-
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  image: string;
-}
-
-export interface Alarm {
-  id: number;
-  tilId: number;
-  isChecked: boolean;
-  roadmap: Roadmap;
-  step: Step;
-  sender: Sender;
-  createdAt: Date;
-}
-
-export interface Sender {
-  name: string;
-  image: string;
 }
 
 export interface Comment {

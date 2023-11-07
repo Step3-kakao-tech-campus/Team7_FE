@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Root = styled.button<{ isActiveStep: boolean }>`
@@ -29,3 +30,12 @@ export const CheckIconContainer = styled.div`
 `;
 
 export const Title = styled.span``;
+
+export const ButtonStyles = css`
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    background-color: white;
+  }
+`;
