@@ -8,6 +8,7 @@ import SubmitModal from '@/components/TILWrite/TILWriteSection/Footer/SubmitModa
 import type { AutoSavedTime } from '@/components/TILWrite/TILWriteSection/useAutoSave';
 import Button from '@/components/common/Button';
 import { useToast } from '@/components/common/Toast/useToast';
+import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
@@ -56,7 +57,7 @@ const Footer = (props: FooterProps) => {
 
   return (
     <Styled.Root>
-      <Styled.ExitContainer onClick={() => router.back()}>
+      <Styled.ExitContainer onClick={() => router.push(TILY_LINKS.home())}>
         <Image src={'/assets/icons/ic_arrowLeft.svg'} alt="Logo" width={20} height={20} />
         <Styled.Title>나가기</Styled.Title>
       </Styled.ExitContainer>

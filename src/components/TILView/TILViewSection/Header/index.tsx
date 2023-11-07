@@ -27,11 +27,11 @@ const Header = (props: HeaderProps) => {
       </button>
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
 
-      <Styled.Container>
+      <Styled.IconContainer>
         {!tilDetail?.isPersonal && (
           <Icon onClick={handleOpenCommentAside} iconName="ic_commentBlack" imageSize={32} ext="svg" alt="코멘트" />
         )}
-      </Styled.Container>
+      </Styled.IconContainer>
     </Styled.Root>
   );
 };

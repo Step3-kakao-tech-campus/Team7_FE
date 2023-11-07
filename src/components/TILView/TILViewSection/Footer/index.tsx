@@ -14,7 +14,7 @@ const Footer = () => {
         <Styled.Title>나가기</Styled.Title>
       </Styled.ExitContainer>
 
-      <Styled.Container>
+      <Styled.ActionButtonsContainer>
         <Button
           css={Styled.ButtonStyles}
           onClick={() =>
@@ -27,7 +27,7 @@ const Footer = () => {
           }>
           다른 사람 TIL 보기
         </Button>
-      </Styled.Container>
+      </Styled.ActionButtonsContainer>
     </Styled.Root>
   );
 };
