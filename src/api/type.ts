@@ -11,6 +11,13 @@ export interface NullResultResponse extends CommonResponse {
   result: null;
 }
 
+// 공통 id 인터페이스
+export interface IdParams {
+  roadmapId?: number;
+  stepId?: number;
+  tilId?: number;
+}
+
 export interface IdResponse extends CommonResponse {
   result: {
     id: number;

@@ -13,7 +13,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   showCloseButton?: boolean;
   width?: number;
   isOpen?: boolean;
-  onClose?: () => void;
+  onClose: () => void;
   modalContentStyles?: (theme: EmotionTheme) => SerializedStyles;
   closeButtonStyles?: (theme: EmotionTheme) => SerializedStyles;
   closeButtonSize?: number;
@@ -39,7 +39,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
   useOnClickOutside(
     modalRef,
     () => {
-      onClose?.();
+      onClose();
     },
     isOnClickOutsideClose,
   );

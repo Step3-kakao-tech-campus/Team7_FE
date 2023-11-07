@@ -24,6 +24,7 @@ import type {
   PatchTilRequest,
   SubmitTilRequest,
 } from '@/api/til/type';
+import { IdParams } from '@/api/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
@@ -78,10 +79,10 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
   };
 };
 
-export const useGetTil = (body: GetTilRequest) => {
+export const useGetTil = (req: IdParams) => {
   const { isReady } = useRouter();
 
-  const { data, isLoading } = useQuery([QUERY_KEY.getTil, body], () => getTil(body), {
+  const { data, isLoading } = useQuery([QUERY_KEY.getTil, req], () => getTil(req), {
     enabled: isReady,
   });
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface DrawerStateProps {
   defaultValue: boolean;
@@ -13,18 +13,18 @@ export const useDrawerState = (props: DrawerStateProps) => {
   const [isOpen, setIsOpen] = useState(defaultValue);
   const [isMount, setIsMount] = useState(defaultValue);
 
-  const handleClose = (...callbacks: Array<() => void>) => {
+  const handleClose = useCallback((...callbacks: Array<() => void>) => {
     setIsOpen(false);
     callbacks.forEach((callback) => callback());
-  };
+  }, []);
 
-  const handleOpen = () => {
+  const handleOpen = useCallback(() => {
     setIsOpen(true);
-  };
+  }, []);
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => {
     setIsOpen((prev) => !prev);
-  };
+  }, []);
 
   useEffect(() => {
     // aside가 마운트될때 drawer가 열리면 레이아웃 깨지는 현상이 발생하여 딜레이를 주었다.
@@ -42,10 +42,14 @@ export const useDrawerState = (props: DrawerStateProps) => {
   }, [isOpen, duration]);
 
   return {
-    isOpen,
-    isMount,
-    handleClose,
-    handleOpen,
-    handleToggle,
+    state: {
+      isOpen,
+      isMount,
+    },
+    handler: {
+      handleClose,
+      handleOpen,
+      handleToggle,
+    },
   };
 };
