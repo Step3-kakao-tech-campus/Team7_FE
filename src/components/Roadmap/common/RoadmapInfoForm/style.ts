@@ -5,5 +5,4 @@ export const RoadmapInfoForm = styled.form`
   flex-direction: column;
   gap: 30px;
   padding: 0 15px;
-  margin-top: 25px;
 `;

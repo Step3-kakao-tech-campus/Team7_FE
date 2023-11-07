@@ -42,5 +42,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const RoadmapCreatePage = styled.main`
   max-width: 930px;
-  margin: 0 auto;
+  margin: 30px auto 0;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    margin-top: 15px;
+  }
 `;

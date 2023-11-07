@@ -29,7 +29,6 @@ export const useRoadmapInfo = () => {
   });
 
   const onSubmit: SubmitHandler<PostRoadmapsRequest> = async (formData) => {
-    console.log(formData);
     if (path === 'create') {
       const { isRecruit, ...restFormData } = formData;
       const data = await postRoadmapsAsync({ body: restFormData });

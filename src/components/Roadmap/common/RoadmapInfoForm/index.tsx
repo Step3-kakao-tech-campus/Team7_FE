@@ -12,7 +12,7 @@ const RoadmapInfoForm = () => {
   return (
     <>
       <Styled.RoadmapInfoForm onSubmit={handleSubmit(onSubmit)}>
-        <Flex justify="space-between">
+        <Flex justify="space-between" align="center">
           {path === 'create' ? (
             <>
               <h1>로드맵 정보 입력</h1>
