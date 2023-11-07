@@ -3,13 +3,13 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
-import GroupCard from '@/components/Roadmap/RoadmapList/GroupCard';
-import * as Styled from '@/components/Roadmap/RoadmapList/RecruitRoadmap/RecruitRoadmapList/style';
-import TilyCard from '@/components/Roadmap/RoadmapList/TilyCard';
 import Button from '@/components/common/Button';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Flex from '@/components/common/Flex';
+import GroupCard from '@/components/roadmap/roadmapList/GroupCard';
+import * as Styled from '@/components/roadmap/roadmapList/RecruitRoadmap/RecruitRoadmapList/style';
+import TilyCard from '@/components/roadmap/roadmapList/TilyCard';
 import TILY_LINKS from '@/constants/links';
 import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 

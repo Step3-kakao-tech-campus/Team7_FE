@@ -39,6 +39,7 @@ export interface User extends IdName {
 
 // Alarm 인터페이스
 export interface Alarm {
+  tilId: number;
   id: number;
   isChecked: boolean;
   roadmap: IdName;

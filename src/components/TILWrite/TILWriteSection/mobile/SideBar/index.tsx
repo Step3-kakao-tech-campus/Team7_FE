@@ -3,11 +3,11 @@ import type { PropsWithChildren } from 'react';
 import { useRouter } from 'next/router';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
-import Comment from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments';
-import Reference from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Reference';
-import RoadMapInfo from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/RoadMap/RoadMapInfo';
-import Step from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/RoadMap/Step';
 import Icon from '@/components/common/Icon';
+import Comment from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments';
+import Reference from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Reference';
+import RoadMapInfo from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/RoadMap/RoadMapInfo';
+import Step from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/RoadMap/Step';
 import * as Styled from './style';
 
 interface SideBarProps {

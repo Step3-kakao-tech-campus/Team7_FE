@@ -1,10 +1,10 @@
-import Footer from '@/components/TILWrite/TILWriteSection/Footer';
-import Header from '@/components/TILWrite/TILWriteSection/Header';
-import TILEditor from '@/components/TILWrite/TILWriteSection/TILEditor';
-import MobileHeader from '@/components/TILWrite/TILWriteSection/mobile/MobileHeader';
-import { useAutoSave } from '@/components/TILWrite/TILWriteSection/useAutoSave';
-import { useTILContent } from '@/components/TILWrite/TILWriteSection/useTILContent';
 import Responsive from '@/components/common/Responsive';
+import Footer from '@/components/tilWrite/TILWriteSection/Footer';
+import Header from '@/components/tilWrite/TILWriteSection/Header';
+import TILEditor from '@/components/tilWrite/TILWriteSection/TILEditor';
+import MobileHeader from '@/components/tilWrite/TILWriteSection/mobile/MobileHeader';
+import { useAutoSave } from '@/components/tilWrite/TILWriteSection/useAutoSave';
+import { useTILContent } from '@/components/tilWrite/TILWriteSection/useTILContent';
 import { useDrawerState } from '@/hooks/useDrawerState';
 
 const TILWriteSection = () => {

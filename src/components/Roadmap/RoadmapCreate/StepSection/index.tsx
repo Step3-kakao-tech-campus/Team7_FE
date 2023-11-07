@@ -1,7 +1,7 @@
-import StepList from '@/components/Roadmap/RoadmapCreate/StepSection/StepList';
-import StepModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/style';
 import Button from '@/components/common/Button';
+import StepList from '@/components/roadmap/roadmapCreate/StepSection/StepList';
+import StepModal from '@/components/roadmap/roadmapCreate/StepSection/StepModal';
+import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/style';
 import { useModalState } from '@/hooks/useModalState';
 
 interface StepSectionProps {

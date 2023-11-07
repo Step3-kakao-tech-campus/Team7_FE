@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
-import * as Styled from '@/components/GNB/GuestGNB/style';
-import useGuestGNB from '@/components/GNB/GuestGNB/useGuestGNB';
-import GNBLogo from '@/components/GNB/common/GNBLogo';
-import GNBNav from '@/components/GNB/common/GNBNav';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Responsive from '@/components/common/Responsive';
+import * as Styled from '@/components/gnb/GuestGNB/style';
+import useGuestGNB from '@/components/gnb/GuestGNB/useGuestGNB';
+import GNBLogo from '@/components/gnb/common/GNBLogo';
+import GNBNav from '@/components/gnb/common/GNBNav';
 import TILY_LINKS from '@/constants/links';
 
 const GuestGNB = () => {

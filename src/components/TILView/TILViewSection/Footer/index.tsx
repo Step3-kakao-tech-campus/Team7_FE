@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import * as Styled from '@/components/TILWrite/TILWriteSection/Footer/style';
 import Button from '@/components/common/Button';
+import * as Styled from '@/components/tilWrite/TILWriteSection/Footer/style';
 import TILY_LINKS from '@/constants/links';
 
 const Footer = () => {

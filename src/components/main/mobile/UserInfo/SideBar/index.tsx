@@ -2,7 +2,7 @@ import { type PropsWithChildren, useState } from 'react';
 import { useRouter } from 'next/router';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
-import type { IdName, Tily } from '@/api/type';
+import type { IdName, Roadmap } from '@/api/type';
 import Icon from '@/components/common/Icon';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
@@ -84,7 +84,7 @@ export default SideBar;
 
 interface Data {
   category: IdName[];
-  roadmaps: Tily[];
+  roadmaps: Roadmap[];
 }
 
 const Steps = {

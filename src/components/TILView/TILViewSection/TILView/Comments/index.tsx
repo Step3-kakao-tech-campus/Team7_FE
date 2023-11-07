@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
-import Comment from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments/Comment';
-import CommentPatchModal from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments/CommentPatchModal';
-import Header from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments/Header';
-import TextAreaSection from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments/TextAreaSection';
-import * as Styled from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments/style';
 import ConditionalRender from '@/components/common/ConditionalRender';
+import Comment from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/Comment';
+import CommentPatchModal from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/CommentPatchModal';
+import Header from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/Header';
+import TextAreaSection from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/TextAreaSection';
+import * as Styled from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/style';
 import { useModalState } from '@/hooks/useModalState';
 
 interface CommentsProps {

@@ -1,8 +1,8 @@
 import { useRecoilValue } from 'recoil';
 import Image from 'next/image';
-import StepBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/style';
-import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import StepBox from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox';
+import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/style';
+import { roadmapAtoms } from '@/components/roadmap/roadmapCreate/states/roadmapCreateAtoms';
 
 const StepList = () => {
   const roadmap = useRecoilValue(roadmapAtoms);

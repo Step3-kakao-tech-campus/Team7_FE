@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import * as Styled from '@/components/GNB/common/GNBNav/style';
+import * as Styled from '@/components/gnb/common/GNBNav/style';
 import TILY_LINKS from '@/constants/links';
 
 const GNBNav = () => {

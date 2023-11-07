@@ -1,9 +1,9 @@
 import { forwardRef, useState } from 'react';
-import Personal from '@/components/GNB/UserGNB/desktop/Personal';
-import RoadMap from '@/components/GNB/UserGNB/desktop/RoadMap';
-import * as Styled from '@/components/GNB/UserGNB/desktop/TILModal/style';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import Tab from '@/components/common/Tab';
+import Personal from '@/components/gnb/UserGNB/desktop/Personal';
+import RoadMap from '@/components/gnb/UserGNB/desktop/RoadMap';
+import * as Styled from '@/components/gnb/UserGNB/desktop/TILModal/style';
 
 const TILModal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   const { isOpen, onClose, isBackDrop = true } = props;

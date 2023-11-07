@@ -1,15 +1,11 @@
-import { useSetRecoilState } from 'recoil';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import type { EmailPasswordRequest } from '@/api/auth/type';
 import { usePostLogin } from '@/api/hooks/auth';
-import { accessTokenAtom } from '@/components/auth/states/accessTokenAtoms';
 import TILY_LINKS from '@/constants/links';
 
 const useLogin = () => {
   const { postLoginAsync, isLoading } = usePostLogin();
-
-  const setAccessToken = useSetRecoilState(accessTokenAtom);
 
   const router = useRouter();
 
@@ -28,8 +24,7 @@ const useLogin = () => {
   const onSubmit: SubmitHandler<EmailPasswordRequest> = async (formData) => {
     const data = await postLoginAsync(formData);
 
-    if (data?.code === 200 && data?.result?.accessToken) {
-      setAccessToken(data?.result?.accessToken);
+    if (data?.code === 200) {
       router.replace(TILY_LINKS.home());
     }
   };

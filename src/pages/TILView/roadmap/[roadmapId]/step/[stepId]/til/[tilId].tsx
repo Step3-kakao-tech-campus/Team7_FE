@@ -1,8 +1,8 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
-import TILViewSection from '@/components/TILView/TILViewSection';
 import EmptyLayout from '@/components/layout/EmptyLayout';
+import TILViewSection from '@/components/tilView/TILViewSection';
 import { setLayout } from '@/utils/layout';
 
 const TILView = () => {

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { forwardRef } from 'react';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
-import TILModal from '@/components/GNB/UserGNB/desktop/TILModal';
-import MobileTILModal from '@/components/GNB/UserGNB/mobile/MobileTILModal';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Responsive from '@/components/common/Responsive';
+import TILModal from '@/components/gnb/UserGNB/desktop/TILModal';
+import MobileTILModal from '@/components/gnb/UserGNB/mobile/MobileTILModal';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 import GNBLogo from '../common/GNBLogo';

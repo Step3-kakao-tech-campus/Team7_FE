@@ -1,7 +1,7 @@
 import { useGetRoadmapsById } from '@/api/hooks/roadmap';
-import StepSection from '@/components/Roadmap/RoadmapCreate/StepSection';
-import InfoSection from '@/components/Roadmap/common/RoadmapInfoForm';
 import Flex from '@/components/common/Flex';
+import InfoSection from '@/components/roadmap/common/RoadmapInfoForm';
+import StepSection from '@/components/roadmap/roadmapCreate/StepSection';
 import useQueryParam from '@/hooks/useQueryParam';
 
 const Info = () => {

@@ -1,5 +1,5 @@
-import GNB from '@/components/GNB/UserGNB';
 import Responsive from '@/components/common/Responsive';
+import GNB from '@/components/gnb/UserGNB';
 import LeftSideBar from '@/components/main/LoggedInUser/LeftSideBar';
 import Onboard from '@/components/main/LoggedInUser/Onboarding';
 import RightArea from '@/components/main/LoggedInUser/RightArea';

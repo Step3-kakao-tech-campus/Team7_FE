@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetRoadmapsMyList } from '@/api/hooks/roadmap';
-import GroupCard from '@/components/Roadmap/RoadmapList/GroupCard';
-import * as Styled from '@/components/Roadmap/RoadmapList/MyRoadmap/MyRoadmapList/style';
-import TilyCard from '@/components/Roadmap/RoadmapList/TilyCard';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Flex from '@/components/common/Flex';
 import Responsive from '@/components/common/Responsive';
+import GroupCard from '@/components/roadmap/roadmapList/GroupCard';
+import * as Styled from '@/components/roadmap/roadmapList/MyRoadmap/MyRoadmapList/style';
+import TilyCard from '@/components/roadmap/roadmapList/TilyCard';
 import TILY_LINKS from '@/constants/links';
 
 const MyRoadmapList = () => {

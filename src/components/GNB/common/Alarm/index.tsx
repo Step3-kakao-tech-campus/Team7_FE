@@ -1,5 +1,5 @@
 import { Alarm } from '@/api/type';
-import * as Styled from '@/components/GNB/common/Alarm/style';
+import * as Styled from '@/components/gnb/common/Alarm/style';
 import Avatar from '@/components/common/Avatar';
 import TILY_LINKS from '@/constants/links';
 import dayjs from 'dayjs';

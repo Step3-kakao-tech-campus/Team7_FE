@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
-import ExtensionIcon from '@/components/TILWrite/TILWriteSection/Header/ExtensionIcon';
-import ExtensionInfoModal from '@/components/TILWrite/TILWriteSection/Header/ExtensionInfoModal';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
+import ExtensionIcon from '@/components/tilWrite/TILWriteSection/Header/ExtensionIcon';
+import ExtensionInfoModal from '@/components/tilWrite/TILWriteSection/Header/ExtensionInfoModal';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';

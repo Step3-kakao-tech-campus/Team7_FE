@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
-import * as Styled from '@/components/TILWrite/TILWriteSection/Header/style';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
+import * as Styled from '@/components/tilWrite/TILWriteSection/Header/style';
 import TILY_LINKS from '@/constants/links';
 
 interface HeaderProps {

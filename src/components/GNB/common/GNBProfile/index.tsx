@@ -1,12 +1,12 @@
 import { useRef } from 'react';
 import { useGetAlarms, useGetUsers, usePatchAlarm } from '@/api/hooks/user';
-import AlarmModal from '@/components/GNB/UserGNB/desktop/AlarmModal';
-import MobileAlarmModal from '@/components/GNB/UserGNB/mobile/MobileAlarmModal';
-import * as Styled from '@/components/GNB/common/GNBProfile/style';
 import Avatar from '@/components/common/Avatar';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Responsive from '@/components/common/Responsive';
 import Skeleton from '@/components/common/Skeleton';
+import AlarmModal from '@/components/gnb/UserGNB/desktop/AlarmModal';
+import MobileAlarmModal from '@/components/gnb/UserGNB/mobile/MobileAlarmModal';
+import * as Styled from '@/components/gnb/common/GNBProfile/style';
 import { useModalState } from '@/hooks/useModalState';
 
 const GNBProfile = () => {

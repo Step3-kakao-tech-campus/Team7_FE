@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import * as Styled from '@/components/GNB/common/AlarmFooter/style';
+import * as Styled from '@/components/gnb/common/AlarmFooter/style';
 import TILY_LINKS from '@/constants/links';
 import useAuth from '@/hooks/useAuth';
 

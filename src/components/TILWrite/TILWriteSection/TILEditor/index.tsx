@@ -2,18 +2,18 @@ import { useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
-import { DURATION } from '@/components/TILWrite/TILWriteSection';
-import Comment from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments';
-import Reference from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Reference';
-import RoadMap from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/RoadMap';
-import type { useAutoSave } from '@/components/TILWrite/TILWriteSection/useAutoSave';
-import { useStepTitle } from '@/components/TILWrite/TILWriteSection/useStepTitle';
 import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
+import { DURATION } from '@/components/tilWrite/TILWriteSection';
+import Comment from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments';
+import Reference from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Reference';
+import RoadMap from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/RoadMap';
+import type { useAutoSave } from '@/components/tilWrite/TILWriteSection/useAutoSave';
+import { useStepTitle } from '@/components/tilWrite/TILWriteSection/useStepTitle';
 import type { useDrawerState } from '@/hooks/useDrawerState';
 import { emotionTheme } from '@/styles/emotion';
 import * as Styled from './style';
 
-const Editor = dynamic(() => import('@/components/TILWrite/TILWriteSection/TILEditor/Ckeditor'), { ssr: false });
+const Editor = dynamic(() => import('@/components/tilWrite/TILWriteSection/TILEditor/Ckeditor'), { ssr: false });
 
 interface TILEditorProps {
   roadmapAsideState: ReturnType<typeof useDrawerState>['state'];

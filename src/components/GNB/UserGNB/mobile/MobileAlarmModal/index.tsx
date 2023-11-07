@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { useGetAlarms } from '@/api/hooks/user';
-import Alarm, { EmptyAlarm } from '@/components/GNB/common/Alarm';
-import AlarmFooter from '@/components/GNB/common/AlarmFooter';
 import { type ModalProps } from '@/components/common/Modal';
+import Alarm, { EmptyAlarm } from '@/components/gnb/common/Alarm';
+import AlarmFooter from '@/components/gnb/common/AlarmFooter';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
 

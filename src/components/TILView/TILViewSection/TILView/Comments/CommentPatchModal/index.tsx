@@ -1,10 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/router';
 import { usePatchComment } from '@/api/hooks/til';
-import * as Styled from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments/CommentPatchModal/style';
 import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
 import TextArea from '@/components/common/TextArea';
+import * as Styled from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/CommentPatchModal/style';
 
 interface CommentPatchModalProps {
   selectedCommentId: number;

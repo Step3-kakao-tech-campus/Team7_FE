@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
-import * as Styled from '@/components/Roadmap/RoadmapList/MyRoadmap/MyRoadmapHeader/style';
-import RoadmapCodeModal from '@/components/Roadmap/RoadmapList/RoadmapCodeModal';
 import Button from '@/components/common/Button';
+import * as Styled from '@/components/roadmap/roadmapList/MyRoadmap/MyRoadmapHeader/style';
+import RoadmapCodeModal from '@/components/roadmap/roadmapList/RoadmapCodeModal';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 

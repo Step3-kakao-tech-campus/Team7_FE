@@ -1,11 +1,11 @@
 import { type GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
-import Info from '@/components/Roadmap/manage/GroupInfo/Info';
-import SideBar from '@/components/Roadmap/manage/SideBar';
-import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
 import Responsive from '@/components/common/Responsive';
 import HeaderLayout from '@/components/layout/HeaderLayout';
+import SideBar from '@/components/roadmap/manage/SideBar';
+import Info from '@/components/roadmap/manage/groupInfo/Info';
+import TabBar from '@/components/roadmap/manage/mobile/TabBar';
 import { Container, LeftArea, RightArea } from '@/pages/roadmap/[roadmapId]/manage/member';
 import { setLayout } from '@/utils/layout';
 

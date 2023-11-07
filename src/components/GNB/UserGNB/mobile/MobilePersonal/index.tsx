@@ -9,12 +9,12 @@ import {
 } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
-import ListItem from '@/components/GNB/UserGNB/desktop/Personal/ListItem';
-import PlusButton from '@/components/GNB/UserGNB/desktop/PlusButton';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Icon from '@/components/common/Icon';
 import Input from '@/components/common/Input';
+import ListItem from '@/components/gnb/UserGNB/desktop/Personal/ListItem';
+import PlusButton from '@/components/gnb/UserGNB/desktop/PlusButton';
 import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 

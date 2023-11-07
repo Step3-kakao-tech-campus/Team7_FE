@@ -1,10 +1,10 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
-import GuestGNB from '@/components/GNB/GuestGNB';
-import GNB from '@/components/GNB/UserGNB';
-import MyRoadmap from '@/components/Roadmap/RoadmapList/MyRoadmap';
-import RecruitRoadmap from '@/components/Roadmap/RoadmapList/RecruitRoadmap';
+import GuestGNB from '@/components/gnb/GuestGNB';
+import GNB from '@/components/gnb/UserGNB';
+import MyRoadmap from '@/components/roadmap/roadmapList/MyRoadmap';
+import RecruitRoadmap from '@/components/roadmap/roadmapList/RecruitRoadmap';
 
 interface RoadmapListProps {
   isUserLogin: boolean;

@@ -5,10 +5,10 @@ import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useDeleteComment } from '@/api/hooks/til';
 import type { Comment as CommentType } from '@/api/type';
-import * as Styled from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments/Comment/style';
 import Avatar from '@/components/common/Avatar';
 import ContextMenu from '@/components/common/ContextMenu';
 import Icon from '@/components/common/Icon';
+import * as Styled from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/Comment/style';
 import { useModalState } from '@/hooks/useModalState';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 

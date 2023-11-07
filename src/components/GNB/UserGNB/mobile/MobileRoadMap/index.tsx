@@ -4,10 +4,10 @@ import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
-import * as Styled from '@/components/GNB/UserGNB/mobile/MobilePersonal/style';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Icon from '@/components/common/Icon';
+import * as Styled from '@/components/gnb/UserGNB/mobile/MobilePersonal/style';
 import TILY_LINKS from '@/constants/links';
 
 const MobileRoadMap = () => {

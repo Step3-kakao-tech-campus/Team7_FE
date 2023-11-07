@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
-import PasswordForm from '@/components/auth/change-password/passwordForm';
+import PasswordForm from '@/components/auth/change-password/PasswordForm';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { AuthPageContainer } from '@/pages/auth/register/verify';
 import { setLayout } from '@/utils/layout';

@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import { useGetStepTilsManage } from '@/api/hooks/til';
-import Checkbox from '@/components/Roadmap/manage/TIL/SearchSection/Checkbox';
-import SearchBar from '@/components/Roadmap/manage/TIL/SearchSection/SearchBar';
-import StepSelect from '@/components/Roadmap/manage/TIL/SearchSection/StepSelect';
-import SubmitSelect from '@/components/Roadmap/manage/TIL/SearchSection/SubmitSelect';
+import Checkbox from '@/components/roadmap/manage/til/SearchSection/Checkbox';
+import SearchBar from '@/components/roadmap/manage/til/SearchSection/SearchBar';
+import StepSelect from '@/components/roadmap/manage/til/SearchSection/StepSelect';
+import SubmitSelect from '@/components/roadmap/manage/til/SearchSection/SubmitSelect';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 

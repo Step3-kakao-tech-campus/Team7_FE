@@ -1,11 +1,11 @@
 import router from 'next/router';
 import { useGetRoadmapsById } from '@/api/hooks/roadmap';
 import { postTil } from '@/api/til';
-import * as Styled from '@/components/Roadmap/RoadmapDetail/RoadmapDetailInfo/style';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import { useToast } from '@/components/common/Toast/useToast';
+import * as Styled from '@/components/roadmap/roadmapDetail/RoadmapDetailInfo/style';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import useQueryParam from '@/hooks/useQueryParam';

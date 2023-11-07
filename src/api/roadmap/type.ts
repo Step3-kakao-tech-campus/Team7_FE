@@ -105,7 +105,6 @@ export interface GetRoadmapsByIdResponse {
   message: string;
   result: {
     creator?: Omit<Creator, 'id'>;
-    creator: Omit<Creator, 'id'>;
     category: 'tily' | 'group';
     name: string;
     description: string;

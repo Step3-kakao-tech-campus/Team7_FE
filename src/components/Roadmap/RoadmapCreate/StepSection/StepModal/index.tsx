@@ -1,6 +1,4 @@
 import { useEffect } from 'react';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal/style';
-import { type ReferenceLink } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import Calendar from '@/components/common/Calendar';
 import InfoArea from '@/components/common/InfoArea';
@@ -8,7 +6,10 @@ import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
-import { useRoadmap } from '@/hooks/useRoadmap';
+import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepModal/style';
+import { type ReferenceLink } from '@/components/roadmap/roadmapCreate/states/roadmapCreateAtoms';
+
+// import { useRoadmap } from '@/hooks/useRoadmap';
 
 export interface StepForm {
   id?: number;
@@ -30,27 +31,27 @@ interface StepModalProps extends ModalProps {
 const StepModal = (props: StepModalProps) => {
   const { type, idx, isOpen, onClose } = props;
 
-  const {
-    roadmap,
-    stepForm,
-    setStepForm,
-    handleStepFormChange,
-    handleCreateStep,
-    handleEditStep,
-    stepValid,
-    handleResetStep,
-  } = useRoadmap();
+  // const {
+  //   roadmap,
+  //   stepForm,
+  //   setStepForm,
+  //   handleStepFormChange,
+  //   handleCreateStep,
+  //   handleEditStep,
+  //   stepValid,
+  //   handleResetStep,
+  // } = useRoadmap();
 
-  useEffect(() => {
-    if (type === 'edit' && idx !== undefined) {
-      setStepForm(roadmap.steps[idx]);
-    }
-  }, [type, idx, roadmap.steps, setStepForm]);
+  // useEffect(() => {
+  //   if (type === 'edit' && idx !== undefined) {
+  //     setStepForm(roadmap.steps[idx]);
+  //   }
+  // }, [type, idx, roadmap.steps, setStepForm]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
       <Styled.Root>
-        {type === 'create' ? <h2>STEP 추가하기</h2> : <h2>STEP 수정하기</h2>}
+        {/* {type === 'create' ? <h2>STEP 추가하기</h2> : <h2>STEP 수정하기</h2>}
 
         <InfoArea>
           <InfoArea.Info>STEP은 로드맵의 한 단계입니다.</InfoArea.Info>
@@ -128,7 +129,7 @@ const StepModal = (props: StepModalProps) => {
             }}>
             확인
           </Button>
-        </Styled.ButtonContainer>
+        </Styled.ButtonContainer> */}
       </Styled.Root>
     </Modal>
   );

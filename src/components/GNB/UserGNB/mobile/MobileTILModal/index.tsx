@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import * as Styled from '@/components/GNB/UserGNB/desktop/TILModal/style';
-import MobilePersonal from '@/components/GNB/UserGNB/mobile/MobilePersonal';
-import MobileRoadMap from '@/components/GNB/UserGNB/mobile/MobileRoadMap';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import Tab from '@/components/common/Tab';
+import * as Styled from '@/components/gnb/UserGNB/desktop/TILModal/style';
+import MobilePersonal from '@/components/gnb/UserGNB/mobile/MobilePersonal';
+import MobileRoadMap from '@/components/gnb/UserGNB/mobile/MobileRoadMap';
 
 const MobileTILModal = (props: ModalProps) => {
   const { isOpen, onClose } = props;

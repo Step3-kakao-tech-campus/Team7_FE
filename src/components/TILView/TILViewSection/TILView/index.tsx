@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic';
-import Comment from '@/components/TILView/TILViewSection/TILView/Comments';
-import { DURATION } from '@/components/TILWrite/TILWriteSection';
-import { editorVariants } from '@/components/TILWrite/TILWriteSection/TILEditor';
-import { EditorContainer, ResizeHandle, AsideContainer } from '@/components/TILWrite/TILWriteSection/TILEditor/style';
-import { Root } from '@/components/TILWrite/TILWriteSection/TILEditor/style';
+import Comment from '@/components/tilView/TILViewSection/TILView/Comments';
+import { DURATION } from '@/components/tilWrite/TILWriteSection';
+import { editorVariants } from '@/components/tilWrite/TILWriteSection/TILEditor';
+import { EditorContainer, ResizeHandle, AsideContainer } from '@/components/tilWrite/TILWriteSection/TILEditor/style';
+import { Root } from '@/components/tilWrite/TILWriteSection/TILEditor/style';
 import type { useDrawerState } from '@/hooks/useDrawerState';
 
-const Editor = dynamic(() => import('@/components/TILView/TILViewSection/TILView/Ckeditor'), { ssr: false });
+const Editor = dynamic(() => import('@/components/tilView/TILViewSection/TILView/Ckeditor'), { ssr: false });
 
 interface TILViewProps {
   commentAsideState: ReturnType<typeof useDrawerState>['state'];

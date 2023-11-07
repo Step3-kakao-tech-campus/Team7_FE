@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import GuestGNB from '@/components/GNB/GuestGNB';
 import Button from '@/components/common/Button';
 import Footer from '@/components/common/Footer';
 import Responsive from '@/components/common/Responsive';
+import GuestGNB from '@/components/gnb/GuestGNB';
 import FeatureSection from '@/components/main/Guest/FeatureSection';
 import * as SectionStyled from '@/components/main/Guest/FeatureSection/style';
 import Typer from '@/components/main/Guest/Typer';

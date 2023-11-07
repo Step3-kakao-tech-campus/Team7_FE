@@ -1,16 +1,17 @@
 import type { GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
-import SideBar from '@/components/Roadmap/manage/SideBar';
-import ApplyTable from '@/components/Roadmap/manage/apply/Table';
-import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
 import Responsive from '@/components/common/Responsive';
 import HeaderLayout from '@/components/layout/HeaderLayout';
-import { Root, Container, LeftArea, RightArea, Header } from '@/pages/roadmap/[roadmapId]/manage/member';
+import SideBar from '@/components/roadmap/manage/SideBar';
+import ApplyTable from '@/components/roadmap/manage/apply/Table';
+import TabBar from '@/components/roadmap/manage/mobile/TabBar';
+import { Container, LeftArea, RightArea, Header } from '@/pages/roadmap/[roadmapId]/manage/member';
+import { ManageContainer } from '@/pages/roadmap/[roadmapId]/manage/roadmapInfo';
 import { setLayout } from '@/utils/layout';
 
 const Apply = () => {
   return (
-    <Root>
+    <ManageContainer>
       <Container>
         <Responsive device="desktop">
           <LeftArea>
@@ -27,7 +28,7 @@ const Apply = () => {
           <ApplyTable />
         </RightArea>
       </Container>
-    </Root>
+    </ManageContainer>
   );
 };
 

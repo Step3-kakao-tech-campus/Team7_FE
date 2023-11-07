@@ -13,13 +13,13 @@ const TILY_LINKS = {
   roadmapCreate: () => '/roadmap/create',
   mypage: () => '/mypage',
   tilWrite: ({ roadmapId, stepId, tilId }: tilWriteParams) =>
-    `/TILWrite/roadmap/${roadmapId}/step/${stepId}/til/${tilId}`,
+    `/tilWrite/roadmap/${roadmapId}/step/${stepId}/til/${tilId}`,
   tilView: ({ roadmapId, stepId, tilId }: tilWriteParams) =>
-    `/TILView/roadmap/${roadmapId}/step/${stepId}/til/${tilId}`,
+    `/tilView/roadmap/${roadmapId}/step/${stepId}/til/${tilId}`,
   peopleTil: ({ roadmapId, stepId }: Omit<tilWriteParams, 'tilId'>) => `/roadmap/${roadmapId}/step/${stepId}`,
   manageGroupInfo: (roadmapId: number) => `/roadmap/${roadmapId}/manage/roadmapInfo`,
   manageMember: (roadmapId: number) => `/roadmap/${roadmapId}/manage/member`,
-  manageTIL: (roadmapId: number) => `/roadmap/${roadmapId}/manage/TIL`,
+  manageTIL: (roadmapId: number) => `/roadmap/${roadmapId}/manage/til`,
   manageApply: (roadmapId: number) => `/roadmap/${roadmapId}/manage/apply`,
 };
 

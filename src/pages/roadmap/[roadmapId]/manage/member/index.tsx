@@ -1,16 +1,17 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
-import SideBar from '@/components/Roadmap/manage/SideBar';
-import Table from '@/components/Roadmap/manage/member/Table';
-import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
 import Responsive from '@/components/common/Responsive';
 import HeaderLayout from '@/components/layout/HeaderLayout';
+import SideBar from '@/components/roadmap/manage/SideBar';
+import Table from '@/components/roadmap/manage/member/Table';
+import TabBar from '@/components/roadmap/manage/mobile/TabBar';
+import { ManageContainer } from '@/pages/roadmap/[roadmapId]/manage/roadmapInfo';
 import { setLayout } from '@/utils/layout';
 
 const Member = () => {
   return (
-    <Root>
+    <ManageContainer>
       <Container>
         <Responsive device="desktop">
           <LeftArea>
@@ -27,7 +28,7 @@ const Member = () => {
           <Table />
         </RightArea>
       </Container>
-    </Root>
+    </ManageContainer>
   );
 };
 

@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form';
 import Link from 'next/link';
-import usePassword from '@/components/auth/change-password/passwordForm/usePassword';
+import usePassword from '@/components/auth/change-password/PasswordForm/usePassword';
 import AuthButtonContainer from '@/components/auth/common/AuthButtonContainer';
 import AuthForm from '@/components/auth/common/AuthForm';
 import AuthLogo from '@/components/auth/common/AuthLogo';

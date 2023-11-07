@@ -16,10 +16,8 @@ import type {
   GetRoadmapGroupMemberResponse,
   GetRoadmapsResponse,
   GetRoadmapsByIdResponse,
-  PostRoadmapsApplyResponse,
   PostRoadmapsRequest,
   PostGroupRoadmapsApplyResponse,
-  PostRoadmapsByIdResponse,
   PostGroupTilyApplyResponse,
 } from '@/api/roadmap/type';
 import type { IdResponse } from '../type';

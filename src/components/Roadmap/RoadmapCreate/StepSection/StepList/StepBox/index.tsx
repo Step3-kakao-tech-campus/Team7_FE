@@ -2,11 +2,11 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import Image from 'next/image';
 import type { StepWithReferences } from '@/api/type';
-import WebBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/WebBox';
-import YoutubeBox from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeBox';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/style';
-import StepModal from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal';
-import type { Step } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import WebBox from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/WebBox';
+import YoutubeBox from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/YoutubeBox';
+import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/style';
+import StepModal from '@/components/roadmap/roadmapCreate/StepSection/StepModal';
+import type { Step } from '@/components/roadmap/roadmapCreate/states/roadmapCreateAtoms';
 import { useModalState } from '@/hooks/useModalState';
 import StepDeleteModal from '../../StepDeleteModal';
 

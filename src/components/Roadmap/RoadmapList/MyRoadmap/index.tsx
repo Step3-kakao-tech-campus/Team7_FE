@@ -1,5 +1,5 @@
-import MyRoadmapHeader from '@/components/Roadmap/RoadmapList/MyRoadmap/MyRoadmapHeader';
-import MyRoadmapList from '@/components/Roadmap/RoadmapList/MyRoadmap/MyRoadmapList';
+import MyRoadmapHeader from '@/components/roadmap/roadmapList/MyRoadmap/MyRoadmapHeader';
+import MyRoadmapList from '@/components/roadmap/roadmapList/MyRoadmap/MyRoadmapList';
 
 const MyRoadmap = () => {
   return (

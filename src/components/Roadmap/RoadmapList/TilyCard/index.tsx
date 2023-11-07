@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { type Roadmap } from '@/api/type';
-import * as Style from '@/components/Roadmap/RoadmapList/TilyCard/style';
 import Logo from '@/components/common/Logo';
+import * as Style from '@/components/roadmap/roadmapList/TilyCard/style';
 import TILY_LINK from '@/constants/links';
 
 interface TilyCardProps {

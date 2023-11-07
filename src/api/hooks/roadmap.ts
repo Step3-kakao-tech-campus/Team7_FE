@@ -19,7 +19,6 @@ import {
   deleteRoadmapGroupApplyReject as deleteRoadmapGroupApplyRejectAPI,
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
   getRoadmapsById,
-  postRoadmapsApply as postRoadmapsApplyAPI,
   postRoadmapsById,
   postGroupRoadmapsApply as postGroupRoadmapsApplyAPI,
 } from '@/api/roadmap';

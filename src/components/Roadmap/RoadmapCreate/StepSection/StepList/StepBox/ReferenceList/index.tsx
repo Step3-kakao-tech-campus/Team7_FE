@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/ReferenceList/style';
-import { useRoadmap } from '@/hooks/useRoadmap';
+import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/ReferenceList/style';
 
 interface ReferenceListProps {
   type: 'youtube' | 'web';
@@ -10,26 +9,26 @@ interface ReferenceListProps {
 
 // youtube, web 에서 재사용하는 참고자료 리스트
 const ReferenceList = (props: ReferenceListProps) => {
-  const { type, stepIdx, where } = props;
+  // const { type, stepIdx, where } = props;
 
-  // 참고자료 리스트에서 사용될 커스텀 훅
-  const { roadmap, handleDeleteReference } = useRoadmap();
+  // // 참고자료 리스트에서 사용될 커스텀 훅
+  // // const { roadmap, handleDeleteReference } = useRoadmap();
 
-  let references = [];
+  // let references = [];
 
-  if (type === 'youtube') {
-    references = roadmap.steps[stepIdx].references.youtube;
-  } else {
-    references = roadmap.steps[stepIdx].references.web;
-  }
+  // if (type === 'youtube') {
+  //   references = roadmap.steps[stepIdx].references.youtube;
+  // } else {
+  //   references = roadmap.steps[stepIdx].references.web;
+  // }
 
-  if (references.length === 0) {
-    return <ReferenceList.Empty />;
-  }
+  // if (references.length === 0) {
+  //   return <ReferenceList.Empty />;
+  // }
 
   return (
     <Styled.Root>
-      {references?.map((reference, idx) => (
+      {/* {references?.map((reference, idx) => (
         <Styled.Link key={idx}>
           <section>
             <Image src={`/assets/icons/ic_${type}.svg`} alt="stepEmptyIcon" width={23} height={23} />
@@ -48,7 +47,7 @@ const ReferenceList = (props: ReferenceListProps) => {
             />
           )}
         </Styled.Link>
-      ))}
+      ))} */}
     </Styled.Root>
   );
 };

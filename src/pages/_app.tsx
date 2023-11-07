@@ -13,20 +13,6 @@ import { emotionTheme } from '@/styles/emotion';
 import '@/styles/globals.css';
 import { getLayout } from '@/utils/layout';
 
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-  if (typeof window === 'undefined') {
-    (async () => {
-      const { server } = await import('../mocks/server');
-      server.listen();
-    })();
-  } else {
-    (async () => {
-      const { worker } = await import('../mocks/browser');
-      worker.start();
-    })();
-  }
-}
-
 // 크롬이 online 일때 리액트 쿼리가 동작하도록 함.
 const queryClient = new QueryClient({
   defaultOptions: {

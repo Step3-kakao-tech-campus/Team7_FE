@@ -1,9 +1,9 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { usePostRoadmapsGroupsParticipate } from '@/api/hooks/roadmap';
-import * as Styled from '@/components/Roadmap/RoadmapList/RoadmapCodeModal/style';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
+import * as Styled from '@/components/roadmap/roadmapList/RoadmapCodeModal/style';
 
 const RoadmapCodeModal = (props: ModalProps) => {
   const { isOpen, onClose } = props;

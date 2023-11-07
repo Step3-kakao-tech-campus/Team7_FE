@@ -1,11 +1,11 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useGetRoadmapsById, usePostGroupRoadmapsApply, usePostTilyRoadmapsApply } from '@/api/hooks/roadmap';
-import * as Styled from '@/components/Roadmap/RoadmapDetail/ApplyModal/style';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import type { ModalProps } from '@/components/common/Modal';
 import Modal from '@/components/common/Modal';
 import TextArea from '@/components/common/TextArea';
+import * as Styled from '@/components/roadmap/roadmapDetail/ApplyModal/style';
 import useQueryParam from '@/hooks/useQueryParam';
 
 const ApplyModal = (props: ModalProps) => {
@@ -16,7 +16,7 @@ const ApplyModal = (props: ModalProps) => {
 
   const roadmapId = Number(useQueryParam('roadmapId'));
 
-  const { data: roadmapDetailInfo } = useGetRoadmapsById(roadmapId);
+  const { data: roadmapDetailInfo } = useGetRoadmapsById({ roadmapId });
   const category = roadmapDetailInfo?.result.category;
 
   const {

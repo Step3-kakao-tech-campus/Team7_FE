@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import RoadmapDetailInfo from '@/components/Roadmap/RoadmapDetail/RoadmapDetailInfo';
-import RoadmapDeatilStep from '@/components/Roadmap/RoadmapDetail/RoadmapDetailStep';
 import HeaderLayout from '@/components/layout/HeaderLayout';
+import RoadmapDetailInfo from '@/components/roadmap/roadmapDetail/RoadmapDetailInfo';
+import RoadmapDeatilStep from '@/components/roadmap/roadmapDetail/RoadmapDetailStep';
 import { setLayout } from '@/utils/layout';
 
 const RoadmapDetail = () => {

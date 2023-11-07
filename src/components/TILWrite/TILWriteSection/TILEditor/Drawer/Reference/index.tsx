@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapStepReference } from '@/api/hooks/roadmap';
-import Docs from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Reference/Docs';
-import Header from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Reference/Header';
-import Youtube from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Reference/Youtube';
 import Fallback from '@/components/common/Fallback';
 import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary';
+import Docs from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Reference/Docs';
+import Header from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Reference/Header';
+import Youtube from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Reference/Youtube';
 import * as Styled from './style';
 
 interface ReferenceProps {

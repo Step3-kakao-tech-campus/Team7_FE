@@ -1,8 +1,8 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
-import TILWriteSection from '@/components/TILWrite/TILWriteSection';
 import EmptyLayout from '@/components/layout/EmptyLayout';
+import TILWriteSection from '@/components/tilWrite/TILWriteSection';
 import { setLayout } from '@/utils/layout';
 
 const TILWrite = () => {

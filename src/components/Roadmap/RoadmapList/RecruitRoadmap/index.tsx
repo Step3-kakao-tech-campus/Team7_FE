@@ -1,5 +1,5 @@
-import RecruitNav from '@/components/Roadmap/RoadmapList/RecruitRoadmap/RecruitNav/';
-import RecruitRoadmapList from '@/components/Roadmap/RoadmapList/RecruitRoadmap/RecruitRoadmapList';
+import RecruitNav from '@/components/roadmap/roadmapList/RecruitRoadmap/RecruitNav';
+import RecruitRoadmapList from '@/components/roadmap/roadmapList/RecruitRoadmap/RecruitRoadmapList';
 
 const RecruitRoadmap = () => {
   return (

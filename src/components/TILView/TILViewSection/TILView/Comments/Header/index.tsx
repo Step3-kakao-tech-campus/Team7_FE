@@ -1,5 +1,5 @@
-import * as Styled from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments/Header/style';
 import Icon from '@/components/common/Icon';
+import * as Styled from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/Header/style';
 
 interface HeaderProps {
   handleCloseCommentAside: () => void;

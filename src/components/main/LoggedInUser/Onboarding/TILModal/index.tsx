@@ -1,12 +1,12 @@
 import { forwardRef } from 'react';
 import { memo } from 'react';
-import * as PersonalModalStyled from '@/components/GNB/UserGNB/desktop/Personal/style';
-import PlusButton from '@/components/GNB/UserGNB/desktop/PlusButton';
-import * as Styled from '@/components/GNB/UserGNB/desktop/TILModal/style';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import Tab from '@/components/common/Tab';
+import * as PersonalModalStyled from '@/components/gnb/UserGNB/desktop/Personal/style';
+import PlusButton from '@/components/gnb/UserGNB/desktop/PlusButton';
+import * as Styled from '@/components/gnb/UserGNB/desktop/TILModal/style';
 
 interface OnboardingModalProps extends ModalProps {
   isCategoryNextStep: boolean;

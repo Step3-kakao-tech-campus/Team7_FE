@@ -1,8 +1,8 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
-import RoadmapInfoForm from '@/components/Roadmap/common/RoadmapInfoForm';
 import HeaderLayout from '@/components/layout/HeaderLayout';
+import RoadmapInfoForm from '@/components/roadmap/common/RoadmapInfoForm';
 import { setLayout } from '@/utils/layout';
 
 const RoadmapCreate = () => {

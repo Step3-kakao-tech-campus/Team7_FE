@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
-import { useChromeExtension } from '@/components/TILWrite/TILWriteSection/Header/useChromeExtension';
 import { useToast } from '@/components/common/Toast/useToast';
+import { useChromeExtension } from '@/components/tilWrite/TILWriteSection/Header/useChromeExtension';
 
 interface ExtensionIconProps {
   TILContent: string;

@@ -1,12 +1,12 @@
 import { produce } from 'immer';
 import { useSetRecoilState } from 'recoil';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepList/StepBox/YoutubeModal/style';
-import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
+import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/YoutubeModal/style';
+import { roadmapAtoms } from '@/components/roadmap/roadmapCreate/states/roadmapCreateAtoms';
 import REGEX from '@/constants/regex';
 
 interface WebModalProps extends ModalProps {

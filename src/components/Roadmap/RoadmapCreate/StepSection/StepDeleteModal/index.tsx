@@ -1,10 +1,10 @@
 import { produce } from 'immer';
 import { useRecoilState } from 'recoil';
-import * as Styled from '@/components/Roadmap/RoadmapCreate/StepSection/StepModal/style';
-import { roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
 import Button from '@/components/common/Button';
 import type { ModalProps } from '@/components/common/Modal';
 import Modal from '@/components/common/Modal';
+import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepModal/style';
+import { roadmapAtoms } from '@/components/roadmap/roadmapCreate/states/roadmapCreateAtoms';
 
 interface StepDeleteModalProps extends ModalProps {
   idx: number;

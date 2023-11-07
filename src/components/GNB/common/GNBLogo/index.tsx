@@ -1,7 +1,7 @@
 import router from 'next/router';
-import * as Styled from '@/components/GNB/common/GNBLogo/style';
 import Logo from '@/components/common/Logo';
 import Responsive from '@/components/common/Responsive';
+import * as Styled from '@/components/gnb/common/GNBLogo/style';
 import TILY_LINKS from '@/constants/links';
 
 const GNBLogo = () => {
