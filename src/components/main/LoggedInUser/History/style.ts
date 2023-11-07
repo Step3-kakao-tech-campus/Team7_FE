@@ -17,9 +17,12 @@ export const Wrapper = styled.div`
 `;
 
 export const CalendarContainer = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 200px;
 
+  // 히스토리가 반응형 크기에 맞게 줄어들게 하기 위해서 넣은 css
   & > div {
     width: 20px;
   }
@@ -30,7 +33,7 @@ export const CalendarContainer = styled.div`
 `;
 
 export const SkeletonStyles = css`
-  width: 930px;
+  width: 930px !important;
   height: 150px;
 `;
 

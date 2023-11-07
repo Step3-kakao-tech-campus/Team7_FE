@@ -12,6 +12,15 @@ export const useOnbaording = () => {
   const searchRef = useRef<HTMLFormElement>(null);
   const TILButtonRef = useRef<HTMLDivElement>(null);
 
+  const [isOnboarding, setIsOnboarding] = useState(false);
+  useEffect(() => {
+    const mainOnboarding = localStorage.getItem('mainOnboarding');
+
+    if (mainOnboarding === null) {
+      setIsOnboarding(true);
+    }
+  }, []);
+
   useEffect(() => {
     setRun(true);
     setSteps([
@@ -386,6 +395,7 @@ export const useOnbaording = () => {
       steps,
       isModalOpen,
       isCategoryNextStep,
+      isOnboarding,
     },
     ref: {
       historyRef,

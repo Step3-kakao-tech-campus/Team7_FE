@@ -1,4 +1,4 @@
-import type { GetAlarmsResponse, GetUserResponse, GetUserHistoryResponse } from '@/api/user/type';
+import type { GetAlarmsResponse, GetUsersResponse, GetUserHistoryResponse } from '@/api/user/type';
 
 export const userHistoryResponse: GetUserHistoryResponse = {
   success: true,
@@ -25,16 +25,11 @@ export const userHistoryResponse: GetUserHistoryResponse = {
   },
 };
 
-export const getUserResponse: GetUserResponse = {
-  success: true,
-  message: 'ok',
-  code: 200,
-  result: {
-    id: 1,
-    name: '김동영',
-    email: 'ehddud1006@pusan.ac.kr',
-    image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
-  },
+export const getUserResponse: GetUsersResponse = {
+  id: 1,
+  name: '김동영',
+  email: 'ehddud1006@pusan.ac.kr',
+  image: 'https://avatars.githubusercontent.com/u/62373865?v=4',
 };
 
 export const getAlarmsResponse: GetAlarmsResponse = {
@@ -53,7 +48,7 @@ export const getAlarmsResponse: GetAlarmsResponse = {
         },
         step: {
           id: 1,
-          name: '6. SPA',
+          title: '6. SPA',
         },
         sender: {
           name: '김동영',
@@ -71,7 +66,7 @@ export const getAlarmsResponse: GetAlarmsResponse = {
         },
         step: {
           id: 1,
-          name: '6. SPA',
+          title: '6. SPA',
         },
         sender: {
           name: '이한홍',

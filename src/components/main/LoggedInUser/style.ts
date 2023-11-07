@@ -15,15 +15,6 @@ export const Inner = styled(Flex)`
   }
 `;
 
-export const LeftArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
-
-  padding: 2.5rem;
-  min-height: 100vh;
-`;
-
 export const RightArea = styled.div`
   display: flex;
   flex-direction: column;
