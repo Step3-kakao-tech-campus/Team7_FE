@@ -33,6 +33,7 @@ const TILSection = () => {
       <Responsive device="mobile">
         <SearchBar />
       </Responsive>
+
       <Styled.Container>
         <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
           <ConditionalRender data={tils} EmptyUI={<EmptyTilSection />}>

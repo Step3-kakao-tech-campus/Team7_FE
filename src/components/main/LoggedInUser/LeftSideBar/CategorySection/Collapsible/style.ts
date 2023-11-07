@@ -27,10 +27,10 @@ export const HeaderRoot = styled.button<{ isActive: boolean }>`
 `;
 
 export const ItemRoot = styled.div<{ isActive: boolean; rootHeight: number }>`
-  max-height: ${({ isActive, rootHeight }) => (isActive ? `${rootHeight}px` : '0px')};
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  max-height: ${({ isActive, rootHeight }) => (isActive ? `${rootHeight}px` : '0px')};
   padding-left: 1rem;
+  transition: max-height 0.2s ease-out;
   & > * {
     margin: 1.3rem 0;
   }

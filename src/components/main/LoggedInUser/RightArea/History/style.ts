@@ -51,3 +51,28 @@ export const HistoryTitle = styled.h1`
     font-weight: 600;
   }
 `;
+
+export const TooltipContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 110px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow:
+    0px 2px 4px -2px rgba(16, 24, 40, 0.1),
+    0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background: ${({ theme }) => theme.colors.black};
+  color: #ffffff;
+`;
+
+export const TooltipSharp = styled.div`
+  position: absolute;
+  top: calc(100% - 6px);
+  width: 12px;
+  height: 12px;
+  background: ${({ theme }) => theme.colors.black};
+  transform: rotate(45deg);
+`;

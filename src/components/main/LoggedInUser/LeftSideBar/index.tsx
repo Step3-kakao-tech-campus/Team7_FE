@@ -10,17 +10,15 @@ import * as Styled from './style';
 
 interface LeftSideBarProps {}
 
-const LeftSideBar = forwardRef<HTMLFormElement, LeftSideBarProps>((_, ref) => {
-  const { user, isLoading: userIsLoading } = useGetUsers();
+const LeftSideBar = forwardRef<HTMLFormElement, LeftSideBarProps>((_, onBoardRef) => {
+  const { user, isLoading } = useGetUsers();
 
   return (
     <Styled.LeftArea>
-      <CustomSuspense
-        isLoading={userIsLoading}
-        fallback={<Skeleton type="circle" css={Styled.ProfileSkeletonStyles} />}>
+      <CustomSuspense isLoading={isLoading} fallback={<Skeleton type="circle" css={Styled.ProfileSkeletonStyles} />}>
         <Avatar imageUrl={user?.image} imageSize={240} alt="프로필 이미지" />
       </CustomSuspense>
-      <SearchBar ref={ref} />
+      <SearchBar ref={onBoardRef} />
       <CategorySection />
     </Styled.LeftArea>
   );

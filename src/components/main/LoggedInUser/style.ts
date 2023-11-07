@@ -25,6 +25,7 @@ export const ProfileSkeletonStyles = css`
 export const UserName = styled.div`
   display: flex;
   align-items: center;
+
   & > span:first-of-type {
     font-size: 20px;
     font-weight: 600;
@@ -41,10 +42,10 @@ export const MenuBarStyles = (theme: EmotionTheme) => css`
     display: flex !important;
     justify-content: space-between;
     position: sticky;
+    z-index: 1;
     top: ${theme.layout.main.GNBHeight};
     width: 100%;
     padding: 16px;
-    z-index: 1;
     background-color: #fff;
     border-bottom: 1px solid ${theme.colors.gray_500};
   }

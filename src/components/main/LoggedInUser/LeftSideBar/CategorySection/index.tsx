@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import Collapsible from '@/components/main/LoggedInUser/LeftSideBar/CategorySection/Collapsible';
@@ -10,10 +11,10 @@ const CategorySection = () => {
 
   const { addParamsToUrl } = useParamsToUrl();
 
-  const handleSelectCategory = (id: number) => {
+  const handleSelectCategory = useCallback((id: number) => {
     const roadmapId = id.toString();
     addParamsToUrl({ roadmapId });
-  };
+  }, []);
 
   return (
     <Styled.Root>
@@ -23,9 +24,9 @@ const CategorySection = () => {
         <Collapsible>
           <Collapsible.Header>개인 TIL</Collapsible.Header>
           <Collapsible.Item>
-            {data.category.map((item, index) => {
+            {data.category.map((item) => {
               return (
-                <Styled.Item onClick={() => handleSelectCategory(item.id)} key={index}>
+                <Styled.Item onClick={() => handleSelectCategory(item.id)} key={item.id}>
                   - {item.name}
                 </Styled.Item>
               );
@@ -35,9 +36,9 @@ const CategorySection = () => {
         <Collapsible>
           <Collapsible.Header>로드맵 TIL</Collapsible.Header>
           <Collapsible.Item>
-            {data.roadmaps.map((item, index) => {
+            {data.roadmaps.map((item) => {
               return (
-                <Styled.Item onClick={() => handleSelectCategory(item.id)} key={index}>
+                <Styled.Item onClick={() => handleSelectCategory(item.id)} key={item.id}>
                   - {item.name}
                 </Styled.Item>
               );

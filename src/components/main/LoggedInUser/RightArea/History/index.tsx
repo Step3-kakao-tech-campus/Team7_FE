@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import { forwardRef } from 'react';
-import { css } from '@emotion/react';
+import { forwardRef, useCallback } from 'react';
 import { Calendar, type CalendarTooltipProps } from '@nivo/calendar';
 import { useGetUserHistory, useGetUsers } from '@/api/hooks/user';
 import CustomSuspense from '@/components/common/CustomSuspense';
@@ -16,10 +15,10 @@ const History = forwardRef<HTMLDivElement, HistoryProps>((_, ref) => {
 
   const { history, isLoading } = useGetUserHistory();
 
-  const handleSelectDay = (color: string, date: string) => {
+  const handleSelectDay = useCallback((color: string, date: string) => {
     if (color === '#eeeeee') return; // til을 작성하지 않은 날은 검색 불가능하도록 함
     addParamsToUrl({ date });
-  };
+  }, []);
 
   const { user } = useGetUsers();
 
@@ -50,9 +49,7 @@ const History = forwardRef<HTMLDivElement, HistoryProps>((_, ref) => {
               dayBorderWidth={2}
               dayBorderColor="#ffffff"
               tooltip={CustomTooltip}
-              onClick={(data) => {
-                handleSelectDay(data.color, data.day);
-              }}
+              onClick={(data) => handleSelectDay(data.color, data.day)}
               legends={[
                 {
                   anchor: 'bottom-right',
@@ -81,33 +78,9 @@ const CustomTooltip = ({ day }: CalendarTooltipProps) => {
 
 const Tooltip = ({ children }: PropsWithChildren) => {
   return (
-    <div
-      css={css`
-        position: relative;
-        display: flex;
-        padding: 6px 12px;
-        justify-content: center;
-        align-items: center;
-        width: 110px;
-        gap: 10px;
-        border-radius: 6px;
-        background: #181818;
-        color: #ffffff;
-        box-shadow:
-          0px 2px 4px -2px rgba(16, 24, 40, 0.1),
-          0px 4px 6px -1px rgba(0, 0, 0, 0.1);
-      `}>
-      <div
-        css={css`
-          position: absolute;
-          top: calc(100% - 6px);
-          background: #181818;
-          width: 12px;
-          height: 12px;
-          transform: rotate(45deg);
-        `}
-      />
+    <Styled.TooltipContainer>
+      <Styled.TooltipSharp />
       {children}
-    </div>
+    </Styled.TooltipContainer>
   );
 };

@@ -4,10 +4,9 @@ import styled from '@emotion/styled';
 export const LeftArea = styled.div`
   display: flex;
   flex-direction: column;
-  border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
-
   padding: 2.5rem;
   min-height: 100vh;
+  border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
 
 export const ProfileSkeletonStyles = css`

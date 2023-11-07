@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useCallback, useState } from 'react';
 import Input from '@/components/common/Input';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
@@ -10,10 +10,13 @@ const SearchBar = forwardRef<HTMLFormElement, SearchBarProps>((_, ref) => {
 
   const { addParamsToUrl } = useParamsToUrl();
 
-  const handleSearch = (title: string) => {
-    if (!tilName) return;
-    addParamsToUrl({ title });
-  };
+  const handleSearch = useCallback(
+    (title: string) => {
+      if (!tilName) return;
+      addParamsToUrl({ title });
+    },
+    [tilName],
+  );
 
   return (
     <Styled.Root

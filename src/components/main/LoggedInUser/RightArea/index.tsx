@@ -7,10 +7,10 @@ import * as Styled from './style';
 
 interface RightAreaProps {}
 
-const RightArea = forwardRef<HTMLDivElement, RightAreaProps>((_, ref) => {
+const RightArea = forwardRef<HTMLDivElement, RightAreaProps>((_, onboardRef) => {
   return (
     <Styled.RightArea>
-      <History ref={ref} />
+      <History ref={onboardRef} />
       <FallbackErrorBoundary FallbackRender={TILSection.Fallback}>
         <TILSection />
       </FallbackErrorBoundary>
