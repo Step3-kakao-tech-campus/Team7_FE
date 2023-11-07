@@ -1,4 +1,5 @@
-import { useRouter } from 'next/router';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import Link from 'next/link';
 import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
 import * as Styled from './style';
@@ -10,7 +11,6 @@ interface ExtensionInfoModalProps {
 
 const ExtensionInfoModal = (props: ExtensionInfoModalProps) => {
   const { isOpen, handleClose } = props;
-  const router = useRouter();
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
@@ -23,9 +23,10 @@ const ExtensionInfoModal = (props: ExtensionInfoModalProps) => {
         <Button variant="ghost" onClick={handleClose}>
           취소
         </Button>
-        <Button onClick={() => router.push('https://zinc-lyre-886.notion.site/c841d91617134426a4ec38535574acfd?pvs=4')}>
-          확인
-        </Button>
+
+        <Link href="https://zinc-lyre-886.notion.site/c841d91617134426a4ec38535574acfd?pvs=4" target="_blank">
+          <Button onClick={handleClose}>확인</Button>
+        </Link>
       </Styled.ButtonContainer>
     </Modal>
   );

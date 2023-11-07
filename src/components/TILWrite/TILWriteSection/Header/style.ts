@@ -18,7 +18,7 @@ export const Title = styled.h1`
   font-weight: 700;
 `;
 
-export const Container = styled.div`
+export const IconContainer = styled.div`
   display: flex;
   gap: 8px;
 

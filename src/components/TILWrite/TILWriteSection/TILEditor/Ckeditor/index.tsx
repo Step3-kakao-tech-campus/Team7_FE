@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
-import { defaultData } from '@/components/TILWrite/TILWriteSection/Ckeditor/defaultData';
+import { defaultData } from '@/components/TILWrite/TILWriteSection/TILEditor/Ckeditor/defaultData';
 import { useToast } from '@/components/common/Toast/useToast';
 import { editorConfiguration } from './plugin';
 import * as Styled from './style';

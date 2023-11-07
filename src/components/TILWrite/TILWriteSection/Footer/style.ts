@@ -23,7 +23,7 @@ export const Title = styled.h1`
   font-weight: 700;
 `;
 
-export const Container = styled.div`
+export const ActionButtonsContainer = styled.div`
   display: flex;
   gap: 1rem;
 `;
@@ -55,10 +55,4 @@ export const ExitContainer = styled.button`
   @media ${({ theme }) => theme.mediaQuery.md} {
     display: none;
   }
-`;
-
-export const SkeletonStyles = css`
-  width: 60px;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
 `;

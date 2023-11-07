@@ -3,13 +3,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
 import { useSubmitTil } from '@/api/hooks/til';
+import SubmitButton from '@/components/TILWrite/TILWriteSection/Footer/SubmitButton';
 import SubmitModal from '@/components/TILWrite/TILWriteSection/Footer/SubmitModal';
 import type { AutoSavedTime } from '@/components/TILWrite/TILWriteSection/useAutoSave';
 import Button from '@/components/common/Button';
-import CustomSuspense from '@/components/common/CustomSuspense';
-import Skeleton from '@/components/common/Skeleton';
 import { useToast } from '@/components/common/Toast/useToast';
-import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
@@ -25,7 +23,7 @@ const Footer = (props: FooterProps) => {
   const { isOpen, handleOpen, handleClose } = useModalState();
   const { patchTil } = usePatchTil();
   const { submitTil } = useSubmitTil();
-  const { tilDetail, isLoading } = useGetTil({
+  const { tilDetail } = useGetTil({
     roadmapId: Number(router.query.roadmapId),
     stepId: Number(router.query.stepId),
     tilId: Number(router.query.tilId),
@@ -58,53 +56,26 @@ const Footer = (props: FooterProps) => {
 
   return (
     <Styled.Root>
-      <Styled.ExitContainer onClick={() => router.push(TILY_LINKS.home())}>
+      <Styled.ExitContainer onClick={() => router.back()}>
         <Image src={'/assets/icons/ic_arrowLeft.svg'} alt="Logo" width={20} height={20} />
         <Styled.Title>나가기</Styled.Title>
       </Styled.ExitContainer>
 
-      <Styled.Container>
+      <Styled.ActionButtonsContainer>
         {autoSavedTime.active && (
           <Styled.AutoSavedTime>
             <span>자동 저장 완료</span>
             <span>{dayjs(autoSavedTime.time).format('HH:mm:ss')}</span>
           </Styled.AutoSavedTime>
         )}
-        <CustomSuspense fallback={<SkeletonButton />} isLoading={isLoading}>
-          {!tilDetail?.isPersonal && (
-            <>
-              {tilDetail?.isSubmit ? (
-                <Button
-                  css={Styled.ButtonStyles}
-                  onClick={() =>
-                    router.push(
-                      TILY_LINKS.peopleTil({
-                        roadmapId: Number(router.query.roadmapId) as number,
-                        stepId: Number(router.query.stepId) as number,
-                      }),
-                    )
-                  }>
-                  다른 사람 TIL 보기
-                </Button>
-              ) : (
-                <Button variant="primary" css={Styled.ButtonStyles} onClick={handleOpen}>
-                  제출
-                </Button>
-              )}
-            </>
-          )}
-        </CustomSuspense>
+        <SubmitButton handleOpen={handleOpen} />
         <Button css={Styled.ButtonStyles} onClick={handleSaveTIL}>
           저장
         </Button>
-      </Styled.Container>
+      </Styled.ActionButtonsContainer>
       <SubmitModal isOpen={isOpen} handleClose={handleClose} handleSubmitTIL={handleSubmitTIL} />
     </Styled.Root>
   );
 };
 
 export default Footer;
-
-const SkeletonButton = () => {
-  return <Skeleton css={Styled.SkeletonStyles} />;
-};

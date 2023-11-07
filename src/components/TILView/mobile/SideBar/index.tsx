@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { PropsWithChildren } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import Comment from '@/components/TILWrite/TILWriteSection/Drawer/Comments';
+import Comment from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments';
 import Icon from '@/components/common/Icon';
 import * as Styled from './style';
 

@@ -1,7 +1,7 @@
 import { type FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { usePostComment } from '@/api/hooks/til';
-import * as Styled from '@/components/TILWrite/TILWriteSection/Drawer/Comments/TextAreaSection/style';
+import * as Styled from '@/components/TILWrite/TILWriteSection/TILEditor/Drawer/Comments/TextAreaSection/style';
 import Icon from '@/components/common/Icon';
 import TextArea from '@/components/common/TextArea';
 
