@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapStepReference } from '@/api/hooks/roadmap';
-import Docs from '@/components/TILWrite/Reference/Docs';
-import Header from '@/components/TILWrite/Reference/Header';
-import Youtube from '@/components/TILWrite/Reference/Youtube';
+import Docs from '@/components/TILWrite/Drawer/Reference/Docs';
+import Header from '@/components/TILWrite/Drawer/Reference/Header';
+import Youtube from '@/components/TILWrite/Drawer/Reference/Youtube';
 import Fallback from '@/components/common/Fallback';
 import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary';
 import * as Styled from './style';

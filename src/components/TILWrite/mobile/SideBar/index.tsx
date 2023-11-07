@@ -3,10 +3,10 @@ import type { PropsWithChildren } from 'react';
 import { useRouter } from 'next/router';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
-import Comment from '@/components/TILWrite/Comments';
-import Reference from '@/components/TILWrite/Reference';
-import RoadMapInfo from '@/components/TILWrite/RoadMap/RoadMapInfo';
-import Step from '@/components/TILWrite/RoadMap/Step';
+import Comment from '@/components/TILWrite/Drawer/Comments';
+import Reference from '@/components/TILWrite/Drawer/Reference';
+import RoadMapInfo from '@/components/TILWrite/Drawer/RoadMap/RoadMapInfo';
+import Step from '@/components/TILWrite/Drawer/RoadMap/Step';
 import Icon from '@/components/common/Icon';
 import * as Styled from './style';
 

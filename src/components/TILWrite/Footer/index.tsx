@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
 import { useSubmitTil } from '@/api/hooks/til';
-import SubmitModal from '@/components/TILWrite/SubmitModal';
+import SubmitModal from '@/components/TILWrite/Footer/SubmitModal';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';

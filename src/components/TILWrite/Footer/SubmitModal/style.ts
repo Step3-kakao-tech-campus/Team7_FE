@@ -2,14 +2,14 @@ import styled from '@emotion/styled';
 
 export const Title = styled.h3`
   font-size: 26px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.5;
 `;
 
 export const Info = styled.p`
+  width: 100%;
   margin-top: 0.8rem;
   padding: 0.6em;
-  width: 100%;
   border: 1px solid ${({ theme }) => theme.colors.blue_gray_200};
   border-radius: 0.3rem;
   background-color: ${({ theme }) => theme.colors.gray_100};
@@ -25,6 +25,5 @@ export const InfoText = styled.li`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-
   margin-top: 1.3rem;
 `;

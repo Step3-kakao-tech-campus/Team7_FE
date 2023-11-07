@@ -1,4 +1,4 @@
-import * as Styled from '@/components/TILWrite/Comments/Header/style';
+import * as Styled from '@/components/TILWrite/Drawer/Comments/Header/style';
 import Icon from '@/components/common/Icon';
 
 interface HeaderProps {

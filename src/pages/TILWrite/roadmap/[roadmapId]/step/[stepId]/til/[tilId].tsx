@@ -6,11 +6,11 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
 import { useGetTil } from '@/api/hooks/til';
-import Comment from '@/components/TILWrite/Comments';
+import Comment from '@/components/TILWrite/Drawer/Comments';
+import Reference from '@/components/TILWrite/Drawer/Reference';
+import RoadMap from '@/components/TILWrite/Drawer/RoadMap';
 import Footer from '@/components/TILWrite/Footer';
 import Header from '@/components/TILWrite/Header';
-import Reference from '@/components/TILWrite/Reference';
-import RoadMap from '@/components/TILWrite/RoadMap';
 import MobileHeader from '@/components/TILWrite/mobile/MobileHeader';
 import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
 import Responsive from '@/components/common/Responsive';
@@ -21,16 +21,11 @@ import { setLayout } from '@/utils/layout';
 
 const Editor = dynamic(() => import('@/components/TILWrite/Ckeditor'), { ssr: false });
 
-export interface AutoSaveTime {
-  active: boolean;
-  time: Date;
-}
-
 const TILWrite = () => {
   const [TILContent, setTILContent] = useState<string>('');
   const [autoSaveTime, setAutoSaveTime] = useState<AutoSaveTime>({
     active: false,
-    time: new Date('2023-11-03'),
+    time: new Date(),
   });
   const [stepTitle, setStepTitle] = useState<string>('');
 
@@ -195,6 +190,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return { props: {} };
 };
+
+export interface AutoSaveTime {
+  active: boolean;
+  time: Date;
+}
 
 export const editorVariants = {
   asideOpen: {

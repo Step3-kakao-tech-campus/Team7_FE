@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import OpenGraph from '@/components/TILWrite/Reference/OpenGraph';
+import OpenGraph from '@/components/TILWrite/Drawer/Reference/OpenGraph';
 import * as Styled from './style';
 
 interface DocsProps {

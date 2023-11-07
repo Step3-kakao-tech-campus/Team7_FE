@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
-import RoadMapInfo from '@/components/TILWrite/RoadMap/RoadMapInfo';
-import Step from '@/components/TILWrite/RoadMap/Step';
+import RoadMapInfo from '@/components/TILWrite/Drawer/RoadMap/RoadMapInfo';
+import Step from '@/components/TILWrite/Drawer/RoadMap/Step';
 import * as Styled from './style';
 
 interface RoadMapProps {

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { useGetTil } from '@/api/hooks/til';
 import SideBar from '@/components/TILView/mobile/SideBar';
-import ExtensionInfoModal from '@/components/TILWrite/ExtensionInfoModal';
+import ExtensionInfoModal from '@/components/TILWrite/Header/ExtensionInfoModal';
 import Icon from '@/components/common/Icon';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';

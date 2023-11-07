@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import { useGetTil } from '@/api/hooks/til';
-import Progress from '@/components/TILWrite/RoadMap/Progress';
-import RoadmapPopover from '@/components/TILWrite/RoadMap/RoadMapInfo/Popover';
+import Progress from '@/components/TILWrite/Drawer/RoadMap/Progress';
+import RoadmapPopover from '@/components/TILWrite/Drawer/RoadMap/RoadMapInfo/Popover';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Icon from '@/components/common/Icon';
 import Skeleton from '@/components/common/Skeleton';
