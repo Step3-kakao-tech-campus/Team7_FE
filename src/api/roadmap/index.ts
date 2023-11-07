@@ -14,13 +14,14 @@ import type {
   PatchRoadmapGroupMemberRoleResponse,
   Role,
   GetRoadmapGroupMemberResponse,
-  PostRoadmapsResponse,
   GetRoadmapsResponse,
   GetRoadmapsByIdResponse,
   PostRoadmapsApplyResponse,
-  PostRoadmapsByIdResponse,
+  PostRoadmapsRequest,
 } from '@/api/roadmap/type';
-import type { RoadmapForm } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import type { IdResponse } from '../type';
+
+// 로드맵 - 공통
 
 export const getRoadmapsMy = async () => {
   const { data } = await axiosInstance.request<GetRoadmapsMyResponse>({
@@ -60,6 +61,8 @@ export const getRoadmapStepReference = async (body: GetRoadmapStepReferenceReque
   return data;
 };
 
+// 로드맵 - 개인
+
 export const postRoadmapIndividual = async (name: string) => {
   const { data } = await axiosInstance.request<PostRoadmapsIndividualResponse>({
     method: 'POST',
@@ -80,30 +83,33 @@ export const postRoadmapStepIndividual = async ({ roadmapId, title }: { roadmapI
   return data;
 };
 
-export const postRoadmaps = async (roadmapForm: RoadmapForm) => {
-  const { data } = await axiosInstance.request<PostRoadmapsResponse>({
+// 로드맵 - 그룹
+
+export const postRoadmaps = async ({ body }: { body: PostRoadmapsRequest }) => {
+  const { data } = await axiosInstance.request<IdResponse>({
     method: 'POST',
     url: '/roadmaps',
-    data: roadmapForm,
+    data: body,
   });
 
   return data;
 };
 
-export const getRoadmapsById = async (roadmapId: number) => {
-  const { data } = await axiosInstance.request<GetRoadmapsByIdResponse>({
-    method: 'GET',
-    url: `roadmaps/${roadmapId}`,
-  });
-
-  return data;
-};
-
-export const postRoadmapsById = async ({ roadmapId, body }: { roadmapId: number; body: RoadmapForm }) => {
-  const { data } = await axiosInstance.request<PostRoadmapsByIdResponse>({
+export const postRoadmapsById = async ({ roadmapId, body }: { roadmapId: number; body: PostRoadmapsRequest }) => {
+  const { data } = await axiosInstance.request<IdResponse>({
     method: 'POST',
     url: `/roadmaps/${roadmapId}`,
     data: body,
+  });
+
+  return data;
+};
+
+export const getRoadmapsById = async (req: { roadmapId: number }) => {
+  const { roadmapId } = req;
+  const { data } = await axiosInstance.request<GetRoadmapsByIdResponse>({
+    method: 'GET',
+    url: `roadmaps/${roadmapId}`,
   });
 
   return data;

@@ -53,11 +53,15 @@ export const EmptyRoot = styled.section`
   align-items: center;
   width: 100%;
   height: 500px;
-  margin-left: 2.5rem;
+  margin-top: 50px;
+  padding-right: 70px;
+
+  @media ${({ theme }) => theme.mediaQuery.lg} {
+    padding-right: 0;
+  }
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     width: 100%;
-    margin-left: 0;
     grid-column: 1 / 3;
   }
 `;

@@ -17,7 +17,7 @@ const TILY_LINKS = {
   tilView: ({ roadmapId, stepId, tilId }: tilWriteParams) =>
     `/TILView/roadmap/${roadmapId}/step/${stepId}/til/${tilId}`,
   peopleTil: ({ roadmapId, stepId }: Omit<tilWriteParams, 'tilId'>) => `/roadmap/${roadmapId}/step/${stepId}`,
-  manageGroupInfo: (roadmapId: number) => `/roadmap/${roadmapId}/manage/groupInfo`,
+  manageGroupInfo: (roadmapId: number) => `/roadmap/${roadmapId}/manage/roadmapInfo`,
   manageMember: (roadmapId: number) => `/roadmap/${roadmapId}/manage/member`,
   manageTIL: (roadmapId: number) => `/roadmap/${roadmapId}/manage/TIL`,
   manageApply: (roadmapId: number) => `/roadmap/${roadmapId}/manage/apply`,

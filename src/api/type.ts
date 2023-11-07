@@ -11,6 +11,12 @@ export interface NullResultResponse extends CommonResponse {
   result: null;
 }
 
+export interface IdResponse extends CommonResponse {
+  result: {
+    id: number;
+  };
+}
+
 // User 인터페이스
 export interface User {
   id: number;

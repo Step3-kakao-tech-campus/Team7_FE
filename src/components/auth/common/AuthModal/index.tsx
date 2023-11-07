@@ -16,7 +16,7 @@ const AuthModal = (props: ModalProps) => {
       width={25}
       isOpen={isOpen}
       onClose={() => {
-        onClose();
+        onClose?.();
         router.replace(TILY_LINKS.login());
       }}>
       <Styled.Title>{content}</Styled.Title>

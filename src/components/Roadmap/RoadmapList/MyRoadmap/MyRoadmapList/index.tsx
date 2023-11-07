@@ -54,7 +54,7 @@ const EmptyMyRoadmap = () => {
     <Styled.EmptyRoot>
       <Image src="/assets/icons/ic_step.svg" alt="빈 로드맵" width={60} height={60} />
       <p>참여중인 로드맵이 없습니다.</p>
-      <p>직접 로드맵을 만들어보세요!</p>
+      <p>직접 로드맵을 만들고 공유해보세요!</p>
       <Button onClick={() => router.push(TILY_LINKS.roadmapCreate())}>로드맵 만들기</Button>
     </Styled.EmptyRoot>
   );

@@ -1,4 +1,3 @@
-import FocusTrap from 'focus-trap-react';
 import { type PropsWithChildren, type HTMLAttributes, useRef } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import Image from 'next/image';

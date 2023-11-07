@@ -1,6 +1,5 @@
 import qs from 'qs';
 import type { ParsedUrlQuery } from 'querystring';
-import { useSetRecoilState } from 'recoil';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import {
@@ -10,7 +9,7 @@ import {
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
   postRoadmapIndividual as postRoadmapIndividualAPI,
   getRoadmapStepReference,
-  postRoadmaps as postRoadmapsAPI,
+  postRoadmaps,
   getRoadmapGroupMember,
   getRoadmapGroupApply,
   patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
@@ -20,10 +19,14 @@ import {
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
   getRoadmapsById,
   postRoadmapsApply as postRoadmapsApplyAPI,
-  postRoadmapsById as postRoadmapsByIdAPI,
+  postRoadmapsById,
 } from '@/api/roadmap';
-import type { GetRoadmapStepReferenceRequest, GetRoadmapsResponse, Role } from '@/api/roadmap/type';
-import { type RoadmapForm, roadmapAtoms } from '@/components/Roadmap/RoadmapCreate/states/roadmapCreateAtoms';
+import type {
+  GetRoadmapStepReferenceRequest,
+  GetRoadmapsResponse,
+  PostRoadmapsRequest,
+  Role,
+} from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
@@ -160,55 +163,48 @@ export const usePostRoadmapStepIndividual = () => {
   return { postRoadmapStepIndividual };
 };
 
+// 로드맵 - 그룹
 export const usePostRoadmaps = () => {
-  const { mutateAsync, isLoading } = useMutation(postRoadmapsAPI);
+  const { mutateAsync, isLoading } = useMutation(postRoadmaps);
 
-  const postRoadmaps = async (body: RoadmapForm) => {
-    const data = await mutateAsync(body);
+  const postRoadmapsAsync = async (req: { body: PostRoadmapsRequest }) => {
+    const data = await mutateAsync(req);
 
     return data;
   };
 
-  return { postRoadmaps, isLoading };
+  return { postRoadmapsAsync, isLoading };
 };
 
 export const usePostRoadmapsById = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const { handleError } = useApiError();
-  const { mutateAsync, isLoading } = useMutation(postRoadmapsByIdAPI);
+  const { mutateAsync, isLoading } = useMutation(postRoadmapsById);
 
-  const postRoadmapsById = async ({ roadmapId, body }: { roadmapId: number; body: RoadmapForm }) => {
-    const data = await mutateAsync(
-      { roadmapId, body },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId)]);
-          toast.showBottom({
-            message: '로드맵이 수정되었습니다.',
-          });
-        },
-        onError: handleError,
+  const postRoadmapsByIdAsync = async (req: { roadmapId: number; body: PostRoadmapsRequest }) => {
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsById(req.roadmapId)]);
+        toast.showBottom({
+          message: '로드맵이 수정되었습니다.',
+        });
       },
-    );
+      onError: handleError,
+    });
 
     return data;
   };
 
-  return { postRoadmapsById, isLoading };
+  return { postRoadmapsByIdAsync, isLoading };
 };
 
-export const useGetRoadmapsById = (roadmapId: number) => {
+export const useGetRoadmapsById = (req: { roadmapId: number }) => {
+  const { roadmapId } = req;
   const enabled = roadmapId > 0;
-  const { data, isLoading } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId), () => getRoadmapsById(roadmapId), {
+  const { data, isLoading } = useQuery(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId), () => getRoadmapsById(req), {
     enabled,
   });
-
-  const setRoadmap = useSetRecoilState(roadmapAtoms);
-
-  if (!isLoading && data) {
-    setRoadmap(data?.result);
-  }
 
   return { data, isLoading };
 };

@@ -47,7 +47,7 @@ export const EmptyRoot = styled.section`
     margin-bottom: 20px;
   }
   & > p {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     margin-bottom: 7px;
 

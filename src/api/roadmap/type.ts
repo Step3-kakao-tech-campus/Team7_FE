@@ -98,25 +98,32 @@ export interface PostRoadmapsGroupsParticipateResponse {
   };
 }
 
-// postRoadmaps
-export interface PostRoadmapsResponse {
-  success: boolean;
-  message: string;
-  result: {
-    id: number;
-  };
+// Roadmap 요청
+
+// 로드맵 - 그룹
+export interface PostRoadmapsRequest {
+  name: string;
+  description: string;
+  isPublic: boolean;
+  isRecruit?: boolean;
 }
+
+// Roadmap 응답
+
+// 로드맵 - 그룹
 
 export interface GetRoadmapsByIdResponse {
   success: boolean;
   message: string;
   result: {
-    creator: Omit<Creator, 'id'>;
+    creator?: Omit<Creator, 'id'>;
     name: string;
     description: string;
-    myRole: 'master' | 'manager' | 'member' | 'none';
-    recentTilId: number | null;
-    recentStepId: number | null;
+    isPublic: boolean;
+    isRecruit: boolean;
+    myRole?: 'master' | 'manager' | 'member' | 'none';
+    recentTilId?: number | null;
+    recentStepId?: number | null;
     code: string;
     steps: StepWithReferences[];
   };

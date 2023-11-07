@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^11.11.0",
+    "@next/bundle-analyzer": "^14.0.1",
     "@storybook/addon-essentials": "^7.4.5",
     "@storybook/addon-interactions": "^7.4.5",
     "@storybook/addon-links": "^7.4.5",

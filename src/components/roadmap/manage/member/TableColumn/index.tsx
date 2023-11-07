@@ -48,6 +48,8 @@ const TableColumn = (props: TableColumnProps) => {
     });
   };
 
+  console.log(image);
+
   return (
     <>
       <tr>
