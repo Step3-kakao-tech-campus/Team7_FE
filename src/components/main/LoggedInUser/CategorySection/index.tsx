@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
-import Collapsible from '@/components/main/Collapsible';
+import Collapsible from '@/components/main/LoggedInUser/CategorySection/Collapsible';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 
