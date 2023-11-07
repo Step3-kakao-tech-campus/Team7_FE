@@ -13,6 +13,7 @@ const AuthModal = (props: ModalProps) => {
 
   return (
     <Modal
+      showCloseButton={false}
       width={25}
       isOpen={isOpen}
       onClose={() => {

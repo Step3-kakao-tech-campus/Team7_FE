@@ -6,6 +6,7 @@ import CommentPatchModal from '@/components/TILWrite/Comments/CommentPatchModal'
 import Header from '@/components/TILWrite/Comments/Header';
 import TextAreaSection from '@/components/TILWrite/Comments/TextAreaSection';
 import * as Styled from '@/components/TILWrite/Comments/style';
+import ConditionalRender from '@/components/common/ConditionalRender';
 import { useModalState } from '@/hooks/useModalState';
 
 interface CommentsProps {
@@ -44,16 +45,18 @@ const Comments = (props: CommentsProps) => {
       </Styled.HeaderContainer>
 
       <Styled.CommentContainer>
-        {tilDetail?.comments.map((comment) => {
-          return (
-            <Comment
-              handlePatchModalOpen={handleOpen}
-              handleSelectComment={handleSelectComment}
-              key={comment.id}
-              {...comment}
-            />
-          );
-        })}
+        <ConditionalRender data={tilDetail?.comments} EmptyUI={<Comments.Empty />}>
+          {tilDetail?.comments.map((comment) => {
+            return (
+              <Comment
+                handlePatchModalOpen={handleOpen}
+                handleSelectComment={handleSelectComment}
+                key={comment.id}
+                {...comment}
+              />
+            );
+          })}
+        </ConditionalRender>
       </Styled.CommentContainer>
 
       <TextAreaSection />
@@ -64,3 +67,12 @@ const Comments = (props: CommentsProps) => {
 };
 
 export default Comments;
+
+Comments.Empty = function Empty() {
+  return (
+    <Styled.EmptyRoot>
+      <img src="/assets/icons/ic_step.svg" alt="stepEmptyIcon" />
+      <h3>댓글이 없습니다.</h3>
+    </Styled.EmptyRoot>
+  );
+};

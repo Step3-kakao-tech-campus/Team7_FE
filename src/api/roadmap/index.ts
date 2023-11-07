@@ -18,6 +18,9 @@ import type {
   GetRoadmapsByIdResponse,
   PostRoadmapsApplyResponse,
   PostRoadmapsRequest,
+  PostGroupRoadmapsApplyResponse,
+  PostRoadmapsByIdResponse,
+  PostGroupTilyApplyResponse,
 } from '@/api/roadmap/type';
 import type { IdResponse } from '../type';
 
@@ -117,11 +120,20 @@ export const getRoadmapsById = async (req: { roadmapId: number }) => {
   return data;
 };
 
-export const postRoadmapsApply = async ({ roadmapId, content }: { roadmapId: number; content: string }) => {
-  const { data } = await axiosInstance.request<PostRoadmapsApplyResponse>({
+export const postGroupRoadmapsApply = async ({ roadmapId, content }: { roadmapId: number; content: string }) => {
+  const { data } = await axiosInstance.request<PostGroupRoadmapsApplyResponse>({
     method: 'POST',
-    url: `roadmaps/${roadmapId}/apply`,
+    url: `roadmaps/groups/${roadmapId}/apply`,
     data: { content },
+  });
+
+  return data;
+};
+
+export const postTilyRoadmapsApply = async (roadmapId: number) => {
+  const { data } = await axiosInstance.request<PostGroupTilyApplyResponse>({
+    method: 'POST',
+    url: `roadmaps/tily/${roadmapId}/apply`,
   });
 
   return data;

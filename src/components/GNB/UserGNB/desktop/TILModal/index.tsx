@@ -21,7 +21,7 @@ const TILModal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
       isOpen={isOpen}
       onClose={onClose}
       isBackDrop={isBackDrop}>
-      <Styled.ModalTitle>TIL 선택</Styled.ModalTitle>
+      <Styled.ModalTitle data-testid="TILSelect">TIL 선택</Styled.ModalTitle>
 
       <Styled.TabOnboardRefContainer ref={ref}>
         <Tab css={Styled.TabStyles}>

@@ -10,6 +10,7 @@ import * as Styled from './style';
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   isOnClickOutsideClose?: boolean;
   isBackDrop?: boolean;
+  showCloseButton?: boolean;
   width?: number;
   isOpen?: boolean;
   onClose?: () => void;
@@ -22,6 +23,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
   const {
     children,
     width,
+    showCloseButton = true,
     isOpen,
     isOnClickOutsideClose = true,
     isBackDrop = true,
@@ -61,14 +63,16 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
           {/* <FocusTrap> */}
           <RemoveScroll>
             <Styled.Container role="dialog" ref={modalRef} width={width} {...rest}>
-              <Styled.CloseButton css={closeButtonStyles} onClick={onClose}>
-                <Image
-                  src="/assets/icons/ic_closeButton.svg"
-                  alt="close"
-                  width={closeButtonSize}
-                  height={closeButtonSize}
-                />
-              </Styled.CloseButton>
+              {showCloseButton && (
+                <Styled.CloseButton css={closeButtonStyles} onClick={onClose}>
+                  <Image
+                    src="/assets/icons/ic_closeButton.svg"
+                    alt="close"
+                    width={closeButtonSize}
+                    height={closeButtonSize}
+                  />
+                </Styled.CloseButton>
+              )}
               <Styled.Content css={modalContentStyles}>{children}</Styled.Content>
             </Styled.Container>
           </RemoveScroll>

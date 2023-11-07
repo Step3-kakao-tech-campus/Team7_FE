@@ -20,7 +20,7 @@ export const Title = styled.h1`
 
 export const Container = styled.div`
   display: flex;
-  gap: 1.3rem;
+  gap: 8px;
 
   & > .swing {
     animation: swing 2s infinite linear;

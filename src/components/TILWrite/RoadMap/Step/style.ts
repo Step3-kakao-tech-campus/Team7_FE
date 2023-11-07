@@ -6,8 +6,9 @@ export const Root = styled.button<{ isActiveStep: boolean }>`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 56px;
   margin: 3px 0;
-  padding: 0.875rem 1.25rem;
+  padding: 10px 20px;
   border-radius: 10px;
   background-color: ${({ theme, isActiveStep }) => isActiveStep && theme.colors.rose_light};
 

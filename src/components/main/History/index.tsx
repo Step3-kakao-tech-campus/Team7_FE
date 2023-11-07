@@ -88,6 +88,7 @@ const Tooltip = ({ children }: PropsWithChildren) => {
         padding: 6px 12px;
         justify-content: center;
         align-items: center;
+        width: 110px;
         gap: 10px;
         border-radius: 6px;
         background: #181818;

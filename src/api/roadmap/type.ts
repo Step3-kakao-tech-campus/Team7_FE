@@ -10,7 +10,7 @@ export interface GetRoadmapStepsResponse {
 export interface RoadmapStepsResult {
   steps: Step[];
   progress: number;
-  role: string;
+  myRole: string;
 }
 
 // getRoadmapStepReference
@@ -105,6 +105,8 @@ export interface GetRoadmapsByIdResponse {
   message: string;
   result: {
     creator?: Omit<Creator, 'id'>;
+    creator: Omit<Creator, 'id'>;
+    category: 'tily' | 'group';
     name: string;
     description: string;
     isPublic: boolean;
@@ -123,7 +125,13 @@ export interface PostRoadmapsByIdResponse {
   result: null;
 }
 
-export interface PostRoadmapsApplyResponse {
+export interface PostGroupRoadmapsApplyResponse {
+  success: boolean;
+  message: string;
+  result: null;
+}
+
+export interface PostGroupTilyApplyResponse {
   success: boolean;
   message: string;
   result: null;

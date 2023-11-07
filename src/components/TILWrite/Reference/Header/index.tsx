@@ -2,11 +2,12 @@ import Image from 'next/image';
 import * as Styled from './style';
 
 interface HeaderProps {
+  stepTitle: string;
   handleCloseReferenceAside: () => void;
 }
 
 const Header = (props: HeaderProps) => {
-  const { handleCloseReferenceAside } = props;
+  const { stepTitle, handleCloseReferenceAside } = props;
 
   return (
     <Styled.Container>
@@ -15,7 +16,7 @@ const Header = (props: HeaderProps) => {
         <div>로드맵</div>
       </Styled.TitleContainer>
 
-      <Styled.Title>Next.js 13 - Next.js 란 무엇인가?</Styled.Title>
+      <Styled.Title>{stepTitle}</Styled.Title>
     </Styled.Container>
   );
 };

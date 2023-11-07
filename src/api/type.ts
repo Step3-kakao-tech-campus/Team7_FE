@@ -33,12 +33,12 @@ export interface User extends IdName {
 // Alarm 인터페이스
 export interface Alarm {
   id: number;
-  tilId: number;
   isChecked: boolean;
   roadmap: IdName;
+  isRead: boolean;
   step: Pick<Step, 'id' | 'title'>;
   sender: Pick<User, 'name' | 'image'>;
-  createdAt: Date;
+  createDate: Date;
 }
 
 export interface Til {

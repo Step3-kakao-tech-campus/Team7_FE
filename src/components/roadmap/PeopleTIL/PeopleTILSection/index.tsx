@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetStepTils } from '@/api/hooks/til';
-import TIL from '@/components/Roadmap/PeopleTIL/TIL';
+import TIL from '@/components/Roadmap/PeopleTIL/PeopleTILSection/TIL';
 import Button from '@/components/common/Button';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';

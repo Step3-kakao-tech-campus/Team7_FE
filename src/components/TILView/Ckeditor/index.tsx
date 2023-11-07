@@ -17,7 +17,7 @@ const CkEditor = () => {
     <Styled.Root isReadOnly={true}>
       <CKEditor
         editor={Editor}
-        data={tilDetail?.content || ''}
+        data={tilDetail?.submitContent || ''}
         onReady={(editor) => {
           editor.enableReadOnlyMode('');
         }}
