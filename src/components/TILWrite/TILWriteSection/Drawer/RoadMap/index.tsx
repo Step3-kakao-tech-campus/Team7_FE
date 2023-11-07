@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
-import RoadMapInfo from '@/components/TILWrite/Drawer/RoadMap/RoadMapInfo';
-import Step from '@/components/TILWrite/Drawer/RoadMap/Step';
+import RoadMapInfo from '@/components/TILWrite/TILWriteSection/Drawer/RoadMap/RoadMapInfo';
+import Step from '@/components/TILWrite/TILWriteSection/Drawer/RoadMap/Step';
 import * as Styled from './style';
 
 interface RoadMapProps {
   asideMount: boolean;
   handleCloseAside: () => void;
   handleOpenReferenceAside: () => void;
-  handleAutoSaveTime: {
+  autoSavedTimeHandler: {
     activeAutoSave: () => void;
     clearAutoSave: () => void;
   };
@@ -16,7 +16,7 @@ interface RoadMapProps {
 }
 
 const RoadMap = (props: RoadMapProps) => {
-  const { asideMount, handleCloseAside, handleOpenReferenceAside, handleAutoSaveTime, handleStepTitle } = props;
+  const { asideMount, handleCloseAside, handleOpenReferenceAside, autoSavedTimeHandler, handleStepTitle } = props;
 
   const { query } = useRouter();
   const { steps } = useGetRoadmapSteps(Number(query.roadmapId));
@@ -42,7 +42,7 @@ const RoadMap = (props: RoadMapProps) => {
               isSubmit={step.isSubmit}
               tilId={step.tilId}
               handleOpenReferenceAside={handleOpenReferenceAside}
-              handleAutoSaveTime={handleAutoSaveTime}
+              autoSavedTimeHandler={autoSavedTimeHandler}
               handleStepTitle={handleStepTitle}
             />
           );

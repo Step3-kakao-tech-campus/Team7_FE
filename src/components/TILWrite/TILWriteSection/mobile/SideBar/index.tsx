@@ -3,32 +3,37 @@ import type { PropsWithChildren } from 'react';
 import { useRouter } from 'next/router';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
-import Comment from '@/components/TILWrite/Drawer/Comments';
-import Reference from '@/components/TILWrite/Drawer/Reference';
-import RoadMapInfo from '@/components/TILWrite/Drawer/RoadMap/RoadMapInfo';
-import Step from '@/components/TILWrite/Drawer/RoadMap/Step';
+import Comment from '@/components/TILWrite/TILWriteSection/Drawer/Comments';
+import Reference from '@/components/TILWrite/TILWriteSection/Drawer/Reference';
+import RoadMapInfo from '@/components/TILWrite/TILWriteSection/Drawer/RoadMap/RoadMapInfo';
+import Step from '@/components/TILWrite/TILWriteSection/Drawer/RoadMap/Step';
 import Icon from '@/components/common/Icon';
 import * as Styled from './style';
 
 interface SideBarProps {
-  handleAutoSaveTime: {
+  autoSavedTimeHandler: {
     activeAutoSave: () => void;
     clearAutoSave: () => void;
   };
 }
 
 const SideBar = (props: PropsWithChildren<SideBarProps>) => {
-  const { children, handleAutoSaveTime } = props;
+  const { children, autoSavedTimeHandler } = props;
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<'roadmap' | 'comment'>('roadmap');
   const [referenceOpen, setReferenceOpen] = useState(false);
+  const [stepTitle, setStepTitle] = useState<string>('');
 
   const { query } = useRouter();
   const { steps } = useGetRoadmapSteps(Number(query.roadmapId));
 
   const handleMobileSideBar = () => {
     setOpen(false);
+  };
+
+  const handleStepTitle = (title: string) => {
+    setStepTitle(title);
   };
 
   return (
@@ -70,6 +75,7 @@ const SideBar = (props: PropsWithChildren<SideBarProps>) => {
               }}
               transition={{ type: 'tween' }}>
               <Reference
+                stepTitle={stepTitle}
                 handleCloseReferenceAside={() => {
                   setReferenceOpen(false);
                 }}
@@ -100,7 +106,8 @@ const SideBar = (props: PropsWithChildren<SideBarProps>) => {
                                 setReferenceOpen(true);
                               }}
                               handleMobileSideBar={handleMobileSideBar}
-                              handleAutoSaveTime={handleAutoSaveTime}
+                              autoSavedTimeHandler={autoSavedTimeHandler}
+                              handleStepTitle={handleStepTitle}
                             />
                           );
                         })}

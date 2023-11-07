@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useDeleteComment } from '@/api/hooks/til';
 import type { Comment as CommentType } from '@/api/type';
-import * as Styled from '@/components/TILWrite/Drawer/Comments/Comment/style';
+import * as Styled from '@/components/TILWrite/TILWriteSection/Drawer/Comments/Comment/style';
 import Avatar from '@/components/common/Avatar';
 import ContextMenu from '@/components/common/ContextMenu';
 import Icon from '@/components/common/Icon';

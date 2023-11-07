@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
-import Comment from '@/components/TILWrite/Drawer/Comments/Comment';
-import CommentPatchModal from '@/components/TILWrite/Drawer/Comments/CommentPatchModal';
-import Header from '@/components/TILWrite/Drawer/Comments/Header';
-import TextAreaSection from '@/components/TILWrite/Drawer/Comments/TextAreaSection';
+import Comment from '@/components/TILWrite/TILWriteSection/Drawer/Comments/Comment';
+import CommentPatchModal from '@/components/TILWrite/TILWriteSection/Drawer/Comments/CommentPatchModal';
+import Header from '@/components/TILWrite/TILWriteSection/Drawer/Comments/Header';
+import TextAreaSection from '@/components/TILWrite/TILWriteSection/Drawer/Comments/TextAreaSection';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { memo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil } from '@/api/hooks/til';
-import ExtensionInfoModal from '@/components/TILWrite/Header/ExtensionInfoModal';
+import ExtensionInfoModal from '@/components/TILWrite/TILWriteSection/Header/ExtensionInfoModal';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
 import { useToast } from '@/components/common/Toast/useToast';
@@ -29,6 +30,8 @@ const Header = (props: HeaderProps) => {
     stepId: Number(router.query.stepId),
     tilId: Number(router.query.tilId),
   });
+
+  console.log('hi');
 
   useEffect(() => {
     const isInstalled = document.documentElement.getAttribute('myextension');
@@ -112,4 +115,4 @@ const Header = (props: HeaderProps) => {
   );
 };
 
-export default Header;
+export default memo(Header);

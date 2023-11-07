@@ -28,7 +28,7 @@ export const Container = styled.div`
   gap: 1rem;
 `;
 
-export const AutoSaveTime = styled.div`
+export const AutoSavedTime = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -19,6 +19,7 @@ import type {
   GetStepTilsRequest,
   GetStepTilsResponse,
 } from '@/api/til/type';
+import { IdParams } from '@/api/type';
 
 export const getTils = async (query: GetTilsRequest) => {
   const { data } = await axiosInstance.request<GetTilsResponse>({
@@ -29,8 +30,8 @@ export const getTils = async (query: GetTilsRequest) => {
   return data;
 };
 
-export const getTil = async (body: GetTilRequest) => {
-  const { roadmapId, stepId, tilId } = body;
+export const getTil = async (req: IdParams) => {
+  const { roadmapId, stepId, tilId } = req;
 
   const { data } = await axiosInstance.request<GetTilResponse>({
     method: 'GET',

@@ -3,21 +3,21 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
-import { defaultData } from '@/components/TILWrite/Ckeditor/defaultData';
+import { defaultData } from '@/components/TILWrite/TILWriteSection/Ckeditor/defaultData';
 import { useToast } from '@/components/common/Toast/useToast';
 import { editorConfiguration } from './plugin';
 import * as Styled from './style';
 
 interface CkEditorProps {
   handleTILContent: (content: string) => void;
-  handleAutoSaveTime: {
+  autoSavedTimeHandler: {
     activeAutoSave: () => void;
     clearAutoSave: () => void;
   };
 }
 
 const CkEditor = (props: CkEditorProps) => {
-  const { handleTILContent, handleAutoSaveTime } = props;
+  const { handleTILContent, autoSavedTimeHandler } = props;
 
   const toast = useToast();
 
@@ -65,7 +65,7 @@ const CkEditor = (props: CkEditorProps) => {
 
     const debounce = setTimeout(() => {
       autoSaveTIL(content);
-      handleAutoSaveTime.activeAutoSave();
+      autoSavedTimeHandler.activeAutoSave();
     }, 10000);
 
     if (isUserExcuteSave) {
@@ -101,7 +101,7 @@ const CkEditor = (props: CkEditorProps) => {
               throttle = true;
               setIsUserExcuteSave(true);
               autoSaveTIL(editor.getData());
-              handleAutoSaveTime.activeAutoSave();
+              autoSavedTimeHandler.activeAutoSave();
               setTimeout(async () => {
                 throttle = false;
               }, 3000);
@@ -118,7 +118,7 @@ const CkEditor = (props: CkEditorProps) => {
           if (isContentChange(prevContent, editor.getData()) && isContentNotEmpty(editor.getData())) {
             autoSaveTIL(editor.getData());
             setIsUserExcuteSave(true);
-            handleAutoSaveTime.activeAutoSave();
+            autoSavedTimeHandler.activeAutoSave();
           }
           setPrevContent(editor.getData());
         }}

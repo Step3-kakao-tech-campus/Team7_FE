@@ -2,7 +2,7 @@ import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { useRouter } from 'next/router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { useGetTil } from '@/api/hooks/til';
-import * as Styled from '@/components/TILWrite/Ckeditor/style';
+import * as Styled from '@/components/TILWrite/TILWriteSection/Ckeditor/style';
 
 const CkEditor = () => {
   const { query } = useRouter();

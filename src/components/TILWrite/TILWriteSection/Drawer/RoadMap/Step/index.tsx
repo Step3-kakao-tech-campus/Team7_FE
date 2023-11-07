@@ -13,7 +13,7 @@ interface StepProps {
   tilId: number | null;
   handleOpenReferenceAside: () => void;
   handleMobileSideBar?: () => void;
-  handleAutoSaveTime: {
+  autoSavedTimeHandler: {
     activeAutoSave: () => void;
     clearAutoSave: () => void;
   };
@@ -28,7 +28,7 @@ const Step = (props: StepProps) => {
     tilId,
     handleOpenReferenceAside,
     handleMobileSideBar,
-    handleAutoSaveTime,
+    autoSavedTimeHandler,
     handleStepTitle,
   } = props;
 
@@ -47,7 +47,7 @@ const Step = (props: StepProps) => {
   const routeTILWrite = async () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
     const roadmapId = Number(router.query.roadmapId) as number;
-    handleAutoSaveTime.clearAutoSave();
+    autoSavedTimeHandler.clearAutoSave();
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
       const data = await postTil({ roadmapId, stepId, title });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));

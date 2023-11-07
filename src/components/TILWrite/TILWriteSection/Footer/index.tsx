@@ -3,23 +3,23 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTil, usePatchTil } from '@/api/hooks/til';
 import { useSubmitTil } from '@/api/hooks/til';
-import SubmitModal from '@/components/TILWrite/Footer/SubmitModal';
+import SubmitModal from '@/components/TILWrite/TILWriteSection/Footer/SubmitModal';
+import type { AutoSavedTime } from '@/components/TILWrite/TILWriteSection/useAutoSave';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
 import { useToast } from '@/components/common/Toast/useToast';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
-import type { AutoSaveTime } from '@/pages/TILWrite/roadmap/[roadmapId]/step/[stepId]/til/[tilId]';
 import * as Styled from './style';
 
 interface FooterProps {
   TILContent: string;
-  autoSaveTime: AutoSaveTime;
+  autoSavedTime: AutoSavedTime;
 }
 
 const Footer = (props: FooterProps) => {
-  const { TILContent, autoSaveTime } = props;
+  const { TILContent, autoSavedTime } = props;
 
   const router = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState();
@@ -64,11 +64,11 @@ const Footer = (props: FooterProps) => {
       </Styled.ExitContainer>
 
       <Styled.Container>
-        {autoSaveTime.active && (
-          <Styled.AutoSaveTime>
+        {autoSavedTime.active && (
+          <Styled.AutoSavedTime>
             <span>자동 저장 완료</span>
-            <span>{dayjs(autoSaveTime.time).format('HH:mm:ss')}</span>
-          </Styled.AutoSaveTime>
+            <span>{dayjs(autoSavedTime.time).format('HH:mm:ss')}</span>
+          </Styled.AutoSavedTime>
         )}
         <CustomSuspense fallback={<SkeletonButton />} isLoading={isLoading}>
           {!tilDetail?.isPersonal && (

@@ -1,22 +1,23 @@
+import { memo } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { useGetTil } from '@/api/hooks/til';
-import ExtensionInfoModal from '@/components/TILWrite/Header/ExtensionInfoModal';
-import SideBar from '@/components/TILWrite/mobile/SideBar';
+import ExtensionInfoModal from '@/components/TILWrite/TILWriteSection/Header/ExtensionInfoModal';
+import SideBar from '@/components/TILWrite/TILWriteSection/mobile/SideBar';
 import Icon from '@/components/common/Icon';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 interface MobileHeaderProps {
-  handleAutoSaveTime: {
+  autoSavedTimeHandler: {
     activeAutoSave: () => void;
     clearAutoSave: () => void;
   };
 }
 
 const MobileHeader = (props: MobileHeaderProps) => {
-  const { handleAutoSaveTime } = props;
+  const { autoSavedTimeHandler } = props;
 
   const router = useRouter();
   const { isOpen, handleClose } = useModalState();
@@ -39,7 +40,7 @@ const MobileHeader = (props: MobileHeaderProps) => {
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
 
       <Styled.Container>
-        <SideBar handleAutoSaveTime={handleAutoSaveTime}>
+        <SideBar autoSavedTimeHandler={autoSavedTimeHandler}>
           <Icon iconName="ic_hamburger" imageSize={24} ext="svg" alt="사이드바 아이콘" />
         </SideBar>
       </Styled.Container>
@@ -49,7 +50,7 @@ const MobileHeader = (props: MobileHeaderProps) => {
   );
 };
 
-export default MobileHeader;
+export default memo(MobileHeader);
 
 export const Root = styled.header`
   display: flex;
