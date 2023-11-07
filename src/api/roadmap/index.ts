@@ -32,10 +32,11 @@ export const getRoadmapsMy = async () => {
   return data;
 };
 
-export const getRoadmaps = async (queryParamToString: string) => {
+export const getRoadmaps = async (req: { query: string }) => {
+  const { query } = req;
   const { data } = await axiosInstance.request<GetRoadmapsResponse>({
     method: 'GET',
-    url: `/roadmaps${queryParamToString}`,
+    url: `/roadmaps${query}`,
   });
 
   return data;
@@ -85,7 +86,8 @@ export const postRoadmapStepIndividual = async ({ roadmapId, title }: { roadmapI
 
 // 로드맵 - 그룹
 
-export const postRoadmaps = async ({ body }: { body: PostRoadmapsRequest }) => {
+export const postRoadmaps = async (req: { body: PostRoadmapsRequest }) => {
+  const { body } = req;
   const { data } = await axiosInstance.request<IdResponse>({
     method: 'POST',
     url: '/roadmaps',

@@ -32,7 +32,7 @@ import { useApiError } from '@/hooks/useApiError';
 
 export const ROADMAP_QUERY_KEY = {
   all: ['roadmaps'],
-  getRoadmapsMy: 'getRoadmapsMy',
+  getRoadmapsMy: () => [...ROADMAP_QUERY_KEY.all, 'my'],
   getRoadmaps: () => [...ROADMAP_QUERY_KEY.all, 'list'],
   getRoadmapsById: (roadmapId: number) => [...ROADMAP_QUERY_KEY.all, roadmapId],
   getRoadmapsFiltered: (filters: ParsedUrlQuery) => [...ROADMAP_QUERY_KEY.getRoadmaps(), filters],
@@ -40,6 +40,8 @@ export const ROADMAP_QUERY_KEY = {
   getRoadmapGroupMember: 'getRoadmapGroupMember',
   getRoadmapGroupApply: 'getRoadmapGroupApply',
 };
+
+// 로드맵 - 공통
 
 export const useGetRoadmapsMy = () => {
   const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapsMy], () => getRoadmapsMy());
@@ -54,12 +56,13 @@ export const useGetRoadmapsMy = () => {
   };
 };
 
-export const useGetRoadmaps = (query: ParsedUrlQuery) => {
+export const useGetRoadmaps = (req: { query: ParsedUrlQuery }) => {
+  const { query } = req;
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery(
     ROADMAP_QUERY_KEY.getRoadmapsFiltered(query),
     ({ pageParam: page = 0 }) => {
       const searchParams = { page, ...query };
-      const data = getRoadmaps(qs.stringify(searchParams, { addQueryPrefix: true }));
+      const data = getRoadmaps({ query: qs.stringify(searchParams, { addQueryPrefix: true }) });
 
       return data;
     },
@@ -90,7 +93,7 @@ export const useGetRoadmaps = (query: ParsedUrlQuery) => {
 
 export const useGetRoadmapsMyList = () => {
   const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapsMy], () => getRoadmapsMy());
-  return { roadmaps: data?.result.roadmaps, isLoading: isLoading };
+  return { groups: data?.result.roadmaps.groups, tilys: data?.result.roadmaps.tilys, isLoading };
 };
 
 export const useGetRoadmapSteps = (roadmapId: number) => {
@@ -164,6 +167,7 @@ export const usePostRoadmapStepIndividual = () => {
 };
 
 // 로드맵 - 그룹
+
 export const usePostRoadmaps = () => {
   const { mutateAsync, isLoading } = useMutation(postRoadmaps);
 

@@ -5,27 +5,36 @@ export const Root = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
   height: 230px;
-  margin: 0 auto;
-  padding: 10px 0;
+  margin: 20px auto;
+  padding: 12px 0 10px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(26, 28, 29, 0.06);
 
-  & > section > * {
+  & > section:first-of-type > * {
     margin-bottom: 7px;
+  }
+
+  & > section:first-of-type {
+    height: 55%;
+  }
+
+  & > section > section > h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    height: 200px;
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled.section`
   padding: 0 10px;
 
   & > p {
     font-size: 12px;
     color: ${({ theme }) => theme.colors.gray_700};
-  }
-
-  & > h5 {
-    font-size: 16px;
   }
 `;

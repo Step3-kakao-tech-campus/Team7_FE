@@ -4,9 +4,6 @@ import SkeletonBox from '@/components/common/Skeleton';
 export const RoadmapContainer = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 26px;
-  grid-row-gap: 40px;
-  padding-top: 26px;
 
   @media ${({ theme }) => theme.mediaQuery.lg} {
     grid-template-columns: repeat(3, 1fr);
@@ -14,12 +11,6 @@ export const RoadmapContainer = styled.section`
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 20px;
-  }
-
-  @media ${({ theme }) => theme.mediaQuery.xs} {
-    padding-top: 16px;
   }
 `;
 
@@ -29,8 +20,14 @@ export const ObserverInterSectionTarget = styled.div`
 `;
 
 export const Skeleton = styled(SkeletonBox)`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%;
   height: 230px;
+  margin: 20px auto;
+  padding: 16px 12px 10px;
+  cursor: pointer;
 
   @media ${({ theme }) => theme.mediaQuery.sm} {
     height: 200px;
@@ -41,18 +38,12 @@ export const EmptyRoot = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 100px auto 55px;
+  gap: 20px;
+  margin: 40px auto 55px;
 
-  & > img {
-    margin-bottom: 20px;
-  }
-  & > p {
+  & > section > p {
     font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 7px;
-
-    &:last-of-type {
-      margin-bottom: 20px;
-    }
+    font-weight: 600;
+    text-align: center;
   }
 `;

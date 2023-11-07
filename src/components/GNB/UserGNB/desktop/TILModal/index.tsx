@@ -29,7 +29,6 @@ const TILModal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
             return (
               <Tab.Menu
                 key={menu.name}
-                css={Styled.TabMenuStyles}
                 onClick={() => setCurTab(menu.status)}
                 className={curTab === menu.status ? 'selected' : ''}
                 tooltipContent={

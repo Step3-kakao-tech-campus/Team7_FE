@@ -6,51 +6,33 @@ export const Root = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
   height: 230px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 16px 12px 10px;
   cursor: pointer;
-  max-width: 225px;
 
-  @media ${({ theme }) => theme.mediaQuery.lg} {
-    max-width: 250px;
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    height: 200px;
   }
 
-  & > section > h5 {
-    width: 100%;
-    margin-bottom: 5px;
-    font-size: 16px;
-    line-height: 1.4;
-    font-weight: 600;
+  & > section > h4 {
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    word-wrap: break-word;
-    white-space: nowrap;
   }
 
   & > section > p {
-    line-height: 1.3;
-    display: -webkit-box;
-    width: 100%;
+    height: 70px;
+    color: ${({ theme }) => theme.colors.gray_700};
     font-size: 14px;
+    line-height: 1.3;
     word-wrap: break-word;
     overflow: hidden;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    height: 60px;
-    color: ${({ theme }) => theme.colors.gray_700};
 
-    @media ${({ theme }) => theme.mediaQuery.xs} {
-      -webkit-line-clamp: 2;
-      height: 40px;
+    @media ${({ theme }) => theme.mediaQuery.sm} {
+      height: 55px;
     }
-  }
-
-  & > section > div > span {
-    font-size: 12px;
-    color: ${({ theme }) => theme.colors.gray_700};
   }
 
   & > section > section {
@@ -64,12 +46,8 @@ export const Root = styled(Card)`
     & > span {
       color: ${({ theme }) => theme.colors.gray_900};
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 600;
     }
-  }
-
-  @media ${({ theme }) => theme.mediaQuery.sm} {
-    height: 200px;
   }
 `;
 

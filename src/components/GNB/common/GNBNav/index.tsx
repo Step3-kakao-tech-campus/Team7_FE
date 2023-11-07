@@ -11,7 +11,7 @@ const GNBNav = () => {
       <Styled.NavItem href={TILY_LINKS.home()} active={+activePathMatcher(TILY_LINKS.home())}>
         홈
       </Styled.NavItem>
-      <Styled.NavItem href={TILY_LINKS.roadmap()} active={+activePathMatcher(TILY_LINKS.roadmap())}>
+      <Styled.NavItem href={TILY_LINKS.roadmap()} active={+activePathMatcher('/roadmap')}>
         로드맵
       </Styled.NavItem>
     </Styled.NavArea>
