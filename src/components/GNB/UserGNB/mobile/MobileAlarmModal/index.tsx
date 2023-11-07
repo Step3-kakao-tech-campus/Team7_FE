@@ -21,7 +21,7 @@ const MobileAlarmModal = (props: MoblieAlarmModalProps) => {
     // 이를 방지하기 위해 알림창이 열려있는 상태에서 프로필이미지를 클릭하면 알림창이 닫히지 않도록 함
     if (!alarmButtonRef.current || alarmButtonRef.current.contains(event?.target as Node)) return;
 
-    onClose();
+    onClose?.();
   });
 
   if (!isOpen) return null;

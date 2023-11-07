@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetRoadmaps } from '@/api/hooks/roadmap';
@@ -8,12 +9,14 @@ import TilyCard from '@/components/Roadmap/RoadmapList/TilyCard';
 import Button from '@/components/common/Button';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';
+import Flex from '@/components/common/Flex';
 import TILY_LINKS from '@/constants/links';
 import { useIntersectionObserver } from '@/hooks/useInterSectionObserver';
 
 const RecruitRoadmapList = () => {
   const router = useRouter();
-  const { data, isLoading, fetchNextPage, hasNextPage } = useGetRoadmaps(router.query);
+
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetRoadmaps({ query: router.query });
 
   const { ref, isVisible } = useIntersectionObserver();
 
@@ -42,15 +45,11 @@ const RecruitRoadmapList = () => {
 const RoadmapSkeleton = () => {
   return (
     <Styled.RoadmapContainer>
-      <Styled.Skeleton />
-      <Styled.Skeleton />
-      <Styled.Skeleton />
-      <Styled.Skeleton />
-      <Styled.Skeleton />
-      <Styled.Skeleton />
-      <Styled.Skeleton />
-      <Styled.Skeleton />
-      <Styled.Skeleton />
+      {Array(12)
+        .fill(null)
+        .map((idx) => (
+          <Styled.Skeleton key={idx} />
+        ))}
     </Styled.RoadmapContainer>
   );
 };
@@ -59,17 +58,14 @@ const EmptyRecruitRoadmap = () => {
   const router = useRouter();
   return (
     <Styled.EmptyRoot>
-      <Image src="/assets/icons/ic_step.svg" alt="빈 로드맵" width={60} height={60} />
-      <p>모집중인 로드맵이 없습니다.</p>
-      <p>직접 로드맵을 만들어보세요!</p>
-      <Button
-        onClick={() => {
-          router.push(TILY_LINKS.roadmapCreate());
-        }}>
-        로드맵 만들기
-      </Button>
+      <Image src="/assets/icons/ic_step.svg" alt="참여중인 로드맵이 없음" width={60} height={60} />
+      <Flex dir="col" gap={0.3}>
+        <p>모집중인 로드맵이 없습니다.</p>
+        <p>직접 로드맵을 만들고 공유해보세요!</p>
+      </Flex>
+      <Button onClick={() => router.push(TILY_LINKS.roadmapCreate())}>로드맵 만들기</Button>
     </Styled.EmptyRoot>
   );
 };
 
-export default RecruitRoadmapList;
+export default React.memo(RecruitRoadmapList);

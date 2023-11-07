@@ -1,87 +1,76 @@
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import SliderList from 'react-slick';
 import styled from '@emotion/styled';
+import Flex from '@/components/common/Flex';
 import SkeletonBox from '@/components/common/Skeleton';
 
 export const Slider = styled(SliderList)`
-  position: relative;
+  margin-bottom: 20px;
 
-  & > div {
-    overflow: hidden;
-  }
-
-  & > div > div {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 20px;
-    padding: 10px;
+  & .slick-track {
+    height: 270px;
 
     @media ${({ theme }) => theme.mediaQuery.sm} {
-      padding: 0;
+      -webkit-line-clamp: 2;
+      height: 250px;
     }
   }
 
-  & > button:nth-of-type(1) {
-    position: absolute;
-    top: 46%;
+  & .slick-arrow {
+    top: 52%;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &::before {
+      content: '';
+    }
+  }
+
+  & .slick-prev {
     left: -35px;
-    width: 20px;
-    height: 40px;
-    background-image: url('/assets/icons/ic_chevronLeftBlack.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    font-size: 0;
-    transform: translateY(-50%);
+    background-image: url('/assets/icons/ic_prev.svg');
   }
 
-  & > button:nth-of-type(2) {
-    position: absolute;
-    bottom: 54%;
+  & .slick-next {
     right: -35px;
-    width: 20px;
-    height: 40px;
-    background-image: url('/assets/icons/ic_chevronRightBlack.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    font-size: 0;
-    transform: translateY(50%);
+    background-image: url('/assets/icons/ic_next.svg');
   }
 
-  & > ul {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  & .slick-dots {
+    bottom: -15px;
   }
 
-  & > ul > li > button {
-    width: 7px;
-    height: 7px;
-    border-radius: 7px;
-    background-color: ${({ theme }) => theme.colors.gray_600};
-    font-size: 0;
-  }
+  & .slick-dots > li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    background-color: ${({ theme }) => theme.colors.gray_500};
 
-  & > ul > li.slick-active > button {
-    background-color: ${({ theme }) => theme.colors.black};
-  }
+    & > button::before {
+      content: '';
+    }
 
-  @media ${({ theme }) => theme.mediaQuery.sm} {
-    margin: 0;
-
-    & > div > div {
-      gap: 10px;
+    &.slick-active {
+      background-color: ${({ theme }) => theme.colors.black};
     }
   }
 `;
 
-export const SkeletonRoot = styled.section`
+export const SkeletonRoot = styled(Flex)`
   display: flex;
-  gap: 10px;
+  margin-bottom: 40px;
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    margin-bottom: 50px;
+  }
 `;
 export const Skeleton = styled(SkeletonBox)`
   width: 100%;
   height: 230px;
-  margin: 0 auto;
+  margin: 20px 0 0 10px;
 
   @media ${({ theme }) => theme.mediaQuery.sm} {
     height: 200px;
@@ -92,18 +81,12 @@ export const EmptyRoot = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
   margin: 40px auto 55px;
 
-  & > img {
-    margin-bottom: 20px;
-  }
-  & > p {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 7px;
-
-    &:last-of-type {
-      margin-bottom: 20px;
-    }
+  & > section > p {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
   }
 `;

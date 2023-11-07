@@ -27,7 +27,7 @@ const YoutubeBox = (props: YoutubeBoxProps) => {
             </Button>
           )}
         </Styled.Header>
-        <ReferenceList type="youtube" stepIdx={idx} where={where} />
+        {/* <ReferenceList type="youtube" stepIdx={idx} where={where} /> */}
       </Styled.Root>
       {where === 'create' && <YoutubeModal isOpen={isOpen} onClose={handleClose} idx={idx} />}
     </>

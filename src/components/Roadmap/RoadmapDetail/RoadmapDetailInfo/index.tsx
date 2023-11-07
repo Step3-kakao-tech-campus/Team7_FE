@@ -12,10 +12,10 @@ import useQueryParam from '@/hooks/useQueryParam';
 import ApplyModal from '../ApplyModal';
 
 const RoadmapDetailInfo = () => {
-  const roadmapId = Number(useQueryParam('roadmapId'));
+  const roadmapId = useQueryParam('roadmapId');
   const toast = useToast();
 
-  const { data } = useGetRoadmapsById(roadmapId);
+  const { data } = useGetRoadmapsById({ roadmapId: Number(roadmapId) });
 
   const myRole = data?.result.myRole;
 
@@ -31,10 +31,16 @@ const RoadmapDetailInfo = () => {
       const recentStepId = data?.result.recentStepId;
       if (recentTilId === NOT_TIL_CREATED_FOR_STEP) {
         const step = data?.result.steps[0];
-        const tilData = await postTil({ roadmapId, stepId: step.id, title: step.title });
-        router.push(TILY_LINKS.tilWrite({ roadmapId, stepId: step.id, tilId: tilData?.result.id }));
+        const tilData = await postTil({ roadmapId: Number(roadmapId), stepId: step.id, title: step.title });
+        router.push(TILY_LINKS.tilWrite({ roadmapId: Number(roadmapId), stepId: step.id, tilId: tilData?.result.id }));
       } else if (recentStepId !== NOT_TIL_CREATED_FOR_STEP) {
-        router.push(TILY_LINKS.tilWrite({ roadmapId, stepId: recentStepId, tilId: recentTilId }));
+        router.push(
+          TILY_LINKS.tilWrite({
+            roadmapId: Number(roadmapId),
+            stepId: Number(recentStepId),
+            tilId: Number(recentTilId),
+          }),
+        );
       }
     }
   };
@@ -50,7 +56,7 @@ const RoadmapDetailInfo = () => {
             <Button onClick={routeTILWrite}>학습하기</Button>
           ) : (
             <Flex gap={1}>
-              <Button variant="outline" onClick={() => router.push(TILY_LINKS.manageGroupInfo(roadmapId))}>
+              <Button variant="outline" onClick={() => router.push(TILY_LINKS.manageGroupInfo(Number(roadmapId)))}>
                 로드맵 관리
               </Button>
               <Button onClick={routeTILWrite}>학습하기</Button>
@@ -59,8 +65,8 @@ const RoadmapDetailInfo = () => {
         </Flex>
         <Styled.InfoBox>
           <Flex align="center">
-            <b>생성자</b> <Avatar imageUrl={data?.result.creator.image} imageSize={25} alt="생성자 이미지" />
-            <p>{data?.result.creator.name}</p>
+            <b>생성자</b> <Avatar imageUrl={data?.result.creator?.image} imageSize={25} alt="생성자 이미지" />
+            <p>{data?.result.creator?.name}</p>
           </Flex>
           <b>로드맵 설명</b>
           <p>{data?.result.description}</p>

@@ -5,6 +5,7 @@ export const Label = styled.label`
   position: relative;
   display: flex;
   align-items: center;
+  margin-top: 8px;
   cursor: pointer;
   user-select: none;
 

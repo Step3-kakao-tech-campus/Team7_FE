@@ -24,8 +24,8 @@ export const useRoadmap = () => {
   const [stepForm, setStepForm] = useState<StepForm>(defaultStepForm);
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
-  const { postRoadmaps, isLoading: createLoading } = usePostRoadmaps();
-  const { postRoadmapsById, isLoading: editLoading } = usePostRoadmapsById();
+  const { postRoadmapsAsync, isLoading: createLoading } = usePostRoadmaps();
+  const { postRoadmapsByIdAsync, isLoading: editLoading } = usePostRoadmapsById();
 
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -96,7 +96,7 @@ export const useRoadmap = () => {
       setInfoValid(true);
       setIsSaved(true);
       const { steps, ...roadmapInfo } = roadmap;
-      const data = await postRoadmaps({ roadmap: roadmapInfo, steps });
+      const data = await postRoadmapsAsync({ roadmap: roadmapInfo, steps });
 
       if (data.success) {
         router.replace(TILY_LINKS.roadmapDetail(data.result.id));
@@ -114,7 +114,7 @@ export const useRoadmap = () => {
       setIsSaved(true);
       const { steps, ...roadmapInfo } = roadmap;
       const body = { roadmap: roadmapInfo, steps };
-      await postRoadmapsById({ roadmapId: Number(roadmapId), body });
+      await postRoadmapsByIdAsync({ roadmapId: Number(roadmapId), body });
     }
   };
 

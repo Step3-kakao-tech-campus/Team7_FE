@@ -6,12 +6,12 @@ type TextAreaStateProps = Pick<TextAreaProps, 'status'>;
 
 export const LabelText = styled.div<LabelTextProps>`
   color: ${({ theme }) => theme.colors.black};
-  font-weight: ${({ labelType }) => (labelType === 'bold' ? '700' : '500')};
-  font-size: ${({ labelType }) => (labelType === 'bold' ? '1.25rem' : '1.1rem')};
+  font-weight: ${({ labelType }) => (labelType === 'bold' ? '600' : '500')};
+  font-size: ${({ labelType }) => (labelType === 'bold' ? '18.72px' : '1.1rem')};
 `;
 export const TextArea = styled.textarea<TextAreaStateProps>`
   width: 100%;
-  margin: 0.25rem 0;
+  margin-top: 0.25rem;
   padding: 0.9rem 0.6rem;
   border: 0.1rem solid ${({ theme }) => theme.colors.blue_gray_300};
   border-radius: 0.35rem;

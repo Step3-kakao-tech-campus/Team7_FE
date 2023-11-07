@@ -29,24 +29,24 @@ const TILSection = () => {
   }, [isVisible, fetchNextPage, hasNextPage, ref]);
 
   return (
-    <Styled.Root>
-      <Responsive device="mobile">
-        <SearchBar />
-      </Responsive>
-
-      <Styled.Container>
+    <ConditionalRender data={tils} EmptyUI={<EmptyTilSection />}>
+      <Styled.Root>
+        <Responsive device="mobile">
+          <SearchBar />
+        </Responsive>
         <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
-          <ConditionalRender data={tils} EmptyUI={<EmptyTilSection />}>
+          <Styled.Container>
             <>
               {tils.map((til, index) => {
                 return <TIL til={til} key={index} />;
               })}
             </>
-          </ConditionalRender>
+
+            <Styled.ObserverInterSectionTarget ref={ref} />
+          </Styled.Container>
         </CustomSuspense>
-        <Styled.ObserverInterSectionTarget ref={ref} />
-      </Styled.Container>
-    </Styled.Root>
+      </Styled.Root>
+    </ConditionalRender>
   );
 };
 

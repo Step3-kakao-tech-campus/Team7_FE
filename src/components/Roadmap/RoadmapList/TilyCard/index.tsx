@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import type { Tily } from '@/api/type';
+import { type Roadmap } from '@/api/type';
 import * as Style from '@/components/Roadmap/RoadmapList/TilyCard/style';
 import Logo from '@/components/common/Logo';
 import TILY_LINK from '@/constants/links';
 
 interface TilyCardProps {
-  roadmap: Tily;
+  roadmap: Roadmap;
 }
 
 const TilyCard = (props: TilyCardProps) => {
@@ -26,11 +26,11 @@ const TilyCard = (props: TilyCardProps) => {
           src={'https://cdn.inflearn.com/public/roadmaps/39a4366c-b886-4b38-87da-7797f0ef6ac7/roadmap-2.png'}
           width={500}
           height={250}
-          style={{ width: '100%', height: 'auto' }}
+          style={{ width: '100%', height: '100%' }}
           alt={'roadmapImg'}
         />
         <Style.Container>
-          <h5>{roadmap.name}</h5>
+          <h4>{roadmap.name}</h4>
         </Style.Container>
       </section>
 

@@ -6,57 +6,63 @@ import * as Styled from '@/components/Roadmap/RoadmapList/MyRoadmap/MyRoadmapLis
 import TilyCard from '@/components/Roadmap/RoadmapList/TilyCard';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
+import Flex from '@/components/common/Flex';
 import Responsive from '@/components/common/Responsive';
 import TILY_LINKS from '@/constants/links';
 
-const Slider = () => {
-  const { roadmaps, isLoading: isRoadmapLoading } = useGetRoadmapsMyList();
+const MyRoadmapList = () => {
+  const { tilys, groups, isLoading } = useGetRoadmapsMyList();
 
-  if (roadmaps?.groups.length === 0 && roadmaps?.tilys.length === 0) {
-    return <EmptyMyRoadmap />;
+  if (groups?.length === 0 && tilys?.length === 0) {
+    return <EmptyMyRoadmapList />;
   }
 
   return (
-    <CustomSuspense isLoading={isRoadmapLoading} fallback={<MyRoadmapSkeleton />}>
+    <CustomSuspense isLoading={isLoading} fallback={<MyRoadmapListSkeleton />}>
       <Styled.Slider {...setting}>
-        {roadmaps?.groups.map((roadmap, idx) => <GroupCard key={idx} roadmap={roadmap} />)}
-        {roadmaps?.tilys.map((roadmap) => <TilyCard key={roadmap.id} roadmap={roadmap} />)}
+        {groups?.map((roadmap, idx) => <GroupCard key={idx} roadmap={roadmap} />)}
+        {tilys?.map((roadmap) => <TilyCard key={roadmap.id} roadmap={roadmap} />)}
       </Styled.Slider>
     </CustomSuspense>
   );
 };
 
-const MyRoadmapSkeleton = () => {
+const EmptyMyRoadmapList = () => {
+  const router = useRouter();
+  return (
+    <Styled.EmptyRoot>
+      <Image src="/assets/icons/ic_step.svg" alt="참여중인 로드맵이 없음" width={60} height={60} />
+      <Flex dir="col" gap={0.3}>
+        <p>참여중인 로드맵이 없습니다.</p>
+        <p>직접 로드맵을 만들고 공유해보세요!</p>
+      </Flex>
+      <Button onClick={() => router.push(TILY_LINKS.roadmapCreate())}>로드맵 만들기</Button>
+    </Styled.EmptyRoot>
+  );
+};
+
+const MyRoadmapListSkeleton = () => {
   return (
     <>
-      {' '}
       <Responsive device="desktop">
-        <Styled.SkeletonRoot>
-          <Styled.Skeleton />
-          <Styled.Skeleton />
-          <Styled.Skeleton />
-          <Styled.Skeleton />
+        <Styled.SkeletonRoot gap={2}>
+          {Array(4)
+            .fill(null)
+            .map((idx) => (
+              <Styled.Skeleton key={idx} />
+            ))}
         </Styled.SkeletonRoot>
       </Responsive>
       <Responsive device="mobile">
         <Styled.SkeletonRoot>
-          <Styled.Skeleton />
-          <Styled.Skeleton />
+          {Array(2)
+            .fill(null)
+            .map((idx) => (
+              <Styled.Skeleton key={idx} />
+            ))}
         </Styled.SkeletonRoot>
       </Responsive>
     </>
-  );
-};
-
-const EmptyMyRoadmap = () => {
-  const router = useRouter();
-  return (
-    <Styled.EmptyRoot>
-      <Image src="/assets/icons/ic_step.svg" alt="빈 로드맵" width={60} height={60} />
-      <p>참여중인 로드맵이 없습니다.</p>
-      <p>직접 로드맵을 만들어보세요!</p>
-      <Button onClick={() => router.push(TILY_LINKS.roadmapCreate())}>로드맵 만들기</Button>
-    </Styled.EmptyRoot>
   );
 };
 
@@ -85,4 +91,4 @@ const setting = {
   ],
 };
 
-export default Slider;
+export default MyRoadmapList;

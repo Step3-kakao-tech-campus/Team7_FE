@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import type { Group } from '@/api/type';
+import type { Roadmap } from '@/api/type';
 import * as Style from '@/components/Roadmap/RoadmapList/GroupCard/style';
 import Avatar from '@/components/common/Avatar';
 import Flex from '@/components/common/Flex';
 import TILY_LINK from '@/constants/links';
 
 interface GroupCardProps {
-  roadmap: Group;
+  roadmap: Roadmap;
 }
 
 const GroupCard = (props: GroupCardProps) => {
@@ -19,22 +19,22 @@ const GroupCard = (props: GroupCardProps) => {
       onClick={() => {
         router.push(TILY_LINK.roadmapDetail(roadmap.id));
       }}>
-      <section>
-        <h5>{roadmap.name}</h5>
+      <Flex dir="col" gap={0.2}>
+        <h4>{roadmap.name}</h4>
         <p>{roadmap.description}</p>
-      </section>
+      </Flex>
 
       <section>
-        <Flex
-          align="center"
-          justify="space-between"
-          onClick={(e) => {
-            e.stopPropagation();
-            router.push(TILY_LINK.manageGroupInfo(roadmap.id));
-          }}>
+        <Flex align="center" justify="space-between">
           <span>{roadmap.stepNum}개 STEP</span>
           {roadmap.isManager && (
-            <Style.RoadmapEdit align="center" gap={0.3}>
+            <Style.RoadmapEdit
+              align="center"
+              gap={0.3}
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push(TILY_LINK.manageGroupInfo(roadmap.id));
+              }}>
               <span>관리</span>
               <Image src="/assets/icons/ic_setting.svg" width={17} height={17} alt="로드맵 관리" />
             </Style.RoadmapEdit>
@@ -42,7 +42,7 @@ const GroupCard = (props: GroupCardProps) => {
         </Flex>
 
         <section>
-          <span>{roadmap.creator.name}</span>
+          <span>{roadmap.creator?.name}</span>
           <Avatar imageUrl={roadmap.creator.image} imageSize={30} alt="프로필 이미지" />
         </section>
       </section>
