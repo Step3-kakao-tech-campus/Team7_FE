@@ -27,7 +27,7 @@ const WebBox = (props: WebBoxProps) => {
             </Button>
           )}
         </Styled.Header>
-        <ReferenceList type="web" stepIdx={idx} where={where} />
+        {/* <ReferenceList type="web" stepIdx={idx} where={where} /> */}
       </Styled.Root>
       {where === 'create' && <WebModal isOpen={isOpen} onClose={handleClose} idx={idx} />}
     </>

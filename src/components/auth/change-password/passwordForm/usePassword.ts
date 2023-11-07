@@ -36,7 +36,7 @@ const usePassword = () => {
     setValue('email', email);
   }, [email, setValue]);
 
-  return { isOpen, handleClose, isLoading, control, handleSubmit, getValues, errors, onSubmit };
+  return { isOpen, handleClose, handleOpen, isLoading, control, handleSubmit, getValues, errors, onSubmit };
 };
 
 export default usePassword;

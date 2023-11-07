@@ -20,7 +20,7 @@ const RoadmapCodeModal = (props: ModalProps) => {
     const data = await postRoadmapsGroupsParticipate(formData.code);
 
     if (data.success) {
-      onClose();
+      onClose?.();
       reset();
     }
   };

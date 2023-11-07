@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.div`
+export const Root = styled.section`
   display: flex;
   gap: 0.2rem;
   width: 100%;
@@ -13,11 +13,16 @@ export const Root = styled.div`
   font-size: 0.875rem;
 `;
 
-export const Menu = styled.div`
+export const Menu = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  height: 32px;
   width: 50%;
   padding: 0.25em;
   border-radius: 3px;
+  font-size: 16px;
 
   cursor: pointer;
 

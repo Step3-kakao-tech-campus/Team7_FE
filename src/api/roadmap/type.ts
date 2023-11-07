@@ -1,29 +1,4 @@
-import type { Step, Category, Roadmaps, CommonResponse, Group, Creator, StepWithReferences } from '@/api/type';
-
-// getRoadmapsMy
-export interface GetRoadmapsMyResponse {
-  success: boolean;
-  message: string;
-  result: UserRoadmapsResult;
-}
-
-export interface UserRoadmapsResult {
-  categories: Category[];
-  roadmaps: Roadmaps;
-}
-
-// getRoadmaps
-export interface GetRoadmapsResponse {
-  success: boolean;
-  message: string;
-  result: GetRoadmapsResult;
-}
-
-interface GetRoadmapsResult {
-  category: 'tily' | 'group';
-  roadmaps: Group[];
-  hasNext: boolean;
-}
+import type { Step, IdName, CommonResponse, Creator, StepWithReferences, Roadmap } from '@/api/type';
 
 // getRoadmapSteps
 export interface GetRoadmapStepsResponse {
@@ -98,26 +73,47 @@ export interface PostRoadmapsGroupsParticipateResponse {
   };
 }
 
-// postRoadmaps
-export interface PostRoadmapsResponse {
-  success: boolean;
-  message: string;
+// Roadmap 요청
+
+// 로드맵 - 그룹
+export interface PostRoadmapsRequest {
+  name: string;
+  description: string;
+  isPublic: boolean;
+  isRecruit?: boolean;
+}
+
+// Roadmap 응답
+
+// 로드맵 - 공통
+
+export interface GetRoadmapsMyResponse extends CommonResponse {
   result: {
-    id: number;
+    categories: IdName[];
+    roadmaps: { tilys: Roadmap[]; groups: Roadmap[] };
   };
 }
+
+export interface GetRoadmapsResponse extends CommonResponse {
+  result: { categoty: 'tily' | 'group'; hasNext: boolean; roadmaps: Roadmap[] };
+}
+
+// 로드맵 - 그룹
 
 export interface GetRoadmapsByIdResponse {
   success: boolean;
   message: string;
   result: {
+    creator?: Omit<Creator, 'id'>;
     creator: Omit<Creator, 'id'>;
     category: 'tily' | 'group';
     name: string;
     description: string;
-    myRole: 'master' | 'manager' | 'member' | 'none';
-    recentTilId: number | null;
-    recentStepId: number | null;
+    isPublic: boolean;
+    isRecruit: boolean;
+    myRole?: 'master' | 'manager' | 'member' | 'none';
+    recentTilId?: number | null;
+    recentStepId?: number | null;
     code: string;
     steps: StepWithReferences[];
   };

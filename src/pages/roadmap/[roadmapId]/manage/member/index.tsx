@@ -58,16 +58,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return { props: {} };
 };
 
-export const Root = styled.div`
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 2rem;
-
-  @media ${({ theme }) => theme.mediaQuery.md} {
-    padding: 0;
-  }
-`;
-
 export const Container = styled.main`
   display: flex;
   height: 100%;

@@ -25,7 +25,7 @@ const AlarmModal = (props: AlarmModalProps) => {
     if (!alarmButtonRef.current || alarmButtonRef.current.contains(event?.target as Node)) return;
     queryClient.invalidateQueries([USER_QUERY_KEY.alarm]);
 
-    onClose();
+    onClose?.();
   });
 
   if (!isOpen) return null;

@@ -12,8 +12,8 @@ export const Label = styled.label`
 
 export const LabelText = styled.div<LabelTextProps>`
   color: ${({ theme }) => theme.colors.black};
-  font-weight: ${({ labelType }) => (labelType === 'bold' ? '700' : '500')};
-  font-size: ${({ labelType }) => (labelType === 'bold' ? '1.25rem' : '1.1rem')};
+  font-weight: ${({ labelType }) => (labelType === 'bold' ? '600' : '500')};
+  font-size: ${({ labelType }) => (labelType === 'bold' ? '18.72px' : '1.1rem')};
 `;
 
 export const InputContainer = styled.div<InputStateProps>`

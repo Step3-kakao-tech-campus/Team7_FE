@@ -1,4 +1,4 @@
-import { References } from './roadmap/type';
+import type { References } from './roadmap/type';
 
 // 공통 응답 인터페이스
 export interface CommonResponse {
@@ -11,10 +11,21 @@ export interface NullResultResponse extends CommonResponse {
   result: null;
 }
 
-// User 인터페이스
-export interface User {
+export interface IdResponse extends CommonResponse {
+  result: {
+    id: number;
+  };
+}
+
+// 공통 인터페이스
+
+export interface IdName {
   id: number;
   name: string;
+}
+
+// User 인터페이스
+export interface User extends IdName {
   email: string;
   image: string;
 }
@@ -22,9 +33,9 @@ export interface User {
 // Alarm 인터페이스
 export interface Alarm {
   id: number;
-  tilId: number;
+  isChecked: boolean;
+  roadmap: IdName;
   isRead: boolean;
-  roadmap: Roadmap;
   step: Pick<Step, 'id' | 'title'>;
   sender: Pick<User, 'name' | 'image'>;
   createDate: Date;
@@ -34,7 +45,7 @@ export interface Til {
   id: number;
   createDate: string;
   step: Pick<Step, 'id' | 'title'>;
-  roadmap: Roadmap;
+  roadmap: IdName;
 }
 
 // Step 인터페이스
@@ -53,43 +64,16 @@ export interface StepWithReferences {
   references: References;
 }
 
-export interface Category {
-  id: number;
-  name: string;
-}
-
-export interface Roadmaps {
-  tilys: Tily[];
-  groups: Group[];
-}
-
 // 로드맵 인터페이스
-export interface Roadmap {
-  id: number;
-  name: string;
-}
-
-export interface Tily {
-  id: number;
-  name: string;
-  description: string | null;
+export interface Roadmap extends IdName {
+  description: string;
   stepNum: number;
-  image: string;
+  image?: string;
+  isManager?: boolean;
+  creator?: Creator;
 }
 
-export interface Group {
-  id: number;
-  name: string;
-  description: string | null;
-  stepNum: number;
-  image: string;
-  isManager: boolean;
-  creator: Creator;
-}
-
-export interface Creator {
-  id?: number;
-  name: string;
+export interface Creator extends IdName {
   image: string;
 }
 
@@ -98,9 +82,7 @@ export interface UserHistory {
   value: number;
 }
 
-export interface Comment {
-  id: number;
-  name: string;
+export interface Comment extends IdName {
   image: string;
   content: string;
   isOwner: boolean;
