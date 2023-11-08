@@ -6,7 +6,6 @@ import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/YoutubeModal/style';
-import { roadmapAtoms } from '@/components/roadmap/roadmapCreate/states/roadmapCreateAtoms';
 
 interface YoutubeModalProps extends ModalProps {
   idx: number;
@@ -18,7 +17,7 @@ interface YoutubeFormInput {
 
 const YoutubeModal = (props: YoutubeModalProps) => {
   const { idx, isOpen, onClose } = props;
-  const setRoadmap = useSetRecoilState(roadmapAtoms);
+  // const setRoadmap = useSetRecoilState(roadmapAtoms);
 
   const {
     control,
@@ -32,15 +31,15 @@ const YoutubeModal = (props: YoutubeModalProps) => {
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<YoutubeFormInput> = (formData) => {
-    setRoadmap((prev) =>
-      produce(prev, (draft) => {
-        draft.steps[idx].references.youtube.push(formData);
-      }),
-    );
-    reset();
-    onClose();
-  };
+  // const onSubmit: SubmitHandler<YoutubeFormInput> = (formData) => {
+  //   setRoadmap((prev) =>
+  //     produce(prev, (draft) => {
+  //       draft.steps[idx].references.youtube.push(formData);
+  //     }),
+  //   );
+  //   reset();
+  //   onClose();
+  // };
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
       <Styled.Root>
@@ -49,7 +48,7 @@ const YoutubeModal = (props: YoutubeModalProps) => {
         <InfoArea>
           <InfoArea.Info>해당 스텝에 사용할 동영상 링크를 첨부해주세요.</InfoArea.Info>
         </InfoArea>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        {/* <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="link"
             control={control}
@@ -79,7 +78,7 @@ const YoutubeModal = (props: YoutubeModalProps) => {
             </Button>
             <Button type="submit">확인</Button>
           </Styled.ButtonContainer>
-        </form>
+        </form> */}
       </Styled.Root>
     </Modal>
   );

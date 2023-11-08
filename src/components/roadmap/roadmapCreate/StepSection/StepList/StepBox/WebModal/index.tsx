@@ -6,7 +6,6 @@ import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/YoutubeModal/style';
-import { roadmapAtoms } from '@/components/roadmap/roadmapCreate/states/roadmapCreateAtoms';
 import REGEX from '@/constants/regex';
 
 interface WebModalProps extends ModalProps {
@@ -19,7 +18,7 @@ interface WebFormInput {
 
 const WebModal = (props: WebModalProps) => {
   const { idx, isOpen, onClose } = props;
-  const setRoadmap = useSetRecoilState(roadmapAtoms);
+  // const setRoadmap = useSetRecoilState(roadmapAtoms);
 
   const {
     control,
@@ -33,15 +32,15 @@ const WebModal = (props: WebModalProps) => {
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<WebFormInput> = (formData) => {
-    setRoadmap((prev) =>
-      produce(prev, (draft) => {
-        draft.steps[idx].references.web.push(formData);
-      }),
-    );
-    reset();
-    onClose();
-  };
+  // const onSubmit: SubmitHandler<WebFormInput> = (formData) => {
+  //   setRoadmap((prev) =>
+  //     produce(prev, (draft) => {
+  //       draft.steps[idx].references.web.push(formData);
+  //     }),
+  //   );
+  //   reset();
+  //   onClose();
+  // };
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
       <Styled.Root>
@@ -50,7 +49,7 @@ const WebModal = (props: WebModalProps) => {
         <InfoArea>
           <InfoArea.Info>해당 스텝에 사용할 참고자료 링크를 첨부해주세요.</InfoArea.Info>
         </InfoArea>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        {/* <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="link"
             control={control}
@@ -84,7 +83,7 @@ const WebModal = (props: WebModalProps) => {
             </Button>
             <Button type="submit">확인</Button>
           </Styled.ButtonContainer>
-        </form>
+        </form> */}
       </Styled.Root>
     </Modal>
   );

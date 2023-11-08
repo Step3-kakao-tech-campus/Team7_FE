@@ -1,22 +1,21 @@
-import type { GetServerSideProps } from 'next';
+import { type GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
 import ManageLayout from '@/components/layout/ManageLayout';
-import ManagePeopleTIL from '@/components/roadmap/manage/til/ManagePeopleTIL';
-import { RightArea, Header } from '@/pages/roadmap/[roadmapId]/manage/member';
+import Info from '@/components/roadmap/manage/groupInfo/Info';
+import { RightArea } from '@/pages/roadmap/[roadmapId]/manage/member';
 import { setLayout } from '@/utils/layout';
 
-const TIL = () => {
+const RoamapInfoPage = () => {
   return (
     <RightArea>
-      <Header>TIL 모아보기</Header>
-      <ManagePeopleTIL />
+      <Info />
     </RightArea>
   );
 };
 
-setLayout(TIL, ManageLayout);
+setLayout(RoamapInfoPage, ManageLayout);
 
-export default TIL;
+export default RoamapInfoPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cookies } = context.req;
