@@ -5,15 +5,15 @@ import styled from '@emotion/styled';
 export const Root = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 2.5rem;
-  gap: 4px;
+  padding: 20px 15px 0 30px;
+  gap: 3px;
 `;
 
 export const NavItem = styled(Link)<{ active?: number }>`
-  font-size: 1.125rem;
-  font-weight: 700;
-  padding: 0.7rem;
-  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 4px;
 
   ${({ active, theme }) => css`
     background-color: ${active ? theme.colors.rose_light : 'transparent'};

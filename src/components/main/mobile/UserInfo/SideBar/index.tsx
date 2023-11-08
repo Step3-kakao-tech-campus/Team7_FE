@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
@@ -7,9 +7,7 @@ import Icon from '@/components/common/Icon';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 
-const SideBar = (props: PropsWithChildren) => {
-  const { children } = props;
-
+const SideBar = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<'personal' | 'group' | null>(null);
 
@@ -26,7 +24,9 @@ const SideBar = (props: PropsWithChildren) => {
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild>{children}</Dialog.Trigger>
+      <Dialog.Trigger asChild>
+        <Icon iconName="ic_hamburger" imageSize={24} alt="사이드바" ext="svg" />
+      </Dialog.Trigger>
       <Dialog.DialogPortal>
         <Dialog.Content asChild>
           <Styled.Content>

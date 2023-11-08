@@ -1,38 +1,20 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
-import Responsive from '@/components/common/Responsive';
-import HeaderLayout from '@/components/layout/HeaderLayout';
-import SideBar from '@/components/roadmap/manage/SideBar';
+import ManageLayout from '@/components/layout/ManageLayout';
 import Table from '@/components/roadmap/manage/member/Table';
-import TabBar from '@/components/roadmap/manage/mobile/TabBar';
-import { ManageContainer } from '@/pages/roadmap/[roadmapId]/manage/roadmapInfo';
 import { setLayout } from '@/utils/layout';
 
 const Member = () => {
   return (
-    <ManageContainer>
-      <Container>
-        <Responsive device="desktop">
-          <LeftArea>
-            <SideBar />
-          </LeftArea>
-        </Responsive>
-
-        <Responsive device="mobile">
-          <TabBar />
-        </Responsive>
-
-        <RightArea>
-          <Header>구성원 관리</Header>
-          <Table />
-        </RightArea>
-      </Container>
-    </ManageContainer>
+    <RightArea>
+      <Header>구성원 관리</Header>
+      <Table />
+    </RightArea>
   );
 };
 
-setLayout(Member, HeaderLayout);
+setLayout(Member, ManageLayout);
 
 export default Member;
 
@@ -58,25 +40,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return { props: {} };
 };
-
-export const Container = styled.main`
-  display: flex;
-  height: 100%;
-
-  @media ${({ theme }) => theme.mediaQuery.md} {
-    flex-direction: column;
-  }
-`;
-
-export const LeftArea = styled.aside`
-  position: sticky;
-  top: ${({ theme }) => theme.layout.main.GNBHeight};
-  width: 200px;
-
-  padding: 0.5rem;
-  height: ${({ theme }) => `calc(100vh - ${theme.layout.main.GNBHeight})`};
-  border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
-`;
 
 export const RightArea = styled.main`
   max-width: 1100px;
