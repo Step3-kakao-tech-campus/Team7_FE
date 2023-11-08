@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { useGetTil } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
 import ExtensionInfoModal from '@/components/tilWrite/TILWriteSection/Header/ExtensionInfoModal';
-import SideBar from '@/components/tilWrite/TILWriteSection/mobile/SideBar';
+import SideBar from '@/components/tilWrite/TILWriteSection/mobile/MobileHeader/SideBar';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';

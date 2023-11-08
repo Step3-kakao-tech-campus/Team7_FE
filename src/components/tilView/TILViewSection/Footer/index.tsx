@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <Styled.Root>
-      <Styled.ExitContainer onClick={() => router.push(TILY_LINKS.home())}>
+      <Styled.ExitContainer onClick={() => router.back()}>
         <Image src={'/assets/icons/ic_arrowLeft.svg'} alt="Logo" width={20} height={20} />
         <Styled.Title>나가기</Styled.Title>
       </Styled.ExitContainer>
