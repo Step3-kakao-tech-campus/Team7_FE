@@ -14,7 +14,6 @@ import * as Styled from './style';
 const PeopleTILSection = () => {
   const { query } = useRouter();
   const { memberTils, isLoading } = useGetStepTils({
-    roadmapId: Number(query.roadmapId),
     stepId: Number(query.stepId),
   });
 

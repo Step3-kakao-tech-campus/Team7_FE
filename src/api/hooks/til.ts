@@ -9,13 +9,12 @@ import {
   postTils,
   postComments,
   patchComments,
-  deleteComment as deleteCommentAPI,
+  deleteComments,
   patchTils,
   submitTils,
   getStepTils,
 } from '@/api/til';
 import type {
-  DeleteCommentRequest,
   PatchCommentsRequest,
   PostCommentsRequest,
   PostTilsRequest,
@@ -121,6 +120,8 @@ export const useSubmitTils = () => {
   return { submitTilsAsync };
 };
 
+// 나의 틸 목록 전체 조회
+
 export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
   const { query } = useRouter();
   const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
@@ -162,6 +163,8 @@ export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
   };
 };
 
+// 코멘트 작성하기
+
 export const usePostComments = () => {
   const queryClient = useQueryClient();
 
@@ -187,6 +190,8 @@ export const usePostComments = () => {
 
   return { postCommentsAsync };
 };
+
+// 코멘트 수정하기
 
 export const usePatchComments = () => {
   const queryClient = useQueryClient();
@@ -216,18 +221,24 @@ export const usePatchComments = () => {
   return { patchCommentsAsync };
 };
 
-export const useDeleteComment = () => {
+// 코멘트 삭제하기
+
+export const useDeleteComments = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(deleteCommentAPI);
+  const { mutateAsync } = useMutation(deleteComments);
   const { handleError } = useApiError();
   const toast = useToast();
 
-  const deleteComment = async (body: DeleteCommentRequest) => {
-    const data = await mutation.mutateAsync(body, {
+  const deleteCommentsAsync = async (req: { param: { tilId: number; commentId: number } }) => {
+    const {
+      param: { tilId },
+    } = req;
+
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 삭제 되었습니다.' });
-        queryClient.invalidateQueries([QUERY_KEY.getTils, body.tilId]);
+        queryClient.invalidateQueries([QUERY_KEY.getTils, tilId]);
       },
       onError: handleError,
     });
@@ -235,25 +246,15 @@ export const useDeleteComment = () => {
     return data;
   };
 
-  return { deleteComment };
+  return { deleteCommentsAsync };
 };
 
-interface useGetStepTilsRequest {
-  roadmapId: number;
-  stepId: number;
-  isSubmit?: boolean;
-  isMember?: boolean;
-  name?: string;
-}
+export const useGetStepTils = (req: { stepId: number }) => {
+  const { stepId } = req;
 
-export const useGetStepTils = (body: useGetStepTilsRequest) => {
-  const { roadmapId, stepId, isSubmit, isMember, name } = body;
-
-  const { data, isLoading } = useQuery([QUERY_KEY.getStepTils, body], () =>
+  const { data, isLoading } = useQuery([QUERY_KEY.getStepTils, stepId], () =>
     getStepTils({
-      roadmapId,
       stepId,
-      input: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
     }),
   );
 
@@ -263,29 +264,29 @@ export const useGetStepTils = (body: useGetStepTilsRequest) => {
   };
 };
 
-export const useGetStepTilsManage = ({ queryKey }: { queryKey: QueryKey }) => {
-  const { query } = useRouter();
-  const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
+// export const useGetStepTilsManage = ({ queryKey }: { queryKey: QueryKey }) => {
+//   const { query } = useRouter();
+//   const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
 
-  const { roadmapId, stepId, isSubmit, isMember, name } = query;
+//   const { roadmapId, stepId, isSubmit, isMember, name } = query;
 
-  const enabled = !!stepId;
+//   const enabled = !!stepId;
 
-  const { data, isLoading } = useQuery(
-    [QUERY_KEY.getStepTils, ..._queryKey],
-    () =>
-      getStepTils({
-        roadmapId: Number(roadmapId),
-        stepId: Number(stepId),
-        input: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
-      }),
-    {
-      enabled,
-    },
-  );
+//   const { data, isLoading } = useQuery(
+//     [QUERY_KEY.getStepTils, ..._queryKey],
+//     () =>
+//       getStepTils({
+//         roadmapId: Number(roadmapId),
+//         stepId: Number(stepId),
+//         input: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
+//       }),
+//     {
+//       enabled,
+//     },
+//   );
 
-  return {
-    memberTils: data?.result.members,
-    isLoading,
-  };
-};
+//   return {
+//     memberTils: data?.result.members,
+//     isLoading,
+//   };
+// };

@@ -5,10 +5,8 @@ import type {
   GetTilsResponse,
   PostCommentsRequest,
   PatchCommentsRequest,
-  DeleteCommentRequest,
   PatchTilsRequest,
   SubmitTilsRequest,
-  GetStepTilsRequest,
   GetStepTilsResponse,
 } from '@/api/til/type';
 import type { IdResponse, NullResultResponse } from '@/api/type';
@@ -119,23 +117,27 @@ export const patchComments = async (req: {
   return data;
 };
 
-export const deleteComment = async (body: DeleteCommentRequest) => {
-  const { roadmapId, stepId, tilId, commentId } = body;
+// 코멘트 삭제하기
+
+export const deleteComments = async (req: { param: { tilId: number; commentId: number } }) => {
+  const {
+    param: { commentId },
+  } = req;
 
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'DELETE',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
+    url: `/comments/${commentId}`,
   });
 
   return data;
 };
 
-export const getStepTils = async (body: GetStepTilsRequest) => {
-  const { roadmapId, stepId, input } = body;
+export const getStepTils = async (req: { stepId: number; query?: string }) => {
+  const { stepId, query = '' } = req;
 
   const { data } = await axiosInstance.request<GetStepTilsResponse>({
     method: 'GET',
-    url: `/roadmaps/groups/${roadmapId}/steps/${stepId}/tils/${input}`,
+    url: `/steps/${stepId}/tils${query}`,
   });
 
   return data;

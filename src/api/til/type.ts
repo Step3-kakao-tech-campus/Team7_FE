@@ -27,21 +27,6 @@ export interface PatchCommentsRequest {
   content: string;
 }
 
-// deleteComment
-export interface DeleteCommentRequest {
-  roadmapId: number;
-  stepId: number;
-  tilId: number;
-  commentId: string;
-}
-
-//  getStepTils
-export interface GetStepTilsRequest {
-  roadmapId: number;
-  stepId: number;
-  input: string;
-}
-
 export interface GetStepTilsResponse extends CommonResponse {
   result: {
     members: MemberTil[];

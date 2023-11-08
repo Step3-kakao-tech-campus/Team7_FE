@@ -3,7 +3,7 @@ import 'dayjs/locale/ko';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
-import { useDeleteComment } from '@/api/hooks/til';
+import { useDeleteComments } from '@/api/hooks/til';
 import type { Comment as CommentType } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import ContextMenu from '@/components/common/ContextMenu';
@@ -30,7 +30,7 @@ const Comment = (props: CommentProps) => {
     handleToggle: handleToggleMenu,
   } = useModalState(false);
   const contextRef = useRef<HTMLDivElement>(null);
-  const { deleteComment } = useDeleteComment();
+  const { deleteCommentsAsync } = useDeleteComments();
   const { query } = useRouter();
 
   const handleOpenContextMenu = () => {
@@ -45,11 +45,8 @@ const Comment = (props: CommentProps) => {
 
   const handleSelectDeleteComment = () => {
     handleCloseMenu();
-    deleteComment({
-      roadmapId: Number(query.roadmapId),
-      stepId: Number(query.stepId),
-      tilId: Number(query.tilId),
-      commentId: id.toString(),
+    deleteCommentsAsync({
+      param: { tilId: Number(query.tilId), commentId: id },
     });
   };
 
