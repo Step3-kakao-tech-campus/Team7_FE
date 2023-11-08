@@ -3,7 +3,6 @@ import type {
   GetRoadmapsMyResponse,
   PostRoadmapsIndividualResponse,
   GetRoadmapStepsResponse,
-  PostRoadmapStepIndividualResponse,
   GetRoadmapStepReferenceRequest,
   GetRoadmapStepReferenceResponse,
   PostRoadmapsGroupsParticipateResponse,
@@ -20,6 +19,7 @@ import type {
   PostGroupRoadmapsApplyResponse,
   PostGroupTilyApplyResponse,
 } from '@/api/roadmap/type';
+import type { IndividualStep } from '@/api/roadmap/type';
 import type { IdResponse } from '../type';
 
 // 로드맵 - 공통
@@ -75,11 +75,13 @@ export const postRoadmapIndividual = async (name: string) => {
   return data;
 };
 
-export const postRoadmapStepIndividual = async ({ roadmapId, title }: { roadmapId: number; title: string }) => {
-  const { data } = await axiosInstance.request<PostRoadmapStepIndividualResponse>({
+export const postRoadmapStepIndividual = async (req: { body: IndividualStep }) => {
+  const { body } = req;
+
+  const { data } = await axiosInstance.request<IdResponse>({
     method: 'POST',
-    url: `/roadmaps/individual/${roadmapId}/steps`,
-    data: { title },
+    url: `/steps`,
+    data: body,
   });
 
   return data;
@@ -117,6 +119,8 @@ export const getRoadmapsById = async (req: { roadmapId: number }) => {
 
   return data;
 };
+
+// 로드맵 신청하기
 
 export const postGroupRoadmapsApply = async ({ roadmapId, content }: { roadmapId: number; content: string }) => {
   const { data } = await axiosInstance.request<PostGroupRoadmapsApplyResponse>({

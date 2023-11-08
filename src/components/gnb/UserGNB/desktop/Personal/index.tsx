@@ -67,7 +67,7 @@ const Personal = () => {
   };
 
   const createStep: SubmitHandler<{ stepTitle: string }> = (formData) => {
-    postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
+    postRoadmapStepIndividual({ body: { roadmapId, title: formData.stepTitle } });
     stepReset();
     setIsStepButtonSelected(false);
   };

@@ -9,15 +9,19 @@ const TextAreaSection = () => {
   const [content, setContent] = useState('');
 
   const { query } = useRouter();
-  const { postComment } = usePostComment();
+  const { postCommentAsync } = usePostComment();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postComment({
-      roadmapId: Number(query.roadmapId),
-      stepId: Number(query.stepId),
-      tilId: Number(query.tilId),
-      content,
+    postCommentAsync({
+      param: {
+        roadmapId: Number(query.roadmapId),
+        stepId: Number(query.stepId),
+        tilId: Number(query.tilId),
+      },
+      body: {
+        content,
+      },
     });
     setContent('');
   };

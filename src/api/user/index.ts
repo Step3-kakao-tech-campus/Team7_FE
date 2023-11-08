@@ -6,7 +6,6 @@ import type {
   GetUsersResponse,
   PatchAlarmRequest,
   PatchUserPasswordRequest,
-  PatchUserPasswordResponse,
   DeleteUserResponse,
   PostUserProfileImageResponse,
   PostUserProfileImageRequset,
@@ -64,7 +63,7 @@ export const getUserHistory = async () => {
 export const patchUserPassword = async (req: { body: PatchUserPasswordRequest }) => {
   const { body } = req;
 
-  const { data } = await axiosInstance.request<PatchUserPasswordResponse>({
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'PATCH',
     url: `/users`,
     data: body,

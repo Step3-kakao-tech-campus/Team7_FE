@@ -7,16 +7,13 @@ import type {
   PostCommentRequest,
   PostCommentResponse,
   PatchCommentRequest,
-  PatchCommentResponse,
   DeleteCommentRequest,
-  DeleteCommentResponse,
   PatchTilRequest,
-  PatchTilResponse,
   SubmitTilRequest,
-  SubmitTilResponse,
   GetStepTilsRequest,
   GetStepTilsResponse,
 } from '@/api/til/type';
+import type { NullResultResponse } from '@/api/type';
 import type { IdParams } from '@/api/type';
 
 // 나의 틸 목록 전체 조회
@@ -72,7 +69,7 @@ export const patchTil = async (req: { param: IdParams; body: PatchTilRequest }) 
     body,
   } = req;
 
-  const { data } = await axiosInstance.request<PatchTilResponse>({
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'PATCH',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
     data: body,
@@ -87,7 +84,7 @@ export const submitTil = async (req: { param: IdParams; body: SubmitTilRequest }
     body: { title, content: submitContent },
   } = req;
 
-  const { data } = await axiosInstance.request<SubmitTilResponse>({
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
     data: { title, submitContent },
@@ -96,8 +93,11 @@ export const submitTil = async (req: { param: IdParams; body: SubmitTilRequest }
   return data;
 };
 
-export const postComment = async (body: PostCommentRequest) => {
-  const { roadmapId, stepId, tilId, content } = body;
+export const postComment = async (req: { param: IdParams; body: PostCommentRequest }) => {
+  const {
+    param: { roadmapId, stepId, tilId },
+    body: { content },
+  } = req;
 
   const { data } = await axiosInstance.request<PostCommentResponse>({
     method: 'POST',
@@ -111,7 +111,7 @@ export const postComment = async (body: PostCommentRequest) => {
 export const patchComment = async (body: PatchCommentRequest) => {
   const { roadmapId, stepId, tilId, commentId, content } = body;
 
-  const { data } = await axiosInstance.request<PatchCommentResponse>({
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'PATCH',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
     data: { content },
@@ -123,7 +123,7 @@ export const patchComment = async (body: PatchCommentRequest) => {
 export const deleteComment = async (body: DeleteCommentRequest) => {
   const { roadmapId, stepId, tilId, commentId } = body;
 
-  const { data } = await axiosInstance.request<DeleteCommentResponse>({
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'DELETE',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
   });

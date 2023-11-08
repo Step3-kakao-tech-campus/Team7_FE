@@ -7,7 +7,7 @@ import {
   getTil,
   getTils,
   postTil,
-  postComment as postCommentAPI,
+  postComment,
   patchComment as patchCommentAPI,
   deleteComment as deleteCommentAPI,
   patchTil,
@@ -37,7 +37,7 @@ interface InfinityTilRequest {
   queryKey?: QueryKey;
 }
 
-export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
+export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
   const { query } = useRouter();
   const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
 
@@ -159,20 +159,24 @@ export const useSubmitTil = () => {
 export const usePostComment = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(postCommentAPI);
+  const { mutateAsync } = useMutation(postComment);
   const { handleError } = useApiError();
   const toast = useToast();
 
-  const postComment = async (body: PostCommentRequest) => {
-    const data = await mutation.mutateAsync(body, {
+  const postCommentAsync = async (req: { param: IdParams; body: PostCommentRequest }) => {
+    const {
+      param: { roadmapId, stepId, tilId },
+    } = req;
+
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 작성되었습니다.' });
         queryClient.invalidateQueries([
           QUERY_KEY.getTil,
           {
-            roadmapId: body.roadmapId,
-            stepId: body.stepId,
-            tilId: body.tilId,
+            roadmapId: roadmapId,
+            stepId: stepId,
+            tilId: tilId,
           },
         ]);
       },
@@ -182,7 +186,7 @@ export const usePostComment = () => {
     return data;
   };
 
-  return { postComment };
+  return { postCommentAsync };
 };
 
 export const usePatchComment = () => {

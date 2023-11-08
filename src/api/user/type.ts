@@ -1,4 +1,4 @@
-import type { CommonResponse, NullResultResponse, UserHistory, User, Alarm } from '@/api/type';
+import type { CommonResponse, UserHistory, User, Alarm } from '@/api/type';
 
 /*
  * User 요청
@@ -45,10 +45,6 @@ export interface GetUserHistoryResponse extends CommonResponse {
     gardens: UserHistory[];
   };
 }
-
-// 마이페이지 유저 비밀번호 변경
-
-export interface PatchUserPasswordResponse extends NullResultResponse {}
 
 // 회원 탈퇴
 

@@ -27,6 +27,7 @@ import type {
   GetRoadmapsResponse,
   PostRoadmapsRequest,
   Role,
+  IndividualStep,
 } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
@@ -155,12 +156,19 @@ export const usePostRoadmapStepIndividual = () => {
 
   const mutation = useMutation(postRoadmapStepIndividualAPI);
 
-  const postRoadmapStepIndividual = async (body: { roadmapId: number; title: string }) => {
-    const data = await mutation.mutateAsync(body, {
-      onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
+  const postRoadmapStepIndividual = async (req: { body: Pick<IndividualStep, 'roadmapId' | 'title'> }) => {
+    const { body } = req;
+
+    const createIndivialStep = { ...body, description: null, dueDate: null };
+
+    const data = await mutation.mutateAsync(
+      { body: createIndivialStep },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
+        },
       },
-    });
+    );
 
     return data;
   };

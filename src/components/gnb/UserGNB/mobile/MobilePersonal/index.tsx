@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
+import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import {
   useGetRoadmapSteps,
-  usePostRoadmapStepIndividual,
-  usePostRoadmapIndividual,
   useGetRoadmapsMy,
+  usePostRoadmapIndividual,
+  usePostRoadmapStepIndividual,
 } from '@/api/hooks/roadmap';
 import { usePostTil } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
@@ -64,7 +64,7 @@ const MobilePersonal = () => {
   };
 
   const createStep: SubmitHandler<{ stepTitle: string }> = (formData) => {
-    postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
+    postRoadmapStepIndividual({ body: { roadmapId, title: formData.stepTitle } });
     stepReset();
     setIsStepButtonSelected(false);
   };

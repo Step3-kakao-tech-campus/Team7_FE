@@ -20,9 +20,6 @@ export interface PostTilResponse {
 
 // postComment
 export interface PostCommentRequest {
-  roadmapId: number;
-  stepId: number;
-  tilId: number;
   content: string;
 }
 
@@ -33,22 +30,18 @@ export interface PostCommentResponse extends CommonResponse {
 }
 
 // patchComment
-export interface PatchCommentRequest extends PostCommentRequest {
+export interface PatchCommentRequest {
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
   commentId: string;
-}
-
-export interface PatchCommentResponse extends CommonResponse {
-  result: null;
+  content: string;
 }
 
 // patchTil
 export interface PatchTilRequest {
   title?: string;
   content: string;
-}
-
-export interface PatchTilResponse extends CommonResponse {
-  result: null;
 }
 
 // deleteComment
@@ -59,16 +52,8 @@ export interface DeleteCommentRequest {
   commentId: string;
 }
 
-export interface DeleteCommentResponse extends CommonResponse {
-  result: null;
-}
-
 // submitTil
 export interface SubmitTilRequest extends PatchTilRequest {}
-
-export interface SubmitTilResponse extends CommonResponse {
-  result: null;
-}
 
 //  getStepTils
 export interface GetStepTilsRequest {
