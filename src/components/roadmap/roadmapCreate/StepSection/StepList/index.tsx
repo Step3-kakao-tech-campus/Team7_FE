@@ -10,11 +10,11 @@ const StepList = () => {
   // if (roadmap.steps.length === 0) return <StepList.Empty />;
   // else {
   //   return (
-  //     // <Styled.Root>
-  //     //   {roadmap.steps.map((step, idx) => (
-  //     //     <StepBox key={step.id ?? idx} idx={idx} step={step} where="create" />
-  //     //   ))}
-  //     // </Styled.Root>
+  //     <Styled.Root>
+  //       {roadmap.steps.map((step, idx) => (
+  //         <StepBox key={step.id ?? idx} idx={idx} step={step} where="create" />
+  //       ))}
+  //     </Styled.Root>
   //   );
   // }
   return <></>;

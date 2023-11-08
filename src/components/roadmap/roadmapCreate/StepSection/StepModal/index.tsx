@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '@/components/common/Button';
 import Calendar from '@/components/common/Calendar';
 import InfoArea from '@/components/common/InfoArea';
@@ -9,55 +10,36 @@ import TextArea from '@/components/common/TextArea';
 import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepModal/style';
 import { type ReferenceLink } from '@/components/roadmap/roadmapCreate/states/roadmapCreateAtoms';
 
-// import { useRoadmap } from '@/hooks/useRoadmap';
+const StepModal = (props: ModalProps) => {
+  const { isOpen, onClose } = props;
 
-export interface StepForm {
-  id?: number;
-  title: string;
-  description: string;
-  dueDate?: Date | null;
-  references: {
-    youtube: ReferenceLink[];
-    web: ReferenceLink[];
-  };
-}
+  const {
+    control,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title: ' ',
+      description: ' ',
+      dueDate: new Date(),
+    },
+    mode: 'onSubmit',
+  });
 
-interface StepModalProps extends ModalProps {
-  type: 'create' | 'edit';
-  idx?: number;
-}
-
-// STEP 생성과 STEP 수정 두가지 모두로 재사용합니다.
-const StepModal = (props: StepModalProps) => {
-  const { type, idx, isOpen, onClose } = props;
-
-  // const {
-  //   roadmap,
-  //   stepForm,
-  //   setStepForm,
-  //   handleStepFormChange,
-  //   handleCreateStep,
-  //   handleEditStep,
-  //   stepValid,
-  //   handleResetStep,
-  // } = useRoadmap();
-
-  // useEffect(() => {
-  //   if (type === 'edit' && idx !== undefined) {
-  //     setStepForm(roadmap.steps[idx]);
-  //   }
-  // }, [type, idx, roadmap.steps, setStepForm]);
+  const onSubmit: SubmitHandler<> = async (formData) => {};
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
       <Styled.Root>
-        {/* {type === 'create' ? <h2>STEP 추가하기</h2> : <h2>STEP 수정하기</h2>}
+        <h2>STEP 추가하기</h2>
 
         <InfoArea>
           <InfoArea.Info>STEP은 로드맵의 한 단계입니다.</InfoArea.Info>
           <InfoArea.Info>STE들을 추가하여 로드맵을 완성해보세요.</InfoArea.Info>
           <InfoArea.Info>STEP에는 참고 자료와 동영상 자료를 삽입할 수 있습니다.</InfoArea.Info>
         </InfoArea>
+
         <Styled.Label>
           STEP 제목
           <Input
@@ -129,7 +111,7 @@ const StepModal = (props: StepModalProps) => {
             }}>
             확인
           </Button>
-        </Styled.ButtonContainer> */}
+        </Styled.ButtonContainer>
       </Styled.Root>
     </Modal>
   );

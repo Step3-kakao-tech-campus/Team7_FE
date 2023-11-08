@@ -5,30 +5,40 @@ import Input from '@/components/common/Input';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
 import * as Styled from '@/components/roadmap/common/RoadmapInfoForm/style';
+import TILY_LINKS from '@/constants/links';
 import { useRoadmapInfo } from './useRoadmapInfo';
 
 const RoadmapInfoForm = () => {
-  const { path, data, createLoading, editLoading, control, handleSubmit, errors, onSubmit } = useRoadmapInfo();
+  const { router, roadmapId, path, data, createLoading, editLoading, control, handleSubmit, errors, onSubmit } =
+    useRoadmapInfo();
+
   return (
     <>
-      <Styled.RoadmapInfoForm onSubmit={handleSubmit(onSubmit)}>
-        <Flex justify="space-between" align="center">
-          {path === 'create' ? (
-            <>
-              <h1>로드맵 정보 입력</h1>
-              <Button type="submit" isLoading={createLoading}>
-                생성하기
+      <Styled.RoadmapInfoForm path={path!} onSubmit={handleSubmit(onSubmit)}>
+        {path === 'create' ? (
+          <Flex justify="space-between" align="center">
+            <h1>로드맵 정보 입력</h1>
+            <Button type="submit" isLoading={createLoading}>
+              생성하기
+            </Button>
+          </Flex>
+        ) : (
+          <Styled.RoadmapEditButton>
+            <h2>로드맵 정보</h2>
+            <Flex gap={0.8}>
+              <Button
+                onClick={() => {
+                  router.push(TILY_LINKS.manageStep(Number(roadmapId)));
+                }}
+                variant="outline">
+                STEP 생성
               </Button>
-            </>
-          ) : (
-            <>
-              <h1>로드맵 정보</h1>
               <Button type="submit" isLoading={editLoading}>
                 수정 완료
               </Button>
-            </>
-          )}
-        </Flex>
+            </Flex>
+          </Styled.RoadmapEditButton>
+        )}
 
         <Controller
           name="name"
@@ -86,7 +96,7 @@ const RoadmapInfoForm = () => {
           </Flex>
         </section>
 
-        {path === 'roadmapInfo' && (
+        {path === 'info' && (
           <>
             <section>
               <h3>모집 여부</h3>
