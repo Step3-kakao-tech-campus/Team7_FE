@@ -68,7 +68,7 @@ export const usePostEmailCode = () => {
   return { postEmailCodeAsync, isLoading };
 };
 
-// 인증 코드 검증
+// 인증 코드 일치 여부 확인
 
 export const usePostEmailCodeCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCodeCheck);
@@ -83,6 +83,23 @@ export const usePostEmailCodeCheck = () => {
   };
 
   return { postEmailCodeCheckAsync, isLoading };
+};
+
+// 비밀번호 재설정하기
+
+export const usePostPasswordChange = () => {
+  const { mutateAsync, isLoading } = useMutation(postPasswordChange);
+  const { handleError } = useApiError();
+
+  const postPasswordChangeAsync = async (req: { body: PostEmailPasswordRequest }) => {
+    const data = await mutateAsync(req, {
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { postPasswordChangeAsync, isLoading };
 };
 
 // 회원 가입
@@ -100,23 +117,6 @@ export const usePostJoin = () => {
   };
 
   return { postJoinAsync, isLoading };
-};
-
-// 유저 비밀번호 변경
-
-export const usePostPasswordChange = () => {
-  const { mutateAsync, isLoading } = useMutation(postPasswordChange);
-  const { handleError } = useApiError();
-
-  const postPasswordChangeAsync = async (req: { body: PostEmailPasswordRequest }) => {
-    const data = await mutateAsync(req, {
-      onError: handleError,
-    });
-
-    return data;
-  };
-
-  return { postPasswordChangeAsync, isLoading };
 };
 
 // 카카오 로그인

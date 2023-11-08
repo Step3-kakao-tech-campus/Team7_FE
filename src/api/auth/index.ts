@@ -50,7 +50,7 @@ export const postEmailCode = async (req: { body: { email: string } }) => {
   return data;
 };
 
-// 인증 코드 검증
+// 인증 코드 일치 여부 확인
 
 export const postEmailCodeCheck = async (req: { body: PostEmailCodeCheckRequest }) => {
   const { body } = req;
@@ -58,6 +58,20 @@ export const postEmailCodeCheck = async (req: { body: PostEmailCodeCheckRequest 
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/email/code/check',
+    data: body,
+  });
+
+  return data;
+};
+
+// 비밀번호 재설정하기
+
+export const postPasswordChange = async (req: { body: PostEmailPasswordRequest }) => {
+  const { body } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'POST',
+    url: '/password/change',
     data: body,
   });
 
@@ -72,20 +86,6 @@ export const postJoin = async (req: { body: PostJoinRequest }) => {
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/join',
-    data: body,
-  });
-
-  return data;
-};
-
-// 유저 비밀번호 변경
-
-export const postPasswordChange = async (req: { body: PostEmailPasswordRequest }) => {
-  const { body } = req;
-
-  const { data } = await axiosInstance.request<NullResultResponse>({
-    method: 'POST',
-    url: '/password/change',
     data: body,
   });
 

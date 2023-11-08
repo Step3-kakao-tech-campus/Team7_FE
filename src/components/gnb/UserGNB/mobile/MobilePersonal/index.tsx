@@ -29,7 +29,7 @@ const MobilePersonal = () => {
   const router = useRouter();
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postRoadmapsIndividual } = usePostRoadmapIndividual();
+  const { postRoadmapsIndividualAsync } = usePostRoadmapIndividual();
   const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();
   const { postTilAsync } = usePostTil();
 
@@ -58,7 +58,7 @@ const MobilePersonal = () => {
   });
 
   const createRoadmap: SubmitHandler<{ roadmapTitle: string }> = (formData) => {
-    postRoadmapsIndividual(formData.roadmapTitle);
+    postRoadmapsIndividualAsync({ body: { name: formData.roadmapTitle } });
     roadmapReset();
     setIsRoadmapButtonSelected(false);
   };

@@ -46,12 +46,6 @@ export interface References {
   link: string;
 }
 
-export interface PostRoadmapsIndividualResponse {
-  success: boolean;
-  message: string;
-  result: { id: number };
-}
-
 export interface PostRoadmapsGroupsParticipateResponse {
   success: boolean;
   message: string;

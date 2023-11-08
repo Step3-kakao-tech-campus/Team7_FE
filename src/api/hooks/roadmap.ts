@@ -7,7 +7,7 @@ import {
   getRoadmapsMy,
   getRoadmaps,
   postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
-  postRoadmapIndividual as postRoadmapIndividualAPI,
+  postRoadmapIndividual,
   getRoadmapStepReference,
   postRoadmaps,
   getRoadmapGroupMember,
@@ -131,11 +131,11 @@ export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest)
 export const usePostRoadmapIndividual = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
-  const mutation = useMutation(postRoadmapIndividualAPI);
+  const { mutateAsync } = useMutation(postRoadmapIndividual);
   const { handleError } = useApiError();
 
-  const postRoadmapsIndividual = async (title: string) => {
-    const data = await mutation.mutateAsync(title, {
+  const postRoadmapsIndividualAsync = async (req: { body: { name: string } }) => {
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy]);
         toast.showBottom({
@@ -148,7 +148,7 @@ export const usePostRoadmapIndividual = () => {
     return data;
   };
   // useMutation 훅을 밖으로 내보내지 않아도, 비즈니스 로직 함수 작성해서 내보내면 된다.
-  return { postRoadmapsIndividual };
+  return { postRoadmapsIndividualAsync };
 };
 
 export const usePostRoadmapStepIndividual = () => {
