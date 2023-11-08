@@ -222,7 +222,6 @@ export const usePatchComments = () => {
 };
 
 // 코멘트 삭제하기
-
 export const useDeleteComments = () => {
   const queryClient = useQueryClient();
 
@@ -249,12 +248,15 @@ export const useDeleteComments = () => {
   return { deleteCommentsAsync };
 };
 
+// 특정 스텝의 틸 목록 조회
+
 export const useGetStepTils = (req: { stepId: number }) => {
   const { stepId } = req;
 
   const { data, isLoading } = useQuery([QUERY_KEY.getStepTils, stepId], () =>
     getStepTils({
       stepId,
+      query: qs.stringify({ isSubmit: true, isMember: false, name: '' }, { addQueryPrefix: true }),
     }),
   );
 

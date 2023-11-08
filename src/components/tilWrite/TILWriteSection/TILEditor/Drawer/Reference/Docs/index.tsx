@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import OpenGraph from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Reference/OpenGraph';
 import * as Styled from './style';
 
@@ -12,6 +13,7 @@ const Docs = (props: DocsProps) => {
   const { link, index } = props;
 
   const [isOpen, setIsOpen] = useState(true);
+  const router = useRouter();
 
   return (
     <Styled.Root>
@@ -20,17 +22,19 @@ const Docs = (props: DocsProps) => {
         <div>{`참고자료 ${index}`}</div>
       </Styled.ReferenceContainer>
 
-      <Styled.OpenGraphContariner
-        isOpen={isOpen}
-        initial="closed"
-        animate={isOpen ? 'open' : 'closed'}
-        variants={{
-          open: { opacity: 1 },
-          closed: { opacity: 0 },
-        }}
-        transition={{ type: 'tween' }}>
-        <OpenGraph url={link} />
-      </Styled.OpenGraphContariner>
+      <button onClick={() => router.push(link)}>
+        <Styled.OpenGraphContariner
+          isOpen={isOpen}
+          initial="closed"
+          animate={isOpen ? 'open' : 'closed'}
+          variants={{
+            open: { opacity: 1 },
+            closed: { opacity: 0 },
+          }}
+          transition={{ type: 'tween' }}>
+          <OpenGraph url={link} />
+        </Styled.OpenGraphContariner>
+      </button>
     </Styled.Root>
   );
 };

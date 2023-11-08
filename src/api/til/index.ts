@@ -132,6 +132,8 @@ export const deleteComments = async (req: { param: { tilId: number; commentId: n
   return data;
 };
 
+// 특정 스텝의 틸 목록 조회
+
 export const getStepTils = async (req: { stepId: number; query?: string }) => {
   const { stepId, query = '' } = req;
 
