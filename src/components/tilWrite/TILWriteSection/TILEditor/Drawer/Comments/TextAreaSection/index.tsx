@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
-import { usePostComment } from '@/api/hooks/til';
+import { usePostComments } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
 import TextArea from '@/components/common/TextArea';
 import * as Styled from './style';
@@ -9,17 +9,15 @@ const TextAreaSection = () => {
   const [content, setContent] = useState('');
 
   const { query } = useRouter();
-  const { postCommentAsync } = usePostComment();
+  const { postCommentsAsync } = usePostComments();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postCommentAsync({
-      param: {
+    postCommentsAsync({
+      body: {
         roadmapId: Number(query.roadmapId),
         stepId: Number(query.stepId),
         tilId: Number(query.tilId),
-      },
-      body: {
         content,
       },
     });

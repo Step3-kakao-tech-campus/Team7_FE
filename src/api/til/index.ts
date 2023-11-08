@@ -1,10 +1,9 @@
 import { axiosInstance } from '@/api';
 import type {
-  GetTilsResponse,
+  GetTilsQueryResponse,
   PostTilsRequest,
-  GetTilResponse,
-  PostCommentRequest,
-  PostCommentResponse,
+  GetTilsResponse,
+  PostCommentsRequest,
   PatchCommentRequest,
   DeleteCommentRequest,
   PatchTilsRequest,
@@ -34,7 +33,7 @@ export const postTils = async (req: { body: PostTilsRequest }) => {
 export const getTils = async (req: { tilId: number }) => {
   const { tilId } = req;
 
-  const { data } = await axiosInstance.request<GetTilResponse>({
+  const { data } = await axiosInstance.request<GetTilsResponse>({
     method: 'GET',
     url: `/tils/${tilId}`,
   });
@@ -78,7 +77,7 @@ export const submitTils = async (req: { param: IdParams; body: SubmitTilsRequest
 export const getTilsQuery = async (req: { query: string }) => {
   const { query } = req;
 
-  const { data } = await axiosInstance.request<GetTilsResponse>({
+  const { data } = await axiosInstance.request<GetTilsQueryResponse>({
     method: 'GET',
     url: `/tils/my${query}`,
   });
@@ -86,16 +85,15 @@ export const getTilsQuery = async (req: { query: string }) => {
   return data;
 };
 
-export const postComment = async (req: { param: IdParams; body: PostCommentRequest }) => {
-  const {
-    param: { roadmapId, stepId, tilId },
-    body: { content },
-  } = req;
+// 코멘트 작성하기
 
-  const { data } = await axiosInstance.request<PostCommentResponse>({
+export const postComments = async (req: { body: PostCommentsRequest }) => {
+  const { body } = req;
+
+  const { data } = await axiosInstance.request<IdResponse>({
     method: 'POST',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments`,
-    data: { content },
+    url: `/comments`,
+    data: body,
   });
 
   return data;

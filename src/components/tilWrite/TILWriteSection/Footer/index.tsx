@@ -22,8 +22,8 @@ const Footer = (props: FooterProps) => {
 
   const router = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState();
-  const { patchTilAsync } = usePatchTils();
-  const { submitTilAsync } = useSubmitTils();
+  const { patchTilsAsync } = usePatchTils();
+  const { submitTilsAsync } = useSubmitTils();
   const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
   });
@@ -32,7 +32,7 @@ const Footer = (props: FooterProps) => {
   const handleSaveTIL = () => {
     if (!tilDetail) return;
 
-    patchTilAsync({
+    patchTilsAsync({
       tilId: Number(router.query.tilId),
       body: {
         content: TILContent,
@@ -43,7 +43,7 @@ const Footer = (props: FooterProps) => {
   };
 
   const handleSubmitTIL = () => {
-    submitTilAsync({
+    submitTilsAsync({
       param: {
         roadmapId: Number(router.query.roadmapId),
         tilId: Number(router.query.tilId),

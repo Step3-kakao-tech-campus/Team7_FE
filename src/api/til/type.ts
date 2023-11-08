@@ -1,4 +1,4 @@
-import type { CommonResponse, Step, Comment, Til } from '@/api/type';
+import type { CommonResponse, Step, Comment, Til, IdParams } from '@/api/type';
 
 // Til 요청
 
@@ -15,14 +15,8 @@ export interface PatchTilsRequest {
 export interface SubmitTilsRequest extends PatchTilsRequest {}
 
 // postComment
-export interface PostCommentRequest {
+export interface PostCommentsRequest extends IdParams {
   content: string;
-}
-
-export interface PostCommentResponse extends CommonResponse {
-  result: {
-    id: number;
-  };
 }
 
 // patchComment
@@ -65,22 +59,9 @@ export interface MemberTil {
   commentNum: number | null;
 }
 
-/*
- * Til 응답
- */
-
-// 나의 틸 목록 전체 조회
+// Til 응답
 
 export interface GetTilsResponse extends CommonResponse {
-  result: {
-    tils: Til[];
-  } | null;
-  hasNext: boolean;
-}
-
-// 틸 조회하기
-
-export interface GetTilResponse extends CommonResponse {
   result: {
     content: string;
     submitContent: string;
@@ -90,4 +71,11 @@ export interface GetTilResponse extends CommonResponse {
     roadmapName: string;
     comments: Comment[];
   };
+}
+
+export interface GetTilsQueryResponse extends CommonResponse {
+  result: {
+    tils: Til[];
+  } | null;
+  hasNext: boolean;
 }

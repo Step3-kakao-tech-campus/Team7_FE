@@ -7,7 +7,7 @@ import {
   getTils,
   getTilsQuery,
   postTils,
-  postComment,
+  postComments,
   patchComment as patchCommentAPI,
   deleteComment as deleteCommentAPI,
   patchTils,
@@ -17,9 +17,9 @@ import {
 import type {
   DeleteCommentRequest,
   PatchCommentRequest,
-  PostCommentRequest,
+  PostCommentsRequest,
   PostTilsRequest,
-  GetTilsResponse,
+  GetTilsQueryResponse,
   PatchTilsRequest,
   SubmitTilsRequest,
 } from '@/api/til/type';
@@ -45,7 +45,7 @@ export const usePostTils = () => {
   const { mutateAsync } = useMutation(postTils);
   const { handleError } = useApiError();
 
-  const postTilAsync = async (req: { body: PostTilsRequest }) => {
+  const postTilsAsync = async (req: { body: PostTilsRequest }) => {
     const { roadmapId } = req.body;
 
     const data = await mutateAsync(req, {
@@ -58,7 +58,7 @@ export const usePostTils = () => {
     return data;
   };
 
-  return { postTilAsync };
+  return { postTilsAsync };
 };
 
 // 틸 조회하기
@@ -84,14 +84,14 @@ export const usePatchTils = () => {
   const { mutateAsync } = useMutation(patchTils);
   const { handleError } = useApiError();
 
-  const patchTilAsync = async (req: { tilId: number; body: PatchTilsRequest }) => {
+  const patchTilsAsync = async (req: { tilId: number; body: PatchTilsRequest }) => {
     const data = await mutateAsync(req, {
       onError: handleError,
     });
 
     return data;
   };
-  return { patchTilAsync };
+  return { patchTilsAsync };
 };
 
 // 틸 제출하기
@@ -102,7 +102,7 @@ export const useSubmitTils = () => {
   const { handleError } = useApiError();
   const toast = useToast();
 
-  const submitTilAsync = async (req: { param: IdParams; body: SubmitTilsRequest }) => {
+  const submitTilsAsync = async (req: { param: IdParams; body: SubmitTilsRequest }) => {
     const {
       param: { roadmapId, tilId },
     } = req;
@@ -118,7 +118,7 @@ export const useSubmitTils = () => {
 
     return data;
   };
-  return { submitTilAsync };
+  return { submitTilsAsync };
 };
 
 export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
@@ -135,7 +135,7 @@ export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
       return data;
     },
     {
-      getNextPageParam: (lastPage: GetTilsResponse, pages) => {
+      getNextPageParam: (lastPage: GetTilsQueryResponse, pages) => {
         if (!lastPage.hasNext) {
           return undefined;
         }
@@ -162,29 +162,22 @@ export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
   };
 };
 
-export const usePostComment = () => {
+export const usePostComments = () => {
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation(postComment);
+  const { mutateAsync } = useMutation(postComments);
   const { handleError } = useApiError();
   const toast = useToast();
 
-  const postCommentAsync = async (req: { param: IdParams; body: PostCommentRequest }) => {
+  const postCommentsAsync = async (req: { body: PostCommentsRequest }) => {
     const {
-      param: { roadmapId, stepId, tilId },
+      body: { tilId },
     } = req;
 
     const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 작성되었습니다.' });
-        queryClient.invalidateQueries([
-          QUERY_KEY.getTils,
-          {
-            roadmapId: roadmapId,
-            stepId: stepId,
-            tilId: tilId,
-          },
-        ]);
+        queryClient.invalidateQueries([QUERY_KEY.getTils, tilId]);
       },
       onError: handleError,
     });
@@ -192,7 +185,7 @@ export const usePostComment = () => {
     return data;
   };
 
-  return { postCommentAsync };
+  return { postCommentsAsync };
 };
 
 export const usePatchComment = () => {
@@ -206,14 +199,7 @@ export const usePatchComment = () => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 수정 되었습니다.' });
-        queryClient.invalidateQueries([
-          QUERY_KEY.getTils,
-          {
-            roadmapId: body.roadmapId,
-            stepId: body.stepId,
-            tilId: body.tilId,
-          },
-        ]);
+        queryClient.invalidateQueries([QUERY_KEY.getTils, body.tilId]);
       },
       onError: handleError,
     });
@@ -235,14 +221,7 @@ export const useDeleteComment = () => {
     const data = await mutation.mutateAsync(body, {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 삭제 되었습니다.' });
-        queryClient.invalidateQueries([
-          QUERY_KEY.getTils,
-          {
-            roadmapId: body.roadmapId,
-            stepId: body.stepId,
-            tilId: body.tilId,
-          },
-        ]);
+        queryClient.invalidateQueries([QUERY_KEY.getTils, body.tilId]);
       },
       onError: handleError,
     });

@@ -27,13 +27,13 @@ const CkEditor = (props: CkEditorProps) => {
 
   const toast = useToast();
   const { query } = useRouter();
-  const { patchTilAsync } = usePatchTils();
+  const { patchTilsAsync } = usePatchTils();
   const { tilDetail } = useGetTils({
     tilId: Number(query.tilId),
   });
 
   const autoSaveTIL = (TILContent: string) => {
-    patchTilAsync({
+    patchTilsAsync({
       tilId: Number(query.tilId),
       body: {
         content: TILContent,

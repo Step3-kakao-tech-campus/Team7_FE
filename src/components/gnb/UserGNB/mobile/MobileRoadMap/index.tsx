@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
-import { usePostTil } from '@/api/hooks/til';
+import { usePostTils } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
@@ -19,14 +19,14 @@ const MobileRoadMap = () => {
 
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postTilAsync } = usePostTil();
+  const { postTilsAsync } = usePostTils();
 
   // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수
   const routeTILWrite = async () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      const data = await postTilAsync({ body: { roadmapId, stepId, title: selectedStepTitle } });
+      const data = await postTilsAsync({ body: { roadmapId, stepId, title: selectedStepTitle } });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));
