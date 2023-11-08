@@ -24,7 +24,13 @@ const Button = forwardRef<HTMLButtonElement, PropsWithChildren<ButtonProps>>((pr
   } = props;
 
   return (
-    <Styled.Button variant={variant} fullWidth={fullWidth} className={className} ref={ref} {...rest}>
+    <Styled.Button
+      variant={variant}
+      fullWidth={fullWidth}
+      isLoading={isLoading}
+      className={className}
+      ref={ref}
+      {...rest}>
       {isLoading && <Spinner width={loadingWidth} height={loadingHeight} />}
       {children}
     </Styled.Button>
