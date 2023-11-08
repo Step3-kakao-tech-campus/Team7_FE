@@ -22,8 +22,8 @@ export const useRoadmapInfo = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: ' ',
-      description: ' ',
+      name: '',
+      description: '',
       isPublic: true,
       isRecruit: true,
     },
@@ -45,7 +45,7 @@ export const useRoadmapInfo = () => {
       const data = await postRoadmapsAsync({ body: restFormData });
 
       if (data?.code === 200) {
-        router.push(TILY_LINKS.manageInfo(data?.result.id));
+        router.push(TILY_LINKS.manageStep(data?.result.id));
       }
       return;
     }

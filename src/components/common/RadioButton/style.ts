@@ -5,7 +5,7 @@ export const Label = styled.label`
   position: relative;
   display: flex;
   align-items: center;
-  margin-top: 8px;
+
   cursor: pointer;
   user-select: none;
 
@@ -22,6 +22,7 @@ export const Label = styled.label`
 
 export const Container = styled.div<{ textSize: number }>`
   position: relative;
+  top: 1.4px;
   width: ${({ textSize }) => `${textSize * 1.5}rem`};
   height: ${({ textSize }) => `${textSize * 1.5}rem`};
 `;

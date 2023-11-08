@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/ReferenceList/style';
+import * as Styled from '@/components/roadmap/manage/step/StepList/StepBox/ReferenceList/style';
 
 interface ReferenceListProps {
   type: 'youtube' | 'web';

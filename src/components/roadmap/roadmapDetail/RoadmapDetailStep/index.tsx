@@ -1,7 +1,5 @@
 import { useGetRoadmapsById } from '@/api/hooks/roadmap';
-import StepList from '@/components/roadmap/roadmapCreate/StepSection/StepList';
-import StepBox from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox';
-import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/style';
+import StepBox from '@/components/roadmap/manage/step/StepList/StepBox';
 import useQueryParam from '@/hooks/useQueryParam';
 
 const RoadmapDetailStep = () => {

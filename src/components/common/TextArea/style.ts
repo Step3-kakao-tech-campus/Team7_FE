@@ -11,7 +11,7 @@ export const LabelText = styled.div<LabelTextProps>`
 `;
 export const TextArea = styled.textarea<TextAreaStateProps>`
   width: 100%;
-  margin-top: 0.25rem;
+  margin-top: 8px;
   padding: 0.9rem 0.6rem;
   border: 0.1rem solid ${({ theme }) => theme.colors.blue_gray_300};
   border-radius: 0.35rem;

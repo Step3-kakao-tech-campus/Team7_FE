@@ -20,11 +20,15 @@ import {
   getRoadmapsById,
   postRoadmapsById,
   postGroupRoadmapsApply as postGroupRoadmapsApplyAPI,
+  postSteps,
+  deleteSteps,
+  patchSteps,
 } from '@/api/roadmap';
 import type {
   GetRoadmapStepReferenceRequest,
   GetRoadmapsResponse,
   PostRoadmapsRequest,
+  PostStepsRequest,
   Role,
 } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
@@ -393,3 +397,77 @@ export const usePostRoadmapsGroupsParticipate = () => {
 };
 
 // STEP
+
+export const usePostSteps = () => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const { handleError } = useApiError();
+
+  const { mutateAsync, isLoading } = useMutation(postSteps);
+
+  const postStepsAsync = async (req: { body: PostStepsRequest }) => {
+    const { body } = req;
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(body.roadmapId));
+        toast.showBottom({
+          message: 'STEP이 생성 되었습니다.',
+        });
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { postStepsAsync, isLoading };
+};
+
+export const usePatchSteps = (roadmapId: number) => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const { handleError } = useApiError();
+
+  const { mutateAsync, isLoading } = useMutation(patchSteps);
+
+  const patchStepsAsync = async (req: { stepId: number; body: Omit<PostStepsRequest, 'roadmapId'> }) => {
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId));
+        toast.showBottom({
+          message: 'STEP이 수정 되었습니다.',
+        });
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { patchStepsAsync, isLoading };
+};
+
+export const useDeleteSteps = (roadmapId: number) => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const { handleError } = useApiError();
+
+  const { mutateAsync, isLoading } = useMutation(deleteSteps);
+
+  const deleteStepsAsync = async (req: { stepId: number }) => {
+    const { stepId } = req;
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId));
+        toast.showBottom({
+          message: 'STEP이 삭제 되었습니다.',
+        });
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { deleteStepsAsync, isLoading };
+};

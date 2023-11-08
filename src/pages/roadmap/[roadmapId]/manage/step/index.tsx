@@ -1,11 +1,11 @@
 import ManageLayout from '@/components/layout/ManageLayout';
-import StepSection from '@/components/roadmap/roadmapCreate/StepSection';
+import StepList from '@/components/roadmap/manage/step/StepList';
 import { setLayout } from '@/utils/layout';
 
 const ManageStepPage = () => {
   return (
     <>
-      <StepSection />
+      <StepList />
     </>
   );
 };

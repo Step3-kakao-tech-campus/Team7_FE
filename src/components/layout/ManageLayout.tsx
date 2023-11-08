@@ -28,7 +28,7 @@ const ManageLayout = (props: PropsWithChildren) => {
 
         <MobileSidebar>
           <MobileManageBar />
-          <h3>{data?.result.name}</h3>
+          <RoadmapName>{data?.result.name}</RoadmapName>
         </MobileSidebar>
         <RightArea>{children}</RightArea>
       </ManageLayoutContainer>
@@ -66,4 +66,11 @@ export const RightArea = styled.main`
     width: auto;
     padding: 0;
   }
+`;
+
+const RoadmapName = styled.h3`
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
