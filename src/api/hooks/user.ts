@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
-import { getAlarms, getUsers, getUserHistory, postUserProfileImage as postUserProfileImageAPI } from '@/api/user';
-import { patchAlarm, patchUserPassword as patchUserPasswordAPI, deleteUser as deleteUserAPI } from '@/api/user';
+import { getAlarms, getUsers, getUserHistory, postUserProfileImage } from '@/api/user';
+import { patchAlarm, patchUserPassword, deleteUser } from '@/api/user';
 import type { PatchAlarmRequest, PatchUserPasswordRequest, PostUserProfileImageRequset } from '@/api/user/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
@@ -12,7 +12,7 @@ export const USER_QUERY_KEY = {
   alarm: 'alarm',
 };
 
-// User
+// 유저 정보
 
 export const useGetUsers = () => {
   const { data, isLoading } = useQuery([USER_QUERY_KEY.user], () => getUsers());
@@ -23,7 +23,7 @@ export const useGetUsers = () => {
   };
 };
 
-// Alarm
+// 알람 정보
 
 export const useGetAlarms = () => {
   const { data } = useQuery([USER_QUERY_KEY.alarm], () => getAlarms());
@@ -44,17 +44,21 @@ export const useGetAlarms = () => {
   };
 };
 
+// 알림 읽음 처리
+
 export const usePatchAlarm = () => {
   const { mutateAsync } = useMutation(patchAlarm);
 
-  const patchAlarmAsync = async (body: PatchAlarmRequest) => {
-    const data = await mutateAsync(body);
+  const patchAlarmAsync = async (req: { body: PatchAlarmRequest }) => {
+    const data = await mutateAsync(req);
 
     return data;
   };
 
   return { patchAlarmAsync };
 };
+
+// 유저 학습 히스토리
 
 export const useGetUserHistory = () => {
   const { data, isLoading } = useQuery([USER_QUERY_KEY.userHistory], () => getUserHistory());
@@ -68,13 +72,15 @@ export const useGetUserHistory = () => {
   };
 };
 
-export const usePatchUserPassword = () => {
-  const { mutateAsync, isLoading } = useMutation(patchUserPasswordAPI);
-  const toast = useToast();
-  const { handleError } = useApiError();
+// 마이페이지 유저 비밀번호 변경
 
-  const patchUserPassword = async (body: PatchUserPasswordRequest) => {
-    const data = await mutateAsync(body, {
+export const usePatchUserPassword = () => {
+  const { mutateAsync, isLoading } = useMutation(patchUserPassword);
+  const { handleError } = useApiError();
+  const toast = useToast();
+
+  const patchUserPasswordAsync = async (req: { body: PatchUserPasswordRequest }) => {
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({
           message: '비밀번호가 변경되었습니다.',
@@ -88,15 +94,17 @@ export const usePatchUserPassword = () => {
     };
   };
 
-  return { patchUserPassword, isLoading };
+  return { patchUserPasswordAsync, isLoading };
 };
 
+// 회원 탈퇴
+
 export const useDeleteUser = () => {
-  const { mutateAsync } = useMutation(deleteUserAPI);
+  const { mutateAsync } = useMutation(deleteUser);
   const { handleError } = useApiError();
 
-  const deleteUser = async (password: string) => {
-    const data = await mutateAsync(password, {
+  const deleteUserAsync = async (req: { body: { password: string } }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
@@ -105,16 +113,18 @@ export const useDeleteUser = () => {
     };
   };
 
-  return { deleteUser };
+  return { deleteUserAsync };
 };
+
+// 유저 프로필 이미지 업로드
 
 export const usePostUserProfileImage = () => {
   const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation(postUserProfileImageAPI);
+  const { mutateAsync } = useMutation(postUserProfileImage);
   const { handleError } = useApiError();
 
-  const postUserProfileImage = async (body: PostUserProfileImageRequset) => {
-    const data = await mutateAsync(body, {
+  const postUserProfileImageAsync = async (req: { param: { userId: number }; body: PostUserProfileImageRequset }) => {
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries([USER_QUERY_KEY.user]);
       },
@@ -126,5 +136,5 @@ export const usePostUserProfileImage = () => {
     };
   };
 
-  return { postUserProfileImage };
+  return { postUserProfileImageAsync };
 };

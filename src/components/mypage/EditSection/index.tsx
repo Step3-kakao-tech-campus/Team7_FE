@@ -1,20 +1,15 @@
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { usePatchUserPassword } from '@/api/hooks/user';
 import { useGetUsers } from '@/api/hooks/user';
+import type { PatchUserPasswordRequest } from '@/api/user/type';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import REGEX from '@/constants/regex';
 import * as Styled from './style';
 
-interface ChangePasswordFormInput {
-  password: string;
-  newPassword: string;
-  newPasswordConfirm: string;
-}
-
 const EditSection = () => {
   const { user } = useGetUsers();
-  const { patchUserPassword, isLoading } = usePatchUserPassword();
+  const { patchUserPasswordAsync, isLoading } = usePatchUserPassword();
 
   const {
     control,
@@ -24,7 +19,7 @@ const EditSection = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      password: '',
+      curPassword: '',
       newPassword: '',
       newPasswordConfirm: '',
     },
@@ -36,11 +31,13 @@ const EditSection = () => {
     if (e.key === 'Enter') e.preventDefault();
   };
 
-  const onSubmit: SubmitHandler<ChangePasswordFormInput> = async (formData) => {
-    patchUserPassword({
-      curPassword: formData.password,
-      newPassword: formData.newPassword,
-      newPasswordConfirm: formData.newPasswordConfirm,
+  const onSubmit: SubmitHandler<PatchUserPasswordRequest> = async (formData) => {
+    patchUserPasswordAsync({
+      body: {
+        curPassword: formData.curPassword,
+        newPassword: formData.newPassword,
+        newPasswordConfirm: formData.newPasswordConfirm,
+      },
     });
     reset();
   };
@@ -55,7 +52,7 @@ const EditSection = () => {
       <Styled.PasswordContainer>
         <Styled.Title>비밀번호</Styled.Title>
         <Controller
-          name="password"
+          name="curPassword"
           control={control}
           rules={{
             required: '필수 정보입니다.',
@@ -70,8 +67,8 @@ const EditSection = () => {
               inputStyles={Styled.InputStyles}
               type="password"
               placeholder="현재 비밀번호"
-              message={errors.password?.message}
-              status={errors.password ? 'error' : 'default'}
+              message={errors.curPassword?.message}
+              status={errors.curPassword ? 'error' : 'default'}
               {...field}
             />
           )}

@@ -1,12 +1,36 @@
-import type { CommonResponse, UserHistory, User, Alarm } from '@/api/type';
+import type { CommonResponse, NullResultResponse, UserHistory, User, Alarm } from '@/api/type';
 
-// User + Alarm 요청
+/*
+ * User 요청
+ */
+
+// 알림 읽음 처리
 
 export interface PatchAlarmRequest {
   alarms: Pick<Alarm, 'id'>[];
 }
 
-// User + Alarm 응답
+// 마이페이지 유저 비밀번호 변경
+
+export interface PatchUserPasswordRequest {
+  curPassword: string;
+  newPassword: string;
+  newPasswordConfirm: string;
+}
+
+// 유저 프로필 이미지 업로드
+
+export interface PostUserProfileImageRequset extends FormData {}
+
+/*
+ * User 응답
+ */
+
+// 유저 정보
+
+export interface GetUsersResponse extends User {}
+
+// 알람 정보
 
 export interface GetAlarmsResponse extends CommonResponse {
   result: {
@@ -14,35 +38,22 @@ export interface GetAlarmsResponse extends CommonResponse {
   };
 }
 
-// getUserHistory
-export interface GetUserHistoryResponse {
-  success: boolean;
-  message: string;
+// 유저 학습 히스토리
+
+export interface GetUserHistoryResponse extends CommonResponse {
   result: {
     gardens: UserHistory[];
   };
 }
 
-// getUser
-export interface GetUsersResponse extends User {}
+// 마이페이지 유저 비밀번호 변경
 
-// deleteUser
+export interface PatchUserPasswordResponse extends NullResultResponse {}
+
+// 회원 탈퇴
+
 export interface DeleteUserResponse extends CommonResponse {}
 
-// patchUserPassword
-export interface PatchUserPasswordRequest {
-  curPassword: string;
-  newPassword: string;
-  newPasswordConfirm: string;
-}
-
-export interface PatchUserPasswordResponse extends CommonResponse {
-  result: null;
-}
-
-export interface PostUserProfileImageRequset {
-  userId: number;
-  formData: FormData;
-}
+// 유저 프로필 이미지 업로드
 
 export interface PostUserProfileImageResponse extends CommonResponse {}

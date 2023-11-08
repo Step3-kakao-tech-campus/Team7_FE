@@ -6,10 +6,10 @@ import * as Styled from './style';
 
 const DeleteUserSection = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
-  const { deleteUser } = useDeleteUser();
+  const { deleteUserAsync } = useDeleteUser();
 
   const handleDelteUser = (password: string) => {
-    deleteUser(password);
+    deleteUserAsync({ body: { password } });
     handleClose();
   };
 

@@ -14,7 +14,7 @@ const ImageUploader = (props: ImageUploaderProps) => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const { postUserProfileImage } = usePostUserProfileImage();
+  const { postUserProfileImageAsync } = usePostUserProfileImage();
 
   const handleClick = () => {
     const inputEl = inputRef.current;
@@ -25,7 +25,7 @@ const ImageUploader = (props: ImageUploaderProps) => {
       [].forEach.call(inputEl.files, (image) => {
         formData.append('image', image);
       });
-      await postUserProfileImage({ userId: user?.id as number, formData });
+      await postUserProfileImageAsync({ param: { userId: user?.id as number }, body: formData });
     };
     inputEl.click();
   };

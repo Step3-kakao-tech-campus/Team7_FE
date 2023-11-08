@@ -20,7 +20,7 @@ const GNBProfile = () => {
 
   const handleAlarm = () => {
     handleToggleAlarm();
-    patchAlarmAsync(patchAlarmRequset);
+    patchAlarmAsync({ body: patchAlarmRequset });
   };
 
   return (
