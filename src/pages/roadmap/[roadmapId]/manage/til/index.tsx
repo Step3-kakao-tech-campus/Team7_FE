@@ -2,15 +2,15 @@ import type { GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
 import ManageLayout from '@/components/layout/ManageLayout';
 import ManagePeopleTIL from '@/components/roadmap/manage/til/ManagePeopleTIL';
-import { RightArea, Header } from '@/pages/roadmap/[roadmapId]/manage/member';
+import { Header } from '@/pages/roadmap/[roadmapId]/manage/member';
 import { setLayout } from '@/utils/layout';
 
 const TIL = () => {
   return (
-    <RightArea>
+    <>
       <Header>TIL 모아보기</Header>
       <ManagePeopleTIL />
-    </RightArea>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useGetRoadmapsById, usePostRoadmaps, usePostRoadmapsById } from '@/api/hooks/roadmap';
@@ -12,21 +13,31 @@ export const useRoadmapInfo = () => {
 
   const { postRoadmapsAsync, isLoading: createLoading } = usePostRoadmaps();
   const { postRoadmapsByIdAsync, isLoading: editLoading } = usePostRoadmapsById();
-  const { data } = useGetRoadmapsById({ roadmapId: Number(roadmapId) });
+  const { data, isLoading: infoLoading } = useGetRoadmapsById({ roadmapId: Number(roadmapId) });
 
   const {
     control,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: data?.result.name || '',
-      description: data?.result.description || '',
-      isPublic: data?.result.isPublic === undefined && true,
-      isRecruit: data?.result.isRecruit === undefined && true,
+      name: '',
+      description: '',
+      isPublic: true,
+      isRecruit: true,
     },
     mode: 'onSubmit',
   });
+
+  useEffect(() => {
+    if (!infoLoading && data) {
+      setValue('name', data?.result.name);
+      setValue('description', data?.result.description);
+      setValue('isPublic', data?.result.isPublic);
+      setValue('isRecruit', data?.result.isRecruit);
+    }
+  }, [infoLoading, data, setValue]);
 
   const onSubmit: SubmitHandler<PostRoadmapsRequest> = async (formData) => {
     if (path === 'create') {
@@ -34,16 +45,28 @@ export const useRoadmapInfo = () => {
       const data = await postRoadmapsAsync({ body: restFormData });
 
       if (data?.code === 200) {
-        router.push(TILY_LINKS.manageGroupInfo(data?.result.id));
+        router.push(TILY_LINKS.manageStep(data?.result.id));
       }
       return;
     }
-    if (path === 'roadmapInfo') {
+    if (path === 'info') {
       await postRoadmapsByIdAsync({ roadmapId: Number(roadmapId), body: formData });
 
       return;
     }
   };
 
-  return { path, data, createLoading, editLoading, control, handleSubmit, errors, onSubmit };
+  return {
+    router,
+    roadmapId,
+    path,
+    data,
+    infoLoading,
+    createLoading,
+    editLoading,
+    control,
+    handleSubmit,
+    errors,
+    onSubmit,
+  };
 };

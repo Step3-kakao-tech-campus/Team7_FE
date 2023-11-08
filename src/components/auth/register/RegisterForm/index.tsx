@@ -1,16 +1,17 @@
 import { Controller } from 'react-hook-form';
-import Link from 'next/link';
-import AuthButtonContainer from '@/components/auth/common/AuthButtonContainer';
+import { useRouter } from 'next/router';
 import AuthForm from '@/components/auth/common/AuthForm';
 import AuthLogo from '@/components/auth/common/AuthLogo';
 import AuthModal from '@/components/auth/common/AuthModal';
 import useRegister from '@/components/auth/register/RegisterForm/useRegister';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
+import TwoButtonContainer from '@/components/common/TwoButtonContainer';
 import TILY_LINKS from '@/constants/links';
 import REGEX from '@/constants/regex';
 
 const RegisterForm = () => {
+  const router = useRouter();
   const { isOpen, handleClose, isLoading, control, handleSubmit, getValues, errors, onSubmit } = useRegister();
 
   return (
@@ -91,12 +92,14 @@ const RegisterForm = () => {
             />
           )}
         />
-        <AuthButtonContainer>
-          <Link href={TILY_LINKS.verify()}>취소</Link>
+        <TwoButtonContainer>
+          <Button type="button" variant="ghost" onClick={() => router.push(TILY_LINKS.verify())}>
+            취소
+          </Button>
           <Button type="submit" isLoading={isLoading}>
             완료
           </Button>
-        </AuthButtonContainer>
+        </TwoButtonContainer>
       </AuthForm>
       <AuthModal isOpen={isOpen} onClose={handleClose} content="회원가입이 완료되었습니다." />
     </>

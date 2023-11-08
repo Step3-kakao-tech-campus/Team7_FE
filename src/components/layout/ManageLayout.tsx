@@ -28,9 +28,9 @@ const ManageLayout = (props: PropsWithChildren) => {
 
         <MobileSidebar>
           <MobileManageBar />
-          <h3>{data?.result.name}</h3>
+          <RoadmapName>{data?.result.name}</RoadmapName>
         </MobileSidebar>
-        {children}
+        <RightArea>{children}</RightArea>
       </ManageLayoutContainer>
     </>
   );
@@ -55,4 +55,22 @@ export const ManageSideBarContainer = styled.aside`
   width: 215px;
   height: ${({ theme }) => `calc(100vh - ${theme.layout.main.GNBHeight})`};
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
+`;
+
+export const RightArea = styled.main`
+  max-width: 1100px;
+  width: 70vw;
+  padding: 30px 0 0 30px;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    width: auto;
+    padding: 0;
+  }
+`;
+
+const RoadmapName = styled.h3`
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

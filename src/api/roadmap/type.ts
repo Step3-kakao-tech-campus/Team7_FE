@@ -83,6 +83,13 @@ export interface PostRoadmapsRequest {
   isRecruit?: boolean;
 }
 
+export interface PostStepsRequest {
+  roadmapId: number;
+  title: string;
+  description: string;
+  dueDate: Date;
+}
+
 // Roadmap 응답
 
 // 로드맵 - 공통
@@ -100,9 +107,7 @@ export interface GetRoadmapsResponse extends CommonResponse {
 
 // 로드맵 - 그룹
 
-export interface GetRoadmapsByIdResponse {
-  success: boolean;
-  message: string;
+export interface GetRoadmapsByIdResponse extends CommonResponse {
   result: {
     creator?: Omit<Creator, 'id'>;
     category: 'tily' | 'group';

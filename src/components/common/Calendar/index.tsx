@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Flex from '@/components/common/Flex';
@@ -28,6 +28,9 @@ const Calendar = (props: CalendarProps) => {
   } = props;
 
   const [date, setDate] = useState(externalDate);
+  useEffect(() => {
+    setDate(externalDate);
+  }, [externalDate]);
   const handleCalendarClose = () => {
     onChangeDate?.(date);
   };
@@ -59,8 +62,9 @@ const Calendar = (props: CalendarProps) => {
           return (
             <Styled.Header>
               <IconButton
-                iconName="ic_chevronLeft"
+                iconName="ic_chevronLeftBlack"
                 variant="outline"
+                type="button"
                 imageSize={12}
                 css={Styled.ButtonStyles}
                 onClick={decreaseMonth}
@@ -70,8 +74,9 @@ const Calendar = (props: CalendarProps) => {
                 {monthName}
               </Flex>
               <IconButton
-                iconName="ic_chevronRight"
+                iconName="ic_chevronRightBlack"
                 variant="outline"
+                type="button"
                 imageSize={12}
                 css={Styled.ButtonStyles}
                 onClick={increaseMonth}

@@ -1,7 +1,7 @@
 import Button from '@/components/common/Button';
-import ReferenceList from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/ReferenceList';
-import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/YoutubeBox/style';
-import YoutubeModal from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/YoutubeModal';
+import ReferenceList from '@/components/roadmap/manage/step/StepList/StepBox/ReferenceList';
+import * as Styled from '@/components/roadmap/manage/step/StepList/StepBox/YoutubeBox/style';
+import YoutubeModal from '@/components/roadmap/manage/step/StepList/StepBox/YoutubeModal';
 import { useModalState } from '@/hooks/useModalState';
 
 interface YoutubeBoxProps {

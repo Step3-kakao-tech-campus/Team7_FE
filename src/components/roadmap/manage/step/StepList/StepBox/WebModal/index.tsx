@@ -5,7 +5,7 @@ import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
-import * as Styled from '@/components/roadmap/roadmapCreate/StepSection/StepList/StepBox/YoutubeModal/style';
+import * as Styled from '@/components/roadmap/manage/step/StepList/StepBox/YoutubeModal/style';
 import REGEX from '@/constants/regex';
 
 interface WebModalProps extends ModalProps {

@@ -56,7 +56,7 @@ const RoadmapDetailInfo = () => {
             <Button onClick={routeTILWrite}>학습하기</Button>
           ) : (
             <Flex gap={1}>
-              <Button variant="outline" onClick={() => router.push(TILY_LINKS.manageGroupInfo(Number(roadmapId)))}>
+              <Button variant="outline" onClick={() => router.push(TILY_LINKS.manageInfo(Number(roadmapId)))}>
                 로드맵 관리
               </Button>
               <Button onClick={routeTILWrite}>학습하기</Button>

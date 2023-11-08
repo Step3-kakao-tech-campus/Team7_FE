@@ -1,16 +1,11 @@
 import { type GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
 import ManageLayout from '@/components/layout/ManageLayout';
-import Info from '@/components/roadmap/manage/groupInfo/Info';
-import { RightArea } from '@/pages/roadmap/[roadmapId]/manage/member';
+import RoadmapInfoForm from '@/components/roadmap/common/RoadmapInfoForm';
 import { setLayout } from '@/utils/layout';
 
 const RoamapInfoPage = () => {
-  return (
-    <RightArea>
-      <Info />
-    </RightArea>
-  );
+  return <RoadmapInfoForm />;
 };
 
 setLayout(RoamapInfoPage, ManageLayout);
