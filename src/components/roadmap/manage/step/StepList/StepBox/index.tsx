@@ -2,12 +2,11 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import Image from 'next/image';
 import type { StepWithReferences } from '@/api/type';
-import WebBox from '@/components/roadmap/manage/step/StepList/StepBox/WebBox';
-import YoutubeBox from '@/components/roadmap/manage/step/StepList/StepBox/YoutubeBox';
 import * as Styled from '@/components/roadmap/manage/step/StepList/StepBox/style';
 import StepModal from '@/components/roadmap/manage/step/StepModal';
 import { useModalState } from '@/hooks/useModalState';
 import StepDeleteModal from '../../StepDeleteModal';
+import ReferenceBox from '../ReferenceBox';
 
 interface StepBoxProps {
   step: StepWithReferences;
@@ -73,13 +72,13 @@ const StepBox = (props: StepBoxProps) => {
             </section>
           </Styled.ButtonContainer>
         </Styled.Header>
-        {/* {isOpen && (
+        {isOpen && (
           <Styled.ContentContainer>
             <p>{step.description}</p>
-            <YoutubeBox idx={idx} where={where} />
-            <WebBox idx={idx} where={where} />
+            <ReferenceBox step={step} type="유튜브 영상" />
+            <ReferenceBox step={step} type="참고자료" />
           </Styled.ContentContainer>
-        )} */}
+        )}
       </article>
 
       <StepModal isEdit={true} step={step} isOpen={isEditOpen} onClose={handleEditClose} />

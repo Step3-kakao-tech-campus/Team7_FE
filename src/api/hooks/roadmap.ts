@@ -23,6 +23,8 @@ import {
   postSteps,
   deleteSteps,
   patchSteps,
+  postReferences,
+  deleteReferences,
 } from '@/api/roadmap';
 import type {
   GetRoadmapStepReferenceRequest,
@@ -31,6 +33,7 @@ import type {
   PostStepsRequest,
   Role,
   IndividualStep,
+  PostReferencesRequest,
 } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
@@ -466,7 +469,6 @@ export const useDeleteSteps = (roadmapId: number) => {
   const { mutateAsync, isLoading } = useMutation(deleteSteps);
 
   const deleteStepsAsync = async (req: { stepId: number }) => {
-    const { stepId } = req;
     const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId));
@@ -481,4 +483,53 @@ export const useDeleteSteps = (roadmapId: number) => {
   };
 
   return { deleteStepsAsync, isLoading };
+};
+
+export const usePostReferences = () => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const { handleError } = useApiError();
+
+  const { mutateAsync, isLoading } = useMutation(postReferences);
+
+  const postReferencesAsync = async (req: { body: PostReferencesRequest }) => {
+    const { body } = req;
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(body.roadmapId));
+        toast.showBottom({
+          message: '참고자료가 생성 되었습니다.',
+        });
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { postReferencesAsync, isLoading };
+};
+
+export const useDeleteReferences = (roadmapId: number) => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const { handleError } = useApiError();
+
+  const { mutateAsync, isLoading } = useMutation(deleteReferences);
+
+  const deleteReferencesAsync = async (req: { referenceId: number }) => {
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId));
+        toast.showBottom({
+          message: '링크가 삭제 되었습니다.',
+        });
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { deleteReferencesAsync, isLoading };
 };
