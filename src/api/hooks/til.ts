@@ -266,29 +266,28 @@ export const useGetStepTils = (req: { stepId: number }) => {
   };
 };
 
-// export const useGetStepTilsManage = ({ queryKey }: { queryKey: QueryKey }) => {
-//   const { query } = useRouter();
-//   const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
+export const useGetStepTilsManage = ({ queryKey }: { queryKey: QueryKey }) => {
+  const { query } = useRouter();
+  const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
 
-//   const { roadmapId, stepId, isSubmit, isMember, name } = query;
+  const { stepId, isSubmit, isMember, name } = query;
 
-//   const enabled = !!stepId;
+  const enabled = !!stepId;
 
-//   const { data, isLoading } = useQuery(
-//     [QUERY_KEY.getStepTils, ..._queryKey],
-//     () =>
-//       getStepTils({
-//         roadmapId: Number(roadmapId),
-//         stepId: Number(stepId),
-//         input: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
-//       }),
-//     {
-//       enabled,
-//     },
-//   );
+  const { data, isLoading } = useQuery(
+    [QUERY_KEY.getStepTils, ..._queryKey],
+    () =>
+      getStepTils({
+        stepId: Number(stepId),
+        query: qs.stringify({ isSubmit, isMember, name }, { addQueryPrefix: true }),
+      }),
+    {
+      enabled,
+    },
+  );
 
-//   return {
-//     memberTils: data?.result.members,
-//     isLoading,
-//   };
-// };
+  return {
+    memberTils: data?.result.members,
+    isLoading,
+  };
+};

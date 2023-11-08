@@ -54,8 +54,7 @@ export const Button = styled.button<StyledButtonProps>`
     cursor: not-allowed;
     background-color: ${({ theme }) => theme.colors.gray_700};
   }
-
   & > div {
-    position: absolute;
+    position: ${({ isLoading }) => (isLoading ? 'absolute' : 'relative')};
   }
 `;
