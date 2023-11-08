@@ -50,10 +50,9 @@ export const ManageLayoutContainer = styled.main`
 `;
 
 export const ManageSideBarContainer = styled.aside`
-  position: sticky;
-  top: ${({ theme }) => theme.layout.main.GNBHeight};
   width: 215px;
-  height: ${({ theme }) => `calc(100vh - ${theme.layout.main.GNBHeight})`};
+  min-height: 100vh;
+  height: auto;
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
 

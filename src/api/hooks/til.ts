@@ -132,16 +132,15 @@ export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
       const searchParams = { page, ...query };
 
       const data = getTilsQuery({ query: qs.stringify(searchParams, { addQueryPrefix: true }) });
-
       return data;
     },
     {
       getNextPageParam: (lastPage: GetTilsQueryResponse, pages) => {
-        if (!lastPage.hasNext) {
+        if (!lastPage.result?.hasNext) {
           return undefined;
         }
 
-        return pages.length + 1;
+        return pages.length;
       },
       keepPreviousData: true, // 이전 데이터 유지 layout shift 방지
     },
