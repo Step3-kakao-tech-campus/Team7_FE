@@ -7,15 +7,9 @@ import type { CommonResponse, Step, Comment, Til } from '@/api/type';
 // 틸 생성하기
 
 export interface PostTilRequest {
+  roadmapId: number;
+  stepId: number;
   title: string;
-}
-
-export interface PostTilResponse {
-  success: boolean;
-  message: string;
-  result: {
-    id: number;
-  };
 }
 
 // postComment

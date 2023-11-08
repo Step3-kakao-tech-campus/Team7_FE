@@ -2,7 +2,6 @@ import { axiosInstance } from '@/api';
 import type {
   GetTilsResponse,
   PostTilRequest,
-  PostTilResponse,
   GetTilResponse,
   PostCommentRequest,
   PostCommentResponse,
@@ -13,8 +12,22 @@ import type {
   GetStepTilsRequest,
   GetStepTilsResponse,
 } from '@/api/til/type';
-import type { NullResultResponse } from '@/api/type';
+import type { IdResponse, NullResultResponse } from '@/api/type';
 import type { IdParams } from '@/api/type';
+
+// 틸 생성하기
+
+export const postTil = async (req: { body: PostTilRequest }) => {
+  const { body } = req;
+
+  const { data } = await axiosInstance.request<IdResponse>({
+    method: 'POST',
+    url: `/tils`,
+    data: body,
+  });
+
+  return data;
+};
 
 // 나의 틸 목록 전체 조회
 
@@ -39,23 +52,6 @@ export const getTil = async (req: { param: IdParams }) => {
   const { data } = await axiosInstance.request<GetTilResponse>({
     method: 'GET',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
-  });
-
-  return data;
-};
-
-// 틸 생성하기
-
-export const postTil = async (req: { param: IdParams; body: PostTilRequest }) => {
-  const {
-    param: { roadmapId, stepId },
-    body,
-  } = req;
-
-  const { data } = await axiosInstance.request<PostTilResponse>({
-    method: 'POST',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils`,
-    data: body,
   });
 
   return data;

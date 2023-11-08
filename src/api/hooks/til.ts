@@ -37,6 +37,30 @@ interface InfinityTilRequest {
   queryKey?: QueryKey;
 }
 
+// 틸 생성하기
+
+export const usePostTil = () => {
+  const queryClient = useQueryClient();
+
+  const { mutateAsync } = useMutation(postTil);
+  const { handleError } = useApiError();
+
+  const postTilAsync = async (req: { body: PostTilRequest }) => {
+    const { roadmapId } = req.body;
+
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId?.toString()]);
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { postTilAsync };
+};
+
 export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
   const { query } = useRouter();
   const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
@@ -91,30 +115,6 @@ export const useGetTil = (req: { param: IdParams }) => {
     tilDetail: data?.result ?? null,
     isLoading,
   };
-};
-
-export const usePostTil = () => {
-  const queryClient = useQueryClient();
-
-  const { mutateAsync } = useMutation(postTil);
-  const { handleError } = useApiError();
-
-  const postTilAsync = async (req: { param: IdParams; body: PostTilRequest }) => {
-    const {
-      param: { roadmapId },
-    } = req;
-
-    const data = await mutateAsync(req, {
-      onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId?.toString()]);
-      },
-      onError: handleError,
-    });
-
-    return data;
-  };
-
-  return { postTilAsync };
 };
 
 export const usePatchTil = () => {

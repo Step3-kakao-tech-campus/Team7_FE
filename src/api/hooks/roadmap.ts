@@ -6,7 +6,7 @@ import {
   getRoadmapSteps,
   getRoadmapsMy,
   getRoadmaps,
-  postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
+  postRoadmapStepIndividual,
   postRoadmapIndividual,
   getRoadmapStepReference,
   postRoadmaps,
@@ -151,17 +151,20 @@ export const usePostRoadmapIndividual = () => {
   return { postRoadmapsIndividualAsync };
 };
 
+// STEP 생성하기
+
 export const usePostRoadmapStepIndividual = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(postRoadmapStepIndividualAPI);
+  const { mutateAsync } = useMutation(postRoadmapStepIndividual);
 
-  const postRoadmapStepIndividual = async (req: { body: Pick<IndividualStep, 'roadmapId' | 'title'> }) => {
+  const postRoadmapStepIndividualAsync = async (req: { body: Pick<IndividualStep, 'roadmapId' | 'title'> }) => {
     const { body } = req;
 
+    // API 재사용을 위함.
     const createIndivialStep = { ...body, description: null, dueDate: null };
 
-    const data = await mutation.mutateAsync(
+    const data = await mutateAsync(
       { body: createIndivialStep },
       {
         onSuccess: () => {
@@ -172,7 +175,7 @@ export const usePostRoadmapStepIndividual = () => {
 
     return data;
   };
-  return { postRoadmapStepIndividual };
+  return { postRoadmapStepIndividualAsync };
 };
 
 // 로드맵 - 그룹

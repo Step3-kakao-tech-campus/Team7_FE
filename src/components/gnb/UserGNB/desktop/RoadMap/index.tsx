@@ -30,7 +30,7 @@ const RoadMap = () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      const data = await postTilAsync({ param: { roadmapId, stepId }, body: { title: selectedStepTitle } });
+      const data = await postTilAsync({ body: { roadmapId, stepId, title: selectedStepTitle } });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));

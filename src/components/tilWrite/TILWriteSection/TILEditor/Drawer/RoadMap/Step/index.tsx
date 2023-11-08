@@ -49,7 +49,7 @@ const Step = (props: StepProps) => {
     const roadmapId = Number(router.query.roadmapId) as number;
     autoSavedTimeHandler.clearAutoSave();
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      const data = await postTilAsync({ param: { roadmapId, stepId }, body: { title } });
+      const data = await postTilAsync({ body: { roadmapId, stepId, title } });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));

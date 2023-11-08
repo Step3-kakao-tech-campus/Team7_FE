@@ -74,6 +74,8 @@ export const getRoadmapStepReference = async (body: GetRoadmapStepReferenceReque
   return data;
 };
 
+// STEP 생성하기
+
 export const postRoadmapStepIndividual = async (req: { body: IndividualStep }) => {
   const { body } = req;
 
