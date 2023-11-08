@@ -1,6 +1,7 @@
 import { useState, type PropsWithChildren, useRef } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import Image from 'next/image';
+import { useDeleteRoadmaps, useDeleteSteps, usePatchRoadmaps, usePatchSteps } from '@/api/hooks/roadmap';
 import Button from '@/components/common/Button';
 import Icon from '@/components/common/Icon';
 import Input from '@/components/common/Input';
@@ -8,16 +9,23 @@ import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
 
 interface ListItemProps {
+  stepId?: number;
+  roadmapId: number;
   selected: boolean;
   onClick: () => void;
 }
 
 const ListItem = (props: PropsWithChildren<ListItemProps>) => {
-  const { children, selected, onClick } = props;
+  const { children, selected, stepId, roadmapId, onClick } = props;
   const [showEdit, setShowEdit] = useState<boolean>(false);
   const [showDeletePopover, setShowDeletePopover] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { deleteStepsAsync } = useDeleteSteps(roadmapId);
+  const { patchStepsAsync } = usePatchSteps(roadmapId);
+  const { deleteRoadmapsAsync } = useDeleteRoadmaps();
+  const { patchRoadmapsAsync } = usePatchRoadmaps();
 
   useOnClickOutside(ref, () => {
     setShowDeletePopover(false);
@@ -41,6 +49,18 @@ const ListItem = (props: PropsWithChildren<ListItemProps>) => {
 
   const editTitle: SubmitHandler<{ title: string }> = (formData) => {
     setShowEdit(false);
+    if (stepId !== undefined)
+      patchStepsAsync({ stepId, body: { title: formData.title, description: null, dueDate: null } });
+    else
+      patchRoadmapsAsync({
+        roadmapId,
+        body: { name: formData.title, description: null, isPublic: false, isRecruit: false },
+      });
+  };
+
+  const handleDelete = () => {
+    if (stepId !== undefined) deleteStepsAsync({ stepId });
+    else deleteRoadmapsAsync({ roadmapId });
   };
 
   return (
@@ -68,6 +88,7 @@ const ListItem = (props: PropsWithChildren<ListItemProps>) => {
                   {...field}
                 />
                 <Styled.ImageContainer
+                  type="button"
                   onClick={() => {
                     setShowEdit(false);
                     reset();
@@ -99,7 +120,9 @@ const ListItem = (props: PropsWithChildren<ListItemProps>) => {
               <Button variant="outline" css={Styled.ButtonStyles} onClick={() => setShowDeletePopover(false)}>
                 취소
               </Button>
-              <Button css={Styled.ButtonStyles}>삭제</Button>
+              <Button css={Styled.ButtonStyles} onClick={handleDelete}>
+                삭제
+              </Button>
             </Styled.Popover>
           )}
         </Styled.Root>

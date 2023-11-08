@@ -245,3 +245,25 @@ export const deleteSteps = async (req: { stepId: number }) => {
 
   return data;
 };
+
+export const deleteRoadmaps = async (req: { roadmapId: number }) => {
+  const { roadmapId } = req;
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'DELETE',
+    url: `/roadmaps/${roadmapId}`,
+  });
+
+  return data;
+};
+
+export const patchRoadmaps = async (req: { roadmapId: number; body: PostRoadmapsRequest }) => {
+  const { roadmapId, body } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'PATCH',
+    url: `/roadmaps/${roadmapId}`,
+    data: body,
+  });
+
+  return data;
+};

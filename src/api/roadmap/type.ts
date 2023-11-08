@@ -56,7 +56,7 @@ export interface PostRoadmapsGroupsParticipateResponse {
 
 export interface PostRoadmapsRequest {
   name: string;
-  description: string;
+  description: string | null;
   isPublic: boolean;
   isRecruit?: boolean;
 }
@@ -64,8 +64,8 @@ export interface PostRoadmapsRequest {
 export interface PostStepsRequest {
   roadmapId: number;
   title: string;
-  description: string;
-  dueDate: Date;
+  description: string | null;
+  dueDate: Date | null;
 }
 
 // Roadmap 응답
