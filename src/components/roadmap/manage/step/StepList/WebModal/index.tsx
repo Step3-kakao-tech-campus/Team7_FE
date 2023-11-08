@@ -1,55 +1,51 @@
-import { produce } from 'immer';
-import { useSetRecoilState } from 'recoil';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { usePostReferences } from '@/api/hooks/roadmap';
+import type { StepWithReferences } from '@/api/type';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
-import * as Styled from '@/components/roadmap/manage/step/StepList/StepBox/YoutubeModal/style';
+import TwoButtonContainer from '@/components/common/TwoButtonContainer';
+import * as Styled from '@/components/roadmap/manage/step/StepList/YoutubeModal/style';
 import REGEX from '@/constants/regex';
+import useQueryParam from '@/hooks/useQueryParam';
 
 interface WebModalProps extends ModalProps {
-  idx: number;
-}
-
-interface WebFormInput {
-  link: string;
+  step: StepWithReferences;
 }
 
 const WebModal = (props: WebModalProps) => {
-  const { idx, isOpen, onClose } = props;
-  // const setRoadmap = useSetRecoilState(roadmapAtoms);
+  const { step, isOpen, onClose } = props;
+  const roadmapId = Number(useQueryParam('roadmapId'));
+  const { postReferencesAsync, isLoading } = usePostReferences();
 
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<{ link: string }>({
     defaultValues: {
       link: '',
     },
     mode: 'onSubmit',
   });
 
-  // const onSubmit: SubmitHandler<WebFormInput> = (formData) => {
-  //   setRoadmap((prev) =>
-  //     produce(prev, (draft) => {
-  //       draft.steps[idx].references.web.push(formData);
-  //     }),
-  //   );
-  //   reset();
-  //   onClose();
-  // };
+  const onSubmit: SubmitHandler<{ link: string }> = async (formData) => {
+    const data = await postReferencesAsync({ body: { category: 'web', roadmapId, stepId: step.id, ...formData } });
+    if (data.code === 200) {
+      reset();
+      onClose();
+    }
+  };
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
       <Styled.Root>
         <h2>참고자료 링크 추가하기</h2>
-
         <InfoArea>
           <InfoArea.Info>해당 스텝에 사용할 참고자료 링크를 첨부해주세요.</InfoArea.Info>
         </InfoArea>
-        {/* <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="link"
             control={control}
@@ -66,12 +62,12 @@ const WebModal = (props: WebModalProps) => {
                 labelType="bold"
                 placeholder="참고자료 링크를 첨부해주세요."
                 message={errors.link?.message}
-                status={errors.link ? 'error' : 'default'}
+                status={errors.link && 'error'}
                 {...field}
               />
             )}
           />
-          <Styled.ButtonContainer>
+          <TwoButtonContainer>
             <Button
               type="button"
               variant="ghost"
@@ -81,9 +77,11 @@ const WebModal = (props: WebModalProps) => {
               }}>
               취소
             </Button>
-            <Button type="submit">확인</Button>
-          </Styled.ButtonContainer>
-        </form> */}
+            <Button type="submit" isLoading={isLoading}>
+              확인
+            </Button>
+          </TwoButtonContainer>
+        </form>
       </Styled.Root>
     </Modal>
   );

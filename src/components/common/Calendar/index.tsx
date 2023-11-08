@@ -10,11 +10,11 @@ dayjs().format();
 
 export interface CalendarProps {
   popperPlacement?: 'top' | 'bottom';
-  onChangeDate?: (date: Date) => void;
+  onChangeDate?: (date: Date | null) => void;
   disabled?: boolean;
   minDate?: Date;
   isTimeInclude?: boolean;
-  date?: Date;
+  date?: Date | null;
 }
 
 const Calendar = (props: CalendarProps) => {

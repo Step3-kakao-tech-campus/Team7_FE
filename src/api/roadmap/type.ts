@@ -26,11 +26,6 @@ export interface GetRoadmapStepReferenceResponse extends CommonResponse {
   };
 }
 
-export interface References {
-  youtube: Youtube[];
-  web: Web[];
-}
-
 export interface Youtube {
   id: number;
   link: string;
@@ -44,6 +39,11 @@ export interface Web {
 export interface References {
   id: number;
   link: string;
+}
+
+export interface References {
+  youtube: Youtube[];
+  web: Web[];
 }
 
 export interface PostRoadmapsGroupsParticipateResponse {
@@ -66,6 +66,13 @@ export interface PostStepsRequest {
   title: string;
   description: string | null;
   dueDate: Date | null;
+}
+
+export interface PostReferencesRequest {
+  category: 'web' | 'youtube';
+  link: string;
+  roadmapId: number;
+  stepId: number;
 }
 
 // Roadmap 응답

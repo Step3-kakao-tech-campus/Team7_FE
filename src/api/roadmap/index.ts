@@ -18,6 +18,7 @@ import type {
   PostGroupRoadmapsApplyResponse,
   PostGroupTilyApplyResponse,
   PostStepsRequest,
+  PostReferencesRequest,
 } from '@/api/roadmap/type';
 import type { IndividualStep } from '@/api/roadmap/type';
 import type { IdResponse, NullResultResponse } from '../type';
@@ -215,7 +216,6 @@ export const deleteRoadmapGroupApplyReject = async ({ roadmapId, userId }: { roa
 
 export const postSteps = async (req: { body: PostStepsRequest }) => {
   const { body } = req;
-  console.log(body);
   const { data } = await axiosInstance.request<IdResponse>({
     method: 'POST',
     url: '/steps',
@@ -263,6 +263,27 @@ export const patchRoadmaps = async (req: { roadmapId: number; body: PostRoadmaps
     method: 'PATCH',
     url: `/roadmaps/${roadmapId}`,
     data: body,
+  });
+
+  return data;
+};
+
+export const postReferences = async (req: { body: PostReferencesRequest }) => {
+  const { body } = req;
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'POST',
+    url: '/references',
+    data: body,
+  });
+
+  return data;
+};
+
+export const deleteReferences = async (req: { referenceId: number }) => {
+  const { referenceId } = req;
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'DELETE',
+    url: `/references/${referenceId}`,
   });
 
   return data;

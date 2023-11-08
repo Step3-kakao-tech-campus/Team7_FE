@@ -1,23 +1,22 @@
-import { produce } from 'immer';
-import { useSetRecoilState } from 'recoil';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { usePostReferences } from '@/api/hooks/roadmap';
+import type { StepWithReferences } from '@/api/type';
 import Button from '@/components/common/Button';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
-import * as Styled from '@/components/roadmap/manage/step/StepList/StepBox/YoutubeModal/style';
+import TwoButtonContainer from '@/components/common/TwoButtonContainer';
+import * as Styled from '@/components/roadmap/manage/step/StepList/YoutubeModal/style';
+import useQueryParam from '@/hooks/useQueryParam';
 
 interface YoutubeModalProps extends ModalProps {
-  idx: number;
-}
-
-interface YoutubeFormInput {
-  link: string;
+  step: StepWithReferences;
 }
 
 const YoutubeModal = (props: YoutubeModalProps) => {
-  const { idx, isOpen, onClose } = props;
-  // const setRoadmap = useSetRecoilState(roadmapAtoms);
+  const { step, isOpen, onClose } = props;
+  const roadmapId = Number(useQueryParam('roadmapId'));
+  const { postReferencesAsync, isLoading } = usePostReferences();
 
   const {
     control,
@@ -31,24 +30,21 @@ const YoutubeModal = (props: YoutubeModalProps) => {
     mode: 'onSubmit',
   });
 
-  // const onSubmit: SubmitHandler<YoutubeFormInput> = (formData) => {
-  //   setRoadmap((prev) =>
-  //     produce(prev, (draft) => {
-  //       draft.steps[idx].references.youtube.push(formData);
-  //     }),
-  //   );
-  //   reset();
-  //   onClose();
-  // };
+  const onSubmit: SubmitHandler<{ link: string }> = async (formData) => {
+    const data = await postReferencesAsync({ body: { category: 'youtube', roadmapId, stepId: step.id, ...formData } });
+    if (data.code === 200) {
+      reset();
+      onClose();
+    }
+  };
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
       <Styled.Root>
         <h2>유튜브 영상 추가하기</h2>
-
         <InfoArea>
           <InfoArea.Info>해당 스텝에 사용할 동영상 링크를 첨부해주세요.</InfoArea.Info>
         </InfoArea>
-        {/* <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="link"
             control={control}
@@ -66,7 +62,7 @@ const YoutubeModal = (props: YoutubeModalProps) => {
               />
             )}
           />
-          <Styled.ButtonContainer>
+          <TwoButtonContainer>
             <Button
               type="button"
               variant="ghost"
@@ -76,9 +72,11 @@ const YoutubeModal = (props: YoutubeModalProps) => {
               }}>
               취소
             </Button>
-            <Button type="submit">확인</Button>
-          </Styled.ButtonContainer>
-        </form> */}
+            <Button type="submit" isLoading={isLoading}>
+              확인
+            </Button>
+          </TwoButtonContainer>
+        </form>
       </Styled.Root>
     </Modal>
   );

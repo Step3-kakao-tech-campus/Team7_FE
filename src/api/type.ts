@@ -74,7 +74,7 @@ export interface StepWithReferences {
   id: number;
   title: string;
   description: string;
-  dueDate: Date;
+  dueDate: Date | null;
   references: References;
 }
 

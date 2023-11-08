@@ -11,6 +11,7 @@ export const Root = styled(Card)`
   margin: 20px auto;
   padding: 16px 12px 10px;
   cursor: pointer;
+  overflow: hidden;
 
   @media ${({ theme }) => theme.mediaQuery.sm} {
     height: 200px;

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { isError } from '@tanstack/react-query';
 import { usePatchSteps, usePostSteps } from '@/api/hooks/roadmap';
 import { type PostStepsRequest } from '@/api/roadmap/type';
 import { type StepWithReferences } from '@/api/type';
@@ -33,7 +32,7 @@ const StepModal = (props: StepModalProps) => {
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<Omit<PostStepsRequest, 'roadmapId'>>({
     defaultValues: {
       title: '',
       description: '',
@@ -46,7 +45,7 @@ const StepModal = (props: StepModalProps) => {
     if (step) {
       setValue('title', step.title);
       setValue('description', step.description);
-      setValue('dueDate', new Date(step.dueDate));
+      setValue('dueDate', step.dueDate ? new Date(step.dueDate) : null);
     }
   }, [step, setValue]);
 
@@ -119,7 +118,7 @@ const StepModal = (props: StepModalProps) => {
                   />
                   <Calendar
                     popperPlacement="top"
-                    onChangeDate={(date: Date) => {
+                    onChangeDate={(date: Date | null) => {
                       onChange(date);
                     }}
                     isTimeInclude={true}
