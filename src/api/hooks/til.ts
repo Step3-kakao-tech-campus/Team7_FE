@@ -16,7 +16,6 @@ import {
 } from '@/api/til';
 import type {
   DeleteCommentRequest,
-  GetTilRequest,
   PatchCommentRequest,
   PostCommentRequest,
   PostTilRequest,
@@ -24,7 +23,7 @@ import type {
   PatchTilRequest,
   SubmitTilRequest,
 } from '@/api/til/type';
-import { IdParams } from '@/api/type';
+import type { IdParams } from '@/api/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 

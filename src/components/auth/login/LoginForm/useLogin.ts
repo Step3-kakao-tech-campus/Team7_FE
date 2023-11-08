@@ -22,7 +22,7 @@ const useLogin = () => {
   });
 
   const onSubmit: SubmitHandler<EmailPasswordRequest> = async (formData) => {
-    const data = await postLoginAsync(formData);
+    const data = await postLoginAsync({ body: formData });
 
     if (data?.code === 200) {
       router.replace(TILY_LINKS.home());

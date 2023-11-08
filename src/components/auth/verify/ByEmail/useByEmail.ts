@@ -26,7 +26,8 @@ const useByEamil = (location: 'register' | 'password') => {
   const onSubmit: SubmitHandler<{ email: string }> = async (formData) => {
     const email = formData.email;
 
-    const data = location === 'register' ? await postEmailCheckAsync({ email }) : await postEmailCodeAsync({ email });
+    const data =
+      location === 'register' ? await postEmailCheckAsync({ body: { email } }) : await postEmailCodeAsync({ email });
 
     if (data?.code === 200) {
       setIsEmail(true);
@@ -39,7 +40,7 @@ const useByEamil = (location: 'register' | 'password') => {
 
   const resend = async () => {
     const email = getValues('email');
-    location === 'register' ? await postEmailCheckAsync({ email }) : await postEmailCodeAsync({ email });
+    location === 'register' ? await postEmailCheckAsync({ body: { email } }) : await postEmailCodeAsync({ email });
   };
 
   return {

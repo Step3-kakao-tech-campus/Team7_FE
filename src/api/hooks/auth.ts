@@ -16,8 +16,8 @@ export const usePostLogin = () => {
   const { mutateAsync, isLoading } = useMutation(postLogin);
   const { handleError } = useApiError();
 
-  const postLoginAsync = async (body: EmailPasswordRequest) => {
-    const data = await mutateAsync(body, {
+  const postLoginAsync = async (req: { body: EmailPasswordRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
@@ -32,8 +32,8 @@ export const usePostLogin = () => {
 export const usePostEmailCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCheck);
 
-  const postEmailCheckAsync = async (body: { email: string }) => {
-    const data = await mutateAsync(body);
+  const postEmailCheckAsync = async (req: { body: { email: string } }) => {
+    const data = await mutateAsync(req);
 
     return data;
   };

@@ -8,7 +8,9 @@ import type {
 } from '@/api/auth/type';
 import type { NullResultResponse } from '@/api/type';
 
-export const postLogin = async (body: EmailPasswordRequest) => {
+export const postLogin = async (req: { body: EmailPasswordRequest }) => {
+  const { body } = req;
+
   const { data } = await axiosInstance.request<LoginResponse>({
     method: 'POST',
     url: '/login',
@@ -18,7 +20,9 @@ export const postLogin = async (body: EmailPasswordRequest) => {
   return data;
 };
 
-export const postEmailCheck = async (body: { email: string }) => {
+export const postEmailCheck = async (req: { body: { email: string } }) => {
+  const { body } = req;
+
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/email/check',

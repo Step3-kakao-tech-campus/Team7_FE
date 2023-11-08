@@ -28,11 +28,6 @@ export interface PostTilResponse {
 }
 
 // getTil
-export interface GetTilRequest {
-  roadmapId: number;
-  stepId: number;
-  tilId: number;
-}
 
 export interface GetTilResponse extends CommonResponse {
   result: {

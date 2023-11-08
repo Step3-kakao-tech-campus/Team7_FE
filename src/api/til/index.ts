@@ -19,7 +19,7 @@ import type {
   GetStepTilsRequest,
   GetStepTilsResponse,
 } from '@/api/til/type';
-import { IdParams } from '@/api/type';
+import type { IdParams } from '@/api/type';
 
 export const getTils = async (query: GetTilsRequest) => {
   const { data } = await axiosInstance.request<GetTilsResponse>({
