@@ -17,9 +17,10 @@ import type {
   PostRoadmapsRequest,
   PostGroupRoadmapsApplyResponse,
   PostGroupTilyApplyResponse,
+  PostStepsRequest,
 } from '@/api/roadmap/type';
 import type { IndividualStep } from '@/api/roadmap/type';
-import type { IdResponse } from '../type';
+import type { IdResponse, NullResultResponse } from '../type';
 
 // 개인 로드맵 생성하기
 
@@ -185,6 +186,15 @@ export const getRoadmapGroupApply = async (roadmapId: number) => {
   return data;
 };
 
+export const postRoadmapsGroupsParticipate = async (code: string) => {
+  const { data } = await axiosInstance.request<PostRoadmapsGroupsParticipateResponse>({
+    method: 'POST',
+    url: '/roadmaps/groups/participate',
+    data: { code },
+  });
+  return data;
+};
+
 export const postRoadmapGroupApplyAccept = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
   const { data } = await axiosInstance.request<PostRoadmapGroupApplyAcceptResponse>({
     method: 'POST',
@@ -203,11 +213,35 @@ export const deleteRoadmapGroupApplyReject = async ({ roadmapId, userId }: { roa
   return data;
 };
 
-export const postRoadmapsGroupsParticipate = async (code: string) => {
-  const { data } = await axiosInstance.request<PostRoadmapsGroupsParticipateResponse>({
+export const postSteps = async (req: { body: PostStepsRequest }) => {
+  const { body } = req;
+  console.log(body);
+  const { data } = await axiosInstance.request<IdResponse>({
     method: 'POST',
-    url: '/roadmaps/groups/participate',
-    data: { code },
+    url: '/steps',
+    data: body,
   });
+
+  return data;
+};
+
+export const patchSteps = async (req: { stepId: number; body: Omit<PostStepsRequest, 'roadmapId'> }) => {
+  const { stepId, body } = req;
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'PATCH',
+    url: `/steps/${stepId}`,
+    data: body,
+  });
+
+  return data;
+};
+
+export const deleteSteps = async (req: { stepId: number }) => {
+  const { stepId } = req;
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'DELETE',
+    url: `/steps/${stepId}`,
+  });
+
   return data;
 };

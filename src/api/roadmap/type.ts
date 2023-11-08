@@ -61,6 +61,17 @@ export interface PostRoadmapsRequest {
   isRecruit?: boolean;
 }
 
+export interface PostStepsRequest {
+  roadmapId: number;
+  title: string;
+  description: string;
+  dueDate: Date;
+}
+
+// Roadmap 응답
+
+// 로드맵 - 공통
+
 export interface GetRoadmapsMyResponse extends CommonResponse {
   result: {
     categories: IdName[];
@@ -72,9 +83,9 @@ export interface GetRoadmapsResponse extends CommonResponse {
   result: { categoty: 'tily' | 'group'; hasNext: boolean; roadmaps: Roadmap[] };
 }
 
-export interface GetRoadmapsByIdResponse {
-  success: boolean;
-  message: string;
+// 로드맵 - 그룹
+
+export interface GetRoadmapsByIdResponse extends CommonResponse {
   result: {
     creator?: Omit<Creator, 'id'>;
     category: 'tily' | 'group';

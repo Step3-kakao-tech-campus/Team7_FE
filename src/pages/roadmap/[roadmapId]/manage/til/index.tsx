@@ -1,38 +1,20 @@
 import type { GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
-import Responsive from '@/components/common/Responsive';
-import HeaderLayout from '@/components/layout/HeaderLayout';
-import SideBar from '@/components/roadmap/manage/SideBar';
-import TabBar from '@/components/roadmap/manage/mobile/TabBar';
+import ManageLayout from '@/components/layout/ManageLayout';
 import ManagePeopleTIL from '@/components/roadmap/manage/til/ManagePeopleTIL';
-import { Container, LeftArea, RightArea, Header } from '@/pages/roadmap/[roadmapId]/manage/member';
-import { ManageContainer } from '@/pages/roadmap/[roadmapId]/manage/roadmapInfo';
+import { Header } from '@/pages/roadmap/[roadmapId]/manage/member';
 import { setLayout } from '@/utils/layout';
 
 const TIL = () => {
   return (
-    <ManageContainer>
-      <Container>
-        <Responsive device="desktop">
-          <LeftArea>
-            <SideBar />
-          </LeftArea>
-        </Responsive>
-
-        <Responsive device="mobile">
-          <TabBar />
-        </Responsive>
-
-        <RightArea>
-          <Header>TIL 모아보기</Header>
-          <ManagePeopleTIL />
-        </RightArea>
-      </Container>
-    </ManageContainer>
+    <>
+      <Header>TIL 모아보기</Header>
+      <ManagePeopleTIL />
+    </>
   );
 };
 
-setLayout(TIL, HeaderLayout);
+setLayout(TIL, ManageLayout);
 
 export default TIL;
 

@@ -33,7 +33,7 @@ const GroupCard = (props: GroupCardProps) => {
               gap={0.3}
               onClick={(e) => {
                 e.stopPropagation();
-                router.push(TILY_LINK.manageGroupInfo(roadmap.id));
+                router.push(TILY_LINK.manageInfo(roadmap.id));
               }}>
               <span>관리</span>
               <Image src="/assets/icons/ic_setting.svg" width={17} height={17} alt="로드맵 관리" />

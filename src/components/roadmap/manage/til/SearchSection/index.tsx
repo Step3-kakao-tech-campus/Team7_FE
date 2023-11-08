@@ -19,7 +19,7 @@ const SearchSection = () => {
 
   useEffect(() => {
     // 초기 useEffect에서 steps가 undefined일 경우 return
-    if (!steps || !router.isReady) return;
+    if (!steps || !router.isReady || steps.result.steps.length === 0) return;
 
     overlapParamsToUrl({ stepId: steps.result.steps[0].id.toString() });
   }, [steps]);
@@ -33,7 +33,7 @@ const SearchSection = () => {
       </Styled.MainSearchContainer>
 
       <Styled.Container>
-        <Styled.TILCount>총 {memberTils?.length}개</Styled.TILCount>
+        <Styled.TILCount>총 {memberTils?.length || '0'}개</Styled.TILCount>
         <Checkbox />
       </Styled.Container>
     </Styled.SearchSection>
