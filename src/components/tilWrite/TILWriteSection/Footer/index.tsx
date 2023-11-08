@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useGetTil, usePatchTil } from '@/api/hooks/til';
-import { useSubmitTil } from '@/api/hooks/til';
+import { useGetTils, usePatchTils } from '@/api/hooks/til';
+import { useSubmitTils } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import { useToast } from '@/components/common/Toast/useToast';
 import SubmitButton from '@/components/tilWrite/TILWriteSection/Footer/SubmitButton';
@@ -22,9 +22,9 @@ const Footer = (props: FooterProps) => {
 
   const router = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState();
-  const { patchTilAsync } = usePatchTil();
-  const { submitTilAsync } = useSubmitTil();
-  const { tilDetail } = useGetTil({
+  const { patchTilAsync } = usePatchTils();
+  const { submitTilAsync } = useSubmitTils();
+  const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
   });
   const toast = useToast();
@@ -46,7 +46,6 @@ const Footer = (props: FooterProps) => {
     submitTilAsync({
       param: {
         roadmapId: Number(router.query.roadmapId),
-        stepId: Number(router.query.stepId),
         tilId: Number(router.query.tilId),
       },
       body: {

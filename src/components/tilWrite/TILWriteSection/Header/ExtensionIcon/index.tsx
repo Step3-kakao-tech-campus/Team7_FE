@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useGetTil } from '@/api/hooks/til';
+import { useGetTils } from '@/api/hooks/til';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useChromeExtension } from '@/components/tilWrite/TILWriteSection/Header/useChromeExtension';
 
@@ -16,7 +16,7 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
   const toast = useToast();
   const { isExtensionInstall } = useChromeExtension();
 
-  const { tilDetail } = useGetTil({
+  const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
   });
 

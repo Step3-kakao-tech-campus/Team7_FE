@@ -1,14 +1,14 @@
 import { axiosInstance } from '@/api';
 import type {
   GetTilsResponse,
-  PostTilRequest,
+  PostTilsRequest,
   GetTilResponse,
   PostCommentRequest,
   PostCommentResponse,
   PatchCommentRequest,
   DeleteCommentRequest,
-  PatchTilRequest,
-  SubmitTilRequest,
+  PatchTilsRequest,
+  SubmitTilsRequest,
   GetStepTilsRequest,
   GetStepTilsResponse,
 } from '@/api/til/type';
@@ -17,7 +17,7 @@ import type { IdParams } from '@/api/type';
 
 // 틸 생성하기
 
-export const postTil = async (req: { body: PostTilRequest }) => {
+export const postTils = async (req: { body: PostTilsRequest }) => {
   const { body } = req;
 
   const { data } = await axiosInstance.request<IdResponse>({
@@ -31,7 +31,7 @@ export const postTil = async (req: { body: PostTilRequest }) => {
 
 // 틸 조회하기
 
-export const getTil = async (req: { tilId: number }) => {
+export const getTils = async (req: { tilId: number }) => {
   const { tilId } = req;
 
   const { data } = await axiosInstance.request<GetTilResponse>({
@@ -44,7 +44,7 @@ export const getTil = async (req: { tilId: number }) => {
 
 // 틸 저장하기
 
-export const patchTil = async (req: { tilId: number; body: PatchTilRequest }) => {
+export const patchTils = async (req: { tilId: number; body: PatchTilsRequest }) => {
   const { tilId, body } = req;
 
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -56,29 +56,31 @@ export const patchTil = async (req: { tilId: number; body: PatchTilRequest }) =>
   return data;
 };
 
-// 나의 틸 목록 전체 조회
+// 틸 제출하기
 
-export const getTils = async (req: { query: string }) => {
-  const { query } = req;
+export const submitTils = async (req: { param: IdParams; body: SubmitTilsRequest }) => {
+  const {
+    param: { tilId },
+    body: { content: submitContent },
+  } = req;
 
-  const { data } = await axiosInstance.request<GetTilsResponse>({
-    method: 'GET',
-    url: `/tils/my${query}`,
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'POST',
+    url: `/tils/${tilId}`,
+    data: { submitContent },
   });
 
   return data;
 };
 
-export const submitTil = async (req: { param: IdParams; body: SubmitTilRequest }) => {
-  const {
-    param: { roadmapId, stepId, tilId },
-    body: { title, content: submitContent },
-  } = req;
+// 나의 틸 목록 전체 조회
 
-  const { data } = await axiosInstance.request<NullResultResponse>({
-    method: 'POST',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
-    data: { title, submitContent },
+export const getTilsQuery = async (req: { query: string }) => {
+  const { query } = req;
+
+  const { data } = await axiosInstance.request<GetTilsResponse>({
+    method: 'GET',
+    url: `/tils/my${query}`,
   });
 
   return data;

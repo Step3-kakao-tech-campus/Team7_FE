@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import { useGetTil } from '@/api/hooks/til';
+import { useGetTils } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
 import ExtensionInfoModal from '@/components/tilWrite/TILWriteSection/Header/ExtensionInfoModal';
 import SideBar from '@/components/tilWrite/TILWriteSection/mobile/MobileHeader/SideBar';
@@ -22,7 +22,7 @@ const MobileHeader = (props: MobileHeaderProps) => {
   const router = useRouter();
   const { isOpen, handleClose } = useModalState();
 
-  const { tilDetail } = useGetTil({
+  const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
   });
 

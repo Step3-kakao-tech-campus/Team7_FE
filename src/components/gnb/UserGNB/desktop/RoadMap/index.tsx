@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmapsMy } from '@/api/hooks/roadmap';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
-import { usePostTil } from '@/api/hooks/til';
+import { usePostTils } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
@@ -19,7 +19,7 @@ const RoadMap = () => {
 
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postTilAsync } = usePostTil();
+  const { postTilAsync } = usePostTils();
 
   useEffect(() => {
     if (roadmaps.roadmaps.length !== 0) setRoadmapId(roadmaps.roadmaps[0].id);

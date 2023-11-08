@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useGetTil } from '@/api/hooks/til';
+import { useGetTils } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Skeleton from '@/components/common/Skeleton';
@@ -15,7 +15,7 @@ const SubmitButton = (props: SubmitButtonProps) => {
 
   const router = useRouter();
 
-  const { tilDetail, isLoading } = useGetTil({
+  const { tilDetail, isLoading } = useGetTils({
     tilId: Number(router.query.tilId),
   });
 

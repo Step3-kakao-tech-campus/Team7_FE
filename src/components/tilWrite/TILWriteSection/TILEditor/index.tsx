@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useGetTil } from '@/api/hooks/til';
+import { useGetTils } from '@/api/hooks/til';
 import FallbackErrorBoundary from '@/components/common/FallbackErrorBoundary';
 import { DURATION } from '@/components/tilWrite/TILWriteSection';
 import Comment from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments';
@@ -40,7 +40,7 @@ const TILEditor = (props: TILEditorProps) => {
 
   const { query } = useRouter();
   const { stepTitle, handleStepTitle } = useStepTitle();
-  const { tilDetail } = useGetTil({
+  const { tilDetail } = useGetTils({
     tilId: Number(query.tilId),
   });
 

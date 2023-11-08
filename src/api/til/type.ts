@@ -2,16 +2,17 @@ import type { CommonResponse, Step, Comment, Til } from '@/api/type';
 
 // Til 요청
 
-export interface PostTilRequest {
+export interface PostTilsRequest {
   roadmapId: number;
   stepId: number;
   title: string;
 }
 
-export interface PatchTilRequest {
-  title?: string;
+export interface PatchTilsRequest {
   content: string;
 }
+
+export interface SubmitTilsRequest extends PatchTilsRequest {}
 
 // postComment
 export interface PostCommentRequest {
@@ -40,9 +41,6 @@ export interface DeleteCommentRequest {
   tilId: number;
   commentId: string;
 }
-
-// submitTil
-export interface SubmitTilRequest extends PatchTilRequest {}
 
 //  getStepTils
 export interface GetStepTilsRequest {

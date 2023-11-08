@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useGetTil } from '@/api/hooks/til';
+import { useGetTils } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
 import * as Styled from '@/components/tilWrite/TILWriteSection/Header/style';
@@ -14,7 +14,7 @@ const Header = (props: HeaderProps) => {
 
   const router = useRouter();
 
-  const { tilDetail } = useGetTil({
+  const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
   });
 

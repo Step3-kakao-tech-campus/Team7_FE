@@ -7,7 +7,7 @@ import {
   usePostRoadmapIndividual,
   usePostRoadmapStepIndividual,
 } from '@/api/hooks/roadmap';
-import { usePostTil } from '@/api/hooks/til';
+import { usePostTils } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
@@ -31,7 +31,7 @@ const MobilePersonal = () => {
   const { steps } = useGetRoadmapSteps(roadmapId);
   const { postRoadmapsIndividualAsync } = usePostRoadmapIndividual();
   const { postRoadmapStepIndividualAsync } = usePostRoadmapStepIndividual();
-  const { postTilAsync } = usePostTil();
+  const { postTilAsync } = usePostTils();
 
   const {
     control: roadmapControl,

@@ -4,32 +4,32 @@ import type { QueryKey } from '@tanstack/react-query';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ROADMAP_QUERY_KEY } from '@/api/hooks/roadmap';
 import {
-  getTil,
   getTils,
-  postTil,
+  getTilsQuery,
+  postTils,
   postComment,
   patchComment as patchCommentAPI,
   deleteComment as deleteCommentAPI,
-  patchTil,
-  submitTil,
+  patchTils,
+  submitTils,
   getStepTils,
 } from '@/api/til';
 import type {
   DeleteCommentRequest,
   PatchCommentRequest,
   PostCommentRequest,
-  PostTilRequest,
+  PostTilsRequest,
   GetTilsResponse,
-  PatchTilRequest,
-  SubmitTilRequest,
+  PatchTilsRequest,
+  SubmitTilsRequest,
 } from '@/api/til/type';
 import type { IdParams } from '@/api/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
 
 const QUERY_KEY = {
+  getTilsQuery: 'getTilsQuery',
   getTils: 'getTils',
-  getTil: 'getTil',
   getStepTils: 'getStepTils',
 };
 
@@ -39,13 +39,13 @@ interface InfinityTilRequest {
 
 // 틸 생성하기
 
-export const usePostTil = () => {
+export const usePostTils = () => {
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation(postTil);
+  const { mutateAsync } = useMutation(postTils);
   const { handleError } = useApiError();
 
-  const postTilAsync = async (req: { body: PostTilRequest }) => {
+  const postTilAsync = async (req: { body: PostTilsRequest }) => {
     const { roadmapId } = req.body;
 
     const data = await mutateAsync(req, {
@@ -63,12 +63,12 @@ export const usePostTil = () => {
 
 // 틸 조회하기
 
-export const useGetTil = (req: { tilId: number }) => {
+export const useGetTils = (req: { tilId: number }) => {
   const { tilId } = req;
 
   const { isReady } = useRouter();
 
-  const { data, isLoading } = useQuery([QUERY_KEY.getTil, tilId], () => getTil(req), {
+  const { data, isLoading } = useQuery([QUERY_KEY.getTils, tilId], () => getTils(req), {
     enabled: isReady,
   });
 
@@ -80,11 +80,11 @@ export const useGetTil = (req: { tilId: number }) => {
 
 // 틸 저장하기
 
-export const usePatchTil = () => {
-  const { mutateAsync } = useMutation(patchTil);
+export const usePatchTils = () => {
+  const { mutateAsync } = useMutation(patchTils);
   const { handleError } = useApiError();
 
-  const patchTilAsync = async (req: { tilId: number; body: PatchTilRequest }) => {
+  const patchTilAsync = async (req: { tilId: number; body: PatchTilsRequest }) => {
     const data = await mutateAsync(req, {
       onError: handleError,
     });
@@ -94,16 +94,43 @@ export const usePatchTil = () => {
   return { patchTilAsync };
 };
 
+// 틸 제출하기
+
+export const useSubmitTils = () => {
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useMutation(submitTils);
+  const { handleError } = useApiError();
+  const toast = useToast();
+
+  const submitTilAsync = async (req: { param: IdParams; body: SubmitTilsRequest }) => {
+    const {
+      param: { roadmapId, tilId },
+    } = req;
+
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        toast.showBottom({ message: 'TIL이 제출 되었습니다.' });
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId]);
+        queryClient.invalidateQueries([QUERY_KEY.getTils, tilId]);
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+  return { submitTilAsync };
+};
+
 export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
   const { query } = useRouter();
   const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
 
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    [QUERY_KEY.getTils, ..._queryKey],
+    [QUERY_KEY.getTilsQuery, ..._queryKey],
     async ({ pageParam: page = 0 }) => {
       const searchParams = { page, ...query };
 
-      const data = getTils({ query: qs.stringify(searchParams, { addQueryPrefix: true }) });
+      const data = getTilsQuery({ query: qs.stringify(searchParams, { addQueryPrefix: true }) });
 
       return data;
     },
@@ -135,31 +162,6 @@ export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
   };
 };
 
-export const useSubmitTil = () => {
-  const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation(submitTil);
-  const { handleError } = useApiError();
-  const toast = useToast();
-
-  const submitTilAsync = async (req: { param: IdParams; body: SubmitTilRequest }) => {
-    const {
-      param: { roadmapId, stepId, tilId },
-    } = req;
-
-    const data = await mutateAsync(req, {
-      onSuccess: () => {
-        toast.showBottom({ message: 'TIL이 제출 되었습니다.' });
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId]);
-        queryClient.invalidateQueries([QUERY_KEY.getTil, { roadmapId, stepId, tilId }]);
-      },
-      onError: handleError,
-    });
-
-    return data;
-  };
-  return { submitTilAsync };
-};
-
 export const usePostComment = () => {
   const queryClient = useQueryClient();
 
@@ -176,7 +178,7 @@ export const usePostComment = () => {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 작성되었습니다.' });
         queryClient.invalidateQueries([
-          QUERY_KEY.getTil,
+          QUERY_KEY.getTils,
           {
             roadmapId: roadmapId,
             stepId: stepId,
@@ -205,7 +207,7 @@ export const usePatchComment = () => {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 수정 되었습니다.' });
         queryClient.invalidateQueries([
-          QUERY_KEY.getTil,
+          QUERY_KEY.getTils,
           {
             roadmapId: body.roadmapId,
             stepId: body.stepId,
@@ -234,7 +236,7 @@ export const useDeleteComment = () => {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 삭제 되었습니다.' });
         queryClient.invalidateQueries([
-          QUERY_KEY.getTil,
+          QUERY_KEY.getTils,
           {
             roadmapId: body.roadmapId,
             stepId: body.stepId,

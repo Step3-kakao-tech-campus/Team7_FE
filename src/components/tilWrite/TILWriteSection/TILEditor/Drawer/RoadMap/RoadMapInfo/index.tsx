@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
-import { useGetTil } from '@/api/hooks/til';
+import { useGetTils } from '@/api/hooks/til';
 import CustomSuspense from '@/components/common/CustomSuspense';
 import Icon from '@/components/common/Icon';
 import Skeleton from '@/components/common/Skeleton';
@@ -18,7 +18,7 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
 
   const router = useRouter();
   const { steps, isLoading } = useGetRoadmapSteps(Number(router.query.roadmapId));
-  const { tilDetail } = useGetTil({
+  const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
   });
 

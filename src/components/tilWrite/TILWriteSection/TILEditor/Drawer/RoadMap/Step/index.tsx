@@ -1,7 +1,7 @@
 import type { MouseEventHandler } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { usePostTil } from '@/api/hooks/til';
+import { usePostTils } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
 import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
@@ -33,7 +33,7 @@ const Step = (props: StepProps) => {
   } = props;
 
   const router = useRouter();
-  const { postTilAsync } = usePostTil();
+  const { postTilAsync } = usePostTils();
 
   const isActiveStep = stepId === Number(router.query.stepId);
 

@@ -2,7 +2,7 @@ import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { type MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { useGetTil, usePatchTil } from '@/api/hooks/til';
+import { useGetTils, usePatchTils } from '@/api/hooks/til';
 import { useToast } from '@/components/common/Toast/useToast';
 import { defaultData } from '@/components/tilWrite/TILWriteSection/TILEditor/Ckeditor/defaultData';
 import { editorConfiguration } from './plugin';
@@ -27,8 +27,8 @@ const CkEditor = (props: CkEditorProps) => {
 
   const toast = useToast();
   const { query } = useRouter();
-  const { patchTilAsync } = usePatchTil();
-  const { tilDetail } = useGetTil({
+  const { patchTilAsync } = usePatchTils();
+  const { tilDetail } = useGetTils({
     tilId: Number(query.tilId),
   });
 
