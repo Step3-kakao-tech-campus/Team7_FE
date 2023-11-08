@@ -1,10 +1,10 @@
-import { StepWithReferences } from '@/api/type';
+import type { StepWithReferences } from '@/api/type';
 import Button from '@/components/common/Button';
+import * as Styled from '@/components/roadmap/manage/step/StepList/ReferenceBox/style';
 import ReferenceList from '@/components/roadmap/manage/step/StepList/ReferenceList';
-import * as Styled from '@/components/roadmap/manage/step/StepList/YoutubeBox/style';
+import WebModal from '@/components/roadmap/manage/step/StepList/WebModal';
 import YoutubeModal from '@/components/roadmap/manage/step/StepList/YoutubeModal';
 import { useModalState } from '@/hooks/useModalState';
-import WebModal from '../WebModal';
 
 interface ReferenceBoxProps {
   step: StepWithReferences;
