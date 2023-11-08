@@ -26,7 +26,7 @@ const usePassword = () => {
   });
 
   const onSubmit: SubmitHandler<EmailPasswordRequest> = async (formData) => {
-    const data = await postPasswordChangeAsync(formData);
+    const data = await postPasswordChangeAsync({ body: formData });
     if (data?.code === 200) {
       handleOpen();
     }

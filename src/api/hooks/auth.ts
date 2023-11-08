@@ -12,6 +12,8 @@ import type { EmailCodeCheckRequest, JoinRequest, EmailPasswordRequest, KakaoLog
 import { useApiError } from '@/hooks/useApiError';
 import { setCookie } from '@/utils/cookie';
 
+// 로그인
+
 export const usePostLogin = () => {
   const { mutateAsync, isLoading } = useMutation(postLogin);
   const { handleError } = useApiError();
@@ -29,6 +31,8 @@ export const usePostLogin = () => {
   return { postLoginAsync, isLoading };
 };
 
+// 이메일 중복 확인
+
 export const usePostEmailCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCheck);
 
@@ -41,13 +45,15 @@ export const usePostEmailCheck = () => {
   return { postEmailCheckAsync, isLoading };
 };
 
+// 인증 코드 발송
+
 export const usePostEmailCode = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCode);
 
   const { handleError } = useApiError();
 
-  const postEmailCodeAsync = async (body: { email: string }) => {
-    const data = await mutateAsync(body, {
+  const postEmailCodeAsync = async (req: { body: { email: string } }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
@@ -57,12 +63,14 @@ export const usePostEmailCode = () => {
   return { postEmailCodeAsync, isLoading };
 };
 
+// 인증 코드 검증
+
 export const usePostEmailCodeCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCodeCheck);
   const { handleError } = useApiError();
 
-  const postEmailCodeCheckAsync = async (body: EmailCodeCheckRequest) => {
-    const data = await mutateAsync(body, {
+  const postEmailCodeCheckAsync = async (req: { body: EmailCodeCheckRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
@@ -72,12 +80,14 @@ export const usePostEmailCodeCheck = () => {
   return { postEmailCodeCheckAsync, isLoading };
 };
 
+// 회원 가입
+
 export const usePostJoin = () => {
   const { mutateAsync, isLoading } = useMutation(postJoin);
   const { handleError } = useApiError();
 
-  const postJoinAsync = async (body: JoinRequest) => {
-    const data = await mutateAsync(body, {
+  const postJoinAsync = async (req: { body: JoinRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
@@ -87,12 +97,14 @@ export const usePostJoin = () => {
   return { postJoinAsync, isLoading };
 };
 
+// 유저 비밀번호 변경
+
 export const usePostPasswordChange = () => {
   const { mutateAsync, isLoading } = useMutation(postPasswordChange);
   const { handleError } = useApiError();
 
-  const postPasswordChangeAsync = async (body: EmailPasswordRequest) => {
-    const data = await mutateAsync(body, {
+  const postPasswordChangeAsync = async (req: { body: EmailPasswordRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
@@ -102,12 +114,14 @@ export const usePostPasswordChange = () => {
   return { postPasswordChangeAsync, isLoading };
 };
 
+// 카카오 로그인
+
 export const useGetKakaoLogin = () => {
   const { mutateAsync, isLoading } = useMutation(getKakaoLogin);
   const { handleError } = useApiError();
 
-  const getKakaoLoginAsync = async (body: KakaoLoginRequest) => {
-    const data = await mutateAsync(body, {
+  const getKakaoLoginAsync = async (req: { body: KakaoLoginRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 

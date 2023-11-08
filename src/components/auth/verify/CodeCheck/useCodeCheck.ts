@@ -22,7 +22,7 @@ const useCodeCheck = (location: 'register' | 'password', email: string) => {
   });
 
   const onSubmit: SubmitHandler<EmailCodeCheckRequest> = async (formData) => {
-    const data = await postEmailCodeCheckAsync(formData);
+    const data = await postEmailCodeCheckAsync({ body: formData });
 
     if (data?.code === 200) {
       if (location === 'register') {

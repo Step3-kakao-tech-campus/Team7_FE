@@ -28,7 +28,7 @@ const useRegister = () => {
   });
 
   const onSubmit: SubmitHandler<JoinRequest> = async (formData) => {
-    const data = await postJoinAsync(formData);
+    const data = await postJoinAsync({ body: formData });
 
     if (data?.code === 200) {
       handleOpen();

@@ -12,7 +12,7 @@ import type {
   PostUserProfileImageRequset,
 } from '@/api/user/type';
 
-// User
+// 유저 정보
 
 export const getUsers = async () => {
   const { data } = await axiosInstance.request<GetUsersResponse>({
@@ -23,7 +23,7 @@ export const getUsers = async () => {
   return data;
 };
 
-// Alarm
+// 알람 정보
 
 export const getAlarms = async () => {
   const { data } = await axiosInstance.request<GetAlarmsResponse>({
@@ -33,6 +33,8 @@ export const getAlarms = async () => {
 
   return data;
 };
+
+// 알림 읽음 처리
 
 export const patchAlarm = async (body: PatchAlarmRequest) => {
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -44,6 +46,8 @@ export const patchAlarm = async (body: PatchAlarmRequest) => {
   return data;
 };
 
+// 유저 학습 히스토리
+
 export const getUserHistory = async () => {
   const { data } = await axiosInstance.request<GetUserHistoryResponse>({
     method: 'GET',
@@ -52,6 +56,8 @@ export const getUserHistory = async () => {
 
   return data;
 };
+
+// 마이페이지 유저 비밀번호 변경
 
 export const patchUserPassword = async (body: PatchUserPasswordRequest) => {
   const { data } = await axiosInstance.request<PatchUserPasswordResponse>({
@@ -63,6 +69,8 @@ export const patchUserPassword = async (body: PatchUserPasswordRequest) => {
   return data;
 };
 
+// 회원 탈퇴
+
 export const deleteUser = async (password: string) => {
   const { data } = await axiosInstance.request<DeleteUserResponse>({
     method: 'DELETE',
@@ -72,6 +80,8 @@ export const deleteUser = async (password: string) => {
 
   return data;
 };
+
+// 유저 프로필 이미지 업로드
 
 export const postUserProfileImage = async (body: PostUserProfileImageRequset) => {
   const { userId, formData } = body;
