@@ -8,7 +8,7 @@ import {
   getTilsQuery,
   postTils,
   postComments,
-  patchComment as patchCommentAPI,
+  patchComments,
   deleteComment as deleteCommentAPI,
   patchTils,
   submitTils,
@@ -16,7 +16,7 @@ import {
 } from '@/api/til';
 import type {
   DeleteCommentRequest,
-  PatchCommentRequest,
+  PatchCommentsRequest,
   PostCommentsRequest,
   PostTilsRequest,
   GetTilsQueryResponse,
@@ -188,18 +188,24 @@ export const usePostComments = () => {
   return { postCommentsAsync };
 };
 
-export const usePatchComment = () => {
+export const usePatchComments = () => {
   const queryClient = useQueryClient();
-
-  const mutation = useMutation(patchCommentAPI);
-  const { handleError } = useApiError();
   const toast = useToast();
+  const { mutateAsync } = useMutation(patchComments);
+  const { handleError } = useApiError();
 
-  const patchComment = async (body: PatchCommentRequest) => {
-    const data = await mutation.mutateAsync(body, {
+  const patchCommentsAsync = async (req: {
+    param: { tilId: number; commentId: number };
+    body: PatchCommentsRequest;
+  }) => {
+    const {
+      param: { tilId },
+    } = req;
+
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 수정 되었습니다.' });
-        queryClient.invalidateQueries([QUERY_KEY.getTils, body.tilId]);
+        queryClient.invalidateQueries([QUERY_KEY.getTils, tilId]);
       },
       onError: handleError,
     });
@@ -207,7 +213,7 @@ export const usePatchComment = () => {
     return data;
   };
 
-  return { patchComment };
+  return { patchCommentsAsync };
 };
 
 export const useDeleteComment = () => {

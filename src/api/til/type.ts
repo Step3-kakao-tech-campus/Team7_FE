@@ -1,4 +1,4 @@
-import type { CommonResponse, Step, Comment, Til, IdParams } from '@/api/type';
+import type { CommonResponse, Step, Comment, Til } from '@/api/type';
 
 // Til 요청
 
@@ -15,16 +15,15 @@ export interface PatchTilsRequest {
 export interface SubmitTilsRequest extends PatchTilsRequest {}
 
 // postComment
-export interface PostCommentsRequest extends IdParams {
+export interface PostCommentsRequest {
+  roadmapId: number;
+  stepId: number;
+  tilId: number;
   content: string;
 }
 
 // patchComment
-export interface PatchCommentRequest {
-  roadmapId: number;
-  stepId: number;
-  tilId: number;
-  commentId: string;
+export interface PatchCommentsRequest {
   content: string;
 }
 

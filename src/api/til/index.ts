@@ -4,7 +4,7 @@ import type {
   PostTilsRequest,
   GetTilsResponse,
   PostCommentsRequest,
-  PatchCommentRequest,
+  PatchCommentsRequest,
   DeleteCommentRequest,
   PatchTilsRequest,
   SubmitTilsRequest,
@@ -99,13 +99,21 @@ export const postComments = async (req: { body: PostCommentsRequest }) => {
   return data;
 };
 
-export const patchComment = async (body: PatchCommentRequest) => {
-  const { roadmapId, stepId, tilId, commentId, content } = body;
+// 코멘트 수정하기
+
+export const patchComments = async (req: {
+  param: { tilId: number; commentId: number };
+  body: PatchCommentsRequest;
+}) => {
+  const {
+    param: { commentId },
+    body,
+  } = req;
 
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'PATCH',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
-    data: { content },
+    url: `/comments/${commentId}`,
+    data: body,
   });
 
   return data;
