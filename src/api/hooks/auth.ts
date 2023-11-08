@@ -8,7 +8,12 @@ import {
   postLogin,
   getKakaoLogin,
 } from '@/api/auth';
-import type { EmailCodeCheckRequest, JoinRequest, EmailPasswordRequest, KakaoLoginRequest } from '@/api/auth/type';
+import type {
+  PostEmailCodeCheckRequest,
+  PostJoinRequest,
+  PostEmailPasswordRequest,
+  GetKakaoLoginRequest,
+} from '@/api/auth/type';
 import { useApiError } from '@/hooks/useApiError';
 import { setCookie } from '@/utils/cookie';
 
@@ -18,7 +23,7 @@ export const usePostLogin = () => {
   const { mutateAsync, isLoading } = useMutation(postLogin);
   const { handleError } = useApiError();
 
-  const postLoginAsync = async (req: { body: EmailPasswordRequest }) => {
+  const postLoginAsync = async (req: { body: PostEmailPasswordRequest }) => {
     const data = await mutateAsync(req, {
       onError: handleError,
     });
@@ -69,7 +74,7 @@ export const usePostEmailCodeCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCodeCheck);
   const { handleError } = useApiError();
 
-  const postEmailCodeCheckAsync = async (req: { body: EmailCodeCheckRequest }) => {
+  const postEmailCodeCheckAsync = async (req: { body: PostEmailCodeCheckRequest }) => {
     const data = await mutateAsync(req, {
       onError: handleError,
     });
@@ -86,7 +91,7 @@ export const usePostJoin = () => {
   const { mutateAsync, isLoading } = useMutation(postJoin);
   const { handleError } = useApiError();
 
-  const postJoinAsync = async (req: { body: JoinRequest }) => {
+  const postJoinAsync = async (req: { body: PostJoinRequest }) => {
     const data = await mutateAsync(req, {
       onError: handleError,
     });
@@ -103,7 +108,7 @@ export const usePostPasswordChange = () => {
   const { mutateAsync, isLoading } = useMutation(postPasswordChange);
   const { handleError } = useApiError();
 
-  const postPasswordChangeAsync = async (req: { body: EmailPasswordRequest }) => {
+  const postPasswordChangeAsync = async (req: { body: PostEmailPasswordRequest }) => {
     const data = await mutateAsync(req, {
       onError: handleError,
     });
@@ -120,7 +125,7 @@ export const useGetKakaoLogin = () => {
   const { mutateAsync, isLoading } = useMutation(getKakaoLogin);
   const { handleError } = useApiError();
 
-  const getKakaoLoginAsync = async (req: { body: KakaoLoginRequest }) => {
+  const getKakaoLoginAsync = async (req: { body: GetKakaoLoginRequest }) => {
     const data = await mutateAsync(req, {
       onError: handleError,
     });

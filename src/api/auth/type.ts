@@ -5,13 +5,15 @@ import { type CommonResponse } from '@/api/type';
  */
 
 // 인증 코드 검증
-export interface EmailCodeCheckRequest {
+
+export interface PostEmailCodeCheckRequest {
   email: string;
   code: string;
 }
 
 // 회원 가입
-export interface JoinRequest {
+
+export interface PostJoinRequest {
   email: string;
   name: string;
   password: string;
@@ -19,13 +21,15 @@ export interface JoinRequest {
 }
 
 // 유저 비밀번호 변경
-export interface EmailPasswordRequest {
+
+export interface PostEmailPasswordRequest {
   email: string;
   password: string;
 }
 
 // 카카오 로그인
-export interface KakaoLoginRequest {
+
+export interface GetKakaoLoginRequest {
   code: string;
 }
 
@@ -33,7 +37,8 @@ export interface KakaoLoginRequest {
  * Auth 응답
  */
 
-// 로그인, 카카오 로그인
+// 로그인 + 카카오 로그인
+
 export interface LoginResponse extends CommonResponse {
   result: { accessToken: string };
 }

@@ -1,16 +1,16 @@
 import { axiosInstance } from '@/api';
 import type {
-  EmailCodeCheckRequest,
-  JoinRequest,
-  EmailPasswordRequest,
+  PostEmailCodeCheckRequest,
+  PostJoinRequest,
+  PostEmailPasswordRequest,
   LoginResponse,
-  KakaoLoginRequest,
+  GetKakaoLoginRequest,
 } from '@/api/auth/type';
 import type { NullResultResponse } from '@/api/type';
 
 // 로그인
 
-export const postLogin = async (req: { body: EmailPasswordRequest }) => {
+export const postLogin = async (req: { body: PostEmailPasswordRequest }) => {
   const { body } = req;
 
   const { data } = await axiosInstance.request<LoginResponse>({
@@ -52,7 +52,7 @@ export const postEmailCode = async (req: { body: { email: string } }) => {
 
 // 인증 코드 검증
 
-export const postEmailCodeCheck = async (req: { body: EmailCodeCheckRequest }) => {
+export const postEmailCodeCheck = async (req: { body: PostEmailCodeCheckRequest }) => {
   const { body } = req;
 
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -66,7 +66,7 @@ export const postEmailCodeCheck = async (req: { body: EmailCodeCheckRequest }) =
 
 // 회원 가입
 
-export const postJoin = async (req: { body: JoinRequest }) => {
+export const postJoin = async (req: { body: PostJoinRequest }) => {
   const { body } = req;
 
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -80,7 +80,7 @@ export const postJoin = async (req: { body: JoinRequest }) => {
 
 // 유저 비밀번호 변경
 
-export const postPasswordChange = async (req: { body: EmailPasswordRequest }) => {
+export const postPasswordChange = async (req: { body: PostEmailPasswordRequest }) => {
   const { body } = req;
 
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -94,7 +94,7 @@ export const postPasswordChange = async (req: { body: EmailPasswordRequest }) =>
 
 // 카카오 로그인
 
-export const getKakaoLogin = async (req: { body: KakaoLoginRequest }) => {
+export const getKakaoLogin = async (req: { body: GetKakaoLoginRequest }) => {
   const { body } = req;
 
   const { data } = await axiosInstance.request<LoginResponse>({

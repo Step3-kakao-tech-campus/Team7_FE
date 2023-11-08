@@ -1,6 +1,6 @@
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { type EmailCodeCheckRequest } from '@/api/auth/type';
+import { type PostEmailCodeCheckRequest } from '@/api/auth/type';
 import { usePostEmailCodeCheck } from '@/api/hooks/auth';
 import TILY_LINKS from '@/constants/links';
 
@@ -21,7 +21,7 @@ const useCodeCheck = (location: 'register' | 'password', email: string) => {
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<EmailCodeCheckRequest> = async (formData) => {
+  const onSubmit: SubmitHandler<PostEmailCodeCheckRequest> = async (formData) => {
     const data = await postEmailCodeCheckAsync({ body: formData });
 
     if (data?.code === 200) {
