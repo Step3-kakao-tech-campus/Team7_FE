@@ -1,6 +1,6 @@
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import type { EmailPasswordRequest } from '@/api/auth/type';
+import type { PostEmailPasswordRequest } from '@/api/auth/type';
 import { usePostLogin } from '@/api/hooks/auth';
 import TILY_LINKS from '@/constants/links';
 
@@ -21,8 +21,8 @@ const useLogin = () => {
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<EmailPasswordRequest> = async (formData) => {
-    const data = await postLoginAsync(formData);
+  const onSubmit: SubmitHandler<PostEmailPasswordRequest> = async (formData) => {
+    const data = await postLoginAsync({ body: formData });
 
     if (data?.code === 200) {
       router.replace(TILY_LINKS.home());

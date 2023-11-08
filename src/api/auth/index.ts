@@ -1,14 +1,18 @@
 import { axiosInstance } from '@/api';
 import type {
-  EmailCodeCheckRequest,
-  JoinRequest,
-  EmailPasswordRequest,
+  PostEmailCodeCheckRequest,
+  PostJoinRequest,
+  PostEmailPasswordRequest,
   LoginResponse,
-  KakaoLoginRequest,
+  GetKakaoLoginRequest,
 } from '@/api/auth/type';
 import type { NullResultResponse } from '@/api/type';
 
-export const postLogin = async (body: EmailPasswordRequest) => {
+// 로그인
+
+export const postLogin = async (req: { body: PostEmailPasswordRequest }) => {
+  const { body } = req;
+
   const { data } = await axiosInstance.request<LoginResponse>({
     method: 'POST',
     url: '/login',
@@ -18,7 +22,11 @@ export const postLogin = async (body: EmailPasswordRequest) => {
   return data;
 };
 
-export const postEmailCheck = async (body: { email: string }) => {
+// 이메일 중복 확인
+
+export const postEmailCheck = async (req: { body: { email: string } }) => {
+  const { body } = req;
+
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/email/check',
@@ -28,7 +36,11 @@ export const postEmailCheck = async (body: { email: string }) => {
   return data;
 };
 
-export const postEmailCode = async (body: { email: string }) => {
+// 인증 코드 발송
+
+export const postEmailCode = async (req: { body: { email: string } }) => {
+  const { body } = req;
+
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/email/code',
@@ -38,7 +50,11 @@ export const postEmailCode = async (body: { email: string }) => {
   return data;
 };
 
-export const postEmailCodeCheck = async (body: EmailCodeCheckRequest) => {
+// 인증 코드 일치 여부 확인
+
+export const postEmailCodeCheck = async (req: { body: PostEmailCodeCheckRequest }) => {
+  const { body } = req;
+
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/email/code/check',
@@ -48,17 +64,11 @@ export const postEmailCodeCheck = async (body: EmailCodeCheckRequest) => {
   return data;
 };
 
-export const postJoin = async (body: JoinRequest) => {
-  const { data } = await axiosInstance.request<NullResultResponse>({
-    method: 'POST',
-    url: '/join',
-    data: body,
-  });
+// 비밀번호 재설정하기
 
-  return data;
-};
+export const postPasswordChange = async (req: { body: PostEmailPasswordRequest }) => {
+  const { body } = req;
 
-export const postPasswordChange = async (body: EmailPasswordRequest) => {
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: '/password/change',
@@ -68,7 +78,25 @@ export const postPasswordChange = async (body: EmailPasswordRequest) => {
   return data;
 };
 
-export const getKakaoLogin = async (body: KakaoLoginRequest) => {
+// 회원 가입
+
+export const postJoin = async (req: { body: PostJoinRequest }) => {
+  const { body } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'POST',
+    url: '/join',
+    data: body,
+  });
+
+  return data;
+};
+
+// 카카오 로그인
+
+export const getKakaoLogin = async (req: { body: GetKakaoLoginRequest }) => {
+  const { body } = req;
+
   const { data } = await axiosInstance.request<LoginResponse>({
     method: 'GET',
     url: `/auth/kakao/callback?code=${body.code}`,

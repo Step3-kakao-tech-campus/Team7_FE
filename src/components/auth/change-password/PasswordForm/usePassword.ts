@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
-import type { EmailPasswordRequest } from '@/api/auth/type';
+import type { PostEmailPasswordRequest } from '@/api/auth/type';
 import { usePostPasswordChange } from '@/api/hooks/auth';
 import { useModalState } from '@/hooks/useModalState';
 import useQueryParam from '@/hooks/useQueryParam';
@@ -25,8 +25,8 @@ const usePassword = () => {
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<EmailPasswordRequest> = async (formData) => {
-    const data = await postPasswordChangeAsync(formData);
+  const onSubmit: SubmitHandler<PostEmailPasswordRequest> = async (formData) => {
+    const data = await postPasswordChangeAsync({ body: formData });
     if (data?.code === 200) {
       handleOpen();
     }

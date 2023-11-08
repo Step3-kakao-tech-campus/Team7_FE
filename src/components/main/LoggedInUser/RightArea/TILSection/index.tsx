@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useGetTilsParam } from '@/api/hooks/til';
+import { useGetTilsQuery } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';
@@ -20,7 +20,7 @@ import * as Styled from './style';
 const TILSection = () => {
   const router = useRouter();
   const { ref, isVisible } = useIntersectionObserver();
-  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTilsParam({ queryKey: [router.query] });
+  const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTilsQuery({ queryKey: [router.query] });
 
   useEffect(() => {
     if (isVisible && hasNextPage) {

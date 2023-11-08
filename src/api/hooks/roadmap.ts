@@ -5,8 +5,8 @@ import {
   getRoadmapSteps,
   getRoadmapsMy,
   getRoadmaps,
-  postRoadmapStepIndividual as postRoadmapStepIndividualAPI,
-  postRoadmapIndividual as postRoadmapIndividualAPI,
+  postRoadmapStepIndividual,
+  postRoadmapIndividual,
   getRoadmapStepReference,
   postRoadmaps,
   getRoadmapGroupMember,
@@ -30,6 +30,7 @@ import type {
   PostRoadmapsRequest,
   PostStepsRequest,
   Role,
+  IndividualStep,
 } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
 import { useApiError } from '@/hooks/useApiError';
@@ -133,11 +134,11 @@ export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest)
 export const usePostRoadmapIndividual = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
-  const mutation = useMutation(postRoadmapIndividualAPI);
+  const { mutateAsync } = useMutation(postRoadmapIndividual);
   const { handleError } = useApiError();
 
-  const postRoadmapsIndividual = async (title: string) => {
-    const data = await mutation.mutateAsync(title, {
+  const postRoadmapsIndividualAsync = async (req: { body: { name: string } }) => {
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy]);
         toast.showBottom({
@@ -150,24 +151,34 @@ export const usePostRoadmapIndividual = () => {
     return data;
   };
   // useMutation 훅을 밖으로 내보내지 않아도, 비즈니스 로직 함수 작성해서 내보내면 된다.
-  return { postRoadmapsIndividual };
+  return { postRoadmapsIndividualAsync };
 };
+
+// STEP 생성하기
 
 export const usePostRoadmapStepIndividual = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(postRoadmapStepIndividualAPI);
+  const { mutateAsync } = useMutation(postRoadmapStepIndividual);
 
-  const postRoadmapStepIndividual = async (body: { roadmapId: number; title: string }) => {
-    const data = await mutation.mutateAsync(body, {
-      onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
+  const postRoadmapStepIndividualAsync = async (req: { body: Pick<IndividualStep, 'roadmapId' | 'title'> }) => {
+    const { body } = req;
+
+    // API 재사용을 위함.
+    const createIndivialStep = { ...body, description: null, dueDate: null };
+
+    const data = await mutateAsync(
+      { body: createIndivialStep },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
+        },
       },
-    });
+    );
 
     return data;
   };
-  return { postRoadmapStepIndividual };
+  return { postRoadmapStepIndividualAsync };
 };
 
 // 로드맵 - 그룹

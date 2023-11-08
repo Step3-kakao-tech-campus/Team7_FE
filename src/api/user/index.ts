@@ -6,13 +6,12 @@ import type {
   GetUsersResponse,
   PatchAlarmRequest,
   PatchUserPasswordRequest,
-  PatchUserPasswordResponse,
   DeleteUserResponse,
   PostUserProfileImageResponse,
   PostUserProfileImageRequset,
 } from '@/api/user/type';
 
-// User
+// 유저 정보
 
 export const getUsers = async () => {
   const { data } = await axiosInstance.request<GetUsersResponse>({
@@ -23,7 +22,7 @@ export const getUsers = async () => {
   return data;
 };
 
-// Alarm
+// 알람 정보
 
 export const getAlarms = async () => {
   const { data } = await axiosInstance.request<GetAlarmsResponse>({
@@ -34,7 +33,11 @@ export const getAlarms = async () => {
   return data;
 };
 
-export const patchAlarm = async (body: PatchAlarmRequest) => {
+// 알림 읽음 처리
+
+export const patchAlarm = async (req: { body: PatchAlarmRequest }) => {
+  const { body } = req;
+
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'PATCH',
     url: `/alarms/read`,
@@ -43,6 +46,8 @@ export const patchAlarm = async (body: PatchAlarmRequest) => {
 
   return data;
 };
+
+// 유저 학습 히스토리
 
 export const getUserHistory = async () => {
   const { data } = await axiosInstance.request<GetUserHistoryResponse>({
@@ -53,33 +58,46 @@ export const getUserHistory = async () => {
   return data;
 };
 
-export const patchUserPassword = async (body: PatchUserPasswordRequest) => {
-  const { data } = await axiosInstance.request<PatchUserPasswordResponse>({
+// 마이페이지 유저 비밀번호 변경
+
+export const patchUserPassword = async (req: { body: PatchUserPasswordRequest }) => {
+  const { body } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'PATCH',
     url: `/users`,
-    data: { ...body },
+    data: body,
   });
 
   return data;
 };
 
-export const deleteUser = async (password: string) => {
+// 회원 탈퇴
+
+export const deleteUser = async (req: { body: { password: string } }) => {
+  const { body } = req;
+
   const { data } = await axiosInstance.request<DeleteUserResponse>({
     method: 'DELETE',
     url: `/users`,
-    data: { password },
+    data: body,
   });
 
   return data;
 };
 
-export const postUserProfileImage = async (body: PostUserProfileImageRequset) => {
-  const { userId, formData } = body;
+// 유저 프로필 이미지 업로드
+
+export const postUserProfileImage = async (req: { param: { userId: number }; body: PostUserProfileImageRequset }) => {
+  const {
+    param: { userId },
+    body,
+  } = req;
 
   const { data } = await axiosInstance.request<PostUserProfileImageResponse>({
     method: 'POST',
     url: `user/${userId}/image`,
-    data: formData,
+    data: body,
     headers: {
       'Content-Type': 'multipart/form-data', // Content-Type을 반드시 이렇게 하여야 한다.
     },

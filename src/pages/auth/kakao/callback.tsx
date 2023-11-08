@@ -15,7 +15,7 @@ const KakaoLoginPage = () => {
 
   useEffect(() => {
     async function KakaoLogin() {
-      const data = await getKakaoLoginAsync({ code: code });
+      const data = await getKakaoLoginAsync({ body: { code: code } });
       if (data.code === 200) {
         router.push(TILY_LINKS.home());
       }

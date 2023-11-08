@@ -1,6 +1,5 @@
 import type { Step, IdName, CommonResponse, Creator, StepWithReferences, Roadmap } from '@/api/type';
 
-// getRoadmapSteps
 export interface GetRoadmapStepsResponse {
   success: boolean;
   message: string;
@@ -13,7 +12,6 @@ export interface RoadmapStepsResult {
   myRole: string;
 }
 
-// getRoadmapStepReference
 export interface GetRoadmapStepReferenceRequest {
   roadmapId: number;
   stepId: number;
@@ -48,23 +46,6 @@ export interface References {
   link: string;
 }
 
-// postRoadmapsIndividual
-export interface PostRoadmapsIndividualResponse {
-  success: boolean;
-  message: string;
-  result: { id: number };
-}
-
-// postRoadmapStepIndividual
-export interface PostRoadmapStepIndividualResponse {
-  success: boolean;
-  message: string;
-  result: {
-    id: number;
-  };
-}
-
-// postRoadmapsGroupsParticipate
 export interface PostRoadmapsGroupsParticipateResponse {
   success: boolean;
   message: string;
@@ -73,9 +54,6 @@ export interface PostRoadmapsGroupsParticipateResponse {
   };
 }
 
-// Roadmap 요청
-
-// 로드맵 - 그룹
 export interface PostRoadmapsRequest {
   name: string;
   description: string;
@@ -141,7 +119,6 @@ export interface PostGroupTilyApplyResponse {
   result: null;
 }
 
-// getRoadmapGroupMember
 export interface GetRoadmapGroupMemberResponse extends CommonResponse {
   result: {
     users: Member[];
@@ -188,10 +165,13 @@ export interface ApplyMember {
   content: string;
 }
 
-// postRoadmapGroupApplyAccept
-
 export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
 
-// delelteRoadmapGroupApplyReject
-
 export interface DeleteRoadmapGroupApplyRejectResponse extends CommonResponse {}
+
+export interface IndividualStep {
+  roadmapId: number;
+  title: string;
+  description: string | null;
+  dueDate: string | null;
+}

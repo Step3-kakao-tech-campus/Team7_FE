@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useGetTil } from '@/api/hooks/til';
+import { useGetTils } from '@/api/hooks/til';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import Comment from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/Comment';
 import CommentPatchModal from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Comments/CommentPatchModal';
@@ -21,12 +21,9 @@ const Comments = (props: CommentsProps) => {
 
   const { query } = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState(false);
-  const { tilDetail } = useGetTil({
-    roadmapId: Number(query.roadmapId),
-    stepId: Number(query.stepId),
+  const { tilDetail } = useGetTils({
     tilId: Number(query.tilId),
   });
-
   const handleSelectComment = (commentId: number) => {
     setSelectedCommentId(commentId);
   };

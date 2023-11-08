@@ -1,6 +1,9 @@
 import type { References } from './roadmap/type';
 
-// 공통 응답 인터페이스
+/*
+ * 공통 응답 인터페이스
+ */
+
 export interface CommonResponse {
   success: boolean;
   code: number;
@@ -11,20 +14,22 @@ export interface NullResultResponse extends CommonResponse {
   result: null;
 }
 
-// 공통 id 인터페이스
-export interface IdParams {
-  roadmapId?: number;
-  stepId?: number;
-  tilId?: number;
-}
-
 export interface IdResponse extends CommonResponse {
   result: {
     id: number;
   };
 }
 
-// 공통 인터페이스
+/*
+ * 공통 요청 인터페이스
+ */
+
+// id 인터페이스
+export interface IdParams {
+  roadmapId?: number;
+  stepId?: number;
+  tilId?: number;
+}
 
 export interface IdName {
   id: number;

@@ -1,7 +1,7 @@
 import type { MouseEventHandler } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { usePostTil } from '@/api/hooks/til';
+import { usePostTils } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
 import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
@@ -33,7 +33,7 @@ const Step = (props: StepProps) => {
   } = props;
 
   const router = useRouter();
-  const { postTil } = usePostTil();
+  const { postTilsAsync } = usePostTils();
 
   const isActiveStep = stepId === Number(router.query.stepId);
 
@@ -49,7 +49,7 @@ const Step = (props: StepProps) => {
     const roadmapId = Number(router.query.roadmapId) as number;
     autoSavedTimeHandler.clearAutoSave();
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      const data = await postTil({ roadmapId, stepId, title });
+      const data = await postTilsAsync({ body: { roadmapId, stepId, title } });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));

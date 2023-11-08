@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useGetTil, usePatchTil } from '@/api/hooks/til';
-import { useSubmitTil } from '@/api/hooks/til';
+import { useGetTils, usePatchTils } from '@/api/hooks/til';
+import { useSubmitTils } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import { useToast } from '@/components/common/Toast/useToast';
 import SubmitButton from '@/components/tilWrite/TILWriteSection/Footer/SubmitButton';
@@ -22,35 +22,35 @@ const Footer = (props: FooterProps) => {
 
   const router = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState();
-  const { patchTil } = usePatchTil();
-  const { submitTil } = useSubmitTil();
-  const { tilDetail } = useGetTil({
-    roadmapId: Number(router.query.roadmapId),
-    stepId: Number(router.query.stepId),
+  const { patchTilsAsync } = usePatchTils();
+  const { submitTilsAsync } = useSubmitTils();
+  const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
   });
-
   const toast = useToast();
 
   const handleSaveTIL = () => {
     if (!tilDetail) return;
 
-    patchTil({
-      roadmapId: Number(router.query.roadmapId),
-      stepId: Number(router.query.stepId),
+    patchTilsAsync({
       tilId: Number(router.query.tilId),
-      content: TILContent,
+      body: {
+        content: TILContent,
+      },
     });
 
     toast.showRight({ message: '저장되었습니다.' });
   };
 
   const handleSubmitTIL = () => {
-    submitTil({
-      roadmapId: Number(router.query.roadmapId),
-      stepId: Number(router.query.stepId),
-      tilId: Number(router.query.tilId),
-      content: TILContent,
+    submitTilsAsync({
+      param: {
+        roadmapId: Number(router.query.roadmapId),
+        tilId: Number(router.query.tilId),
+      },
+      body: {
+        content: TILContent,
+      },
     });
     handleClose();
   };

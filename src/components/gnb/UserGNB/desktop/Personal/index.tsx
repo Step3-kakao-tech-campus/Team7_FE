@@ -7,7 +7,7 @@ import {
   usePostRoadmapStepIndividual,
   usePostRoadmapIndividual,
 } from '@/api/hooks/roadmap';
-import { usePostTil } from '@/api/hooks/til';
+import { usePostTils } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
@@ -28,9 +28,9 @@ const Personal = () => {
   const router = useRouter();
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postRoadmapsIndividual } = usePostRoadmapIndividual();
-  const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();
-  const { postTil } = usePostTil();
+  const { postRoadmapsIndividualAsync } = usePostRoadmapIndividual();
+  const { postRoadmapStepIndividualAsync } = usePostRoadmapStepIndividual();
+  const { postTilsAsync } = usePostTils();
 
   useEffect(() => {
     if (roadmaps.category.length !== 0) setRoadmapId(roadmaps.category[0].id);
@@ -61,13 +61,13 @@ const Personal = () => {
   });
 
   const createRoadmap: SubmitHandler<{ roadmapTitle: string }> = (formData) => {
-    postRoadmapsIndividual(formData.roadmapTitle);
+    postRoadmapsIndividualAsync({ body: { name: formData.roadmapTitle } });
     roadmapReset();
     setIsRoadmapButtonSelected(false);
   };
 
   const createStep: SubmitHandler<{ stepTitle: string }> = (formData) => {
-    postRoadmapStepIndividual({ roadmapId, title: formData.stepTitle });
+    postRoadmapStepIndividualAsync({ body: { roadmapId, title: formData.stepTitle } });
     stepReset();
     setIsStepButtonSelected(false);
   };
@@ -77,7 +77,7 @@ const Personal = () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
+      const data = await postTilsAsync({ body: { roadmapId, stepId, title: selectedStepTitle } });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));

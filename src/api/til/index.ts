@@ -1,28 +1,81 @@
 import { axiosInstance } from '@/api';
 import type {
-  GetTilsRequest,
+  GetTilsQueryResponse,
+  PostTilsRequest,
   GetTilsResponse,
-  PostTilRequest,
-  PostTilResponse,
-  GetTilRequest,
-  GetTilResponse,
-  PostCommentRequest,
-  PostCommentResponse,
-  PatchCommentRequest,
-  PatchCommentResponse,
-  DeleteCommentRequest,
-  DeleteCommentResponse,
-  PatchTilRequest,
-  PatchTilResponse,
-  SubmitTilRequest,
-  SubmitTilResponse,
-  GetStepTilsRequest,
+  PostCommentsRequest,
+  PatchCommentsRequest,
+  PatchTilsRequest,
+  SubmitTilsRequest,
   GetStepTilsResponse,
 } from '@/api/til/type';
-import { IdParams } from '@/api/type';
+import type { IdResponse, NullResultResponse } from '@/api/type';
+import type { IdParams } from '@/api/type';
 
-export const getTils = async (query: GetTilsRequest) => {
+// 틸 생성하기
+
+export const postTils = async (req: { body: PostTilsRequest }) => {
+  const { body } = req;
+
+  const { data } = await axiosInstance.request<IdResponse>({
+    method: 'POST',
+    url: `/tils`,
+    data: body,
+  });
+
+  return data;
+};
+
+// 틸 조회하기
+
+export const getTils = async (req: { tilId: number }) => {
+  const { tilId } = req;
+
   const { data } = await axiosInstance.request<GetTilsResponse>({
+    method: 'GET',
+    url: `/tils/${tilId}`,
+  });
+
+  return data;
+};
+
+// 틸 저장하기
+
+export const patchTils = async (req: { tilId: number; body: PatchTilsRequest }) => {
+  const { tilId, body } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'PATCH',
+    url: `/tils/${tilId}`,
+    data: body,
+  });
+
+  return data;
+};
+
+// 틸 제출하기
+
+export const submitTils = async (req: { param: IdParams; body: SubmitTilsRequest }) => {
+  const {
+    param: { tilId },
+    body: { content: submitContent },
+  } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'POST',
+    url: `/tils/${tilId}`,
+    data: { submitContent },
+  });
+
+  return data;
+};
+
+// 나의 틸 목록 전체 조회
+
+export const getTilsQuery = async (req: { query: string }) => {
+  const { query } = req;
+
+  const { data } = await axiosInstance.request<GetTilsQueryResponse>({
     method: 'GET',
     url: `/tils/my${query}`,
   });
@@ -30,94 +83,63 @@ export const getTils = async (query: GetTilsRequest) => {
   return data;
 };
 
-export const getTil = async (req: IdParams) => {
-  const { roadmapId, stepId, tilId } = req;
+// 코멘트 작성하기
 
-  const { data } = await axiosInstance.request<GetTilResponse>({
-    method: 'GET',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
-  });
+export const postComments = async (req: { body: PostCommentsRequest }) => {
+  const { body } = req;
 
-  return data;
-};
-
-export const postTil = async (body: PostTilRequest) => {
-  const { roadmapId, stepId, title } = body;
-
-  const { data } = await axiosInstance.request<PostTilResponse>({
+  const { data } = await axiosInstance.request<IdResponse>({
     method: 'POST',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils`,
-    data: { title },
+    url: `/comments`,
+    data: body,
   });
 
   return data;
 };
 
-export const patchTil = async (body: PatchTilRequest) => {
-  const { roadmapId, stepId, tilId, title, content } = body;
+// 코멘트 수정하기
 
-  const { data } = await axiosInstance.request<PatchTilResponse>({
+export const patchComments = async (req: {
+  param: { tilId: number; commentId: number };
+  body: PatchCommentsRequest;
+}) => {
+  const {
+    param: { commentId },
+    body,
+  } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'PATCH',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
-    data: { title, content },
+    url: `/comments/${commentId}`,
+    data: body,
   });
 
   return data;
 };
 
-export const submitTil = async (body: SubmitTilRequest) => {
-  const { roadmapId, stepId, tilId, title, content: submitContent } = body;
+// 코멘트 삭제하기
 
-  const { data } = await axiosInstance.request<SubmitTilResponse>({
-    method: 'POST',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
-    data: { title, submitContent },
-  });
+export const deleteComments = async (req: { param: { tilId: number; commentId: number } }) => {
+  const {
+    param: { commentId },
+  } = req;
 
-  return data;
-};
-
-export const postComment = async (body: PostCommentRequest) => {
-  const { roadmapId, stepId, tilId, content } = body;
-
-  const { data } = await axiosInstance.request<PostCommentResponse>({
-    method: 'POST',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments`,
-    data: { content },
-  });
-
-  return data;
-};
-
-export const patchComment = async (body: PatchCommentRequest) => {
-  const { roadmapId, stepId, tilId, commentId, content } = body;
-
-  const { data } = await axiosInstance.request<PatchCommentResponse>({
-    method: 'PATCH',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
-    data: { content },
-  });
-
-  return data;
-};
-
-export const deleteComment = async (body: DeleteCommentRequest) => {
-  const { roadmapId, stepId, tilId, commentId } = body;
-
-  const { data } = await axiosInstance.request<DeleteCommentResponse>({
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'DELETE',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}/comments/${commentId}`,
+    url: `/comments/${commentId}`,
   });
 
   return data;
 };
 
-export const getStepTils = async (body: GetStepTilsRequest) => {
-  const { roadmapId, stepId, input } = body;
+// 특정 스텝의 틸 목록 조회
+
+export const getStepTils = async (req: { stepId: number; query?: string }) => {
+  const { stepId, query = '' } = req;
 
   const { data } = await axiosInstance.request<GetStepTilsResponse>({
     method: 'GET',
-    url: `/roadmaps/groups/${roadmapId}/steps/${stepId}/tils/${input}`,
+    url: `/steps/${stepId}/tils${query}`,
   });
 
   return data;

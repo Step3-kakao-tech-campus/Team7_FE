@@ -1,6 +1,6 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type FormEvent, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import { usePatchComment } from '@/api/hooks/til';
+import { useGetTils, usePatchComments } from '@/api/hooks/til';
 import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
 import TextArea from '@/components/common/TextArea';
@@ -17,20 +17,35 @@ const CommentPatchModal = (props: CommentPatchModalProps) => {
 
   const { query } = useRouter();
   const [content, setContent] = useState('');
-  const { patchComment } = usePatchComment();
+  const { patchCommentsAsync } = usePatchComments();
+  const { tilDetail } = useGetTils({
+    tilId: Number(query.tilId),
+  });
+
+  useEffect(() => {
+    const comment = tilDetail?.comments.find((comment) => comment.id === selectedCommentId);
+    setContent(comment?.content || '');
+  }, [tilDetail, selectedCommentId, isOpen]);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    patchComment({
-      roadmapId: Number(query.roadmapId),
-      stepId: Number(query.stepId),
-      tilId: Number(query.tilId),
-      commentId: selectedCommentId.toString(),
-      content,
+    patchCommentsAsync({
+      param: {
+        tilId: Number(query.tilId),
+        commentId: selectedCommentId,
+      },
+      body: {
+        content,
+      },
     });
     onClose();
     setContent('');
   };
+
+  const handleClose = useCallback(() => {
+    setContent('');
+    onClose();
+  }, []);
 
   if (!isOpen) return null;
 
@@ -45,7 +60,7 @@ const CommentPatchModal = (props: CommentPatchModalProps) => {
         <TextArea css={Styled.TextAreaStyles} rows={5} value={content} onChange={(e) => setContent(e.target.value)} />
 
         <Styled.ButtonContainer>
-          <Button onClick={onClose} type="button" css={Styled.CancelButtonStyles} variant="ghost">
+          <Button onClick={handleClose} type="button" css={Styled.CancelButtonStyles} variant="ghost">
             취소
           </Button>
           <Button type="submit" css={Styled.ConfirmButtonStyles} variant="default">

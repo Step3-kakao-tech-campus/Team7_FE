@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import { useGetTil } from '@/api/hooks/til';
+import { useGetTils } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
-import SideBar from '@/components/tilView/TILViewSection/mobile/SideBar';
+import SideBar from '@/components/tilView/TILViewSection/mobile/MobileHeader/SideBar';
 import ExtensionInfoModal from '@/components/tilWrite/TILWriteSection/Header/ExtensionInfoModal';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
@@ -12,9 +12,7 @@ const MobileHeader = () => {
   const router = useRouter();
   const { isOpen, handleClose } = useModalState();
 
-  const { tilDetail } = useGetTil({
-    roadmapId: Number(router.query.roadmapId),
-    stepId: Number(router.query.stepId),
+  const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
   });
 
