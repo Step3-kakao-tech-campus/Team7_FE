@@ -1,10 +1,8 @@
 import { axiosInstance } from '@/api';
 import type {
-  GetTilsRequest,
   GetTilsResponse,
   PostTilRequest,
   PostTilResponse,
-  GetTilRequest,
   GetTilResponse,
   PostCommentRequest,
   PostCommentResponse,
@@ -21,7 +19,11 @@ import type {
 } from '@/api/til/type';
 import type { IdParams } from '@/api/type';
 
-export const getTils = async (query: GetTilsRequest) => {
+// 나의 틸 목록 전체 조회
+
+export const getTils = async (req: { query: string }) => {
+  const { query } = req;
+
   const { data } = await axiosInstance.request<GetTilsResponse>({
     method: 'GET',
     url: `/tils/my${query}`,
@@ -30,8 +32,12 @@ export const getTils = async (query: GetTilsRequest) => {
   return data;
 };
 
-export const getTil = async (req: IdParams) => {
-  const { roadmapId, stepId, tilId } = req;
+// 틸 조회하기
+
+export const getTil = async (req: { param: IdParams }) => {
+  const {
+    param: { roadmapId, stepId, tilId },
+  } = req;
 
   const { data } = await axiosInstance.request<GetTilResponse>({
     method: 'GET',
@@ -41,32 +47,45 @@ export const getTil = async (req: IdParams) => {
   return data;
 };
 
-export const postTil = async (body: PostTilRequest) => {
-  const { roadmapId, stepId, title } = body;
+// 틸 생성하기
+
+export const postTil = async (req: { param: IdParams; body: PostTilRequest }) => {
+  const {
+    param: { roadmapId, stepId },
+    body,
+  } = req;
 
   const { data } = await axiosInstance.request<PostTilResponse>({
     method: 'POST',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils`,
-    data: { title },
+    data: body,
   });
 
   return data;
 };
 
-export const patchTil = async (body: PatchTilRequest) => {
-  const { roadmapId, stepId, tilId, title, content } = body;
+// 틸 저장하기
+
+export const patchTil = async (req: { param: IdParams; body: PatchTilRequest }) => {
+  const {
+    param: { roadmapId, stepId, tilId },
+    body,
+  } = req;
 
   const { data } = await axiosInstance.request<PatchTilResponse>({
     method: 'PATCH',
     url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
-    data: { title, content },
+    data: body,
   });
 
   return data;
 };
 
-export const submitTil = async (body: SubmitTilRequest) => {
-  const { roadmapId, stepId, tilId, title, content: submitContent } = body;
+export const submitTil = async (req: { param: IdParams; body: SubmitTilRequest }) => {
+  const {
+    param: { roadmapId, stepId, tilId },
+    body: { title, content: submitContent },
+  } = req;
 
   const { data } = await axiosInstance.request<SubmitTilResponse>({
     method: 'POST',

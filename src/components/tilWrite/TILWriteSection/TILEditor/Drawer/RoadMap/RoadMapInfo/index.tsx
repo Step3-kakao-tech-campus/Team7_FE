@@ -19,9 +19,11 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
   const router = useRouter();
   const { steps, isLoading } = useGetRoadmapSteps(Number(router.query.roadmapId));
   const { tilDetail } = useGetTil({
-    roadmapId: Number(router.query.roadmapId),
-    stepId: Number(router.query.stepId),
-    tilId: Number(router.query.tilId),
+    param: {
+      roadmapId: Number(router.query.roadmapId),
+      stepId: Number(router.query.stepId),
+      tilId: Number(router.query.tilId),
+    },
   });
 
   const routeUserBasedOnRole = (userRole?: string) => {

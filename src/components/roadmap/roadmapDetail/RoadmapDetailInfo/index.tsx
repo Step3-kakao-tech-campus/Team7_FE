@@ -31,7 +31,10 @@ const RoadmapDetailInfo = () => {
       const recentStepId = data?.result.recentStepId;
       if (recentTilId === NOT_TIL_CREATED_FOR_STEP) {
         const step = data?.result.steps[0];
-        const tilData = await postTil({ roadmapId: Number(roadmapId), stepId: step.id, title: step.title });
+        const tilData = await postTil({
+          param: { roadmapId: Number(roadmapId), stepId: step.id },
+          body: { title: step.title },
+        });
         router.push(TILY_LINKS.tilWrite({ roadmapId: Number(roadmapId), stepId: step.id, tilId: tilData?.result.id }));
       } else if (recentStepId !== NOT_TIL_CREATED_FOR_STEP) {
         router.push(

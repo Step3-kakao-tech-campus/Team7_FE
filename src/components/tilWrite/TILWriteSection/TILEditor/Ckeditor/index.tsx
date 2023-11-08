@@ -27,19 +27,25 @@ const CkEditor = (props: CkEditorProps) => {
 
   const toast = useToast();
   const { query } = useRouter();
-  const { patchTil } = usePatchTil();
+  const { patchTilAsync } = usePatchTil();
   const { tilDetail } = useGetTil({
-    roadmapId: Number(query.roadmapId),
-    stepId: Number(query.stepId),
-    tilId: Number(query.tilId),
-  });
-
-  const autoSaveTIL = (TILContent: string) => {
-    patchTil({
+    param: {
       roadmapId: Number(query.roadmapId),
       stepId: Number(query.stepId),
       tilId: Number(query.tilId),
-      content: TILContent,
+    },
+  });
+
+  const autoSaveTIL = (TILContent: string) => {
+    patchTilAsync({
+      param: {
+        roadmapId: Number(query.roadmapId),
+        stepId: Number(query.stepId),
+        tilId: Number(query.tilId),
+      },
+      body: {
+        content: TILContent,
+      },
     });
 
     toast.showRight({

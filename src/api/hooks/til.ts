@@ -6,12 +6,12 @@ import { ROADMAP_QUERY_KEY } from '@/api/hooks/roadmap';
 import {
   getTil,
   getTils,
-  postTil as postTilAPI,
+  postTil,
   postComment as postCommentAPI,
   patchComment as patchCommentAPI,
   deleteComment as deleteCommentAPI,
-  patchTil as patchTilAPI,
-  submitTil as submitTilAPI,
+  patchTil,
+  submitTil,
   getStepTils,
 } from '@/api/til';
 import type {
@@ -46,7 +46,7 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
     async ({ pageParam: page = 0 }) => {
       const searchParams = { page, ...query };
 
-      const data = getTils(qs.stringify(searchParams, { addQueryPrefix: true }));
+      const data = getTils({ query: qs.stringify(searchParams, { addQueryPrefix: true }) });
 
       return data;
     },
@@ -78,10 +78,12 @@ export const useGetTilsParam = ({ queryKey }: InfinityTilRequest) => {
   };
 };
 
-export const useGetTil = (req: IdParams) => {
+export const useGetTil = (req: { param: IdParams }) => {
+  const { param } = req;
+
   const { isReady } = useRouter();
 
-  const { data, isLoading } = useQuery([QUERY_KEY.getTil, req], () => getTil(req), {
+  const { data, isLoading } = useQuery([QUERY_KEY.getTil, param], () => getTil(req), {
     enabled: isReady,
   });
 
@@ -94,15 +96,17 @@ export const useGetTil = (req: IdParams) => {
 export const usePostTil = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(postTilAPI);
+  const { mutateAsync } = useMutation(postTil);
   const { handleError } = useApiError();
 
-  const postTil = async (body: PostTilRequest) => {
-    const { roadmapId } = body;
+  const postTilAsync = async (req: { param: IdParams; body: PostTilRequest }) => {
+    const {
+      param: { roadmapId },
+    } = req;
 
-    const data = await mutation.mutateAsync(body, {
+    const data = await mutateAsync(req, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId.toString()]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId?.toString()]);
       },
       onError: handleError,
     });
@@ -110,45 +114,46 @@ export const usePostTil = () => {
     return data;
   };
 
-  return { postTil };
+  return { postTilAsync };
 };
 
 export const usePatchTil = () => {
-  const mutation = useMutation(patchTilAPI);
+  const { mutateAsync } = useMutation(patchTil);
   const { handleError } = useApiError();
-  const patchTil = async (body: PatchTilRequest) => {
-    const data = await mutation.mutateAsync(body, {
+
+  const patchTilAsync = async (req: { param: IdParams; body: PatchTilRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
     return data;
   };
-  return { patchTil };
+  return { patchTilAsync };
 };
 
 export const useSubmitTil = () => {
   const queryClient = useQueryClient();
-
-  const mutation = useMutation(submitTilAPI);
+  const { mutateAsync } = useMutation(submitTil);
   const { handleError } = useApiError();
   const toast = useToast();
 
-  const submitTil = async (body: SubmitTilRequest) => {
-    const data = await mutation.mutateAsync(body, {
+  const submitTilAsync = async (req: { param: IdParams; body: SubmitTilRequest }) => {
+    const {
+      param: { roadmapId, stepId, tilId },
+    } = req;
+
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({ message: 'TIL이 제출 되었습니다.' });
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
-        queryClient.invalidateQueries([
-          QUERY_KEY.getTil,
-          { roadmapId: body.roadmapId, stepId: body.stepId, tilId: body.tilId },
-        ]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId]);
+        queryClient.invalidateQueries([QUERY_KEY.getTil, { roadmapId, stepId, tilId }]);
       },
       onError: handleError,
     });
 
     return data;
   };
-  return { submitTil };
+  return { submitTilAsync };
 };
 
 export const usePostComment = () => {

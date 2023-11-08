@@ -15,9 +15,11 @@ const Header = (props: HeaderProps) => {
   const router = useRouter();
 
   const { tilDetail } = useGetTil({
-    roadmapId: Number(router.query.roadmapId),
-    stepId: Number(router.query.stepId),
-    tilId: Number(router.query.tilId),
+    param: {
+      roadmapId: Number(router.query.roadmapId),
+      stepId: Number(router.query.stepId),
+      tilId: Number(router.query.tilId),
+    },
   });
 
   return (

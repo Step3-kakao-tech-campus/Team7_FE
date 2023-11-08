@@ -22,35 +22,44 @@ const Footer = (props: FooterProps) => {
 
   const router = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState();
-  const { patchTil } = usePatchTil();
-  const { submitTil } = useSubmitTil();
+  const { patchTilAsync } = usePatchTil();
+  const { submitTilAsync } = useSubmitTil();
   const { tilDetail } = useGetTil({
-    roadmapId: Number(router.query.roadmapId),
-    stepId: Number(router.query.stepId),
-    tilId: Number(router.query.tilId),
+    param: {
+      roadmapId: Number(router.query.roadmapId),
+      stepId: Number(router.query.stepId),
+      tilId: Number(router.query.tilId),
+    },
   });
-
   const toast = useToast();
 
   const handleSaveTIL = () => {
     if (!tilDetail) return;
 
-    patchTil({
-      roadmapId: Number(router.query.roadmapId),
-      stepId: Number(router.query.stepId),
-      tilId: Number(router.query.tilId),
-      content: TILContent,
+    patchTilAsync({
+      param: {
+        roadmapId: Number(router.query.roadmapId),
+        stepId: Number(router.query.stepId),
+        tilId: Number(router.query.tilId),
+      },
+      body: {
+        content: TILContent,
+      },
     });
 
     toast.showRight({ message: '저장되었습니다.' });
   };
 
   const handleSubmitTIL = () => {
-    submitTil({
-      roadmapId: Number(router.query.roadmapId),
-      stepId: Number(router.query.stepId),
-      tilId: Number(router.query.tilId),
-      content: TILContent,
+    submitTilAsync({
+      param: {
+        roadmapId: Number(router.query.roadmapId),
+        stepId: Number(router.query.stepId),
+        tilId: Number(router.query.tilId),
+      },
+      body: {
+        content: TILContent,
+      },
     });
     handleClose();
   };

@@ -19,7 +19,7 @@ const RoadMap = () => {
 
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postTil } = usePostTil();
+  const { postTilAsync } = usePostTil();
 
   useEffect(() => {
     if (roadmaps.roadmaps.length !== 0) setRoadmapId(roadmaps.roadmaps[0].id);
@@ -30,7 +30,7 @@ const RoadMap = () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
+      const data = await postTilAsync({ param: { roadmapId, stepId }, body: { title: selectedStepTitle } });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));

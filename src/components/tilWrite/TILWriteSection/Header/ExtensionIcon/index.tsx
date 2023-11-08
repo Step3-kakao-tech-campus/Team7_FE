@@ -17,9 +17,11 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
   const { isExtensionInstall } = useChromeExtension();
 
   const { tilDetail } = useGetTil({
-    roadmapId: Number(router.query.roadmapId),
-    stepId: Number(router.query.stepId),
-    tilId: Number(router.query.tilId),
+    param: {
+      roadmapId: Number(router.query.roadmapId),
+      stepId: Number(router.query.stepId),
+      tilId: Number(router.query.tilId),
+    },
   });
 
   const handleSubmitTILContentToGithub = useCallback(() => {

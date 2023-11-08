@@ -1,21 +1,12 @@
 import type { CommonResponse, Step, Comment, Til } from '@/api/type';
 
-export type GetTilsRequest = string;
+/*
+ * Til 요청
+ */
 
-// getTils
-export interface GetTilsResponse {
-  success: boolean;
-  message: string;
-  result: {
-    tils: Til[];
-  } | null;
-  hasNext: boolean;
-}
+// 틸 생성하기
 
-// postTil
 export interface PostTilRequest {
-  roadmapId: number;
-  stepId: number;
   title: string;
 }
 
@@ -24,20 +15,6 @@ export interface PostTilResponse {
   message: string;
   result: {
     id: number;
-  };
-}
-
-// getTil
-
-export interface GetTilResponse extends CommonResponse {
-  result: {
-    content: string;
-    submitContent: string;
-    isPersonal: boolean;
-    isSubmit: boolean;
-    step: Omit<Step, 'tilId' | 'isSubmit'>;
-    roadmapName: string;
-    comments: Comment[];
   };
 }
 
@@ -66,9 +43,6 @@ export interface PatchCommentResponse extends CommonResponse {
 
 // patchTil
 export interface PatchTilRequest {
-  roadmapId: number;
-  stepId: number;
-  tilId: number;
   title?: string;
   content: string;
 }
@@ -117,4 +91,31 @@ export interface MemberTil {
   content: string | null;
   submitDate: string | null;
   commentNum: number | null;
+}
+
+/*
+ * Til 응답
+ */
+
+// 나의 틸 목록 전체 조회
+
+export interface GetTilsResponse extends CommonResponse {
+  result: {
+    tils: Til[];
+  } | null;
+  hasNext: boolean;
+}
+
+// 틸 조회하기
+
+export interface GetTilResponse extends CommonResponse {
+  result: {
+    content: string;
+    submitContent: string;
+    isPersonal: boolean;
+    isSubmit: boolean;
+    step: Omit<Step, 'tilId' | 'isSubmit'>;
+    roadmapName: string;
+    comments: Comment[];
+  };
 }

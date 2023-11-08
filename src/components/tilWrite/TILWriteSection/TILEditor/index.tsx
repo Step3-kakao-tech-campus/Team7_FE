@@ -41,9 +41,11 @@ const TILEditor = (props: TILEditorProps) => {
   const { query } = useRouter();
   const { stepTitle, handleStepTitle } = useStepTitle();
   const { tilDetail } = useGetTil({
-    roadmapId: Number(query.roadmapId),
-    stepId: Number(query.stepId),
-    tilId: Number(query.tilId),
+    param: {
+      roadmapId: Number(query.roadmapId),
+      stepId: Number(query.stepId),
+      tilId: Number(query.tilId),
+    },
   });
 
   const handleToggleResize = useCallback(() => {

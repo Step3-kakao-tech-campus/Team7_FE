@@ -19,14 +19,14 @@ const MobileRoadMap = () => {
 
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postTil } = usePostTil();
+  const { postTilAsync } = usePostTil();
 
   // 틸 작성하기 페이지로 이동하기전에 해당 Step의 TIL이 생성되어있는지, 아닌지 분기 처리 하는 함수
   const routeTILWrite = async () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
+      const data = await postTilAsync({ param: { roadmapId, stepId }, body: { title: selectedStepTitle } });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));

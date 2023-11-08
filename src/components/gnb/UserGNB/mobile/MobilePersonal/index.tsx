@@ -31,7 +31,7 @@ const MobilePersonal = () => {
   const { steps } = useGetRoadmapSteps(roadmapId);
   const { postRoadmapsIndividual } = usePostRoadmapIndividual();
   const { postRoadmapStepIndividual } = usePostRoadmapStepIndividual();
-  const { postTil } = usePostTil();
+  const { postTilAsync } = usePostTil();
 
   const {
     control: roadmapControl,
@@ -74,7 +74,7 @@ const MobilePersonal = () => {
     const NOT_TIL_CREATED_FOR_STEP = null;
 
     if (tilId === NOT_TIL_CREATED_FOR_STEP) {
-      const data = await postTil({ roadmapId, stepId, title: selectedStepTitle });
+      const data = await postTilAsync({ param: { roadmapId, stepId }, body: { title: selectedStepTitle } });
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId: data?.result.id }));
     } else {
       router.push(TILY_LINKS.tilWrite({ roadmapId, stepId, tilId }));
