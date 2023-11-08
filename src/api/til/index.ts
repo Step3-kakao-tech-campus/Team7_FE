@@ -29,6 +29,33 @@ export const postTil = async (req: { body: PostTilRequest }) => {
   return data;
 };
 
+// 틸 조회하기
+
+export const getTil = async (req: { tilId: number }) => {
+  const { tilId } = req;
+
+  const { data } = await axiosInstance.request<GetTilResponse>({
+    method: 'GET',
+    url: `/tils/${tilId}`,
+  });
+
+  return data;
+};
+
+// 틸 저장하기
+
+export const patchTil = async (req: { tilId: number; body: PatchTilRequest }) => {
+  const { tilId, body } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'PATCH',
+    url: `/tils/${tilId}`,
+    data: body,
+  });
+
+  return data;
+};
+
 // 나의 틸 목록 전체 조회
 
 export const getTils = async (req: { query: string }) => {
@@ -37,38 +64,6 @@ export const getTils = async (req: { query: string }) => {
   const { data } = await axiosInstance.request<GetTilsResponse>({
     method: 'GET',
     url: `/tils/my${query}`,
-  });
-
-  return data;
-};
-
-// 틸 조회하기
-
-export const getTil = async (req: { param: IdParams }) => {
-  const {
-    param: { roadmapId, stepId, tilId },
-  } = req;
-
-  const { data } = await axiosInstance.request<GetTilResponse>({
-    method: 'GET',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
-  });
-
-  return data;
-};
-
-// 틸 저장하기
-
-export const patchTil = async (req: { param: IdParams; body: PatchTilRequest }) => {
-  const {
-    param: { roadmapId, stepId, tilId },
-    body,
-  } = req;
-
-  const { data } = await axiosInstance.request<NullResultResponse>({
-    method: 'PATCH',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/tils/${tilId}`,
-    data: body,
   });
 
   return data;

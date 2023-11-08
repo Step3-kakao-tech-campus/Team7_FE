@@ -16,11 +16,7 @@ const SubmitButton = (props: SubmitButtonProps) => {
   const router = useRouter();
 
   const { tilDetail, isLoading } = useGetTil({
-    param: {
-      roadmapId: Number(router.query.roadmapId),
-      stepId: Number(router.query.stepId),
-      tilId: Number(router.query.tilId),
-    },
+    tilId: Number(router.query.tilId),
   });
 
   return (

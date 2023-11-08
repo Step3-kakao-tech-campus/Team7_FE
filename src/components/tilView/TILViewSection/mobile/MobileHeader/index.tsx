@@ -13,11 +13,7 @@ const MobileHeader = () => {
   const { isOpen, handleClose } = useModalState();
 
   const { tilDetail } = useGetTil({
-    param: {
-      roadmapId: Number(router.query.roadmapId),
-      stepId: Number(router.query.stepId),
-      tilId: Number(router.query.tilId),
-    },
+    tilId: Number(router.query.tilId),
   });
 
   return (

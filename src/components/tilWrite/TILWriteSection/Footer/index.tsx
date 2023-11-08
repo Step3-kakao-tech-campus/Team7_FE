@@ -25,11 +25,7 @@ const Footer = (props: FooterProps) => {
   const { patchTilAsync } = usePatchTil();
   const { submitTilAsync } = useSubmitTil();
   const { tilDetail } = useGetTil({
-    param: {
-      roadmapId: Number(router.query.roadmapId),
-      stepId: Number(router.query.stepId),
-      tilId: Number(router.query.tilId),
-    },
+    tilId: Number(router.query.tilId),
   });
   const toast = useToast();
 
@@ -37,11 +33,7 @@ const Footer = (props: FooterProps) => {
     if (!tilDetail) return;
 
     patchTilAsync({
-      param: {
-        roadmapId: Number(router.query.roadmapId),
-        stepId: Number(router.query.stepId),
-        tilId: Number(router.query.tilId),
-      },
+      tilId: Number(router.query.tilId),
       body: {
         content: TILContent,
       },

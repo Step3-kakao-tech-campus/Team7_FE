@@ -61,6 +61,39 @@ export const usePostTil = () => {
   return { postTilAsync };
 };
 
+// 틸 조회하기
+
+export const useGetTil = (req: { tilId: number }) => {
+  const { tilId } = req;
+
+  const { isReady } = useRouter();
+
+  const { data, isLoading } = useQuery([QUERY_KEY.getTil, tilId], () => getTil(req), {
+    enabled: isReady,
+  });
+
+  return {
+    tilDetail: data?.result ?? null,
+    isLoading,
+  };
+};
+
+// 틸 저장하기
+
+export const usePatchTil = () => {
+  const { mutateAsync } = useMutation(patchTil);
+  const { handleError } = useApiError();
+
+  const patchTilAsync = async (req: { tilId: number; body: PatchTilRequest }) => {
+    const data = await mutateAsync(req, {
+      onError: handleError,
+    });
+
+    return data;
+  };
+  return { patchTilAsync };
+};
+
 export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
   const { query } = useRouter();
   const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
@@ -100,35 +133,6 @@ export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
     fetchNextPage,
     hasNextPage,
   };
-};
-
-export const useGetTil = (req: { param: IdParams }) => {
-  const { param } = req;
-
-  const { isReady } = useRouter();
-
-  const { data, isLoading } = useQuery([QUERY_KEY.getTil, param], () => getTil(req), {
-    enabled: isReady,
-  });
-
-  return {
-    tilDetail: data?.result ?? null,
-    isLoading,
-  };
-};
-
-export const usePatchTil = () => {
-  const { mutateAsync } = useMutation(patchTil);
-  const { handleError } = useApiError();
-
-  const patchTilAsync = async (req: { param: IdParams; body: PatchTilRequest }) => {
-    const data = await mutateAsync(req, {
-      onError: handleError,
-    });
-
-    return data;
-  };
-  return { patchTilAsync };
 };
 
 export const useSubmitTil = () => {

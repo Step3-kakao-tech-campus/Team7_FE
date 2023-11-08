@@ -29,20 +29,12 @@ const CkEditor = (props: CkEditorProps) => {
   const { query } = useRouter();
   const { patchTilAsync } = usePatchTil();
   const { tilDetail } = useGetTil({
-    param: {
-      roadmapId: Number(query.roadmapId),
-      stepId: Number(query.stepId),
-      tilId: Number(query.tilId),
-    },
+    tilId: Number(query.tilId),
   });
 
   const autoSaveTIL = (TILContent: string) => {
     patchTilAsync({
-      param: {
-        roadmapId: Number(query.roadmapId),
-        stepId: Number(query.stepId),
-        tilId: Number(query.tilId),
-      },
+      tilId: Number(query.tilId),
       body: {
         content: TILContent,
       },

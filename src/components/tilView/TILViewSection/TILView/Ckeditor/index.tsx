@@ -8,11 +8,7 @@ const CkEditor = () => {
   const { query } = useRouter();
 
   const { tilDetail } = useGetTil({
-    param: {
-      roadmapId: Number(query.roadmapId),
-      stepId: Number(query.stepId),
-      tilId: Number(query.tilId),
-    },
+    tilId: Number(query.tilId),
   });
 
   return (

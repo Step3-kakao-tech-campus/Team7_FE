@@ -1,15 +1,16 @@
 import type { CommonResponse, Step, Comment, Til } from '@/api/type';
 
-/*
- * Til 요청
- */
-
-// 틸 생성하기
+// Til 요청
 
 export interface PostTilRequest {
   roadmapId: number;
   stepId: number;
   title: string;
+}
+
+export interface PatchTilRequest {
+  title?: string;
+  content: string;
 }
 
 // postComment
@@ -29,12 +30,6 @@ export interface PatchCommentRequest {
   stepId: number;
   tilId: number;
   commentId: string;
-  content: string;
-}
-
-// patchTil
-export interface PatchTilRequest {
-  title?: string;
   content: string;
 }
 
