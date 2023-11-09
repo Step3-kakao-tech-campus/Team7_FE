@@ -9,17 +9,17 @@ export default {
 
 export const WithState: StoryObj<typeof Calendar> = {
   render: function Render() {
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState<Date | null>(new Date());
 
     useEffect(() => {
       console.log(date);
     }, [date]);
 
-    const handleDate = (date: Date) => {
+    const handleDate = (date: Date | null) => {
       setDate(date);
     };
 
-    return <Calendar onChangeDate={(date: Date) => handleDate(date)} />;
+    return <Calendar onChangeDate={(date: Date | null) => handleDate(date)} />;
   },
 };
 

@@ -6,7 +6,7 @@ import Onboard from '@/components/main/LoggedInUser/Onboarding';
 import RightArea from '@/components/main/LoggedInUser/RightArea';
 import { useOnbaording } from '@/components/main/LoggedInUser/useOnboarding';
 import * as Styled from './style';
-import SideBar from '../mobile/UserInfo/SideBar';
+import SideBar from '../mobile/SideBar';
 
 const LoggedInUser = () => {
   const { state: onboardState, ref, callback } = useOnbaording();
