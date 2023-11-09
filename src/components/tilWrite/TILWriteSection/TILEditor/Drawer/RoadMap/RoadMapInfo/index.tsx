@@ -28,7 +28,7 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
     if (userRole === 'member') {
       router.push(TILY_LINKS.roadmapDetail(Number(router.query.roadmapId)));
     } else {
-      router.push(TILY_LINKS.manageGroupInfo(Number(router.query.roadmapId)));
+      router.push(TILY_LINKS.manageInfo(Number(router.query.roadmapId)));
     }
   };
 

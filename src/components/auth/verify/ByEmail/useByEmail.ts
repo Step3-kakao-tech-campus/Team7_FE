@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { usePostEmailCheck, usePostEmailCode } from '@/api/hooks/auth';
+import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 
 const useByEamil = (location: 'register' | 'password') => {
+  const router = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   const [isEmail, setIsEmail] = useState<boolean>(false);
@@ -32,7 +35,13 @@ const useByEamil = (location: 'register' | 'password') => {
         : await postEmailCodeAsync({ body: { email } });
 
     if (data?.code === 200) {
-      setIsEmail(true);
+      // setIsEmail(true);
+      router.push({
+        pathname: TILY_LINKS.register(),
+        query: {
+          email: email,
+        },
+      });
     } else {
       if (location === 'register') {
         handleOpen();
