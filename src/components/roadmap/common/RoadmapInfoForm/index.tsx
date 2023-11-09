@@ -143,9 +143,11 @@ const RoadmapInfoForm = () => {
             <Input label="참여 코드" value={data?.result.code} labelType="bold" disabled />
           </>
         )}
-        <Button onClick={handleOpen} type="button" variant="primary">
-          로드맵 삭제
-        </Button>
+        {path === 'info' && (
+          <Button onClick={handleOpen} type="button" variant="primary">
+            로드맵 삭제
+          </Button>
+        )}
       </Styled.RoadmapInfoForm>
       <RoadmapDeleteModal isOpen={isOpen} onClose={handleClose} />
     </>
