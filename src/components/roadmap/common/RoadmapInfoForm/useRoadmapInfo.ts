@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { useGetRoadmapsById, usePostRoadmaps, usePostRoadmapsById } from '@/api/hooks/roadmap';
+import { useGetRoadmapsById, usePatchRoadmaps, usePostRoadmaps } from '@/api/hooks/roadmap';
 import type { PostRoadmapsRequest } from '@/api/roadmap/type';
 import TILY_LINKS from '@/constants/links';
 import useQueryParam from '@/hooks/useQueryParam';
@@ -12,7 +12,7 @@ export const useRoadmapInfo = () => {
   const path = router.asPath.split('/').at(-1);
 
   const { postRoadmapsAsync, isLoading: createLoading } = usePostRoadmaps();
-  const { postRoadmapsByIdAsync, isLoading: editLoading } = usePostRoadmapsById();
+  const { patchRoadmapsAsync, isLoading: editLoading } = usePatchRoadmaps();
   const { data, isLoading: infoLoading } = useGetRoadmapsById({ roadmapId: Number(roadmapId) });
 
   const {
@@ -50,7 +50,7 @@ export const useRoadmapInfo = () => {
       return;
     }
     if (path === 'info') {
-      await postRoadmapsByIdAsync({ roadmapId: Number(roadmapId), body: formData });
+      await patchRoadmapsAsync({ roadmapId: Number(roadmapId), body: formData });
 
       return;
     }

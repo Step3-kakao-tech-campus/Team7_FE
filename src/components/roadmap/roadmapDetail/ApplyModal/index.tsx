@@ -1,23 +1,20 @@
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { useGetRoadmapsById, usePostGroupRoadmapsApply, usePostTilyRoadmapsApply } from '@/api/hooks/roadmap';
+import { usePostGroupApply } from '@/api/hooks/roadmap';
 import Button from '@/components/common/Button';
+import Flex from '@/components/common/Flex';
+import FlexForm from '@/components/common/FlexForm';
 import InfoArea from '@/components/common/InfoArea';
 import type { ModalProps } from '@/components/common/Modal';
 import Modal from '@/components/common/Modal';
 import TextArea from '@/components/common/TextArea';
-import * as Styled from '@/components/roadmap/roadmapDetail/ApplyModal/style';
+import TwoButtonContainer from '@/components/common/TwoButtonContainer';
 import useQueryParam from '@/hooks/useQueryParam';
 
 const ApplyModal = (props: ModalProps) => {
   const { isOpen, onClose } = props;
-
-  const { postGroupRoadmapsApplyAsync, isLoading: isGroupApplyLoading } = usePostGroupRoadmapsApply();
-  const { postTilyRoadmapsApplyAsync, isLoading: isTilyApplyLoading } = usePostTilyRoadmapsApply();
-
   const roadmapId = Number(useQueryParam('roadmapId'));
 
-  const { data: roadmapDetailInfo } = useGetRoadmapsById({ roadmapId });
-  const category = roadmapDetailInfo?.result.category;
+  const { postGroupApplyAsync, isLoading } = usePostGroupApply();
 
   const {
     control,
@@ -26,17 +23,14 @@ const ApplyModal = (props: ModalProps) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      aboutMe: '',
+      content: '',
     },
   });
+  
+  const onSubmit: SubmitHandler<{ content: string }> = async (formData) => {
+    const data = await postGroupApplyAsync({ roadmapId: roadmapId, body: { content: formData.content } });
 
-  const onSubmit: SubmitHandler<{ aboutMe: string }> = async (formData) => {
-    const data =
-      category === 'tily'
-        ? await postTilyRoadmapsApplyAsync({ roadmapId })
-        : await postGroupRoadmapsApplyAsync({ roadmapId: roadmapId, body: { content: formData.aboutMe } });
-
-    if (data?.success) {
+    if (data?.code === 200) {
       onClose();
       reset();
     }
@@ -44,14 +38,14 @@ const ApplyModal = (props: ModalProps) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={40}>
-      <Styled.Root>
+      <Flex dir="col" gap={1.5}>
         <h2>신청하기</h2>
         <InfoArea>
           <InfoArea.Info>가볍게 자신을 소개해보세요.</InfoArea.Info>
         </InfoArea>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <FlexForm onSubmit={handleSubmit(onSubmit)}>
           <Controller
-            name="aboutMe"
+            name="content"
             control={control}
             rules={{ required: '자기소개를 입력해주세요.' }}
             render={({ field }) => (
@@ -59,27 +53,27 @@ const ApplyModal = (props: ModalProps) => {
                 label="자기소개"
                 labelType="regular"
                 rows={8}
-                message={errors.aboutMe?.message}
-                status={errors.aboutMe ? 'error' : 'default'}
+                message={errors.content?.message}
+                status={errors.content ? 'error' : 'default'}
                 {...field}
               />
             )}
           />
 
-          <Styled.ButtonContainer>
+          <TwoButtonContainer>
             <Button
               variant="ghost"
               type="button"
               onClick={() => {
-                onClose();
                 reset();
+                onClose();
               }}>
               취소
             </Button>
-            <Button isLoading={category === 'tily' ? isTilyApplyLoading : isGroupApplyLoading}>신청</Button>
-          </Styled.ButtonContainer>
-        </form>
-      </Styled.Root>
+            <Button isLoading={isLoading}>신청</Button>
+          </TwoButtonContainer>
+        </FlexForm>
+      </Flex>
     </Modal>
   );
 };

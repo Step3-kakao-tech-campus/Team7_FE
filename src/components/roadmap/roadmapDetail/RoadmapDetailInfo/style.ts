@@ -1,28 +1,38 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.section`
+export const RoadmapDetailInfo = styled.section`
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 0 15px;
 
-  & > div > h1 {
-    overflow-wrap: anywhere;
+  & > section > h1 {
+    width: calc(100% - 240px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  & > div > button {
-    flex-shrink: 0;
-  }
-
-  @media ${({ theme }) => theme.mediaQuery.xs} {
-    gap: 20px;
-
-    & > div > h1 {
-      font-size: 22px;
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    & > section {
+      flex-direction: column;
     }
 
-    & > div > button {
-      font-size: 14px;
+    & > section > h1 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      width: 100%;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    & > section > section {
+      width: 100%;
+    }
+
+    & > section > section > button {
+      width: 100%;
     }
   }
 `;

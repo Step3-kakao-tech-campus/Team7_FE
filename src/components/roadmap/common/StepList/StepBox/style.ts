@@ -46,6 +46,10 @@ export const ButtonContainer = styled.section`
     gap: 12px;
   }
 
+  & > section:nth-of-type(1) {
+    width: 230px;
+  }
+
   & > section > img {
     cursor: pointer;
   }

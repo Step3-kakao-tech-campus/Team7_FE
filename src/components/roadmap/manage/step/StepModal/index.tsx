@@ -6,13 +6,13 @@ import { type StepWithReferences } from '@/api/type';
 import Button from '@/components/common/Button';
 import Calendar from '@/components/common/Calendar';
 import Flex from '@/components/common/Flex';
+import FlexForm from '@/components/common/FlexForm';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
 import TwoButtonContainer from '@/components/common/TwoButtonContainer';
-import * as Styled from '@/components/roadmap/manage/step/StepModal/style';
 import useQueryParam from '@/hooks/useQueryParam';
 
 interface StepModalProps extends ModalProps {
@@ -79,7 +79,7 @@ const StepModal = (props: StepModalProps) => {
           <InfoArea.Info>STEP에는 참고 자료와 동영상 자료를 삽입할 수 있습니다.</InfoArea.Info>
         </InfoArea>
 
-        <Styled.StepForm onSubmit={handleSubmit(onSubmit)}>
+        <FlexForm onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="title"
             control={control}
@@ -159,7 +159,7 @@ const StepModal = (props: StepModalProps) => {
               확인
             </Button>
           </TwoButtonContainer>
-        </Styled.StepForm>
+        </FlexForm>
       </Flex>
     </Modal>
   );

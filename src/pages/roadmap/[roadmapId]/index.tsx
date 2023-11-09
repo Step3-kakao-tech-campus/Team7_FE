@@ -1,16 +1,19 @@
 import styled from '@emotion/styled';
 import HeaderLayout from '@/components/layout/HeaderLayout';
+import StepList from '@/components/roadmap/common/StepList';
 import RoadmapDetailInfo from '@/components/roadmap/roadmapDetail/RoadmapDetailInfo';
-import RoadmapDeatilStep from '@/components/roadmap/roadmapDetail/RoadmapDetailStep';
+import { RoadmapPage } from '@/pages/roadmap/create';
 import { setLayout } from '@/utils/layout';
 
 const RoadmapDetail = () => {
   return (
-    <RoadmapDetailPage>
+    <RoadmapPage>
       <RoadmapDetailInfo />
-      <StepListHeader>STEP 목록</StepListHeader>
-      <RoadmapDeatilStep />
-    </RoadmapDetailPage>
+      <RoadmapDetailStepContainer>
+        <h2>STEP 목록</h2>
+        <StepList />
+      </RoadmapDetailStepContainer>
+    </RoadmapPage>
   );
 };
 
@@ -18,20 +21,15 @@ setLayout(RoadmapDetail, HeaderLayout);
 
 export default RoadmapDetail;
 
-const RoadmapDetailPage = styled.main`
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  max-width: 930px;
-  margin: 40px auto 0;
-
-  @media ${({ theme }) => theme.mediaQuery.xs} {
-    margin-top: 20px;
-    gap: 20px;
-  }
-`;
-
-const StepListHeader = styled.h2`
+const RoadmapDetailStepContainer = styled.section`
+  margin-top: 30px;
   padding: 0 15px;
-  font-size: 22px;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 0;
+
+    & > h2 {
+      padding: 0 15px;
+    }
+  }
 `;

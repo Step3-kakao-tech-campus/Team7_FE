@@ -1,5 +1,5 @@
 import ManageLayout from '@/components/layout/ManageLayout';
-import StepList from '@/components/roadmap/manage/step/StepList';
+import StepList from '@/components/roadmap/common/StepList';
 import { setLayout } from '@/utils/layout';
 
 const ManageStepPage = () => {
