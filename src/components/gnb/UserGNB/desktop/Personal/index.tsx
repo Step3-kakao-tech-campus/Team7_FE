@@ -5,7 +5,7 @@ import {
   useGetRoadmapSteps,
   useGetRoadmapsMy,
   usePostRoadmapStepIndividual,
-  usePostRoadmapIndividual,
+  usePostRoadmaps,
 } from '@/api/hooks/roadmap';
 import { usePostTils } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
@@ -28,7 +28,7 @@ const Personal = () => {
   const router = useRouter();
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postRoadmapsIndividualAsync } = usePostRoadmapIndividual();
+  const { postRoadmapsAsync } = usePostRoadmaps();
   const { postRoadmapStepIndividualAsync } = usePostRoadmapStepIndividual();
   const { postTilsAsync } = usePostTils();
 
@@ -61,7 +61,9 @@ const Personal = () => {
   });
 
   const createRoadmap: SubmitHandler<{ roadmapTitle: string }> = (formData) => {
-    postRoadmapsIndividualAsync({ body: { name: formData.roadmapTitle } });
+    postRoadmapsAsync({
+      body: { name: formData.roadmapTitle, description: null, isPublic: false, category: 'individual' },
+    });
     roadmapReset();
     setIsRoadmapButtonSelected(false);
   };

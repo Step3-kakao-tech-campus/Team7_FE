@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import {
   useGetRoadmapSteps,
   useGetRoadmapsMy,
-  usePostRoadmapIndividual,
+  usePostRoadmaps,
   usePostRoadmapStepIndividual,
 } from '@/api/hooks/roadmap';
 import { usePostTils } from '@/api/hooks/til';
@@ -29,7 +29,7 @@ const MobilePersonal = () => {
   const router = useRouter();
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postRoadmapsIndividualAsync } = usePostRoadmapIndividual();
+  const { postRoadmapsAsync } = usePostRoadmaps();
   const { postRoadmapStepIndividualAsync } = usePostRoadmapStepIndividual();
   const { postTilsAsync } = usePostTils();
 
@@ -58,7 +58,9 @@ const MobilePersonal = () => {
   });
 
   const createRoadmap: SubmitHandler<{ roadmapTitle: string }> = (formData) => {
-    postRoadmapsIndividualAsync({ body: { name: formData.roadmapTitle } });
+    postRoadmapsAsync({
+      body: { name: formData.roadmapTitle, description: null, isPublic: false, category: 'individual' },
+    });
     roadmapReset();
     setIsRoadmapButtonSelected(false);
   };

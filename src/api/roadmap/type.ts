@@ -41,19 +41,12 @@ export interface References {
   web: Web[];
 }
 
-export interface PostRoadmapsGroupsParticipateResponse {
-  success: boolean;
-  message: string;
-  result: {
-    id: number;
-  };
-}
-
 export interface PostRoadmapsRequest {
   name: string;
   description: string | null;
   isPublic: boolean;
   isRecruit?: boolean;
+  category: 'individual' | 'group';
 }
 
 export interface PostStepsRequest {
