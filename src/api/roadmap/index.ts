@@ -14,6 +14,8 @@ import type {
 } from '@/api/roadmap/type';
 import type { IdResponse, NullResultResponse, CommonResponse } from '../type';
 
+// 로드맵 조회하기 (나의 로드맵)
+
 export const getRoadmapsMy = async () => {
   const { data } = await axiosInstance.request<GetRoadmapsMyResponse>({
     method: 'GET',
@@ -22,6 +24,8 @@ export const getRoadmapsMy = async () => {
 
   return data;
 };
+
+// 로드맵 조회하기 (모집 중인 로드맵)
 
 export const getRoadmaps = async (req: { query: string }) => {
   const { query } = req;
@@ -33,27 +37,19 @@ export const getRoadmaps = async (req: { query: string }) => {
   return data;
 };
 
-export const getRoadmapSteps = async (roadmapId: number) => {
-  const { data } = await axiosInstance.request<GetRoadmapStepsResponse>({
+// 로드맵 상세 정보 조회
+
+export const getRoadmapsById = async (req: { roadmapId: number }) => {
+  const { roadmapId } = req;
+  const { data } = await axiosInstance.request<GetRoadmapsByIdResponse>({
     method: 'GET',
-    url: `/roadmaps/${roadmapId}/steps`,
+    url: `roadmaps/${roadmapId}`,
   });
 
   return data;
 };
 
-export const getRoadmapStepReference = async (req: { param: { stepId: number } }) => {
-  const {
-    param: { stepId },
-  } = req;
-
-  const { data } = await axiosInstance.request<GetRoadmapStepReferenceResponse>({
-    method: 'GET',
-    url: `/steps/${stepId}/references`,
-  });
-
-  return data;
-};
+// 로드맵 생성하기
 
 export const postRoadmaps = async (req: { body: PostRoadmapsRequest }) => {
   const { body } = req;
@@ -66,8 +62,12 @@ export const postRoadmaps = async (req: { body: PostRoadmapsRequest }) => {
   return data;
 };
 
-export const postRoadmapsById = async ({ roadmapId, body }: { roadmapId: number; body: PostRoadmapsRequest }) => {
-  const { data } = await axiosInstance.request<IdResponse>({
+// 로드맵 정보 수정하기
+
+export const patchRoadmaps = async (req: { roadmapId: number; body: PostRoadmapsRequest }) => {
+  const { roadmapId, body } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'PATCH',
     url: `/roadmaps/${roadmapId}`,
     data: body,
@@ -76,17 +76,20 @@ export const postRoadmapsById = async ({ roadmapId, body }: { roadmapId: number;
   return data;
 };
 
-export const getRoadmapsById = async (req: { roadmapId: number }) => {
+// 로드맵 삭제하기
+
+export const deleteRoadmaps = async (req: { roadmapId: number }) => {
   const { roadmapId } = req;
-  const { data } = await axiosInstance.request<GetRoadmapsByIdResponse>({
-    method: 'GET',
-    url: `roadmaps/${roadmapId}`,
+  const { data } = await axiosInstance.request<NullResultResponse>({
+    method: 'DELETE',
+    url: `/roadmaps/${roadmapId}`,
   });
 
   return data;
 };
 
 // 그룹 로드맵 신청
+
 export const postGroupApply = async (req: { roadmapId: number; body: { content: string } }) => {
   const { roadmapId, body } = req;
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -99,6 +102,7 @@ export const postGroupApply = async (req: { roadmapId: number; body: { content: 
 };
 
 // 틸리 로드맵 신청
+
 export const postTilyApply = async (req: { roadmapId: number }) => {
   const { roadmapId } = req;
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -121,6 +125,8 @@ export const postRoadmapsGroupsParticipate = async (req: { body: { code: string 
   });
   return data;
 };
+
+// 로드맵 구성원 조회하기
 
 export const getRoadmapGroupMember = async (req: { roadmapId: number }) => {
   const { roadmapId } = req;
@@ -153,6 +159,8 @@ export const patchRoadmapGroupMemberRole = async (req: {
   return data;
 };
 
+// 로드맵의 구성원 강퇴하기
+
 export const deleteRoadmapGroupMember = async (req: { param: { roadmapId: number; userId: number } }) => {
   const {
     param: { roadmapId, userId },
@@ -166,6 +174,8 @@ export const deleteRoadmapGroupMember = async (req: { param: { roadmapId: number
   return data;
 };
 
+// 로드맵에 신청한 사람들 목록 조회하기
+
 export const getRoadmapGroupApply = async (req: { roadmapId: number }) => {
   const { roadmapId } = req;
 
@@ -176,6 +186,8 @@ export const getRoadmapGroupApply = async (req: { roadmapId: number }) => {
 
   return data;
 };
+
+// 로드맵 참여 신청 승인
 
 export const postRoadmapGroupApplyAccept = async (req: { param: { roadmapId: number; userId: number } }) => {
   const {
@@ -190,6 +202,8 @@ export const postRoadmapGroupApplyAccept = async (req: { param: { roadmapId: num
   return data;
 };
 
+// 로드맵 참여 신청 거절
+
 export const deleteRoadmapGroupApplyReject = async (req: { param: { roadmapId: number; userId: number } }) => {
   const {
     param: { roadmapId, userId },
@@ -203,6 +217,8 @@ export const deleteRoadmapGroupApplyReject = async (req: { param: { roadmapId: n
   return data;
 };
 
+// STEP 생성하기
+
 export const postSteps = async (req: { body: PostStepsRequest }) => {
   const { body } = req;
   const { data } = await axiosInstance.request<IdResponse>({
@@ -213,6 +229,19 @@ export const postSteps = async (req: { body: PostStepsRequest }) => {
 
   return data;
 };
+
+// STEP 조회하기
+
+export const getRoadmapSteps = async (roadmapId: number) => {
+  const { data } = await axiosInstance.request<GetRoadmapStepsResponse>({
+    method: 'GET',
+    url: `/roadmaps/${roadmapId}/steps`,
+  });
+
+  return data;
+};
+
+// STEP 수정하기
 
 export const patchSteps = async (req: { stepId: number; body: Omit<PostStepsRequest, 'roadmapId'> }) => {
   const { stepId, body } = req;
@@ -225,6 +254,8 @@ export const patchSteps = async (req: { stepId: number; body: Omit<PostStepsRequ
   return data;
 };
 
+// STEP 삭제하기
+
 export const deleteSteps = async (req: { stepId: number }) => {
   const { stepId } = req;
   const { data } = await axiosInstance.request<NullResultResponse>({
@@ -235,27 +266,22 @@ export const deleteSteps = async (req: { stepId: number }) => {
   return data;
 };
 
-export const deleteRoadmaps = async (req: { roadmapId: number }) => {
-  const { roadmapId } = req;
-  const { data } = await axiosInstance.request<NullResultResponse>({
-    method: 'DELETE',
-    url: `/roadmaps/${roadmapId}`,
+// STEP 의 레퍼런스 조회하기
+
+export const getRoadmapStepReference = async (req: { param: { stepId: number } }) => {
+  const {
+    param: { stepId },
+  } = req;
+
+  const { data } = await axiosInstance.request<GetRoadmapStepReferenceResponse>({
+    method: 'GET',
+    url: `/steps/${stepId}/references`,
   });
 
   return data;
 };
 
-export const patchRoadmaps = async (req: { roadmapId: number; body: PostRoadmapsRequest }) => {
-  const { roadmapId, body } = req;
-
-  const { data } = await axiosInstance.request<NullResultResponse>({
-    method: 'PATCH',
-    url: `/roadmaps/${roadmapId}`,
-    data: body,
-  });
-
-  return data;
-};
+// STEP의 레퍼런스 생성하기
 
 export const postReferences = async (req: { body: PostReferencesRequest }) => {
   const { body } = req;
@@ -268,11 +294,23 @@ export const postReferences = async (req: { body: PostReferencesRequest }) => {
   return data;
 };
 
+// STEP의 레퍼런스 삭제하기
+
 export const deleteReferences = async (req: { referenceId: number }) => {
   const { referenceId } = req;
   const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'DELETE',
     url: `/references/${referenceId}`,
+  });
+
+  return data;
+};
+
+export const postRoadmapsById = async ({ roadmapId, body }: { roadmapId: number; body: PostRoadmapsRequest }) => {
+  const { data } = await axiosInstance.request<IdResponse>({
+    method: 'PATCH',
+    url: `/roadmaps/${roadmapId}`,
+    data: body,
   });
 
   return data;

@@ -1,8 +1,6 @@
 import type { References } from './roadmap/type';
 
-/*
- * 공통 응답 인터페이스
- */
+// 공통 응답 인터페이스
 
 export interface CommonResponse {
   success: boolean;
@@ -20,9 +18,7 @@ export interface IdResponse extends CommonResponse {
   };
 }
 
-/*
- * 공통 요청 인터페이스
- */
+// 공통 요청 인터페이스
 
 // id 인터페이스
 export interface IdParams {

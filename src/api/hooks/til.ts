@@ -265,6 +265,8 @@ export const useGetStepTils = (req: { stepId: number }) => {
   };
 };
 
+// 특정 스텝의 틸 목록 조회(관리자용)
+
 export const useGetStepTilsManage = ({ queryKey }: { queryKey: QueryKey }) => {
   const { query } = useRouter();
   const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
