@@ -10,6 +10,7 @@ import Modal, { type ModalProps } from '@/components/common/Modal';
 import TwoButtonContainer from '@/components/common/TwoButtonContainer';
 import REGEX from '@/constants/regex';
 import useQueryParam from '@/hooks/useQueryParam';
+import preventEnterSubmit from '@/utils/preventEnterSubmit';
 
 interface WebModalProps extends ModalProps {
   step: StepWithReferences;
@@ -46,7 +47,7 @@ const WebModal = (props: WebModalProps) => {
         <InfoArea>
           <InfoArea.Info>해당 스텝에 사용할 참고자료 링크를 첨부해주세요.</InfoArea.Info>
         </InfoArea>
-        <FlexForm onSubmit={handleSubmit(onSubmit)}>
+        <FlexForm onSubmit={handleSubmit(onSubmit)} onKeyDown={preventEnterSubmit}>
           <Controller
             name="link"
             control={control}
