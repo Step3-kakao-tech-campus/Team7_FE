@@ -1,6 +1,8 @@
 import type { GetServerSideProps } from 'next';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
+import { getRoadmapsById } from '@/api/roadmap';
 import GuestGNB from '@/components/gnb/GuestGNB';
 import GNB from '@/components/gnb/UserGNB';
 import StepList from '@/components/roadmap/common/StepList';
@@ -30,6 +32,10 @@ export default RoadmapDetail;
 
 export const getServerSideProps: GetServerSideProps<RoadmapDetailProps> = async (context) => {
   const { cookies } = context.req;
+  const param = context.params;
+  const roadmapId = param?.roadmapId;
+  const queryClient = new QueryClient();
+
   let isUserLogin = true;
 
   try {
@@ -39,9 +45,15 @@ export const getServerSideProps: GetServerSideProps<RoadmapDetailProps> = async 
     isUserLogin = false;
   }
 
+  // 로드맵 정보 SSR
+  await queryClient.prefetchQuery(['roadmaps', Number(roadmapId)], () =>
+    getRoadmapsById({ roadmapId: Number(roadmapId) }),
+  );
+
   return {
     props: {
       isUserLogin,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };

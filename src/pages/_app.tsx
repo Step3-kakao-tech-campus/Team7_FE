@@ -2,7 +2,7 @@ import { RecoilRoot } from 'recoil';
 import { ErrorBoundary } from 'react-error-boundary';
 import cookies from 'next-cookies';
 import type { AppProps, AppContext } from 'next/app';
-import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from '@tanstack/react-query';
+import { Hydrate, QueryClient, QueryClientProvider, QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from '@emotion/react';
 import { axiosInstance } from '@/api';
@@ -38,28 +38,30 @@ export default function App({ Component, pageProps, token }: MyAppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <ThemeProvider theme={emotionTheme}>
-          <ResponsiveProvider>
-            <ToastProvider>
-              <QueryErrorResetBoundary>
-                {({ reset }) => (
-                  <ErrorBoundary
-                    onReset={reset}
-                    fallbackRender={({ error, resetErrorBoundary }) => {
-                      return <GlobalErrorBoundary error={error} resetErrorBoundary={resetErrorBoundary} />;
-                    }}>
-                    <Layout>
-                      <Component {...pageProps} />
-                    </Layout>
-                  </ErrorBoundary>
-                )}
-              </QueryErrorResetBoundary>
-            </ToastProvider>
-          </ResponsiveProvider>
-        </ThemeProvider>
-      </RecoilRoot>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <Hydrate state={pageProps.dehydratedState}>
+        <RecoilRoot>
+          <ThemeProvider theme={emotionTheme}>
+            <ResponsiveProvider>
+              <ToastProvider>
+                <QueryErrorResetBoundary>
+                  {({ reset }) => (
+                    <ErrorBoundary
+                      onReset={reset}
+                      fallbackRender={({ error, resetErrorBoundary }) => {
+                        return <GlobalErrorBoundary error={error} resetErrorBoundary={resetErrorBoundary} />;
+                      }}>
+                      <Layout>
+                        <Component {...pageProps} />
+                      </Layout>
+                    </ErrorBoundary>
+                  )}
+                </QueryErrorResetBoundary>
+              </ToastProvider>
+            </ResponsiveProvider>
+          </ThemeProvider>
+        </RecoilRoot>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </Hydrate>
     </QueryClientProvider>
   );
 }
