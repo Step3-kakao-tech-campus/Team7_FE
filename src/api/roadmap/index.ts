@@ -71,7 +71,7 @@ export const getRoadmapStepReference = async (req: { param: { stepId: number } }
 
   const { data } = await axiosInstance.request<GetRoadmapStepReferenceResponse>({
     method: 'GET',
-    url: `steps/${stepId}/references`,
+    url: `/steps/${stepId}/references`,
   });
 
   return data;
