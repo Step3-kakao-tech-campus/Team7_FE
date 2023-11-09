@@ -6,17 +6,35 @@ export const RoadmapDetailInfo = styled.section`
   gap: 30px;
   padding: 0 15px;
 
-  /* & > section > h1 {
-    overflow-wrap: anywhere;
+  & > section > h1 {
+    width: calc(100% - 240px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  & > div > button {
-    flex-shrink: 0;
-  } */
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    & > section {
+      flex-direction: column;
+    }
 
-  /* @media ${({ theme }) => theme.mediaQuery.md} {
-    gap: 20px;
-  } */
+    & > section > h1 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      width: 100%;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    & > section > section {
+      width: 100%;
+    }
+
+    & > section > section > button {
+      width: 100%;
+    }
+  }
 `;
 
 export const InfoBox = styled.section`

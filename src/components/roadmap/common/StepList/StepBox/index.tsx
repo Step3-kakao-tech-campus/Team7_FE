@@ -42,12 +42,10 @@ const StepBox = (props: StepBoxProps) => {
             <h3>{step.title}</h3>
           </Styled.TitleContainer>
           <Styled.ButtonContainer>
-            {step.dueDate && (
-              <section>
-                <b>제출기한</b>
-                <p>{dayjs(step.dueDate).format('YYYY-MM-DD | HH:mm')}</p>
-              </section>
-            )}
+            <section>
+              <b>제출기한</b>
+              {step.dueDate ? <p>{dayjs(step.dueDate).format('YYYY-MM-DD | HH:mm')}</p> : <p>기한 없음</p>}
+            </section>
 
             {path === 'manage' && (
               <>
