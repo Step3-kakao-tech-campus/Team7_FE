@@ -124,10 +124,6 @@ export const roleStatus = {
   member: '멤버',
 } as const;
 
-// deleteRoadmapGroupMember
-
-export interface DeleteRoadmapGroupMemberResponse extends CommonResponse {}
-
 // getRoadmapGroupApply
 
 export interface GetRoadmapGroupApplyResponse extends CommonResponse {
@@ -144,7 +140,3 @@ export interface ApplyMember {
   date: string;
   content: string;
 }
-
-export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
-
-export interface DeleteRoadmapGroupApplyRejectResponse extends CommonResponse {}

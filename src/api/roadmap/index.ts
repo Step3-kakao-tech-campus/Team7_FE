@@ -3,8 +3,6 @@ import type {
   GetRoadmapsMyResponse,
   GetRoadmapStepsResponse,
   GetRoadmapStepReferenceResponse,
-  DeleteRoadmapGroupApplyRejectResponse,
-  PostRoadmapGroupApplyAcceptResponse,
   GetRoadmapGroupApplyResponse,
   Role,
   GetRoadmapGroupMemberResponse,
@@ -168,7 +166,9 @@ export const deleteRoadmapGroupMember = async (req: { param: { roadmapId: number
   return data;
 };
 
-export const getRoadmapGroupApply = async (roadmapId: number) => {
+export const getRoadmapGroupApply = async (req: { roadmapId: number }) => {
+  const { roadmapId } = req;
+
   const { data } = await axiosInstance.request<GetRoadmapGroupApplyResponse>({
     method: 'GET',
     url: `/roadmaps/groups/${roadmapId}/members/apply`,
@@ -177,8 +177,12 @@ export const getRoadmapGroupApply = async (roadmapId: number) => {
   return data;
 };
 
-export const postRoadmapGroupApplyAccept = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
-  const { data } = await axiosInstance.request<PostRoadmapGroupApplyAcceptResponse>({
+export const postRoadmapGroupApplyAccept = async (req: { param: { roadmapId: number; userId: number } }) => {
+  const {
+    param: { roadmapId, userId },
+  } = req;
+
+  const { data } = await axiosInstance.request<CommonResponse>({
     method: 'POST',
     url: `/roadmaps/groups/${roadmapId}/members/${userId}/accept`,
   });
@@ -186,8 +190,12 @@ export const postRoadmapGroupApplyAccept = async ({ roadmapId, userId }: { roadm
   return data;
 };
 
-export const deleteRoadmapGroupApplyReject = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
-  const { data } = await axiosInstance.request<DeleteRoadmapGroupApplyRejectResponse>({
+export const deleteRoadmapGroupApplyReject = async (req: { param: { roadmapId: number; userId: number } }) => {
+  const {
+    param: { roadmapId, userId },
+  } = req;
+
+  const { data } = await axiosInstance.request<CommonResponse>({
     method: 'DELETE',
     url: `/roadmaps/groups/${roadmapId}/members/${userId}/reject`,
   });

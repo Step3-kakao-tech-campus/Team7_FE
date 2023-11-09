@@ -14,10 +14,10 @@ const ApplyTable = () => {
   const [memberInfo, setMemberInfo] = useState<ApplyMember>(ApplyMemberDefault);
 
   const router = useRouter();
-  const { members } = useGetRoadmapGroupApply(Number(router.query.roadmapId));
+  const { members } = useGetRoadmapGroupApply({ roadmapId: Number(router.query.roadmapId) });
   const { isOpen, handleOpen, handleClose } = useModalState();
-  const { postRoadmapGroupApplyAccept } = usePostRoadmapGroupApplyAccept();
-  const { deleteRoadmapGroupApplyReject } = useDeleteRoadmapGroupApplyReject();
+  const { postRoadmapGroupApplyAcceptAsync } = usePostRoadmapGroupApplyAccept();
+  const { deleteRoadmapGroupApplyRejectAsync } = useDeleteRoadmapGroupApplyReject();
 
   /*
    * userId가 변경될때 모달에 넘겨줄 유저 데이터를 변경하기 위해 만든 useEffect
@@ -36,17 +36,21 @@ const ApplyTable = () => {
   };
 
   const handleAcceptUser = () => {
-    postRoadmapGroupApplyAccept({
-      roadmapId: Number(router.query.roadmapId),
-      userId: userId,
+    postRoadmapGroupApplyAcceptAsync({
+      param: {
+        roadmapId: Number(router.query.roadmapId),
+        userId: userId,
+      },
     });
     handleClose();
   };
 
   const handleRejectUser = () => {
-    deleteRoadmapGroupApplyReject({
-      roadmapId: Number(router.query.roadmapId),
-      userId: userId,
+    deleteRoadmapGroupApplyRejectAsync({
+      param: {
+        roadmapId: Number(router.query.roadmapId),
+        userId: userId,
+      },
     });
     handleClose();
   };

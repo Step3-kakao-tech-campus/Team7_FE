@@ -11,8 +11,8 @@ import {
   getRoadmapGroupApply,
   patchRoadmapGroupMemberRole,
   deleteRoadmapGroupMember,
-  postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
-  deleteRoadmapGroupApplyReject as deleteRoadmapGroupApplyRejectAPI,
+  postRoadmapGroupApplyAccept,
+  deleteRoadmapGroupApplyReject,
   postRoadmapsGroupsParticipate,
   getRoadmapsById,
   postRoadmapsById,
@@ -304,8 +304,10 @@ export const useDeleteRoadmapGroupMember = () => {
   return { deleteRoadmapGroupMemberAsync };
 };
 
-export const useGetRoadmapGroupApply = (roadmapId: number) => {
-  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupApply, roadmapId], () => getRoadmapGroupApply(roadmapId));
+export const useGetRoadmapGroupApply = (req: { roadmapId: number }) => {
+  const { roadmapId } = req;
+
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupApply, roadmapId], () => getRoadmapGroupApply(req));
 
   return {
     members: data?.result.users ?? [],
@@ -315,35 +317,43 @@ export const useGetRoadmapGroupApply = (roadmapId: number) => {
 export const usePostRoadmapGroupApplyAccept = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(postRoadmapGroupApplyAcceptAPI);
+  const { mutateAsync } = useMutation(postRoadmapGroupApplyAccept);
 
-  const postRoadmapGroupApplyAccept = async (body: { roadmapId: number; userId: number }) => {
-    const data = await mutation.mutateAsync(body, {
+  const postRoadmapGroupApplyAcceptAsync = async (req: { param: { roadmapId: number; userId: number } }) => {
+    const {
+      param: { roadmapId },
+    } = req;
+
+    const data = await mutateAsync(req, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupApply, body.roadmapId]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupApply, roadmapId]);
       },
     });
 
     return data;
   };
-  return { postRoadmapGroupApplyAccept };
+  return { postRoadmapGroupApplyAcceptAsync };
 };
 
 export const useDeleteRoadmapGroupApplyReject = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(deleteRoadmapGroupApplyRejectAPI);
+  const { mutateAsync } = useMutation(deleteRoadmapGroupApplyReject);
 
-  const deleteRoadmapGroupApplyReject = async (body: { roadmapId: number; userId: number }) => {
-    const data = await mutation.mutateAsync(body, {
+  const deleteRoadmapGroupApplyRejectAsync = async (req: { param: { roadmapId: number; userId: number } }) => {
+    const {
+      param: { roadmapId },
+    } = req;
+
+    const data = await mutateAsync(req, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupApply, body.roadmapId]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupApply, roadmapId]);
       },
     });
 
     return data;
   };
-  return { deleteRoadmapGroupApplyReject };
+  return { deleteRoadmapGroupApplyRejectAsync };
 };
 
 export const usePostRoadmapsGroupsParticipate = () => {
