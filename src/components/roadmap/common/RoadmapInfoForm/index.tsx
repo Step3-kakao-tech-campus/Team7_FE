@@ -1,4 +1,5 @@
 import { Controller } from 'react-hook-form';
+import { css } from '@emotion/react';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
 import Input from '@/components/common/Input';
@@ -64,7 +65,12 @@ const RoadmapInfoForm = () => {
           )}
         />
         <section>
-          <h3>공개 여부</h3>
+          <h3
+            css={css`
+              margin-bottom: 12px;
+            `}>
+            공개 여부
+          </h3>
           <Flex gap={0.8}>
             <Controller
               name="isPublic"

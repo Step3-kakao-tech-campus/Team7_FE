@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmapStepReference } from '@/api/hooks/roadmap';
 import Fallback from '@/components/common/Fallback';
@@ -21,19 +22,27 @@ const Reference = (props: ReferenceProps) => {
     },
   });
 
+  const isEmptyReference = useMemo(() => reference?.youtubes.length === 0 && reference?.webs.length === 0, [reference]);
+
   return (
     <Styled.Root>
       <Header stepTitle={stepTitle} handleCloseReferenceAside={handleCloseReferenceAside} />
 
       <Styled.Reference>참고 자료</Styled.Reference>
 
-      {reference?.youtubes?.map((item, index) => {
-        return <Youtube key={item.id} index={index + 1} link={item.link} />;
-      })}
+      {isEmptyReference ? (
+        <Reference.Empty />
+      ) : (
+        <>
+          {reference?.youtubes?.map((item, index) => {
+            return <Youtube key={item.id} index={index + 1} link={item.link} />;
+          })}
 
-      {reference?.webs?.map((item, index) => {
-        return <Docs key={item.id} index={index + 1} link={item.link} />;
-      })}
+          {reference?.webs?.map((item, index) => {
+            return <Docs key={item.id} index={index + 1} link={item.link} />;
+          })}
+        </>
+      )}
     </Styled.Root>
   );
 };
@@ -51,5 +60,14 @@ Reference.Fallback = function (props: ErrorBoundaryProps) {
         }}
       />
     </Styled.FallbackRoot>
+  );
+};
+
+Reference.Empty = function Empty() {
+  return (
+    <Styled.EmptyRoot>
+      <img src="/assets/icons/ic_step.svg" alt="stepEmptyIcon" />
+      <h3>참고자료가 없습니다.</h3>
+    </Styled.EmptyRoot>
   );
 };

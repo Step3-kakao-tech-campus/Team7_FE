@@ -3,7 +3,6 @@ import type {
   GetRoadmapsMyResponse,
   GetRoadmapStepsResponse,
   GetRoadmapStepReferenceResponse,
-  PostRoadmapsGroupsParticipateResponse,
   DeleteRoadmapGroupApplyRejectResponse,
   PostRoadmapGroupApplyAcceptResponse,
   GetRoadmapGroupApplyResponse,
@@ -14,27 +13,10 @@ import type {
   GetRoadmapsResponse,
   GetRoadmapsByIdResponse,
   PostRoadmapsRequest,
-  PostGroupRoadmapsApplyResponse,
-  PostGroupTilyApplyResponse,
   PostStepsRequest,
   PostReferencesRequest,
 } from '@/api/roadmap/type';
-import type { IndividualStep } from '@/api/roadmap/type';
 import type { IdResponse, NullResultResponse } from '../type';
-
-// 개인 로드맵 생성하기
-
-export const postRoadmapIndividual = async (req: { body: { name: string } }) => {
-  const { body } = req;
-
-  const { data } = await axiosInstance.request<IdResponse>({
-    method: 'POST',
-    url: `/roadmaps/individual`,
-    data: body,
-  });
-
-  return data;
-};
 
 export const getRoadmapsMy = async () => {
   const { data } = await axiosInstance.request<GetRoadmapsMyResponse>({
@@ -77,20 +59,6 @@ export const getRoadmapStepReference = async (req: { param: { stepId: number } }
   return data;
 };
 
-// STEP 생성하기
-
-export const postRoadmapStepIndividual = async (req: { body: IndividualStep }) => {
-  const { body } = req;
-
-  const { data } = await axiosInstance.request<IdResponse>({
-    method: 'POST',
-    url: `/steps`,
-    data: body,
-  });
-
-  return data;
-};
-
 export const postRoadmaps = async (req: { body: PostRoadmapsRequest }) => {
   const { body } = req;
   const { data } = await axiosInstance.request<IdResponse>({
@@ -122,10 +90,15 @@ export const getRoadmapsById = async (req: { roadmapId: number }) => {
   return data;
 };
 
-// 로드맵 신청하기
+// 그룹 로드맵에 참여 신청하기
 
-export const postGroupRoadmapsApply = async ({ roadmapId, content }: { roadmapId: number; content: string }) => {
-  const { data } = await axiosInstance.request<PostGroupRoadmapsApplyResponse>({
+export const postGroupRoadmapsApply = async (req: { roadmapId: number; body: { content: string } }) => {
+  const {
+    roadmapId,
+    body: { content },
+  } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: `roadmaps/groups/${roadmapId}/apply`,
     data: { content },
@@ -134,12 +107,29 @@ export const postGroupRoadmapsApply = async ({ roadmapId, content }: { roadmapId
   return data;
 };
 
-export const postTilyRoadmapsApply = async (roadmapId: number) => {
-  const { data } = await axiosInstance.request<PostGroupTilyApplyResponse>({
+// 틸리 로드맵에 참여 신청하기
+
+export const postTilyRoadmapsApply = async (req: { roadmapId: number }) => {
+  const { roadmapId } = req;
+
+  const { data } = await axiosInstance.request<NullResultResponse>({
     method: 'POST',
     url: `roadmaps/tily/${roadmapId}/apply`,
   });
 
+  return data;
+};
+
+// 참가 코드로 로드맵 신청하기
+
+export const postRoadmapsGroupsParticipate = async (req: { body: { code: string } }) => {
+  const { body } = req;
+
+  const { data } = await axiosInstance.request<IdResponse>({
+    method: 'POST',
+    url: '/roadmaps/groups/participate',
+    data: body,
+  });
   return data;
 };
 
@@ -185,15 +175,6 @@ export const getRoadmapGroupApply = async (roadmapId: number) => {
     url: `/roadmaps/groups/${roadmapId}/members/apply`,
   });
 
-  return data;
-};
-
-export const postRoadmapsGroupsParticipate = async (code: string) => {
-  const { data } = await axiosInstance.request<PostRoadmapsGroupsParticipateResponse>({
-    method: 'POST',
-    url: '/roadmaps/groups/participate',
-    data: { code },
-  });
   return data;
 };
 

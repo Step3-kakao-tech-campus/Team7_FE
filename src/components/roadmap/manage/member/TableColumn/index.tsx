@@ -79,7 +79,7 @@ const TableColumn = (props: TableColumnProps) => {
 
         {(() => {
           switch (true) {
-            case myRole === 'master':
+            case myRole === 'master' && userRole !== 'master':
               return (
                 <td>
                   <Button
