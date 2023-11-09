@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { useGetRoadmapSteps, useGetRoadmapsMy, usePostRoadmaps, usePostSteps } from '@/api/hooks/roadmap';
+import { useGetRoadmapSteps, useGetRoadmapsMy, usePostRoadmapsIndividial, usePostSteps } from '@/api/hooks/roadmap';
 import { usePostTils } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
@@ -25,7 +25,7 @@ const MobilePersonal = () => {
   const router = useRouter();
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
-  const { postRoadmapsAsync } = usePostRoadmaps();
+  const { postRoadmapsIndividialAsync } = usePostRoadmapsIndividial();
   const { postStepsAsync } = usePostSteps();
   const { postTilsAsync } = usePostTils();
 
@@ -54,7 +54,7 @@ const MobilePersonal = () => {
   });
 
   const createRoadmap: SubmitHandler<{ roadmapTitle: string }> = (formData) => {
-    postRoadmapsAsync({
+    postRoadmapsIndividialAsync({
       body: { name: formData.roadmapTitle, description: null, isPublic: false, category: 'individual' },
     });
     roadmapReset();
