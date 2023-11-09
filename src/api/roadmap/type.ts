@@ -12,11 +12,6 @@ export interface RoadmapStepsResult {
   myRole: string;
 }
 
-export interface GetRoadmapStepReferenceRequest {
-  roadmapId: number;
-  stepId: number;
-}
-
 export interface GetRoadmapStepReferenceResponse extends CommonResponse {
   result: {
     id: number;

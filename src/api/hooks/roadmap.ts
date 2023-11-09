@@ -29,7 +29,6 @@ import {
   deleteReferences,
 } from '@/api/roadmap';
 import type {
-  GetRoadmapStepReferenceRequest,
   GetRoadmapsResponse,
   PostRoadmapsRequest,
   PostStepsRequest,
@@ -47,6 +46,7 @@ export const ROADMAP_QUERY_KEY = {
   getRoadmapsById: (roadmapId: number) => [...ROADMAP_QUERY_KEY.all, roadmapId],
   getRoadmapsFiltered: (filters: ParsedUrlQuery) => [...ROADMAP_QUERY_KEY.getRoadmaps(), filters],
   getRoadmapSteps: 'getRoadmapSteps',
+  getRoadmapStepReference: 'getRoadmapStepReference',
   getRoadmapGroupMember: 'getRoadmapGroupMember',
   getRoadmapGroupApply: 'getRoadmapGroupApply',
 };
@@ -123,12 +123,20 @@ export const useGetRoadmapSteps = (roadmapId: number) => {
   };
 };
 
-export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest) => {
-  const enabled = !!body.roadmapId && !!body.roadmapId;
+export const useGetRoadmapStepReference = (req: { param: { stepId: number } }) => {
+  const {
+    param: { stepId },
+  } = req;
 
-  const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapSteps, body], () => getRoadmapStepReference(body), {
-    enabled,
-  });
+  const enabled = !!stepId;
+
+  const { data, isLoading } = useQuery(
+    [ROADMAP_QUERY_KEY.getRoadmapStepReference, stepId],
+    () => getRoadmapStepReference(req),
+    {
+      enabled,
+    },
+  );
 
   return {
     reference: data?.result,

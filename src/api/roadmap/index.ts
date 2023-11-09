@@ -2,7 +2,6 @@ import { axiosInstance } from '@/api';
 import type {
   GetRoadmapsMyResponse,
   GetRoadmapStepsResponse,
-  GetRoadmapStepReferenceRequest,
   GetRoadmapStepReferenceResponse,
   PostRoadmapsGroupsParticipateResponse,
   DeleteRoadmapGroupApplyRejectResponse,
@@ -65,12 +64,14 @@ export const getRoadmapSteps = async (roadmapId: number) => {
   return data;
 };
 
-export const getRoadmapStepReference = async (body: GetRoadmapStepReferenceRequest) => {
-  const { roadmapId, stepId } = body;
+export const getRoadmapStepReference = async (req: { param: { stepId: number } }) => {
+  const {
+    param: { stepId },
+  } = req;
 
   const { data } = await axiosInstance.request<GetRoadmapStepReferenceResponse>({
     method: 'GET',
-    url: `/roadmaps/${roadmapId}/steps/${stepId}/references`,
+    url: `steps/${stepId}/references`,
   });
 
   return data;
