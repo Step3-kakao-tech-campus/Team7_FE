@@ -63,9 +63,9 @@ const Step = (props: StepProps) => {
       <Styled.Container>
         <Styled.CheckIconContainer>
           {isSubmit ? (
-            <Image src="/assets/icons/ic_checkButton.svg" width={28} height={28} alt="체크 버튼" />
+            <Image src={`/assets/icons/ic_checkButton.svg`} width={28} height={28} alt="체크 버튼" />
           ) : (
-            <Image src="/assets/icons/ic_unCheckButton.svg" width={28} height={28} alt="체크 버튼" />
+            <Image src={`/assets/icons/ic_uncheckButton.svg`} width={28} height={28} alt="체크 버튼" />
           )}
         </Styled.CheckIconContainer>
         <Styled.Title>{title}</Styled.Title>
