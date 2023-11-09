@@ -12,6 +12,11 @@ export const Header = styled.section`
     flex-direction: column;
     padding: 10px;
   }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.blue_gray_200};
+    transition: all 0.2s;
+  }
 `;
 
 export const TitleContainer = styled.section`

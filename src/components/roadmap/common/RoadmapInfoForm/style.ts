@@ -5,9 +5,18 @@ export const RoadmapInfoForm = styled.form<{ path: string }>`
   flex-direction: column;
   gap: 30px;
   padding: ${({ path }) => (path === 'create' ? '0 15px' : '0')};
+
+  & > button {
+    align-self: flex-end;
+  }
+
   @media ${({ theme }) => theme.mediaQuery.md} {
     gap: 15px;
     padding: 0 15px;
+
+    & > button {
+      width: 100%;
+    }
   }
 `;
 

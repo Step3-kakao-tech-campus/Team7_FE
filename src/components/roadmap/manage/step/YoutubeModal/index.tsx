@@ -9,6 +9,7 @@ import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import TwoButtonContainer from '@/components/common/TwoButtonContainer';
 import useQueryParam from '@/hooks/useQueryParam';
+import preventEnterSubmit from '@/utils/preventEnterSubmit';
 import * as Styled from './style';
 
 interface YoutubeModalProps extends ModalProps {
@@ -57,7 +58,7 @@ const YoutubeModal = (props: YoutubeModalProps) => {
             </Styled.Youtube>
           </Styled.YoutubeContainer>
         </InfoArea>
-        <FlexForm onSubmit={handleSubmit(onSubmit)}>
+        <FlexForm onSubmit={handleSubmit(onSubmit)} onKeyDown={preventEnterSubmit}>
           <Controller
             name="link"
             control={control}

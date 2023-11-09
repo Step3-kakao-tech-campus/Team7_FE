@@ -38,19 +38,21 @@ export interface GetRoadmapsResponse extends CommonResponse {
 }
 
 export interface GetRoadmapsByIdResponse extends CommonResponse {
-  result: {
-    creator?: Omit<Creator, 'id'>;
-    category: 'tily' | 'group';
-    name: string;
-    description: string;
-    isPublic: boolean;
-    isRecruit: boolean;
-    myRole?: 'master' | 'manager' | 'member' | 'none';
-    recentTilId?: number | null;
-    recentStepId?: number | null;
-    code: string;
-    steps: StepWithReferences[];
-  };
+  result: GetRoadmapsByIdResult;
+}
+
+export interface GetRoadmapsByIdResult {
+  creator?: Omit<Creator, 'id'>;
+  category: 'tily' | 'group';
+  name: string;
+  description: string;
+  isPublic: boolean;
+  isRecruit: boolean;
+  myRole?: 'master' | 'manager' | 'member' | 'none';
+  recentTilId?: number | null;
+  recentStepId?: number | null;
+  code: string;
+  steps: StepWithReferences[];
 }
 
 export interface GetRoadmapGroupApplyResponse extends CommonResponse {

@@ -14,6 +14,7 @@ import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
 import TwoButtonContainer from '@/components/common/TwoButtonContainer';
 import useQueryParam from '@/hooks/useQueryParam';
+import preventEnterSubmit from '@/utils/preventEnterSubmit';
 
 interface StepModalProps extends ModalProps {
   isEdit?: boolean;
@@ -79,7 +80,7 @@ const StepModal = (props: StepModalProps) => {
           <InfoArea.Info>STEP에는 참고 자료와 동영상 자료를 삽입할 수 있습니다.</InfoArea.Info>
         </InfoArea>
 
-        <FlexForm onSubmit={handleSubmit(onSubmit)}>
+        <FlexForm onSubmit={handleSubmit(onSubmit)} onKeyDown={preventEnterSubmit}>
           <Controller
             name="title"
             control={control}
