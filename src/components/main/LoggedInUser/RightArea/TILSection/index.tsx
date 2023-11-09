@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTilsQuery } from '@/api/hooks/til';
-import Button from '@/components/common/Button';
 import ConditionalRender from '@/components/common/ConditionalRender';
 import CustomSuspense from '@/components/common/CustomSuspense';
+import EmptyList from '@/components/common/EmptyList';
 import Fallback from '@/components/common/Fallback';
 import type { ErrorBoundaryProps } from '@/components/common/GlobalErrorBoundary';
 import Responsive from '@/components/common/Responsive';
@@ -21,6 +20,7 @@ const TILSection = () => {
   const router = useRouter();
   const { ref, isVisible } = useIntersectionObserver();
   const { tils, isLoading, fetchNextPage, hasNextPage } = useGetTilsQuery({ queryKey: [router.query] });
+  const { isOpen, handleOpen, handleClose } = useModalState();
 
   useEffect(() => {
     if (isVisible && hasNextPage) {
@@ -30,7 +30,19 @@ const TILSection = () => {
 
   return (
     <>
-      <ConditionalRender data={tils} EmptyUI={<EmptyTilSection />}>
+      <ConditionalRender
+        data={tils}
+        EmptyUI={
+          <EmptyList
+            image="ic_peopleTILEmpty"
+            button="TIL 작성하기"
+            onClick={() => handleOpen()}
+            imageHeight={150}
+            imageWidth={200}>
+            <p>작성된 TIL이 없습니다</p>
+            <p>새로운 TIL을 작성해보세요!</p>
+          </EmptyList>
+        }>
         <Styled.Root>
           <Responsive device="mobile">
             <SearchBar />
@@ -47,32 +59,17 @@ const TILSection = () => {
         </Styled.Root>
       </ConditionalRender>
       <Styled.ObserverInterSectionTarget ref={ref} />
-    </>
-  );
-};
-
-export default TILSection;
-
-export const EmptyTilSection = () => {
-  const { isOpen, handleOpen, handleClose } = useModalState();
-
-  return (
-    <Styled.EmptyRoot>
-      <Image src="/assets/icons/ic_peopleTILEmpty.svg" width={200} height={200} alt="작성된 TIL이 없습니다." />
-      <Styled.Description>
-        <span>작성된 TIL이 없습니다</span>
-        <span>새로운 TIL을 작성해보세요!</span>
-        <Button onClick={handleOpen}>TIL 작성하기</Button>
-      </Styled.Description>
       <Responsive device="desktop">
         <TILModal isOpen={isOpen} onClose={handleClose} />
       </Responsive>
       <Responsive device="mobile">
         <MobileTILModal isOpen={isOpen} onClose={handleClose} />
       </Responsive>
-    </Styled.EmptyRoot>
+    </>
   );
 };
+
+export default TILSection;
 
 const SKELETON_COUNT = 9;
 
