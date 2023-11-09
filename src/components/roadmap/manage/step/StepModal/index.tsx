@@ -98,8 +98,15 @@ const StepModal = (props: StepModalProps) => {
           <Controller
             name="description"
             control={control}
-            render={({ field }) => (
-              <TextArea label="STEP 설명" labelType="bold" placeholder="설명을 입력해주세요." rows={5} {...field} />
+            render={({ field: { value, ...props } }) => (
+              <TextArea
+                label="STEP 설명"
+                labelType="bold"
+                value={value === null ? '' : value}
+                placeholder="설명을 입력해주세요."
+                rows={5}
+                {...props}
+              />
             )}
           />
           <Controller
