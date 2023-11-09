@@ -11,8 +11,8 @@ import useQueryParam from '@/hooks/useQueryParam';
 const ApplyModal = (props: ModalProps) => {
   const { isOpen, onClose } = props;
 
-  const { postGroupRoadmapsApply, isLoading: isGroupApplyLoading } = usePostGroupRoadmapsApply();
-  const { postTilyRoadmapsApply, isLoading: isTilyApplyLoading } = usePostTilyRoadmapsApply();
+  const { postGroupRoadmapsApplyAsync, isLoading: isGroupApplyLoading } = usePostGroupRoadmapsApply();
+  const { postTilyRoadmapsApplyAsync, isLoading: isTilyApplyLoading } = usePostTilyRoadmapsApply();
 
   const roadmapId = Number(useQueryParam('roadmapId'));
 
@@ -33,8 +33,8 @@ const ApplyModal = (props: ModalProps) => {
   const onSubmit: SubmitHandler<{ aboutMe: string }> = async (formData) => {
     const data =
       category === 'tily'
-        ? await postTilyRoadmapsApply(roadmapId)
-        : await postGroupRoadmapsApply({ roadmapId: roadmapId, content: formData.aboutMe });
+        ? await postTilyRoadmapsApplyAsync({ roadmapId })
+        : await postGroupRoadmapsApplyAsync({ roadmapId: roadmapId, body: { content: formData.aboutMe } });
 
     if (data?.success) {
       onClose();
