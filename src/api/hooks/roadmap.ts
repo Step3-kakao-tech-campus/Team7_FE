@@ -204,7 +204,6 @@ export const usePostGroupApply = () => {
   const toast = useToast();
 
   const postGroupApplyAsync = async (req: { roadmapId: number; body: { content: string } }) => {
-
     if (req.roadmapId > 0) {
       const data = await mutateAsync(req, {
         onSuccess: () => {
@@ -222,7 +221,7 @@ export const usePostGroupApply = () => {
       return data;
     } else return undefined;
   };
-  
+
   return { postGroupApplyAsync, isLoading };
 };
 
@@ -239,13 +238,12 @@ export const usePostTilyApply = () => {
   };
 
   return { postTilyApplyAsync, isLoading };
-
 };
 
-export const useGetRoadmapGroupMember = (roadmapId: number) => {
-  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupMember, roadmapId], () =>
-    getRoadmapGroupMember(roadmapId),
-  );
+export const useGetRoadmapGroupMember = (req: { roadmapId: number }) => {
+  const { roadmapId } = req;
+
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapGroupMember, roadmapId], () => getRoadmapGroupMember(req));
 
   const roleWeight = {
     master: 3,

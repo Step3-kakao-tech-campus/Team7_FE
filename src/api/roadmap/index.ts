@@ -90,7 +90,6 @@ export const getRoadmapsById = async (req: { roadmapId: number }) => {
   return data;
 };
 
-
 // 그룹 로드맵 신청
 export const postGroupApply = async (req: { roadmapId: number; body: { content: string } }) => {
   const { roadmapId, body } = req;
@@ -127,7 +126,11 @@ export const postRoadmapsGroupsParticipate = async (req: { body: { code: string 
   return data;
 };
 
-export const getRoadmapGroupMember = async (roadmapId: number) => {
+// 참가 코드로 구성원 조회하기
+
+export const getRoadmapGroupMember = async (req: { roadmapId: number }) => {
+  const { roadmapId } = req;
+
   const { data } = await axiosInstance.request<GetRoadmapGroupMemberResponse>({
     method: 'GET',
     url: `/roadmaps/groups/${roadmapId}/members`,

@@ -10,7 +10,7 @@ const ManageTable = () => {
   const [userId, setUserId] = useState<number>(0);
 
   const router = useRouter();
-  const { members, myRole } = useGetRoadmapGroupMember(Number(router.query.roadmapId));
+  const { members, myRole } = useGetRoadmapGroupMember({ roadmapId: Number(router.query.roadmapId) });
   const { deleteRoadmapGroupMember } = useDeleteRoadmapGroupMember();
   const { isOpen, handleOpen, handleClose } = useModalState();
 
