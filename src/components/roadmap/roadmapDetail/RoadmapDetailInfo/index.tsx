@@ -5,19 +5,38 @@ import ApplyModal from '@/components/roadmap/roadmapDetail/ApplyModal';
 import * as Styled from '@/components/roadmap/roadmapDetail/RoadmapDetailInfo/style';
 import useRoadmapApply from '@/components/roadmap/roadmapDetail/RoadmapDetailInfo/useRoadmapApply';
 import TILY_LINKS from '@/constants/links';
+import AuthRequireModal from '../AuthRequireModal';
 
-const RoadmapDetailInfo = () => {
-  const { data, category, roadmapId, myRole, isLoading, handleApply, routeTILWrite, router, isOpen, handleClose } =
-    useRoadmapApply();
+interface RoadmapDetailInfoProps {
+  isUserLogin: boolean;
+}
+
+const RoadmapDetailInfo = (props: RoadmapDetailInfoProps) => {
+  const { isUserLogin } = props;
+  const {
+    data,
+    category,
+    roadmapId,
+    myRole,
+    isLoading,
+    handleApply,
+    routeTILWrite,
+    router,
+    isOpen,
+    handleClose,
+    handleOpen,
+  } = useRoadmapApply();
 
   return (
     <>
       <Styled.RoadmapDetailInfo>
         <Flex justify="space-between" align="flex-start" gap={0.8}>
           <h1>{data?.result.name}</h1>
-          {myRole === 'none' ? (
+          {!isUserLogin ? (
+            <Button onClick={handleOpen}>시작하기</Button>
+          ) : myRole === 'none' ? (
             <Button onClick={handleApply} isLoading={category === 'group' && isLoading}>
-              {category === 'group' ? '신청하기' : '학습하기'}
+              {category === 'group' ? '참여하기' : '학습하기'}
             </Button>
           ) : myRole === 'member' ? (
             <Button onClick={routeTILWrite}>학습하기</Button>
@@ -39,7 +58,11 @@ const RoadmapDetailInfo = () => {
           <p>{data?.result.description}</p>
         </Styled.InfoBox>
       </Styled.RoadmapDetailInfo>
-      <ApplyModal isOpen={isOpen} onClose={handleClose} />
+      {isUserLogin ? (
+        <ApplyModal isOpen={isOpen} onClose={handleClose} />
+      ) : (
+        <AuthRequireModal isOpen={isOpen} onClose={handleClose} />
+      )}
     </>
   );
 };

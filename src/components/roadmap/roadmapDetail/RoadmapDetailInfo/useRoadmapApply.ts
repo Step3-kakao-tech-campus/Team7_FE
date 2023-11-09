@@ -55,7 +55,19 @@ const useRoadmapApply = () => {
     }
   };
 
-  return { data, category, roadmapId, myRole, isLoading, handleApply, routeTILWrite, router, isOpen, handleClose };
+  return {
+    data,
+    category,
+    roadmapId,
+    myRole,
+    isLoading,
+    handleApply,
+    routeTILWrite,
+    router,
+    isOpen,
+    handleClose,
+    handleOpen,
+  };
 };
 
 export default useRoadmapApply;
