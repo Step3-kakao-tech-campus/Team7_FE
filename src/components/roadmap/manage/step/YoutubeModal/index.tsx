@@ -9,6 +9,7 @@ import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import TwoButtonContainer from '@/components/common/TwoButtonContainer';
 import useQueryParam from '@/hooks/useQueryParam';
+import preventEnterSubmit from '@/utils/preventEnterSubmit';
 
 interface YoutubeModalProps extends ModalProps {
   step: StepWithReferences;
@@ -45,7 +46,7 @@ const YoutubeModal = (props: YoutubeModalProps) => {
         <InfoArea>
           <InfoArea.Info>해당 스텝에 사용할 동영상 링크를 첨부해주세요.</InfoArea.Info>
         </InfoArea>
-        <FlexForm onSubmit={handleSubmit(onSubmit)}>
+        <FlexForm onSubmit={handleSubmit(onSubmit)} onKeyDown={preventEnterSubmit}>
           <Controller
             name="link"
             control={control}
