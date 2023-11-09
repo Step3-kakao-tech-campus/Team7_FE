@@ -10,8 +10,8 @@ const ManageTable = () => {
   const [userId, setUserId] = useState<number>(0);
 
   const router = useRouter();
-  const { members, myRole } = useGetRoadmapGroupMember(Number(router.query.roadmapId));
-  const { deleteRoadmapGroupMember } = useDeleteRoadmapGroupMember();
+  const { members, myRole } = useGetRoadmapGroupMember({ roadmapId: Number(router.query.roadmapId) });
+  const { deleteRoadmapGroupMemberAsync } = useDeleteRoadmapGroupMember();
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   const handleUserId = (userId: number) => {
@@ -19,9 +19,11 @@ const ManageTable = () => {
   };
 
   const handleBanUser = () => {
-    deleteRoadmapGroupMember({
-      roadmapId: Number(router.query.roadmapId),
-      userId: userId,
+    deleteRoadmapGroupMemberAsync({
+      param: {
+        roadmapId: Number(router.query.roadmapId),
+        userId: userId,
+      },
     });
     handleClose();
   };

@@ -1,20 +1,19 @@
 import { axiosInstance } from '@/api';
 import type { NullResultResponse } from '@/api/type';
+import type { CommonResponse } from '@/api/type';
+import type { User } from '@/api/type';
 import type {
   GetAlarmsResponse,
   GetUserHistoryResponse,
-  GetUsersResponse,
   PatchAlarmRequest,
   PatchUserPasswordRequest,
-  DeleteUserResponse,
-  PostUserProfileImageResponse,
   PostUserProfileImageRequset,
 } from '@/api/user/type';
 
 // 유저 정보
 
 export const getUsers = async () => {
-  const { data } = await axiosInstance.request<GetUsersResponse>({
+  const { data } = await axiosInstance.request<User>({
     method: 'GET',
     url: `/users`,
   });
@@ -77,7 +76,7 @@ export const patchUserPassword = async (req: { body: PatchUserPasswordRequest })
 export const deleteUser = async (req: { body: { password: string } }) => {
   const { body } = req;
 
-  const { data } = await axiosInstance.request<DeleteUserResponse>({
+  const { data } = await axiosInstance.request<CommonResponse>({
     method: 'DELETE',
     url: `/users`,
     data: body,
@@ -94,7 +93,7 @@ export const postUserProfileImage = async (req: { param: { userId: number }; bod
     body,
   } = req;
 
-  const { data } = await axiosInstance.request<PostUserProfileImageResponse>({
+  const { data } = await axiosInstance.request<CommonResponse>({
     method: 'POST',
     url: `user/${userId}/image`,
     data: body,

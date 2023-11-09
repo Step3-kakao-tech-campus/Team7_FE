@@ -1,15 +1,69 @@
 import type { Step, IdName, CommonResponse, Creator, StepWithReferences, Roadmap } from '@/api/type';
 
+// 요청
+
+export interface PostRoadmapsRequest {
+  name: string;
+  description: string | null;
+  isPublic: boolean;
+  isRecruit?: boolean;
+  category?: 'individual' | 'group';
+}
+
+export interface PostReferencesRequest {
+  category: 'web' | 'youtube';
+  link: string;
+  roadmapId: number;
+  stepId: number;
+}
+
+export interface PostStepsRequest {
+  roadmapId: number;
+  title: string;
+  description: string | null;
+  dueDate: Date | null;
+}
+
+// 응답
+
+export interface GetRoadmapsMyResponse extends CommonResponse {
+  result: {
+    categories: IdName[];
+    roadmaps: { tilys: Roadmap[]; groups: Roadmap[] };
+  };
+}
+
+export interface GetRoadmapsResponse extends CommonResponse {
+  result: { categoty: 'tily' | 'group'; hasNext: boolean; roadmaps: Roadmap[] };
+}
+
+export interface GetRoadmapsByIdResponse extends CommonResponse {
+  result: {
+    creator?: Omit<Creator, 'id'>;
+    category: 'tily' | 'group';
+    name: string;
+    description: string;
+    isPublic: boolean;
+    isRecruit: boolean;
+    myRole?: 'master' | 'manager' | 'member' | 'none';
+    recentTilId?: number | null;
+    recentStepId?: number | null;
+    code: string;
+    steps: StepWithReferences[];
+  };
+}
+
+export interface GetRoadmapGroupApplyResponse extends CommonResponse {
+  result: {
+    users: ApplyMember[];
+    myRole: Role;
+  };
+}
+
 export interface GetRoadmapStepsResponse {
   success: boolean;
   message: string;
   result: RoadmapStepsResult;
-}
-
-export interface RoadmapStepsResult {
-  steps: Step[];
-  progress: number;
-  myRole: string;
 }
 
 export interface GetRoadmapStepReferenceResponse extends CommonResponse {
@@ -19,6 +73,19 @@ export interface GetRoadmapStepReferenceResponse extends CommonResponse {
     youtubes: Youtube[];
     webs: Web[];
   };
+}
+
+export interface GetRoadmapGroupMemberResponse extends CommonResponse {
+  result: {
+    users: Member[];
+    myRole: Role;
+  };
+}
+
+export interface RoadmapStepsResult {
+  steps: Step[];
+  progress: number;
+  myRole: string;
 }
 
 export interface Youtube {
@@ -41,72 +108,10 @@ export interface References {
   web: Web[];
 }
 
-export interface PostRoadmapsRequest {
-  name: string;
-  description: string | null;
-  isPublic: boolean;
-  isRecruit?: boolean;
-  category?: 'individual' | 'group';
-}
-
-export interface PostStepsRequest {
-  roadmapId: number;
-  title: string;
-  description: string | null;
-  dueDate: Date | null;
-}
-
-export interface PostReferencesRequest {
-  category: 'web' | 'youtube';
-  link: string;
-  roadmapId: number;
-  stepId: number;
-}
-
-// Roadmap 응답
-
-// 로드맵 - 공통
-
-export interface GetRoadmapsMyResponse extends CommonResponse {
-  result: {
-    categories: IdName[];
-    roadmaps: { tilys: Roadmap[]; groups: Roadmap[] };
-  };
-}
-
-export interface GetRoadmapsResponse extends CommonResponse {
-  result: { categoty: 'tily' | 'group'; hasNext: boolean; roadmaps: Roadmap[] };
-}
-
-// 로드맵 - 그룹
-
-export interface GetRoadmapsByIdResponse extends CommonResponse {
-  result: {
-    creator?: Omit<Creator, 'id'>;
-    category: 'tily' | 'group';
-    name: string;
-    description: string;
-    isPublic: boolean;
-    isRecruit: boolean;
-    myRole?: 'master' | 'manager' | 'member' | 'none';
-    recentTilId?: number | null;
-    recentStepId?: number | null;
-    code: string;
-    steps: StepWithReferences[];
-  };
-}
-
 export interface PostRoadmapsByIdResponse {
   success: boolean;
   message: string;
   result: null;
-}
-
-export interface GetRoadmapGroupMemberResponse extends CommonResponse {
-  result: {
-    users: Member[];
-    myRole: Role;
-  };
 }
 
 export interface Member {
@@ -124,22 +129,6 @@ export const roleStatus = {
   member: '멤버',
 } as const;
 
-// patchRoadmapGroupMemberRole
-export interface PatchRoadmapGroupMemberRoleResponse extends CommonResponse {}
-
-// deleteRoadmapGroupMember
-
-export interface DeleteRoadmapGroupMemberResponse extends CommonResponse {}
-
-// getRoadmapGroupApply
-
-export interface GetRoadmapGroupApplyResponse extends CommonResponse {
-  result: {
-    users: ApplyMember[];
-    myRole: Role;
-  };
-}
-
 export interface ApplyMember {
   id: number;
   name: string;
@@ -147,7 +136,3 @@ export interface ApplyMember {
   date: string;
   content: string;
 }
-
-export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
-
-export interface DeleteRoadmapGroupApplyRejectResponse extends CommonResponse {}

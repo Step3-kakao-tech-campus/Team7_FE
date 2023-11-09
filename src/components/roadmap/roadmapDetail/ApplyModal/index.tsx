@@ -26,7 +26,7 @@ const ApplyModal = (props: ModalProps) => {
       content: '',
     },
   });
-  
+
   const onSubmit: SubmitHandler<{ content: string }> = async (formData) => {
     const data = await postGroupApplyAsync({ roadmapId: roadmapId, body: { content: formData.content } });
 
