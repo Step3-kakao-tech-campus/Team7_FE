@@ -23,11 +23,12 @@ import {
   postSteps,
   deleteSteps,
   patchSteps,
+  patchRoadmaps,
+  deleteRoadmaps,
   postReferences,
   deleteReferences,
 } from '@/api/roadmap';
 import type {
-  GetRoadmapStepReferenceRequest,
   GetRoadmapsResponse,
   PostRoadmapsRequest,
   PostStepsRequest,
@@ -45,6 +46,7 @@ export const ROADMAP_QUERY_KEY = {
   getRoadmapsById: (roadmapId: number) => [...ROADMAP_QUERY_KEY.all, roadmapId],
   getRoadmapsFiltered: (filters: ParsedUrlQuery) => [...ROADMAP_QUERY_KEY.getRoadmaps(), filters],
   getRoadmapSteps: 'getRoadmapSteps',
+  getRoadmapStepReference: 'getRoadmapStepReference',
   getRoadmapGroupMember: 'getRoadmapGroupMember',
   getRoadmapGroupApply: 'getRoadmapGroupApply',
 };
@@ -52,7 +54,7 @@ export const ROADMAP_QUERY_KEY = {
 // 로드맵 - 공통
 
 export const useGetRoadmapsMy = () => {
-  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapsMy], () => getRoadmapsMy());
+  const { data } = useQuery([ROADMAP_QUERY_KEY.getRoadmapsMy()], () => getRoadmapsMy());
 
   const categoryData = {
     category: data?.result.categories ?? [],
@@ -121,12 +123,20 @@ export const useGetRoadmapSteps = (roadmapId: number) => {
   };
 };
 
-export const useGetRoadmapStepReference = (body: GetRoadmapStepReferenceRequest) => {
-  const enabled = !!body.roadmapId && !!body.roadmapId;
+export const useGetRoadmapStepReference = (req: { param: { stepId: number } }) => {
+  const {
+    param: { stepId },
+  } = req;
 
-  const { data, isLoading } = useQuery([ROADMAP_QUERY_KEY.getRoadmapSteps, body], () => getRoadmapStepReference(body), {
-    enabled,
-  });
+  const enabled = !!stepId;
+
+  const { data, isLoading } = useQuery(
+    [ROADMAP_QUERY_KEY.getRoadmapStepReference, stepId],
+    () => getRoadmapStepReference(req),
+    {
+      enabled,
+    },
+  );
 
   return {
     reference: data?.result,
@@ -143,7 +153,7 @@ export const usePostRoadmapIndividual = () => {
   const postRoadmapsIndividualAsync = async (req: { body: { name: string } }) => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy()]);
         toast.showBottom({
           message: '로드맵이 생성되었습니다.',
         });
@@ -448,6 +458,7 @@ export const usePatchSteps = (roadmapId: number) => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId));
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId]);
         toast.showBottom({
           message: 'STEP이 수정 되었습니다.',
         });
@@ -472,6 +483,7 @@ export const useDeleteSteps = (roadmapId: number) => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(roadmapId));
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId]);
         toast.showBottom({
           message: 'STEP이 삭제 되었습니다.',
         });
@@ -483,6 +495,54 @@ export const useDeleteSteps = (roadmapId: number) => {
   };
 
   return { deleteStepsAsync, isLoading };
+};
+
+export const usePatchRoadmaps = () => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const { handleError } = useApiError();
+
+  const { mutateAsync } = useMutation(patchRoadmaps);
+
+  const patchRoadmapsAsync = async (req: { roadmapId: number; body: PostRoadmapsRequest }) => {
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy()]);
+        toast.showBottom({
+          message: '로드맵이 수정 되었습니다.',
+        });
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { patchRoadmapsAsync };
+};
+
+export const useDeleteRoadmaps = () => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const { handleError } = useApiError();
+
+  const { mutateAsync } = useMutation(deleteRoadmaps);
+
+  const deleteRoadmapsAsync = async (req: { roadmapId: number }) => {
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy()]);
+        toast.showBottom({
+          message: '로드맵이 삭제 되었습니다.',
+        });
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { deleteRoadmapsAsync };
 };
 
 export const usePostReferences = () => {

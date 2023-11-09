@@ -42,6 +42,7 @@ const Select = (props: SelectProps) => {
       <Styled.Select
         onClick={toggleOpen}
         isOpen={isOpen}
+        rotate={isOpen}
         imageSize={imageSize}
         iconName="ic_chevronDown"
         iconPosition="right">

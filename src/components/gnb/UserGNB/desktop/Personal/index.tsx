@@ -133,7 +133,11 @@ const Personal = () => {
           <Styled.List>
             {roadmaps?.category.map((roadmap) => {
               return (
-                <ListItem selected={roadmapId === roadmap.id} onClick={() => setRoadmapId(roadmap.id)} key={roadmap.id}>
+                <ListItem
+                  roadmapId={roadmap.id}
+                  selected={roadmapId === roadmap.id}
+                  onClick={() => setRoadmapId(roadmap.id)}
+                  key={roadmap.id}>
                   {roadmap.name}
                 </ListItem>
               );
@@ -174,7 +178,12 @@ const Personal = () => {
           <Styled.List>
             {steps?.result.steps.map((step: Step) => {
               return (
-                <ListItem selected={stepId === step.id} onClick={() => handleSelcteStep(step)} key={step.id}>
+                <ListItem
+                  selected={stepId === step.id}
+                  stepId={step.id}
+                  roadmapId={roadmapId}
+                  onClick={() => handleSelcteStep(step)}
+                  key={step.id}>
                   {step.title}
                 </ListItem>
               );

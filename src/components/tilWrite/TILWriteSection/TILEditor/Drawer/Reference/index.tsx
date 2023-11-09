@@ -16,8 +16,9 @@ const Reference = (props: ReferenceProps) => {
 
   const { query } = useRouter();
   const { reference } = useGetRoadmapStepReference({
-    roadmapId: Number(query?.roadmapId),
-    stepId: Number(query?.stepId),
+    param: {
+      stepId: Number(query?.stepId),
+    },
   });
 
   return (

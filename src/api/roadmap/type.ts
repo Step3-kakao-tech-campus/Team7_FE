@@ -12,11 +12,6 @@ export interface RoadmapStepsResult {
   myRole: string;
 }
 
-export interface GetRoadmapStepReferenceRequest {
-  roadmapId: number;
-  stepId: number;
-}
-
 export interface GetRoadmapStepReferenceResponse extends CommonResponse {
   result: {
     id: number;
@@ -56,7 +51,7 @@ export interface PostRoadmapsGroupsParticipateResponse {
 
 export interface PostRoadmapsRequest {
   name: string;
-  description: string;
+  description: string | null;
   isPublic: boolean;
   isRecruit?: boolean;
 }
@@ -64,7 +59,7 @@ export interface PostRoadmapsRequest {
 export interface PostStepsRequest {
   roadmapId: number;
   title: string;
-  description: string;
+  description: string | null;
   dueDate: Date | null;
 }
 

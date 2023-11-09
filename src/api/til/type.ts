@@ -60,6 +60,6 @@ export interface GetTilsResponse extends CommonResponse {
 export interface GetTilsQueryResponse extends CommonResponse {
   result: {
     tils: Til[];
+    hasNext: boolean;
   } | null;
-  hasNext: boolean;
 }

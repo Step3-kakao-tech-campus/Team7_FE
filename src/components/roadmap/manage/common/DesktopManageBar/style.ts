@@ -3,6 +3,8 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Root = styled.div`
+  position: sticky;
+  top: ${({ theme }) => theme.layout.main.GNBHeight};
   display: flex;
   flex-direction: column;
   padding: 20px 15px 0 30px;

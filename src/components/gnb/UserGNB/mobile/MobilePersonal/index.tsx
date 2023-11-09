@@ -136,6 +136,7 @@ const MobilePersonal = () => {
               {roadmaps?.category.map((roadmap) => {
                 return (
                   <ListItem
+                    roadmapId={roadmap.id}
                     selected={roadmapId === roadmap.id}
                     onClick={() => setRoadmapId(roadmap.id)}
                     key={roadmap.id}>
@@ -178,7 +179,12 @@ const MobilePersonal = () => {
             <Styled.List>
               {steps?.result.steps.map((step: Step) => {
                 return (
-                  <ListItem selected={stepId === step.id} onClick={() => handleSelcteStep(step)} key={step.id}>
+                  <ListItem
+                    roadmapId={roadmapId}
+                    stepId={step.id}
+                    selected={stepId === step.id}
+                    onClick={() => handleSelcteStep(step)}
+                    key={step.id}>
                     {step.title}
                   </ListItem>
                 );
