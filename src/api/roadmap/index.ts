@@ -6,7 +6,6 @@ import type {
   DeleteRoadmapGroupApplyRejectResponse,
   PostRoadmapGroupApplyAcceptResponse,
   GetRoadmapGroupApplyResponse,
-  DeleteRoadmapGroupMemberResponse,
   Role,
   GetRoadmapGroupMemberResponse,
   GetRoadmapsResponse,
@@ -125,8 +124,6 @@ export const postRoadmapsGroupsParticipate = async (req: { body: { code: string 
   return data;
 };
 
-// 참가 코드로 구성원 조회하기
-
 export const getRoadmapGroupMember = async (req: { roadmapId: number }) => {
   const { roadmapId } = req;
 
@@ -158,8 +155,12 @@ export const patchRoadmapGroupMemberRole = async (req: {
   return data;
 };
 
-export const deleteRoadmapGroupMember = async ({ roadmapId, userId }: { roadmapId: number; userId: number }) => {
-  const { data } = await axiosInstance.request<DeleteRoadmapGroupMemberResponse>({
+export const deleteRoadmapGroupMember = async (req: { param: { roadmapId: number; userId: number } }) => {
+  const {
+    param: { roadmapId, userId },
+  } = req;
+
+  const { data } = await axiosInstance.request<CommonResponse>({
     method: 'DELETE',
     url: `/roadmaps/groups/${roadmapId}/members/${userId}`,
   });

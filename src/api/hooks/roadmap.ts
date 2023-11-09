@@ -10,7 +10,7 @@ import {
   getRoadmapGroupMember,
   getRoadmapGroupApply,
   patchRoadmapGroupMemberRole,
-  deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
+  deleteRoadmapGroupMember,
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
   deleteRoadmapGroupApplyReject as deleteRoadmapGroupApplyRejectAPI,
   postRoadmapsGroupsParticipate,
@@ -283,12 +283,16 @@ export const usePatchRoadmapGroupMemberRole = () => {
 export const useDeleteRoadmapGroupMember = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
-  const mutation = useMutation(deleteRoadmapGroupMemberAPI);
+  const { mutateAsync } = useMutation(deleteRoadmapGroupMember);
 
-  const deleteRoadmapGroupMember = async (body: { roadmapId: number; userId: number }) => {
-    const data = await mutation.mutateAsync(body, {
+  const deleteRoadmapGroupMemberAsync = async (req: { param: { roadmapId: number; userId: number } }) => {
+    const {
+      param: { roadmapId },
+    } = req;
+
+    const data = await mutateAsync(req, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupMember, body.roadmapId]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapGroupMember, roadmapId]);
         toast.showBottom({
           message: '멤버가 강퇴되었습니다.',
         });
@@ -297,7 +301,7 @@ export const useDeleteRoadmapGroupMember = () => {
 
     return data;
   };
-  return { deleteRoadmapGroupMember };
+  return { deleteRoadmapGroupMemberAsync };
 };
 
 export const useGetRoadmapGroupApply = (roadmapId: number) => {
