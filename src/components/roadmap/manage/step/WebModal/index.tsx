@@ -2,18 +2,20 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { usePostReferences } from '@/api/hooks/roadmap';
 import type { StepWithReferences } from '@/api/type';
 import Button from '@/components/common/Button';
+import Flex from '@/components/common/Flex';
+import FlexForm from '@/components/common/FlexForm';
 import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import TwoButtonContainer from '@/components/common/TwoButtonContainer';
-import * as Styled from '@/components/roadmap/manage/step/StepList/YoutubeModal/style';
+import REGEX from '@/constants/regex';
 import useQueryParam from '@/hooks/useQueryParam';
 
-interface YoutubeModalProps extends ModalProps {
+interface WebModalProps extends ModalProps {
   step: StepWithReferences;
 }
 
-const YoutubeModal = (props: YoutubeModalProps) => {
+const WebModal = (props: WebModalProps) => {
   const { step, isOpen, onClose } = props;
   const roadmapId = Number(useQueryParam('roadmapId'));
   const { postReferencesAsync, isLoading } = usePostReferences();
@@ -23,7 +25,7 @@ const YoutubeModal = (props: YoutubeModalProps) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<{ link: string }>({
     defaultValues: {
       link: '',
     },
@@ -31,7 +33,7 @@ const YoutubeModal = (props: YoutubeModalProps) => {
   });
 
   const onSubmit: SubmitHandler<{ link: string }> = async (formData) => {
-    const data = await postReferencesAsync({ body: { category: 'youtube', roadmapId, stepId: step.id, ...formData } });
+    const data = await postReferencesAsync({ body: { category: 'web', roadmapId, stepId: step.id, ...formData } });
     if (data.code === 200) {
       reset();
       onClose();
@@ -39,25 +41,29 @@ const YoutubeModal = (props: YoutubeModalProps) => {
   };
   return (
     <Modal isOpen={isOpen} onClose={onClose} width={35}>
-      <Styled.Root>
-        <h2>유튜브 영상 추가하기</h2>
+      <Flex dir="col" gap={1.5}>
+        <h2>참고자료 링크 추가하기</h2>
         <InfoArea>
-          <InfoArea.Info>해당 스텝에 사용할 동영상 링크를 첨부해주세요.</InfoArea.Info>
+          <InfoArea.Info>해당 스텝에 사용할 참고자료 링크를 첨부해주세요.</InfoArea.Info>
         </InfoArea>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <FlexForm onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="link"
             control={control}
             rules={{
               required: '필수 정보입니다.',
+              pattern: {
+                value: REGEX.webAddress(),
+                message: '링크를 정확히 입력하셨는지 확인해주세요.',
+              },
             }}
             render={({ field }) => (
               <Input
-                label="동영상 링크"
+                label="참고자료 링크"
                 labelType="bold"
-                placeholder="동영상 링크를 첨부해주세요."
+                placeholder="참고자료 링크를 첨부해주세요."
                 message={errors.link?.message}
-                status={errors.link ? 'error' : 'default'}
+                status={errors.link && 'error'}
                 {...field}
               />
             )}
@@ -76,10 +82,10 @@ const YoutubeModal = (props: YoutubeModalProps) => {
               확인
             </Button>
           </TwoButtonContainer>
-        </form>
-      </Styled.Root>
+        </FlexForm>
+      </Flex>
     </Modal>
   );
 };
 
-export default YoutubeModal;
+export default WebModal;

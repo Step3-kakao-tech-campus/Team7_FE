@@ -14,12 +14,11 @@ import {
   patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
-  postTilyRoadmapsApply as postTilyRoadmapsApplyAPI,
   deleteRoadmapGroupApplyReject as deleteRoadmapGroupApplyRejectAPI,
   postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
   getRoadmapsById,
   postRoadmapsById,
-  postGroupRoadmapsApply as postGroupRoadmapsApplyAPI,
+  postGroupApply,
   postSteps,
   deleteSteps,
   patchSteps,
@@ -27,6 +26,7 @@ import {
   deleteRoadmaps,
   postReferences,
   deleteReferences,
+  postTilyApply,
 } from '@/api/roadmap';
 import type {
   GetRoadmapsResponse,
@@ -241,13 +241,13 @@ export const useGetRoadmapsById = (req: { roadmapId: number }) => {
   return { data, isLoading };
 };
 
-export const usePostGroupRoadmapsApply = () => {
-  const { mutateAsync, isLoading } = useMutation(postGroupRoadmapsApplyAPI);
+export const usePostGroupApply = () => {
+  const { mutateAsync, isLoading } = useMutation(postGroupApply);
   const toast = useToast();
 
-  const postGroupRoadmapsApply = async (body: { roadmapId: number; content: string }) => {
-    if (body.roadmapId > 0) {
-      const data = await mutateAsync(body, {
+  const postGroupApplyAsync = async (req: { roadmapId: number; body: { content: string } }) => {
+    if (req.roadmapId > 0) {
+      const data = await mutateAsync(req, {
         onSuccess: () => {
           toast.showBottom({
             message: '신청이 완료되었습니다.',
@@ -264,33 +264,22 @@ export const usePostGroupRoadmapsApply = () => {
     } else return undefined;
   };
 
-  return { postGroupRoadmapsApply, isLoading };
+  return { postGroupApplyAsync, isLoading };
 };
 
-export const usePostTilyRoadmapsApply = () => {
-  const { mutateAsync, isLoading } = useMutation(postTilyRoadmapsApplyAPI);
-  const toast = useToast();
+export const usePostTilyApply = () => {
+  const { mutateAsync, isLoading } = useMutation(postTilyApply);
 
-  const postTilyRoadmapsApply = async (roadmapId: number) => {
+  const postTilyApplyAsync = async (req: { roadmapId: number }) => {
+    const { roadmapId } = req;
     if (roadmapId > 0) {
-      const data = await mutateAsync(roadmapId, {
-        onSuccess: () => {
-          toast.showBottom({
-            message: '신청이 완료되었습니다.',
-          });
-        },
-        onError: () => {
-          toast.showBottom({
-            message: '신청에 실패하였습니다.',
-          });
-        },
-      });
+      const data = await mutateAsync(req);
 
       return data;
     } else return undefined;
   };
 
-  return { postTilyRoadmapsApply, isLoading };
+  return { postTilyApplyAsync, isLoading };
 };
 
 export const useGetRoadmapGroupMember = (roadmapId: number) => {
@@ -502,7 +491,7 @@ export const usePatchRoadmaps = () => {
   const toast = useToast();
   const { handleError } = useApiError();
 
-  const { mutateAsync } = useMutation(patchRoadmaps);
+  const { mutateAsync, isLoading } = useMutation(patchRoadmaps);
 
   const patchRoadmapsAsync = async (req: { roadmapId: number; body: PostRoadmapsRequest }) => {
     const data = await mutateAsync(req, {
@@ -518,7 +507,7 @@ export const usePatchRoadmaps = () => {
     return data;
   };
 
-  return { patchRoadmapsAsync };
+  return { patchRoadmapsAsync, isLoading };
 };
 
 export const useDeleteRoadmaps = () => {

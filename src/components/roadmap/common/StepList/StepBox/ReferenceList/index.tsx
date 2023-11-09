@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useDeleteReferences } from '@/api/hooks/roadmap';
 import type { StepWithReferences } from '@/api/type';
-import * as Styled from '@/components/roadmap/manage/step/StepList/ReferenceList/style';
+import * as Styled from '@/components/roadmap/common/StepList/ReferenceList/style';
 import useQueryParam from '@/hooks/useQueryParam';
 
 interface ReferenceListProps {

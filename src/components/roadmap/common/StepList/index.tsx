@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useGetRoadmapsById } from '@/api/hooks/roadmap';
 import Button from '@/components/common/Button';
-import * as Styled from '@/components/roadmap/manage/step/StepList/style';
+import * as Styled from '@/components/roadmap/common/StepList/style';
 import StepModal from '@/components/roadmap/manage/step/StepModal';
 import { useModalState } from '@/hooks/useModalState';
 import useQueryParam from '@/hooks/useQueryParam';
@@ -10,29 +11,33 @@ import StepBox from './StepBox';
 const StepList = () => {
   const roadmapId = Number(useQueryParam('roadmapId'));
 
+  const path = useRouter().asPath.split('/').at(-1) === 'step' ? 'manage' : 'detail';
+
   const { isOpen, handleOpen, handleClose } = useModalState();
 
   const { data } = useGetRoadmapsById({ roadmapId });
 
-  console.log(data);
-
   return (
     <>
       <Styled.ManageStepHeader justify="space-between">
-        <h2>STEP 관리</h2>
-        <Button
-          onClick={() => {
-            handleOpen();
-          }}>
-          STEP 추가
-        </Button>
+        {path === 'manage' && (
+          <>
+            <h2>STEP 관리</h2>
+            <Button
+              onClick={() => {
+                handleOpen();
+              }}>
+              STEP 추가
+            </Button>
+          </>
+        )}
       </Styled.ManageStepHeader>
 
       {data?.result.steps.length === 0 && <EmptyStepList />}
 
       {data?.result.steps.map((step) => <StepBox key={step.id} step={step} />)}
 
-      <StepModal isOpen={isOpen} onClose={handleClose} />
+      {path === 'manage' && <StepModal isOpen={isOpen} onClose={handleClose} />}
     </>
   );
 };

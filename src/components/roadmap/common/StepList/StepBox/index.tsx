@@ -1,11 +1,12 @@
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import type { StepWithReferences } from '@/api/type';
-import * as Styled from '@/components/roadmap/manage/step/StepList/StepBox/style';
+import * as Styled from '@/components/roadmap/common/StepList/StepBox/style';
 import StepModal from '@/components/roadmap/manage/step/StepModal';
 import { useModalState } from '@/hooks/useModalState';
-import StepDeleteModal from '../../StepDeleteModal';
+import StepDeleteModal from '../../../manage/step/StepDeleteModal';
 import ReferenceBox from '../ReferenceBox';
 
 interface StepBoxProps {
@@ -14,6 +15,8 @@ interface StepBoxProps {
 
 const StepBox = (props: StepBoxProps) => {
   const { step } = props;
+
+  const path = useRouter().asPath.split('/').at(-1) === 'step' ? 'manage' : 'detail';
 
   // STEP 수정하기 Modal
   const { isOpen: isEditOpen, handleOpen: handleEditOpen, handleClose: handleEditClose } = useModalState();
@@ -46,30 +49,34 @@ const StepBox = (props: StepBoxProps) => {
               </section>
             )}
 
-            <section>
-              <Image
-                src="/assets/icons/ic_edit.svg"
-                alt="STEP 수정하기"
-                title="수정하기"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleEditOpen();
-                }}
-                width={25}
-                height={25}
-              />
-              <Image
-                src="/assets/icons/ic_trash.svg"
-                alt="STEP 삭제하기"
-                title="삭제하기"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteOpen();
-                }}
-                width={25}
-                height={25}
-              />
-            </section>
+            {path === 'manage' && (
+              <>
+                <section>
+                  <Image
+                    src="/assets/icons/ic_edit.svg"
+                    alt="STEP 수정하기"
+                    title="수정하기"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleEditOpen();
+                    }}
+                    width={25}
+                    height={25}
+                  />
+                  <Image
+                    src="/assets/icons/ic_trash.svg"
+                    alt="STEP 삭제하기"
+                    title="삭제하기"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteOpen();
+                    }}
+                    width={25}
+                    height={25}
+                  />
+                </section>
+              </>
+            )}
           </Styled.ButtonContainer>
         </Styled.Header>
         {isOpen && (
@@ -81,8 +88,12 @@ const StepBox = (props: StepBoxProps) => {
         )}
       </article>
 
-      <StepModal isEdit={true} step={step} isOpen={isEditOpen} onClose={handleEditClose} />
-      <StepDeleteModal step={step} isOpen={isDeleteOpen} onClose={handleDeleteClose} />
+      {path === 'manage' && (
+        <>
+          <StepModal isEdit={true} step={step} isOpen={isEditOpen} onClose={handleEditClose} />
+          <StepDeleteModal step={step} isOpen={isDeleteOpen} onClose={handleDeleteClose} />
+        </>
+      )}
     </>
   );
 };

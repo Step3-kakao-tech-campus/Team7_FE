@@ -17,7 +17,7 @@ const StepDeleteModal = (props: StepDeleteModalProps) => {
   const { deleteStepsAsync, isLoading } = useDeleteSteps(roadmapId);
 
   const handleStepDelete = async () => {
-    const data = await deleteStepsAsync({ stepId: step.id });
+    await deleteStepsAsync({ stepId: step.id });
   };
 
   return (

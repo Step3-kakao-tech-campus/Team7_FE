@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useDeleteReferences } from '@/api/hooks/roadmap';
 import type { StepWithReferences } from '@/api/type';
-import * as Styled from '@/components/roadmap/manage/step/StepList/ReferenceList/style';
+import * as Styled from '@/components/roadmap/common/StepList/ReferenceList/style';
 import useQueryParam from '@/hooks/useQueryParam';
 
 interface ReferenceListProps {
@@ -10,8 +11,10 @@ interface ReferenceListProps {
 }
 
 const ReferenceList = (props: ReferenceListProps) => {
-  const roadmapId = Number(useQueryParam('roadmapId'));
   const { type, step } = props;
+  const roadmapId = Number(useQueryParam('roadmapId'));
+  const path = useRouter().asPath.split('/').at(-1) === 'step' ? 'manage' : 'detail';
+
   const { deleteReferencesAsync } = useDeleteReferences(roadmapId);
 
   let references = [];
@@ -43,15 +46,17 @@ const ReferenceList = (props: ReferenceListProps) => {
             />
             <p>{`${idx + 1}. ${reference.link}`}</p>
           </section>
-          <Image
-            src="/assets/icons/ic_trash.svg"
-            alt="stepEmptyIcon"
-            width={25}
-            height={25}
-            onClick={() => {
-              handleDeleteReference(reference.id);
-            }}
-          />
+          {path === 'manage' && (
+            <Image
+              src="/assets/icons/ic_trash.svg"
+              alt="stepEmptyIcon"
+              width={25}
+              height={25}
+              onClick={() => {
+                handleDeleteReference(reference.id);
+              }}
+            />
+          )}
         </Styled.Link>
       ))}
     </Styled.Root>

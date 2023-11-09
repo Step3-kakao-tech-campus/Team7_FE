@@ -109,18 +109,6 @@ export interface PostRoadmapsByIdResponse {
   result: null;
 }
 
-export interface PostGroupRoadmapsApplyResponse {
-  success: boolean;
-  message: string;
-  result: null;
-}
-
-export interface PostGroupTilyApplyResponse {
-  success: boolean;
-  message: string;
-  result: null;
-}
-
 export interface GetRoadmapGroupMemberResponse extends CommonResponse {
   result: {
     users: Member[];

@@ -7,9 +7,9 @@ import { setLayout } from '@/utils/layout';
 
 const RoadmapCreate = () => {
   return (
-    <RoadmapCreatePage>
+    <RoadmapPage>
       <RoadmapInfoForm />
-    </RoadmapCreatePage>
+    </RoadmapPage>
   );
 };
 
@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return { props: {} };
 };
 
-const RoadmapCreatePage = styled.main`
+export const RoadmapPage = styled.main`
   max-width: 930px;
   margin: 30px auto 0;
 
