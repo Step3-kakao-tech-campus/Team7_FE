@@ -6,12 +6,16 @@ import Input from '@/components/common/Input';
 import RadioButton from '@/components/common/RadioButton';
 import TextArea from '@/components/common/TextArea';
 import * as Styled from '@/components/roadmap/common/RoadmapInfoForm/style';
+import { useRoadmapInfo } from '@/components/roadmap/common/RoadmapInfoForm/useRoadmapInfo';
+import RoadmapDeleteModal from '@/components/roadmap/manage/info/RoadmapDeleteModal';
 import TILY_LINKS from '@/constants/links';
-import { useRoadmapInfo } from './useRoadmapInfo';
+import { useModalState } from '@/hooks/useModalState';
 
 const RoadmapInfoForm = () => {
   const { router, roadmapId, path, data, createLoading, editLoading, control, handleSubmit, errors, onSubmit } =
     useRoadmapInfo();
+
+  const { isOpen, handleOpen, handleClose } = useModalState();
 
   return (
     <>
@@ -139,7 +143,11 @@ const RoadmapInfoForm = () => {
             <Input label="참여 코드" value={data?.result.code} labelType="bold" disabled />
           </>
         )}
+        <Button onClick={handleOpen} type="button" variant="primary">
+          로드맵 삭제
+        </Button>
       </Styled.RoadmapInfoForm>
+      <RoadmapDeleteModal isOpen={isOpen} onClose={handleClose} />
     </>
   );
 };
