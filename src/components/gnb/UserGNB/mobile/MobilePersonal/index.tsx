@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import {
-  useGetRoadmapSteps,
-  useGetRoadmapsMy,
-  usePostRoadmaps,
-  usePostRoadmapStepIndividual,
-} from '@/api/hooks/roadmap';
+import { useGetRoadmapSteps, useGetRoadmapsMy, usePostRoadmaps, usePostSteps } from '@/api/hooks/roadmap';
 import { usePostTils } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
@@ -30,7 +25,7 @@ const MobilePersonal = () => {
   const { data: roadmaps } = useGetRoadmapsMy();
   const { steps } = useGetRoadmapSteps(roadmapId);
   const { postRoadmapsAsync } = usePostRoadmaps();
-  const { postRoadmapStepIndividualAsync } = usePostRoadmapStepIndividual();
+  const { postStepsAsync } = usePostSteps();
   const { postTilsAsync } = usePostTils();
 
   const {
@@ -66,7 +61,7 @@ const MobilePersonal = () => {
   };
 
   const createStep: SubmitHandler<{ stepTitle: string }> = (formData) => {
-    postRoadmapStepIndividualAsync({ body: { roadmapId, title: formData.stepTitle } });
+    postStepsAsync({ body: { roadmapId, title: formData.stepTitle, description: null, dueDate: null } });
     stepReset();
     setIsStepButtonSelected(false);
   };

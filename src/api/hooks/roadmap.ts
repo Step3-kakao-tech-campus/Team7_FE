@@ -5,7 +5,6 @@ import {
   getRoadmapSteps,
   getRoadmapsMy,
   getRoadmaps,
-  postRoadmapStepIndividual,
   getRoadmapStepReference,
   postRoadmaps,
   getRoadmapGroupMember,
@@ -32,7 +31,6 @@ import type {
   PostRoadmapsRequest,
   PostStepsRequest,
   Role,
-  IndividualStep,
   PostReferencesRequest,
 } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
@@ -141,33 +139,6 @@ export const useGetRoadmapStepReference = (req: { param: { stepId: number } }) =
     reference: data?.result,
     isLoading,
   };
-};
-
-// STEP 생성하기
-
-export const usePostRoadmapStepIndividual = () => {
-  const queryClient = useQueryClient();
-
-  const { mutateAsync } = useMutation(postRoadmapStepIndividual);
-
-  const postRoadmapStepIndividualAsync = async (req: { body: Pick<IndividualStep, 'roadmapId' | 'title'> }) => {
-    const { body } = req;
-
-    // API 재사용을 위함.
-    const createIndivialStep = { ...body, description: null, dueDate: null };
-
-    const data = await mutateAsync(
-      { body: createIndivialStep },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
-        },
-      },
-    );
-
-    return data;
-  };
-  return { postRoadmapStepIndividualAsync };
 };
 
 // 로드맵 - 그룹
@@ -420,6 +391,7 @@ export const usePostSteps = () => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(body.roadmapId));
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
         toast.showBottom({
           message: 'STEP이 생성 되었습니다.',
         });

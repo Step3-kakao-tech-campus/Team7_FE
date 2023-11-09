@@ -46,7 +46,7 @@ export interface PostRoadmapsRequest {
   description: string | null;
   isPublic: boolean;
   isRecruit?: boolean;
-  category: 'individual' | 'group';
+  category?: 'individual' | 'group';
 }
 
 export interface PostStepsRequest {
@@ -151,10 +151,3 @@ export interface ApplyMember {
 export interface PostRoadmapGroupApplyAcceptResponse extends CommonResponse {}
 
 export interface DeleteRoadmapGroupApplyRejectResponse extends CommonResponse {}
-
-export interface IndividualStep {
-  roadmapId: number;
-  title: string;
-  description: string | null;
-  dueDate: string | null;
-}

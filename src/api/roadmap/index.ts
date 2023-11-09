@@ -16,7 +16,6 @@ import type {
   PostStepsRequest,
   PostReferencesRequest,
 } from '@/api/roadmap/type';
-import type { IndividualStep } from '@/api/roadmap/type';
 import type { IdResponse, NullResultResponse } from '../type';
 
 export const getRoadmapsMy = async () => {
@@ -55,20 +54,6 @@ export const getRoadmapStepReference = async (req: { param: { stepId: number } }
   const { data } = await axiosInstance.request<GetRoadmapStepReferenceResponse>({
     method: 'GET',
     url: `/steps/${stepId}/references`,
-  });
-
-  return data;
-};
-
-// STEP 생성하기
-
-export const postRoadmapStepIndividual = async (req: { body: IndividualStep }) => {
-  const { body } = req;
-
-  const { data } = await axiosInstance.request<IdResponse>({
-    method: 'POST',
-    url: `/steps`,
-    data: body,
   });
 
   return data;
