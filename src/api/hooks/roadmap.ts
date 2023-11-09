@@ -9,7 +9,7 @@ import {
   postRoadmaps,
   getRoadmapGroupMember,
   getRoadmapGroupApply,
-  patchRoadmapGroupMemberRole as patchRoadmapGroupMemberRoleAPI,
+  patchRoadmapGroupMemberRole,
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
   deleteRoadmapGroupApplyReject as deleteRoadmapGroupApplyRejectAPI,
@@ -261,14 +261,13 @@ export const useGetRoadmapGroupMember = (req: { roadmapId: number }) => {
 
 export const usePatchRoadmapGroupMemberRole = () => {
   const toast = useToast();
-  const mutation = useMutation(patchRoadmapGroupMemberRoleAPI);
+  const { mutateAsync } = useMutation(patchRoadmapGroupMemberRole);
 
-  const patchRoadmapGroupMemberRole = async (body: {
-    roadmapId: number;
-    userId: number;
-    role: Exclude<Role, null>;
+  const patchRoadmapGroupMemberRoleAsync = async (req: {
+    param: { roadmapId: number; userId: number };
+    body: { role: Exclude<Role, null> };
   }) => {
-    const data = await mutation.mutateAsync(body, {
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({
           message: '멤버 권한이 변경되었습니다.',
@@ -278,7 +277,7 @@ export const usePatchRoadmapGroupMemberRole = () => {
 
     return data;
   };
-  return { patchRoadmapGroupMemberRole };
+  return { patchRoadmapGroupMemberRoleAsync };
 };
 
 export const useDeleteRoadmapGroupMember = () => {

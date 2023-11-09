@@ -7,7 +7,6 @@ import type {
   PostRoadmapGroupApplyAcceptResponse,
   GetRoadmapGroupApplyResponse,
   DeleteRoadmapGroupMemberResponse,
-  PatchRoadmapGroupMemberRoleResponse,
   Role,
   GetRoadmapGroupMemberResponse,
   GetRoadmapsResponse,
@@ -16,7 +15,7 @@ import type {
   PostStepsRequest,
   PostReferencesRequest,
 } from '@/api/roadmap/type';
-import type { IdResponse, NullResultResponse } from '../type';
+import type { IdResponse, NullResultResponse, CommonResponse } from '../type';
 
 export const getRoadmapsMy = async () => {
   const { data } = await axiosInstance.request<GetRoadmapsMyResponse>({
@@ -139,19 +138,21 @@ export const getRoadmapGroupMember = async (req: { roadmapId: number }) => {
   return data;
 };
 
-export const patchRoadmapGroupMemberRole = async ({
-  roadmapId,
-  userId,
-  role,
-}: {
-  roadmapId: number;
-  userId: number;
-  role: Exclude<Role, null>;
+// 로드맵의 구성원 역할 바꾸기
+
+export const patchRoadmapGroupMemberRole = async (req: {
+  param: { roadmapId: number; userId: number };
+  body: { role: Exclude<Role, null> };
 }) => {
-  const { data } = await axiosInstance.request<PatchRoadmapGroupMemberRoleResponse>({
+  const {
+    param: { roadmapId, userId },
+    body,
+  } = req;
+
+  const { data } = await axiosInstance.request<CommonResponse>({
     method: 'PATCH',
     url: `/roadmaps/groups/${roadmapId}/members/${userId}`,
-    data: { role },
+    data: body,
   });
 
   return data;

@@ -124,9 +124,6 @@ export const roleStatus = {
   member: '멤버',
 } as const;
 
-// patchRoadmapGroupMemberRole
-export interface PatchRoadmapGroupMemberRoleResponse extends CommonResponse {}
-
 // deleteRoadmapGroupMember
 
 export interface DeleteRoadmapGroupMemberResponse extends CommonResponse {}
