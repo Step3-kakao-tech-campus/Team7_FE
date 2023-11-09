@@ -7,6 +7,10 @@ export const Root = styled.main`
   width: 95%;
   flex-direction: column;
   flex: 1;
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    width: 100%;
+  }
 `;
 
 export const Container = styled.div`
