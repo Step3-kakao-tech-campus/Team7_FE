@@ -21,6 +21,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 0.625rem;
+  overflow: hidden;
 `;
 
 export const CheckIconContainer = styled.div`
@@ -30,7 +31,16 @@ export const CheckIconContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 `;
 
-export const Title = styled.span``;
+export const Title = styled.div`
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media ${({ theme }) => theme.mediaQuery.xs} {
+    max-width: 80vw;
+  }
+`;
 
 export const ButtonStyles = css`
   padding: 10px;

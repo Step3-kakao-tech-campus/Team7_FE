@@ -8,6 +8,7 @@ export const Root = styled(Card)`
 
   padding: 1.25rem;
   cursor: pointer;
+  overflow: hidden;
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     width: 100%;
@@ -22,11 +23,21 @@ export const Badge = styled.div`
     font-size: 0.75rem;
     padding: 0.5rem;
     width: fit-content;
+    max-width: 100%;
     border-radius: 6px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   `}
 `;
 
 export const Title = styled.h4`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 1rem;
   margin-top: 0.5rem;
   font-weight: 600;

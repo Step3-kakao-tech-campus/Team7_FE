@@ -22,12 +22,17 @@ const RoadmapPopover = (props: PropsWithChildren<RoadmapPopoverProps>) => {
 
   return (
     <Popover.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Popover.Trigger onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <Popover.Trigger
+        css={css`
+          overflow: hidden;
+        `}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}>
         {children}
       </Popover.Trigger>
 
       <Popover.Portal>
-        <Popover.Content side="right" css={animatedStyle}>
+        <Popover.Content side="top" css={animatedStyle}>
           <Styled.Content>
             {userRole !== 'member'
               ? '로드맵 관리 페이지로 이동하시겠습니까?'
