@@ -113,7 +113,7 @@ const Steps = {
           <p>카테고리를 만들어 보세요.</p>
         </EmptyList>
       );
-    data.category.map((item, index) => {
+    return data.category.map((item, index) => {
       return (
         <Styled.Item onClick={() => handleSelectCategory(item.id)} key={index}>
           {item.name}
@@ -122,14 +122,16 @@ const Steps = {
     });
   },
   group: (data: Data, handleSelectCategory: (id: number) => void, handleRoadmapList: () => void) => {
-    if (data.roadmaps.length === 0)
+    console.log(data.category);
+    if (data.roadmaps.length === 0) {
       return (
         <EmptyList image="ic_step" imageHeight={45} button="로드맵 목록" onClick={handleRoadmapList}>
           <p>참여중인 로드맵이 없어요.</p>
           <p>로드맵에 참여해보세요.</p>
         </EmptyList>
       );
-    data.roadmaps.map((item, index) => {
+    }
+    return data.roadmaps.map((item, index) => {
       return (
         <Styled.Item onClick={() => handleSelectCategory(item.id)} key={index}>
           {item.name}
