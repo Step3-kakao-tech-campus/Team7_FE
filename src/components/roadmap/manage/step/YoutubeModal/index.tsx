@@ -9,6 +9,7 @@ import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import TwoButtonContainer from '@/components/common/TwoButtonContainer';
 import useQueryParam from '@/hooks/useQueryParam';
+import * as Styled from './style';
 
 interface YoutubeModalProps extends ModalProps {
   step: StepWithReferences;
@@ -44,6 +45,17 @@ const YoutubeModal = (props: YoutubeModalProps) => {
         <h2>유튜브 영상 추가하기</h2>
         <InfoArea>
           <InfoArea.Info>해당 스텝에 사용할 동영상 링크를 첨부해주세요.</InfoArea.Info>
+          <Styled.YoutubeContainer>
+            <Styled.Youtube>
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/1T8fyDzgfT4?si=GFNmcV3Sw3LttNwZ"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              />
+            </Styled.Youtube>
+          </Styled.YoutubeContainer>
         </InfoArea>
         <FlexForm onSubmit={handleSubmit(onSubmit)}>
           <Controller
