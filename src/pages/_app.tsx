@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from '@tans
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from '@emotion/react';
 import { axiosInstance } from '@/api';
+import type { LoginResponse } from '@/api/auth/type';
 import GlobalErrorBoundary from '@/components/common/GlobalErrorBoundary';
 import ResponsiveProvider from '@/components/common/Responsive/provider';
 import ToastProvider from '@/components/common/Toast/provider';
@@ -30,11 +31,13 @@ const queryClient = new QueryClient({
 
 interface MyAppProps extends AppProps {
   token: boolean;
+  test: string;
 }
 
-export default function App({ Component, pageProps, token }: MyAppProps) {
+export default function App({ Component, pageProps, token, test }: MyAppProps) {
   const Layout = getLayout(Component);
   axiosInstance.defaults.headers.common['Authorization'] = token;
+  console.log('test', test);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -68,6 +71,20 @@ App.getInitialProps = async (context: AppContext) => {
   const { ctx, Component } = context;
   const allCookies = cookies(ctx);
 
+  let test = '';
+
+  try {
+    //정적생성페이지(이벤트상세)에서는 리프레쉬로직 돌지 않음
+    if (ctx.req) {
+      const refreshToken = allCookies.refreshToken;
+      axiosInstance.defaults.headers.Cookie = refreshToken || '';
+      const response = await axiosInstance.get<LoginResponse>('/refresh');
+      test = response.data.result.accessToken;
+    } else throw new Error('isClient');
+  } catch (err: any) {
+    //console.log(err.response);
+  }
+
   let pageProps = {};
 
   if (Component.getInitialProps) {
@@ -75,5 +92,5 @@ App.getInitialProps = async (context: AppContext) => {
     pageProps = await Component.getInitialProps(ctx);
   }
   // return한 값은 해당 컴포넌트의 props로 들어가게 됩니다.
-  return { pageProps, token: allCookies.accessToken };
+  return { pageProps, token: allCookies.accessToken, test };
 };
