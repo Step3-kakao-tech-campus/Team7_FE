@@ -5,7 +5,7 @@ export const EmptyRoot = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin: 40px auto 55px;
+  margin: 70px auto 55px;
 
   & > section > p {
     font-size: 18px;
