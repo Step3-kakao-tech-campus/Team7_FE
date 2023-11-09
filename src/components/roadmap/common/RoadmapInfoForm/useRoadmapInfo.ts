@@ -42,7 +42,7 @@ export const useRoadmapInfo = () => {
   const onSubmit: SubmitHandler<PostRoadmapsRequest> = async (formData) => {
     if (path === 'create') {
       const { isRecruit, ...restFormData } = formData;
-      const data = await postRoadmapsAsync({ body: restFormData });
+      const data = await postRoadmapsAsync({ body: { ...restFormData, category: 'group' } });
 
       if (data?.code === 200) {
         router.push(TILY_LINKS.manageStep(data?.result.id));

@@ -7,7 +7,7 @@ import * as Styled from '@/components/roadmap/roadmapList/RoadmapCodeModal/style
 
 const RoadmapCodeModal = (props: ModalProps) => {
   const { isOpen, onClose } = props;
-  const { postRoadmapsGroupsParticipate, isLoading } = usePostRoadmapsGroupsParticipate();
+  const { postRoadmapsGroupsParticipateAsync, isLoading } = usePostRoadmapsGroupsParticipate();
 
   const {
     control,
@@ -17,7 +17,7 @@ const RoadmapCodeModal = (props: ModalProps) => {
   } = useForm({ defaultValues: { code: '' }, mode: 'onSubmit' });
 
   const onSubmit: SubmitHandler<{ code: string }> = async (formData) => {
-    const data = await postRoadmapsGroupsParticipate(formData.code);
+    const data = await postRoadmapsGroupsParticipateAsync({ body: { code: formData.code } });
 
     if (data.success) {
       onClose?.();

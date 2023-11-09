@@ -5,8 +5,6 @@ import {
   getRoadmapSteps,
   getRoadmapsMy,
   getRoadmaps,
-  postRoadmapStepIndividual,
-  postRoadmapIndividual,
   getRoadmapStepReference,
   postRoadmaps,
   getRoadmapGroupMember,
@@ -15,7 +13,7 @@ import {
   deleteRoadmapGroupMember as deleteRoadmapGroupMemberAPI,
   postRoadmapGroupApplyAccept as postRoadmapGroupApplyAcceptAPI,
   deleteRoadmapGroupApplyReject as deleteRoadmapGroupApplyRejectAPI,
-  postRoadmapsGroupsParticipate as postRoadmapsGroupsParticipateAPI,
+  postRoadmapsGroupsParticipate,
   getRoadmapsById,
   postRoadmapsById,
   postGroupApply,
@@ -33,7 +31,6 @@ import type {
   PostRoadmapsRequest,
   PostStepsRequest,
   Role,
-  IndividualStep,
   PostReferencesRequest,
 } from '@/api/roadmap/type';
 import { useToast } from '@/components/common/Toast/useToast';
@@ -144,13 +141,15 @@ export const useGetRoadmapStepReference = (req: { param: { stepId: number } }) =
   };
 };
 
-export const usePostRoadmapIndividual = () => {
+// 로드맵 - 그룹
+
+export const usePostRoadmaps = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
-  const { mutateAsync } = useMutation(postRoadmapIndividual);
+  const { mutateAsync, isLoading } = useMutation(postRoadmaps);
   const { handleError } = useApiError();
 
-  const postRoadmapsIndividualAsync = async (req: { body: { name: string } }) => {
+  const postRoadmapsAsync = async (req: { body: PostRoadmapsRequest }) => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy()]);
@@ -160,47 +159,6 @@ export const usePostRoadmapIndividual = () => {
       },
       onError: handleError,
     });
-
-    return data;
-  };
-  // useMutation 훅을 밖으로 내보내지 않아도, 비즈니스 로직 함수 작성해서 내보내면 된다.
-  return { postRoadmapsIndividualAsync };
-};
-
-// STEP 생성하기
-
-export const usePostRoadmapStepIndividual = () => {
-  const queryClient = useQueryClient();
-
-  const { mutateAsync } = useMutation(postRoadmapStepIndividual);
-
-  const postRoadmapStepIndividualAsync = async (req: { body: Pick<IndividualStep, 'roadmapId' | 'title'> }) => {
-    const { body } = req;
-
-    // API 재사용을 위함.
-    const createIndivialStep = { ...body, description: null, dueDate: null };
-
-    const data = await mutateAsync(
-      { body: createIndivialStep },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
-        },
-      },
-    );
-
-    return data;
-  };
-  return { postRoadmapStepIndividualAsync };
-};
-
-// 로드맵 - 그룹
-
-export const usePostRoadmaps = () => {
-  const { mutateAsync, isLoading } = useMutation(postRoadmaps);
-
-  const postRoadmapsAsync = async (req: { body: PostRoadmapsRequest }) => {
-    const data = await mutateAsync(req);
 
     return data;
   };
@@ -246,6 +204,7 @@ export const usePostGroupApply = () => {
   const toast = useToast();
 
   const postGroupApplyAsync = async (req: { roadmapId: number; body: { content: string } }) => {
+
     if (req.roadmapId > 0) {
       const data = await mutateAsync(req, {
         onSuccess: () => {
@@ -263,7 +222,7 @@ export const usePostGroupApply = () => {
       return data;
     } else return undefined;
   };
-
+  
   return { postGroupApplyAsync, isLoading };
 };
 
@@ -280,6 +239,7 @@ export const usePostTilyApply = () => {
   };
 
   return { postTilyApplyAsync, isLoading };
+
 };
 
 export const useGetRoadmapGroupMember = (roadmapId: number) => {
@@ -386,27 +346,24 @@ export const useDeleteRoadmapGroupApplyReject = () => {
 };
 
 export const usePostRoadmapsGroupsParticipate = () => {
-  const { mutateAsync, isLoading, isError } = useMutation(postRoadmapsGroupsParticipateAPI);
+  const { mutateAsync, isLoading, isError } = useMutation(postRoadmapsGroupsParticipate);
+  const { handleError } = useApiError();
   const toast = useToast();
 
-  const postRoadmapsGroupsParticipate = async (code: string) => {
-    const data = await mutateAsync(code, {
+  const postRoadmapsGroupsParticipateAsync = async (req: { body: { code: string } }) => {
+    const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({
           message: '로드맵에 참여되었습니다.',
         });
       },
-      onError: () => {
-        toast.showBottom({
-          message: '로드맵을 찾을 수 없습니다. 코드를 확인해주세요.',
-        });
-      },
+      onError: handleError,
     });
 
     return data;
   };
 
-  return { postRoadmapsGroupsParticipate, isLoading, isError };
+  return { postRoadmapsGroupsParticipateAsync, isLoading, isError };
 };
 
 // STEP
@@ -423,6 +380,7 @@ export const usePostSteps = () => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsById(body.roadmapId));
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, body.roadmapId]);
         toast.showBottom({
           message: 'STEP이 생성 되었습니다.',
         });

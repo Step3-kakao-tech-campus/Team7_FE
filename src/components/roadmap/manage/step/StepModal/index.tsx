@@ -101,8 +101,8 @@ const StepModal = (props: StepModalProps) => {
             render={({ field: { value, ...props } }) => (
               <TextArea
                 label="STEP 설명"
-                value={value === null ? '' : value}
                 labelType="bold"
+                value={value === null ? '' : value}
                 placeholder="설명을 입력해주세요."
                 rows={5}
                 {...props}
