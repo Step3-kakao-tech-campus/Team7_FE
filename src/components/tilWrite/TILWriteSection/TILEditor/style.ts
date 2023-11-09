@@ -38,7 +38,7 @@ export const AsideContainer = styled.aside`
   display: flex;
   flex: 1;
 
-  @media ${({ theme }) => theme.mediaQuery.md} {
+  @media ${({ theme }) => theme.mediaQuery.xl} {
     display: none;
   }
 `;

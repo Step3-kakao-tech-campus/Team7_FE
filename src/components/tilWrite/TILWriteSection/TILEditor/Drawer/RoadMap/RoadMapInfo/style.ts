@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.div`
   position: sticky;
@@ -58,4 +59,15 @@ export const ProgressBarStyle = css`
   width: 100%;
   height: 8px;
   margin-top: 0.75rem;
+`;
+
+export const RoadmapTitleStyle = (theme: EmotionTheme) => css`
+  max-width: 410px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media ${theme.mediaQuery.xs} {
+    max-width: 90vw;
+  }
 `;

@@ -42,7 +42,9 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
 
         <Styled.Title>
           <RoadmapPopover userRole={steps?.result.myRole}>
-            <button onClick={() => routeUserBasedOnRole(steps?.result.myRole)}>{tilDetail?.roadmapName}</button>
+            <button css={Styled.RoadmapTitleStyle} onClick={() => routeUserBasedOnRole(steps?.result.myRole)}>
+              {tilDetail?.roadmapName}
+            </button>
           </RoadmapPopover>
         </Styled.Title>
 
