@@ -1,25 +1,62 @@
+import type { GetServerSideProps } from 'next';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import styled from '@emotion/styled';
-import HeaderLayout from '@/components/layout/HeaderLayout';
+import { axiosInstance } from '@/api';
+import { getRoadmapsById } from '@/api/roadmap';
+import GuestGNB from '@/components/gnb/GuestGNB';
+import GNB from '@/components/gnb/UserGNB';
 import StepList from '@/components/roadmap/common/StepList';
 import RoadmapDetailInfo from '@/components/roadmap/roadmapDetail/RoadmapDetailInfo';
 import { RoadmapPage } from '@/pages/roadmap/create';
-import { setLayout } from '@/utils/layout';
 
-const RoadmapDetail = () => {
+interface RoadmapDetailProps {
+  isUserLogin: boolean;
+}
+
+const RoadmapDetail = ({ isUserLogin }: RoadmapDetailProps) => {
   return (
-    <RoadmapPage>
-      <RoadmapDetailInfo />
-      <RoadmapDetailStepContainer>
-        <h2>STEP 목록</h2>
-        <StepList />
-      </RoadmapDetailStepContainer>
-    </RoadmapPage>
+    <>
+      {isUserLogin ? <GNB /> : <GuestGNB />}
+      <RoadmapPage>
+        <RoadmapDetailInfo isUserLogin={isUserLogin} />
+        <RoadmapDetailStepContainer>
+          <h2>STEP 목록</h2>
+          <StepList />
+        </RoadmapDetailStepContainer>
+      </RoadmapPage>
+    </>
   );
 };
 
-setLayout(RoadmapDetail, HeaderLayout);
-
 export default RoadmapDetail;
+
+export const getServerSideProps: GetServerSideProps<RoadmapDetailProps> = async (context) => {
+  const { cookies } = context.req;
+  const param = context.params;
+  const roadmapId = param?.roadmapId;
+  const queryClient = new QueryClient();
+
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
+  }
+
+  // 로드맵 정보 SSR
+  await queryClient.prefetchQuery(['roadmaps', Number(roadmapId)], () =>
+    getRoadmapsById({ roadmapId: Number(roadmapId) }),
+  );
+
+  return {
+    props: {
+      isUserLogin,
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
 
 const RoadmapDetailStepContainer = styled.section`
   margin-top: 30px;
