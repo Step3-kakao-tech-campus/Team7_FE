@@ -38,30 +38,37 @@ const GNB = forwardRef<HTMLDivElement, GNBProps>((_, ref) => {
               </Styled.TILInfo>
             </Responsive>
 
-            <Styled.RefContainer ref={ref}>
-              {isButton && (
-                <Button
-                  onMouseEnter={() => {
-                    setIsButton(false);
-                    setIsFlower(true);
-                  }}
-                  onClick={handleOpenTilModal}
-                  css={Styled.TILButtonStyles}
-                  variant="ghost">
-                  TIL
-                </Button>
-              )}
+            <Responsive device="mobile">
+              <Button onClick={handleOpenTilModal} css={Styled.TILButtonStyles} variant="ghost">
+                TIL
+              </Button>
+            </Responsive>
+            <Responsive device="desktop">
+              <Styled.RefContainer ref={ref}>
+                {isButton && (
+                  <Button
+                    onMouseEnter={() => {
+                      setIsButton(false);
+                      setIsFlower(true);
+                    }}
+                    onClick={handleOpenTilModal}
+                    css={Styled.TILButtonStyles}
+                    variant="ghost">
+                    TIL
+                  </Button>
+                )}
 
-              {isFlower && (
-                <Flower
-                  onMouseLeave={() => {
-                    setIsButton(true);
-                    setIsFlower(false);
-                  }}
-                  onClick={handleOpenTilModal}
-                />
-              )}
-            </Styled.RefContainer>
+                {isFlower && (
+                  <Flower
+                    onMouseLeave={() => {
+                      setIsButton(true);
+                      setIsFlower(false);
+                    }}
+                    onClick={handleOpenTilModal}
+                  />
+                )}
+              </Styled.RefContainer>
+            </Responsive>
 
             <GNBProfile />
           </Flex>
