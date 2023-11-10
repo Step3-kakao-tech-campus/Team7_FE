@@ -17,7 +17,7 @@ const TIL = (props: TILProps) => {
       onClick={() =>
         router.push(TILY_LINKS.tilWrite({ roadmapId: til.roadmap.id, stepId: til.step.id, tilId: til.id }))
       }>
-      <Styled.Badge>{til.roadmap.name}</Styled.Badge>
+      <Styled.Badge category={til.roadmap.category}>{til.roadmap.name}</Styled.Badge>
       <Styled.Title>{til.step.title}</Styled.Title>
       <Styled.Date>{til.createDate}</Styled.Date>
     </Styled.Root>

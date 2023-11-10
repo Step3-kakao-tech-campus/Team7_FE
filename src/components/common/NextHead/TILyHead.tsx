@@ -9,7 +9,7 @@ interface TilyHeadProps {
 const TILyHead = ({ title, description, additional }: TilyHeadProps) => {
   return (
     <Head>
-      <title>{title || 'TILy'}</title>
+      <title>{title || 'TIL-y'}</title>
       {description ? (
         <>
           <meta name="description" content={description} />

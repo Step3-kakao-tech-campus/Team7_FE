@@ -6,14 +6,12 @@ import Checkbox from '@/components/roadmap/manage/til/SearchSection/Checkbox';
 import SearchBar from '@/components/roadmap/manage/til/SearchSection/SearchBar';
 import StepSelect from '@/components/roadmap/manage/til/SearchSection/StepSelect';
 import SubmitSelect from '@/components/roadmap/manage/til/SearchSection/SubmitSelect';
-import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 
 const SearchSection = () => {
   const router = useRouter();
 
   const { steps } = useGetRoadmapSteps(Number(router.query.roadmapId));
-  const { overlapParamsToUrl } = useParamsToUrl();
 
   const { memberTils } = useGetStepTilsManage({ queryKey: [router.query] });
 
@@ -22,7 +20,6 @@ const SearchSection = () => {
     if (!steps || !router.isReady || steps.result.steps.length === 0) {
       return;
     }
-    overlapParamsToUrl({ stepId: steps.result.steps[0].id.toString() });
   }, [steps]);
 
   return (

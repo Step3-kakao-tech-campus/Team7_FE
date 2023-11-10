@@ -1,3 +1,4 @@
+import { useGetUsers } from '@/api/hooks/user';
 import MobileSidebar from '@/components/common/MobileSidebar';
 import Responsive from '@/components/common/Responsive';
 import GNB from '@/components/gnb/UserGNB';
@@ -10,6 +11,7 @@ import SideBar from '../mobile/SideBar';
 
 const LoggedInUser = () => {
   const { state: onboardState, ref, callback } = useOnbaording();
+  const { user } = useGetUsers();
 
   return (
     <>
@@ -23,7 +25,7 @@ const LoggedInUser = () => {
           <MobileSidebar>
             <SideBar />
             <Styled.UserName>
-              <span>김동영</span>
+              <span>{user?.name}</span>
               <span>님</span>
             </Styled.UserName>
           </MobileSidebar>
