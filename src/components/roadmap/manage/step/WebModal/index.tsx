@@ -35,7 +35,7 @@ const WebModal = (props: WebModalProps) => {
 
   const onSubmit: SubmitHandler<{ link: string }> = async (formData) => {
     const data = await postReferencesAsync({ body: { category: 'web', roadmapId, stepId: step.id, ...formData } });
-    if (data.code === 200) {
+    if (data.code === 201) {
       reset();
       onClose();
     }

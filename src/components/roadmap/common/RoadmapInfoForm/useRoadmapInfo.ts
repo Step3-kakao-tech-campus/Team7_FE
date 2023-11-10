@@ -44,7 +44,7 @@ export const useRoadmapInfo = () => {
       const { isRecruit, ...restFormData } = formData;
       const data = await postRoadmapsAsync({ body: { ...restFormData, category: 'group' } });
 
-      if (data?.code === 200) {
+      if (data?.code === 201) {
         router.push(TILY_LINKS.manageStep(data?.result.id));
       }
       return;
