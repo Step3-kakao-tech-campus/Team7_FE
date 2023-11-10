@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import EmptyLayout from '@/components/layout/EmptyLayout';
 import TILWriteSection from '@/components/tilWrite/TILWriteSection';
 import { setLayout } from '@/utils/layout';
@@ -8,6 +9,7 @@ import { setLayout } from '@/utils/layout';
 const TILWrite = () => {
   return (
     <TILWritePage>
+      <TILyHead title="TIL-y | TIL 작성" />
       <TILWriteSection />
     </TILWritePage>
   );

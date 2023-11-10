@@ -4,7 +4,7 @@ import * as Styled from '@/components/common/TextArea/style';
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
-  labelType?: 'bold' | 'regular';
+  labelType?: 'bold' | 'regular' | 'none';
   status?: 'error' | 'default';
   message?: string;
 }
