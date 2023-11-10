@@ -1,4 +1,6 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import type { EmotionTheme } from '@/styles/emotion';
 
 export const Title = styled.h3`
   font-size: 26px;
@@ -25,6 +27,11 @@ export const InfoText = styled.li`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-
+  gap: 12px;
   margin-top: 1.3rem;
+`;
+
+export const InfoTextStyles = (theme: EmotionTheme) => css`
+  color: ${theme.colors.rose};
+  font-weight: 600;
 `;

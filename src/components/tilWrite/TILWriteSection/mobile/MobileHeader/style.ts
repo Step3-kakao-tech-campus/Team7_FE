@@ -18,7 +18,7 @@ export const Title = styled.h1`
   font-weight: 700;
 
   @media ${({ theme }) => theme.mediaQuery.md} {
-    margin-left: 4px;
+    margin-left: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

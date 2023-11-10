@@ -125,6 +125,31 @@ export const usePostRoadmaps = () => {
   return { postRoadmapsAsync, isLoading };
 };
 
+// 로드맵 생성하기 (개인)
+
+export const usePostRoadmapsIndividial = () => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+  const { mutateAsync, isLoading } = useMutation(postRoadmaps);
+  const { handleError } = useApiError();
+
+  const postRoadmapsIndividialAsync = async (req: { body: PostRoadmapsRequest }) => {
+    const data = await mutateAsync(req, {
+      onSuccess: () => {
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy()]);
+        toast.showBottom({
+          message: '카테고리가 생성되었습니다.',
+        });
+      },
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { postRoadmapsIndividialAsync, isLoading };
+};
+
 // 로드맵 정보 수정하기
 
 export const usePatchRoadmaps = () => {
@@ -161,9 +186,12 @@ export const useDeleteRoadmaps = () => {
   const { mutateAsync } = useMutation(deleteRoadmaps);
 
   const deleteRoadmapsAsync = async (req: { roadmapId: number }) => {
+    const { roadmapId } = req;
+
     const data = await mutateAsync(req, {
       onSuccess: () => {
-        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsMy());
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy()]);
+        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId]);
         toast.showBottom({
           message: '로드맵이 삭제 되었습니다.',
         });

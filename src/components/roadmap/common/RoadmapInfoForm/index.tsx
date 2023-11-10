@@ -109,7 +109,12 @@ const RoadmapInfoForm = () => {
         {path === 'info' && (
           <>
             <section>
-              <h3>모집 여부</h3>
+              <h3
+                css={css`
+                  margin-bottom: 12px;
+                `}>
+                모집 여부
+              </h3>
               <Flex gap={0.8}>
                 <Controller
                   name="isRecruit"

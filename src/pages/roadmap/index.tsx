@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import GuestGNB from '@/components/gnb/GuestGNB';
 import GNB from '@/components/gnb/UserGNB';
 import MyRoadmap from '@/components/roadmap/roadmapList/MyRoadmap';
@@ -13,6 +14,7 @@ interface RoadmapListProps {
 const RoadmapList = ({ isUserLogin }: RoadmapListProps) => {
   return (
     <>
+      <TILyHead title="TILy | 로드맵" />
       {isUserLogin ? <GNB /> : <GuestGNB />}
       <RoadmapListPage>
         {isUserLogin && <MyRoadmap />}

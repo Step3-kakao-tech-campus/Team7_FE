@@ -30,7 +30,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { result } = await ogs({ url });
 
     return res.status(200).json(result);
-  } catch {
+  } catch (error) {
+    console.error(error);
     return res.status(200).json({ message: 'Page not found' });
   }
 }

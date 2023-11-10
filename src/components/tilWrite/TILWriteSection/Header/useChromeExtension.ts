@@ -1,20 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useToast } from '@/components/common/Toast/useToast';
 
 export const useChromeExtension = () => {
-  const [isExtensionInstall, setIsExtensionInstall] = useState(false);
   const toast = useToast();
-
-  // 익스텐션 설치 여부 확인
-  useEffect(() => {
-    const isInstalled = document.documentElement.getAttribute('myextension');
-
-    if (isInstalled) {
-      setIsExtensionInstall(true);
-    } else {
-      setIsExtensionInstall(false);
-    }
-  }, []);
 
   // 크롬 익스텐션 실행 성공, 실패 여부 Listener
   useEffect(() => {
@@ -42,6 +30,4 @@ export const useChromeExtension = () => {
       );
     };
   }, []);
-
-  return { isExtensionInstall };
 };

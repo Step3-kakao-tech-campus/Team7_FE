@@ -73,7 +73,7 @@ const createRepo = (token, name) => {
     private: true,
     auto_init: true,
     description:
-      'This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).',
+      'A space to record and share every step of a steady developer [TILy](https://github.com/Step3-kakao-tech-campus/Team7_FE).',
   };
   data = JSON.stringify(data);
 
