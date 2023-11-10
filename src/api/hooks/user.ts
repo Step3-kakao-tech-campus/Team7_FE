@@ -4,18 +4,13 @@ import { getAlarms, getUsers, getUserHistory, postUserProfileImage } from '@/api
 import { patchAlarm, patchUserPassword, deleteUser } from '@/api/user';
 import type { PatchAlarmRequest, PatchUserPasswordRequest, PostUserProfileImageRequset } from '@/api/user/type';
 import { useToast } from '@/components/common/Toast/useToast';
+import { USER_QUERY_KEY } from '@/constants/queryKey';
 import { useApiError } from '@/hooks/useApiError';
-
-export const USER_QUERY_KEY = {
-  user: 'user',
-  userHistory: 'userHistory',
-  alarm: 'alarm',
-};
 
 // 유저 정보
 
 export const useGetUsers = () => {
-  const { data, isLoading } = useQuery([USER_QUERY_KEY.user], () => getUsers());
+  const { data, isLoading } = useQuery(USER_QUERY_KEY.users, () => getUsers());
 
   return {
     user: data,
@@ -26,7 +21,7 @@ export const useGetUsers = () => {
 // 알람 정보
 
 export const useGetAlarms = () => {
-  const { data } = useQuery([USER_QUERY_KEY.alarm], () => getAlarms());
+  const { data } = useQuery(USER_QUERY_KEY.alarms(), () => getAlarms());
 
   const isNewAlarm = data?.result.alarms.some((alarm) => alarm.isRead === false);
 
@@ -61,7 +56,7 @@ export const usePatchAlarm = () => {
 // 유저 학습 히스토리
 
 export const useGetUserHistory = () => {
-  const { data, isLoading } = useQuery([USER_QUERY_KEY.userHistory], () => getUserHistory());
+  const { data, isLoading } = useQuery(USER_QUERY_KEY.usersHistory(), () => getUserHistory());
 
   const history = data?.result.gardens.filter((garden) => garden.value !== 0);
 
@@ -126,7 +121,7 @@ export const usePostUserProfileImage = () => {
   const postUserProfileImageAsync = async (req: { param: { userId: number }; body: PostUserProfileImageRequset }) => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
-        queryClient.invalidateQueries([USER_QUERY_KEY.user]);
+        queryClient.invalidateQueries(USER_QUERY_KEY.users);
       },
       onError: handleError,
     });

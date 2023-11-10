@@ -3,7 +3,7 @@ import 'dayjs/locale/ko';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import type { MemberTil } from '@/api/til/type';
+import type { MemberTil } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';

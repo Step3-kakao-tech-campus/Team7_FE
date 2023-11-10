@@ -1,4 +1,4 @@
-import type { ApplyMember } from '@/api/roadmap/type';
+import type { ApplyMember } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import * as Styled from '@/components/roadmap/manage/member/TableColumn/style';
