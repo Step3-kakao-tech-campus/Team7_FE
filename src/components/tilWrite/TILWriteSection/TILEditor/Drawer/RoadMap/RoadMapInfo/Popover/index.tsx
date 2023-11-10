@@ -1,6 +1,9 @@
 import { type PropsWithChildren, useState } from 'react';
+import { useRouter } from 'next/router';
 import { keyframes, css } from '@emotion/react';
 import * as Popover from '@radix-ui/react-popover';
+import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
+import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 interface RoadmapPopoverProps {
@@ -12,12 +15,25 @@ const RoadmapPopover = (props: PropsWithChildren<RoadmapPopoverProps>) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const router = useRouter();
+  const { steps } = useGetRoadmapSteps(Number(router.query.roadmapId));
+
   const handleMouseEnter = () => {
     setIsOpen(true);
   };
 
   const handleMouseLeave = () => {
     setIsOpen(false);
+  };
+
+  const routeUserBasedOnRole = (userRole?: string) => {
+    if (!userRole) return;
+
+    if (userRole === 'member') {
+      router.push(TILY_LINKS.roadmapDetail(Number(router.query.roadmapId)));
+    } else {
+      router.push(TILY_LINKS.manageInfo(Number(router.query.roadmapId)));
+    }
   };
 
   return (
@@ -27,7 +43,8 @@ const RoadmapPopover = (props: PropsWithChildren<RoadmapPopoverProps>) => {
           overflow: hidden;
         `}
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}>
+        onMouseLeave={handleMouseLeave}
+        onClick={() => routeUserBasedOnRole(steps?.result.myRole)}>
         {children}
       </Popover.Trigger>
 

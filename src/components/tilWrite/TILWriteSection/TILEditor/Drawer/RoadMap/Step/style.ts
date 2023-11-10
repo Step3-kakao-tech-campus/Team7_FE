@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Root = styled.button<{ isActiveStep: boolean }>`
+export const Root = styled.div<{ isActiveStep: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,6 +11,8 @@ export const Root = styled.button<{ isActiveStep: boolean }>`
   padding: 10px 20px;
   border-radius: 10px;
   background-color: ${({ theme, isActiveStep }) => isActiveStep && theme.colors.rose_light};
+
+  cursor: pointer;
 
   &:hover {
     background-color: ${({ theme, isActiveStep }) => (isActiveStep ? theme.colors.rose_light : theme.colors.gray_300)};

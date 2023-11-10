@@ -6,7 +6,6 @@ import Icon from '@/components/common/Icon';
 import Skeleton from '@/components/common/Skeleton';
 import Progress from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/RoadMap/Progress';
 import RoadmapPopover from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/RoadMap/RoadMapInfo/Popover';
-import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
 
 interface RoadMapInfoProps {
@@ -22,16 +21,6 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
     tilId: Number(router.query.tilId),
   });
 
-  const routeUserBasedOnRole = (userRole?: string) => {
-    if (!userRole) return;
-
-    if (userRole === 'member') {
-      router.push(TILY_LINKS.roadmapDetail(Number(router.query.roadmapId)));
-    } else {
-      router.push(TILY_LINKS.manageInfo(Number(router.query.roadmapId)));
-    }
-  };
-
   return (
     <Styled.Root>
       <Styled.Container>
@@ -42,9 +31,7 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
 
         <Styled.Title>
           <RoadmapPopover userRole={steps?.result.myRole}>
-            <button css={Styled.RoadmapTitleStyle} onClick={() => routeUserBasedOnRole(steps?.result.myRole)}>
-              {tilDetail?.roadmapName}
-            </button>
+            <span css={Styled.RoadmapTitleStyle}>{tilDetail?.roadmapName}</span>
           </RoadmapPopover>
         </Styled.Title>
 
