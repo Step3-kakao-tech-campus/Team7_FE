@@ -4,7 +4,6 @@ import { useGetTils } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
 import Logo from '@/components/common/Logo';
 import ExtensionIcon from '@/components/tilWrite/TILWriteSection/Header/ExtensionIcon';
-import ExtensionInfoModal from '@/components/tilWrite/TILWriteSection/Header/ExtensionInfoModal';
 import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
@@ -32,13 +31,12 @@ const Header = (props: HeaderProps) => {
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
 
       <Styled.IconContainer>
-        <ExtensionIcon TILContent={TILContent} handleModalOpen={handleOpen} />
+        <ExtensionIcon TILContent={TILContent} handleModalOpen={handleOpen} isOpen={isOpen} handleClose={handleClose} />
 
         {!tilDetail?.isPersonal && (
           <Icon onClick={handleOpenCommentAside} iconName="ic_commentBlack" imageSize={32} ext="svg" alt="코멘트" />
         )}
       </Styled.IconContainer>
-      <ExtensionInfoModal isOpen={isOpen} handleClose={handleClose} />
     </Styled.Root>
   );
 };
