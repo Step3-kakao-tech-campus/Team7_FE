@@ -76,17 +76,3 @@ export const Skeleton = styled(SkeletonBox)`
     height: 200px;
   }
 `;
-
-export const EmptyRoot = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  margin: 40px auto 55px;
-
-  & > section > p {
-    font-size: 18px;
-    font-weight: 600;
-    text-align: center;
-  }
-`;
