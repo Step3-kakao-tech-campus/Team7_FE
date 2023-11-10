@@ -14,7 +14,7 @@ interface RoadmapListProps {
 const RoadmapList = ({ isUserLogin }: RoadmapListProps) => {
   return (
     <>
-      <TILyHead title="TILy | 로드맵" />
+      <TILyHead title="TIL-y | 로드맵" />
       {isUserLogin ? <GNB /> : <GuestGNB />}
       <RoadmapListPage>
         {isUserLogin && <MyRoadmap />}
