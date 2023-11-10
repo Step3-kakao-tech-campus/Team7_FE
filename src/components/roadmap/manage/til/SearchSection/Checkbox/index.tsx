@@ -1,20 +1,37 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import CommonCheckbox from '@/components/common/Checkbox';
 import { useParamsToUrl } from '@/hooks/useParamsToUrl';
 import * as Styled from './style';
 
 const Checkbox = () => {
-  const [checked, setChecked] = useState<boolean>(MEMBER);
+  const [checked, setChecked] = useState<boolean>(MASTER_MANAGER);
 
   const router = useRouter();
+  const { steps } = useGetRoadmapSteps(Number(router.query.roadmapId));
   const { overlapParamsToUrl } = useParamsToUrl();
 
-  useEffect(() => {
-    if (!router.isReady) return;
+  const transformData = steps?.result.steps.map((step) => {
+    return {
+      label: step.title,
+      value: step.id.toString(),
+    };
+  });
 
-    setChecked(router.query.isMember === 'false' ? MASTER_MANAGER : MEMBER);
-  }, [router.isReady]);
+  useEffect(() => {
+    if (!steps || !router.isReady || steps.result.steps.length === 0) return;
+
+    if (!router.query.isMember) {
+      overlapParamsToUrl({
+        stepId: router.query.stepId ? router.query.stepId : transformData?.[0].value,
+        isMember: 'false',
+      });
+      setChecked(MASTER_MANAGER);
+    } else {
+      setChecked(router.query.isMember === 'false' ? MASTER_MANAGER : MEMBER);
+    }
+  }, [router.isReady, steps]);
 
   return (
     <Styled.Root>

@@ -26,7 +26,6 @@ const StepSelect = () => {
       };
     });
 
-    overlapParamsToUrl({ stepId: router.query.stepId ? router.query.stepId : transformData[0].value });
     setSelectedOption(
       router.query.stepId ? transformData.find((data) => data.value === router.query.stepId) : transformData[0],
     );
