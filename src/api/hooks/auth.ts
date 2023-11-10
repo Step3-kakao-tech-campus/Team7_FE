@@ -28,7 +28,7 @@ export const usePostLogin = () => {
       onError: handleError,
     });
 
-    setCookie('accessToken', data.result?.accessToken as string, { path: '/' });
+    setCookie('accessToken', `Bearer ${data.result?.accessToken as string}`, { path: '/' });
 
     return data;
   };
@@ -130,7 +130,7 @@ export const useGetKakaoLogin = () => {
       onError: handleError,
     });
 
-    setCookie('accessToken', data.result?.accessToken as string, { path: '/' });
+    setCookie('accessToken', `Bearer ${data.result?.accessToken as string}`, { path: '/' });
 
     return data;
   };
