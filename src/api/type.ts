@@ -54,7 +54,7 @@ export interface Til {
   id: number;
   createDate: string;
   step: Pick<Step, 'id' | 'title'>;
-  roadmap: IdName;
+  roadmap: IdName & { category: 'individual' | 'group' | 'tily' };
 }
 
 // Step 인터페이스

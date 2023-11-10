@@ -45,7 +45,8 @@ export const TILInfo = styled.div`
   font-size: 15px;
 
   & > span:nth-of-type(2) {
-    color: ${({ theme }) => theme.colors.rose};
+    /* color: ${({ theme }) => theme.colors.rose}; */
+    color: #db0f38;
   }
 `;
 

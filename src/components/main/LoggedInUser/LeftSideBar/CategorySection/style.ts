@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Root = styled.section``;
 
-export const CategoryTitle = styled.h3`
+export const CategoryTitle = styled.h2`
   width: fit-content;
   margin-top: 1.5rem;
   border-bottom: 3px solid ${({ theme }) => theme.colors.black};

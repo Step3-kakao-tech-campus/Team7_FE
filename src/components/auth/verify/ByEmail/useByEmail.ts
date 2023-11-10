@@ -36,12 +36,21 @@ const useByEamil = (location: 'register' | 'password') => {
 
     if (data?.code === 200) {
       // setIsEmail(true);
-      router.push({
-        pathname: TILY_LINKS.register(),
-        query: {
-          email: email,
-        },
-      });
+      if (location === 'register') {
+        router.push({
+          pathname: TILY_LINKS.register(),
+          query: {
+            email: email,
+          },
+        });
+      } else {
+        router.push({
+          pathname: TILY_LINKS.changePassword(),
+          query: {
+            email: email,
+          },
+        });
+      }
     } else {
       if (location === 'register') {
         handleOpen();
