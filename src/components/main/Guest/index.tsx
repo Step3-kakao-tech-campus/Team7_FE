@@ -100,25 +100,25 @@ const SECTIONS = [
   {
     key: 'github',
     title: 'TIL 깃허브 업로드',
-    imgsrc: '/assets/images/roadmap.gif',
+    imgsrc: '/assets/images/github.gif',
     alt: 'TIL 깃허브 업로드',
   },
   {
     key: 'share',
     title: '동일 주제에 대한 TIL 공유 기능',
-    imgsrc: '/assets/images/roadmap.gif',
+    imgsrc: '/assets/images/peopleTIL.gif',
     alt: '동일 주제에 대한 TIL 공유 기능',
   },
   {
     key: 'group',
     title: '그룹 로드맵 생성',
-    imgsrc: '/assets/images/roadmap.gif',
+    imgsrc: '/assets/images/group.gif',
     alt: '그룹 로드맵 생성',
   },
   {
     key: 'team',
     title: '팀 내 학습 관리',
-    imgsrc: '/assets/images/roadmap.gif',
+    imgsrc: '/assets/images/team.gif',
     alt: '팀 내 학습 관리',
   },
 ];

@@ -1,9 +1,16 @@
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import type { MemberTil } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import TILY_LINKS from '@/constants/links';
 import * as Styled from './style';
+
+// 플러그인과 로케일 설정
+dayjs.extend(relativeTime);
+dayjs.locale('ko');
 
 const TILCard = (props: MemberTil) => {
   const router = useRouter();
@@ -42,7 +49,7 @@ const TILCard = (props: MemberTil) => {
       {submitDate !== null && (
         <Styled.Footer>
           <Styled.TILInfoContainer>
-            <span>{submitDate}</span>
+            <span>{dayjs(submitDate).from(dayjs())}</span>
           </Styled.TILInfoContainer>
 
           <Styled.CommentContainer>
