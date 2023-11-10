@@ -27,7 +27,7 @@ const TextAreaSection = () => {
   return (
     <Styled.TextAreaContainer onSubmit={onSubmit}>
       <Styled.Container>
-        <TextArea rows={3} value={content} onChange={(e) => setContent(e.target.value)} />
+        <TextArea labelType="none" label="댓글" rows={3} value={content} onChange={(e) => setContent(e.target.value)} />
       </Styled.Container>
 
       <Icon iconName="ic_chatButton" imageSize={38} ext="svg" alt="전송" />

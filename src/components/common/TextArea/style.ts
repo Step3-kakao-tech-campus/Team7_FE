@@ -4,10 +4,11 @@ import type { TextAreaProps } from './index';
 type LabelTextProps = Pick<TextAreaProps, 'labelType'>;
 type TextAreaStateProps = Pick<TextAreaProps, 'status'>;
 
-export const LabelText = styled.div<LabelTextProps>`
+export const LabelText = styled.p<LabelTextProps>`
   color: ${({ theme }) => theme.colors.black};
   font-weight: ${({ labelType }) => (labelType === 'bold' ? '600' : '500')};
   font-size: ${({ labelType }) => (labelType === 'bold' ? '18.72px' : '1.1rem')};
+  font-size: ${({ labelType }) => labelType === 'none' && '0'};
 `;
 export const TextArea = styled.textarea<TextAreaStateProps>`
   width: 100%;

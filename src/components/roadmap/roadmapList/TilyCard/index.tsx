@@ -30,7 +30,7 @@ const TilyCard = (props: TilyCardProps) => {
           alt={'roadmapImg'}
         />
         <Style.Container>
-          <h4>{roadmap.name}</h4>
+          <h3>{roadmap.name}</h3>
         </Style.Container>
       </section>
 

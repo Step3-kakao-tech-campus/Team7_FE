@@ -13,6 +13,9 @@ const MyRoadmapHeader = () => {
     <>
       <Styled.Header>
         <h1>참여중인 로드맵</h1>
+
+        {/* 웹 접근성 고려, 숨김 헤더 */}
+        <h2>참여중인 틸리, 그룹 로드맵</h2>
         <Styled.ButtonContainer>
           <Button
             variant="outline"

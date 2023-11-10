@@ -3,12 +3,14 @@ import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
 import SocialLogin from '@/components/auth/common/SocialLogin';
 import VerifyForm from '@/components/auth/verify/VerifyForm';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { setLayout } from '@/utils/layout';
 
 const RegisterVerifyPage = () => {
   return (
     <AuthPageContainer>
+      <TILyHead title="TIL-y | 이메일 인증" />
       <VerifyForm location="register" />
       <SocialLogin />
     </AuthPageContainer>

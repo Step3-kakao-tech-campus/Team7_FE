@@ -42,3 +42,9 @@ export const RoadmapEditButton = styled.section`
     }
   }
 `;
+
+export const Label = styled.p`
+  margin-bottom: 5px;
+  font-size: 18.72px;
+  font-weight: 600;
+`;

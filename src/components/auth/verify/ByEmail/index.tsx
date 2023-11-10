@@ -53,6 +53,7 @@ const ByEmail = ({ location }: ByEmailProps) => {
             />
           )}
         />
+        {/* 크램폴린의 이메일 인증 통신 이슈로 인해 이메일 인증 기능 블락 */}
         {/* {isEmail && (
           <TextButton type="button" variant="ghost" onClick={resend}>
             재전송하기

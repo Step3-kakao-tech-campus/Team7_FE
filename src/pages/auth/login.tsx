@@ -5,6 +5,7 @@ import SocialLogin from '@/components/auth/common/SocialLogin';
 import TextButton from '@/components/auth/common/TextButton';
 import LoginForm from '@/components/auth/login/LoginForm';
 import Flex from '@/components/common/Flex';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import TILY_LINKS from '@/constants/links';
 import { AuthPageContainer } from '@/pages/auth/register/verify';
@@ -14,6 +15,7 @@ export const LoginPage = () => {
   const router = useRouter();
   return (
     <AuthPageContainer>
+      <TILyHead title="TIL-y | 로그인" />
       <LoginForm />
       <Flex justify="space-between" fullWidth>
         <TextButton onClick={() => router.push(TILY_LINKS.passwordVerify())}>비밀번호 찾기</TextButton>

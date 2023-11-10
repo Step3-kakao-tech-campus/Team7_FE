@@ -35,7 +35,7 @@ const MyRoadmapListSkeleton = () => {
         <Styled.SkeletonRoot gap={2}>
           {Array(4)
             .fill(null)
-            .map((idx) => (
+            .map((_, idx) => (
               <Styled.Skeleton key={idx} />
             ))}
         </Styled.SkeletonRoot>
@@ -44,7 +44,7 @@ const MyRoadmapListSkeleton = () => {
         <Styled.SkeletonRoot>
           {Array(2)
             .fill(null)
-            .map((idx) => (
+            .map((_, idx) => (
               <Styled.Skeleton key={idx} />
             ))}
         </Styled.SkeletonRoot>

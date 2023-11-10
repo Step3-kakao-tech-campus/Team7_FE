@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
 import PasswordForm from '@/components/auth/change-password/PasswordForm';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { AuthPageContainer } from '@/pages/auth/register/verify';
 import { setLayout } from '@/utils/layout';
@@ -8,6 +9,7 @@ import { setLayout } from '@/utils/layout';
 const ChangePasswordPage = () => {
   return (
     <AuthPageContainer>
+      <TILyHead title="TIL-y | 비밀번호 변경" />
       <PasswordForm />
     </AuthPageContainer>
   );

@@ -27,7 +27,7 @@ const Header = styled.div`
   align-items: center;
   margin: 20px 0 10px 0;
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.gray_800};
+  color: ${({ theme }) => theme.colors.gray_900};
   font-weight: 600;
 
   &::before {

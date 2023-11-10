@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
 import RegisterForm from '@/components/auth/register/RegisterForm';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import FullHeightLayout from '@/components/layout/FullHeightLayout';
 import { AuthPageContainer } from '@/pages/auth/register/verify';
 import { setLayout } from '@/utils/layout';
@@ -8,6 +9,7 @@ import { setLayout } from '@/utils/layout';
 export const RegisterPage = () => {
   return (
     <AuthPageContainer>
+      <TILyHead title="TIL-y | 회원가입" />
       <RegisterForm />
     </AuthPageContainer>
   );

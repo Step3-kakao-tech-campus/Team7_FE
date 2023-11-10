@@ -8,12 +8,12 @@ const TextButton = styled(Button)`
   background-color: transparent;
   font-size: 0.8rem;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.gray_800};
+  color: ${({ theme }) => theme.colors.gray_900};
 
   transition: all 0.1s;
 
   &:hover {
-    color: #5d5d5d;
+    color: black;
   }
 `;
 

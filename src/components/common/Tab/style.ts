@@ -7,13 +7,13 @@ export const Root = styled.section`
   padding: 0.25em;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.gray_300};
-  color: ${({ theme }) => theme.colors.gray_700};
+  color: #707070;
   text-align: center;
   font-weight: 700;
   font-size: 0.875rem;
 `;
 
-export const Menu = styled.section`
+export const Menu = styled.h2`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -25,7 +25,7 @@ const TILyHead = ({ title, description, additional }: TilyHeadProps) => {
           <meta property="og:image" content="https://i.ibb.co/tQFwNy0/tily-1.png" />
         </>
       )}
-      <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+      <meta name="viewport" content="initial-scale=1.0, maximum-scale=5, width=device-width" />
       <link rel="apple-touch-icon" href="/logo.svg" />
       <link rel="icon" href="/favicon.ico" />
       {additional}

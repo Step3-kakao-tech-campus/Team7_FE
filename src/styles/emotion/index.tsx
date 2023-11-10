@@ -1,7 +1,7 @@
 const colors = {
   white: '#ffffff',
   black: '#0F172A',
-  rose: '#EF4365',
+  rose: '#EA103C',
   rose_light: '#FFEEF1',
   red: '#DC2626',
   gray_100: '#F8F9FA',
@@ -12,7 +12,7 @@ const colors = {
   gray_600: '#BBBBBB',
   gray_700: '#8D8D8D',
   gray_800: '#94A3B8',
-  gray_900: '#868A8D',
+  gray_900: '#757575',
   blue_gray_100: '#F7F7FB',
   blue_gray_200: '#D9E2EA',
   blue_gray_300: '#CBD5E1',

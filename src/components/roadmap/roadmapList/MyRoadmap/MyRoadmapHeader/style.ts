@@ -5,6 +5,10 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap-reverse;
+
+  & > h2 {
+    font-size: 0;
+  }
 `;
 
 export const ButtonContainer = styled.section`

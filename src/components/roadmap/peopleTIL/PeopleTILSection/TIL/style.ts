@@ -9,7 +9,7 @@ export const Root = styled(Card)`
   cursor: pointer;
 `;
 
-export const Header = styled.h3`
+export const Header = styled.h2`
   display: flex;
   gap: 0.5rem;
 `;

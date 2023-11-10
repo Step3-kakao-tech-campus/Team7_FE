@@ -20,7 +20,7 @@ const GroupCard = (props: GroupCardProps) => {
         router.push(TILY_LINK.roadmapDetail(roadmap.id));
       }}>
       <Flex dir="col" gap={0.2}>
-        <h4>{roadmap.name}</h4>
+        <h3>{roadmap.name}</h3>
         <p>{roadmap.description}</p>
       </Flex>
 

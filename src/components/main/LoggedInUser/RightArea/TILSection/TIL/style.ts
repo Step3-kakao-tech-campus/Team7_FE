@@ -31,7 +31,7 @@ export const Badge = styled.div`
   `}
 `;
 
-export const Title = styled.h4`
+export const Title = styled.h2`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
