@@ -7,7 +7,7 @@ import * as Styled from './style';
 interface ExtensionInfoModalProps {
   isOpen: boolean;
   handleClose: () => void;
-  handleSubmitTILContentToGithub: () => void;
+  handleSubmitTILContentToGithub?: () => void;
 }
 
 const ExtensionInfoModal = (props: ExtensionInfoModalProps) => {
@@ -15,7 +15,7 @@ const ExtensionInfoModal = (props: ExtensionInfoModalProps) => {
 
   const handleGithubUpload = () => {
     handleClose();
-    handleSubmitTILContentToGithub();
+    handleSubmitTILContentToGithub?.();
   };
 
   return (
