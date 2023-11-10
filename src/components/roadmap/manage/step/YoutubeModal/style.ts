@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const YoutubeContainer = styled.div`
-  width: 70%;
+  width: 100%;
   margin: 20px auto;
 `;
 

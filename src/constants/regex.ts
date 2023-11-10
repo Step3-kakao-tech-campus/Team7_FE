@@ -3,6 +3,7 @@ const REGEX = {
   name: () => /^[^\s]{2,10}$/,
   password: () => /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$/,
   webAddress: () => /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/,
+  yotubueAddress: () => /<iframe.*?src="([^"]+)".*?<\/iframe>/g,
 };
 
 export default REGEX;
