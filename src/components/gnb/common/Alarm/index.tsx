@@ -4,7 +4,6 @@ import Avatar from '@/components/common/Avatar';
 import TILY_LINKS from '@/constants/links';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import { useQueryClient } from '@tanstack/react-query';
 import { USER_QUERY_KEY } from '@/api/hooks/user';
 
@@ -44,12 +43,3 @@ const Alarm = (props: AlarmProps) => {
 };
 
 export default Alarm;
-
-export const EmptyAlarm = () => {
-  return (
-    <Styled.EmptyAlarmRoot>
-      <Image src="/assets/icons/ic_unAlarm.svg" width={36} height={36} alt="알림이 없습니다" />
-      <Styled.EmptyAlarmText>알림이 없습니다.</Styled.EmptyAlarmText>
-    </Styled.EmptyAlarmRoot>
-  );
-};

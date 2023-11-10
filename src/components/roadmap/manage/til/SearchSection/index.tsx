@@ -19,7 +19,9 @@ const SearchSection = () => {
 
   useEffect(() => {
     // 초기 useEffect에서 steps가 undefined일 경우 return
-    if (!steps || !router.isReady || steps.result.steps.length === 0) return;
+    if (!steps || !router.isReady || steps.result.steps.length === 0) {
+      return;
+    }
     overlapParamsToUrl({ stepId: steps.result.steps[0].id.toString() });
   }, [steps]);
 

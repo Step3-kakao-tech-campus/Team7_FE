@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { useGetAlarms } from '@/api/hooks/user';
+import EmptyList from '@/components/common/EmptyList';
 import { type ModalProps } from '@/components/common/Modal';
-import Alarm, { EmptyAlarm } from '@/components/gnb/common/Alarm';
+import Alarm from '@/components/gnb/common/Alarm';
 import AlarmFooter from '@/components/gnb/common/AlarmFooter';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
@@ -33,7 +34,13 @@ const MobileAlarmModal = (props: MoblieAlarmModalProps) => {
         <Styled.Header>알림</Styled.Header>
 
         <Styled.List>
-          {alarms.length === 0 ? <EmptyAlarm /> : alarms.map((alarm) => <Alarm key={alarm.id} alarm={alarm} />)}
+          {alarms.length === 0 ? (
+            <EmptyList image="ic_unAlarm" imageWidth={40} imageHeight={40}>
+              <p>알림이 없습니다.</p>
+            </EmptyList>
+          ) : (
+            alarms.map((alarm) => <Alarm key={alarm.id} alarm={alarm} />)
+          )}
         </Styled.List>
 
         <AlarmFooter />
