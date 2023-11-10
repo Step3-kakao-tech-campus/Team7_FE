@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import ManageLayout from '@/components/layout/ManageLayout';
 import Table from '@/components/roadmap/manage/member/Table';
 import { setLayout } from '@/utils/layout';
@@ -8,6 +9,7 @@ import { setLayout } from '@/utils/layout';
 const Member = () => {
   return (
     <>
+      <TILyHead title="TIL-y | STEP 관리" />
       <Header>구성원 관리</Header>
       <Table />
     </>
