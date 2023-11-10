@@ -3,16 +3,22 @@ import { useRouter } from 'next/router';
 import { usePostComments } from '@/api/hooks/til';
 import Icon from '@/components/common/Icon';
 import TextArea from '@/components/common/TextArea';
+import { useToast } from '@/components/common/Toast/useToast';
 import * as Styled from './style';
 
 const TextAreaSection = () => {
   const [content, setContent] = useState('');
+  const toast = useToast();
 
   const { query } = useRouter();
   const { postCommentsAsync } = usePostComments();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (content === '') {
+      toast.showBottom({ message: '댓글이 비어있어요' });
+      return;
+    }
     postCommentsAsync({
       body: {
         roadmapId: Number(query.roadmapId),
