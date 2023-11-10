@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import HeaderLayout from '@/components/layout/HeaderLayout';
 import RoadmapInfoForm from '@/components/roadmap/common/RoadmapInfoForm';
 import { setLayout } from '@/utils/layout';
@@ -8,6 +9,7 @@ import { setLayout } from '@/utils/layout';
 const RoadmapCreate = () => {
   return (
     <RoadmapPage>
+      <TILyHead title="TIL-y | 로드맵 생성" />
       <RoadmapInfoForm />
     </RoadmapPage>
   );

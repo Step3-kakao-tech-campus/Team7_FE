@@ -17,7 +17,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   onBlur?: () => void;
 }
 
-const Input = forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement> | undefined) => {
+const Input = forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement>) => {
   const {
     label,
     status = 'default',

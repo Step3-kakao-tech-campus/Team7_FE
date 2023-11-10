@@ -69,12 +69,7 @@ const RoadmapInfoForm = () => {
           )}
         />
         <section>
-          <h3
-            css={css`
-              margin-bottom: 12px;
-            `}>
-            공개 여부
-          </h3>
+          <Styled.Label>공개 여부</Styled.Label>
           <Flex gap={0.8}>
             <Controller
               name="isPublic"

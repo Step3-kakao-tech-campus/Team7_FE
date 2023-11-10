@@ -3,6 +3,7 @@ import { QueryClient, dehydrate } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
 import { getRoadmapsById } from '@/api/roadmap';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import GuestGNB from '@/components/gnb/GuestGNB';
 import GNB from '@/components/gnb/UserGNB';
 import StepList from '@/components/roadmap/common/StepList';
@@ -16,6 +17,7 @@ interface RoadmapDetailProps {
 const RoadmapDetail = ({ isUserLogin }: RoadmapDetailProps) => {
   return (
     <>
+      <TILyHead title="TIL-y | 로드맵" />
       {isUserLogin ? <GNB /> : <GuestGNB />}
       <RoadmapPage>
         <RoadmapDetailInfo isUserLogin={isUserLogin} />
