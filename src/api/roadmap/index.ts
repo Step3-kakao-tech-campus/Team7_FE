@@ -4,7 +4,6 @@ import type {
   GetRoadmapStepsResponse,
   GetRoadmapStepReferenceResponse,
   GetRoadmapGroupApplyResponse,
-  Role,
   GetRoadmapGroupMemberResponse,
   GetRoadmapsResponse,
   GetRoadmapsByIdResponse,
@@ -12,7 +11,7 @@ import type {
   PostStepsRequest,
   PostReferencesRequest,
 } from '@/api/roadmap/type';
-import type { IdResponse, NullResultResponse, CommonResponse } from '../type';
+import type { IdResponse, NullResultResponse, CommonResponse, Role } from '../type';
 
 // 로드맵 조회하기 (나의 로드맵)
 

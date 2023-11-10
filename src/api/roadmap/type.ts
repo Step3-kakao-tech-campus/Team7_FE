@@ -1,4 +1,15 @@
-import type { Step, IdName, CommonResponse, Creator, StepWithReferences, Roadmap } from '@/api/type';
+import type {
+  Step,
+  IdName,
+  CommonResponse,
+  Creator,
+  StepWithReferences,
+  Roadmap,
+  Reference,
+  Member,
+  Role,
+  ApplyMember,
+} from '@/api/type';
 
 // 요청
 
@@ -65,15 +76,19 @@ export interface GetRoadmapGroupApplyResponse extends CommonResponse {
 export interface GetRoadmapStepsResponse {
   success: boolean;
   message: string;
-  result: RoadmapStepsResult;
+  result: {
+    steps: Step[];
+    progress: number;
+    myRole: string;
+  };
 }
 
 export interface GetRoadmapStepReferenceResponse extends CommonResponse {
   result: {
     id: number;
     description: string;
-    youtubes: Youtube[];
-    webs: Web[];
+    youtubes: Reference[];
+    webs: Reference[];
   };
 }
 
@@ -82,59 +97,4 @@ export interface GetRoadmapGroupMemberResponse extends CommonResponse {
     users: Member[];
     myRole: Role;
   };
-}
-
-export interface RoadmapStepsResult {
-  steps: Step[];
-  progress: number;
-  myRole: string;
-}
-
-export interface Youtube {
-  id: number;
-  link: string;
-}
-
-export interface Web {
-  id: number;
-  link: string;
-}
-
-export interface References {
-  id: number;
-  link: string;
-}
-
-export interface References {
-  youtube: Youtube[];
-  web: Web[];
-}
-
-export interface PostRoadmapsByIdResponse {
-  success: boolean;
-  message: string;
-  result: null;
-}
-
-export interface Member {
-  id: number;
-  name: string;
-  image: string;
-  role: Exclude<Role, null>;
-}
-
-export type Role = keyof typeof roleStatus | null;
-
-export const roleStatus = {
-  master: '마스터',
-  manager: '매니저',
-  member: '멤버',
-} as const;
-
-export interface ApplyMember {
-  id: number;
-  name: string;
-  image: string;
-  date: string;
-  content: string;
 }
