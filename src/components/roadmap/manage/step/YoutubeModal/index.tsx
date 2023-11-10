@@ -8,6 +8,7 @@ import InfoArea from '@/components/common/InfoArea';
 import Input from '@/components/common/Input';
 import Modal, { type ModalProps } from '@/components/common/Modal';
 import TwoButtonContainer from '@/components/common/TwoButtonContainer';
+import REGEX from '@/constants/regex';
 import useQueryParam from '@/hooks/useQueryParam';
 import preventEnterSubmit from '@/utils/preventEnterSubmit';
 import * as Styled from './style';
@@ -41,7 +42,7 @@ const YoutubeModal = (props: YoutubeModalProps) => {
     }
   };
   return (
-    <Modal isOpen={isOpen} onClose={onClose} width={35}>
+    <Modal isOpen={isOpen} onClose={onClose} width={50}>
       <Flex dir="col" gap={1.5}>
         <h2>유튜브 영상 추가하기</h2>
         <InfoArea>
@@ -49,8 +50,8 @@ const YoutubeModal = (props: YoutubeModalProps) => {
           <Styled.YoutubeContainer>
             <Styled.Youtube>
               <iframe
-                width="560"
-                height="315"
+                width="1000"
+                height="600"
                 src="https://www.youtube.com/embed/1T8fyDzgfT4?si=GFNmcV3Sw3LttNwZ"
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -64,6 +65,10 @@ const YoutubeModal = (props: YoutubeModalProps) => {
             control={control}
             rules={{
               required: '필수 정보입니다.',
+              pattern: {
+                value: REGEX.yotubueAddress(),
+                message: '형식에 맞는 동영상 링크를 입력해주세요.',
+              },
             }}
             render={({ field }) => (
               <Input

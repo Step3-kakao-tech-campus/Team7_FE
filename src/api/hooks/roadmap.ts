@@ -136,7 +136,7 @@ export const usePostRoadmapsIndividial = () => {
   const postRoadmapsIndividialAsync = async (req: { body: PostRoadmapsRequest }) => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapsMy()]);
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsMy());
         toast.showBottom({
           message: '카테고리가 생성되었습니다.',
         });
@@ -253,6 +253,7 @@ export const usePostTilyApply = () => {
 // 참가 코드로 로드맵 신청하기
 
 export const usePostRoadmapsGroupsParticipate = () => {
+  const queryClient = useQueryClient();
   const { mutateAsync, isLoading, isError } = useMutation(postRoadmapsGroupsParticipate);
   const { handleError } = useApiError();
   const toast = useToast();
@@ -260,6 +261,7 @@ export const usePostRoadmapsGroupsParticipate = () => {
   const postRoadmapsGroupsParticipateAsync = async (req: { body: { code: string } }) => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsMy());
         toast.showBottom({
           message: '로드맵에 참여되었습니다.',
         });

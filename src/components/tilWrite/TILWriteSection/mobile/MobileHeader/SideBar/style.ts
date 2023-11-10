@@ -8,7 +8,7 @@ export const Content = styled.div<{ referenceOpen: boolean }>`
   top: 0;
   left: 0;
   flex-direction: column;
-  z-index: 100001;
+  z-index: 9998;
   background-color: #fff;
   width: 100%;
   height: 100dvh;

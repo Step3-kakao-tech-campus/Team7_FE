@@ -1,5 +1,3 @@
-import type { References } from './roadmap/type';
-
 // 공통 응답 인터페이스
 
 export interface CommonResponse {
@@ -33,13 +31,15 @@ export interface IdName {
   category?: 'individual' | 'group' | 'tily';
 }
 
-// User 인터페이스
+// 공통 엔티티 인터페이스
+
+// User
 export interface User extends IdName {
   email: string;
   image: string;
 }
 
-// Alarm 인터페이스
+// Alarm
 export interface Alarm {
   tilId: number;
   id: number;
@@ -51,6 +51,7 @@ export interface Alarm {
   createDate: Date;
 }
 
+// TIL
 export interface Til {
   id: number;
   createDate: string;
@@ -58,7 +59,17 @@ export interface Til {
   roadmap: IdName & { category: 'individual' | 'group' | 'tily' };
 }
 
-// Step 인터페이스
+export interface MemberTil {
+  tilId: number | null;
+  userId: number;
+  name: string;
+  image: string;
+  content: string | null;
+  submitDate: string | null;
+  commentNum: number | null;
+}
+
+// Step
 export interface Step {
   id: number;
   title: string;
@@ -72,10 +83,19 @@ export interface StepWithReferences {
   title: string;
   description: string;
   dueDate: Date | null;
-  references: References;
+  references: {
+    youtube: Reference[];
+    web: Reference[];
+  };
 }
 
-// 로드맵 인터페이스
+// 참고자료
+export interface Reference {
+  id: number;
+  link: string;
+}
+
+// 로드맵
 export interface Roadmap extends IdName {
   description: string;
   stepNum: number;
@@ -84,18 +104,42 @@ export interface Roadmap extends IdName {
   creator?: Creator;
 }
 
+// 로드맵 생성자
 export interface Creator extends IdName {
   image: string;
 }
 
+// 장미밭
 export interface UserHistory {
   day: string;
   value: number;
 }
 
+// 댓글
 export interface Comment extends IdName {
   image: string;
   content: string;
   isOwner: boolean;
   date: string;
+}
+
+// 로드맵 구성원
+export interface Member extends IdName {
+  image: string;
+  role: Exclude<Role, null>;
+}
+
+export type Role = keyof typeof roleStatus | null;
+
+export const roleStatus = {
+  master: '마스터',
+  manager: '매니저',
+  member: '멤버',
+} as const;
+
+// 로드맵 신청자
+export interface ApplyMember extends IdName {
+  image: string;
+  date: string;
+  content: string;
 }
