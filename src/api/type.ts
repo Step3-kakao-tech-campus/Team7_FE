@@ -30,6 +30,7 @@ export interface IdParams {
 export interface IdName {
   id: number;
   name: string;
+  category?: 'individual' | 'group' | 'tily';
 }
 
 // User 인터페이스
