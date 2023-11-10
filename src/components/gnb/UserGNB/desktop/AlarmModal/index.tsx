@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useGetAlarms } from '@/api/hooks/user';
-import { USER_QUERY_KEY } from '@/api/hooks/user';
 import EmptyList from '@/components/common/EmptyList';
 import { type ModalProps } from '@/components/common/Modal';
 import Alarm from '@/components/gnb/common/Alarm';
 import AlarmFooter from '@/components/gnb/common/AlarmFooter';
+import { USER_QUERY_KEY } from '@/constants/queryKey';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import * as Styled from './style';
 
@@ -24,7 +24,7 @@ const AlarmModal = (props: AlarmModalProps) => {
     // 유저가 헤더의 프로필이미지를 클릭하면 useOnClickOutside가 실행되고 다시 handleToggleAlarm가 실행되어서 알림창이 다시 열리는 현상이 발생함
     // 이를 방지하기 위해 알림창이 열려있는 상태에서 프로필이미지를 클릭하면 알림창이 닫히지 않도록 함
     if (!alarmButtonRef.current || alarmButtonRef.current.contains(event?.target as Node)) return;
-    queryClient.invalidateQueries([USER_QUERY_KEY.alarm]);
+    queryClient.invalidateQueries(USER_QUERY_KEY.alarms());
 
     onClose?.();
   });

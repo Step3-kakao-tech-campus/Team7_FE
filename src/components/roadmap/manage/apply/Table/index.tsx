@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useGetRoadmapGroupApply } from '@/api/hooks/roadmap';
 import { usePostRoadmapGroupApplyAccept } from '@/api/hooks/roadmap';
 import { useDeleteRoadmapGroupApplyReject } from '@/api/hooks/roadmap';
-import type { ApplyMember } from '@/api/roadmap/type';
+import type { ApplyMember } from '@/api/type';
 import ConfirmModal from '@/components/roadmap/manage/apply/ConfirmModal';
 import TableColumn from '@/components/roadmap/manage/apply/TableColumn';
 import * as Styled from '@/components/roadmap/manage/member/Table/style';

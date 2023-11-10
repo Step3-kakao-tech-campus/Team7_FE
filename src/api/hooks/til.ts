@@ -2,7 +2,6 @@ import qs from 'qs';
 import { useRouter } from 'next/router';
 import type { QueryKey } from '@tanstack/react-query';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ROADMAP_QUERY_KEY } from '@/api/hooks/roadmap';
 import {
   getTils,
   getTilsQuery,
@@ -24,13 +23,8 @@ import type {
 } from '@/api/til/type';
 import type { IdParams } from '@/api/type';
 import { useToast } from '@/components/common/Toast/useToast';
+import { ROADMAP_QUERY_KEY, TIL_QUERY_KEY } from '@/constants/queryKey';
 import { useApiError } from '@/hooks/useApiError';
-
-const QUERY_KEY = {
-  getTilsQuery: 'getTilsQuery',
-  getTils: 'getTils',
-  getStepTils: 'getStepTils',
-};
 
 interface InfinityTilRequest {
   queryKey?: QueryKey;
@@ -49,7 +43,7 @@ export const usePostTils = () => {
 
     const data = await mutateAsync(req, {
       onSuccess: () => {
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId?.toString()]);
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapSteps(roadmapId));
       },
       onError: handleError,
     });
@@ -67,7 +61,7 @@ export const useGetTils = (req: { tilId: number }) => {
 
   const { isReady } = useRouter();
 
-  const { data, isLoading } = useQuery([QUERY_KEY.getTils, tilId], () => getTils(req), {
+  const { data, isLoading } = useQuery(TIL_QUERY_KEY.getTils(tilId), () => getTils(req), {
     enabled: isReady,
   });
 
@@ -109,8 +103,8 @@ export const useSubmitTils = () => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({ message: 'TIL이 제출 되었습니다.' });
-        queryClient.invalidateQueries([ROADMAP_QUERY_KEY.getRoadmapSteps, roadmapId]);
-        queryClient.invalidateQueries([QUERY_KEY.getTils, tilId]);
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapSteps(roadmapId!));
+        queryClient.invalidateQueries(TIL_QUERY_KEY.getTils(tilId!));
       },
       onError: handleError,
     });
@@ -127,7 +121,7 @@ export const useGetTilsQuery = ({ queryKey }: InfinityTilRequest) => {
   const _queryKey = (typeof queryKey === 'string' ? [queryKey] : queryKey) ?? []; // _queryKey를 배열로 만든다 또한 _queryKey가 undefined일 경우 []로 초기화
 
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    [QUERY_KEY.getTilsQuery, ..._queryKey],
+    TIL_QUERY_KEY.getTilsQuery(_queryKey),
     async ({ pageParam: page = 0 }) => {
       const searchParams = { page, ...query };
 
@@ -179,7 +173,7 @@ export const usePostComments = () => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 작성되었습니다.' });
-        queryClient.invalidateQueries([QUERY_KEY.getTils, tilId]);
+        queryClient.invalidateQueries(TIL_QUERY_KEY.getTils(tilId));
       },
       onError: handleError,
     });
@@ -209,7 +203,7 @@ export const usePatchComments = () => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 수정 되었습니다.' });
-        queryClient.invalidateQueries([QUERY_KEY.getTils, tilId]);
+        queryClient.invalidateQueries(TIL_QUERY_KEY.getTils(tilId));
       },
       onError: handleError,
     });
@@ -236,7 +230,7 @@ export const useDeleteComments = () => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         toast.showBottom({ message: '댓글이 삭제 되었습니다.' });
-        queryClient.invalidateQueries([QUERY_KEY.getTils, tilId]);
+        queryClient.invalidateQueries(TIL_QUERY_KEY.getTils(tilId));
       },
       onError: handleError,
     });
@@ -252,7 +246,7 @@ export const useDeleteComments = () => {
 export const useGetStepTils = (req: { stepId: number }) => {
   const { stepId } = req;
 
-  const { data, isLoading } = useQuery([QUERY_KEY.getStepTils, stepId], () =>
+  const { data, isLoading } = useQuery(TIL_QUERY_KEY.getStepTils(stepId), () =>
     getStepTils({
       stepId,
       query: qs.stringify({ isSubmit: true, isMember: false, name: '' }, { addQueryPrefix: true }),
@@ -276,7 +270,7 @@ export const useGetStepTilsManage = ({ queryKey }: { queryKey: QueryKey }) => {
   const enabled = !!stepId;
 
   const { data, isLoading } = useQuery(
-    [QUERY_KEY.getStepTils, ..._queryKey],
+    [TIL_QUERY_KEY.getStepTils, ..._queryKey],
     () =>
       getStepTils({
         stepId: Number(stepId),

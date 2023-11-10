@@ -5,7 +5,7 @@ import TILY_LINKS from '@/constants/links';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useQueryClient } from '@tanstack/react-query';
-import { USER_QUERY_KEY } from '@/api/hooks/user';
+import { USER_QUERY_KEY } from '@/constants/queryKey';
 
 interface AlarmProps {
   alarm: Alarm;
@@ -21,7 +21,7 @@ const Alarm = (props: AlarmProps) => {
       isRead={alarm.isRead}
       key={alarm.id}
       onClick={() => {
-        queryClient.invalidateQueries([USER_QUERY_KEY.alarm]);
+        queryClient.invalidateQueries(USER_QUERY_KEY.alarms());
         router.push(TILY_LINKS.tilWrite({ roadmapId: alarm.roadmap.id, stepId: alarm.step.id, tilId: alarm.tilId }))
       }}>
       <Avatar imageSize={40} imageUrl={alarm.sender.image} alt="프로필 이미지" />

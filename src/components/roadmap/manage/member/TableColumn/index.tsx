@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { usePatchRoadmapGroupMemberRole } from '@/api/hooks/roadmap';
-import type { Member, Role } from '@/api/roadmap/type';
-import { roleStatus } from '@/api/roadmap/type';
+import { roleStatus, type Member, type Role } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import Select from '@/components/common/Select';
