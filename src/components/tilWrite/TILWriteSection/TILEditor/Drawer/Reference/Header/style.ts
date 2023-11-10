@@ -13,6 +13,10 @@ export const TitleContainer = styled.button`
   gap: 0.5rem;
   cursor: pointer;
 
+  & > img:hover {
+    scale: 1.3;
+  }
+
   & > div {
     @media ${({ theme }) => theme.mediaQuery.md} {
       display: none;

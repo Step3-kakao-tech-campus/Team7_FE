@@ -102,7 +102,7 @@ export const usePostRoadmaps = () => {
       onSuccess: () => {
         queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsMy());
         toast.showBottom({
-          message: '로드맵이 생성되었습니다.',
+          message: 'STEP을 추가해보세요.',
         });
       },
       onError: handleError,
