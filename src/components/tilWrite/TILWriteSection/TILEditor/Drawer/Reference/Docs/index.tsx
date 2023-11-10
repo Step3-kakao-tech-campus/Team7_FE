@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import OpenGraph from '@/components/tilWrite/TILWriteSection/TILEditor/Drawer/Reference/OpenGraph';
 import * as Styled from './style';
 
 interface DocsProps {
@@ -32,7 +31,9 @@ const Docs = (props: DocsProps) => {
             closed: { opacity: 0 },
           }}
           transition={{ type: 'tween' }}>
-          <OpenGraph url={link} />
+          <Styled.ReferenceLink href={link} target="_blank" rel="noreferrer">
+            <span>{`${index}. ${link}`}</span>
+          </Styled.ReferenceLink>
         </Styled.OpenGraphContariner>
       </button>
     </Styled.Root>

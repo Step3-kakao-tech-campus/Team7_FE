@@ -95,7 +95,7 @@ export const postUserProfileImage = async (req: { param: { userId: number }; bod
 
   const { data } = await axiosInstance.request<CommonResponse>({
     method: 'POST',
-    url: `user/${userId}/image`,
+    url: `/images/users/${userId}`,
     data: body,
     headers: {
       'Content-Type': 'multipart/form-data', // Content-Type을 반드시 이렇게 하여야 한다.
