@@ -25,6 +25,6 @@ export const InfoText = styled.li`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-
+  gap: 12px;
   margin-top: 1.3rem;
 `;

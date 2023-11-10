@@ -3,18 +3,21 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTils } from '@/api/hooks/til';
 import { useToast } from '@/components/common/Toast/useToast';
+import ExtensionInfoModal from '@/components/tilWrite/TILWriteSection/Header/ExtensionInfoModal';
 import { useChromeExtension } from '@/components/tilWrite/TILWriteSection/Header/useChromeExtension';
 
 interface ExtensionIconProps {
+  isOpen: boolean;
   TILContent: string;
   handleModalOpen: () => void;
+  handleClose: () => void;
 }
 const ExtensionIcon = (props: ExtensionIconProps) => {
-  const { TILContent, handleModalOpen } = props;
+  const { isOpen, TILContent, handleModalOpen, handleClose } = props;
 
   const router = useRouter();
   const toast = useToast();
-  const { isExtensionInstall } = useChromeExtension();
+  useChromeExtension();
 
   const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
@@ -42,15 +45,19 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
 
   return (
     <>
-      {isExtensionInstall ? (
+      {/* {isExtensionInstall ? (
         <button id="github_extenstion" onClick={handleSubmitTILContentToGithub}>
           <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
         </button>
-      ) : (
-        <button id="github_extenstion" onClick={handleModalOpen}>
-          <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
-        </button>
-      )}
+      ) : ( */}
+      <button id="github_extenstion" onClick={handleModalOpen}>
+        <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
+      </button>
+      <ExtensionInfoModal
+        isOpen={isOpen}
+        handleClose={handleClose}
+        handleSubmitTILContentToGithub={handleSubmitTILContentToGithub}
+      />
     </>
   );
 };
