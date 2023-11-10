@@ -52,7 +52,7 @@ const RoadmapSkeleton = () => {
     <Styled.RoadmapContainer>
       {Array(12)
         .fill(null)
-        .map((idx) => (
+        .map((_, idx) => (
           <Styled.Skeleton key={idx} />
         ))}
     </Styled.RoadmapContainer>

@@ -13,14 +13,15 @@ export const Root = styled(Card)`
   cursor: pointer;
   overflow: hidden;
 
-  @media ${({ theme }) => theme.mediaQuery.sm} {
-    height: 200px;
-  }
-
-  & > section > h4 {
+  & h3 {
+    font-size: 17px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    height: 200px;
   }
 
   & > section > p {
@@ -54,7 +55,7 @@ export const Root = styled(Card)`
 
 export const RoadmapEdit = styled(Flex)`
   padding: 2px 8px;
-  background-color: #09b707;
+  background-color: #088906;
   border-radius: 8px;
   color: white;
 

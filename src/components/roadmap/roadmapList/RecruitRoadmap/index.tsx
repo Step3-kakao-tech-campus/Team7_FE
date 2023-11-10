@@ -4,7 +4,7 @@ import RecruitRoadmapList from '@/components/roadmap/roadmapList/RecruitRoadmap/
 const RecruitRoadmap = () => {
   return (
     <>
-      <h2>로드맵 목록</h2>
+      <h1>로드맵 목록</h1>
       <RecruitNav />
       <RecruitRoadmapList />
     </>
