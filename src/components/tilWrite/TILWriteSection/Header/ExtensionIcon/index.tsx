@@ -17,7 +17,7 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
 
   const router = useRouter();
   const toast = useToast();
-  useChromeExtension();
+  const { isChromeExtensionInstall } = useChromeExtension();
 
   const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
@@ -45,11 +45,6 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
 
   return (
     <>
-      {/* {isExtensionInstall ? (
-        <button id="github_extenstion" onClick={handleSubmitTILContentToGithub}>
-          <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
-        </button>
-      ) : ( */}
       <button id="github_extenstion" onClick={handleModalOpen}>
         <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
       </button>
@@ -57,6 +52,7 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
         isOpen={isOpen}
         handleClose={handleClose}
         handleSubmitTILContentToGithub={handleSubmitTILContentToGithub}
+        isChromeExtensionInstall={isChromeExtensionInstall}
       />
     </>
   );
