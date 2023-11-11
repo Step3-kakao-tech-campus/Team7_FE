@@ -54,8 +54,9 @@
 
 
 <p align='center'>
-<img width="3000" alt="스크린샷 2023-03-16 오전 9 30 09" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/b9967f2f-9676-4891-8da2-51a75f575ca2">
+<img width="3000" alt="스크린샷 2023-03-16 오전 9 30 09" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/3288031f-3460-40d1-84b7-a19656d29f4c">
 </p>
+
 
 
 
