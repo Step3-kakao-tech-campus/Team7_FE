@@ -17,7 +17,7 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
 
   const router = useRouter();
   const toast = useToast();
-  const { isChromeExtensionInstall } = useChromeExtension();
+  useChromeExtension();
 
   const { tilDetail } = useGetTils({
     tilId: Number(router.query.tilId),
@@ -52,7 +52,6 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
         isOpen={isOpen}
         handleClose={handleClose}
         handleSubmitTILContentToGithub={handleSubmitTILContentToGithub}
-        isChromeExtensionInstall={isChromeExtensionInstall}
       />
     </>
   );
