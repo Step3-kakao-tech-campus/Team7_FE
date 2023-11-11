@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useDeleteReferences } from '@/api/hooks/roadmap';
 import type { StepWithReferences } from '@/api/type';
@@ -6,7 +7,7 @@ import * as Styled from '@/components/roadmap/common/StepList/ReferenceList/styl
 import useQueryParam from '@/hooks/useQueryParam';
 
 interface ReferenceListProps {
-  type: '유튜브 영상' | '참고자료';
+  type: 'youtube' | 'web';
   step: StepWithReferences;
 }
 
@@ -19,7 +20,7 @@ const ReferenceList = (props: ReferenceListProps) => {
 
   let references = [];
 
-  if (type === '유튜브 영상') {
+  if (type === 'youtube') {
     references = step.references.youtube;
   } else {
     references = step.references.web;
@@ -27,6 +28,14 @@ const ReferenceList = (props: ReferenceListProps) => {
 
   const handleDeleteReference = async (referenceId: number) => {
     await deleteReferencesAsync({ referenceId });
+  };
+
+  const IframeToUrl = (iframeString: string) => {
+    const regex = /src="(https:\/\/www.youtube.com\/embed\/[^"]+)"/;
+    const match = iframeString.match(regex);
+
+    // match[1]에 추출된 YouTube URL이 들어있습니다.
+    return match ? match[1] : '';
   };
 
   if (references.length === 0) {
@@ -38,13 +47,22 @@ const ReferenceList = (props: ReferenceListProps) => {
       {references?.map((reference, idx) => (
         <Styled.Link key={reference.id}>
           <section>
-            <Image
-              src={`/assets/icons/ic_${type === '유튜브 영상' ? 'youtube' : 'web'}.svg`}
-              alt="stepEmptyIcon"
-              width={23}
-              height={23}
-            />
-            <p>{`${idx + 1}. ${reference.link}`}</p>
+            <Image src={`/assets/icons/ic_${type}.svg`} alt="stepEmptyIcon" width={23} height={23} />
+            {type === 'web' ? (
+              <p>
+                {`${idx + 1}. `}
+                <Link href={reference.link} target="_blank" rel="noopener noreferrer">
+                  참고자료
+                </Link>
+              </p>
+            ) : (
+              <p>
+                {`${idx + 1}. `}
+                <Link href={IframeToUrl(reference.link)} target="_blank" rel="noopener noreferrer">
+                  동영상 링크
+                </Link>
+              </p>
+            )}
           </section>
           {path === 'manage' && (
             <Image

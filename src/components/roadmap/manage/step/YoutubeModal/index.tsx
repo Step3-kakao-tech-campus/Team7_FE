@@ -36,7 +36,7 @@ const YoutubeModal = (props: YoutubeModalProps) => {
 
   const onSubmit: SubmitHandler<{ link: string }> = async (formData) => {
     const data = await postReferencesAsync({ body: { category: 'youtube', roadmapId, stepId: step.id, ...formData } });
-    if (data.code === 200) {
+    if (data.code === 201) {
       reset();
       onClose();
     }
