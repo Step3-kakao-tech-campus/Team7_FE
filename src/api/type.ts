@@ -120,7 +120,7 @@ export interface Comment extends IdName {
   image: string;
   content: string;
   isOwner: boolean;
-  date: string;
+  createDate: string;
 }
 
 // 로드맵 구성원

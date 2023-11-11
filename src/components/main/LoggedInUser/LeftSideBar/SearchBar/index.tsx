@@ -8,11 +8,11 @@ interface SearchBarProps {}
 const SearchBar = forwardRef<HTMLFormElement, SearchBarProps>((_, ref) => {
   const [tilName, setTilName] = useState<string>('');
 
-  const { addParamsToUrl } = useParamsToUrl();
+  const { addParamsToUrl, deleteParamsFromUrl } = useParamsToUrl();
 
   const handleSearch = useCallback(
     (title: string) => {
-      if (!tilName) return;
+      if (!tilName) deleteParamsFromUrl('title');
       addParamsToUrl({ title });
     },
     [tilName],
