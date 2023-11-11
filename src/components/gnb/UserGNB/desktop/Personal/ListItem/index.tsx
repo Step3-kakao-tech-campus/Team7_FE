@@ -1,4 +1,4 @@
-import { useState, type PropsWithChildren, useRef } from 'react';
+import { useState, type PropsWithChildren, useRef, type SetStateAction, type Dispatch } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import Image from 'next/image';
 import { useDeleteRoadmaps, useDeleteSteps, usePatchRoadmaps, usePatchSteps } from '@/api/hooks/roadmap';
@@ -13,10 +13,11 @@ interface ListItemProps {
   roadmapId: number;
   selected: boolean;
   onClick: () => void;
+  onClickRoadmap: Dispatch<SetStateAction<number>>;
 }
 
 const ListItem = (props: PropsWithChildren<ListItemProps>) => {
-  const { children, selected, stepId, roadmapId, onClick } = props;
+  const { children, selected, stepId, roadmapId, onClick, onClickRoadmap } = props;
   const [showEdit, setShowEdit] = useState<boolean>(false);
   const [showDeletePopover, setShowDeletePopover] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -58,9 +59,14 @@ const ListItem = (props: PropsWithChildren<ListItemProps>) => {
       });
   };
 
-  const handleDelete = () => {
-    if (stepId !== undefined) deleteStepsAsync({ stepId });
-    else deleteRoadmapsAsync({ roadmapId });
+  const handleDelete = async () => {
+    if (stepId !== undefined) await deleteStepsAsync({ stepId });
+    else {
+      const data = await deleteRoadmapsAsync({ roadmapId });
+      if (data.code === 200) {
+        onClickRoadmap(0);
+      }
+    }
   };
 
   return (

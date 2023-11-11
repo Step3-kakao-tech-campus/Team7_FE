@@ -30,23 +30,23 @@ const TILSection = () => {
 
   return (
     <>
-      <ConditionalRender
-        data={tils}
-        EmptyUI={
-          <EmptyList
-            image="ic_peopleTILEmpty"
-            button="TIL 작성하기"
-            onClick={() => handleOpen()}
-            imageHeight={150}
-            imageWidth={200}>
-            <p>작성된 TIL이 없습니다</p>
-            <p>새로운 TIL을 작성해보세요!</p>
-          </EmptyList>
-        }>
-        <Styled.Root>
-          <Responsive device="mobile">
-            <SearchBar />
-          </Responsive>
+      <Styled.Root>
+        <Responsive device="mobile">
+          <SearchBar />
+        </Responsive>
+        <ConditionalRender
+          data={tils}
+          EmptyUI={
+            <EmptyList
+              image="ic_peopleTILEmpty"
+              button="TIL 작성하기"
+              onClick={() => handleOpen()}
+              imageHeight={150}
+              imageWidth={200}>
+              <p>작성된 TIL이 없습니다</p>
+              <p>새로운 TIL을 작성해보세요!</p>
+            </EmptyList>
+          }>
           <CustomSuspense isLoading={isLoading} fallback={<TILSection.Skeleton />}>
             <Styled.Container>
               <>
@@ -56,8 +56,8 @@ const TILSection = () => {
               </>
             </Styled.Container>
           </CustomSuspense>
-        </Styled.Root>
-      </ConditionalRender>
+        </ConditionalRender>
+      </Styled.Root>
       <Styled.ObserverInterSectionTarget ref={ref} />
       <Responsive device="desktop">
         <TILModal isOpen={isOpen} onClose={handleClose} />

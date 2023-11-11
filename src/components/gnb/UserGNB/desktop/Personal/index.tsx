@@ -28,8 +28,10 @@ const Personal = () => {
   const { postTilsAsync } = usePostTils();
 
   useEffect(() => {
-    if (roadmaps.category.length !== 0) setRoadmapId(roadmaps.category[0].id);
-  }, []);
+    if (roadmaps.category.length !== 0) {
+      setRoadmapId(roadmaps.category[0].id);
+    }
+  }, [roadmaps.category]);
 
   const {
     control: roadmapControl,
@@ -135,6 +137,7 @@ const Personal = () => {
                   roadmapId={roadmap.id}
                   selected={roadmapId === roadmap.id}
                   onClick={() => setRoadmapId(roadmap.id)}
+                  onClickRoadmap={setRoadmapId}
                   key={roadmap.id}>
                   {roadmap.name}
                 </ListItem>
@@ -182,6 +185,7 @@ const Personal = () => {
                   stepId={step.id}
                   roadmapId={roadmapId}
                   onClick={() => handleSelcteStep(step)}
+                  onClickRoadmap={setRoadmapId}
                   key={step.id}>
                   {step.title}
                 </ListItem>

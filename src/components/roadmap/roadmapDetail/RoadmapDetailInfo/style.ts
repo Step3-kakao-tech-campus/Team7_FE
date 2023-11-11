@@ -31,7 +31,7 @@ export const RoadmapDetailInfo = styled.section`
       width: 100%;
     }
 
-    & > section > section > button {
+    & button {
       width: 100%;
     }
   }

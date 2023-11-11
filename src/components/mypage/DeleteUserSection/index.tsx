@@ -1,10 +1,13 @@
+import { useRouter } from 'next/router';
 import { useDeleteUser } from '@/api/hooks/user';
 import Button from '@/components/common/Button';
 import DeleteUserModal from '@/components/mypage/DeleteUserModal';
+import TILY_LINKS from '@/constants/links';
 import { useModalState } from '@/hooks/useModalState';
 import * as Styled from './style';
 
 const DeleteUserSection = () => {
+  const router = useRouter();
   const { isOpen, handleOpen, handleClose } = useModalState();
   const { deleteUserAsync } = useDeleteUser();
 
@@ -22,6 +25,7 @@ const DeleteUserSection = () => {
         onClick={(e) => {
           e.preventDefault();
           handleOpen();
+          router.replace(TILY_LINKS.intro());
         }}>
         회원 탈퇴
       </Button>
