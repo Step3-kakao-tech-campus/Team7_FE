@@ -13,9 +13,16 @@ const Avatar = (props: AvatarProps) => {
   return (
     <>
       {imageUrl ? (
-        <Styled.Avatar src={imageUrl} alt={alt} width={imageSize} height={imageSize} {...rest} />
+        <Styled.Avatar priority={true} src={`${imageUrl}`} alt={alt} width={imageSize} height={imageSize} {...rest} />
       ) : (
-        <Styled.Avatar src={`/assets/icons/${iconName}.svg`} alt={alt} width={imageSize} height={imageSize} {...rest} />
+        <Styled.Avatar
+          priority={true}
+          src={iconName ? `/assets/icons/${iconName}.svg` : `/assets/icons/ic_profile.svg`}
+          alt={alt}
+          width={imageSize}
+          height={imageSize}
+          {...rest}
+        />
       )}
     </>
   );

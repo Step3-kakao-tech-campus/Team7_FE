@@ -1,5 +1,14 @@
 // 웹 사이트에서 확장 프로그램이 설치되어있는 확인하기 위함.
-document.documentElement.setAttribute('myextension', true);
+try {
+  document.documentElement.setAttribute('myextension', true);
+
+  const targetElement = document.getElementById('tilyhub');
+
+  // 대상 요소에 새 클래스를 추가합니다.
+  targetElement.classList.add('tilytily');
+} catch (e) {
+  console.log(e);
+}
 
 document.addEventListener('크롬익스텐션이벤트', (e) => {
   commitContentToGitHub({
@@ -25,7 +34,9 @@ const commitContentToGitHub = async ({ isPersonal, roadmapTitle, stepTitle, cont
  * @returns {Object} { directory, message, readme }
  */
 const getGitUploadData = ({ isPersonal, roadmapTitle, stepTitle, content }) => {
-  const directory = isPersonal ? `개인 로드맵/${stepTitle}` : `틸리 로드맵 + 그룹 로드맵/${roadmapTitle}/${stepTitle}`;
+  const directory = isPersonal
+    ? `개인 로드맵/${roadmapTitle}/${stepTitle}`
+    : `틸리 로드맵 + 그룹 로드맵/${roadmapTitle}/${stepTitle}`;
   const message = `Sync TIL to GitHub - ${stepTitle}`;
   const readme = content;
   // prettier-ignore-end

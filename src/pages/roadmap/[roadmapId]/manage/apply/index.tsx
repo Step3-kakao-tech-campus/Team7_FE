@@ -1,40 +1,28 @@
 import type { GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
-import SideBar from '@/components/Roadmap/manage/SideBar';
-import ApplyTable from '@/components/Roadmap/manage/apply/Table';
-import TabBar from '@/components/Roadmap/manage/mobile/TabBar';
-import Responsive from '@/components/common/Responsive';
-import HeaderLayout from '@/components/layout/HeaderLayout';
-import { Root, Container, LeftArea, RightArea, Header } from '@/pages/roadmap/[roadmapId]/manage/member';
+import { getRoadmapsById } from '@/api/roadmap';
+import TILyHead from '@/components/common/NextHead/TILyHead';
+import ManageLayout from '@/components/layout/ManageLayout';
+import ApplyTable from '@/components/roadmap/manage/apply/Table';
+import { Header } from '@/pages/roadmap/[roadmapId]/manage/member';
 import { setLayout } from '@/utils/layout';
 
 const Apply = () => {
   return (
-    <Root>
-      <Container>
-        <Responsive device="desktop">
-          <LeftArea>
-            <SideBar />
-          </LeftArea>
-        </Responsive>
-
-        <Responsive device="mobile">
-          <TabBar />
-        </Responsive>
-
-        <RightArea>
-          <Header>신청 관리</Header>
-          <ApplyTable />
-        </RightArea>
-      </Container>
-    </Root>
+    <>
+      <TILyHead title="TIL-y | 신청 관리" />
+      <Header>신청 관리</Header>
+      <ApplyTable />
+    </>
   );
 };
 
-setLayout(Apply, HeaderLayout);
-
+setLayout(Apply, ManageLayout);
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cookies } = context.req;
+  const param = context.params;
+  const roadmapId = param?.roadmapId;
+
   let isUserLogin = true;
 
   try {
@@ -53,7 +41,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  return { props: {} };
+  const data = await getRoadmapsById({ roadmapId: Number(roadmapId) });
+
+  const myRole = data.result.myRole;
+
+  if (myRole === 'none' || myRole === 'member') {
+    return {
+      redirect: {
+        destination: `/roadmap/${roadmapId}`,
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 };
 
 export default Apply;

@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetRoadmapGroupApply } from '@/api/hooks/roadmap';
 import { usePostRoadmapGroupApplyAccept } from '@/api/hooks/roadmap';
-import { useDelelteRoadmapGroupApplyReject } from '@/api/hooks/roadmap';
-import type { ApplyMember } from '@/api/roadmap/type';
-import ConfirmModal from '@/components/Roadmap/manage/apply/ConfirmModal';
-import TableColumn from '@/components/Roadmap/manage/apply/TableColumn';
-import * as Styled from '@/components/Roadmap/manage/member/Table/style';
+import { useDeleteRoadmapGroupApplyReject } from '@/api/hooks/roadmap';
+import type { ApplyMember } from '@/api/type';
+import ConfirmModal from '@/components/roadmap/manage/apply/ConfirmModal';
+import TableColumn from '@/components/roadmap/manage/apply/TableColumn';
+import * as Styled from '@/components/roadmap/manage/member/Table/style';
 import { useModalState } from '@/hooks/useModalState';
 
 const ApplyTable = () => {
@@ -14,10 +14,10 @@ const ApplyTable = () => {
   const [memberInfo, setMemberInfo] = useState<ApplyMember>(ApplyMemberDefault);
 
   const router = useRouter();
-  const { members } = useGetRoadmapGroupApply(Number(router.query.roadmapId));
+  const { members } = useGetRoadmapGroupApply({ roadmapId: Number(router.query.roadmapId) });
   const { isOpen, handleOpen, handleClose } = useModalState();
-  const { postRoadmapGroupApplyAccept } = usePostRoadmapGroupApplyAccept();
-  const { delelteRoadmapGroupApplyReject } = useDelelteRoadmapGroupApplyReject();
+  const { postRoadmapGroupApplyAcceptAsync } = usePostRoadmapGroupApplyAccept();
+  const { deleteRoadmapGroupApplyRejectAsync } = useDeleteRoadmapGroupApplyReject();
 
   /*
    * userId가 변경될때 모달에 넘겨줄 유저 데이터를 변경하기 위해 만든 useEffect
@@ -36,17 +36,21 @@ const ApplyTable = () => {
   };
 
   const handleAcceptUser = () => {
-    postRoadmapGroupApplyAccept({
-      roadmapId: Number(router.query.roadmapId),
-      userId: userId,
+    postRoadmapGroupApplyAcceptAsync({
+      param: {
+        roadmapId: Number(router.query.roadmapId),
+        userId: userId,
+      },
     });
     handleClose();
   };
 
   const handleRejectUser = () => {
-    delelteRoadmapGroupApplyReject({
-      roadmapId: Number(router.query.roadmapId),
-      userId: userId,
+    deleteRoadmapGroupApplyRejectAsync({
+      param: {
+        roadmapId: Number(router.query.roadmapId),
+        userId: userId,
+      },
     });
     handleClose();
   };

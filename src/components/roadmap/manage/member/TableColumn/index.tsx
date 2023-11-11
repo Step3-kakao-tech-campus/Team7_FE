@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { usePatchRoadmapGroupMemberRole } from '@/api/hooks/roadmap';
-import type { Member, Role } from '@/api/roadmap/type';
-import { roleStatus } from '@/api/roadmap/type';
+import { roleStatus, type Member, type Role } from '@/api/type';
 import Avatar from '@/components/common/Avatar';
 import Button from '@/components/common/Button';
 import Select from '@/components/common/Select';
@@ -35,16 +34,20 @@ const TableColumn = (props: TableColumnProps) => {
   });
 
   const { query } = useRouter();
-  const { patchRoadmapGroupMemberRole } = usePatchRoadmapGroupMemberRole();
+  const { patchRoadmapGroupMemberRoleAsync } = usePatchRoadmapGroupMemberRole();
 
   const handleChangeRole = (option: SelectOption) => {
     // 이전 상태와 클릭된 상태가 같으면 요청을 보내지 않는다.
     if (selectedOption.value === option.value) return;
 
-    patchRoadmapGroupMemberRole({
-      roadmapId: Number(query.roadmapId),
-      userId: memberId,
-      role: option.value as Exclude<Role, null>,
+    patchRoadmapGroupMemberRoleAsync({
+      param: {
+        roadmapId: Number(query.roadmapId),
+        userId: memberId,
+      },
+      body: {
+        role: option.value as Exclude<Role, null>,
+      },
     });
   };
 
@@ -79,7 +82,7 @@ const TableColumn = (props: TableColumnProps) => {
 
         {(() => {
           switch (true) {
-            case myRole === 'master':
+            case myRole === 'master' && userRole !== 'master':
               return (
                 <td>
                   <Button

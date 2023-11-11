@@ -10,7 +10,7 @@ const LoginForm = () => {
   const { isLoading, control, handleSubmit, errors, onSubmit } = useLogin();
 
   return (
-    <Flex dir="col" align="center" gap={3} fullWidth>
+    <Flex dir="col" align="center" gap={2} fullWidth>
       <AuthLogo />
       <AuthForm onSubmit={handleSubmit(onSubmit)}>
         <Controller

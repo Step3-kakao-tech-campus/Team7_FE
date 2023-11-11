@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.form`
-  padding: 3rem 0 3rem 6.25rem;
+  padding: 3rem 0;
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     padding: 3rem 0;

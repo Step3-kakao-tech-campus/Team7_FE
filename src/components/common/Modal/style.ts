@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 
-export const Background = styled.div`
+export const Background = styled.div<{ isBackDrop: boolean }>`
   display: flex;
   position: fixed;
   top: 0;
@@ -9,7 +9,7 @@ export const Background = styled.div`
   align-items: center;
   justify-content: center;
   z-index: ${({ theme }) => theme.layer.modalBackground};
-  background-color: rgb(0 0 0 / 70%);
+  background-color: ${({ isBackDrop }) => (isBackDrop ? 'rgb(0 0 0 / 70%)' : 'transparent')};
   width: 100%;
   height: 100%;
 `;
@@ -19,7 +19,7 @@ export const Container = styled.div<{ width?: number }>`
   position: relative;
   z-index: 101;
   max-height: 90vh;
-  border-radius: 20px;
+  border-radius: 10px;
   background: #fff;
   width: ${({ width }) => width ?? 28}rem;
   color: ${({ theme }) => theme.colors.black};
@@ -28,6 +28,12 @@ export const Container = styled.div<{ width?: number }>`
     0px 10px 15px -3px rgba(0, 0, 0, 0.1),
     0px 0px 0px 1px rgba(0, 0, 0, 0.1);
   overflow: auto;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 
   & :focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.black};

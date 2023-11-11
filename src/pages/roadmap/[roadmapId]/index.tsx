@@ -1,37 +1,74 @@
+import type { GetServerSideProps } from 'next';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 import styled from '@emotion/styled';
-import RoadmapDetailInfo from '@/components/Roadmap/RoadmapDetail/RoadmapDetailInfo';
-import RoadmapDeatilStep from '@/components/Roadmap/RoadmapDetail/RoadmapDetailStep';
-import HeaderLayout from '@/components/layout/HeaderLayout';
-import { setLayout } from '@/utils/layout';
+import { axiosInstance } from '@/api';
+import { getRoadmapsById } from '@/api/roadmap';
+import TILyHead from '@/components/common/NextHead/TILyHead';
+import GuestGNB from '@/components/gnb/GuestGNB';
+import GNB from '@/components/gnb/UserGNB';
+import StepList from '@/components/roadmap/common/StepList';
+import RoadmapDetailInfo from '@/components/roadmap/roadmapDetail/RoadmapDetailInfo';
+import { RoadmapPage } from '@/pages/roadmap/create';
 
-const RoadmapDetail = () => {
+interface RoadmapDetailProps {
+  isUserLogin: boolean;
+}
+
+const RoadmapDetail = ({ isUserLogin }: RoadmapDetailProps) => {
   return (
-    <RoadmapDetailPage>
-      <RoadmapDetailInfo />
-      <StepListHeader>STEP 목록</StepListHeader>
-      <RoadmapDeatilStep />
-    </RoadmapDetailPage>
+    <>
+      <TILyHead title="TIL-y | 로드맵" />
+      {isUserLogin ? <GNB /> : <GuestGNB />}
+      <RoadmapPage>
+        <RoadmapDetailInfo isUserLogin={isUserLogin} />
+        <RoadmapDetailStepContainer>
+          <h2>STEP 목록</h2>
+          <StepList />
+        </RoadmapDetailStepContainer>
+      </RoadmapPage>
+    </>
   );
 };
 
-setLayout(RoadmapDetail, HeaderLayout);
-
 export default RoadmapDetail;
 
-const RoadmapDetailPage = styled.main`
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  max-width: 930px;
-  margin: 40px auto 0;
+export const getServerSideProps: GetServerSideProps<RoadmapDetailProps> = async (context) => {
+  const { cookies } = context.req;
+  const param = context.params;
+  const roadmapId = param?.roadmapId;
+  const queryClient = new QueryClient();
 
-  @media ${({ theme }) => theme.mediaQuery.xs} {
-    margin-top: 20px;
-    gap: 20px;
+  let isUserLogin = true;
+
+  try {
+    axiosInstance.defaults.headers.common['Authorization'] = cookies['accessToken'];
+    await axiosInstance.get('users');
+  } catch (err) {
+    isUserLogin = false;
   }
-`;
 
-const StepListHeader = styled.h2`
+  // 로드맵 정보 SSR
+  await queryClient.prefetchQuery(['roadmaps', Number(roadmapId)], () =>
+    getRoadmapsById({ roadmapId: Number(roadmapId) }),
+  );
+
+  return {
+    props: {
+      isUserLogin,
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
+
+const RoadmapDetailStepContainer = styled.section`
+  margin-top: 30px;
   padding: 0 15px;
-  font-size: 22px;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 0;
+
+    & > h2 {
+      padding: 0 15px;
+    }
+  }
 `;

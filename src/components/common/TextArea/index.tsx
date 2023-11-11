@@ -1,20 +1,20 @@
 import { motion } from 'framer-motion';
-import type { TextareaHTMLAttributes } from 'react';
+import { forwardRef, type LegacyRef, type TextareaHTMLAttributes } from 'react';
 import * as Styled from '@/components/common/TextArea/style';
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
-  labelType?: 'bold' | 'regular';
+  labelType?: 'bold' | 'regular' | 'none';
   status?: 'error' | 'default';
   message?: string;
 }
 
-const TextArea = (props: TextAreaProps) => {
+const TextArea = forwardRef((props: TextAreaProps, ref: LegacyRef<HTMLTextAreaElement>) => {
   const { label, labelType, status = 'default', message, ...rest } = props;
   return (
     <label>
       {label && <Styled.LabelText labelType={labelType}>{label}</Styled.LabelText>}
-      <Styled.TextArea status={status} {...rest} />
+      <Styled.TextArea status={status} ref={ref} {...rest} />
       {status === 'error' && message && (
         <motion.div
           initial={{ height: 0 }}
@@ -25,6 +25,6 @@ const TextArea = (props: TextAreaProps) => {
       )}
     </label>
   );
-};
+});
 
 export default TextArea;

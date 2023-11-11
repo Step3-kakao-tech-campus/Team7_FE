@@ -1,8 +1,6 @@
 import { useState, type PropsWithChildren, useRef } from 'react';
 import Image from 'next/image';
-import { SerializedStyles } from '@emotion/react';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
-import { EmotionTheme } from '@/styles/emotion';
 import * as Styled from './style';
 
 export interface SelectOption {
@@ -44,6 +42,7 @@ const Select = (props: SelectProps) => {
       <Styled.Select
         onClick={toggleOpen}
         isOpen={isOpen}
+        rotate={isOpen}
         imageSize={imageSize}
         iconName="ic_chevronDown"
         iconPosition="right">

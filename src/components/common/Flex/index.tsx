@@ -11,7 +11,7 @@ export interface Props {
   fullWidth?: boolean;
 }
 
-const Flex = styled.div<Props>`
+const Flex = styled.section<Props>`
   display: flex;
   flex-direction: ${({ dir }) => (dir === 'col' ? 'column' : 'row')};
   justify-content: ${({ justify }) => justify};

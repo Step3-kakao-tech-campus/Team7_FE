@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
-import { type JoinRequest } from '@/api/auth/type';
+import { type PostJoinRequest } from '@/api/auth/type';
 import { usePostJoin } from '@/api/hooks/auth';
 import { useModalState } from '@/hooks/useModalState';
 import useQueryParam from '@/hooks/useQueryParam';
@@ -27,10 +27,10 @@ const useRegister = () => {
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<JoinRequest> = async (formData) => {
-    const data = await postJoinAsync(formData);
+  const onSubmit: SubmitHandler<PostJoinRequest> = async (formData) => {
+    const data = await postJoinAsync({ body: formData });
 
-    if (data?.code === 200) {
+    if (data?.code === 201) {
       handleOpen();
     }
   };

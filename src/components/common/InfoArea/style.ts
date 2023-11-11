@@ -15,4 +15,8 @@ export const Root = styled.ul<InfoAreaProps>`
 export const Info = styled.li`
   margin: 0.4rem;
   font-size: 0.9rem;
+
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    font-size: 14px;
+  }
 `;

@@ -1,10 +1,11 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
-import GuestGNB from '@/components/GNB/GuestGNB';
-import GNB from '@/components/GNB/UserGNB';
-import MyRoadmap from '@/components/Roadmap/RoadmapList/MyRoadmap';
-import RecruitRoadmap from '@/components/Roadmap/RoadmapList/RecruitRoadmap';
+import TILyHead from '@/components/common/NextHead/TILyHead';
+import GuestGNB from '@/components/gnb/GuestGNB';
+import GNB from '@/components/gnb/UserGNB';
+import MyRoadmap from '@/components/roadmap/roadmapList/MyRoadmap';
+import RecruitRoadmap from '@/components/roadmap/roadmapList/RecruitRoadmap';
 
 interface RoadmapListProps {
   isUserLogin: boolean;
@@ -12,13 +13,14 @@ interface RoadmapListProps {
 
 const RoadmapList = ({ isUserLogin }: RoadmapListProps) => {
   return (
-    <Root>
+    <>
+      <TILyHead title="TIL-y | 로드맵" />
       {isUserLogin ? <GNB /> : <GuestGNB />}
       <RoadmapListPage>
         {isUserLogin && <MyRoadmap />}
         <RecruitRoadmap />
       </RoadmapListPage>
-    </Root>
+    </>
   );
 };
 
@@ -42,19 +44,16 @@ export const getServerSideProps: GetServerSideProps<RoadmapListProps> = async (c
   };
 };
 
-const Root = styled.div``;
-
 const RoadmapListPage = styled.main`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 15px;
   max-width: 1120px;
+  margin: 30px auto 0;
   padding: 0 40px;
-  margin: 40px auto 0;
 
-  @media ${({ theme }) => theme.mediaQuery.sm} {
-    margin: 20px auto;
-    padding: 0 10px;
-    gap: 15px;
+  @media ${({ theme }) => theme.mediaQuery.md} {
+    padding: 0 15px;
+    margin-top: 15px;
   }
 `;

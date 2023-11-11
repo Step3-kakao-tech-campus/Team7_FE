@@ -2,7 +2,7 @@ import { RecoilRoot } from 'recoil';
 import { ErrorBoundary } from 'react-error-boundary';
 import cookies from 'next-cookies';
 import type { AppProps, AppContext } from 'next/app';
-import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from '@tanstack/react-query';
+import { Hydrate, QueryClient, QueryClientProvider, QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from '@emotion/react';
 import { axiosInstance } from '@/api';
@@ -12,20 +12,6 @@ import ToastProvider from '@/components/common/Toast/provider';
 import { emotionTheme } from '@/styles/emotion';
 import '@/styles/globals.css';
 import { getLayout } from '@/utils/layout';
-
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-  if (typeof window === 'undefined') {
-    (async () => {
-      const { server } = await import('../mocks/server');
-      server.listen();
-    })();
-  } else {
-    (async () => {
-      const { worker } = await import('../mocks/browser');
-      worker.start();
-    })();
-  }
-}
 
 // 크롬이 online 일때 리액트 쿼리가 동작하도록 함.
 const queryClient = new QueryClient({
@@ -52,28 +38,30 @@ export default function App({ Component, pageProps, token }: MyAppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <ThemeProvider theme={emotionTheme}>
-          <ResponsiveProvider>
-            <ToastProvider>
-              <QueryErrorResetBoundary>
-                {({ reset }) => (
-                  <ErrorBoundary
-                    onReset={reset}
-                    fallbackRender={({ error, resetErrorBoundary }) => {
-                      return <GlobalErrorBoundary error={error} resetErrorBoundary={resetErrorBoundary} />;
-                    }}>
-                    <Layout>
-                      <Component {...pageProps} />
-                    </Layout>
-                  </ErrorBoundary>
-                )}
-              </QueryErrorResetBoundary>
-            </ToastProvider>
-          </ResponsiveProvider>
-        </ThemeProvider>
-      </RecoilRoot>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <Hydrate state={pageProps.dehydratedState}>
+        <RecoilRoot>
+          <ThemeProvider theme={emotionTheme}>
+            <ResponsiveProvider>
+              <ToastProvider>
+                <QueryErrorResetBoundary>
+                  {({ reset }) => (
+                    <ErrorBoundary
+                      onReset={reset}
+                      fallbackRender={({ error, resetErrorBoundary }) => {
+                        return <GlobalErrorBoundary error={error} resetErrorBoundary={resetErrorBoundary} />;
+                      }}>
+                      <Layout>
+                        <Component {...pageProps} />
+                      </Layout>
+                    </ErrorBoundary>
+                  )}
+                </QueryErrorResetBoundary>
+              </ToastProvider>
+            </ResponsiveProvider>
+          </ThemeProvider>
+        </RecoilRoot>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </Hydrate>
     </QueryClientProvider>
   );
 }

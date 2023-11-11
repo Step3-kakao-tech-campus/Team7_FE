@@ -11,4 +11,10 @@ export const Card = styled.div`
     transform: translateY(-7px);
     box-shadow: 0 4px 10px rgba(26, 28, 29, 0.1);
   }
+
+  @media ${({ theme }) => theme.mediaQuery.sm} {
+    &:hover {
+      transform: none;
+    }
+  }
 `;

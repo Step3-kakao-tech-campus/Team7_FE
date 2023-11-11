@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import type { InputHTMLAttributes } from 'react';
+import { forwardRef, type LegacyRef, type InputHTMLAttributes } from 'react';
 import Image from 'next/image';
 import type { SerializedStyles } from '@emotion/react';
 import type { EmotionTheme } from '@/styles/emotion';
@@ -14,9 +14,10 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   endIcon?: string;
   inputStyles?: (theme: EmotionTheme) => SerializedStyles;
   onClick?: () => void;
+  onBlur?: () => void;
 }
 
-const Input = (props: InputProps) => {
+const Input = forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement>) => {
   const {
     label,
     status = 'default',
@@ -27,6 +28,7 @@ const Input = (props: InputProps) => {
     endIcon,
     disabled = false,
     onClick,
+    onBlur,
     ...rest
   } = props;
 
@@ -34,10 +36,10 @@ const Input = (props: InputProps) => {
     <Styled.Label>
       {label && <Styled.LabelText labelType={labelType}>{label}</Styled.LabelText>}
       <Styled.InputContainer className={className} status={status} disabled={disabled}>
-        <Styled.Input {...rest} css={inputStyles} disabled={disabled} />
+        <Styled.Input {...rest} css={inputStyles} disabled={disabled} onBlur={onBlur} ref={ref} />
         {endIcon && (
           <Styled.ButtonContainer onClick={() => onClick?.()}>
-            <Image src={`/assets/icons/${endIcon}.svg`} alt="" width={24} height={24} />
+            <Image src={`/assets/icons/${endIcon}.svg`} alt="검색" width={24} height={24} />
           </Styled.ButtonContainer>
         )}
       </Styled.InputContainer>
@@ -51,6 +53,6 @@ const Input = (props: InputProps) => {
       )}
     </Styled.Label>
   );
-};
+});
 
 export default Input;

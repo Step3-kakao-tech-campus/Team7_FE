@@ -8,15 +8,16 @@ interface IconButtonProps extends Omit<ButtonProps, 'isLoading' | 'loadingWidth'
   iconPosition?: 'left' | 'right';
   iconName: string;
   imageSize?: number;
+  rotate?: boolean;
 }
 
 const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
-  const { children, iconPosition = 'left', iconName, imageSize = 16, ...rest } = props;
+  const { children, iconPosition = 'left', iconName, imageSize = 16, rotate = false, ...rest } = props;
 
   const renderImage = (position: 'left' | 'right') => {
     if (iconPosition === position) {
       return (
-        <Container>
+        <Container rotate={rotate}>
           <Image src={`/assets/icons/${iconName}.svg`} alt="icon" width={imageSize} height={imageSize} />
         </Container>
       );
@@ -35,10 +36,12 @@ const IconButton = (props: PropsWithChildren<IconButtonProps>) => {
 
 export default IconButton;
 
-const Container = styled.div`
+const Container = styled.div<{ rotate: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
 
   margin-bottom: 3px;
+
+  transform: ${({ rotate }) => (rotate ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;

@@ -53,19 +53,20 @@ const ByEmail = ({ location }: ByEmailProps) => {
             />
           )}
         />
-        {isEmail && (
+        {/* 크램폴린의 이메일 인증 통신 이슈로 인해 이메일 인증 기능 블락 */}
+        {/* {isEmail && (
           <TextButton type="button" variant="ghost" onClick={resend}>
             재전송하기
           </TextButton>
-        )}
+        )} */}
 
-        {!isEmail && (
-          <Button fullWidth isLoading={registerLoading || passwordLoading}>
-            이메일 확인
-          </Button>
-        )}
+        {/* {!isEmail && ( */}
+        <Button fullWidth isLoading={registerLoading || passwordLoading}>
+          이메일 확인
+        </Button>
+        {/* )} */}
       </Styled.EmailForm>
-      {isEmail && <CodeCheck location={location} email={getValues('email')} />}
+      {/* {isEmail && <CodeCheck location={location} email={getValues('email')} />} */}
 
       <DuplicateEmailModal isOpen={isOpen} onClose={handleClose} />
     </>

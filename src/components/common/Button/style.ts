@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import type { ButtonProps } from '@/components/common/Button';
 import type { EmotionTheme } from '@/styles/emotion';
 
-type StyledButtonProps = Required<Pick<ButtonProps, 'variant' | 'fullWidth'>>;
+type StyledButtonProps = Required<Pick<ButtonProps, 'variant' | 'fullWidth' | 'isLoading'>>;
 
 export const buttonStyles = {
   primary: (theme: EmotionTheme) => css`
@@ -46,11 +46,15 @@ export const Button = styled.button<StyledButtonProps>`
   border-radius: 6px;
 
   font-size: 1rem;
+  color: ${({ isLoading }) => (isLoading === true ? 'transparent !important' : 'auto')};
   cursor: pointer;
   ${({ variant, theme }) => buttonStyles[variant](theme)}
 
   &:disabled {
     cursor: not-allowed;
     background-color: ${({ theme }) => theme.colors.gray_700};
+  }
+  & > div {
+    position: ${({ isLoading }) => (isLoading ? 'absolute' : 'relative')};
   }
 `;

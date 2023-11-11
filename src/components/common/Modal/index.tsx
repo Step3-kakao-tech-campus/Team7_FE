@@ -1,4 +1,3 @@
-import FocusTrap from 'focus-trap-react';
 import { type PropsWithChildren, type HTMLAttributes, useRef } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import Image from 'next/image';
@@ -9,6 +8,9 @@ import type { EmotionTheme } from '@/styles/emotion';
 import * as Styled from './style';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
+  isOnClickOutsideClose?: boolean;
+  isBackDrop?: boolean;
+  showCloseButton?: boolean;
   width?: number;
   isOpen?: boolean;
   onClose: () => void;
@@ -21,7 +23,10 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
   const {
     children,
     width,
+    showCloseButton = true,
     isOpen,
+    isOnClickOutsideClose = true,
+    isBackDrop = true,
     onClose,
     modalContentStyles,
     closeButtonStyles,
@@ -31,9 +36,13 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  useOnClickOutside(modalRef, () => {
-    onClose();
-  });
+  useOnClickOutside(
+    modalRef,
+    () => {
+      onClose();
+    },
+    isOnClickOutsideClose,
+  );
 
   if (!isOpen) {
     return null;
@@ -41,8 +50,9 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
 
   return (
     <Portal>
-      <Styled.Background>
+      <Styled.Background isBackDrop={isBackDrop}>
         <Styled.Root
+          data-testid="modal"
           initial="closed"
           animate={isOpen ? 'open' : 'closed'}
           variants={{
@@ -50,9 +60,10 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
             closed: { opacity: 0 },
           }}
           transition={{ type: 'tween', duration: 0.2 }}>
-          <FocusTrap>
-            <RemoveScroll>
-              <Styled.Container role="dialog" ref={modalRef} width={width} {...rest}>
+          {/* <FocusTrap> */}
+          <RemoveScroll>
+            <Styled.Container role="dialog" ref={modalRef} width={width} {...rest}>
+              {showCloseButton && (
                 <Styled.CloseButton css={closeButtonStyles} onClick={onClose}>
                   <Image
                     src="/assets/icons/ic_closeButton.svg"
@@ -61,10 +72,11 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
                     height={closeButtonSize}
                   />
                 </Styled.CloseButton>
-                <Styled.Content css={modalContentStyles}>{children}</Styled.Content>
-              </Styled.Container>
-            </RemoveScroll>
-          </FocusTrap>
+              )}
+              <Styled.Content css={modalContentStyles}>{children}</Styled.Content>
+            </Styled.Container>
+          </RemoveScroll>
+          {/* </FocusTrap> */}
         </Styled.Root>
       </Styled.Background>
     </Portal>

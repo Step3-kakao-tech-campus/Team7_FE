@@ -12,6 +12,11 @@ export const useApiError = () => {
           message: '에러가 발생했습니다.',
           isError: true,
         });
+      } else if (error.response?.data.message === 'TIL 제목을 입력해주세요.') {
+        toast.showBottom({
+          message: 'STEP을 선택해주세요.',
+          isError: true,
+        });
       } else {
         toast.showBottom({
           message: error.response?.data.message || '에러가 발생했습니다.',

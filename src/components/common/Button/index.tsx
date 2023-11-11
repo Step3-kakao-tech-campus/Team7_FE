@@ -11,7 +11,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-const Button = forwardRef((props: PropsWithChildren<ButtonProps>) => {
+const Button = forwardRef<HTMLButtonElement, PropsWithChildren<ButtonProps>>((props, ref) => {
   const {
     variant = 'default',
     fullWidth = false,
@@ -24,7 +24,13 @@ const Button = forwardRef((props: PropsWithChildren<ButtonProps>) => {
   } = props;
 
   return (
-    <Styled.Button variant={variant} fullWidth={fullWidth} className={className} {...rest}>
+    <Styled.Button
+      variant={variant}
+      fullWidth={fullWidth}
+      isLoading={isLoading}
+      className={className}
+      ref={ref}
+      {...rest}>
       {isLoading && <Spinner width={loadingWidth} height={loadingHeight} />}
       {children}
     </Styled.Button>

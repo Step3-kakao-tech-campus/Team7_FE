@@ -1,12 +1,20 @@
-import type { CommonResponse, UserHistory, User, Alarm } from '@/api/type';
+import type { CommonResponse, UserHistory, Alarm } from '@/api/type';
 
-// User + Alarm 요청
+// User 요청
 
 export interface PatchAlarmRequest {
   alarms: Pick<Alarm, 'id'>[];
 }
 
-// User + Alarm 응답
+export interface PatchUserPasswordRequest {
+  curPassword: string;
+  newPassword: string;
+  newPasswordConfirm: string;
+}
+
+export interface PostUserProfileImageRequset extends FormData {}
+
+// User 응답
 
 export interface GetAlarmsResponse extends CommonResponse {
   result: {
@@ -14,28 +22,8 @@ export interface GetAlarmsResponse extends CommonResponse {
   };
 }
 
-// getUserHistory
-export interface GetUserHistoryResponse {
-  success: boolean;
-  message: string;
+export interface GetUserHistoryResponse extends CommonResponse {
   result: {
     gardens: UserHistory[];
   };
-}
-
-// getUser
-export interface GetUsersResponse extends User {}
-
-// deleteUser
-export interface DeleteUserResponse extends CommonResponse {}
-
-// patchUserPassword
-export interface PatchUserPasswordRequest {
-  curPassword: string;
-  newPassword: string;
-  newPasswordConfirm: string;
-}
-
-export interface PatchUserPasswordResponse extends CommonResponse {
-  result: null;
 }

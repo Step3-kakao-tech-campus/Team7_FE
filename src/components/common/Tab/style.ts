@@ -1,23 +1,28 @@
 import styled from '@emotion/styled';
 
-export const Root = styled.div`
+export const Root = styled.section`
   display: flex;
   gap: 0.2rem;
   width: 100%;
   padding: 0.25em;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.gray_300};
-  color: ${({ theme }) => theme.colors.gray_700};
+  color: #707070;
   text-align: center;
   font-weight: 700;
   font-size: 0.875rem;
 `;
 
-export const Menu = styled.div`
+export const Menu = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  height: 32px;
   width: 50%;
   padding: 0.25em;
   border-radius: 3px;
+  font-size: 16px;
 
   cursor: pointer;
 

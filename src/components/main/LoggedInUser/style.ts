@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Flex from '@/components/common/Flex';
-import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.div``;
 
@@ -15,27 +14,6 @@ export const Inner = styled(Flex)`
   }
 `;
 
-export const LeftArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
-
-  padding: 2.5rem;
-  min-height: 100vh;
-`;
-
-export const RightArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 101vh;
-  padding: 2.5rem 0 0 4rem;
-
-  @media ${({ theme }) => theme.mediaQuery.md} {
-    padding: 20px;
-  }
-`;
-
 export const ProfileSkeletonStyles = css`
   width: 240px;
   height: 240px;
@@ -46,28 +24,15 @@ export const ProfileSkeletonStyles = css`
 export const UserName = styled.div`
   display: flex;
   align-items: center;
+
   & > span:first-of-type {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   & > span:nth-of-type(2) {
     font-size: 16px;
-    font-weight: 600;
-  }
-`;
-
-export const MenuBarStyles = (theme: EmotionTheme) => css`
-  @media ${theme.mediaQuery.md} {
-    display: flex !important;
-    justify-content: space-between;
-    position: sticky;
-    top: ${theme.layout.main.GNBHeight};
-    width: 100%;
-    padding: 16px;
-    z-index: 1;
-    background-color: #fff;
-    border-bottom: 1px solid ${theme.colors.gray_500};
+    font-weight: 500;
   }
 `;
 

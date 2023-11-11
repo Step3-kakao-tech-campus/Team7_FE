@@ -1,5 +1,6 @@
 import type { GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
+import TILyHead from '@/components/common/NextHead/TILyHead';
 import Guest from '@/components/main/Guest';
 import LoggedInUser from '@/components/main/LoggedInUser';
 
@@ -8,7 +9,12 @@ interface HomeProps {
 }
 
 const Home = ({ isUserLogin }: HomeProps) => {
-  return <>{isUserLogin ? <LoggedInUser /> : <Guest />}</>;
+  return (
+    <>
+      <TILyHead />
+      {isUserLogin ? <LoggedInUser /> : <Guest />}
+    </>
+  );
 };
 
 export default Home;

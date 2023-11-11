@@ -1,19 +1,34 @@
 import { useMutation } from '@tanstack/react-query';
-import { postPasswordChange, postEmailCheck, postEmailCode, postEmailCodeCheck, postJoin, postLogin } from '@/api/auth';
-import type { EmailCodeCheckRequest, JoinRequest, EmailPasswordRequest } from '@/api/auth/type';
+import {
+  postPasswordChange,
+  postEmailCheck,
+  postEmailCode,
+  postEmailCodeCheck,
+  postJoin,
+  postLogin,
+  getKakaoLogin,
+} from '@/api/auth';
+import type {
+  PostEmailCodeCheckRequest,
+  PostJoinRequest,
+  PostEmailPasswordRequest,
+  GetKakaoLoginRequest,
+} from '@/api/auth/type';
 import { useApiError } from '@/hooks/useApiError';
 import { setCookie } from '@/utils/cookie';
+
+// 로그인
 
 export const usePostLogin = () => {
   const { mutateAsync, isLoading } = useMutation(postLogin);
   const { handleError } = useApiError();
 
-  const postLoginAsync = async (body: EmailPasswordRequest) => {
-    const data = await mutateAsync(body, {
+  const postLoginAsync = async (req: { body: PostEmailPasswordRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
-    setCookie('accessToken', data.result?.accessToken as string, { path: '/' });
+    setCookie('accessToken', `Bearer ${data.result?.accessToken as string}`, { path: '/' });
 
     return data;
   };
@@ -21,11 +36,13 @@ export const usePostLogin = () => {
   return { postLoginAsync, isLoading };
 };
 
+// 이메일 중복 확인
+
 export const usePostEmailCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCheck);
 
-  const postEmailCheckAsync = async (body: { email: string }) => {
-    const data = await mutateAsync(body);
+  const postEmailCheckAsync = async (req: { body: { email: string } }) => {
+    const data = await mutateAsync(req);
 
     return data;
   };
@@ -33,13 +50,15 @@ export const usePostEmailCheck = () => {
   return { postEmailCheckAsync, isLoading };
 };
 
+// 인증 코드 발송
+
 export const usePostEmailCode = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCode);
 
   const { handleError } = useApiError();
 
-  const postEmailCodeAsync = async (body: { email: string }) => {
-    const data = await mutateAsync(body, {
+  const postEmailCodeAsync = async (req: { body: { email: string } }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
@@ -49,12 +68,14 @@ export const usePostEmailCode = () => {
   return { postEmailCodeAsync, isLoading };
 };
 
+// 인증 코드 일치 여부 확인
+
 export const usePostEmailCodeCheck = () => {
   const { mutateAsync, isLoading } = useMutation(postEmailCodeCheck);
   const { handleError } = useApiError();
 
-  const postEmailCodeCheckAsync = async (body: EmailCodeCheckRequest) => {
-    const data = await mutateAsync(body, {
+  const postEmailCodeCheckAsync = async (req: { body: PostEmailCodeCheckRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
@@ -64,12 +85,31 @@ export const usePostEmailCodeCheck = () => {
   return { postEmailCodeCheckAsync, isLoading };
 };
 
+// 비밀번호 재설정하기
+
+export const usePostPasswordChange = () => {
+  const { mutateAsync, isLoading } = useMutation(postPasswordChange);
+  const { handleError } = useApiError();
+
+  const postPasswordChangeAsync = async (req: { body: PostEmailPasswordRequest }) => {
+    const data = await mutateAsync(req, {
+      onError: handleError,
+    });
+
+    return data;
+  };
+
+  return { postPasswordChangeAsync, isLoading };
+};
+
+// 회원 가입
+
 export const usePostJoin = () => {
   const { mutateAsync, isLoading } = useMutation(postJoin);
   const { handleError } = useApiError();
 
-  const postJoinAsync = async (body: JoinRequest) => {
-    const data = await mutateAsync(body, {
+  const postJoinAsync = async (req: { body: PostJoinRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
 
@@ -79,17 +119,21 @@ export const usePostJoin = () => {
   return { postJoinAsync, isLoading };
 };
 
-export const usePostPasswordChange = () => {
-  const { mutateAsync, isLoading } = useMutation(postPasswordChange);
+// 카카오 로그인
+
+export const useGetKakaoLogin = () => {
+  const { mutateAsync, isLoading } = useMutation(getKakaoLogin);
   const { handleError } = useApiError();
 
-  const postPasswordChangeAsync = async (body: EmailPasswordRequest) => {
-    const data = await mutateAsync(body, {
+  const getKakaoLoginAsync = async (req: { body: GetKakaoLoginRequest }) => {
+    const data = await mutateAsync(req, {
       onError: handleError,
     });
+
+    setCookie('accessToken', `Bearer ${data.result?.accessToken as string}`, { path: '/' });
 
     return data;
   };
 
-  return { postPasswordChangeAsync, isLoading };
+  return { getKakaoLoginAsync, isLoading };
 };

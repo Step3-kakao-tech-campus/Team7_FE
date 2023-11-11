@@ -9,7 +9,7 @@ const DuplicateEmailModal = (props: ModalProps) => {
   const router = useRouter();
 
   return (
-    <Modal width={20} isOpen={isOpen} onClose={onClose}>
+    <Modal showCloseButton={false} width={20} isOpen={isOpen} onClose={onClose}>
       <Styled.ModalContainer>
         <Styled.Title>이미 사용중인 이메일입니다.</Styled.Title>
         <Styled.Info dir="col">
