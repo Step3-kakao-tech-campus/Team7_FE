@@ -1,7 +1,4 @@
 # [🌹 틸리 - 꾸준하고픈 개발자를 위한 공간](https://kc29be941feb6a.user-app.krampoline.com/)
-### 목차
-[1. 서비스 기획 의도](https://github.com/monsta-zo/Team7_FE/blob/develop/README.md#-%EC%99%9C-%EC%9D%B4%EB%9F%B0-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC)
-
 
 <p align='center'>
 <img width="200" alt="스크린샷 2023-03-16 오전 9 30 09" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/908cde6b-1f19-4a35-bc36-7c77309ffef1">
@@ -15,6 +12,9 @@
     <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&amp;logo=Axios&amp;logoColor=white">
     <img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&amp;logo=Storybook&amp;logoColor=white">
 </p>
+
+## 목차
+[1. 서비스 기획 의도](https://github.com/monsta-zo/Team7_FE/blob/develop/README.md#-%EC%99%9C-%EC%9D%B4%EB%9F%B0-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC)
 
 # 🤔 왜 이런 서비스를?
 
