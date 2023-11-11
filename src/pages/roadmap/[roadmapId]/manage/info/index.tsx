@@ -1,5 +1,6 @@
 import { type GetServerSideProps } from 'next';
 import { axiosInstance } from '@/api';
+import { getRoadmapsById } from '@/api/roadmap';
 import TILyHead from '@/components/common/NextHead/TILyHead';
 import ManageLayout from '@/components/layout/ManageLayout';
 import RoadmapInfoForm from '@/components/roadmap/common/RoadmapInfoForm';
@@ -20,6 +21,9 @@ export default RoamapInfoPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cookies } = context.req;
+  const param = context.params;
+  const roadmapId = param?.roadmapId;
+
   let isUserLogin = true;
 
   try {
@@ -38,5 +42,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  return { props: {} };
+  const data = await getRoadmapsById({ roadmapId: Number(roadmapId) });
+
+  const myRole = data.result.myRole;
+
+  if (myRole === 'none' || myRole === 'member') {
+    return {
+      redirect: {
+        destination: `/roadmap/${roadmapId}`,
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 };

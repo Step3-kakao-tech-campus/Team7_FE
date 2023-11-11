@@ -38,6 +38,7 @@ export const Link = styled.section`
 
   & a {
     border-bottom: 1px solid black;
+    font-weight: 600;
 
     &:hover {
       color: ${({ theme }) => theme.colors.rose};

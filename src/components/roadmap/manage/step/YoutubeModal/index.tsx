@@ -50,8 +50,8 @@ const YoutubeModal = (props: YoutubeModalProps) => {
           <Styled.YoutubeContainer>
             <Styled.Youtube>
               <iframe
-                width="1000"
-                height="600"
+                width="600"
+                height="400"
                 src="https://www.youtube.com/embed/1T8fyDzgfT4?si=GFNmcV3Sw3LttNwZ"
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

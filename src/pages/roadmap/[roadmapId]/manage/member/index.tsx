@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import styled from '@emotion/styled';
 import { axiosInstance } from '@/api';
+import { getRoadmapsById } from '@/api/roadmap';
 import TILyHead from '@/components/common/NextHead/TILyHead';
 import ManageLayout from '@/components/layout/ManageLayout';
 import Table from '@/components/roadmap/manage/member/Table';
@@ -22,6 +23,9 @@ export default Member;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cookies } = context.req;
+  const param = context.params;
+  const roadmapId = param?.roadmapId;
+
   let isUserLogin = true;
 
   try {
@@ -40,7 +44,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  return { props: {} };
+  const data = await getRoadmapsById({ roadmapId: Number(roadmapId) });
+
+  const myRole = data.result.myRole;
+
+  if (myRole === 'none' || myRole === 'member') {
+    return {
+      redirect: {
+        destination: `/roadmap/${roadmapId}`,
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 };
 
 export const Header = styled.h2`
