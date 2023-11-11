@@ -6,7 +6,7 @@ import * as Styled from './style';
 
 interface ExtensionInfoModalProps {
   isOpen: boolean;
-  isChromeExtensionInstall: boolean;
+  isChromeExtensionInstall?: boolean;
   handleClose: () => void;
   handleSubmitTILContentToGithub?: () => void;
 }

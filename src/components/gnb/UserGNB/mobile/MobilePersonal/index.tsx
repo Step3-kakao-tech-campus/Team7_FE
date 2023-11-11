@@ -130,6 +130,7 @@ const MobilePersonal = () => {
                       message={errors.stepTitle?.message}
                       status={errors.stepTitle ? 'error' : 'default'}
                       {...field}
+                      onBlur={() => setIsStepButtonSelected(false)}
                     />
                   )}
                 />
@@ -175,6 +176,7 @@ const MobilePersonal = () => {
                       message={roadmapErrors.roadmapTitle?.message}
                       status={roadmapErrors.roadmapTitle ? 'error' : 'default'}
                       {...field}
+                      onBlur={() => setIsRoadmapButtonSelected(false)}
                     />
                   )}
                 />
