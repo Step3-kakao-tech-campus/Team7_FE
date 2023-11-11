@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useRef } from 'react';
+import { axiosInstance } from '@/api';
 import { useGetUsers, usePostUserProfileImage } from '@/api/hooks/user';
 import Avatar from '@/components/common/Avatar';
 import * as Styled from './style';
@@ -11,7 +13,6 @@ interface ImageUploaderProps {
 const ImageUploader = (props: ImageUploaderProps) => {
   const { imageUrl, imgSize = 160 } = props;
   const { user } = useGetUsers();
-
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const { postUserProfileImageAsync } = usePostUserProfileImage();
@@ -25,7 +26,14 @@ const ImageUploader = (props: ImageUploaderProps) => {
       [].forEach.call(inputEl.files, (image) => {
         formData.append('image', image);
       });
-      await postUserProfileImageAsync({ param: { userId: user?.id as number }, body: formData });
+      formData.append('key', '6a18ed9fbcb9bcdac5cfe389fd389fdc');
+      axios
+        .post('https://api.imgbb.com/1/upload', formData)
+        .then((res) => {
+          const url = res.data.data.url;
+          axiosInstance.post(`/images/users/${user?.id}`, { url });
+        })
+        .catch((err) => console.log(err));
     };
     inputEl.click();
   };
