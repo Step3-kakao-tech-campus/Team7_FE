@@ -122,7 +122,6 @@ const Steps = {
     });
   },
   group: (data: Data, handleSelectCategory: (id: number) => void, handleRoadmapList: () => void) => {
-    console.log(data.category);
     if (data.roadmaps.length === 0) {
       return (
         <EmptyList image="ic_step" imageHeight={45} button="로드맵 목록" onClick={handleRoadmapList}>

@@ -85,10 +85,6 @@ const MobilePersonal = () => {
     setSelectedStepTitle(step.title);
   };
 
-  useEffect(() => {
-    console.log(roadmapId);
-  }, [roadmapId]);
-
   return (
     <>
       <Styled.ModalInfo>
