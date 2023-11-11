@@ -13,9 +13,6 @@
     <img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&amp;logo=Storybook&amp;logoColor=white">
 </p>
 
-# 🏠 ERD
-![TIL-y_ERD](https://github.com/Step3-kakao-tech-campus/Team7_BE/assets/95485737/e3db0e8f-ec7b-4048-8c6e-a628722776ea)
-
 # 🔗 관련 주소
 
 | 문서 | 
@@ -269,10 +266,8 @@ UX를 개선하기 위해서 에디터의 자동 저장 기능을 추가하였�
 [스토리북 링크](https://www.chromatic.com/build?appId=6513e523ff3743561f1e3e49&number=29)
 
 
-
-
-
-
+# 🏠 ERD
+![TIL-y_ERD](https://github.com/Step3-kakao-tech-campus/Team7_BE/assets/95485737/e3db0e8f-ec7b-4048-8c6e-a628722776ea)
 
 
 # ⚙️ 아키택쳐 구조
