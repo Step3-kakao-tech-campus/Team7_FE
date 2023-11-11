@@ -1,5 +1,6 @@
 # [🌹 틸리 - 꾸준하고픈 개발자를 위한 공간](https://kc29be941feb6a.user-app.krampoline.com/)
-### 목자
+### 목차
+[1. 서비스 기획 의도](https://github.com/monsta-zo/Team7_FE/blob/develop/README.md#-%EC%99%9C-%EC%9D%B4%EB%9F%B0-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC)
 
 
 <p align='center'>
