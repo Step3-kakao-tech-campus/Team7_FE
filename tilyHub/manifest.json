@@ -3,7 +3,7 @@
   "name": "틸리허브(TILyHub)",
   "description": "Automatically integrate your TIL submissions to GitHub",
   "homepage_url": "https://github.com/Step3-kakao-tech-campus/Team7_FE",
-  "version": "1.7",
+  "version": "1.8",
   "author": "ehddud1006",
   "action": {
     "default_icon": "assets/thumbnail.png",

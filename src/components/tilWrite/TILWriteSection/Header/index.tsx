@@ -30,7 +30,7 @@ const Header = (props: HeaderProps) => {
       </button>
       <Styled.Title>{tilDetail?.step.title}</Styled.Title>
 
-      <Styled.IconContainer>
+      <Styled.IconContainer id="tilyhub">
         <ExtensionIcon TILContent={TILContent} handleModalOpen={handleOpen} isOpen={isOpen} handleClose={handleClose} />
 
         {!tilDetail?.isPersonal && (

@@ -13,7 +13,7 @@ interface ListItemProps {
   roadmapId: number;
   selected: boolean;
   onClick: () => void;
-  onClickRoadmap: Dispatch<SetStateAction<number>>;
+  onClickRoadmap?: Dispatch<SetStateAction<number>>;
 }
 
 const ListItem = (props: PropsWithChildren<ListItemProps>) => {
@@ -64,7 +64,7 @@ const ListItem = (props: PropsWithChildren<ListItemProps>) => {
     else {
       const data = await deleteRoadmapsAsync({ roadmapId });
       if (data.code === 200) {
-        onClickRoadmap(0);
+        onClickRoadmap?.(0);
       }
     }
   };

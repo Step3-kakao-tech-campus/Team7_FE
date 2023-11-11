@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetTils } from '@/api/hooks/til';
@@ -14,6 +14,7 @@ interface ExtensionIconProps {
 }
 const ExtensionIcon = (props: ExtensionIconProps) => {
   const { isOpen, TILContent, handleModalOpen, handleClose } = props;
+  const [isExtensionInstall, setIsExtensionInstall] = useState(false);
 
   const router = useRouter();
   const toast = useToast();
@@ -43,12 +44,22 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
     document.dispatchEvent(event);
   }, [tilDetail, TILContent]);
 
+  useEffect(() => {
+    // 클래스 이름으로 요소를 찾습니다.
+    const element = document.querySelector('.tilytily');
+
+    if (element) {
+      setIsExtensionInstall(true);
+    }
+  }, []);
+
   return (
     <>
       <button id="github_extenstion" onClick={handleModalOpen}>
         <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
       </button>
       <ExtensionInfoModal
+        isExtensionInstall={isExtensionInstall}
         isOpen={isOpen}
         handleClose={handleClose}
         handleSubmitTILContentToGithub={handleSubmitTILContentToGithub}
