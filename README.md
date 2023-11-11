@@ -134,4 +134,8 @@ Access Token의 여부를 확인하고 페이지 컴포넌트에 props를 넘겨
 
 로드맵 관리 페이지에 관리자(매니저+마스터)만 접근할 수 있다는 점도 같은 방식을 이용하여 처리하였습니다.
 
-### Reac
+### React-Query의 prefetch와 Hydration을 이용한 SSR
+
+데이터 SSR을 위하여 React-Query의 Hydration을 활용하였습니다. 서버사이드에서 `prefetchQuery` 를 이용하여 쿼리를 prefetch한 후, `queryClient`를 'dehydrate'하여 쿼리를 캐싱하였습니다. 그 후, 
+SSR을 진행 중 useQuery를 만났을 때 쿼리를 'rehydrate' 함으로써 미리 데이터를 가져오고 클라이언트 측 렌더링 이전에 데이터를 페칭하는 방식으로 SSR을 구현하였습니다.
+
