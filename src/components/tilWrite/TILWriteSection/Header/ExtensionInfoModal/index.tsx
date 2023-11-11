@@ -6,13 +6,12 @@ import * as Styled from './style';
 
 interface ExtensionInfoModalProps {
   isOpen: boolean;
-  isChromeExtensionInstall?: boolean;
   handleClose: () => void;
   handleSubmitTILContentToGithub?: () => void;
 }
 
 const ExtensionInfoModal = (props: ExtensionInfoModalProps) => {
-  const { isOpen, isChromeExtensionInstall, handleClose, handleSubmitTILContentToGithub } = props;
+  const { isOpen, handleClose, handleSubmitTILContentToGithub } = props;
 
   const handleGithubUpload = () => {
     handleClose();
@@ -33,11 +32,9 @@ const ExtensionInfoModal = (props: ExtensionInfoModalProps) => {
           </Button>
         </Link>
 
-        {isChromeExtensionInstall && (
-          <Button onClick={handleGithubUpload} variant="primary">
-            업로드
-          </Button>
-        )}
+        <Button onClick={handleGithubUpload} variant="primary">
+          업로드
+        </Button>
       </Styled.ButtonContainer>
     </Modal>
   );
