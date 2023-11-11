@@ -13,10 +13,10 @@
     <img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&amp;logo=Storybook&amp;logoColor=white">
 </p>
 
-# ERD
+# 🏠 ERD
 ![TIL-y_ERD](https://github.com/Step3-kakao-tech-campus/Team7_BE/assets/95485737/e3db0e8f-ec7b-4048-8c6e-a628722776ea)
 
-# 관련 주소
+# 🔗 관련 주소
 
 | 문서 | 
 |:--------:|
@@ -25,7 +25,7 @@
 | [피그마](https://www.figma.com/file/CBibyBNZ1jmESyVs0jnjSt/3%EB%8B%A8%EA%B3%84-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%99%80%EC%9D%B4%EC%96%B4-%ED%94%84%EB%A0%88%EC%9E%84?type=design&node-id=0-1&mode=design&t=0h0155bB1sb2wp98-0) |
 | [7조 노션](https://www.notion.so/2a6af605e8184499b21492cb7aabf6f5?v=0b907fed27634982ace606d37a4a6c88) |
 
-## 목차
+# 🏳️‍🌈 목차
 1. [서비스 기획 의도](https://github.com/monsta-zo/Team7_FE/blob/develop/README.md#-%EC%99%9C-%EC%9D%B4%EB%9F%B0-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC)
 2. [주요 기능](https://github.com/monsta-zo/Team7_FE/blob/develop/README.md#-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)
 3. [FE - 핵심 개발 영역](https://github.com/monsta-zo/Team7_FE/blob/develop/README.md#-fe---%ED%95%B5%EC%8B%AC-%EA%B0%9C%EB%B0%9C-%EC%98%81%EC%97%AD)
