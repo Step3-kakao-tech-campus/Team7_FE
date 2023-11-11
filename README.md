@@ -64,7 +64,7 @@
 |TIL 작성|학습 참고|
 |:--:|:--:|
 |- 마크다운 에디터를 통한 TIL 작성<br/>-사라질 걱정 없는 상시 저장 기능<br/> |- 각 STEP별 참고자료 확인<br/>- 글에 대한 코멘트 확인|
-|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/ehddud1006/hh/assets/62373865/f4d03965-7ccc-45e4-b47e948515759984">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/ehddud1006/hh/assets/62373865/66e4d193-36e1-4014-99d7170df46513ad">|
+|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/0891a195-b7d3-4cf5-8d83-66f15e1ce695">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/7f9dd89d-d40d-415b-9c2b-f63363ced835">|
 
 |메인|참고 자료|
 |:--:|:--:|
@@ -74,12 +74,12 @@
 |로드맵 목록|구성원 관리|
 |:--:|:--:|
 |- 내가 참여하고 있는 로드맵의 목록을 확인<br/>- 현재 모집중인 그룹 로드맵 목록 확인|- 현재 로드맵에 속한 그룹원 목록<br/>-멤버 권한 변경, 강퇴 기능<br/> -그룹원의 학습일지 작성현황 확인<br/>  -로드맵 신청 관리, 수락 거절<br/>|
-|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/0cabf489-e6e4-4236-aba1-b8d78b18f316">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/ehddud1006/hh/assets/62373865/6b29ee53-d90f-4a04-920a-f998a9970ab1">|
+|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/0cabf489-e6e4-4236-aba1-b8d78b18f316">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/a975f794-b7b1-40db-be2f-51890e4d9d39">|
 
 |TIL 공유하기|깃허브 업로드|
-|:—:|:—:|
+|:--:|:--:|
 |- 내가 공부하는 주제에 대해 타인과 생각을 공유<br/>|- 작성한 학습일지를 깃허브에 업로드 하는 기능<br/>
-|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/ehddud1006/hh/assets/62373865/a7166450-9ccb-4d0b-bf7c-42e09af11ab8">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/863b26cd-7703-42e8-b5c6-74c97cd2ae29">|
+|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/db9467c1-8759-49d7-9f10-1ddda8744ea3">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/735e6859-ff34-49f9-a797-930fddaecd04">|
 
 
 
@@ -90,7 +90,12 @@
 
 
 
-# 🎯 핵심 개발 영역
+
+
+
+
+
+# 🎯 FE - 핵심 개발 영역
 
 ## 성능 개선
 TIL-y는 Chrome의 Lighthouse 점수를 중심으로 성능을 개선해 나갔습니다. 
@@ -162,7 +167,7 @@ SSR을 진행 중 useQuery를 만났을 때 쿼리를 'rehydrate' 함으로써 �
 </br>
 </br>
 
-# Til-y 팀원들
+# TIL-y 구성원
 
 <table>
   <tr>
