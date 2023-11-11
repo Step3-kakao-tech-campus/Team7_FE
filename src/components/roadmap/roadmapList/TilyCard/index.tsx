@@ -23,11 +23,11 @@ const TilyCard = (props: TilyCardProps) => {
           <Logo type="logo" imageSize={25} />
         </Style.Container>
         <Image
-          src={'https://cdn.inflearn.com/public/roadmaps/39a4366c-b886-4b38-87da-7797f0ef6ac7/roadmap-2.png'}
+          src={roadmap.image!}
           width={500}
           height={250}
           style={{ width: '100%', height: '100%' }}
-          alt={'roadmapImg'}
+          alt={'틸리 로드맵 이미지'}
         />
         <Style.Container>
           <h3>{roadmap.name}</h3>

@@ -29,7 +29,7 @@ const Personal = () => {
 
   useEffect(() => {
     if (roadmaps.category.length !== 0) setRoadmapId(roadmaps.category[0].id);
-  }, []);
+  }, [roadmaps.category]);
 
   const {
     control: roadmapControl,
@@ -182,6 +182,7 @@ const Personal = () => {
                   stepId={step.id}
                   roadmapId={roadmapId}
                   onClick={() => handleSelcteStep(step)}
+                  setRoadmapId={setRoadmapId}
                   key={step.id}>
                   {step.title}
                 </ListItem>

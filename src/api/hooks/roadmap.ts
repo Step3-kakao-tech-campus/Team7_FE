@@ -178,6 +178,7 @@ export const useDeleteRoadmaps = () => {
     const data = await mutateAsync(req, {
       onSuccess: () => {
         queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapsMy());
+        queryClient.invalidateQueries(ROADMAP_QUERY_KEY.getRoadmapSteps(req.roadmapId));
         toast.showBottom({
           message: '삭제 되었습니다.',
         });
