@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useGetRoadmapSteps } from '@/api/hooks/roadmap';
 import { useGetTils } from '@/api/hooks/til';
@@ -25,13 +26,17 @@ const RoadMapInfo = (props: RoadMapInfoProps) => {
     <Styled.Root>
       <Styled.Container>
         <Styled.RoadMapContainer>
-          <Styled.RoadMap>로드맵</Styled.RoadMap>
+          <Styled.RoadMap>{tilDetail?.roadmapName}</Styled.RoadMap>
           <Icon iconName="ic_close" imageSize={16} ext="svg" onClick={handleCloseAside} alt="닫기 버튼" />
         </Styled.RoadMapContainer>
 
         <Styled.Title>
           <RoadmapPopover userRole={steps?.result.myRole}>
-            <span css={Styled.RoadmapTitleStyle}>{tilDetail?.roadmapName}</span>
+            <Styled.RoadmapEdit align="center" gap={0.3}>
+              {steps?.result.myRole === 'member' ? <span>로드맵 정보</span> : <span>로드맵 관리</span>}
+
+              <Image src="/assets/icons/ic_setting.svg" width={17} height={17} alt="로드맵 관리" />
+            </Styled.RoadmapEdit>
           </RoadmapPopover>
         </Styled.Title>
 

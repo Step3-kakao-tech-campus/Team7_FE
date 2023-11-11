@@ -20,7 +20,7 @@ export const OpenGraphContariner = styled(motion.div)<{ isOpen: boolean }>`
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
 `;
 
-export const ReferenceLink = styled.a`
+export const ReferenceLink = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,16 +28,6 @@ export const ReferenceLink = styled.a`
   padding: 0.5rem;
   border: 1px solid ${({ theme }) => theme.colors.gray_500};
   border-radius: 5px;
-
-  & > span {
-    width: 400px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 
   & > img {
     cursor: pointer;

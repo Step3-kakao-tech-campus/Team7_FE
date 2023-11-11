@@ -80,8 +80,8 @@ const StepBox = (props: StepBoxProps) => {
         {isOpen && (
           <Styled.ContentContainer>
             <p>{step.description}</p>
-            <ReferenceBox step={step} type="유튜브 영상" />
-            <ReferenceBox step={step} type="참고자료" />
+            <ReferenceBox step={step} type="youtube" />
+            <ReferenceBox step={step} type="web" />
           </Styled.ContentContainer>
         )}
       </article>

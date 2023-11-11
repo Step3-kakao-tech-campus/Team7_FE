@@ -53,7 +53,7 @@ const RoadmapPopover = (props: PropsWithChildren<RoadmapPopoverProps>) => {
           <Styled.Content>
             {userRole !== 'member'
               ? '로드맵 관리 페이지로 이동하시겠습니까?'
-              : '로드맵 상세 페이지로 이동하시겠습니까?'}
+              : '로드맵 정보 페이지로 이동하시겠습니까?'}
           </Styled.Content>
         </Popover.Content>
       </Popover.Portal>

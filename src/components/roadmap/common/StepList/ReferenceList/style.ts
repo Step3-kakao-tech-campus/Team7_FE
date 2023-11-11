@@ -36,6 +36,16 @@ export const Link = styled.section`
     cursor: pointer;
   }
 
+  & a {
+    border-bottom: 1px solid black;
+    font-weight: 600;
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.rose};
+      border-color: ${({ theme }) => theme.colors.rose};
+    }
+  }
+
   @media ${({ theme }) => theme.mediaQuery.sm} {
     & section > p {
       font-size: 12px;

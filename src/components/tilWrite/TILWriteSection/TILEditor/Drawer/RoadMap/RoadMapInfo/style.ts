@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import Flex from '@/components/common/Flex';
 import type { EmotionTheme } from '@/styles/emotion';
 
 export const Root = styled.div`
@@ -28,6 +29,11 @@ export const RoadMapContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding-right: 0.5rem;
+
+  & > button:hover {
+    scale: 1.3;
+    transition: all 0.2s;
+  }
 
   @media ${({ theme }) => theme.mediaQuery.md} {
     display: none;
@@ -69,5 +75,22 @@ export const RoadmapTitleStyle = (theme: EmotionTheme) => css`
 
   @media ${theme.mediaQuery.xs} {
     max-width: 90vw;
+  }
+`;
+
+export const RoadmapEdit = styled(Flex)`
+  padding: 2px 8px;
+  background-color: #088906;
+  border-radius: 8px;
+  color: white;
+
+  & > span {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &:hover {
+    color: black;
+    transition: all 0.2s ease;
   }
 `;

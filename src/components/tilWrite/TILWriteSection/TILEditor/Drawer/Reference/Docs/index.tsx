@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import * as Styled from './style';
 
 interface DocsProps {
@@ -12,7 +12,6 @@ const Docs = (props: DocsProps) => {
   const { link, index } = props;
 
   const [isOpen, setIsOpen] = useState(true);
-  const router = useRouter();
 
   return (
     <Styled.Root>
@@ -21,7 +20,7 @@ const Docs = (props: DocsProps) => {
         <div>{`참고자료 ${index}`}</div>
       </Styled.ReferenceContainer>
 
-      <button onClick={() => router.push(link)}>
+      <>
         <Styled.OpenGraphContariner
           isOpen={isOpen}
           initial="closed"
@@ -31,11 +30,14 @@ const Docs = (props: DocsProps) => {
             closed: { opacity: 0 },
           }}
           transition={{ type: 'tween' }}>
-          <Styled.ReferenceLink href={link} target="_blank" rel="noreferrer">
-            <span>{`${index}. ${link}`}</span>
+          <Styled.ReferenceLink>
+            <Link href={link} target="_blank" rel="noopener noreferrer">
+              {' '}
+              {`${index}. ${link}`}
+            </Link>
           </Styled.ReferenceLink>
         </Styled.OpenGraphContariner>
-      </button>
+      </>
     </Styled.Root>
   );
 };

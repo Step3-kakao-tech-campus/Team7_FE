@@ -9,7 +9,7 @@ import { useModalState } from '@/hooks/useModalState';
 
 interface ReferenceBoxProps {
   step: StepWithReferences;
-  type: '유튜브 영상' | '참고자료';
+  type: 'youtube' | 'web';
 }
 
 const ReferenceBox = (props: ReferenceBoxProps) => {
@@ -22,19 +22,19 @@ const ReferenceBox = (props: ReferenceBoxProps) => {
     <>
       <Styled.Root>
         <Styled.Header>
-          <h3>{type} 링크</h3>
+          <h3>{type === 'youtube' ? '유튜브 영상' : '참고자료'} 링크</h3>
           {path === 'manage' && (
             <Button
               onClick={() => {
                 handleOpen();
               }}>
-              {type} 추가하기
+              {type === 'youtube' ? '유튜브 영상' : '참고자료'} 추가하기
             </Button>
           )}
         </Styled.Header>
         <ReferenceList type={type} step={step} />
       </Styled.Root>
-      {type === '참고자료' ? (
+      {type === 'web' ? (
         <WebModal step={step} isOpen={isOpen} onClose={handleClose} />
       ) : (
         <YoutubeModal step={step} isOpen={isOpen} onClose={handleClose} />
