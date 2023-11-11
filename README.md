@@ -61,15 +61,32 @@
 </p>
 
 # 🧩 주요 기능
-|TIL 작성|TIL 목록|
+|TIL 작성|학습 참고|
 |:--:|:--:|
-|- 마크다운 에디터를 통한 TIL 작성<br/>-사라질 걱정 없는 상시 저장 기능<br/> |- 작성한 TIL 목록들을 검색하고 확인<br/>- 장미밭을 통해 학습 열정 확인|
-|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/2c8fc376-7009-402b-9007-5d7ede29d4a1">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/2c8fc376-7009-402b-9007-5d7ede29d4a1">|
+|- 마크다운 에디터를 통한 TIL 작성<br/>-사라질 걱정 없는 상시 저장 기능<br/> |- 각 STEP별 참고자료 확인<br/>- 글에 대한 코멘트 확인|
+|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/ehddud1006/hh/assets/62373865/f4d03965-7ccc-45e4-b47e948515759984">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/ehddud1006/hh/assets/62373865/66e4d193-36e1-4014-99d7170df46513ad">|
 
-|TIL 작성|TIL 목록|
+|메인|참고 자료|
 |:--:|:--:|
-|- 마크다운 에디터를 통한 TIL 작성<br/>-사라질 걱정 없는 상시 저장 기능<br/> |- 작성한 TIL 목록들을 검색하고 확인<br/>- 장미밭을 통해 학습 열정 확인|
-|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/2c8fc376-7009-402b-9007-5d7ede29d4a1">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/2c8fc376-7009-402b-9007-5d7ede29d4a1">|
+|- 작성한 TIL 목록들을 검색하고 확인<br/>- 장미밭을 통해 학습 열정 확인 <br/> - 개인, 그룹 로드맵을 분류하여 관리|- 로드맵에 참고할 자료를 첨부하는 기능<br/>-유튜브, 참고자료 링크<br/> |
+|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/101dc410-2f68-4ca4-84b6-c5d00005df84">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/f0812e9f-f1df-4c94-bbb0-a0dab46f022f">|
+
+|로드맵 목록|구성원 관리|
+|:--:|:--:|
+|- 내가 참여하고 있는 로드맵의 목록을 확인<br/>- 현재 모집중인 그룹 로드맵 목록 확인|- 현재 로드맵에 속한 그룹원 목록<br/>-멤버 권한 변경, 강퇴 기능<br/> -그룹원의 학습일지 작성현황 확인<br/>  -로드맵 신청 관리, 수락 거절<br/>|
+|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/0cabf489-e6e4-4236-aba1-b8d78b18f316">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/ehddud1006/hh/assets/62373865/6b29ee53-d90f-4a04-920a-f998a9970ab1">|
+
+|TIL 공유하기|깃허브 업로드|
+|:—:|:—:|
+|- 내가 공부하는 주제에 대해 타인과 생각을 공유<br/>|- 작성한 학습일지를 깃허브에 업로드 하는 기능<br/>
+|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/ehddud1006/hh/assets/62373865/a7166450-9ccb-4d0b-bf7c-42e09af11ab8">|<img width="476" alt="스크린샷 2023-03-19 오후 11 51 04" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/863b26cd-7703-42e8-b5c6-74c97cd2ae29">|
+
+
+
+
+
+
+
 
 
 
@@ -139,3 +156,42 @@ Access Token의 여부를 확인하고 페이지 컴포넌트에 props를 넘겨
 데이터 SSR을 위하여 React-Query의 Hydration을 활용하였습니다. 서버사이드에서 `prefetchQuery` 를 이용하여 쿼리를 prefetch한 후, `queryClient`를 'dehydrate'하여 쿼리를 캐싱하였습니다. 그 후, 
 SSR을 진행 중 useQuery를 만났을 때 쿼리를 'rehydrate' 함으로써 미리 데이터를 가져오고 클라이언트 측 렌더링 이전에 데이터를 페칭하는 방식으로 SSR을 구현하였습니다.
 
+
+# 아키택쳐 구조
+<img width="800" alt="스크린샷 2023-11-11 오후 8 02 21" src="https://github.com/Step3-kakao-tech-campus/Team7_BE/assets/131665728/aff5dd73-0cc2-4da4-8e53-f838630b7afd">
+</br>
+</br>
+
+# Til-y 팀원들
+
+<table>
+  <tr>
+    <td>김동영</td>
+    <td>조준서</td>
+    <td>이한홍</td>
+    <td>김수현</td>
+    <td>이상명</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/ehddud1006.png" alt="김동영" width="100" height="100"></td>
+    <td><img src="https://github.com/monsta-zo.png" alt="조준서" width="100" height="100"></td>
+    <td><img src="https://github.com/hoyaii.png" alt="이한홍" width="100" height="100"></td>
+    <td><img src="https://github.com/suuding.png" alt="김수현" width="100" height="100"></td>
+    <td><img src="https://github.com/sam-mae.png" alt="이상명" width="100" height="100"></td>
+  </tr>
+  <tr>
+    <td>FE</td>
+    <td>FE</td>
+    <td>BE</td>
+    <td>BE</td>
+    <td>BE</td>
+  </tr>
+  <tr>
+    <td>조장</td>
+    <td>기확리더</td>
+    <td>테크리더</td>
+    <td>스케줄러</td>
+    <td>리마인더</td>
+  </tr>
+</table>
+</br>
