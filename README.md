@@ -1,253 +1,61 @@
-# Team7
-7조
-## 카카오 테크 캠퍼스 3단계 진행 보드
-
-</br>
-
-## 배포와 관련하여
-
-```
-
-최종 배포는 크램폴린으로 배포해야 합니다.
-
-하지만 배포 환경의 불편함이 있는 경우를 고려하여 
-
-임의의 배포를 위해 타 배포 환경을 자유롭게 이용해도 됩니다. (단, 금액적인 지원은 어렵습니다.)
-
-아래는 추가적인 설정을 통해 (체험판, 혹은 프리 티어 등)무료로 클라우드 배포가 가능한 서비스입니다.
-
-ex ) AWS(아마존), GCP(구글), Azure(마이크로소프트), Cloudtype 
-
-```
-## Notice
-
-```
-필요 산출물들은 수료 기준에 영향을 주는 것은 아니지만, 
-주차 별 산출물을 기반으로 평가가 이루어 집니다.
-
-주차 별 평가 점수는 추 후 최종 평가에 최종 합산 점수로 포함됩니다.
-```
-
-![레포지토리 운영-001 (1)](https://github.com/Step3-kakao-tech-campus/practice/assets/138656575/acb0dccd-0441-4200-999a-981865535d5f)
-![image](https://github.com/Step3-kakao-tech-campus/practice/assets/138656575/b42cbc06-c5e7-4806-8477-63dfa8e807a0)
-
-[git flowchart_FE.pdf](https://github.com/Step3-kakao-tech-campus/practice/files/12521045/git.flowchart_FE.pdf)
+# [🌹 틸리 - 꾸준하고픈 개발자를 위한 공간](https://kc29be941feb6a.user-app.krampoline.com/)
+### 목자
 
 
-</br>
+<p align='center'>
+<img width="200" alt="스크린샷 2023-03-16 오전 9 30 09" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/908cde6b-1f19-4a35-bc36-7c77309ffef1">
+</p>
 
-## 필요 산출물
-<details>
-<summary>Step3. Week-1</summary>
-<div>
-    
-✅**1주차**
-    
-```
-    - 5 Whys
-    - 마켓 리서치
-    - 페르소나 & 저니맵
-    - 와이어 프레임
-    - 칸반보드
-```
-    
-</div>
-</details>
+<p align='center'>
+    <img src="https://img.shields.io/badge/typescript-3178C6?style=flat-square&amp;logo=typescript&amp;logoColor=white">
+    <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&amp;logo=React&logoColor=white">
+    <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&amp;logo=Next.js&amp;logoColor=white">
+    <img src="https://img.shields.io/badge/ReactQuery-FF4154?style=flat-square&amp;logo=ReactQuery&amp;logoColor=white">
+    <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&amp;logo=Axios&amp;logoColor=white">
+    <img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&amp;logo=Storybook&amp;logoColor=white">
+</p>
 
----
+# 🤔 왜 이런 서비스를?
 
-<details>
-<summary>Step3. Week-2</summary>
-<div>
-    
-✅**2주차**
-    
-```
-    - ERD 설계서
-    
-    - API 명세서
-```
-    
-</div>
-</details>
-
----
-
-<details>
-<summary>Step3. Week-3</summary>
-<div>
-    
-✅**3주차**
-    
-```
-    - 최종 기획안
-```
-    
-</div>
-</details>
-
----
-
-<details>
-<summary>Step3. Week-4</summary>
-<div>
-    
-✅**4주차**
-    
-```
-    - 4주차 github
-    
-    - 4주차 노션
-```
-    
-</div>
-</details>
-
----
-<details>
-<summary>Step3. Week-5</summary>
-<div>
-    
-✅**5주차**
-    
-```
-    - 5주차 github
-    
-    - 5주차 노션
-```
-    
-</div>
-</details>
-
----
-
-<details>
-<summary>Step3. Week-6</summary>
-<div>
-    
-✅**6주차**
-    
-```
-    - 6주차 github
-    
-    - 중간발표자료
-    
-    - 피어리뷰시트
-```
-    
-</div>
-</details>
-
----
-
-<details>
-<summary>Step3. Week-7</summary>
-<div>
-    
-✅**7주차**
-    
-```
-    - 7주차 github
-    
-    - 7주차 노션
-```
-    
-</div>
-</details>
-
----
-
-<details>
-<summary>Step3. Week-8</summary>
-<div>
-    
-✅**8주차**
-    
-```
-    - 중간고사
-    
-```
-    
-</div>
-</details>
-
----
-
-<details>
-<summary>Step3. Week-9</summary>
-<div>
-    
-✅**9주차**
-    
-```
-    - 9주차 github
-    
-    - 9주차 노션
-```
-    
-</div>
-</details>
-
----
-
-<details>
-<summary>Step3. Week-10</summary>
-<div>
-    
-✅**10주차**
-    
-```
-    - 10주차 github
-    
-    - 테스트 시나리오 명세서
-    
-    - 테스트 결과 보고서
-```
-    
-</div>
-</details>
-
----
-
-<details>
-<summary>Step3. Week-11</summary>
-<div>
-    
-✅**11주차**
-    
-```
-    - 최종 기획안
-    
-    - 배포 인스턴스 링크
-```
-    
-</div>
-</details>
-
----
-
-## **과제 상세 : 수강생들이 과제를 진행할 때, 유념해야할 것**
+## 📍 문제 상황 인식 1단계 <카테캠 1,2 단계를 겪으며>
+- 카테캠의 핵심, 자기주도적 학습 -> **매일, 매주 TIL 작성 및 제출**
+- 하지만 100명이 넘는 학생들의 TIL을 **노션의 한 페이지에서 관리**
+<p align='center'>
+    <img width="350" alt="image" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/fa0355af-0242-472d-b0e6-0f313edd7a89">
+    <img width="300" alt="image" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/45d8a088-7119-49f8-a311-cdd87d0acad5">
+</p>
 
 ```
-1. README.md 파일은 동료 개발자에게 프로젝트에 쉽게 랜딩하도록 돕는 중요한 소통 수단입니다.
-해당 프로젝트에 대해 아무런 지식이 없는 동료들에게 설명하는 것처럼 쉽고, 간결하게 작성해주세요.
+학생의 불편함 - 내 TIL이 삭제되는 일, 서로의 모든 TIL이 공개
+멘토의 불편함 - 일일히 들어가서 작성 여부를 확인, 제출 여부 확인 어려움
 
-2. 좋은 개발자는 디자이너, 기획자, 마케터 등 여러 포지션에 있는 분들과 소통을 잘합니다.
-UI 컴포넌트의 명칭과 이를 구현하는 능력은 필수적인 커뮤니케이션 스킬이자 필요사항이니 어떤 상황에서 해당 컴포넌트를 사용하면 좋을지 고민하며 코드를 작성해보세요.
-
+-> 학습일지를 더 편하게 관리하고 제출할 수는 없을까?
 ```
 
-</br>
+### 🎯 문제 해결 방안 <그룹 서비스>
+- 그룹 로드맵을 생성한 후, 학습 단계 구성
+- 각 단계를 수행한 후, TIL 제출
+- 한 눈에 구성원들의 TIL 관리
 
-## **코드리뷰 관련: review branch로 PR시, 아래 내용을 포함하여 코멘트 남겨주세요.**
+<hr/>
 
-**1. PR 제목과 내용을 아래와 같이 작성 해주세요.**
+## 📍 문제 상황 인식 2단계 <자기주도적 개발 학습의 어려움>
+- 개발, 스택 공부는 스스로 시작해야하는 경우가 많음
+```
+하지만 어디서부터 어떤 순서로 해야할지 막막함
+내가 잘하고 있는지도 확인하기 어려움
 
-> PR 제목 : 부산대_0조_아이템명_0주차
-> 
+-> 어떤 순서로 공부할지, 또 잘하고 있는 지 확인할 방법은 없을까?
+```
+### 🎯 문제 해결 방안 <로드맵>
+- 학습의 단계를 제공
+- 각 단계를 수행한 후, TIL 제출
+- 같은 단계를 수행한 다른 사람들의 TIL 확인
 
-</br>
 
-</div>
+<p align='center'>
+<img width="1000" alt="스크린샷 2023-03-16 오전 9 30 09" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/c7646ff1-5c24-4493-b45e-6aa9e990f8f6">
+</p>
 
----
+
+
