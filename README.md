@@ -28,7 +28,7 @@
 2. [주요 기능](https://github.com/Step3-kakao-tech-campus/Team7_FE/tree/master#-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)
 3. [FE - 핵심 개발 영역](https://github.com/Step3-kakao-tech-campus/Team7_FE/tree/master#-fe---%ED%95%B5%EC%8B%AC-%EA%B0%9C%EB%B0%9C-%EC%98%81%EC%97%AD)
 4. [ERD](https://github.com/Step3-kakao-tech-campus/Team7_FE/tree/master#-erd)
-5. [아키텍쳐 구조](https://github.com/Step3-kakao-tech-campus/Team7_FE/tree/master#%EF%B8%8F-%EC%95%84%ED%82%A4%ED%83%9D%EC%B3%90-%EA%B5%AC%EC%A1%B0
+5. [아키텍쳐 구조](https://github.com/Step3-kakao-tech-campus/Team7_FE/tree/master#%EF%B8%8F-%EC%95%84%ED%82%A4%ED%83%9D%EC%B3%90-%EA%B5%AC%EC%A1%B0)
 6. [TIL-y 구성원](https://github.com/Step3-kakao-tech-campus/Team7_FE/tree/master#-til-y-%EA%B5%AC%EC%84%B1%EC%9B%90)
 
 
