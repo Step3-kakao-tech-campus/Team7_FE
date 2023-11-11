@@ -22,7 +22,7 @@ interface CommentProps extends CommentType {
 }
 
 const Comment = (props: CommentProps) => {
-  const { handlePatchModalOpen, handleSelectComment, id, name, image, content, isOwner, date } = props;
+  const { handlePatchModalOpen, handleSelectComment, id, name, image, content, isOwner, createDate } = props;
 
   const {
     isOpen: isContextMenuOpen,
@@ -60,7 +60,7 @@ const Comment = (props: CommentProps) => {
         <Styled.Left>
           <Avatar imageSize={32} imageUrl={image} alt="프로필 이미지" />
           <Styled.Name>{name}</Styled.Name>
-          <Styled.Date>{dayjs(date).from(dayjs())}</Styled.Date>
+          <Styled.Date>{dayjs(createDate).from(dayjs())}</Styled.Date>
         </Styled.Left>
 
         <Styled.Right>
