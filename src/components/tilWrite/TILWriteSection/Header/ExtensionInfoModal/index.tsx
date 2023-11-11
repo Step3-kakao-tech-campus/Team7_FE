@@ -5,13 +5,14 @@ import Modal from '@/components/common/Modal';
 import * as Styled from './style';
 
 interface ExtensionInfoModalProps {
+  isExtensionInstall?: boolean;
   isOpen: boolean;
   handleClose: () => void;
   handleSubmitTILContentToGithub?: () => void;
 }
 
 const ExtensionInfoModal = (props: ExtensionInfoModalProps) => {
-  const { isOpen, handleClose, handleSubmitTILContentToGithub } = props;
+  const { isExtensionInstall, isOpen, handleClose, handleSubmitTILContentToGithub } = props;
 
   const handleGithubUpload = () => {
     handleClose();
@@ -23,6 +24,7 @@ const ExtensionInfoModal = (props: ExtensionInfoModalProps) => {
       <Styled.Title>깃허브 업로드 기능</Styled.Title>
       <Styled.Info>
         <Styled.InfoText>학습일지를 깃허브에 업로드 할 수 있습니다.</Styled.InfoText>
+        <Styled.InfoText>확장 프로그램을 설치후 새로고침을 해주세요.</Styled.InfoText>
         <Styled.InfoText css={Styled.InfoTextStyles}>확장 프로그램에서 업로드할 레포를 등록해주세요.</Styled.InfoText>
       </Styled.Info>
       <Styled.ButtonContainer>
@@ -31,10 +33,11 @@ const ExtensionInfoModal = (props: ExtensionInfoModalProps) => {
             안내페이지로 이동
           </Button>
         </Link>
-
-        <Button onClick={handleGithubUpload} variant="primary">
-          업로드
-        </Button>
+        {isExtensionInstall && (
+          <Button onClick={handleGithubUpload} variant="primary">
+            업로드
+          </Button>
+        )}
       </Styled.ButtonContainer>
     </Modal>
   );
