@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import { useState } from 'react';
 import Image from 'next/image';
 import * as Styled from './style';
@@ -11,6 +12,8 @@ const Youtube = (props: YoutubeProps) => {
   const { link, index } = props;
 
   const [isOpen, setIsOpen] = useState(true);
+
+  const cleanHTML = DOMPurify.sanitize(link);
 
   return (
     <Styled.Root>
@@ -28,7 +31,7 @@ const Youtube = (props: YoutubeProps) => {
           closed: { opacity: 0 },
         }}
         transition={{ type: 'tween' }}>
-        <Styled.Youtube dangerouslySetInnerHTML={{ __html: link }} />
+        <Styled.Youtube dangerouslySetInnerHTML={{ __html: cleanHTML }} />
       </Styled.YoutubeContariner>
     </Styled.Root>
   );
