@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Button from '@/components/common/Button';
 import Flex from '@/components/common/Flex';
@@ -30,7 +29,6 @@ const AuthModal = (props: ModalProps) => {
           <h3>바로 다양한 서비스들을 이용해보세요.</h3>
         </Flex>
 
-        <Image src="/assets/icons/ic_welcome.svg" width={200} height={200} alt="환영 이미지" />
         <Button
           onClick={() => {
             router.replace(TILY_LINKS.login());

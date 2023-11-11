@@ -45,11 +45,6 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
 
   return (
     <>
-      {/* {isExtensionInstall ? (
-        <button id="github_extenstion" onClick={handleSubmitTILContentToGithub}>
-          <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
-        </button>
-      ) : ( */}
       <button id="github_extenstion" onClick={handleModalOpen}>
         <Image src="/assets/icons/ic_github.svg" width={60} height={60} alt="깃허브 익스텐션" />
       </button>
