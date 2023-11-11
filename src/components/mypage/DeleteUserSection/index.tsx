@@ -11,9 +11,12 @@ const DeleteUserSection = () => {
   const { isOpen, handleOpen, handleClose } = useModalState();
   const { deleteUserAsync } = useDeleteUser();
 
-  const handleDelteUser = (password: string) => {
-    deleteUserAsync({ body: { password } });
-    handleClose();
+  const handleDelteUser = async (password: string) => {
+    const { data } = await deleteUserAsync({ body: { password } });
+    if (data.code === 200) {
+      handleClose();
+      router.push(TILY_LINKS.intro());
+    }
   };
 
   return (

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { type Roadmap } from '@/api/type';
 import Logo from '@/components/common/Logo';
@@ -22,8 +21,8 @@ const TilyCard = (props: TilyCardProps) => {
         <Style.Container>
           <Logo type="logo" imageSize={25} />
         </Style.Container>
-        <Image
-          src={roadmap.image!}
+        <img
+          src={roadmap.image}
           width={500}
           height={250}
           style={{ width: '100%', height: '100%' }}
