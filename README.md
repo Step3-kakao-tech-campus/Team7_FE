@@ -21,8 +21,8 @@
 - 카테캠의 핵심, 자기주도적 학습 -> **매일, 매주 TIL 작성 및 제출**
 - 하지만 100명이 넘는 학생들의 TIL을 **노션의 한 페이지에서 관리**
 <p align='center'>
-    <img width="450" alt="image" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/fa0355af-0242-472d-b0e6-0f313edd7a89">
-    <img width="400" alt="image" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/45d8a088-7119-49f8-a311-cdd87d0acad5">
+    <img width="400" alt="image" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/fa0355af-0242-472d-b0e6-0f313edd7a89">
+    <img width="350" alt="image" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/45d8a088-7119-49f8-a311-cdd87d0acad5">
 </p>
 
 ```
@@ -54,7 +54,7 @@
 
 
 <p align='center'>
-<img width="1300" alt="스크린샷 2023-03-16 오전 9 30 09" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/c7646ff1-5c24-4493-b45e-6aa9e990f8f6">
+<img width="2000" alt="스크린샷 2023-03-16 오전 9 30 09" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/c7646ff1-5c24-4493-b45e-6aa9e990f8f6">
 </p>
 
 
