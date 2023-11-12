@@ -17,6 +17,7 @@ export default function Document() {
         <link rel="preload" href="/fonts/Pretendard-Regular.subset.woff2" as="font" type="font/woff2" crossOrigin="" />
       </Head>
       <body>
+        <div id="tilyhubCheck" />
         <Main />
         <NextScript />
       </body>
