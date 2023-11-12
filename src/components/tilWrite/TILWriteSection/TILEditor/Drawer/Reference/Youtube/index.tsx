@@ -1,5 +1,5 @@
 import DOMPurify from 'dompurify';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import * as Styled from './style';
 
@@ -13,7 +13,11 @@ const Youtube = (props: YoutubeProps) => {
 
   const [isOpen, setIsOpen] = useState(true);
 
-  const cleanHTML = DOMPurify.sanitize(link);
+  const cleanHTML = useMemo(() => {
+    const temp = link.split(' ');
+    temp[3] = DOMPurify.sanitize(temp[3]);
+    return temp.join(' ');
+  }, [link]);
 
   return (
     <Styled.Root>
