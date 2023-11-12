@@ -13,7 +13,7 @@ const Mypage = () => {
       <Title>개인 정보 수정</Title>
       <ProfileSection />
       <EditSection />
-      <DeleteUserSection />
+      {/* <DeleteUserSection /> */}
     </Root>
   );
 };
