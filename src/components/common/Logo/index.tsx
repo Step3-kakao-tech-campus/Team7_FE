@@ -13,7 +13,7 @@ const Logo = (props: LogoProps) => {
 
   return (
     <Styled.Root onClick={onClick} isPointer={isPointer}>
-      <Image src={'/assets/icons/tily.png'} alt="Logo" width={imageSize + 3} height={imageSize} />
+      <Image src={'/assets/icons/tily.svg'} alt="Logo" width={imageSize + 3} height={imageSize} />
       {type === 'textLogo' && <Styled.Text imageSize={imageSize}>TIL-y</Styled.Text>}
     </Styled.Root>
   );
