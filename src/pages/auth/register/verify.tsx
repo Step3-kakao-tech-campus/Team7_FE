@@ -12,7 +12,7 @@ const RegisterVerifyPage = () => {
     <AuthPageContainer>
       <TILyHead title="TIL-y | 이메일 인증" />
       <VerifyForm location="register" />
-      <SocialLogin />
+      {/* <SocialLogin /> */}
     </AuthPageContainer>
   );
 };
