@@ -6,6 +6,7 @@ import { usePostTils } from '@/api/hooks/til';
 import type { Step } from '@/api/type';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
+import EmptyList from '@/components/common/EmptyList';
 import Icon from '@/components/common/Icon';
 import * as Styled from '@/components/gnb/UserGNB/desktop/Personal/style';
 import TILY_LINKS from '@/constants/links';
@@ -53,16 +54,26 @@ const RoadMap = () => {
       <Card css={Styled.CardStyles}>
         <Styled.RoadmapSection>
           <Styled.List>
-            {roadmaps?.roadmaps.map((roadmap) => {
-              return (
-                <Styled.Item
-                  selected={roadmapId === roadmap.id}
-                  onClick={() => setRoadmapId(roadmap.id)}
-                  key={roadmap.id}>
-                  {roadmap.name}
-                </Styled.Item>
-              );
-            })}
+            {roadmaps.roadmaps.length === 0 ? (
+              <EmptyList
+                onClick={() => {
+                  router.push(TILY_LINKS.roadmap());
+                }}
+                button="로드맵 찾아보기">
+                <p>참여중인 로드맵이 없어요.</p>
+              </EmptyList>
+            ) : (
+              roadmaps?.roadmaps.map((roadmap) => {
+                return (
+                  <Styled.Item
+                    selected={roadmapId === roadmap.id}
+                    onClick={() => setRoadmapId(roadmap.id)}
+                    key={roadmap.id}>
+                    {roadmap.name}
+                  </Styled.Item>
+                );
+              })
+            )}
           </Styled.List>
         </Styled.RoadmapSection>
 

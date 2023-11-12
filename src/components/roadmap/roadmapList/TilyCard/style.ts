@@ -10,6 +10,7 @@ export const Root = styled(Card)`
   margin: 20px auto;
   padding: 12px 0 10px;
   cursor: pointer;
+  overflow: hidden;
 
   & > section:first-of-type > * {
     margin-bottom: 7px;
@@ -19,7 +20,8 @@ export const Root = styled(Card)`
     height: 55%;
   }
 
-  & > section > section > h4 {
+  & h3 {
+    font-size: 17px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

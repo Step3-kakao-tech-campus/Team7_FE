@@ -31,10 +31,9 @@ const ReferenceList = (props: ReferenceListProps) => {
   };
 
   const IframeToUrl = (iframeString: string) => {
-    const regex = /src="(https:\/\/www.youtube.com\/embed\/[^"]+)"/;
+    const regex = /src=['"](https:\/\/www\.youtube\.com\/embed\/[^"']+)['"]/;
     const match = iframeString.match(regex);
 
-    // match[1]에 추출된 YouTube URL이 들어있습니다.
     return match ? match[1] : '';
   };
 
