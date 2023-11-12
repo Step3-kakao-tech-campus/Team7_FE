@@ -18,7 +18,7 @@
     "service_worker": "scripts/background.js"
   },
   "permissions": ["storage"],
-  "host_permissions": ["https://kc29be941feb6a.user-app.krampoline.com/*", "https://github.com/"],
+  "host_permissions": ["https://k50d31201bb8ea.user-app.krampoline.com/*", "https://github.com/"],
   "web_accessible_resources": [
     {
       "matches": ["<all_urls>"],
@@ -39,7 +39,7 @@
       "run_at": "document_idle"
     },
     {
-      "matches": ["https://kc29be941feb6a.user-app.krampoline.com/*"],
+      "matches": ["https://k50d31201bb8ea.user-app.krampoline.com/*"],
       "js": [
         "library/sha1.min.js",
         "library/jszip.min.js",
