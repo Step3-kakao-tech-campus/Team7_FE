@@ -47,7 +47,7 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
   useEffect(() => {
     let count = 0;
     const maxCount = 5;
-    console.log(count);
+
     const interval = setInterval(() => {
       count += 1;
 
@@ -60,7 +60,7 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
       if (count >= maxCount) {
         clearInterval(interval);
       }
-    }, 2000);
+    }, 300);
 
     return () => clearInterval(interval);
   }, []);
