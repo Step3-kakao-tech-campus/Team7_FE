@@ -45,12 +45,24 @@ const ExtensionIcon = (props: ExtensionIconProps) => {
   }, [tilDetail, TILContent]);
 
   useEffect(() => {
-    // 클래스 이름으로 요소를 찾습니다.
-    const element = document.querySelector('.tilytily');
+    let count = 0;
+    const maxCount = 5;
+    console.log(count);
+    const interval = setInterval(() => {
+      count += 1;
 
-    if (element) {
-      setIsExtensionInstall(true);
-    }
+      const element = document.querySelector('.tilytily');
+
+      if (element) {
+        setIsExtensionInstall(true);
+      }
+
+      if (count >= maxCount) {
+        clearInterval(interval);
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
