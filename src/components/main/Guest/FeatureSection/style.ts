@@ -33,6 +33,10 @@ export const HardWareContainer = styled.div`
   border: 1px solid #d2d3d4;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 
+  & > video {
+    width: 100%;
+  }
+
   @media ${({ theme }) => theme.mediaQuery.md} {
     padding: 14px;
   }
