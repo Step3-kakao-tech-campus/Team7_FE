@@ -20,7 +20,8 @@ export const Root = styled.div<{ isActiveStep: boolean }>`
 `;
 
 export const Container = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 28px 1fr;
   align-items: center;
   gap: 0.625rem;
   overflow: hidden;
@@ -34,7 +35,6 @@ export const CheckIconContainer = styled.div`
 `;
 
 export const Title = styled.div`
-  max-width: 300px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

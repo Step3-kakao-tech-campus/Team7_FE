@@ -15,7 +15,7 @@ const SubmitModal = (props: SubmitModalProps) => {
     <Modal isOpen={isOpen} onClose={handleClose}>
       <Styled.Title>TIL 제출하기</Styled.Title>
       <Styled.Info>
-        <Styled.InfoText>그룹 로드맵 제출은 한번만 가능합니다</Styled.InfoText>
+        <Styled.InfoText>로드맵 제출은 한번만 가능합니다</Styled.InfoText>
         <Styled.InfoText>그래도 제출하시겠습니까?</Styled.InfoText>
       </Styled.Info>
       <Styled.ButtonContainer>

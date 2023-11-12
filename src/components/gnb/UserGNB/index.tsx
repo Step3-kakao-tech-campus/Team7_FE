@@ -32,7 +32,7 @@ const GNB = forwardRef<HTMLDivElement, GNBProps>((_, ref) => {
           <Flex>
             <Responsive device="desktop">
               <Styled.TILInfo>
-                <span>오늘의 TIL를 작성하고 </span>
+                <span>오늘의 TIL을 작성하고 </span>
                 <span>장미</span>
                 <span>를 심어보세요</span>
               </Styled.TILInfo>
