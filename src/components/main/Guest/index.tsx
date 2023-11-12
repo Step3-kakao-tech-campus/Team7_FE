@@ -71,7 +71,7 @@ const Guest = () => {
         </SectionStyled.FeatureSection>
 
         {SECTIONS.map((section) => {
-          return <FeatureSection key={section.key} title={section.title} alt={section.alt} imgsrc={section.imgsrc} />;
+          return <FeatureSection key={section.key} title={section.title} alt={section.alt} videoSrc={section.imgsrc} />;
         })}
 
         <SectionStyled.FeatureSection>
@@ -94,31 +94,31 @@ const SECTIONS = [
   {
     key: 'roadmap',
     title: '개발공부의 방향성 제시',
-    imgsrc: '/assets/images/roadmap.gif',
+    imgsrc: 'roadmap',
     alt: '개발공부의 방향성 제시',
   },
   {
     key: 'github',
     title: 'TIL 깃허브 업로드',
-    imgsrc: '/assets/images/github.gif',
+    imgsrc: 'github',
     alt: 'TIL 깃허브 업로드',
   },
   {
     key: 'share',
     title: '동일 주제에 대한 TIL 공유 기능',
-    imgsrc: '/assets/images/peopleTIL.gif',
+    imgsrc: 'peopleTIL',
     alt: '동일 주제에 대한 TIL 공유 기능',
   },
   {
     key: 'group',
     title: '그룹 로드맵 생성',
-    imgsrc: '/assets/images/group.gif',
+    imgsrc: 'group',
     alt: '그룹 로드맵 생성',
   },
   {
     key: 'team',
     title: '팀 내 학습 관리',
-    imgsrc: '/assets/images/team.gif',
+    imgsrc: 'team',
     alt: '팀 내 학습 관리',
   },
 ];

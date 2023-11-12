@@ -7,12 +7,12 @@ const FADE_DOWN_ANIMATION_VARIANTS = {
 
 interface FeatureSectionProps {
   title: string;
-  imgsrc: string;
+  videoSrc: string;
   alt: string;
 }
 
 const FeatureSection = (props: FeatureSectionProps) => {
-  const { title, imgsrc, alt } = props;
+  const { title, videoSrc, alt } = props;
 
   return (
     <Styled.FeatureSection
@@ -22,7 +22,10 @@ const FeatureSection = (props: FeatureSectionProps) => {
       variants={FADE_DOWN_ANIMATION_VARIANTS}>
       <Styled.SectionTitle>{title}</Styled.SectionTitle>
       <Styled.HardWareContainer>
-        <Styled.Image src={imgsrc} alt={alt} />
+        <video autoPlay loop muted>
+          <source src={`assets/images/${videoSrc}.mp4`} type="video/mp4" />
+          {alt}
+        </video>
       </Styled.HardWareContainer>
     </Styled.FeatureSection>
   );
