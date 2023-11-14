@@ -1,4 +1,4 @@
-# [🌹 틸리 - 꾸준하고픈 개발자를 위한 공간](https://k50d31201bb8ea.user-app.krampoline.com/)
+# [🌹 틸리 - 꾸준하고픈 개발자를 위한 공간](https://kce4f8e6cb395a.user-app.krampoline.com/)
 
 <p align='center'>
 <img width="200" alt="스크린샷 2023-03-16 오전 9 30 09" src="https://github.com/monsta-zo/Team7_FE/assets/83194164/908cde6b-1f19-4a35-bc36-7c77309ffef1">
@@ -18,7 +18,7 @@
 
 | 문서 | 
 |:--------:|
-| [7조 배포 주소](https://k50d31201bb8ea.user-app.krampoline.com/) |
+| [7조 배포 주소](https://kce4f8e6cb395a.user-app.krampoline.com/) |
 | [API 문서](https://www.notion.so/API-d7c21dd77c1643348c98b01c8f3d9f2a) |
 | [피그마](https://www.figma.com/file/CBibyBNZ1jmESyVs0jnjSt/3%EB%8B%A8%EA%B3%84-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%99%80%EC%9D%B4%EC%96%B4-%ED%94%84%EB%A0%88%EC%9E%84?type=design&node-id=0-1&mode=design&t=0h0155bB1sb2wp98-0) |
 | [7조 노션](https://www.notion.so/2a6af605e8184499b21492cb7aabf6f5?v=0b907fed27634982ace606d37a4a6c88) |
@@ -281,11 +281,11 @@ UX를 개선하기 위해서 에디터의 자동 저장 기능을 추가하였�
 
 <table>
   <tr>
-    <td>김동영</td>
-    <td>조준서</td>
-    <td>이한홍</td>
-    <td>김수현</td>
-    <td>이상명</td>
+    <td>[김동영](https://github.com/ehddud1006)</td>
+    <td>[조준서](https://github.com/monsta-zo)</td>
+    <td>[이한홍](https://github.com/hoyaii)</td>
+    <td>[김수현](https://github.com/suuding)</td>
+    <td>[이상명](https://github.com/sam-mae)</td>
   </tr>
   <tr>
     <td><img src="https://github.com/ehddud1006.png" alt="김동영" width="100" height="100"></td>
@@ -303,8 +303,8 @@ UX를 개선하기 위해서 에디터의 자동 저장 기능을 추가하였�
   </tr>
   <tr>
     <td>조장</td>
-    <td>기확리더</td>
     <td>테크리더</td>
+    <td>기획리더</td>
     <td>스케줄러</td>
     <td>리마인더</td>
   </tr>
