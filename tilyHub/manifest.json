@@ -3,7 +3,7 @@
   "name": "틸리허브(TILyHub)",
   "description": "Automatically integrate your TIL submissions to GitHub",
   "homepage_url": "https://github.com/Step3-kakao-tech-campus/Team7_FE",
-  "version": "1.8",
+  "version": "1.9",
   "author": "ehddud1006",
   "action": {
     "default_icon": "assets/thumbnail.png",
@@ -18,7 +18,7 @@
     "service_worker": "scripts/background.js"
   },
   "permissions": ["storage"],
-  "host_permissions": ["https://k50d31201bb8ea.user-app.krampoline.com/*", "https://github.com/"],
+  "host_permissions": ["https://kce4f8e6cb395a.user-app.krampoline.com/*", "https://github.com/"],
   "web_accessible_resources": [
     {
       "matches": ["<all_urls>"],
@@ -39,7 +39,7 @@
       "run_at": "document_idle"
     },
     {
-      "matches": ["https://k50d31201bb8ea.user-app.krampoline.com/*"],
+      "matches": ["https://kce4f8e6cb395a.user-app.krampoline.com/*"],
       "js": [
         "library/sha1.min.js",
         "library/jszip.min.js",
