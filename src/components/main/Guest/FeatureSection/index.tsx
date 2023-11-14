@@ -22,7 +22,7 @@ const FeatureSection = (props: FeatureSectionProps) => {
       variants={FADE_DOWN_ANIMATION_VARIANTS}>
       <Styled.SectionTitle>{title}</Styled.SectionTitle>
       <Styled.HardWareContainer>
-        <video autoPlay loop muted playsInline>
+        <video autoPlay loop muted>
           <source src={`assets/images/${videoSrc}.mp4`} type="video/mp4" />
           {alt}
         </video>

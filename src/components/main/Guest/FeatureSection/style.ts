@@ -34,7 +34,6 @@ export const HardWareContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 
   & > video {
-    border-radius: 10px;
     width: 100%;
   }
 

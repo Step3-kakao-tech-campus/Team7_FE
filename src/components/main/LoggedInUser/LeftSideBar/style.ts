@@ -6,6 +6,7 @@ export const LeftArea = styled.div`
   flex-direction: column;
   padding: 2.5rem;
   min-height: 100vh;
+  height: 100%;
   border-right: 1px solid ${({ theme }) => theme.colors.gray_500};
 `;
 
