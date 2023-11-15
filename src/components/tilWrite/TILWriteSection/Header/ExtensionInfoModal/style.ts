@@ -35,3 +35,10 @@ export const InfoTextStyles = (theme: EmotionTheme) => css`
   color: ${theme.colors.rose};
   font-weight: 600;
 `;
+
+export const InfoHighlightTextStyles = (theme: EmotionTheme) => css`
+  & > span {
+    color: ${theme.colors.rose};
+    font-weight: 600;
+  }
+`;
