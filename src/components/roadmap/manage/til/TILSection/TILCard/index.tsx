@@ -64,15 +64,6 @@ const TILCard = (props: MemberTil) => {
           )}
         </>
       )}
-
-      {submitDate !== null && content === null ? (
-        <></>
-      ) : (
-        <Styled.CommentContainer>
-          <Image src="/assets/icons/ic_comment.svg" width={16} height={16} alt="댓글 이미지" />
-          <span>{commentNum}</span>
-        </Styled.CommentContainer>
-      )}
     </Styled.Root>
   );
 };
