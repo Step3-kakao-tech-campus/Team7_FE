@@ -52,7 +52,9 @@ const TILCard = (props: MemberTil) => {
             <span>{dayjs(submitDate).from(dayjs())}</span>
           </Styled.TILInfoContainer>
 
-          {submitDate !== null && content === null && (
+          {submitDate !== null && content === null ? (
+            <></>
+          ) : (
             <Styled.CommentContainer>
               <Image src="/assets/icons/ic_comment.svg" width={16} height={16} alt="댓글 이미지" />
               <span>{commentNum}</span>
