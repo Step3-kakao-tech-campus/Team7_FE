@@ -23,9 +23,9 @@ const PeopleTILSection = () => {
         <Styled.Root>
           <Styled.Title>다른 사람의 TIL 보기</Styled.Title>
           <Styled.Container>
-            {memberTils?.map((til) => (
+            {memberTils?.map((til, index) => (
               <TIL
-                key={til.tilId}
+                key={index}
                 tilId={til.tilId}
                 userId={til.userId}
                 submitDate={til.submitDate}
